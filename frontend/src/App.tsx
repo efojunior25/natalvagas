@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { Routes, Route, useNavigate, useParams, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { JobCard } from './components/JobCard';
@@ -11,43 +12,69 @@ import { INITIAL_REAL_JOBS } from './data/initialJobs';
 import { Sparkles, AlertCircle, Loader2, PlusCircle } from 'lucide-react';
 import axios from 'axios';
 
-export const App: React.FC = () => {
-  // Inicializa já com as vagas reais de Natal para nunca ficar em branco
-  const [jobs, setJobs] = useState<Job[]>(INITIAL_REAL_JOBS);
-  const [isLoading] = useState<boolean>(false);
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfUse } from './pages/TermsOfUse';
+import { AboutUs } from './pages/AboutUs';
+import { Contact } from './pages/Contact';
+import { JobSafety } from './pages/JobSafety';
+
+interface HomePageProps {
+  jobs: Job[];
+  isLoading: boolean;
+  onJobCreated: () => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) => {
+  const { slug } = useParams<{ slug?: string }>();
+  const navigate = useNavigate();
+  const [activeJob, setActiveJob] = useState<Job | null>(null);
+  const [isPostJobOpen, setIsPostJobOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
-  const [activeJob, setActiveJob] = useState<Job | null>(null);
-  const [isPostJobOpen, setIsPostJobOpen] = useState<boolean>(false);
 
-  // Tenta sincronizar com o backend Spring Boot em tempo real
-  const fetchJobs = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/jobs', {
-        params: { size: 50 },
-        headers: { 'Accept': 'application/json' }
-      });
-      // Verifica se a resposta é JSON válido com o array de vagas
-      if (response.data && Array.isArray(response.data.content) && response.data.content.length > 0) {
-        const remote: Job[] = response.data.content;
-        setJobs([...INITIAL_REAL_JOBS, ...remote.filter(job =>
-          !INITIAL_REAL_JOBS.some(local => local.id === job.id || local.applicationTarget === job.applicationTarget)
-        )]);
-      }
-    } catch (err) {
-      // Mantém silenciosamente o catálogo real de vagas caso a API remota esteja offline
-      console.log('Utilizando catálogo local de vagas reais.');
-    }
-  }, []);
-
+  // Trata abertura direta por URL (/vaga/:slug)
   useEffect(() => {
-    fetchJobs();
-  }, [fetchJobs]);
+    if (slug) {
+      const found = jobs.find(j => j.slug === slug || String(j.id) === slug);
+      if (found) {
+        setActiveJob(found);
+        document.title = `${found.title} — ${found.companyName} | Natal Vagas`;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          metaDesc.setAttribute(
+            'content',
+            `Vaga de ${found.title} na empresa ${found.companyName} em ${found.city}/RN. Requisitos, benefícios e link oficial para candidatura no Natal Vagas.`
+          );
+        }
+      }
+    } else {
+      setActiveJob(null);
+      document.title = 'Natal Vagas — Vagas de Emprego em Natal e Região Metropolitana (RN)';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute(
+          'content',
+          'Encontre mais de 120 vagas de emprego reais e atualizadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
+        );
+      }
+    }
+  }, [slug, jobs]);
 
   const handleSearch = (query: string, city: string) => {
     setSearchQuery(query);
     setSelectedCity(city);
+  };
+
+  const handleApply = (job: Job) => {
+    navigate(`/vaga/${job.slug}`);
+  };
+
+  const handleCloseModal = () => {
+    setActiveJob(null);
+    if (slug) {
+      navigate('/');
+    }
   };
 
   const filteredJobs = useMemo(() => {
@@ -72,7 +99,10 @@ export const App: React.FC = () => {
       <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
 
       {/* Seção Hero com Banner e Busca */}
-      <HeroBanner onSearch={handleSearch} cities={[...new Set(jobs.map(job => job.city))].sort((a, b) => a.localeCompare(b, 'pt-BR'))} />
+      <HeroBanner 
+        onSearch={handleSearch} 
+        cities={[...new Set(jobs.map(job => job.city))].sort((a, b) => a.localeCompare(b, 'pt-BR'))} 
+      />
 
       {/* Anúncio Banner de Topo (AdSense) */}
       <div className="max-w-5xl mx-auto px-4 w-full">
@@ -124,7 +154,7 @@ export const App: React.FC = () => {
               <JobCard 
                 key={job.id} 
                 job={job} 
-                onApply={(j) => setActiveJob(j)} 
+                onApply={handleApply} 
               />
             ))}
           </div>
@@ -141,7 +171,7 @@ export const App: React.FC = () => {
                 setSelectedCity('');
                 setSelectedWorkModel('TODOS');
               }}
-              className="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold"
+              className="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-700 transition-colors"
             >
               Limpar Filtros
             </button>
@@ -181,19 +211,59 @@ export const App: React.FC = () => {
       {/* Modal de Detalhes da Vaga */}
       <JobModal 
         job={activeJob} 
-        onClose={() => setActiveJob(null)} 
+        onClose={handleCloseModal} 
       />
 
       {/* Modal de Anúncio de Vaga por Empresas */}
       <PostJobModal 
         isOpen={isPostJobOpen} 
         onClose={() => setIsPostJobOpen(false)}
-        onJobCreated={fetchJobs}
+        onJobCreated={onJobCreated}
       />
 
       {/* Rodapé */}
       <Footer />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  const [jobs, setJobs] = useState<Job[]>(INITIAL_REAL_JOBS);
+  const [isLoading] = useState<boolean>(false);
+
+  // Tenta sincronizar com o backend Spring Boot em tempo real
+  const fetchJobs = useCallback(async () => {
+    try {
+      const response = await axios.get('/api/jobs', {
+        params: { size: 50 },
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.data && Array.isArray(response.data.content) && response.data.content.length > 0) {
+        const remote: Job[] = response.data.content;
+        setJobs([...INITIAL_REAL_JOBS, ...remote.filter(job =>
+          !INITIAL_REAL_JOBS.some(local => local.id === job.id || local.applicationTarget === job.applicationTarget)
+        )]);
+      }
+    } catch (err) {
+      console.log('Utilizando catálogo local de vagas reais.');
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
+
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+      <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+      <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+      <Route path="/termos-de-uso" element={<TermsOfUse />} />
+      <Route path="/sobre" element={<AboutUs />} />
+      <Route path="/contato" element={<Contact />} />
+      <Route path="/dicas-seguranca" element={<JobSafety />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 };
 
