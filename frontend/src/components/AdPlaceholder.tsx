@@ -22,8 +22,8 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
   const adRef = useRef<HTMLModElement | null>(null);
   const isLoaded = useRef(false);
 
-  // ID do cliente Google AdSense (substituir quando a conta for aprovada)
-  const activeClientId = clientId || (import.meta.env.VITE_ADSENSE_CLIENT_ID as string | undefined);
+  // ID oficial do cliente Google AdSense
+  const activeClientId = clientId || (import.meta.env.VITE_ADSENSE_CLIENT_ID as string | undefined) || 'ca-pub-7415792754049263';
   const activeSlotId = slotId || (import.meta.env.VITE_ADSENSE_SLOT_ID as string | undefined);
 
   useEffect(() => {
