@@ -1,22 +1,27 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useParams, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { JobCard } from './components/JobCard';
 import { JobModal } from './components/JobModal';
-import { PostJobModal } from './components/PostJobModal';
+import { CityPills } from './components/CityPills';
+import { FaqSection } from './components/FaqSection';
 import { AdPlaceholder } from './components/AdPlaceholder';
 import { Footer } from './components/Footer';
 import { Job } from './types/job';
 import { INITIAL_REAL_JOBS } from './data/initialJobs';
-import { Sparkles, AlertCircle, Loader2, PlusCircle } from 'lucide-react';
+import { Sparkles, AlertCircle, Loader2, PlusCircle, ChevronDown } from 'lucide-react';
 import axios from 'axios';
 
-import { PrivacyPolicy } from './pages/PrivacyPolicy';
-import { TermsOfUse } from './pages/TermsOfUse';
-import { AboutUs } from './pages/AboutUs';
-import { Contact } from './pages/Contact';
-import { JobSafety } from './pages/JobSafety';
+// Lazy loading para páginas institucionais e modais (reduz bundle inicial)
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
+const TermsOfUse = lazy(() => import('./pages/TermsOfUse').then(m => ({ default: m.TermsOfUse })));
+const AboutUs = lazy(() => import('./pages/AboutUs').then(m => ({ default: m.AboutUs })));
+const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
+const JobSafety = lazy(() => import('./pages/JobSafety').then(m => ({ default: m.JobSafety })));
+const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
+
+const PAGE_SIZE = 24;
 
 interface HomePageProps {
   jobs: Job[];
@@ -32,6 +37,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
+  const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
   // Trata abertura direta por URL (/vaga/:slug)
   useEffect(() => {
@@ -50,12 +56,12 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       }
     } else {
       setActiveJob(null);
-      document.title = 'Natal Vagas — Vagas de Emprego em Natal e Região Metropolitana (RN)';
+      document.title = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 120 Oportunidades';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute(
           'content',
-          'Encontre mais de 120 vagas de emprego reais e atualizadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
+          'Encontre mais de 120 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
         );
       }
     }
@@ -64,6 +70,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const handleSearch = (query: string, city: string) => {
     setSearchQuery(query);
     setSelectedCity(city);
+    setVisibleCount(PAGE_SIZE);
   };
 
   const handleApply = (job: Job) => {
@@ -93,8 +100,59 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
     });
   }, [jobs, searchQuery, selectedCity, selectedWorkModel]);
 
+  // Lista visível com paginação progressiva para alta performance e Core Web Vitals
+  const visibleJobs = useMemo(() => {
+    return filteredJobs.slice(0, visibleCount);
+  }, [filteredJobs, visibleCount]);
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + PAGE_SIZE);
+  };
+
+  // Schema.org ItemList para o Google indexar a coleção de empregos da página inicial
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: visibleJobs.slice(0, 15).map((job, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'JobPosting',
+        title: job.title,
+        description: job.description,
+        datePosted: job.publishedAt || job.createdAt,
+        validThrough: job.expiresAt || undefined,
+        employmentType: job.contractType === 'ESTAGIO' ? 'INTERN' : job.contractType === 'TEMPORARIO' ? 'TEMPORARY' : 'FULL_TIME',
+        hiringOrganization: {
+          '@type': 'Organization',
+          name: job.companyName,
+          logo: job.companyLogoUrl || 'https://natalvagas.com.br/assets/logo-natalvagas.jpg',
+        },
+        jobLocation: {
+          '@type': 'Place',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: job.city,
+            addressRegion: 'RN',
+            addressCountry: 'BR',
+          },
+        },
+        url: `https://natalvagas.com.br/vaga/${job.slug}`,
+        directApply: true,
+      },
+    })),
+  };
+
+  const topCities = ['Natal', 'Mossoró', 'Parnamirim', 'Macaíba', 'São Gonçalo do Amarante', 'Currais Novos', 'Caicó'];
+
   return (
     <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+      {/* Schema JSON-LD ItemList / JobPosting para Google for Jobs */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+
       {/* Barra de Navegação */}
       <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
 
@@ -112,15 +170,26 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       {/* Conteúdo Principal / Listagem de Vagas */}
       <main id="vagas" className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
+        {/* Filtro Rápido por Polos de Cidades no RN */}
+        <CityPills
+          cities={topCities}
+          selectedCity={selectedCity}
+          onSelectCity={(city) => {
+            setSelectedCity(city);
+            setVisibleCount(PAGE_SIZE);
+          }}
+        />
+
         {/* Barra de Filtros e Contagem */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-brand-500" />
-              Oportunidades no Rio Grande do Norte
+              Oportunidades em Destaque no RN
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-              Exibindo <span className="font-bold text-brand-600">{filteredJobs.length}</span> anúncios de vagas no RN
+              Mostrando <span className="font-bold text-brand-600">{visibleJobs.length}</span> de{' '}
+              <span className="font-bold text-slate-800">{filteredJobs.length}</span> vagas ativas no estado
             </p>
           </div>
 
@@ -129,8 +198,11 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
             {['TODOS', 'PRESENCIAL', 'HIBRIDO', 'REMOTO'].map((model) => (
               <button
                 key={model}
-                onClick={() => setSelectedWorkModel(model)}
-                className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
+                onClick={() => {
+                  setSelectedWorkModel(model);
+                  setVisibleCount(PAGE_SIZE);
+                }}
+                className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                   selectedWorkModel === model 
                     ? 'bg-brand-600 text-white shadow-xs' 
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -149,15 +221,32 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
             <p className="text-sm">Carregando oportunidades atualizadas em Natal...</p>
           </div>
         ) : filteredJobs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-            {filteredJobs.map((job) => (
-              <JobCard 
-                key={job.id} 
-                job={job} 
-                onApply={handleApply} 
-              />
-            ))}
-          </div>
+          <>
+            {/* Grid com os Cards Otimizados */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              {visibleJobs.map((job) => (
+                <JobCard 
+                  key={job.id} 
+                  job={job} 
+                  onApply={handleApply} 
+                />
+              ))}
+            </div>
+
+            {/* Botão de Paginação Progressiva ("Carregar mais vagas") */}
+            {visibleCount < filteredJobs.length && (
+              <div className="mt-8 flex justify-center">
+                <button
+                  type="button"
+                  onClick={handleLoadMore}
+                  className="px-6 py-3.5 bg-white hover:bg-slate-50 active:scale-98 text-slate-800 font-bold text-sm rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <span>Carregar mais vagas ({filteredJobs.length - visibleCount} restantes)</span>
+                  <ChevronDown className="w-4 h-4 text-brand-600" />
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs max-w-lg mx-auto">
             <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-3" />
@@ -170,8 +259,9 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
                 setSearchQuery('');
                 setSelectedCity('');
                 setSelectedWorkModel('TODOS');
+                setVisibleCount(PAGE_SIZE);
               }}
-              className="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-700 transition-colors"
+              className="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-700 transition-colors cursor-pointer"
             >
               Limpar Filtros
             </button>
@@ -179,7 +269,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
         )}
 
         {/* Anúncio Banner de Meio/Fim da Página */}
-        <div className="mt-8">
+        <div className="mt-10">
           <AdPlaceholder format="horizontal" />
         </div>
 
@@ -206,6 +296,9 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
           </button>
         </div>
 
+        {/* Seção FAQ com Schema.org FAQPage para Rich Snippets no Google */}
+        <FaqSection />
+
       </main>
 
       {/* Modal de Detalhes da Vaga */}
@@ -214,18 +307,28 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
         onClose={handleCloseModal} 
       />
 
-      {/* Modal de Anúncio de Vaga por Empresas */}
-      <PostJobModal 
-        isOpen={isPostJobOpen} 
-        onClose={() => setIsPostJobOpen(false)}
-        onJobCreated={onJobCreated}
-      />
+      {/* Modal de Anúncio de Vaga por Empresas (Lazy Loaded) */}
+      <Suspense fallback={null}>
+        {isPostJobOpen && (
+          <PostJobModal 
+            isOpen={isPostJobOpen} 
+            onClose={() => setIsPostJobOpen(false)}
+            onJobCreated={onJobCreated}
+          />
+        )}
+      </Suspense>
 
       {/* Rodapé */}
       <Footer />
     </div>
   );
 };
+
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-surface-lightBg text-brand-500">
+    <Loader2 className="w-8 h-8 animate-spin" />
+  </div>
+);
 
 export const App: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>(INITIAL_REAL_JOBS);
@@ -254,16 +357,18 @@ export const App: React.FC = () => {
   }, [fetchJobs]);
 
   return (
-    <Routes>
-      <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-      <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-      <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
-      <Route path="/termos-de-uso" element={<TermsOfUse />} />
-      <Route path="/sobre" element={<AboutUs />} />
-      <Route path="/contato" element={<Contact />} />
-      <Route path="/dicas-seguranca" element={<JobSafety />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <Suspense fallback={<LoadingFallback />}>
+      <Routes>
+        <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+        <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+        <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+        <Route path="/termos-de-uso" element={<TermsOfUse />} />
+        <Route path="/sobre" element={<AboutUs />} />
+        <Route path="/contato" element={<Contact />} />
+        <Route path="/dicas-seguranca" element={<JobSafety />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 };
 
