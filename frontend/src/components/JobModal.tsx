@@ -31,8 +31,6 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
     "title": job.title,
     "description": job.description,
     "datePosted": job.publishedAt || job.createdAt,
-    "validThrough": "2027-01-01T00:00:00",
-    "employmentType": job.contractType === 'CLT' ? 'FULL_TIME' : 'CONTRACTOR',
     "hiringOrganization": {
       "@type": "Organization",
       "name": job.companyName,
@@ -96,7 +94,7 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
                 <MapPin className="w-3.5 h-3.5 text-slate-400" />
                 <span>{job.neighborhood ? `${job.neighborhood}, ` : ''}{job.city}/RN</span>
                 <span>•</span>
-                <span>{job.workModel}</span>
+                <span>{job.workModel === 'NAO_INFORMADO' ? 'Modalidade não informada' : job.workModel}</span>
               </div>
             </div>
           </div>
@@ -116,14 +114,14 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
             <div>
               <span className="text-[11px] font-semibold text-slate-400 uppercase">Regime</span>
-              <p className="font-semibold text-slate-800">{job.contractType}</p>
+              <p className="font-semibold text-slate-800">{job.contractType === 'NAO_INFORMADO' ? 'Não informado' : job.contractType}</p>
             </div>
             <div>
               <span className="text-[11px] font-semibold text-slate-400 uppercase">Salário</span>
               <p className="font-semibold text-emerald-600">
                 {!job.hideSalary && job.salaryMin 
                   ? `R$ ${job.salaryMin.toLocaleString('pt-BR')}` 
-                  : 'A combinar'}
+                  : 'Não informado'}
               </p>
             </div>
             <div>
@@ -131,6 +129,14 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
               <p className="font-semibold text-slate-800">{job.city}/RN</p>
             </div>
           </div>
+
+          {job.sourceUrl && (
+            <div className="p-4 bg-brand-50 rounded-xl text-sm space-y-1">
+              <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-700 underline">Fonte: {job.sourceName}</a>
+              <p>Conferida em {job.verifiedAt?.split('-').reverse().join('/')}. A disponibilidade pode mudar na fonte.</p>
+              <p>{job.expiresAt ? `Inscrições até ${job.expiresAt.slice(0, 10).split('-').reverse().join('/')}` : 'Prazo de inscrição não informado pela empresa.'}</p>
+            </div>
+          )}
 
           {/* Descrição */}
           <div>

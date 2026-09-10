@@ -3,9 +3,10 @@ import { Search, MapPin, Briefcase } from 'lucide-react';
 
 interface HeroBannerProps {
   onSearch: (query: string, city: string) => void;
+  cities: string[];
 }
 
-export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch }) => {
+export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
   const [query, setQuery] = useState('');
   const [city, setCity] = useState('');
 
@@ -25,7 +26,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch }) => {
         {/* Badge Regional */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold mb-6 border border-brand-200 shadow-2xs">
           <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
-          Vagas atualizadas em Natal & Grande Natal / RN
+          Vagas em Natal e no Rio Grande do Norte
         </div>
 
         {/* Headline Principal */}
@@ -33,11 +34,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch }) => {
           Conectando você às melhores <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">
             oportunidades de emprego
-          </span> em Natal
+          </span> no RN
         </h1>
 
         <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
-          Encontre vagas em empresas locais no comércio, saúde, gastronomia, administração e tecnologia. Sem cadastro demorado, com contato direto.
+          Encontre oportunidades em Natal e outras cidades do estado, com fonte e link para candidatura na empresa.
         </p>
 
         {/* Barra de Pesquisa de Alta Conversão */}
@@ -64,12 +65,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch }) => {
               className="w-full bg-transparent text-sm text-slate-800 focus:outline-none cursor-pointer"
             >
               <option value="">Todas as Cidades</option>
-              <option value="Natal">Natal</option>
-              <option value="Parnamirim">Parnamirim</option>
-              <option value="São Gonçalo do Amarante">São Gonçalo</option>
-              <option value="Macaíba">Macaíba</option>
-              <option value="Ceará-Mirim">Ceará-Mirim</option>
-              <option value="Extremoz">Extremoz</option>
+              {cities.map(name => <option key={name} value={name}>{name}</option>)}
             </select>
           </div>
 

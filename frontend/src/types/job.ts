@@ -6,8 +6,8 @@ export interface Category {
   description?: string;
 }
 
-export type WorkModel = 'PRESENCIAL' | 'HIBRIDO' | 'REMOTO';
-export type ContractType = 'CLT' | 'PJ' | 'ESTAGIO' | 'TEMPORARIO' | 'JOVEM_APRENDIZ';
+export type WorkModel = 'PRESENCIAL' | 'HIBRIDO' | 'REMOTO' | 'NAO_INFORMADO';
+export type ContractType = 'CLT' | 'PJ' | 'ESTAGIO' | 'TEMPORARIO' | 'JOVEM_APRENDIZ' | 'NAO_INFORMADO';
 export type JobStatus = 'PENDING' | 'APPROVED' | 'EXPIRED' | 'REJECTED';
 export type ApplicationChannel = 'EMAIL' | 'LINK' | 'WHATSAPP';
 
@@ -37,6 +37,10 @@ export interface Job {
   viewsCount: number;
   publishedAt: string;
   createdAt: string;
+  sourceName?: string;
+  sourceUrl?: string;
+  verifiedAt?: string;
+  expiresAt?: string;
 }
 
 export interface JobFilterParams {

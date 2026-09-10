@@ -30,7 +30,10 @@ export const App: React.FC = () => {
       });
       // Verifica se a resposta é JSON válido com o array de vagas
       if (response.data && Array.isArray(response.data.content) && response.data.content.length > 0) {
-        setJobs(response.data.content);
+        const remote: Job[] = response.data.content;
+        setJobs([...INITIAL_REAL_JOBS, ...remote.filter(job =>
+          !INITIAL_REAL_JOBS.some(local => local.id === job.id || local.applicationTarget === job.applicationTarget)
+        )]);
       }
     } catch (err) {
       // Mantém silenciosamente o catálogo real de vagas caso a API remota esteja offline
@@ -49,6 +52,7 @@ export const App: React.FC = () => {
 
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
+      if (job.status !== 'APPROVED' || (job.expiresAt && Date.parse(job.expiresAt) < Date.now())) return false;
       const matchesQuery = 
         !searchQuery || 
         job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -68,7 +72,7 @@ export const App: React.FC = () => {
       <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
 
       {/* Seção Hero com Banner e Busca */}
-      <HeroBanner onSearch={handleSearch} />
+      <HeroBanner onSearch={handleSearch} cities={[...new Set(jobs.map(job => job.city))].sort((a, b) => a.localeCompare(b, 'pt-BR'))} />
 
       {/* Anúncio Banner de Topo (AdSense) */}
       <div className="max-w-5xl mx-auto px-4 w-full">
@@ -83,10 +87,10 @@ export const App: React.FC = () => {
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-brand-500" />
-              Oportunidades Reais em Destaque
+              Oportunidades no Rio Grande do Norte
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-              Exibindo <span className="font-bold text-brand-600">{filteredJobs.length}</span> vagas ativas em Natal e região metropolitana
+              Exibindo <span className="font-bold text-brand-600">{filteredJobs.length}</span> anúncios de vagas no RN
             </p>
           </div>
 

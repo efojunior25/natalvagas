@@ -59,7 +59,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
 
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 font-medium border border-brand-100">
             <Clock className="w-3.5 h-3.5 text-brand-500" />
-            {job.contractType} • {job.workModel}
+            {job.contractType === 'NAO_INFORMADO' ? 'Regime não informado' : job.contractType} • {job.workModel === 'NAO_INFORMADO' ? 'Modalidade não informada' : job.workModel}
           </span>
 
           {!job.hideSalary && job.salaryMin && (
@@ -79,7 +79,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
 
       {/* Rodapé do Card */}
       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-        <span>Publicada recentemente</span>
+        <span>{job.verifiedAt ? `Conferida em ${job.verifiedAt.split('-').reverse().join('/')}` : 'Confira a fonte'}</span>
         <span className="inline-flex items-center gap-1 font-semibold text-brand-600 group-hover:translate-x-0.5 transition-transform">
           Ver detalhes e candidatar-se
           <ArrowUpRight className="w-4 h-4" />
