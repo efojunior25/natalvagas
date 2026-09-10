@@ -1,5 +1,6 @@
 import React from 'react';
-import { PlusCircle, Search } from 'lucide-react';
+import { PlusCircle, Search, Info, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   onOpenPostJob: () => void;
@@ -12,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
         <div className="flex items-center justify-between h-20">
           
           {/* Logotipo Oficial */}
-          <a href="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group">
             <img 
               src="/assets/logo-natalvagas.jpg" 
               alt="Natal Vagas Logotipo" 
@@ -27,17 +28,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 Sua oportunidade está aqui!
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Links e Botão de Ação */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <a 
-              href="#vagas" 
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Link 
+              to="/" 
               className="text-sm font-medium text-slate-700 hover:text-brand-600 flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
             >
               <Search className="w-4 h-4 text-slate-400" />
-              <span className="hidden md:inline">Explorar Vagas</span>
-            </a>
+              <span className="hidden md:inline">Vagas</span>
+            </Link>
+
+            <Link 
+              to="/sobre" 
+              className="text-sm font-medium text-slate-700 hover:text-brand-600 flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              <Info className="w-4 h-4 text-slate-400" />
+              <span className="hidden md:inline">Sobre</span>
+            </Link>
+
+            <Link 
+              to="/contato" 
+              className="text-sm font-medium text-slate-700 hover:text-brand-600 flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              <MessageSquare className="w-4 h-4 text-slate-400" />
+              <span className="hidden md:inline">Contato</span>
+            </Link>
 
             <button 
               onClick={onOpenPostJob}

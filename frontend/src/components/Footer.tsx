@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
@@ -35,10 +36,10 @@ export const Footer: React.FC = () => {
               Navegação
             </h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
-              <li><a href="#vagas" className="hover:text-brand-400 transition-colors">Todas as Vagas</a></li>
-              <li><a href="#anunciar" className="hover:text-brand-400 transition-colors">Divulgar Vaga Gratuitamente</a></li>
-              <li><a href="#estagios" className="hover:text-brand-400 transition-colors">Vagas de Estágio</a></li>
-              <li><a href="#jovemaprendiz" className="hover:text-brand-400 transition-colors">Jovem Aprendiz Natal</a></li>
+              <li><Link to="/" className="hover:text-brand-400 transition-colors">Todas as Vagas</Link></li>
+              <li><Link to="/sobre" className="hover:text-brand-400 transition-colors">Sobre o Natal Vagas</Link></li>
+              <li><Link to="/dicas-seguranca" className="hover:text-brand-400 transition-colors">Dicas Anti-Golpe</Link></li>
+              <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Fale Conosco / Contato</Link></li>
             </ul>
           </div>
 
@@ -48,10 +49,10 @@ export const Footer: React.FC = () => {
               Institucional & Legal
             </h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
-              <li><a href="#politica" className="hover:text-brand-400 transition-colors">Política de Privacidade</a></li>
-              <li><a href="#termos" className="hover:text-brand-400 transition-colors">Termos de Uso</a></li>
-              <li><a href="#seguranca" className="hover:text-brand-400 transition-colors">Dicas de Segurança (Anti-Golpe)</a></li>
-              <li><a href="#contato" className="hover:text-brand-400 transition-colors">Fale Conosco / Suporte</a></li>
+              <li><Link to="/politica-de-privacidade" className="hover:text-brand-400 transition-colors">Política de Privacidade</Link></li>
+              <li><Link to="/termos-de-uso" className="hover:text-brand-400 transition-colors">Termos de Uso</Link></li>
+              <li><Link to="/dicas-seguranca" className="hover:text-brand-400 transition-colors">Segurança do Candidato</Link></li>
+              <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Reportar Vaga / Suporte</Link></li>
             </ul>
           </div>
 
