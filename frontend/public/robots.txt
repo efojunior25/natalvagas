@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
 Sitemap: https://natalvagas.com.br/sitemap.xml

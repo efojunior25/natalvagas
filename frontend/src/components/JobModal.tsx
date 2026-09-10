@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { X, MapPin, Building2, Send, Share2, AlertCircle } from 'lucide-react';
+import { X, MapPin, Building2, Send, Share2, AlertCircle, Instagram } from 'lucide-react';
 import { Job } from '../types/job';
+import { SocialPostGeneratorModal } from './SocialPostGeneratorModal';
 
 interface JobModalProps {
   job: Job | null;
@@ -10,6 +11,7 @@ interface JobModalProps {
 export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
   const [showEmailOptions, setShowEmailOptions] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
+  const [isSocialModalOpen, setIsSocialModalOpen] = useState(false);
   useEffect(() => {
     setShowEmailOptions(false);
     setCopyStatus('');
@@ -224,15 +226,25 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
               const text = `Vaga: *${job.title}* em Natal/RN: https://natalvagas.com.br/vaga/${job.slug}`;
               window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
             }}
-            className="px-4 py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-2 transition-colors"
+            className="px-4 py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-2 transition-colors cursor-pointer"
           >
             <Share2 className="w-4 h-4" />
             <span>Compartilhar</span>
           </button>
 
           <button
+            type="button"
+            onClick={() => setIsSocialModalOpen(true)}
+            className="px-4 py-3 rounded-xl border border-pink-200 bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Gerar Arte para Instagram Feed ou Story"
+          >
+            <Instagram className="w-4 h-4 text-pink-600" />
+            <span>Gerar Post / Story</span>
+          </button>
+
+          <button
             onClick={handleApplyClick}
-            className="flex-1 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 transition-all"
+            className="flex-1 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <Send className="w-4 h-4" />
             <span>{job.applicationChannel === 'EMAIL' ? 'Enviar currículo por e-mail' : job.applicationChannel === 'WHATSAPP' ? 'Candidatar-se pelo WhatsApp' : 'Candidatar-se no site da empresa'}</span>
@@ -242,6 +254,13 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
         </div>
 
       </div>
+
+      {/* Modal Gerador de Artes para Redes Sociais */}
+      <SocialPostGeneratorModal
+        job={job}
+        isOpen={isSocialModalOpen}
+        onClose={() => setIsSocialModalOpen(false)}
+      />
     </div>
   );
 };

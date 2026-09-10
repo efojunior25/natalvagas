@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Building2, Clock, DollarSign, ArrowUpRight, Share2 } from 'lucide-react';
+import { MapPin, Building2, Clock, DollarSign, ArrowUpRight, Share2, Sparkles } from 'lucide-react';
 import { Job } from '../types/job';
 
 interface JobCardProps {
@@ -17,9 +17,21 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
   return (
     <article 
       onClick={() => onApply(job)}
-      className="group relative bg-white rounded-2xl p-5 border border-slate-200/90 hover:border-brand-300 shadow-xs hover:shadow-xl hover:shadow-slate-200/50 transition-all cursor-pointer flex flex-col justify-between"
+      className={`group relative rounded-2xl p-5 shadow-xs hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between border ${
+        job.isFeatured
+          ? 'border-amber-300 ring-2 ring-amber-400/20 bg-gradient-to-b from-amber-50/30 via-white to-white hover:border-amber-400'
+          : 'bg-white border-slate-200/90 hover:border-brand-300 hover:shadow-slate-200/50'
+      }`}
     >
       <div>
+        {/* Selo Vaga em Destaque (Se contratado) */}
+        {job.isFeatured && (
+          <div className="mb-3 inline-flex items-center gap-1.5 text-[11px] font-extrabold text-amber-800 bg-amber-100 border border-amber-300/80 px-2.5 py-0.5 rounded-full shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400 animate-pulse" />
+            <span>VAGA EM DESTAQUE VIP</span>
+          </div>
+        )}
+
         {/* Cabeçalho do Card */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">

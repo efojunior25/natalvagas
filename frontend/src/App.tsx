@@ -101,6 +101,10 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       const matchesModel = selectedWorkModel === 'TODOS' || job.workModel === selectedWorkModel;
 
       return matchesQuery && matchesCity && matchesModel;
+    }).sort((a, b) => {
+      if (a.isFeatured && !b.isFeatured) return -1;
+      if (!a.isFeatured && b.isFeatured) return 1;
+      return 0;
     });
   }, [jobs, searchQuery, selectedCity, selectedWorkModel]);
 

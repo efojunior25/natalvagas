@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 import { Category, WorkModel, ContractType, ApplicationChannel } from '../types/job';
 import axios from 'axios';
 
@@ -31,6 +31,8 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   const [benefits, setBenefits] = useState('');
   const [applicationChannel, setApplicationChannel] = useState<ApplicationChannel>('EMAIL');
   const [applicationTarget, setApplicationTarget] = useState('');
+  const [isFeatured, setIsFeatured] = useState<boolean>(false);
+  const [copiedPix, setCopiedPix] = useState<boolean>(false);
 
   // Carregar Categorias
   useEffect(() => {
@@ -71,6 +73,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         benefits: benefits.trim() || null,
         applicationChannel,
         applicationTarget: applicationTarget.trim(),
+        isFeatured: isFeatured,
         sourceUrl: 'https://natalvagas.com.br'
       };
 
@@ -401,6 +404,86 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Linha 8: Escolha do Tipo de Anúncio / Monetização B2B */}
+            <div className="p-4 rounded-2xl border border-slate-200 bg-slate-50/80 space-y-3">
+              <span className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                Escolha o Plano de Divulgação da Vaga
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                
+                {/* Opção Gratuita */}
+                <label className={`p-3.5 rounded-xl border cursor-pointer flex flex-col justify-between transition-all ${
+                  !isFeatured ? 'bg-white border-brand-500 ring-2 ring-brand-500/20 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300'
+                }`}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-2">
+                      <input 
+                        type="radio" 
+                        name="plan" 
+                        checked={!isFeatured} 
+                        onChange={() => setIsFeatured(false)} 
+                        className="text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      />
+                      <span className="font-bold text-xs text-slate-800">Anúncio Padrão</span>
+                    </div>
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Grátis</span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-2">Publicação no catálogo com filtros por cidade e cargo.</p>
+                </label>
+
+                {/* Opção Destaque VIP */}
+                <label className={`p-3.5 rounded-xl border cursor-pointer flex flex-col justify-between transition-all relative ${
+                  isFeatured ? 'bg-amber-50/60 border-amber-400 ring-2 ring-amber-400/20 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300'
+                }`}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-2">
+                      <input 
+                        type="radio" 
+                        name="plan" 
+                        checked={isFeatured} 
+                        onChange={() => setIsFeatured(true)} 
+                        className="text-amber-600 focus:ring-amber-500 cursor-pointer"
+                      />
+                      <span className="font-bold text-xs text-slate-900 flex items-center gap-1">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+                        Destaque VIP
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-black text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded">R$ 29,90</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 mt-2">Fixada no topo do portal com selo dourado + Disparo VIP no WhatsApp.</p>
+                </label>
+              </div>
+
+              {/* Box de Pagamento do Destaque VIP via Pix */}
+              {isFeatured && (
+                <div className="p-4 bg-white rounded-xl border border-amber-300 shadow-xs space-y-3 mt-3 animate-in fade-in">
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    <img 
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=8&data=${encodeURIComponent('00020126360014br.gov.bcb.pix0114+5584992344922520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***630485D3')}`}
+                      alt="QR Code Pix R$ 29,90"
+                      className="w-24 h-24 object-contain rounded-lg border border-slate-200"
+                    />
+                    <div className="flex-1 space-y-1.5 text-center sm:text-left">
+                      <span className="text-xs font-bold text-slate-800 block">Ativação do Destaque VIP (R$ 29,90)</span>
+                      <p className="text-[11px] text-slate-500">Escaneie o QR Code no app do banco ou use a chave telefone: <strong>(84) 99234-4922</strong></p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText('00020126360014br.gov.bcb.pix0114+5584992344922520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***630485D3');
+                          setCopiedPix(true);
+                          setTimeout(() => setCopiedPix(false), 3000);
+                        }}
+                        className="mt-1 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 active:scale-98 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                      >
+                        {copiedPix ? 'Código Pix Copiado!' : 'Copiar Pix Copia e Cola (R$ 29,90)'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Botões de Ação */}
