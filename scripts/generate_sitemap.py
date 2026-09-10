@@ -1,8 +1,10 @@
 import re
 import json
+import os
 
-initial_jobs_path = "C:/Users/edson.junior/Documents/ChatGPT/NatalVagas/app/frontend/src/data/initialJobs.ts"
-sitemap_path = "C:/Users/edson.junior/Documents/ChatGPT/NatalVagas/app/frontend/public/sitemap.xml"
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+initial_jobs_path = os.path.join(repo_root, "frontend", "src", "data", "initialJobs.ts")
+sitemap_path = os.path.join(repo_root, "frontend", "public", "sitemap.xml")
 
 with open(initial_jobs_path, "r", encoding="utf-8") as f:
     content = f.read()
@@ -28,6 +30,12 @@ xml_lines = [
     f'    <lastmod>{today}</lastmod>',
     '    <changefreq>daily</changefreq>',
     '    <priority>1.0</priority>',
+    '  </url>',
+    '  <url>',
+    f'    <loc>{base_url}/criar-curriculo</loc>',
+    f'    <lastmod>{today}</lastmod>',
+    '    <changefreq>weekly</changefreq>',
+    '    <priority>0.9</priority>',
     '  </url>',
     '  <url>',
     f'    <loc>{base_url}/sobre</loc>',
@@ -72,16 +80,15 @@ for job in records:
         '  <url>',
         f'    <loc>{base_url}/vaga/{slug}</loc>',
         f'    <lastmod>{pub}</lastmod>',
-        '    <changefreq>weekly</changefreq>',
-        '    <priority>0.9</priority>',
+        f'    <changefreq>weekly</changefreq>',
+        '    <priority>0.8</priority>',
         '  </url>'
     ])
 
 xml_lines.append('</urlset>')
-
-xml_content = '\n'.join(xml_lines) + '\n'
+xml_lines.append('')
 
 with open(sitemap_path, "w", encoding="utf-8") as f:
-    f.write(xml_content)
+    f.write('\n'.join(xml_lines))
 
-print(f"Successfully generated sitemap with {len(records) + 6} URLs at {sitemap_path}")
+print(f"Generated sitemap with {len(records) + 7} URLs at {sitemap_path}")

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlusCircle, Search, Info, MessageSquare } from 'lucide-react';
+import { PlusCircle, Search, Info, MessageSquare, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface NavbarProps {
@@ -38,6 +38,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
             >
               <Search className="w-4 h-4 text-slate-400" />
               <span className="hidden md:inline">Vagas</span>
+            </Link>
+
+            <Link 
+              to="/criar-curriculo" 
+              className="text-sm font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-brand-50/70 hover:bg-brand-50 transition-colors"
+            >
+              <FileText className="w-4 h-4 text-brand-600" />
+              <span>Criar Currículo</span>
+              <span className="hidden sm:inline text-[10px] bg-emerald-100 text-emerald-700 font-extrabold px-1.5 py-0.2 rounded-sm uppercase tracking-wider">
+                Grátis
+              </span>
             </Link>
 
             <Link 

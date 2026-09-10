@@ -12,6 +12,9 @@ import { Job } from './types/job';
 import { INITIAL_REAL_JOBS } from './data/initialJobs';
 import { Sparkles, AlertCircle, Loader2, PlusCircle, ChevronDown } from 'lucide-react';
 import axios from 'axios';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { WhatsAppCommunityBanner } from './components/WhatsAppCommunityBanner';
+import { CourseRecommendations } from './components/CourseRecommendations';
 
 // Lazy loading para páginas institucionais e modais (reduz bundle inicial)
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
@@ -19,6 +22,7 @@ const TermsOfUse = lazy(() => import('./pages/TermsOfUse').then(m => ({ default:
 const AboutUs = lazy(() => import('./pages/AboutUs').then(m => ({ default: m.AboutUs })));
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const JobSafety = lazy(() => import('./pages/JobSafety').then(m => ({ default: m.JobSafety })));
+const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder').then(m => ({ default: m.ResumeBuilder })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 
 const PAGE_SIZE = 24;
@@ -268,13 +272,23 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
           </div>
         )}
 
+        {/* Banner de Retenção e Alertas no WhatsApp */}
+        <div className="mt-8">
+          <WhatsAppCommunityBanner />
+        </div>
+
         {/* Anúncio Banner de Meio/Fim da Página */}
-        <div className="mt-10">
+        <div className="mt-8">
           <AdPlaceholder format="horizontal" />
         </div>
 
+        {/* Recomendações de Cursos Profissionalizantes com Certificado */}
+        <div className="mt-8">
+          <CourseRecommendations />
+        </div>
+
         {/* Banner Institucional de Novas Oportunidades */}
-        <div className="mt-10 relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+        <div className="mt-8 relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
           <div className="max-w-xl">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-600">
               Para Empresas & Recrutadores
@@ -357,18 +371,25 @@ export const App: React.FC = () => {
   }, [fetchJobs]);
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <Routes>
-        <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-        <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-        <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
-        <Route path="/termos-de-uso" element={<TermsOfUse />} />
-        <Route path="/sobre" element={<AboutUs />} />
-        <Route path="/contato" element={<Contact />} />
-        <Route path="/dicas-seguranca" element={<JobSafety />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Suspense>
+    <>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          <Route path="/criar-curriculo" element={<ResumeBuilder />} />
+          <Route path="/gerador-curriculo" element={<Navigate to="/criar-curriculo" replace />} />
+          <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+          <Route path="/termos-de-uso" element={<TermsOfUse />} />
+          <Route path="/sobre" element={<AboutUs />} />
+          <Route path="/contato" element={<Contact />} />
+          <Route path="/dicas-seguranca" element={<JobSafety />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+
+      {/* Banner de Consentimento de Cookies (LGPD & Google AdSense) */}
+      <CookieConsentBanner />
+    </>
   );
 };
 
