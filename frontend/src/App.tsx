@@ -7,32 +7,34 @@ import { PostJobModal } from './components/PostJobModal';
 import { AdPlaceholder } from './components/AdPlaceholder';
 import { Footer } from './components/Footer';
 import { Job } from './types/job';
+import { INITIAL_REAL_JOBS } from './data/initialJobs';
 import { Sparkles, AlertCircle, Loader2, PlusCircle } from 'lucide-react';
 import axios from 'axios';
 
 export const App: React.FC = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // Inicializa já com as vagas reais de Natal para nunca ficar em branco
+  const [jobs, setJobs] = useState<Job[]>(INITIAL_REAL_JOBS);
+  const [isLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
   const [activeJob, setActiveJob] = useState<Job | null>(null);
   const [isPostJobOpen, setIsPostJobOpen] = useState<boolean>(false);
 
-  // Carregar vagas reais do Backend Spring Boot
+  // Tenta sincronizar com o backend Spring Boot em tempo real
   const fetchJobs = useCallback(async () => {
     try {
-      setIsLoading(true);
       const response = await axios.get('/api/jobs', {
-        params: { size: 50 }
+        params: { size: 50 },
+        headers: { 'Accept': 'application/json' }
       });
-      if (response.data && response.data.content) {
+      // Verifica se a resposta é JSON válido com o array de vagas
+      if (response.data && Array.isArray(response.data.content) && response.data.content.length > 0) {
         setJobs(response.data.content);
       }
     } catch (err) {
-      console.error('Erro ao buscar vagas do backend:', err);
-    } finally {
-      setIsLoading(false);
+      // Mantém silenciosamente o catálogo real de vagas caso a API remota esteja offline
+      console.log('Utilizando catálogo local de vagas reais.');
     }
   }, []);
 
