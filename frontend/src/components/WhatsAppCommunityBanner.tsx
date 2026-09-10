@@ -6,7 +6,7 @@ interface WhatsAppCommunityBannerProps {
 }
 
 export const WhatsAppCommunityBanner: React.FC<WhatsAppCommunityBannerProps> = ({
-  channelUrl = 'https://chat.whatsapp.com/natalvagas-oficial'
+  channelUrl = 'https://wa.me/5584992344922?text=Ol%C3%A1%2C+quero+entrar+no+grupo+VIP+de+vagas+do+Natal+Vagas'
 }) => {
   return (
     <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-6 sm:p-8 shadow-lg shadow-emerald-900/10 border border-emerald-500/30">

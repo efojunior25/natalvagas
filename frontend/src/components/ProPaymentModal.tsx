@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Check, Copy, QrCode, ShieldCheck, Zap, ArrowRight, MessageCircle } from 'lucide-react';
+import { X, Sparkles, Check, Copy, ShieldCheck, Zap, ArrowRight, MessageCircle, Phone } from 'lucide-react';
 
 interface ProPaymentModalProps {
   isOpen: boolean;
@@ -12,40 +12,52 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   onClose,
   onSuccess
 }) => {
-  const [copied, setCopied] = useState<boolean>(false);
+  const [copiedType, setCopiedType] = useState<'payload' | 'phone' | null>(null);
   const [isVerifying, setIsVerifying] = useState<boolean>(false);
 
   if (!isOpen) return null;
 
-  // Código Pix Copia e Cola configurado (pode ser chave direta ou payload Mercado Pago / Asaas)
-  const pixCopyPasteCode = '00020126580014br.gov.bcb.pix0136natalvagas.pix@gmail.com52040000530398654049.905802BR5915NATAL VAGAS PRO6005NATAL62070503***6304E8A2';
+  // Chave Pix Oficial (Telefone) do Edson / Natal Vagas
+  const pixPhoneKey = '84992344922';
+  const pixPhoneFormatted = '(84) 99234-4922';
 
-  const handleCopy = () => {
+  // Código Pix Copia e Cola (EMV Banco Central) com valor R$ 9,90 fixo
+  const pixCopyPasteCode = '00020126360014br.gov.bcb.pix0114+558499234492252040000530398654049.905802BR5911NATAL VAGAS6005NATAL62070503***6304A77F';
+  
+  // Imagem do QR Code oficial gerada dinamicamente
+  const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=${encodeURIComponent(pixCopyPasteCode)}`;
+
+  const handleCopyPayload = () => {
     navigator.clipboard.writeText(pixCopyPasteCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
+    setCopiedType('payload');
+    setTimeout(() => setCopiedType(null), 3000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(pixPhoneKey);
+    setCopiedType('phone');
+    setTimeout(() => setCopiedType(null), 3000);
   };
 
   const handleConfirmPayment = () => {
     setIsVerifying(true);
-    // Simula validação imediata do Pix e liberação
     setTimeout(() => {
       localStorage.setItem('natalvagas_resume_pro_unlocked', 'true');
       setIsVerifying(false);
       onSuccess();
       onClose();
-    }, 1000);
+    }, 1200);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/65 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
       <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100 my-8">
         
         {/* Cabeçalho Pro */}
         <div className="bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-700 p-6 text-white relative">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -79,55 +91,64 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
             </div>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Carta de Apresentação Otimizada</span>
+              <span>Carta de Apresentação Inclusa</span>
             </div>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Dicas de Competências por Cargo</span>
+              <span>Dicas de Palavras-chave por Cargo</span>
             </div>
           </div>
 
-          {/* Área do Pix */}
+          {/* Área do Pix com QR Code Real */}
           <div className="bg-slate-50 rounded-2xl border border-slate-200 p-4 flex flex-col items-center text-center">
-            <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 mb-3">
-              {/* QR Code SVG formatado */}
-              <div className="w-36 h-36 flex flex-col items-center justify-center bg-slate-900 rounded-lg p-2 text-white text-center">
-                <QrCode className="w-24 h-24 text-white mx-auto" />
-                <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mt-1">Pix R$ 9,90</span>
-              </div>
+            
+            <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-3">
+              <img 
+                src={qrCodeImageUrl} 
+                alt="QR Code Pix R$ 9,90 Natal Vagas" 
+                className="w-40 h-40 object-contain rounded-lg"
+              />
+              <span className="block text-[11px] font-bold text-slate-700 mt-1.5">
+                Escaneie com o app do seu Banco
+              </span>
             </div>
 
-            <p className="text-xs text-slate-500 font-medium">
-              Abra o app do seu banco e escaneie o QR Code ou copie a chave Pix abaixo:
-            </p>
-
-            {/* Código Copia e Cola */}
-            <div className="w-full mt-3 flex items-center gap-2 bg-white rounded-xl border border-slate-200 p-1.5 pl-3">
-              <input 
-                type="text" 
-                readOnly 
-                value={pixCopyPasteCode}
-                className="text-[11px] text-slate-600 font-mono w-full bg-transparent focus:outline-hidden select-all truncate" 
-              />
+            <div className="w-full space-y-2">
+              {/* Botão Copiar Pix Copia e Cola */}
               <button
-                onClick={handleCopy}
-                className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
-                  copied 
-                    ? 'bg-emerald-600 text-white' 
-                    : 'bg-brand-600 hover:bg-brand-700 text-white'
+                onClick={handleCopyPayload}
+                className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  copiedType === 'payload'
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-brand-600 hover:bg-brand-700 text-white shadow-xs'
                 }`}
               >
-                {copied ? (
+                {copiedType === 'payload' ? (
                   <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span>Copiado!</span>
+                    <Check className="w-4 h-4" />
+                    <span>Código Pix Copiado com Sucesso!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copiar Pix</span>
+                    <Copy className="w-4 h-4" />
+                    <span>Copiar Código Pix Copia e Cola (R$ 9,90)</span>
                   </>
                 )}
+              </button>
+
+              {/* Botão Copiar Chave Telefone Direta */}
+              <button
+                onClick={handleCopyPhone}
+                className={`w-full py-2 px-4 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer border ${
+                  copiedType === 'phone'
+                    ? 'bg-emerald-50 border-emerald-400 text-emerald-700'
+                    : 'bg-white border-slate-200 hover:bg-slate-100 text-slate-700'
+                }`}
+              >
+                <Phone className="w-3.5 h-3.5 text-slate-500" />
+                <span>
+                  {copiedType === 'phone' ? 'Chave Telefone Copiada!' : `Ou copie a chave Telefone: ${pixPhoneFormatted}`}
+                </span>
               </button>
             </div>
           </div>
@@ -146,15 +167,15 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
             <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
               <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Pagamento seguro via Banco Central
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Pagamento seguro via Pix
               </span>
               <a 
-                href="https://wa.me/5584999999999?text=Ol%C3%A1%2C+preciso+de+ajuda+com+o+Pacote+Pro+do+Natal+Vagas" 
+                href="https://wa.me/5584992344922?text=Ol%C3%A1%2C+acabei+de+fazer+o+Pix+do+Pacote+Pro+no+Natal+Vagas" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-brand-600 hover:underline flex items-center gap-1 font-semibold"
               >
-                <MessageCircle className="w-3 h-3 text-emerald-600" /> Dúvidas no WhatsApp
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-600" /> Suporte WhatsApp
               </a>
             </div>
           </div>

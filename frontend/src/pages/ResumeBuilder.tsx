@@ -672,7 +672,7 @@ export const ResumeBuilder: React.FC = () => {
                 Ajustamos as palavras-chave certas para passar na triagem das melhores empresas de Natal e Parnamirim.
               </p>
               <a
-                href="https://wa.me/5584999999999?text=Ol%C3%A1%2C+gostaria+da+revis%C3%A3o+humana+do+meu+curr%C3%ADculo+pelo+Natal+Vagas"
+                href="https://wa.me/5584992344922?text=Ol%C3%A1%2C+gostaria+da+revis%C3%A3o+humana+do+meu+curr%C3%ADculo+pelo+Natal+Vagas"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 bg-white text-emerald-700 hover:bg-emerald-50 rounded-xl text-xs font-bold shadow-xs transition-all"
