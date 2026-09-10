@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, MapPin, Building2, Send, Share2, AlertCircle } from 'lucide-react';
 import { Job } from '../types/job';
 
@@ -8,6 +8,12 @@ interface JobModalProps {
 }
 
 export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
+  const [showEmailOptions, setShowEmailOptions] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('');
+  useEffect(() => {
+    setShowEmailOptions(false);
+    setCopyStatus('');
+  }, [job?.id]);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -23,6 +29,11 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
   }, [job, onClose]);
 
   if (!job) return null;
+
+  const emailSubject = `Candidatura: ${job.title} (Via Natal Vagas)`;
+  const emailBody = `Olá! Tenho interesse na vaga de ${job.title}, divulgada no Natal Vagas.\n\nSegue meu currículo para avaliação.\n\nNome:\nTelefone:`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(job.applicationTarget)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+  const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(job.applicationTarget)}&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
   // Schema.org JobPosting para Google Jobs
   const jobPostingSchema = {
@@ -50,12 +61,12 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
 
   const handleApplyClick = () => {
     if (job.applicationChannel === 'EMAIL') {
-      window.location.href = `mailto:${job.applicationTarget}?subject=Candidatura: ${encodeURIComponent(job.title)} (Via Natal Vagas)`;
+      setShowEmailOptions(true);
     } else if (job.applicationChannel === 'WHATSAPP') {
       const text = `Olá! Vi a vaga de *${job.title}* no site Natal Vagas e gostaria de enviar meu currículo.`;
       window.open(`https://api.whatsapp.com/send?phone=${job.applicationTarget}&text=${encodeURIComponent(text)}`, '_blank');
     } else {
-      window.open(job.applicationTarget, '_blank');
+      window.open(job.applicationTarget, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -101,6 +112,7 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
 
           <button 
             onClick={onClose}
+            aria-label="Fechar detalhes da vaga"
             className="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -183,7 +195,30 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
         </div>
 
         {/* Botão de Ação / Candidatura */}
-        <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
+        <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200">
+          {showEmailOptions && job.applicationChannel === 'EMAIL' ? (
+            <section aria-label="Candidatura por e-mail" className="space-y-3">
+              <h3 className="font-bold text-slate-900">Envie seu currículo por e-mail</h3>
+              <p className="text-sm text-slate-600">Escolha onde escrever. Revise a mensagem e anexe seu currículo antes de enviar.</p>
+              <p className="text-sm text-slate-700 break-all">Destinatário: <strong>{job.applicationTarget}</strong></p>
+              <div className="flex flex-wrap gap-2">
+                <a href={gmailUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-3 rounded-xl bg-brand-600 text-white font-semibold text-sm">Abrir Gmail no navegador</a>
+                <a href={outlookUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-3 rounded-xl border border-slate-300 bg-white font-semibold text-sm">Abrir Outlook no navegador</a>
+                <button type="button" onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(job.applicationTarget);
+                    setCopyStatus('Endereço copiado. Cole no serviço de e-mail que você utiliza.');
+                  } catch {
+                    setCopyStatus('Não foi possível copiar. Selecione e copie o endereço exibido acima.');
+                  }
+                }} className="px-4 py-3 rounded-xl border border-slate-300 bg-white font-semibold text-sm">Copiar endereço de e-mail</button>
+              </div>
+              <p role="status" className="text-sm text-slate-600">{copyStatus || 'Você poderá precisar entrar na sua conta. Nenhum e-mail é enviado automaticamente.'}</p>
+              <button type="button" onClick={() => setShowEmailOptions(false)} className="text-sm text-brand-700 underline">Voltar aos detalhes</button>
+            </section>
+          ) : <>
+          <p className="text-xs text-slate-500 mb-3">{job.applicationChannel === 'EMAIL' ? 'Escolha seu serviço de e-mail para preparar a candidatura.' : job.applicationChannel === 'WHATSAPP' ? 'Converse com o responsável pela vaga no WhatsApp.' : 'A candidatura será feita na página da empresa, aberta em uma nova aba.'}</p>
+          <div className="flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={() => {
               const text = `Vaga: *${job.title}* em Natal/RN: https://natalvagas.com.br/vaga/${job.slug}`;
@@ -200,8 +235,10 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
             className="flex-1 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 transition-all"
           >
             <Send className="w-4 h-4" />
-            <span>Candidatar-se Agora</span>
+            <span>{job.applicationChannel === 'EMAIL' ? 'Enviar currículo por e-mail' : job.applicationChannel === 'WHATSAPP' ? 'Candidatar-se pelo WhatsApp' : 'Candidatar-se no site da empresa'}</span>
           </button>
+          </div>
+          </>}
         </div>
 
       </div>
