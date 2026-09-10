@@ -25,7 +25,18 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 font-bold text-lg uppercase shrink-0 overflow-hidden group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors">
               {job.companyLogoUrl ? (
-                <img src={job.companyLogoUrl} alt={job.companyName} className="w-full h-full object-cover" />
+                <img 
+                  src={job.companyLogoUrl} 
+                  alt={`Logotipo da empresa ${job.companyName}`} 
+                  width={48}
+                  height={48}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="w-full h-full object-cover" 
+                />
               ) : (
                 <Building2 className="w-6 h-6" />
               )}
@@ -34,17 +45,18 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
               <span className="text-xs font-semibold text-slate-500 flex items-center gap-1">
                 {job.companyName}
               </span>
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors leading-snug">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors leading-snug">
                 {job.title}
-              </h2>
+              </h3>
             </div>
           </div>
 
           {/* Botão Compartilhar WhatsApp */}
           <button
             onClick={handleShareWhatsApp}
-            title="Compartilhar vaga no WhatsApp"
-            className="p-2 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+            title={`Compartilhar vaga de ${job.title} no WhatsApp`}
+            aria-label={`Compartilhar vaga de ${job.title} no WhatsApp`}
+            className="p-2 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors cursor-pointer"
           >
             <Share2 className="w-4 h-4" />
           </button>
