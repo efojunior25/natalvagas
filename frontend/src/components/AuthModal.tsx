@@ -106,28 +106,31 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-100 relative my-auto animate-in zoom-in-95 duration-200"
+        className="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-100 relative animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         
-        {/* Botão Fechar */}
+        {/* Botão Fechar Pinned */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-full hover:bg-slate-100 transition-colors cursor-pointer z-10"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-full hover:bg-slate-100 transition-colors cursor-pointer z-20"
+          title="Fechar (Esc)"
+          aria-label="Fechar"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Topo do Modal */}
-        <div className="p-6 pb-2 text-center">
+        <div className="p-6 pb-2 text-center shrink-0">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 mb-3 shadow-xs">
             <Sparkles className="w-6 h-6 text-brand-600" />
           </div>
-          <h3 className="text-xl font-black text-slate-900">{title}</h3>
+          <h3 className="text-xl font-black text-slate-900 pr-6 pl-6">{title}</h3>
           <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto leading-relaxed">{subtitle}</p>
         </div>
 
-        <div className="p-6 pt-3 space-y-4">
+        <div className="p-6 pt-3 space-y-4 overflow-y-auto flex-1">
           
           {/* Botão Oficial Continuar com Google */}
           <button

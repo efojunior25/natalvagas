@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { 
   FileText, Download, Sparkles, Plus, Trash2, 
   ArrowLeft, Crown, Eye, Edit3, MessageCircle, 
-  Briefcase, GraduationCap, User, Wrench, UserCheck, LogIn
+  Briefcase, GraduationCap, User, Wrench
 } from 'lucide-react';
 import { ProPaymentModal } from '../components/ProPaymentModal';
 import { AuthModal } from '../components/AuthModal';
 import { ResumeLaunchOfferModal } from '../components/ResumeLaunchOfferModal';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { PostJobModal } from '../components/PostJobModal';
 import { useAuth, PRO_TOKEN_KEY, verifyProToken } from '../context/AuthContext';
 
 interface Experience {
@@ -103,7 +106,7 @@ export const ResumeBuilder: React.FC = () => {
   });
 
   const [activeTemplate, setActiveTemplate] = useState<TemplateType>('ats');
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
   const [isPro, setIsPro] = useState<boolean>(() => {
     return verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
   });
@@ -118,6 +121,7 @@ export const ResumeBuilder: React.FC = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [isLaunchOfferOpen, setIsLaunchOfferOpen] = useState<boolean>(false);
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
+  const [isPostJobOpen, setIsPostJobOpen] = useState<boolean>(false);
   const [mobileTab, setMobileTab] = useState<'form' | 'preview'>('form');
   const [newSkill, setNewSkill] = useState<string>('');
 
@@ -224,59 +228,48 @@ export const ResumeBuilder: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       
-      {/* Barra de Ação Superior Minimalista (Oculta na impressão) */}
-      <header className="print:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3 shadow-xs">
+      {/* Barra de Navegação Principal do Site (Oculta na impressão) */}
+      <div className="print:hidden">
+        <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
+      </div>
+
+      {/* Sub-barra de Status do Currículo */}
+      <div className="print:hidden bg-white/85 backdrop-blur-xs border-b border-slate-200 px-4 sm:px-8 py-2.5 shadow-2xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <Link to="/" className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors shrink-0" title="Voltar ao início">
-              <ArrowLeft className="w-5 h-5" />
+          <div className="flex items-center gap-2 text-xs text-slate-500">
+            <Link to="/" className="hover:text-brand-600 flex items-center gap-1 transition-colors font-medium">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Início</span>
             </Link>
-            <div className="min-w-0">
-              <h1 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-brand-600 shrink-0" />
-                <span>Criar Currículo</span>
-              </h1>
-            </div>
+            <span>/</span>
+            <span className="font-bold text-slate-800 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-brand-600" />
+              Criar Currículo Profissional
+            </span>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-3">
             {effectiveIsPro ? (
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs font-extrabold shadow-2xs">
-                <Crown className="w-4 h-4 text-amber-500" />
+                <Crown className="w-3.5 h-3.5 text-amber-500" />
                 <span>Acesso PRO Ativo</span>
               </div>
             ) : (
               <button
                 type="button"
-                onClick={() => setIsLaunchOfferOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-amber-50 to-amber-100 hover:from-amber-100 hover:to-amber-200 text-amber-900 border border-amber-300 rounded-xl text-xs font-black shadow-2xs transition-all cursor-pointer"
+                onClick={() => setIsPaymentModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-amber-50 to-amber-100 hover:from-amber-100 hover:to-amber-200 text-amber-900 border border-amber-300 rounded-xl text-xs font-black shadow-2xs transition-all cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
                 <span>Oferta PRO (R$ 9,90)</span>
               </button>
             )}
-
-            {isAuthenticated ? (
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-semibold text-slate-700">
-                <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="max-w-[120px] truncate">{user?.name}</span>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setIsAuthOpen(true)}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-slate-600 hover:text-brand-600 rounded-xl text-xs font-semibold hover:bg-slate-100 transition-colors cursor-pointer"
-              >
-                <LogIn className="w-3.5 h-3.5" />
-                <span>Entrar</span>
-              </button>
-            )}
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Seletor de Abas Mobile (Formulário vs Prévia) */}
-      <div className="print:hidden lg:hidden flex border-b border-slate-200 bg-white sticky top-[57px] z-20">
+      <div className="print:hidden lg:hidden flex border-b border-slate-200 bg-white sticky top-16 sm:top-20 z-20">
         <button
           onClick={() => setMobileTab('form')}
           className={`flex-1 py-3 text-center text-xs font-bold flex items-center justify-center gap-2 border-b-2 cursor-pointer ${
@@ -1103,6 +1096,20 @@ export const ResumeBuilder: React.FC = () => {
         title="Salvar Currículo na Nuvem"
         subtitle="Conecte-se em 1 clique para manter seus dados salvos em qualquer dispositivo."
       />
+
+      {/* Rodapé Institucional (Oculto na impressão) */}
+      <div className="print:hidden mt-12">
+        <Footer />
+      </div>
+
+      {/* Modal de Publicação de Vaga */}
+      {isPostJobOpen && (
+        <PostJobModal
+          isOpen={isPostJobOpen}
+          onClose={() => setIsPostJobOpen(false)}
+          onJobCreated={() => setIsPostJobOpen(false)}
+        />
+      )}
 
     </div>
   );

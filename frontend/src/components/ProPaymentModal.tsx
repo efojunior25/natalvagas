@@ -268,43 +268,51 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   return createPortal(
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/75 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
-        <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100 my-6">
-          
-          {/* Cabeçalho */}
-          <div className="bg-gradient-to-r from-brand-600 via-indigo-600 to-slate-900 p-5 sm:p-6 text-white relative">
+      <div 
+        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-900/75 backdrop-blur-xs animate-in fade-in duration-200"
+        onClick={onClose}
+      >
+        <div 
+          className="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-100 relative animate-in zoom-in-95 duration-200 text-slate-800"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Cabeçalho Fixo - Pinned no topo para NUNCA ser cortado */}
+          <div className="bg-gradient-to-r from-brand-600 via-indigo-600 to-slate-900 p-4 sm:p-5 text-white relative shrink-0">
             <button
+              type="button"
               onClick={onClose}
-              className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+              className="absolute top-3.5 right-3.5 text-white/90 hover:text-white p-1.5 rounded-full hover:bg-white/20 transition-all cursor-pointer z-10"
+              title="Fechar janela (Esc)"
+              aria-label="Fechar"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/25 text-amber-300 text-[11px] font-black uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/25 text-amber-300 text-[10px] font-black uppercase tracking-wider mb-1.5">
+              <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" />
               <span>Oferta Especial de Lançamento</span>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-black">
+            <h3 className="text-lg sm:text-xl font-black leading-tight pr-8">
               Currículo Aprovado por Inteligência Artificial
             </h3>
-            <p className="text-xs sm:text-sm text-brand-100 mt-1">
-              Otimizado para passar nos robôs de triagem (Gupy / ATS) das empresas de Natal e RN.
+            <p className="text-[11px] sm:text-xs text-brand-100 mt-0.5">
+              Otimizado para passar nos robôs de triagem (Gupy / ATS) das empresas do RN.
             </p>
 
-            <div className="mt-3 flex items-center justify-between text-xs text-brand-200">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] text-brand-200">
               <span className="flex items-center gap-1">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Pagamento Seguro Efí Bank
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Pagamento Seguro Efí Bank
               </span>
-              <div className="flex items-center gap-1 font-mono bg-white/10 px-2 py-0.5 rounded-md text-amber-300">
+              <div className="flex items-center gap-1 font-mono bg-white/10 px-2 py-0.5 rounded-md text-amber-300 text-[10px]">
                 <Clock className="w-3 h-3" />
                 <span>Expira em {formatMinutes(secondsLeft)}</span>
               </div>
             </div>
           </div>
 
-          {/* Vínculo da Conta */}
-          <div className="bg-slate-50 border-b border-slate-200 px-5 py-2.5 flex items-center justify-between text-xs">
+          {/* Vínculo da Conta (shrink-0) */}
+          <div className="bg-slate-50 border-b border-slate-200 px-4 sm:px-5 py-2 flex items-center justify-between text-xs shrink-0">
             {isAuthenticated ? (
               <div className="flex items-center gap-2 text-slate-700 font-medium truncate">
                 <UserCheck className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -312,7 +320,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
               </div>
             ) : (
               <div className="flex items-center justify-between w-full">
-                <span className="text-slate-500 text-[11px] sm:text-xs">Deseja salvar seu currículo online?</span>
+                <span className="text-slate-500 text-[11px]">Deseja salvar seu currículo online?</span>
                 <button
                   type="button"
                   onClick={() => setIsAuthOpen(true)}
@@ -324,7 +332,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
             )}
           </div>
 
-          <div className="p-5 sm:p-6 space-y-4">
+          {/* Corpo Rolável Interno */}
+          <div className="p-4 sm:p-5 space-y-3 overflow-y-auto flex-1">
             
             {/* 1. Seletor de Planos */}
             <div>
@@ -446,7 +455,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     <img 
                       src={qrCodeImageUrl} 
                       alt={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"} 
-                      className="w-36 h-36 object-contain rounded-lg"
+                      className="w-28 h-28 sm:w-32 sm:h-32 object-contain rounded-lg mx-auto"
                     />
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
                       Valor com Desconto: <strong>R$ {currentPlanData.currentPrice}</strong>
