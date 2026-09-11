@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { 
   X, Sparkles, Check, Copy, ShieldCheck, 
   MessageCircle, Mail, UserCheck, Clock, 
@@ -105,11 +106,6 @@ const PLANS: Record<PlanType, {
   }
 };
 
-const VALID_CODES = [
-  "POTIGUAR2026", "VITALICIO2026", "PRO2026", "NATALVAGAS", 
-  "LANCAMENTO26", "IA2026", "PRO-POTIGUAR", "VIP-NATAL"
-];
-
 export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   isOpen,
   onClose,
@@ -122,22 +118,34 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
   const [secondsLeft, setSecondsLeft] = useState<number>(15 * 60);
 
-  // Formulário de Cartão de Crédito
-  const [cardNumber, setCardNumber] = useState<string>("");
-  const [cardHolder, setCardHolder] = useState<string>("");
-  const [cardExpiry, setCardExpiry] = useState<string>("");
-  const [cardCvv, setCardCvv] = useState<string>("");
-  const [cardCpf, setCardCpf] = useState<string>("");
-  const [cardInstallments, setCardInstallments] = useState<number>(1);
-  const [cardProcessingStep, setCardProcessingStep] = useState<"idle" | "validating" | "authorizing" | "success" | "error">("idle");
-  const [cardErrorMessage, setCardErrorMessage] = useState<string>("");
+  // Status de automação do Pix
+  const [autoApproved, setAutoApproved] = useState<boolean>(false);
 
-  // Controle de liberação protegida por código
+  // Controle de liberação protegida por código via API segura
   const [activationCode, setActivationCode] = useState<string>("");
   const [codeError, setCodeError] = useState<string>("");
   const [codeSuccess, setCodeSuccess] = useState<boolean>(false);
+  const [isValidatingCode, setIsValidatingCode] = useState<boolean>(false);
   const [showCodeInput, setShowCodeInput] = useState<boolean>(false);
 
+  // Trava a rolagem da tela e escuta tecla Escape
+  useEffect(() => {
+    if (!isOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  // Contagem regressiva
   useEffect(() => {
     if (!isOpen) return;
     const timer = setInterval(() => {
@@ -146,11 +154,46 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     return () => clearInterval(timer);
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   const currentPlanData = PLANS[selectedPlan];
   const pixEmailKey = "pix@natalvagas.com.br";
   const qrCodeImageUrl = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=" + encodeURIComponent(currentPlanData.emvCode);
+
+  // POLLING AUTOMÁTICO EM TEMPO REAL DO STATUS DO PIX
+  useEffect(() => {
+    if (!isOpen || paymentMethod !== "pix" || autoApproved) return;
+    let isMounted = true;
+
+    const checkStatus = async () => {
+      try {
+        const res = await fetch(`/api/payments/pix/status/${currentPlanData.txid}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.status === "approved" && isMounted) {
+            setAutoApproved(true);
+            unlockProStatus(data.token, data.plan || selectedPlan);
+            setTimeout(() => {
+              if (isMounted) {
+                onSuccess();
+                onClose();
+              }
+            }, 2500);
+          }
+        }
+      } catch (err) {
+        // Silencioso para não interromper a interface
+      }
+    };
+
+    // Consulta inicial e intervalo a cada 3,5 segundos
+    const interval = setInterval(checkStatus, 3500);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [isOpen, paymentMethod, currentPlanData.txid, selectedPlan, autoApproved, unlockProStatus, onSuccess, onClose]);
+
+  if (!isOpen || typeof document === "undefined") return null;
 
   const formatMinutes = (totalSec: number) => {
     const min = Math.floor(totalSec / 60);
@@ -170,72 +213,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     setTimeout(() => setCopiedType(null), 3000);
   };
 
-  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value.replace(/\D/g, "").slice(0, 16);
-    const formatted = val.replace(/(\d{4})(?=\d)/g, "$1 ");
-    setCardNumber(formatted);
-  };
-
-  const handleCardExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value.replace(/\D/g, "").slice(0, 4);
-    if (val.length >= 2) {
-      val = val.slice(0, 2) + "/" + val.slice(2);
-    }
-    setCardExpiry(val);
-  };
-
-  const handleCardCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value.replace(/\D/g, "").slice(0, 11);
-    val = val.replace(/(\d{3})(\d)/, "$1.$2");
-    val = val.replace(/(\d{3})(\d)/, "$1.$2");
-    val = val.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    setCardCpf(val);
-  };
-
-  const handleCardSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCardErrorMessage("");
-
-    const cleanNumber = cardNumber.replace(/\D/g, "");
-    const cleanCpf = cardCpf.replace(/\D/g, "");
-
-    if (cleanNumber.length < 15) {
-      setCardErrorMessage("Informe um número de cartão de crédito válido.");
-      return;
-    }
-    if (!cardHolder.trim() || cardHolder.trim().split(" ").length < 2) {
-      setCardErrorMessage("Informe o nome completo conforme impresso no cartão.");
-      return;
-    }
-    if (cardExpiry.length < 5) {
-      setCardErrorMessage("Informe a validade no formato MM/AA.");
-      return;
-    }
-    if (cardCvv.length < 3) {
-      setCardErrorMessage("Informe o código de segurança CVV (3 ou 4 dígitos).");
-      return;
-    }
-    if (cleanCpf.length < 11) {
-      setCardErrorMessage("Informe o CPF válido do titular do cartão.");
-      return;
-    }
-
-    setCardProcessingStep("validating");
-
-    setTimeout(() => {
-      setCardProcessingStep("authorizing");
-      setTimeout(() => {
-        setCardProcessingStep("success");
-        setTimeout(() => {
-          unlockProStatus();
-          onSuccess();
-          onClose();
-        }, 1500);
-      }, 1500);
-    }, 1000);
-  };
-
-  const handleValidateCode = (e: React.FormEvent) => {
+  // Validação segura de código de ativação no backend/Cloudflare Function
+  const handleValidateCode = async (e: React.FormEvent) => {
     e.preventDefault();
     const cleanCode = activationCode.trim().toUpperCase();
 
@@ -244,16 +223,32 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
       return;
     }
 
-    if (VALID_CODES.includes(cleanCode) || cleanCode.startsWith("NV-") || cleanCode.startsWith("PRO-")) {
-      setCodeError("");
-      setCodeSuccess(true);
-      setTimeout(() => {
-        unlockProStatus();
-        onSuccess();
-        onClose();
-      }, 1200);
-    } else {
-      setCodeError("Código não encontrado. Envie o comprovante no WhatsApp (84) 99234-4922 para receber seu código de liberação.");
+    setIsValidatingCode(true);
+    setCodeError("");
+
+    try {
+      const res = await fetch("/api/payments/verify-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: cleanCode, email: user?.email || "" })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        setCodeSuccess(true);
+        setTimeout(() => {
+          unlockProStatus(data.token, data.plan || selectedPlan);
+          onSuccess();
+          onClose();
+        }, 1200);
+      } else {
+        setCodeError(data.message || "Código não reconhecido. Envie seu comprovante no WhatsApp (84) 99234-4922 para receber um código exclusivo.");
+      }
+    } catch (err) {
+      setCodeError("Erro de conexão ao validar o código. Tente novamente ou fale com o suporte.");
+    } finally {
+      setIsValidatingCode(false);
     }
   };
 
@@ -261,10 +256,17 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     "Olá! Fiz o pagamento de R$ " + currentPlanData.currentPrice + " para o Plano " + currentPlanData.title + " no Natal Vagas.\n\n" +
     "E-mail da conta: " + (user?.email || "Não informado") + "\n" +
     "Nome: " + (user?.name || "Candidato") + "\n\n" +
-    "Segue o comprovante para emissão do meu código de liberação:"
+    "Segue o comprovante:"
   );
 
-  return (
+  const whatsappCardMessage = encodeURIComponent(
+    "Olá! Gostaria de pagar o Plano " + currentPlanData.title + " (R$ " + currentPlanData.currentPrice + ") no Cartão de Crédito sem juros.\n\n" +
+    "E-mail: " + (user?.email || "Não informado") + "\n" +
+    "Nome: " + (user?.name || "Candidato") + "\n\n" +
+    "Poderia me enviar o link seguro de pagamento?"
+  );
+
+  return createPortal(
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/75 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
         <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100 my-6">
@@ -451,6 +453,21 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     </span>
                   </div>
 
+                  {/* Status do Pix em Tempo Real */}
+                  <div className="w-full mb-2.5 p-2 rounded-xl bg-slate-100/90 border border-slate-200 text-center">
+                    {autoApproved ? (
+                      <div className="flex items-center justify-center gap-2 text-emerald-700 font-extrabold text-xs">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 animate-bounce" />
+                        <span>Pagamento Confirmado! Desbloqueando Acesso Pro...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-2 text-slate-600 text-[11px]">
+                        <Loader2 className="w-3.5 h-3.5 text-brand-600 animate-spin" />
+                        <span>Aguardando confirmação Pix em tempo real...</span>
+                      </div>
+                    )}
+                  </div>
+
                   <button
                     type="button"
                     onClick={handleCopyPayload}
@@ -496,14 +513,14 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
-                  <span>Confirmar Pagamento no WhatsApp (84) 99234-4922</span>
+                  <span>Enviar Comprovante no WhatsApp (84) 99234-4922</span>
                 </a>
               </div>
             )}
 
             {/* CONTEÚDO CARTÃO DE CRÉDITO */}
             {paymentMethod === "card" && (
-              <form onSubmit={handleCardSubmit} className="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+              <div className="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200 text-[11px] text-slate-500">
                   <span className="flex items-center gap-1 font-semibold text-slate-700">
                     <Lock className="w-3.5 h-3.5 text-emerald-600" /> Cartão de Crédito
@@ -511,152 +528,52 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   <span className="font-bold text-slate-600">Visa • Master • Elo • Amex</span>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                    Número do Cartão:
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      value={cardNumber}
-                      onChange={handleCardNumberChange}
-                      placeholder="0000 0000 0000 0000"
-                      className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none font-mono"
-                    />
-                    <CreditCard className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                <div className="p-3 bg-white rounded-xl border border-slate-200 space-y-2 text-left">
+                  <div className="text-xs font-bold text-slate-800 flex items-center justify-between">
+                    <span>Plano Selecionado:</span>
+                    <span className="text-brand-600">{currentPlanData.title}</span>
+                  </div>
+                  <div className="text-xs text-slate-600 flex items-center justify-between">
+                    <span>Valor Total:</span>
+                    <strong className="text-slate-900 text-sm">R$ {currentPlanData.currentPrice}</strong>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 text-[11px] text-slate-500">
+                    <span>Opções de parcelamento: </span>
+                    <span className="font-semibold text-slate-700">
+                      {currentPlanData.installments[currentPlanData.installments.length - 1]?.label}
+                    </span>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                    Nome impresso no Cartão:
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={cardHolder}
-                    onChange={(e) => setCardHolder(e.target.value.toUpperCase())}
-                    placeholder="COMO IMPRESSO NO CARTÃO"
-                    className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none uppercase font-mono"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                      Validade:
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={cardExpiry}
-                      onChange={handleCardExpiryChange}
-                      placeholder="MM/AA"
-                      className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none font-mono text-center"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                      CVV (Código):
-                    </label>
-                    <input
-                      type="password"
-                      required
-                      maxLength={4}
-                      value={cardCvv}
-                      onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                      placeholder="123"
-                      className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none font-mono text-center"
-                    />
+                <div className="p-3 bg-indigo-50/80 rounded-xl border border-indigo-200 text-indigo-900 text-xs leading-relaxed space-y-2">
+                  <div className="flex items-start gap-2">
+                    <ShieldCheck className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <span>
+                      Para pagamento com cartão sem juros e com máxima proteção antifraude, geramos seu link oficial e exclusivo de checkout instantaneamente.
+                    </span>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                    CPF do Titular:
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={cardCpf}
-                    onChange={handleCardCpfChange}
-                    placeholder="000.000.000-00"
-                    className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none font-mono"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                    Opção de Parcelamento:
-                  </label>
-                  <select
-                    value={cardInstallments}
-                    onChange={(e) => setCardInstallments(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none font-medium"
-                  >
-                    {currentPlanData.installments.map((inst) => (
-                      <option key={inst.count} value={inst.count}>
-                        {inst.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {cardErrorMessage && (
-                  <div className="flex items-start gap-1.5 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-[11px]">
-                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                    <span>{cardErrorMessage}</span>
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={cardProcessingStep !== "idle"}
-                  className={`w-full py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                    cardProcessingStep === "success"
-                      ? "bg-emerald-600 text-white"
-                      : cardProcessingStep !== "idle"
-                        ? "bg-indigo-400 text-white cursor-wait"
-                        : "bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white"
-                  }`}
+                <a
+                  href={"https://wa.me/5584992344922?text=" + whatsappCardMessage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  {cardProcessingStep === "validating" && (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Validando dados do cartão...</span>
-                    </>
-                  )}
-                  {cardProcessingStep === "authorizing" && (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Processando cobrança segura...</span>
-                    </>
-                  )}
-                  {cardProcessingStep === "success" && (
-                    <>
-                      <CheckCircle2 className="w-4 h-4 text-white" />
-                      <span>Pagamento Aprovado! Liberando Pro...</span>
-                    </>
-                  )}
-                  {cardProcessingStep === "idle" && (
-                    <>
-                      <Lock className="w-4 h-4" />
-                      <span>Pagar R$ {currentPlanData.currentPrice} no Cartão</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
+                  <CreditCard className="w-4 h-4" />
+                  <span>Receber Link de Cartão no WhatsApp</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
 
                 <div className="text-center">
                   <span className="text-[10px] text-slate-400">
-                    Transação protegida por criptografia bancária SSL 256 bits via Efí Bank.
+                    Transação protegida e monitorada via Efí Bank / WhatsApp Oficial Natal Vagas.
                   </span>
                 </div>
-              </form>
+              </div>
             )}
 
-            {/* Código de Ativação Manual */}
+            {/* Código de Ativação Manual via API Segura */}
             <div className="pt-2 border-t border-slate-200">
               {!showCodeInput ? (
                 <button
@@ -678,13 +595,16 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                       value={activationCode}
                       onChange={(e) => setActivationCode(e.target.value)}
                       placeholder="Ex: POTIGUAR2026"
+                      disabled={isValidatingCode || codeSuccess}
                       className="flex-1 uppercase font-mono px-3 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none"
                     />
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                      disabled={isValidatingCode || codeSuccess}
+                      className="px-4 py-2 bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
                     >
-                      Ativar Pro
+                      {isValidatingCode && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                      <span>Ativar Pro</span>
                     </button>
                   </div>
 
@@ -715,7 +635,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
         title="Conectar com o Google"
         subtitle="Vincule sua conta para manter seus currículos salvos para sempre."
       />
-    </>
+    </>,
+    document.body
   );
 };
 export default ProPaymentModal;
