@@ -73,7 +73,7 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-xs animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/70 backdrop-blur-xs animate-fadeIn">
       
       {/* Script com Schema JSON-LD para Google Jobs */}
       <script 
@@ -82,30 +82,32 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
       />
 
       <div 
-        className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] flex flex-col animate-scaleUp"
+        className="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[94vh] sm:max-h-[90vh] flex flex-col animate-scaleUp"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Cabeçalho */}
-        <div className="p-6 bg-gradient-to-r from-brand-50 to-white border-b border-slate-200 flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-brand-600 font-bold text-xl uppercase overflow-hidden shrink-0">
+        <div className="p-4 sm:p-6 bg-gradient-to-r from-brand-50 to-white border-b border-slate-200 flex items-start justify-between gap-3">
+          <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0 flex-1">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-brand-600 font-bold text-lg sm:text-xl uppercase overflow-hidden shrink-0 mt-0.5 sm:mt-0">
               {job.companyLogoUrl ? (
                 <img src={job.companyLogoUrl} alt={job.companyName} className="w-full h-full object-cover" />
               ) : (
-                <Building2 className="w-7 h-7 text-slate-400" />
+                <Building2 className="w-6 h-6 sm:w-7 sm:h-7 text-slate-400" />
               )}
             </div>
-            <div>
-              <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider">
+            <div className="min-w-0 flex-1">
+              <span className="text-[11px] sm:text-xs font-semibold text-brand-600 uppercase tracking-wider block truncate">
                 {job.companyName}
               </span>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
+              <h2 className="text-lg sm:text-2xl font-black text-slate-900 leading-snug break-words">
                 {job.title}
               </h2>
-              <div className="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                <span>{job.neighborhood ? `${job.neighborhood}, ` : ''}{job.city}/RN</span>
+              <div className="mt-1 flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-slate-500">
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  {job.neighborhood ? `${job.neighborhood}, ` : ''}{job.city}/RN
+                </span>
                 <span>•</span>
                 <span>{job.workModel === 'NAO_INFORMADO' ? 'Modalidade não informada' : job.workModel}</span>
               </div>
@@ -115,14 +117,14 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
           <button 
             onClick={onClose}
             aria-label="Fechar detalhes da vaga"
-            className="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
+            className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors shrink-0 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Conteúdo com Scroll */}
-        <div className="p-6 overflow-y-auto space-y-6 text-slate-700 text-sm leading-relaxed">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 text-slate-700 text-sm leading-relaxed">
           
           {/* Informações Rápidas */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -220,35 +222,38 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
             </section>
           ) : <>
           <p className="text-xs text-slate-500 mb-3">{job.applicationChannel === 'EMAIL' ? 'Escolha seu serviço de e-mail para preparar a candidatura.' : job.applicationChannel === 'WHATSAPP' ? 'Converse com o responsável pela vaga no WhatsApp.' : 'A candidatura será feita na página da empresa, aberta em uma nova aba.'}</p>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-          <button
-            onClick={() => {
-              const text = `Vaga: *${job.title}* em Natal/RN: https://natalvagas.com.br/vaga/${job.slug}`;
-              window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-            }}
-            className="px-4 py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-2 transition-colors cursor-pointer"
-          >
-            <Share2 className="w-4 h-4" />
-            <span>Compartilhar</span>
-          </button>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => {
+                  const text = `Vaga: *${job.title}* em Natal/RN: https://natalvagas.com.br/vaga/${job.slug}`;
+                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+                }}
+                className="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <Share2 className="w-3.5 h-3.5" />
+                <span>Compartilhar</span>
+              </button>
 
-          <button
-            type="button"
-            onClick={() => setIsSocialModalOpen(true)}
-            className="px-4 py-3 rounded-xl border border-pink-200 bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
-            title="Gerar Arte para Instagram Feed ou Story"
-          >
-            <Instagram className="w-4 h-4 text-pink-600" />
-            <span>Gerar Post / Story</span>
-          </button>
+              <button
+                type="button"
+                onClick={() => setIsSocialModalOpen(true)}
+                className="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-pink-200 bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                title="Gerar Arte para Instagram Feed ou Story"
+              >
+                <Instagram className="w-3.5 h-3.5 text-pink-600" />
+                <span>Gerar Card</span>
+              </button>
+            </div>
 
-          <button
-            onClick={handleApplyClick}
-            className="flex-1 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
-          >
-            <Send className="w-4 h-4" />
-            <span>{job.applicationChannel === 'EMAIL' ? 'Enviar currículo por e-mail' : job.applicationChannel === 'WHATSAPP' ? 'Candidatar-se pelo WhatsApp' : 'Candidatar-se no site da empresa'}</span>
-          </button>
+            <button
+              onClick={handleApplyClick}
+              className="w-full sm:flex-1 px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <Send className="w-4 h-4" />
+              <span className="truncate">{job.applicationChannel === 'EMAIL' ? 'Enviar currículo por e-mail' : job.applicationChannel === 'WHATSAPP' ? 'Candidatar-se no WhatsApp' : 'Candidatar-se na empresa'}</span>
+            </button>
           </div>
           </>}
         </div>

@@ -202,7 +202,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
           </div>
 
           {/* Filtro Rápido de Modalidade */}
-          <div className="flex items-center gap-1.5 p-1 bg-white border border-slate-200 rounded-xl text-xs font-medium self-stretch sm:self-auto overflow-x-auto">
+          <div className="flex items-center gap-1.5 p-1 bg-white border border-slate-200 rounded-xl text-xs font-medium self-stretch sm:self-auto overflow-x-auto no-scrollbar">
             {['TODOS', 'PRESENCIAL', 'HIBRIDO', 'REMOTO'].map((model) => (
               <button
                 key={model}

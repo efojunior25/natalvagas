@@ -203,16 +203,16 @@ export const ResumeBuilder: React.FC = () => {
     <div className="min-h-screen bg-slate-100 text-slate-900">
       
       {/* Barra de Ação Superior (Oculta na impressão) */}
-      <header className="print:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3 shadow-xs">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="p-2 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors">
+      <header className="print:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-3 sm:px-8 py-2.5 sm:py-3 shadow-xs">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
+            <Link to="/" className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors shrink-0" title="Voltar ao início">
               <ArrowLeft className="w-5 h-5" />
             </Link>
-            <div>
-              <h1 className="text-lg font-black text-slate-900 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-brand-600" />
-                <span>Currículo Aprovado por IA</span>
+            <div className="min-w-0">
+              <h1 className="text-sm sm:text-lg font-black text-slate-900 flex items-center gap-1.5 sm:gap-2 truncate">
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-brand-600 shrink-0" />
+                <span className="truncate">Currículo IA</span>
               </h1>
               <p className="text-xs text-slate-500 hidden sm:block">
                 Otimizado para passar nos robôs de triagem (Gupy / ATS) das empresas de Natal e RN.
@@ -220,14 +220,14 @@ export const ResumeBuilder: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
               <span>Lançamento: <strong>Mensal R$ 9,90</strong> • <strong>Anual R$ 39,90</strong> • <strong>Vitalício R$ 99,90</strong></span>
             </div>
 
             {isAuthenticated ? (
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-semibold text-slate-700">
+              <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-semibold text-slate-700">
                 <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                 <span className="max-w-[120px] truncate">{user?.name}</span>
                 {effectiveIsPro && (
@@ -238,29 +238,32 @@ export const ResumeBuilder: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsAuthOpen(true)}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-slate-600 hover:text-brand-600 rounded-xl text-xs font-semibold hover:bg-slate-100 transition-colors cursor-pointer"
+                className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 text-slate-600 hover:text-brand-600 rounded-xl text-xs font-semibold hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <LogIn className="w-3.5 h-3.5" />
-                <span>Entrar / Salvar</span>
+                <span>Entrar</span>
               </button>
             )}
 
             {!effectiveIsPro && (
               <button
                 onClick={() => setIsPaymentModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer"
               >
-                <Crown className="w-4 h-4 text-amber-100" />
-                <span>Liberar Acesso com IA (A partir de R$ 9,90)</span>
+                <Crown className="w-3.5 h-3.5 text-amber-100" />
+                <span className="hidden lg:inline">Liberar Acesso com IA (A partir de R$ 9,90)</span>
+                <span className="hidden sm:inline lg:hidden">PRO (R$ 9,90)</span>
+                <span className="sm:hidden font-extrabold text-[11px]">PRO R$ 9,90</span>
               </button>
             )}
 
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-brand-500/25 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-brand-500/25 transition-all cursor-pointer"
             >
-              <Download className="w-4 h-4" />
-              <span>Baixar em PDF</span>
+              <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Baixar em PDF</span>
+              <span className="sm:hidden font-bold text-[11px]">PDF</span>
             </button>
           </div>
         </div>

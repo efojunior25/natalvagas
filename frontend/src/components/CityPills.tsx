@@ -9,7 +9,7 @@ interface CityPillsProps {
 
 export const CityPills: React.FC<CityPillsProps> = ({ cities, selectedCity, onSelectCity }) => {
   return (
-    <nav aria-label="Filtro rápido por cidade" className="mb-6 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+    <nav aria-label="Filtro rápido por cidade" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
       <div className="flex items-center gap-2 min-w-max">
         <span className="text-xs font-bold text-slate-500 flex items-center gap-1 mr-1">
           <MapPin className="w-3.5 h-3.5 text-brand-500" />
