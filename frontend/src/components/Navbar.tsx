@@ -47,119 +47,99 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Logotipo Oficial */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+          {/* Logotipo Oficial Limpo */}
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img 
               src="/assets/logo-natalvagas.jpg" 
               alt="Natal Vagas Logotipo" 
-              className="h-10 sm:h-14 w-auto object-contain rounded-md shadow-2xs transition-transform group-hover:scale-105"
+              className="h-10 sm:h-12 w-auto object-contain rounded-md shadow-2xs transition-transform group-hover:scale-105"
             />
-            <div>
-              <span className="block text-xl sm:text-2xl font-black tracking-tight leading-none">
-                <span className="text-brand-600">Natal</span>
-                <span className="text-brand-400">Vagas</span>
-              </span>
-              <span className="hidden sm:block text-[10px] uppercase font-bold tracking-wider text-brand-500 mt-0.5">
-                Sua oportunidade está aqui!
-              </span>
-            </div>
+            <span className="text-xl sm:text-2xl font-black tracking-tight leading-none">
+              <span className="text-brand-600">Natal</span>
+              <span className="text-brand-400">Vagas</span>
+            </span>
           </Link>
 
-          {/* Versão Desktop (telas >= md) */}
-          <div className="hidden md:flex items-center gap-3 lg:gap-4">
-            <Link 
-              to="/" 
-              className={`text-sm font-medium flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
-                location.pathname === '/' 
-                  ? 'text-brand-600 bg-brand-50/60 font-bold' 
-                  : 'text-slate-700 hover:text-brand-600 hover:bg-slate-50'
-              }`}
-            >
-              <Search className="w-4 h-4 text-slate-400" />
-              <span>Vagas</span>
-            </Link>
+          {/* Versão Desktop Minimalista (telas >= md) */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
+              <Link 
+                to="/" 
+                className={`transition-colors hover:text-brand-600 ${
+                  location.pathname === '/' ? 'text-brand-600 font-bold' : ''
+                }`}
+              >
+                Vagas
+              </Link>
 
-            <Link 
-              to="/criar-curriculo" 
-              className={`text-sm font-bold flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
-                location.pathname === '/criar-curriculo'
-                  ? 'text-brand-700 bg-brand-100/70'
-                  : 'text-brand-600 hover:text-brand-700 bg-brand-50/70 hover:bg-brand-50'
-              }`}
-            >
-              <FileText className="w-4 h-4 text-brand-600" />
-              <span>Criar Currículo</span>
-              <span className="text-[10px] bg-emerald-100 text-emerald-700 font-extrabold px-1.5 py-0.5 rounded-sm uppercase tracking-wider">
-                Grátis
-              </span>
-            </Link>
+              <Link 
+                to="/criar-curriculo" 
+                className={`transition-colors hover:text-brand-600 ${
+                  location.pathname === '/criar-curriculo' ? 'text-brand-600 font-bold' : ''
+                }`}
+              >
+                Criar Currículo
+              </Link>
 
-            <Link 
-              to="/blog" 
-              className={`text-sm font-medium flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
-                location.pathname.startsWith('/blog') 
-                  ? 'text-brand-600 bg-brand-50/60 font-bold' 
-                  : 'text-slate-700 hover:text-brand-600 hover:bg-slate-50'
-              }`}
-            >
-              <BookOpen className="w-4 h-4 text-slate-400" />
-              <span>Blog</span>
-            </Link>
+              <Link 
+                to="/blog" 
+                className={`transition-colors hover:text-brand-600 ${
+                  location.pathname.startsWith('/blog') ? 'text-brand-600 font-bold' : ''
+                }`}
+              >
+                Blog
+              </Link>
 
-            <Link 
-              to="/sobre" 
-              className="text-sm font-medium text-slate-700 hover:text-brand-600 flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-            >
-              <Info className="w-4 h-4 text-slate-400" />
-              <span>Sobre</span>
-            </Link>
+              <Link 
+                to="/sobre" 
+                className={`transition-colors hover:text-brand-600 ${
+                  location.pathname === '/sobre' ? 'text-brand-600 font-bold' : ''
+                }`}
+              >
+                Sobre
+              </Link>
+            </nav>
 
-            <Link 
-              to="/contato" 
-              className="text-sm font-medium text-slate-700 hover:text-brand-600 flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-            >
-              <MessageSquare className="w-4 h-4 text-slate-400" />
-              <span>Contato</span>
-            </Link>
-
-            {/* Status do Usuário / Botão Entrar */}
-            {isAuthenticated ? (
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-bold text-slate-700">
-                  <User className="w-3.5 h-3.5 text-brand-600" />
-                  <span className="max-w-[100px] truncate">{user?.name}</span>
-                  {user?.isPro && (
-                    <span className="bg-amber-100 text-amber-800 text-[10px] px-1 py-0.5 rounded-sm">PRO</span>
-                  )}
+            <div className="flex items-center gap-4">
+              {/* Status do Usuário / Botão Entrar */}
+              {isAuthenticated ? (
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-bold text-slate-700">
+                    <User className="w-3.5 h-3.5 text-brand-600" />
+                    <span className="max-w-[100px] truncate">{user?.name}</span>
+                    {user?.isPro && (
+                      <span className="bg-amber-100 text-amber-800 text-[10px] px-1 py-0.5 rounded-sm">PRO</span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="text-xs text-slate-400 hover:text-rose-600 px-2 py-1 transition-colors cursor-pointer flex items-center gap-1"
+                    title="Sair da conta"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    <span>Sair</span>
+                  </button>
                 </div>
+              ) : (
                 <button
                   type="button"
-                  onClick={logout}
-                  className="text-xs text-slate-400 hover:text-rose-600 px-2 py-1 transition-colors cursor-pointer flex items-center gap-1"
-                  title="Sair da conta"
+                  onClick={() => setIsAuthOpen(true)}
+                  className="text-sm font-semibold text-slate-700 hover:text-brand-600 transition-colors cursor-pointer"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
-                  <span>Sair</span>
+                  Entrar
                 </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setIsAuthOpen(true)}
-                className="text-sm font-semibold text-slate-700 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
-              >
-                Entrar
-              </button>
-            )}
+              )}
 
-            <button 
-              onClick={onOpenPostJob}
-              type="button"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-md shadow-brand-500/20 hover:shadow-lg transition-all cursor-pointer shrink-0"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Anunciar Vaga</span>
-            </button>
+              <button 
+                onClick={onOpenPostJob}
+                type="button"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold shadow-sm hover:shadow-md transition-all cursor-pointer shrink-0"
+              >
+                <PlusCircle className="w-4 h-4" />
+                <span>Anunciar Vaga</span>
+              </button>
+            </div>
           </div>
 
           {/* Versão Mobile (telas < md) - Ações Rápidas & Hambúrguer */}

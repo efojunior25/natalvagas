@@ -14,7 +14,7 @@ export const BLOG_POSTS: BlogPost[] = [
       name: 'Equipe Editorial Natal Vagas',
       role: 'Especialistas em RH & Carreiras no RN'
     },
-    coverImage: '/assets/banner01.jpg',
+    coverImage: '/assets/blog/curriculo-celular.jpg',
     coverImageAlt: 'Candidato montando currículo pelo celular para vagas em Natal RN',
     isFeatured: true,
     tags: ['Currículo no Celular', 'Empregos Natal', 'Gupy ATS', 'Modelo de Currículo Grátis'],
@@ -45,7 +45,7 @@ export const BLOG_POSTS: BlogPost[] = [
       name: 'Redação Natal Vagas',
       role: 'Serviço de Utilidade Pública'
     },
-    coverImage: '/assets/banner01.jpg',
+    coverImage: '/assets/blog/sine-natal.jpg',
     coverImageAlt: 'Unidade de atendimento do SINE em Natal Rio Grande do Norte',
     isFeatured: false,
     tags: ['SINE Natal', 'SINE RN', 'Seguro Desemprego', 'Central do Trabalhador'],
@@ -82,7 +82,7 @@ export const BLOG_POSTS: BlogPost[] = [
       name: 'Equipe Editorial Natal Vagas',
       role: 'Orientação de Carreira'
     },
-    coverImage: '/assets/banner01.jpg',
+    coverImage: '/assets/blog/jovem-aprendiz.jpg',
     coverImageAlt: 'Jovens estudantes participando de processo seletivo em Natal',
     isFeatured: false,
     tags: ['Jovem Aprendiz', 'Primeiro Emprego', 'CIEE Natal', 'SENAC RN'],
@@ -115,7 +115,7 @@ export const BLOG_POSTS: BlogPost[] = [
       name: 'Redação Natal Vagas',
       role: 'Especialistas em Recrutamento'
     },
-    coverImage: '/assets/banner01.jpg',
+    coverImage: '/assets/blog/entrevistas-varejo.jpg',
     coverImageAlt: 'Profissional de vendas atendendo em loja de shopping de Natal',
     isFeatured: false,
     tags: ['Entrevista de Emprego', 'Supermercados RN', 'Midway Mall', 'Dicas de Entrevista'],
@@ -146,7 +146,7 @@ export const BLOG_POSTS: BlogPost[] = [
       name: 'Equipe Editorial Natal Vagas',
       role: 'Qualificação Profissional'
     },
-    coverImage: '/assets/banner01.jpg',
+    coverImage: '/assets/blog/cursos-qualificacao.jpg',
     coverImageAlt: 'Estudante realizando curso profissionalizante com certificado',
     isFeatured: false,
     tags: ['Cursos Gratuitos', 'Certificado Válido', 'Qualificação RN', 'SENAC IFRN'],
