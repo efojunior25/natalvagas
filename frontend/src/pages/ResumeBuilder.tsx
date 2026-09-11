@@ -8,7 +8,7 @@ import {
 import { ProPaymentModal } from '../components/ProPaymentModal';
 import { AuthModal } from '../components/AuthModal';
 import { ResumeLaunchOfferModal } from '../components/ResumeLaunchOfferModal';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, PRO_TOKEN_KEY, verifyProToken } from '../context/AuthContext';
 
 interface Experience {
   id: string;
@@ -105,9 +105,15 @@ export const ResumeBuilder: React.FC = () => {
   const [activeTemplate, setActiveTemplate] = useState<TemplateType>('ats');
   const { user, isAuthenticated } = useAuth();
   const [isPro, setIsPro] = useState<boolean>(() => {
-    return localStorage.getItem('natalvagas_resume_pro_unlocked') === 'true';
+    return verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
   });
   const effectiveIsPro = isPro || !!user?.isPro;
+
+  useEffect(() => {
+    if (user?.isPro) {
+      setIsPro(true);
+    }
+  }, [user?.isPro]);
 
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [isLaunchOfferOpen, setIsLaunchOfferOpen] = useState<boolean>(false);
