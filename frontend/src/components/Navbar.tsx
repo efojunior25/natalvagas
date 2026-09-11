@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { PlusCircle, Search, Info, MessageSquare, FileText, Menu, X, ShieldCheck, LogIn, LogOut, User } from 'lucide-react';
+import { PlusCircle, Search, Info, MessageSquare, FileText, Menu, X, ShieldCheck, LogIn, LogOut, User, BookOpen } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthModal } from './AuthModal';
@@ -81,13 +81,29 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
             <Link 
               to="/criar-curriculo" 
-              className="text-sm font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-brand-50/70 hover:bg-brand-50 transition-colors"
+              className={`text-sm font-bold flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
+                location.pathname === '/criar-curriculo'
+                  ? 'text-brand-700 bg-brand-100/70'
+                  : 'text-brand-600 hover:text-brand-700 bg-brand-50/70 hover:bg-brand-50'
+              }`}
             >
               <FileText className="w-4 h-4 text-brand-600" />
               <span>Criar Currículo</span>
               <span className="text-[10px] bg-emerald-100 text-emerald-700 font-extrabold px-1.5 py-0.5 rounded-sm uppercase tracking-wider">
                 Grátis
               </span>
+            </Link>
+
+            <Link 
+              to="/blog" 
+              className={`text-sm font-medium flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
+                location.pathname.startsWith('/blog') 
+                  ? 'text-brand-600 bg-brand-50/60 font-bold' 
+                  : 'text-slate-700 hover:text-brand-600 hover:bg-slate-50'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 text-slate-400" />
+              <span>Blog</span>
             </Link>
 
             <Link 
@@ -276,6 +292,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                   <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full uppercase font-extrabold">
                     Grátis
                   </span>
+                </Link>
+
+                <Link
+                  to="/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 px-3.5 py-3 text-sm font-semibold text-slate-800 hover:text-brand-600 hover:bg-brand-50/50 rounded-xl transition-colors"
+                >
+                  <BookOpen className="w-4 h-4 text-brand-500" />
+                  <span>Blog & Notícias de Emprego</span>
                 </Link>
 
                 <Link

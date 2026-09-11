@@ -38,6 +38,7 @@ export const Footer: React.FC = () => {
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li><Link to="/" className="hover:text-brand-400 transition-colors">Todas as Vagas</Link></li>
               <li><Link to="/criar-curriculo" className="hover:text-brand-400 text-brand-300 font-semibold transition-colors flex items-center gap-1">Criar Currículo <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-1 rounded-sm">Grátis</span></Link></li>
+              <li><Link to="/blog" className="hover:text-brand-400 transition-colors">Blog & Notícias de Emprego</Link></li>
               <li><Link to="/sobre" className="hover:text-brand-400 transition-colors">Sobre o Natal Vagas</Link></li>
               <li><Link to="/dicas-seguranca" className="hover:text-brand-400 transition-colors">Dicas Anti-Golpe</Link></li>
               <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Fale Conosco / Contato</Link></li>

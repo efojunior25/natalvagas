@@ -23,6 +23,8 @@ const AboutUs = lazy(() => import('./pages/AboutUs').then(m => ({ default: m.Abo
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const JobSafety = lazy(() => import('./pages/JobSafety').then(m => ({ default: m.JobSafety })));
 const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder').then(m => ({ default: m.ResumeBuilder })));
+const BlogList = lazy(() => import('./pages/BlogList').then(m => ({ default: m.BlogList })));
+const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 
 const PAGE_SIZE = 24;
@@ -382,6 +384,8 @@ export const App: React.FC = () => {
           <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
           <Route path="/criar-curriculo" element={<ResumeBuilder />} />
           <Route path="/gerador-curriculo" element={<Navigate to="/criar-curriculo" replace />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
           <Route path="/sobre" element={<AboutUs />} />
