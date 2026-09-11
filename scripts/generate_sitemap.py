@@ -67,9 +67,39 @@ xml_lines = [
     '    <changefreq>monthly</changefreq>',
     '    <priority>0.7</priority>',
     '  </url>',
+    '  <url>',
+    f'    <loc>{base_url}/blog</loc>',
+    f'    <lastmod>{today}</lastmod>',
+    '    <changefreq>daily</changefreq>',
+    '    <priority>0.9</priority>',
+    '  </url>',
+    '',
+    '  <!-- URLs do Blog Guia de Carreira RN -->',
+]
+
+blog_posts_path = os.path.join(repo_root, "frontend", "src", "data", "blogPosts.ts")
+if os.path.exists(blog_posts_path):
+    with open(blog_posts_path, "r", encoding="utf-8") as f:
+        blog_content = f.read()
+    bm = re.search(r'export const blogPosts:\s*BlogPost\[\]\s*=\s*(\[.*?\]);', blog_content, re.DOTALL)
+    if bm:
+        blog_records = json.loads(bm.group(1))
+        for bp in blog_records:
+            bslug = bp.get('slug')
+            bpub = bp.get('publishedAt') or today
+            xml_lines.extend([
+                '  <url>',
+                f'    <loc>{base_url}/blog/{bslug}</loc>',
+                f'    <lastmod>{bpub}</lastmod>',
+                f'    <changefreq>monthly</changefreq>',
+                '    <priority>0.8</priority>',
+                '  </url>'
+            ])
+
+xml_lines.extend([
     '',
     '  <!-- URLs das Vagas Ativas no RN -->',
-]
+])
 
 for job in records:
     slug = job.get('slug')
@@ -91,4 +121,5 @@ xml_lines.append('')
 with open(sitemap_path, "w", encoding="utf-8") as f:
     f.write('\n'.join(xml_lines))
 
-print(f"Generated sitemap with {len(records) + 7} URLs at {sitemap_path}")
+print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
+
