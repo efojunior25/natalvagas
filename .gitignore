@@ -28,3 +28,9 @@ yarn-error.log*
 # Docker & Database
 pgdata/
 .env
+
+# Certificates and Secrets
+*.p12
+*.pem
+certs/
+
