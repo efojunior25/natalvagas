@@ -462,17 +462,17 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 <div className="p-4 bg-white rounded-xl border border-amber-300 shadow-xs space-y-3 mt-3 animate-in fade-in">
                   <div className="flex flex-col sm:flex-row items-center gap-4">
                     <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=8&data=${encodeURIComponent('00020126360014br.gov.bcb.pix0114+5584992344922520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***630485D3')}`}
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=8&data=${encodeURIComponent('00020126430014br.gov.bcb.pix0121pix@natalvagas.com.br520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***6304B441')}`}
                       alt="QR Code Pix R$ 29,90"
                       className="w-24 h-24 object-contain rounded-lg border border-slate-200"
                     />
                     <div className="flex-1 space-y-1.5 text-center sm:text-left">
                       <span className="text-xs font-bold text-slate-800 block">Ativação do Destaque VIP (R$ 29,90)</span>
-                      <p className="text-[11px] text-slate-500">Escaneie o QR Code no app do banco ou use a chave telefone: <strong>(84) 99234-4922</strong></p>
+                      <p className="text-[11px] text-slate-500">Escaneie o QR Code no app do banco ou use a chave oficial: <strong>pix@natalvagas.com.br</strong></p>
                       <button
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText('00020126360014br.gov.bcb.pix0114+5584992344922520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***630485D3');
+                          navigator.clipboard.writeText('00020126430014br.gov.bcb.pix0121pix@natalvagas.com.br520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***6304B441');
                           setCopiedPix(true);
                           setTimeout(() => setCopiedPix(false), 3000);
                         }}
