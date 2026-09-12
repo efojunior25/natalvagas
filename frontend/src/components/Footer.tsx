@@ -7,25 +7,25 @@ export const Footer: React.FC = () => {
     <footer className="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
           
           {/* Coluna 1: Sobre */}
-          <div className="md:col-span-2">
+          <div>
             <div className="flex items-center gap-3">
               <img 
                 src="/assets/logo-natalvagas.jpg" 
                 alt="Natal Vagas" 
-                className="h-10 w-auto rounded object-contain bg-white p-0.5"
+                className="h-10 w-auto rounded object-contain bg-white p-0.5" 
               />
               <span className="text-xl font-black text-white">
                 <span className="text-brand-400">Natal</span>Vagas
               </span>
             </div>
-            <p className="mt-4 text-sm text-slate-400 max-w-sm leading-relaxed">
-              O portal líder em oportunidades de emprego em Natal e toda a Região Metropolitana (Parnamirim, Macaíba, São Gonçalo). Conectamos candidatos a empresas de forma 100% gratuita.
+            <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
+              O maior portal de empregos em Natal e no RN. Vagas verificadas e atualizadas diariamente de forma 100% gratuita.
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-brand-300">
-              <MapPin className="w-4 h-4 text-brand-400" />
+              <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
               <span>Natal, Rio Grande do Norte — Brasil</span>
             </div>
           </div>
@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
               Navegação
             </h3>
-            <ul className="mt-4 space-y-2 text-sm text-slate-400">
+            <ul className="mt-4 space-y-2 text-xs sm:text-sm text-slate-400">
               <li><Link to="/" className="hover:text-brand-400 transition-colors">Todas as Vagas</Link></li>
               <li><Link to="/criar-curriculo" className="hover:text-brand-400 text-brand-300 font-semibold transition-colors flex items-center gap-1">Criar Currículo <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-1 rounded-sm">Grátis</span></Link></li>
               <li><Link to="/blog" className="hover:text-brand-400 transition-colors">Blog & Notícias de Emprego</Link></li>
@@ -50,11 +50,59 @@ export const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
               Institucional & Legal
             </h3>
-            <ul className="mt-4 space-y-2 text-sm text-slate-400">
+            <ul className="mt-4 space-y-2 text-xs sm:text-sm text-slate-400">
               <li><Link to="/politica-de-privacidade" className="hover:text-brand-400 transition-colors">Política de Privacidade</Link></li>
               <li><Link to="/termos-de-uso" className="hover:text-brand-400 transition-colors">Termos de Uso</Link></li>
               <li><Link to="/dicas-seguranca" className="hover:text-brand-400 transition-colors">Segurança do Candidato</Link></li>
               <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Reportar Vaga / Suporte</Link></li>
+            </ul>
+          </div>
+
+          {/* Coluna 4: Redes Sociais & Comunidades Oficiais */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+              Canais Oficiais
+            </h3>
+            <p className="mt-2 text-xs text-slate-400">
+              Canais em fase final de lançamento:
+            </p>
+            <ul className="mt-4 space-y-2.5 text-xs sm:text-sm">
+              <li className="flex items-center justify-between p-2 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                <span className="flex items-center gap-2 text-slate-200 font-medium">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Grupo WhatsApp VIP
+                </span>
+                <span className="text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-500/30">
+                  Em breve
+                </span>
+              </li>
+              <li className="flex items-center justify-between p-2 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                <span className="flex items-center gap-2 text-slate-200 font-medium">
+                  <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                  Canal Telegram
+                </span>
+                <span className="text-[10px] font-extrabold bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-md border border-sky-500/30">
+                  Em breve
+                </span>
+              </li>
+              <li className="flex items-center justify-between p-2 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                <span className="flex items-center gap-2 text-slate-200 font-medium">
+                  <span className="w-2 h-2 rounded-full bg-pink-400" />
+                  Instagram Oficial
+                </span>
+                <span className="text-[10px] font-extrabold bg-pink-500/20 text-pink-300 px-2 py-0.5 rounded-md border border-pink-500/30">
+                  Em breve
+                </span>
+              </li>
+              <li className="flex items-center justify-between p-2 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                <span className="flex items-center gap-2 text-slate-200 font-medium">
+                  <span className="w-2 h-2 rounded-full bg-blue-400" />
+                  Página Facebook
+                </span>
+                <span className="text-[10px] font-extrabold bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-md border border-blue-500/30">
+                  Em breve
+                </span>
+              </li>
             </ul>
           </div>
 
