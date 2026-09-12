@@ -200,8 +200,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Equipe Editorial Natal Vagas",
       "role": "Especialistas em RH"
     },
-    "coverImage": "/assets/blog/curriculo-celular.jpg",
-    "coverImageAlt": "Envio de currículo profissional via WhatsApp",
+    "coverImage": "/assets/blog/whatsapp-curriculo.jpg",
+    "coverImageAlt": "Candidato enviando currículo profissional em PDF pelo WhatsApp",
     "isFeatured": false,
     "tags": [
       "WhatsApp Profissional",
@@ -236,8 +236,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Redação Natal Vagas",
       "role": "Pesquisa de Mercado"
     },
-    "coverImage": "/assets/blog/entrevistas-varejo.jpg",
-    "coverImageAlt": "Obras e construção civil na Grande Natal",
+    "coverImage": "/assets/blog/construcao-civil-rn.jpg",
+    "coverImageAlt": "Trabalhadores da construção civil em canteiro de obras em Natal e Parnamirim",
     "isFeatured": false,
     "tags": [
       "Construção Civil",
@@ -273,8 +273,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Equipe Editorial Natal Vagas",
       "role": "Turismo e Hospitalidade"
     },
-    "coverImage": "/assets/blog/entrevistas-varejo.jpg",
-    "coverImageAlt": "Hotéis e turismo na orla de Natal RN",
+    "coverImage": "/assets/blog/hotelaria-turismo-natal.jpg",
+    "coverImageAlt": "Recepção de hotel resort em Ponta Negra com vista para a orla de Natal RN",
     "isFeatured": false,
     "tags": [
       "Hotelaria",
@@ -309,8 +309,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Redação Natal Vagas",
       "role": "Recrutamento & Seleção"
     },
-    "coverImage": "/assets/blog/cursos-qualificacao.jpg",
-    "coverImageAlt": "Candidato em entrevista de emprego demonstrando confiança",
+    "coverImage": "/assets/blog/entrevista-periodo-sem-registro.jpg",
+    "coverImageAlt": "Candidato respondendo com confiança em entrevista de emprego com recrutadora de RH",
     "isFeatured": false,
     "tags": [
       "Entrevista de Emprego",
@@ -346,8 +346,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Equipe Editorial Natal Vagas",
       "role": "Interior do RN"
     },
-    "coverImage": "/assets/blog/sine-natal.jpg",
-    "coverImageAlt": "Centro comercial e oportunidades de trabalho em Mossoró RN",
+    "coverImage": "/assets/blog/mossoro-regiao-oeste.jpg",
+    "coverImageAlt": "Agronegócio e parques de energia eólica e solar em Mossoró e Oeste Potiguar",
     "isFeatured": false,
     "tags": [
       "Mossoró",
@@ -379,8 +379,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Redação Natal Vagas",
       "role": "Trabalho Remoto"
     },
-    "coverImage": "/assets/blog/curriculo-celular.jpg",
-    "coverImageAlt": "Profissional trabalhando de home office em Natal",
+    "coverImage": "/assets/blog/home-office-teleatendimento.jpg",
+    "coverImageAlt": "Profissional em teleatendimento e vendas home office com headset e notebook",
     "isFeatured": false,
     "tags": [
       "Home Office",
@@ -415,8 +415,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Equipe Editorial Natal Vagas",
       "role": "Legislação & Direitos"
     },
-    "coverImage": "/assets/blog/sine-natal.jpg",
-    "coverImageAlt": "Carteira de trabalho digital e direitos trabalhistas no RN",
+    "coverImage": "/assets/blog/direitos-trabalhistas-clt.jpg",
+    "coverImageAlt": "Carteira de trabalho digital no celular junto a contrato assinado e direitos CLT",
     "isFeatured": false,
     "tags": [
       "Direitos Trabalhistas",
@@ -453,8 +453,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Redação Natal Vagas",
       "role": "Educação & Estágios"
     },
-    "coverImage": "/assets/blog/jovem-aprendiz.jpg",
-    "coverImageAlt": "Estudantes universitários em oportunidade de estágio em Natal",
+    "coverImage": "/assets/blog/estagio-universitario-natal.jpg",
+    "coverImageAlt": "Estudantes universitários reunidos em biblioteca acadêmica em Natal RN",
     "isFeatured": false,
     "tags": [
       "Estágio Remunerado",
@@ -496,8 +496,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Equipe Editorial Natal Vagas",
       "role": "Logística & Cadeia de Suprimentos"
     },
-    "coverImage": "/assets/blog/entrevistas-varejo.jpg",
-    "coverImageAlt": "Centro de distribuição logística na Grande Natal",
+    "coverImage": "/assets/blog/logistica-estoque-rn.jpg",
+    "coverImageAlt": "Operador em centro de distribuição e logística com leitor de código de barras na Grande Natal",
     "isFeatured": false,
     "tags": [
       "Logística RN",
@@ -532,8 +532,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "name": "Redação Natal Vagas",
       "role": "Recrutamento & Seleção"
     },
-    "coverImage": "/assets/blog/cursos-qualificacao.jpg",
-    "coverImageAlt": "Dicas para responder perguntas difíceis em entrevista de emprego",
+    "coverImage": "/assets/blog/perguntas-entrevista-rh.jpg",
+    "coverImageAlt": "Recrutadora de RH conduzindo entrevista profissional em sala corporativa",
     "isFeatured": false,
     "tags": [
       "Entrevista de Emprego",
