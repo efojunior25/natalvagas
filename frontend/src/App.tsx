@@ -173,12 +173,12 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       />
 
       {/* Anúncio Banner de Topo (AdSense) */}
-      <div className="max-w-5xl mx-auto px-4 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <AdPlaceholder format="horizontal" />
       </div>
 
       {/* Conteúdo Principal / Listagem de Vagas */}
-      <main id="vagas" className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <main id="vagas" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
         {/* Filtro Rápido por Polos de Cidades no RN */}
         <CityPills
