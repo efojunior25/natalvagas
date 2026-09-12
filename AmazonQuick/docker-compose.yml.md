@@ -1,0 +1,32 @@
+# File: docker-compose.yml
+- **Original Path:** `docker-compose.yml`
+- **Language / Type:** `yaml`
+- **Lines of Code:** 22
+
+---
+
+```yaml
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: natalvagas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: natalvagas_db
+      POSTGRES_USER: natalvagas_user
+      POSTGRES_PASSWORD: natalvagas_secret_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U natalvagas_user -d natalvagas_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+    driver: local
+
+```

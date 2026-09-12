@@ -1,0 +1,87 @@
+# File: index.html
+- **Original Path:** `frontend/index.html`
+- **Language / Type:** `html`
+- **Lines of Code:** 77
+
+---
+
+```html
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/assets/logo-natalvagas.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natal Vagas — Vagas de Emprego em Natal e Região Metropolitana (RN)</title>
+    <meta name="description" content="Encontre mais de 120 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos e empresas de forma 100% gratuita." />
+    <meta name="keywords" content="vagas de emprego natal rn, empregos natal, trabalho parnamirim, vagas mossoró, estágio natal, jovem aprendiz natal, sine natal, natal vagas" />
+    <link rel="canonical" href="https://natalvagas.com.br/" />
+
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-7415792754049263">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7415792754049263" crossorigin="anonymous"></script>
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://natalvagas.com.br/" />
+    <meta property="og:title" content="Natal Vagas — Vagas de Emprego em Natal e no RN" />
+    <meta property="og:description" content="Oportunidades de emprego reais e verificadas em Natal, Parnamirim, Mossoró e Região Metropolitana / RN." />
+    <meta property="og:image" content="https://natalvagas.com.br/assets/banner01.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Natal Vagas" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Natal Vagas — Vagas de Emprego em Natal e no RN" />
+    <meta name="twitter:description" content="Oportunidades de emprego reais e verificadas em Natal, Parnamirim, Mossoró e Região Metropolitana / RN." />
+    <meta name="twitter:image" content="https://natalvagas.com.br/assets/banner01.jpg" />
+
+    <!-- Schema.org Structured Data (WebSite & Organization) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://natalvagas.com.br/#website",
+          "url": "https://natalvagas.com.br/",
+          "name": "Natal Vagas",
+          "description": "Portal líder de empregos e oportunidades no Rio Grande do Norte",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://natalvagas.com.br/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://natalvagas.com.br/#organization",
+          "name": "Natal Vagas",
+          "url": "https://natalvagas.com.br/",
+          "logo": "https://natalvagas.com.br/assets/logo-natalvagas.jpg",
+          "description": "Plataforma gratuita de divulgação e curadoria de vagas de emprego no Rio Grande do Norte.",
+          "areaServed": {
+            "@type": "State",
+            "name": "Rio Grande do Norte"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- DNS & Preconnect para aceleração de LCP / PageSpeed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://attachments.gupy.io" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-surface-lightBg text-slate-900 antialiased selection:bg-brand-500 selection:text-white transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+```

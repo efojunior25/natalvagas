@@ -1,0 +1,60 @@
+# File: index.css
+- **Original Path:** `frontend/src/index.css`
+- **Language / Type:** `css`
+- **Lines of Code:** 50
+
+---
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 15mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Oculta tudo exceto o conteúdo do currículo */
+  header, footer, nav, aside, button, .print\:hidden {
+    display: none !important;
+  }
+
+  #resume-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+  }
+}
+
+```

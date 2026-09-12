@@ -1,0 +1,52 @@
+# File: application.yml
+- **Original Path:** `backend/src/main/resources/application.yml`
+- **Language / Type:** `yaml`
+- **Lines of Code:** 42
+
+---
+
+```yaml
+spring:
+  application:
+    name: natalvagas-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/natalvagas_db}
+    username: ${DB_USERNAME:natalvagas_user}
+    password: ${DB_PASSWORD:natalvagas_secret_password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 25
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+server:
+  port: ${PORT:8085}
+  servlet:
+    context-path: /api
+
+springdoc:
+  swagger-ui:
+    path: /docs
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+natalvagas:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5050,http://localhost:5173,https://natalvagas.com.br,https://www.natalvagas.com.br}
+
+```
