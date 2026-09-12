@@ -9,9 +9,7 @@ import { FaqSection } from './components/FaqSection';
 import { AdPlaceholder } from './components/AdPlaceholder';
 import { Footer } from './components/Footer';
 import { Job } from './types/job';
-import { INITIAL_REAL_JOBS } from './data/initialJobs';
 import { Sparkles, AlertCircle, Loader2, PlusCircle, ChevronDown } from 'lucide-react';
-import axios from 'axios';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { WhatsAppCommunityBanner } from './components/WhatsAppCommunityBanner';
 import { CourseRecommendations } from './components/CourseRecommendations';
@@ -363,25 +361,44 @@ const LoadingFallback = () => (
   </div>
 );
 
-export const App: React.FC = () => {
-  const [jobs, setJobs] = useState<Job[]>(INITIAL_REAL_JOBS);
-  const [isLoading] = useState<boolean>(false);
+const JOBS_CACHE_KEY = 'natalvagas_jobs_cache_v2';
 
-  // Tenta sincronizar com o backend Spring Boot em tempo real
+export const App: React.FC = () => {
+  const [jobs, setJobs] = useState<Job[]>(() => {
+    try {
+      const cached = sessionStorage.getItem(JOBS_CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      // ignore parse error
+    }
+    return [];
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(() => jobs.length === 0);
+
+  // Carrega o catálogo consolidado assincronamente via Cloudflare Edge CDN
   const fetchJobs = useCallback(async () => {
     try {
-      const response = await axios.get('/api/jobs', {
-        params: { size: 50 },
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.data && Array.isArray(response.data.content) && response.data.content.length > 0) {
-        const remote: Job[] = response.data.content;
-        setJobs([...INITIAL_REAL_JOBS, ...remote.filter(job =>
-          !INITIAL_REAL_JOBS.some(local => local.id === job.id || local.applicationTarget === job.applicationTarget)
-        )]);
+      const response = await fetch('/data/jobs.json');
+      if (response.ok) {
+        const data: Job[] = await response.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setJobs(data);
+          try {
+            sessionStorage.setItem(JOBS_CACHE_KEY, JSON.stringify(data));
+          } catch (e) {
+            // ignore storage quota error
+          }
+        }
       }
     } catch (err) {
-      console.log('Utilizando catálogo local de vagas reais.');
+      console.warn('Erro ao carregar catálogo /data/jobs.json:', err);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 

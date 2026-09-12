@@ -28,6 +28,13 @@ yarn-error.log*
 # Docker & Database
 pgdata/
 .env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+!.env.example
+!**/.env.example
 
 # Certificates and Secrets
 *.p12

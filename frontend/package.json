@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:smoke": "python3 ../scripts/verify_build_integrity.py"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",

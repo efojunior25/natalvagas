@@ -6,6 +6,7 @@ interface Env {
     get: (key: string) => Promise<string | null>;
     put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
   };
+  WEBHOOK_SECRET?: string;
 }
 
 // Armazenamento em memória (persiste durante o ciclo de vida do worker)
@@ -13,6 +14,21 @@ const MEMORY_APPROVED_TXIDS = new Map<string, any>();
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
   try {
+    const url = new URL(request.url);
+    const tokenQuery = url.searchParams.get('token');
+    const tokenHeader = request.headers.get('x-webhook-token');
+
+    // Validação de segurança opcional via WEBHOOK_SECRET
+    if (env && env.WEBHOOK_SECRET) {
+      const authorized = tokenQuery === env.WEBHOOK_SECRET || tokenHeader === env.WEBHOOK_SECRET;
+      if (!authorized) {
+        return new Response(JSON.stringify({ error: 'Unauthorized webhook call' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+
     let payload: any = {};
     const text = await request.text();
     if (text) {
