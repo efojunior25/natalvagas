@@ -157,12 +157,38 @@ export const ResumeBuilder: React.FC = () => {
     setActiveTemplate(template);
   };
 
+  const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
+
   const handlePrint = () => {
     if (activeTemplate !== 'ats' && !effectiveIsPro) {
       setIsPaymentModalOpen(true);
       return;
     }
     window.print();
+  };
+
+  const handleWhatsAppShare = () => {
+    const text = `Olá! Tudo bem? Me chamo *${data.fullName || 'Candidato'}* e tenho interesse na oportunidade para *${data.targetRole || 'a vaga anunciada'}*.
+
+Estou anexando meu currículo atualizado em formato PDF (gerado profissionalmente no Natal Vagas).
+
+*Resumo das minhas qualificações:*
+${data.summary ? data.summary.slice(0, 180) + (data.summary.length > 180 ? '...' : '') : 'Disponível para início imediato e com total dedicação para agregar à equipe.'}
+
+*Contato direto:*
+📞 ${data.phone || 'Informado no currículo'}
+✉️ ${data.email || 'Informado no currículo'}
+
+Agradeço pela oportunidade e fico à disposição para entrevista!`;
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    }
+    setCopiedNotification('Mensagem de apresentação copiada! Baixe o PDF e anexe na conversa do WhatsApp.');
+    setTimeout(() => setCopiedNotification(null), 7000);
+
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   // Funções de atualização
@@ -748,16 +774,36 @@ export const ResumeBuilder: React.FC = () => {
                 </span>
               </div>
 
-              {/* Botão Baixar PDF Próximo ao Documento */}
-              <button
-                type="button"
-                onClick={handlePrint}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-brand-500/25 transition-all cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>Baixar Currículo em PDF</span>
-              </button>
+              {/* Botões de Ação: WhatsApp e Download PDF */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleWhatsAppShare}
+                  title="Copiar mensagem formal e abrir WhatsApp"
+                  className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Enviar no WhatsApp</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-brand-500/25 transition-all cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Baixar PDF</span>
+                </button>
+              </div>
             </div>
+
+            {/* Alerta amigável ao copiar para o WhatsApp */}
+            {copiedNotification && (
+              <div className="mb-3 px-4 py-2.5 bg-emerald-50 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-xs animate-fadeIn">
+                <span>📋</span>
+                <span>{copiedNotification}</span>
+              </div>
+            )}
 
             {/* FOLHA DO CURRÍCULO (ESTILIZADA PARA TELA E IMPRESSÃO) */}
             <div 

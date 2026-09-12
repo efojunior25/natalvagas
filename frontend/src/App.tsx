@@ -43,6 +43,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
+  const [onlyNoExperience, setOnlyNoExperience] = useState<boolean>(false);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
   // Trata abertura direta por URL (/vaga/:slug)
@@ -62,12 +63,12 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       }
     } else {
       setActiveJob(null);
-      document.title = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 120 Oportunidades';
+      document.title = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 800 Oportunidades';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute(
           'content',
-          'Encontre mais de 120 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
+          'Encontre mais de 800 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
         );
       }
     }
@@ -101,14 +102,21 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
 
       const matchesCity = !selectedCity || job.city.toLowerCase() === selectedCity.toLowerCase();
       const matchesModel = selectedWorkModel === 'TODOS' || job.workModel === selectedWorkModel;
+      const matchesNoExperience = !onlyNoExperience || (
+        job.contractType === 'ESTAGIO' ||
+        job.contractType === 'JOVEM_APRENDIZ' ||
+        /sem experiência|primeiro emprego|não exige experiência|jovem aprendiz|estágio/i.test(
+          `${job.title} ${job.requirements || ''} ${job.description}`
+        )
+      );
 
-      return matchesQuery && matchesCity && matchesModel;
+      return matchesQuery && matchesCity && matchesModel && matchesNoExperience;
     }).sort((a, b) => {
       if (a.isFeatured && !b.isFeatured) return -1;
       if (!a.isFeatured && b.isFeatured) return 1;
       return 0;
     });
-  }, [jobs, searchQuery, selectedCity, selectedWorkModel]);
+  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience]);
 
   // Lista visível com paginação progressiva para alta performance e Core Web Vitals
   const visibleJobs = useMemo(() => {
@@ -186,6 +194,11 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
           selectedCity={selectedCity}
           onSelectCity={(city) => {
             setSelectedCity(city);
+            setVisibleCount(PAGE_SIZE);
+          }}
+          onlyNoExperience={onlyNoExperience}
+          onToggleNoExperience={() => {
+            setOnlyNoExperience(prev => !prev);
             setVisibleCount(PAGE_SIZE);
           }}
         />

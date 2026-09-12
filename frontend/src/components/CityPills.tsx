@@ -5,9 +5,17 @@ interface CityPillsProps {
   cities: string[];
   selectedCity: string;
   onSelectCity: (city: string) => void;
+  onlyNoExperience?: boolean;
+  onToggleNoExperience?: () => void;
 }
 
-export const CityPills: React.FC<CityPillsProps> = ({ cities, selectedCity, onSelectCity }) => {
+export const CityPills: React.FC<CityPillsProps> = ({ 
+  cities, 
+  selectedCity, 
+  onSelectCity,
+  onlyNoExperience,
+  onToggleNoExperience
+}) => {
   return (
     <nav aria-label="Filtro rápido por cidade" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
       <div className="flex items-center gap-2 min-w-max">
@@ -27,6 +35,21 @@ export const CityPills: React.FC<CityPillsProps> = ({ cities, selectedCity, onSe
         >
           Todas as Cidades
         </button>
+
+        {/* Filtro Especial: Sem Experiência / Primeiro Emprego */}
+        {onToggleNoExperience && (
+          <button
+            type="button"
+            onClick={onToggleNoExperience}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+              onlyNoExperience
+                ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-400/30'
+                : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-300'
+            }`}
+          >
+            <span>🌱 Sem Experiência / 1º Emprego</span>
+          </button>
+        )}
 
         {cities.map((city) => {
           const isSelected = selectedCity.toLowerCase() === city.toLowerCase();

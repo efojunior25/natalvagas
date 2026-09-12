@@ -97,6 +97,15 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
               </span>
             </span>
           )}
+
+          {/* Selo Sem Experiência / 1º Emprego se aplicável */}
+          {(job.contractType === 'ESTAGIO' || 
+            job.contractType === 'JOVEM_APRENDIZ' || 
+            /sem experiência|primeiro emprego|não exige experiência|jovem aprendiz|estágio/i.test(`${job.title} ${job.requirements || ''} ${job.description}`)) && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+              <span>🌱 Sem Experiência</span>
+            </span>
+          )}
         </div>
 
         {/* Resumo da Descrição */}

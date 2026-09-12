@@ -44,6 +44,14 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
     "title": job.title,
     "description": job.description,
     "datePosted": job.publishedAt || job.createdAt,
+    "validThrough": job.expiresAt || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    "employmentType": job.contractType === 'ESTAGIO' 
+      ? 'INTERN' 
+      : job.contractType === 'TEMPORARIO' 
+      ? 'TEMPORARY' 
+      : job.contractType === 'PJ' 
+      ? 'CONTRACTOR' 
+      : 'FULL_TIME',
     "hiringOrganization": {
       "@type": "Organization",
       "name": job.companyName,
@@ -58,7 +66,20 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
         "addressRegion": "RN",
         "addressCountry": "BR"
       }
-    }
+    },
+    "directApply": true,
+    ...(job.salaryMin ? {
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "BRL",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": job.salaryMin,
+          ...(job.salaryMax ? { "maxValue": job.salaryMax } : {}),
+          "unitText": "MONTH"
+        }
+      }
+    } : {})
   };
 
   const handleApplyClick = () => {
