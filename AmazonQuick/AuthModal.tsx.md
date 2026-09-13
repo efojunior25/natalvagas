@@ -83,23 +83,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
     setLoading(true);
     try {
-      let success = false;
+      let res: { success: boolean; message?: string };
       if (isRegister) {
         if (!name) {
           setErrorMsg('Informe seu nome completo.');
           setLoading(false);
           return;
         }
-        success = await registerWithEmail(name, email, password);
+        res = await registerWithEmail(name, email, password);
       } else {
-        success = await loginWithEmail(email, password);
+        res = await loginWithEmail(email, password);
       }
 
-      if (success) {
+      if (res.success) {
         if (onSuccess) onSuccess();
         onClose();
       } else {
-        setErrorMsg('Credenciais inválidas. Tente novamente.');
+        setErrorMsg(res.message || 'Credenciais inválidas. Tente novamente.');
       }
     } catch (err) {
       setErrorMsg('Ocorreu um erro ao processar. Tente novamente.');

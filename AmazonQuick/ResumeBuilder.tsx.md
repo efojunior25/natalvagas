@@ -1,7 +1,7 @@
 # File: ResumeBuilder.tsx
 - **Original Path:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 1186
+- **Lines of Code:** 1281
 
 ---
 
@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 import { 
   FileText, Download, Sparkles, Plus, Trash2, 
   ArrowLeft, Crown, Eye, Edit3, MessageCircle, 
-  Briefcase, GraduationCap, User, Wrench
+  Briefcase, GraduationCap, User, Wrench,
+  Cloud, Check, Loader2
 } from 'lucide-react';
 import { ProPaymentModal } from '../components/ProPaymentModal';
 import { AuthModal } from '../components/AuthModal';
@@ -19,7 +20,7 @@ import { ResumeLaunchOfferModal } from '../components/ResumeLaunchOfferModal';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { PostJobModal } from '../components/PostJobModal';
-import { useAuth, PRO_TOKEN_KEY, verifyProToken } from '../context/AuthContext';
+import { useAuth, PRO_TOKEN_KEY, TOKEN_STORAGE_KEY, verifyProToken } from '../context/AuthContext';
 
 interface Experience {
   id: string;
@@ -133,10 +134,70 @@ export const ResumeBuilder: React.FC = () => {
   const [mobileTab, setMobileTab] = useState<'form' | 'preview'>('form');
   const [newSkill, setNewSkill] = useState<string>('');
 
-  // Salva rascunho automaticamente
+  const [cloudSyncStatus, setCloudSyncStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+
+  // Carrega currículo da nuvem quando o usuário estiver autenticado
+  useEffect(() => {
+    if (!user) return;
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (!token) return;
+
+    fetch('/api/resumes', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.ok ? res.json() : null)
+      .then(result => {
+        if (result?.success && result?.resume?.data) {
+          setData(prev => ({ ...prev, ...result.resume.data }));
+          if (result.resume.template) {
+            setActiveTemplate(result.resume.template as TemplateType);
+          }
+        }
+      })
+      .catch(err => {
+        console.warn('Não foi possível sincronizar da nuvem:', err);
+      });
+  }, [user?.id]);
+
+  // Salva rascunho automaticamente (local + Cloudflare D1 se autenticado)
   useEffect(() => {
     localStorage.setItem('natalvagas_resume_draft', JSON.stringify(data));
-  }, [data]);
+
+    if (!user) {
+      setCloudSyncStatus('idle');
+      return;
+    }
+
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (!token) return;
+
+    setCloudSyncStatus('saving');
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch('/api/resumes', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            title: data.fullName ? `Currículo - ${data.fullName}` : 'Meu Currículo',
+            template: activeTemplate,
+            data
+          })
+        });
+        if (res.ok) {
+          setCloudSyncStatus('saved');
+        } else {
+          setCloudSyncStatus('error');
+        }
+      } catch (err) {
+        setCloudSyncStatus('error');
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [data, activeTemplate, user]);
 
   // Atualiza SEO da página
   useEffect(() => {
@@ -305,6 +366,40 @@ Agradeço pela oportunidade e fico à disposição para entrevista!`;
           </div>
 
           <div className="flex items-center gap-3">
+            {user ? (
+              <div 
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-50 text-slate-600 border border-slate-200"
+                title="Sincronização em Nuvem Cloudflare D1"
+              >
+                {cloudSyncStatus === 'saving' ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-600" />
+                    <span>Salvando...</span>
+                  </>
+                ) : cloudSyncStatus === 'error' ? (
+                  <>
+                    <Cloud className="w-3.5 h-3.5 text-amber-500" />
+                    <span>Salvo offline</span>
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Nuvem sincronizada</span>
+                  </>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsAuthOpen(true)}
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 border border-slate-200 rounded-xl text-xs font-medium shadow-2xs transition-all cursor-pointer"
+                title="Entre para sincronizar seu currículo na nuvem"
+              >
+                <Cloud className="w-3.5 h-3.5 text-slate-400" />
+                <span>Salvar na Nuvem</span>
+              </button>
+            )}
+
             {effectiveIsPro ? (
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs font-extrabold shadow-2xs">
                 <Crown className="w-3.5 h-3.5 text-amber-500" />

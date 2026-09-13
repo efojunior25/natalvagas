@@ -38,13 +38,18 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [V1__init_schema.sql.md](./V1__init_schema.sql.md) | `backend/src/main/resources/db/migration/V1__init_schema.sql` | 71 | `.sql` |
 | [docker-compose.yml.md](./docker-compose.yml.md) | `docker-compose.yml` | 22 | `.yml` |
 | [frontend.env.example.md](./frontend.env.example.md) | `frontend/.env.example` | 8 | `.example` |
+| [utils.ts.md](./utils.ts.md) | `frontend/functions/api/auth/_utils.ts` | 116 | `.ts` |
+| [login.ts.md](./login.ts.md) | `frontend/functions/api/auth/login.ts` | 119 | `.ts` |
+| [me.ts.md](./me.ts.md) | `frontend/functions/api/auth/me.ts` | 94 | `.ts` |
+| [register.ts.md](./register.ts.md) | `frontend/functions/api/auth/register.ts` | 115 | `.ts` |
 | [sign-pro.ts.md](./sign-pro.ts.md) | `frontend/functions/api/auth/sign-pro.ts` | 87 | `.ts` |
-| [create.ts.md](./create.ts.md) | `frontend/functions/api/coupons/create.ts` | 145 | `.ts` |
-| [list.ts.md](./list.ts.md) | `frontend/functions/api/coupons/list.ts` | 95 | `.ts` |
-| [verify.ts.md](./verify.ts.md) | `frontend/functions/api/coupons/verify.ts` | 134 | `.ts` |
+| [create.ts.md](./create.ts.md) | `frontend/functions/api/coupons/create.ts` | 162 | `.ts` |
+| [list.ts.md](./list.ts.md) | `frontend/functions/api/coupons/list.ts` | 127 | `.ts` |
+| [verify.ts.md](./verify.ts.md) | `frontend/functions/api/coupons/verify.ts` | 177 | `.ts` |
 | [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 111 | `.ts` |
 | [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 143 | `.ts` |
 | [verify-code.ts.md](./verify-code.ts.md) | `frontend/functions/api/payments/verify-code.ts` | 128 | `.ts` |
+| [index.ts.md](./index.ts.md) | `frontend/functions/api/resumes/index.ts` | 139 | `.ts` |
 | [index.html.md](./index.html.md) | `frontend/index.html` | 98 | `.html` |
 | [package-lock.json.md](./package-lock.json.md) | `frontend/package-lock.json` | 3069 | `.json` |
 | [package.json.md](./package.json.md) | `frontend/package.json` | 33 | `.json` |
@@ -57,6 +62,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8938 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
+| [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
@@ -77,7 +83,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [SocialPostGeneratorModal.tsx.md](./SocialPostGeneratorModal.tsx.md) | `frontend/src/components/SocialPostGeneratorModal.tsx` | 334 | `.tsx` |
 | [ThemeToggle.tsx.md](./ThemeToggle.tsx.md) | `frontend/src/components/ThemeToggle.tsx` | 41 | `.tsx` |
 | [WhatsAppCommunityBanner.tsx.md](./WhatsAppCommunityBanner.tsx.md) | `frontend/src/components/WhatsAppCommunityBanner.tsx` | 132 | `.tsx` |
-| [AuthContext.tsx.md](./AuthContext.tsx.md) | `frontend/src/context/AuthContext.tsx` | 246 | `.tsx` |
+| [AuthContext.tsx.md](./AuthContext.tsx.md) | `frontend/src/context/AuthContext.tsx` | 321 | `.tsx` |
 | [ThemeContext.tsx.md](./ThemeContext.tsx.md) | `frontend/src/context/ThemeContext.tsx` | 73 | `.tsx` |
 | [blogPosts.ts.md](./blogPosts.ts.md) | `frontend/src/data/blogPosts.ts` | 565 | `.ts` |
 | [initialJobs.ts.md](./initialJobs.ts.md) | `frontend/src/data/initialJobs.ts` | 20 | `.ts` |
@@ -91,7 +97,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [Contact.tsx.md](./Contact.tsx.md) | `frontend/src/pages/Contact.tsx` | 176 | `.tsx` |
 | [JobSafety.tsx.md](./JobSafety.tsx.md) | `frontend/src/pages/JobSafety.tsx` | 94 | `.tsx` |
 | [PrivacyPolicy.tsx.md](./PrivacyPolicy.tsx.md) | `frontend/src/pages/PrivacyPolicy.tsx` | 119 | `.tsx` |
-| [ResumeBuilder.tsx.md](./ResumeBuilder.tsx.md) | `frontend/src/pages/ResumeBuilder.tsx` | 1186 | `.tsx` |
+| [ResumeBuilder.tsx.md](./ResumeBuilder.tsx.md) | `frontend/src/pages/ResumeBuilder.tsx` | 1281 | `.tsx` |
 | [TermsOfUse.tsx.md](./TermsOfUse.tsx.md) | `frontend/src/pages/TermsOfUse.tsx` | 98 | `.tsx` |
 | [paymentService.ts.md](./paymentService.ts.md) | `frontend/src/services/paymentService.ts` | 61 | `.ts` |
 | [blog.ts.md](./blog.ts.md) | `frontend/src/types/blog.ts` | 21 | `.ts` |
@@ -115,4 +121,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 105 arquivos convertidos com sucesso.
+**Total de Arquivos:** 111 arquivos convertidos com sucesso.

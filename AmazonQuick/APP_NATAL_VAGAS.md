@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 105 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 111 arquivos.
 
 ---
 
@@ -40,77 +40,83 @@
 32. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
 33. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
 34. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
-35. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
-36. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
-37. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
-38. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
-39. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-40. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-41. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-42. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-43. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
-44. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-45. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-46. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-47. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-48. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-49. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
-50. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-51. [`frontend/public/_redirects`](#frontend-public--redirects)
-52. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-53. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
-54. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
-55. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-56. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-57. [`frontend/public/sw.js`](#frontend-public-swjs)
-58. [`frontend/.env.example`](#frontend-envexample)
-59. [`frontend/index.html`](#frontend-indexhtml)
-60. [`frontend/package-lock.json`](#frontend-package-lockjson)
-61. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-62. [`frontend/src/index.css`](#frontend-src-indexcss)
-63. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-64. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-65. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-66. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-67. [`backend/Dockerfile`](#backend-dockerfile)
-68. [`backend/pom.xml`](#backend-pomxml)
-69. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-70. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-71. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-72. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-73. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-74. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-75. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-76. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-77. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-78. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-79. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-80. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-81. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-82. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-83. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-84. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-85. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-86. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-87. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-88. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-89. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-90. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-91. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
-92. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-93. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-94. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
-95. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-96. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-97. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-98. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-99. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-100. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-101. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-102. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-103. [`.env.example`](#envexample)
-104. [`.gitignore`](#gitignore)
-105. [`docker-compose.yml`](#docker-composeyml)
+35. [`frontend/functions/api/auth/_utils.ts`](#frontend-functions-api-auth--utilsts)
+36. [`frontend/functions/api/auth/login.ts`](#frontend-functions-api-auth-logints)
+37. [`frontend/functions/api/auth/me.ts`](#frontend-functions-api-auth-mets)
+38. [`frontend/functions/api/auth/register.ts`](#frontend-functions-api-auth-registerts)
+39. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
+40. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
+41. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
+42. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
+43. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+44. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+45. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+46. [`frontend/functions/api/resumes/index.ts`](#frontend-functions-api-resumes-indexts)
+47. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+48. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
+49. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+50. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+51. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+52. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+53. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+54. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
+55. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+56. [`frontend/public/_redirects`](#frontend-public--redirects)
+57. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+58. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
+59. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
+60. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+61. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+62. [`frontend/public/sw.js`](#frontend-public-swjs)
+63. [`frontend/.env.example`](#frontend-envexample)
+64. [`frontend/index.html`](#frontend-indexhtml)
+65. [`frontend/package-lock.json`](#frontend-package-lockjson)
+66. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+67. [`frontend/schema.sql`](#frontend-schemasql)
+68. [`frontend/src/index.css`](#frontend-src-indexcss)
+69. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+70. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+71. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+72. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+73. [`backend/Dockerfile`](#backend-dockerfile)
+74. [`backend/pom.xml`](#backend-pomxml)
+75. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+76. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+77. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+78. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+79. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+80. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+81. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+82. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+83. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+84. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+85. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+86. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+87. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+88. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+89. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+90. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+91. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+92. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+93. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+94. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+95. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+96. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+97. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
+98. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+99. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+100. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+101. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+102. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+103. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+104. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+105. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+106. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+107. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+108. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+109. [`.env.example`](#envexample)
+110. [`.gitignore`](#gitignore)
+111. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -1218,7 +1224,7 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
 - **Nome:** `AuthModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 278
-- **Tamanho:** 10498 bytes
+- **Tamanho:** 10537 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
@@ -1298,23 +1304,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
     setLoading(true);
     try {
-      let success = false;
+      let res: { success: boolean; message?: string };
       if (isRegister) {
         if (!name) {
           setErrorMsg('Informe seu nome completo.');
           setLoading(false);
           return;
         }
-        success = await registerWithEmail(name, email, password);
+        res = await registerWithEmail(name, email, password);
       } else {
-        success = await loginWithEmail(email, password);
+        res = await loginWithEmail(email, password);
       }
 
-      if (success) {
+      if (res.success) {
         if (onSuccess) onSuccess();
         onClose();
       } else {
-        setErrorMsg('Credenciais inválidas. Tente novamente.');
+        setErrorMsg(res.message || 'Credenciais inválidas. Tente novamente.');
       }
     } catch (err) {
       setErrorMsg('Ocorreu um erro ao processar. Tente novamente.');
@@ -6961,8 +6967,8 @@ export const PrivacyPolicy: React.FC = () => {
 - **Caminho:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Nome:** `ResumeBuilder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 1186
-- **Tamanho:** 55138 bytes
+- **Total de Linhas:** 1281
+- **Tamanho:** 58532 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
@@ -6970,7 +6976,8 @@ import { Link } from 'react-router-dom';
 import { 
   FileText, Download, Sparkles, Plus, Trash2, 
   ArrowLeft, Crown, Eye, Edit3, MessageCircle, 
-  Briefcase, GraduationCap, User, Wrench
+  Briefcase, GraduationCap, User, Wrench,
+  Cloud, Check, Loader2
 } from 'lucide-react';
 import { ProPaymentModal } from '../components/ProPaymentModal';
 import { AuthModal } from '../components/AuthModal';
@@ -6978,7 +6985,7 @@ import { ResumeLaunchOfferModal } from '../components/ResumeLaunchOfferModal';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { PostJobModal } from '../components/PostJobModal';
-import { useAuth, PRO_TOKEN_KEY, verifyProToken } from '../context/AuthContext';
+import { useAuth, PRO_TOKEN_KEY, TOKEN_STORAGE_KEY, verifyProToken } from '../context/AuthContext';
 
 interface Experience {
   id: string;
@@ -7092,10 +7099,70 @@ export const ResumeBuilder: React.FC = () => {
   const [mobileTab, setMobileTab] = useState<'form' | 'preview'>('form');
   const [newSkill, setNewSkill] = useState<string>('');
 
-  // Salva rascunho automaticamente
+  const [cloudSyncStatus, setCloudSyncStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+
+  // Carrega currículo da nuvem quando o usuário estiver autenticado
+  useEffect(() => {
+    if (!user) return;
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (!token) return;
+
+    fetch('/api/resumes', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.ok ? res.json() : null)
+      .then(result => {
+        if (result?.success && result?.resume?.data) {
+          setData(prev => ({ ...prev, ...result.resume.data }));
+          if (result.resume.template) {
+            setActiveTemplate(result.resume.template as TemplateType);
+          }
+        }
+      })
+      .catch(err => {
+        console.warn('Não foi possível sincronizar da nuvem:', err);
+      });
+  }, [user?.id]);
+
+  // Salva rascunho automaticamente (local + Cloudflare D1 se autenticado)
   useEffect(() => {
     localStorage.setItem('natalvagas_resume_draft', JSON.stringify(data));
-  }, [data]);
+
+    if (!user) {
+      setCloudSyncStatus('idle');
+      return;
+    }
+
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (!token) return;
+
+    setCloudSyncStatus('saving');
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch('/api/resumes', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            title: data.fullName ? `Currículo - ${data.fullName}` : 'Meu Currículo',
+            template: activeTemplate,
+            data
+          })
+        });
+        if (res.ok) {
+          setCloudSyncStatus('saved');
+        } else {
+          setCloudSyncStatus('error');
+        }
+      } catch (err) {
+        setCloudSyncStatus('error');
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [data, activeTemplate, user]);
 
   // Atualiza SEO da página
   useEffect(() => {
@@ -7264,6 +7331,40 @@ Agradeço pela oportunidade e fico à disposição para entrevista!`;
           </div>
 
           <div className="flex items-center gap-3">
+            {user ? (
+              <div 
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-50 text-slate-600 border border-slate-200"
+                title="Sincronização em Nuvem Cloudflare D1"
+              >
+                {cloudSyncStatus === 'saving' ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-600" />
+                    <span>Salvando...</span>
+                  </>
+                ) : cloudSyncStatus === 'error' ? (
+                  <>
+                    <Cloud className="w-3.5 h-3.5 text-amber-500" />
+                    <span>Salvo offline</span>
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Nuvem sincronizada</span>
+                  </>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsAuthOpen(true)}
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 border border-slate-200 rounded-xl text-xs font-medium shadow-2xs transition-all cursor-pointer"
+                title="Entre para sincronizar seu currículo na nuvem"
+              >
+                <Cloud className="w-3.5 h-3.5 text-slate-400" />
+                <span>Salvar na Nuvem</span>
+              </button>
+            )}
+
             {effectiveIsPro ? (
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs font-extrabold shadow-2xs">
                 <Crown className="w-3.5 h-3.5 text-amber-500" />
@@ -8268,8 +8369,508 @@ export const TermsOfUse: React.FC = () => {
 
 ---
 
+<a id="frontend-functions-api-auth--utilsts"></a>
+## 35. Arquivo: `frontend/functions/api/auth/_utils.ts`
+- **Caminho:** `frontend/functions/api/auth/_utils.ts`
+- **Nome:** `_utils.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 116
+- **Tamanho:** 3417 bytes
+
+```typescript
+export const DEFAULT_AUTH_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+
+/**
+ * Gera salt aleatório seguro em formato hexadecimal
+ */
+export function generateSalt(bytes = 16): string {
+  const arr = new Uint8Array(bytes);
+  crypto.getRandomValues(arr);
+  return Array.from(arr).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * Derivação de chave PBKDF2 com HMAC-SHA256 (100.000 iterações)
+ */
+export async function hashPassword(password: string, existingSalt?: string): Promise<{ hash: string; salt: string }> {
+  const salt = existingSalt || generateSalt();
+  const enc = new TextEncoder();
+  
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(password),
+    { name: "PBKDF2" },
+    false,
+    ["deriveBits"]
+  );
+
+  const derivedBits = await crypto.subtle.deriveBits(
+    {
+      name: "PBKDF2",
+      salt: enc.encode(salt),
+      iterations: 100000,
+      hash: "SHA-256"
+    },
+    keyMaterial,
+    256
+  );
+
+  const hashArray = Array.from(new Uint8Array(derivedBits));
+  const hash = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+  return { hash, salt };
+}
+
+/**
+ * Verificação de senha em tempo constante
+ */
+export async function verifyPassword(password: string, salt: string, expectedHash: string): Promise<boolean> {
+  const { hash } = await hashPassword(password, salt);
+  if (hash.length !== expectedHash.length) return false;
+  
+  let result = 0;
+  for (let i = 0; i < hash.length; i++) {
+    result |= hash.charCodeAt(i) ^ expectedHash.charCodeAt(i);
+  }
+  return result === 0;
+}
+
+/**
+ * Assina payload HMAC-SHA256
+ */
+export async function signHMAC(secret: string, data: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const signature = await crypto.subtle.sign("HMAC", key, enc.encode(data));
+  const hashArray = Array.from(new Uint8Array(signature));
+  return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * Cria token de sessão seguro com expiração de 30 dias
+ */
+export async function createSessionToken(user: { id: string; email: string; name: string; isPro: boolean }, secret: string): Promise<string> {
+  const payload = {
+    sub: user.id,
+    email: user.email,
+    name: user.name,
+    isPro: user.isPro,
+    iat: Date.now(),
+    exp: Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 dias
+  };
+
+  const b64Payload = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+  const signature = await signHMAC(secret, b64Payload);
+  return `${b64Payload}.${signature}`;
+}
+
+/**
+ * Verifica e decodifica token de sessão
+ */
+export async function verifySessionToken(token: string, secret: string): Promise<{ sub: string; email: string; name: string; isPro: boolean } | null> {
+  try {
+    if (!token || typeof token !== "string") return null;
+    const parts = token.split(".");
+    if (parts.length !== 2) return null;
+
+    const [b64Payload, signature] = parts;
+    const expectedSignature = await signHMAC(secret, b64Payload);
+    if (signature !== expectedSignature) return null;
+
+    const jsonStr = decodeURIComponent(escape(atob(b64Payload)));
+    const payload = JSON.parse(jsonStr);
+
+    if (payload.exp && payload.exp < Date.now()) {
+      return null; // Expirado
+    }
+
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+```
+
+---
+
+<a id="frontend-functions-api-auth-logints"></a>
+## 36. Arquivo: `frontend/functions/api/auth/login.ts`
+- **Caminho:** `frontend/functions/api/auth/login.ts`
+- **Nome:** `login.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 119
+- **Tamanho:** 3788 bytes
+
+```typescript
+import { verifyPassword, createSessionToken, DEFAULT_AUTH_SECRET } from "./_utils";
+
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      first: <T = any>() => Promise<T | null>;
+      run: () => Promise<{ success: boolean; meta?: any }>;
+    };
+  };
+}
+
+interface Env {
+  DB?: D1Database;
+  AUTH_SECRET?: string;
+}
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const body: any = await request.json().catch(() => ({}));
+    const email = (body.email || "").trim().toLowerCase();
+    const password = (body.password || "").trim();
+
+    if (!email || !password) {
+      return new Response(JSON.stringify({ success: false, message: "Informe seu e-mail e senha." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const secret = env?.AUTH_SECRET || DEFAULT_AUTH_SECRET;
+
+    if (env && env.DB) {
+      // 1. Busca o usuário pelo e-mail
+      const userRecord: any = await env.DB.prepare(`
+        SELECT id, name, email, password_hash, salt, is_pro, pro_plan, created_at
+        FROM users WHERE email = ?
+      `).bind(email).first();
+
+      if (!userRecord) {
+        return new Response(JSON.stringify({ success: false, message: "E-mail ou senha incorretos." }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+
+      // 2. Valida a senha com tempo constante
+      const isValid = await verifyPassword(password, userRecord.salt, userRecord.password_hash);
+      if (!isValid) {
+        return new Response(JSON.stringify({ success: false, message: "E-mail ou senha incorretos." }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+
+      const userProfile = {
+        id: userRecord.id,
+        name: userRecord.name,
+        email: userRecord.email,
+        isPro: Boolean(userRecord.is_pro),
+        proPlan: userRecord.pro_plan,
+        createdAt: userRecord.created_at
+      };
+
+      const token = await createSessionToken(userProfile, secret);
+
+      return new Response(JSON.stringify({
+        success: true,
+        user: userProfile,
+        token,
+        message: "Login realizado com sucesso!"
+      }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    // Fallback de contingência caso D1 ainda não esteja vinculado
+    const fallbackName = email.split("@")[0].replace(/[._]/g, " ");
+    const fallbackUser = {
+      id: `usr_${Date.now()}`,
+      name: fallbackName.charAt(0).toUpperCase() + fallbackName.slice(1),
+      email,
+      isPro: false,
+      createdAt: new Date().toISOString()
+    };
+    const token = await createSessionToken(fallbackUser, secret);
+
+    return new Response(JSON.stringify({
+      success: true,
+      user: fallbackUser,
+      token,
+      message: "Login realizado!"
+    }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      message: "Erro ao autenticar no servidor.", 
+      error: err?.message 
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
+<a id="frontend-functions-api-auth-mets"></a>
+## 37. Arquivo: `frontend/functions/api/auth/me.ts`
+- **Caminho:** `frontend/functions/api/auth/me.ts`
+- **Nome:** `me.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 94
+- **Tamanho:** 2913 bytes
+
+```typescript
+import { verifySessionToken, DEFAULT_AUTH_SECRET } from "./_utils";
+
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      first: <T = any>() => Promise<T | null>;
+    };
+  };
+}
+
+interface Env {
+  DB?: D1Database;
+  AUTH_SECRET?: string;
+}
+
+export const onRequestGet = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const authHeader = request.headers.get("Authorization");
+    const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
+
+    if (!token) {
+      return new Response(JSON.stringify({ success: false, message: "Token não fornecido." }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const secret = env?.AUTH_SECRET || DEFAULT_AUTH_SECRET;
+    const session = await verifySessionToken(token, secret);
+
+    if (!session) {
+      return new Response(JSON.stringify({ success: false, message: "Sessão expirada ou inválida." }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    // Se o banco D1 estiver ativo, busca status mais recente
+    if (env && env.DB) {
+      const userRecord: any = await env.DB.prepare(`
+        SELECT id, name, email, is_pro, pro_plan, created_at
+        FROM users WHERE id = ?
+      `).bind(session.sub).first();
+
+      if (userRecord) {
+        return new Response(JSON.stringify({
+          success: true,
+          user: {
+            id: userRecord.id,
+            name: userRecord.name,
+            email: userRecord.email,
+            isPro: Boolean(userRecord.is_pro),
+            proPlan: userRecord.pro_plan,
+            createdAt: userRecord.created_at
+          }
+        }), {
+          status: 200,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      user: {
+        id: session.sub,
+        name: session.name,
+        email: session.email,
+        isPro: session.isPro,
+        createdAt: new Date(session.sub ? parseInt(session.sub.replace(/\D/g, "")) || Date.now() : Date.now()).toISOString()
+      }
+    }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ success: false, message: "Erro ao verificar sessão." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
+<a id="frontend-functions-api-auth-registerts"></a>
+## 38. Arquivo: `frontend/functions/api/auth/register.ts`
+- **Caminho:** `frontend/functions/api/auth/register.ts`
+- **Nome:** `register.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 115
+- **Tamanho:** 3776 bytes
+
+```typescript
+import { hashPassword, createSessionToken, DEFAULT_AUTH_SECRET } from "./_utils";
+
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      first: <T = any>() => Promise<T | null>;
+      run: () => Promise<{ success: boolean; meta?: any }>;
+      all: <T = any>() => Promise<{ results: T[] }>;
+    };
+  };
+}
+
+interface Env {
+  DB?: D1Database;
+  AUTH_SECRET?: string;
+}
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const body: any = await request.json().catch(() => ({}));
+    const name = (body.name || "").trim();
+    const email = (body.email || "").trim().toLowerCase();
+    const password = (body.password || "").trim();
+
+    if (!name || name.length < 2) {
+      return new Response(JSON.stringify({ success: false, message: "Informe seu nome completo." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return new Response(JSON.stringify({ success: false, message: "Informe um e-mail válido." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    if (!password || password.length < 6) {
+      return new Response(JSON.stringify({ success: false, message: "A senha deve ter no mínimo 6 caracteres." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const userId = `usr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const now = new Date().toISOString();
+    const secret = env?.AUTH_SECRET || DEFAULT_AUTH_SECRET;
+
+    // Se o Cloudflare D1 estiver configurado
+    if (env && env.DB) {
+      // 1. Verifica se o e-mail já existe
+      const existing = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
+      if (existing) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          message: "Este e-mail já está cadastrado. Faça login para acessar sua conta." 
+        }), {
+          status: 409,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+
+      // 2. Criptografa a senha com salt exclusivo
+      const { hash, salt } = await hashPassword(password);
+
+      // 3. Salva no banco de dados D1
+      await env.DB.prepare(`
+        INSERT INTO users (id, name, email, password_hash, salt, is_pro, pro_plan, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, 0, NULL, ?, ?)
+      `).bind(userId, name, email, hash, salt, now, now).run();
+    }
+
+    const userProfile = {
+      id: userId,
+      name,
+      email,
+      isPro: false,
+      createdAt: now
+    };
+
+    const token = await createSessionToken(userProfile, secret);
+
+    return new Response(JSON.stringify({
+      success: true,
+      user: userProfile,
+      token,
+      message: "Conta criada com sucesso!"
+    }), {
+      status: 201,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      message: "Erro ao criar conta no servidor.", 
+      error: err?.message 
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
 <a id="frontend-functions-api-auth-sign-prots"></a>
-## 35. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
+## 39. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
 - **Caminho:** `frontend/functions/api/auth/sign-pro.ts`
 - **Nome:** `sign-pro.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8370,15 +8971,24 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
 ---
 
 <a id="frontend-functions-api-coupons-createts"></a>
-## 36. Arquivo: `frontend/functions/api/coupons/create.ts`
+## 40. Arquivo: `frontend/functions/api/coupons/create.ts`
 - **Caminho:** `frontend/functions/api/coupons/create.ts`
 - **Nome:** `create.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 145
-- **Tamanho:** 4926 bytes
+- **Total de Linhas:** 162
+- **Tamanho:** 5422 bytes
 
 ```typescript
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      run: () => Promise<{ success: boolean; meta?: any }>;
+    };
+  };
+}
+
 interface Env {
+  DB?: D1Database;
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
     put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
@@ -8455,6 +9065,14 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       usedBy: null
     };
 
+    // Armazena no Cloudflare D1 se disponível
+    if (env && env.DB) {
+      await env.DB.prepare(`
+        INSERT OR REPLACE INTO coupons (code, discount_percent, used, candidate_name, created_at)
+        VALUES (?, ?, 0, ?, ?)
+      `).bind(code, discountPercent, candidate, couponData.createdAt).run();
+    }
+
     // Armazena no KV se disponível
     if (env && env.PAYMENTS_KV) {
       await env.PAYMENTS_KV.put(`coupon:${code}`, JSON.stringify(couponData), {
@@ -8529,15 +9147,24 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-listts"></a>
-## 37. Arquivo: `frontend/functions/api/coupons/list.ts`
+## 41. Arquivo: `frontend/functions/api/coupons/list.ts`
 - **Caminho:** `frontend/functions/api/coupons/list.ts`
 - **Nome:** `list.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 95
-- **Tamanho:** 2822 bytes
+- **Total de Linhas:** 127
+- **Tamanho:** 3951 bytes
 
 ```typescript
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      all: <T = any>() => Promise<{ results: T[] }>;
+    };
+  };
+}
+
 interface Env {
+  DB?: D1Database;
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
     list?: (options?: any) => Promise<{ keys: { name: string }[] }>;
@@ -8581,8 +9208,31 @@ export const onRequestGet = async ({ request, env }: { request: Request; env?: E
       });
     }
 
+    // 1. Busca primeiro no Cloudflare D1 se configurado
+    if (env && env.DB) {
+      try {
+        const queryRes = await env.DB.prepare(`
+          SELECT code, discount_percent as discountPercent, used, used_at as usedAt, used_by as usedBy, candidate_name as candidate, created_at as createdAt
+          FROM coupons ORDER BY created_at DESC LIMIT 50
+        `).bind().all();
+
+        if (queryRes && Array.isArray(queryRes.results) && queryRes.results.length > 0) {
+          return new Response(JSON.stringify({
+            success: true,
+            coupons: queryRes.results.map((c: any) => ({ ...c, used: Boolean(c.used) }))
+          }), {
+            status: 200,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          });
+        }
+      } catch (d1Err) {
+        console.warn("Falha ao consultar D1 coupons, tentando KV:", d1Err);
+      }
+    }
+
     const coupons: any[] = [];
 
+    // 2. Busca no Cloudflare KV (fallback)
     if (env && env.PAYMENTS_KV) {
       const indexStr = await env.PAYMENTS_KV.get("coupons_index");
       let codes: string[] = [];
@@ -8638,15 +9288,25 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-verifyts"></a>
-## 38. Arquivo: `frontend/functions/api/coupons/verify.ts`
+## 42. Arquivo: `frontend/functions/api/coupons/verify.ts`
 - **Caminho:** `frontend/functions/api/coupons/verify.ts`
 - **Nome:** `verify.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 134
-- **Tamanho:** 4845 bytes
+- **Total de Linhas:** 177
+- **Tamanho:** 6462 bytes
 
 ```typescript
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      first: <T = any>() => Promise<T | null>;
+      run: () => Promise<{ success: boolean; meta?: any }>;
+    };
+  };
+}
+
 interface Env {
+  DB?: D1Database;
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
     put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
@@ -8684,7 +9344,40 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       });
     }
 
-    // 2. Validação no Cloudflare KV
+    // 2. Validação no Cloudflare D1 se disponível
+    if (env && env.DB) {
+      const dbCoupon: any = await env.DB.prepare(`SELECT * FROM coupons WHERE code = ?`).bind(rawCode).first();
+      if (dbCoupon) {
+        if (dbCoupon.used) {
+          const usedDateStr = dbCoupon.used_at ? new Date(dbCoupon.used_at).toLocaleDateString("pt-BR") : "";
+          return new Response(JSON.stringify({ 
+            success: false, 
+            message: `Este cupom já foi utilizado${usedDateStr ? ` em ${usedDateStr}` : ""} e só é válido uma única vez.` 
+          }), {
+            status: 409,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          });
+        }
+
+        // Consome o cupom no D1
+        const now = new Date().toISOString();
+        await env.DB.prepare(`
+          UPDATE coupons SET used = 1, used_at = ?, used_by = ? WHERE code = ?
+        `).bind(now, userEmail || "candidato", rawCode).run();
+
+        return new Response(JSON.stringify({
+          success: true,
+          code: rawCode,
+          discountPercent: dbCoupon.discount_percent || 50,
+          message: "Cupom PcD validado com sucesso! 50% de desconto aplicado."
+        }), {
+          status: 200,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+    }
+
+    // 3. Validação no Cloudflare KV (fallback/contingência)
     if (env && env.PAYMENTS_KV) {
       const recordStr = await env.PAYMENTS_KV.get(`coupon:${rawCode}`);
       
@@ -8786,7 +9479,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 39. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+## 43. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Nome:** `[txid].ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8911,7 +9604,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 40. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 44. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9068,7 +9761,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 41. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 45. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9209,13 +9902,166 @@ export const onRequestOptions = async () => {
 
 ---
 
+<a id="frontend-functions-api-resumes-indexts"></a>
+## 46. Arquivo: `frontend/functions/api/resumes/index.ts`
+- **Caminho:** `frontend/functions/api/resumes/index.ts`
+- **Nome:** `index.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 139
+- **Tamanho:** 4941 bytes
+
+```typescript
+import { verifySessionToken, DEFAULT_AUTH_SECRET } from "../auth/_utils";
+
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      first: <T = any>() => Promise<T | null>;
+      run: () => Promise<{ success: boolean; meta?: any }>;
+    };
+  };
+}
+
+interface Env {
+  DB?: D1Database;
+  AUTH_SECRET?: string;
+}
+
+export const onRequestGet = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const authHeader = request.headers.get("Authorization");
+    const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
+    const secret = env?.AUTH_SECRET || DEFAULT_AUTH_SECRET;
+
+    const session = await verifySessionToken(token, secret);
+    if (!session) {
+      return new Response(JSON.stringify({ success: false, message: "Sessão não autorizada." }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    if (env && env.DB) {
+      const record: any = await env.DB.prepare(`
+        SELECT id, title, resume_data, updated_at
+        FROM resumes WHERE user_id = ?
+        ORDER BY updated_at DESC LIMIT 1
+      `).bind(session.sub).first();
+
+      if (record && record.resume_data) {
+        try {
+          const parsed = JSON.parse(record.resume_data);
+          return new Response(JSON.stringify({
+            success: true,
+            title: record.title,
+            updatedAt: record.updated_at,
+            resume: parsed
+          }), {
+            status: 200,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          });
+        } catch (e) {
+          console.error("Falha ao parsear resume_data:", e);
+        }
+      }
+    }
+
+    return new Response(JSON.stringify({ success: false, message: "Nenhum currículo em nuvem encontrado." }), {
+      status: 404,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ success: false, message: "Erro ao buscar currículo.", error: err?.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const authHeader = request.headers.get("Authorization");
+    const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
+    const secret = env?.AUTH_SECRET || DEFAULT_AUTH_SECRET;
+
+    const session = await verifySessionToken(token, secret);
+    if (!session) {
+      return new Response(JSON.stringify({ success: false, message: "Faça login para salvar seu currículo na nuvem." }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const body: any = await request.json().catch(() => ({}));
+    const resumeData = body.resume;
+    const title = (body.title || "Meu Currículo").trim();
+
+    if (!resumeData || typeof resumeData !== "object") {
+      return new Response(JSON.stringify({ success: false, message: "Dados do currículo inválidos." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const now = new Date().toISOString();
+    const jsonStr = JSON.stringify(resumeData);
+
+    if (env && env.DB) {
+      const existing: any = await env.DB.prepare(`SELECT id FROM resumes WHERE user_id = ?`).bind(session.sub).first();
+
+      if (existing) {
+        await env.DB.prepare(`
+          UPDATE resumes SET title = ?, resume_data = ?, updated_at = ? WHERE user_id = ?
+        `).bind(title, jsonStr, now, session.sub).run();
+      } else {
+        const resumeId = `res_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+        await env.DB.prepare(`
+          INSERT INTO resumes (id, user_id, title, resume_data, created_at, updated_at)
+          VALUES (?, ?, ?, ?, ?, ?)
+        `).bind(resumeId, session.sub, title, jsonStr, now, now).run();
+      }
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      message: "Currículo salvo na nuvem com sucesso!",
+      updatedAt: now
+    }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ success: false, message: "Erro ao salvar currículo.", error: err?.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
 <a id="frontend-src-context-authcontexttsx"></a>
-## 42. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 47. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 246
-- **Tamanho:** 7232 bytes
+- **Total de Linhas:** 321
+- **Tamanho:** 10567 bytes
 
 ```tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
@@ -9234,16 +10080,16 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   loginWithGoogle: (credential: string) => Promise<boolean>;
-  loginWithEmail: (email: string, pass: string) => Promise<boolean>;
-  registerWithEmail: (name: string, email: string, pass: string) => Promise<boolean>;
+  loginWithEmail: (email: string, pass: string) => Promise<{ success: boolean; message?: string }>;
+  registerWithEmail: (name: string, email: string, pass: string) => Promise<{ success: boolean; message?: string }>;
   logout: () => void;
   unlockProStatus: (token?: string, plan?: string) => Promise<void> | void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const USER_STORAGE_KEY = 'natalvagas_auth_user';
-const TOKEN_STORAGE_KEY = 'natalvagas_auth_token';
+export const USER_STORAGE_KEY = 'natalvagas_auth_user';
+export const TOKEN_STORAGE_KEY = 'natalvagas_auth_token';
 export const PRO_TOKEN_KEY = 'natalvagas_pro_token';
 
 export interface ProTokenPayload {
@@ -9295,21 +10141,46 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Inicializa a sessão a partir do armazenamento local
+  // Inicializa a sessão a partir da nuvem ou do armazenamento local
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(USER_STORAGE_KEY);
-      const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        parsed.isPro = isProUnlocked;
-        setUser(parsed);
+    const initAuth = async () => {
+      try {
+        const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+        if (token) {
+          try {
+            const res = await fetch('/api/auth/me', {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.success && data.user) {
+                const isProUnlocked = data.user.isPro || verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+                const userObj: UserProfile = { ...data.user, isPro: isProUnlocked };
+                setUser(userObj);
+                localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userObj));
+                return;
+              }
+            }
+          } catch (apiErr) {
+            console.warn('Falha ao sincronizar com /api/auth/me, usando cache local:', apiErr);
+          }
+        }
+
+        const stored = localStorage.getItem(USER_STORAGE_KEY);
+        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          parsed.isPro = isProUnlocked;
+          setUser(parsed);
+        }
+      } catch (e) {
+        console.error('Erro ao restaurar sessão:', e);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (e) {
-      console.error('Erro ao restaurar sessão:', e);
-    } finally {
-      setIsLoading(false);
-    }
+    };
+
+    initAuth();
   }, []);
 
   // Login simulado ou integrado com Google Credential
@@ -9358,44 +10229,94 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const loginWithEmail = async (email: string, _pass: string): Promise<boolean> => {
+  const loginWithEmail = async (email: string, pass: string): Promise<{ success: boolean; message?: string }> => {
     setIsLoading(true);
     try {
-      const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-      const name = email.split('@')[0].replace(/[._]/g, ' ');
-      const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
 
-      const loggedUser: UserProfile = {
-        id: `user_${Date.now()}`,
-        name: formattedName,
-        email,
-        isPro: isProUnlocked,
-        createdAt: new Date().toISOString()
-      };
+      const data = await res.json().catch(() => ({}));
 
-      setUser(loggedUser);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
-      return true;
+      if (res.ok && data.success) {
+        const isProUnlocked = data.user.isPro || verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        const loggedUser: UserProfile = { ...data.user, isPro: isProUnlocked };
+        setUser(loggedUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
+        if (data.token) {
+          localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
+        }
+        return { success: true, message: data.message };
+      }
+
+      // Fallback local se a API estiver offline/em desenvolvimento
+      if (!res.ok && res.status !== 401 && res.status !== 404 && res.status !== 409) {
+        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        const name = email.split('@')[0].replace(/[._]/g, ' ');
+        const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+        const loggedUser: UserProfile = {
+          id: `user_${Date.now()}`,
+          name: formattedName,
+          email,
+          isPro: isProUnlocked,
+          createdAt: new Date().toISOString()
+        };
+        setUser(loggedUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
+        return { success: true };
+      }
+
+      return { success: false, message: data.message || 'E-mail ou senha incorretos.' };
+    } catch (err) {
+      return { success: false, message: 'Erro de conexão ao autenticar. Tente novamente.' };
     } finally {
       setIsLoading(false);
     }
   };
 
-  const registerWithEmail = async (name: string, email: string, _pass: string): Promise<boolean> => {
+  const registerWithEmail = async (name: string, email: string, pass: string): Promise<{ success: boolean; message?: string }> => {
     setIsLoading(true);
     try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password: pass })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        const newUser: UserProfile = { ...data.user, isPro: isProUnlocked };
+        setUser(newUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+        if (data.token) {
+          localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
+        }
+        return { success: true, message: data.message };
+      }
+
+      // Se for erro de validação (ex: e-mail duplicado), retorna mensagem exata
+      if (data.message) {
+        return { success: false, message: data.message };
+      }
+
+      // Fallback local em caso de indisponibilidade
       const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-      const newUser: UserProfile = {
+      const fallbackUser: UserProfile = {
         id: `user_${Date.now()}`,
         name,
         email,
         isPro: isProUnlocked,
         createdAt: new Date().toISOString()
       };
-
-      setUser(newUser);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
-      return true;
+      setUser(fallbackUser);
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(fallbackUser));
+      return { success: true };
+    } catch (err) {
+      return { success: false, message: 'Erro de conexão ao criar conta. Tente novamente.' };
     } finally {
       setIsLoading(false);
     }
@@ -9470,7 +10391,7 @@ export const useAuth = (): AuthContextType => {
 ---
 
 <a id="frontend-src-context-themecontexttsx"></a>
-## 43. Arquivo: `frontend/src/context/ThemeContext.tsx`
+## 48. Arquivo: `frontend/src/context/ThemeContext.tsx`
 - **Caminho:** `frontend/src/context/ThemeContext.tsx`
 - **Nome:** `ThemeContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -9557,7 +10478,7 @@ export const useTheme = (): ThemeContextType => {
 ---
 
 <a id="frontend-src-services-paymentservicets"></a>
-## 44. Arquivo: `frontend/src/services/paymentService.ts`
+## 49. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9632,7 +10553,7 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 45. Arquivo: `frontend/src/types/blog.ts`
+## 50. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9667,7 +10588,7 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 46. Arquivo: `frontend/src/types/job.ts`
+## 51. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9736,7 +10657,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 47. Arquivo: `frontend/src/data/blogPosts.ts`
+## 52. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10315,7 +11236,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 48. Arquivo: `frontend/src/data/initialJobs.ts`
+## 53. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10349,7 +11270,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-src-data-seolandingpagests"></a>
-## 49. Arquivo: `frontend/src/data/seoLandingPages.ts`
+## 54. Arquivo: `frontend/src/data/seoLandingPages.ts`
 - **Caminho:** `frontend/src/data/seoLandingPages.ts`
 - **Nome:** `seoLandingPages.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10526,7 +11447,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-data-jobsjson"></a>
-## 50. Arquivo: `frontend/public/data/jobs.json`
+## 55. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -45693,7 +46614,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public--redirects"></a>
-## 51. Arquivo: `frontend/public/_redirects`
+## 56. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -45709,7 +46630,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 52. Arquivo: `frontend/public/ads.txt`
+## 57. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -45724,7 +46645,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestjson"></a>
-## 53. Arquivo: `frontend/public/manifest.json`
+## 58. Arquivo: `frontend/public/manifest.json`
 - **Caminho:** `frontend/public/manifest.json`
 - **Nome:** `manifest.json`
 - **Linguagem / Sintaxe:** `json`
@@ -45771,7 +46692,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestwebmanifest"></a>
-## 54. Arquivo: `frontend/public/manifest.webmanifest`
+## 59. Arquivo: `frontend/public/manifest.webmanifest`
 - **Caminho:** `frontend/public/manifest.webmanifest`
 - **Nome:** `manifest.webmanifest`
 - **Linguagem / Sintaxe:** `text`
@@ -45818,7 +46739,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 55. Arquivo: `frontend/public/robots.txt`
+## 60. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -45845,7 +46766,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 56. Arquivo: `frontend/public/sitemap.xml`
+## 61. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -54797,7 +55718,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-swjs"></a>
-## 57. Arquivo: `frontend/public/sw.js`
+## 62. Arquivo: `frontend/public/sw.js`
 - **Caminho:** `frontend/public/sw.js`
 - **Nome:** `sw.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -54898,7 +55819,7 @@ self.addEventListener('fetch', (event) => {
 ---
 
 <a id="frontend-envexample"></a>
-## 58. Arquivo: `frontend/.env.example`
+## 63. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -54920,7 +55841,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 59. Arquivo: `frontend/index.html`
+## 64. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -55032,7 +55953,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 60. Arquivo: `frontend/package-lock.json`
+## 65. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -58115,7 +59036,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 61. Arquivo: `frontend/postcss.config.js`
+## 66. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -58134,8 +59055,67 @@ export default {
 
 ---
 
+<a id="frontend-schemasql"></a>
+## 67. Arquivo: `frontend/schema.sql`
+- **Caminho:** `frontend/schema.sql`
+- **Nome:** `schema.sql`
+- **Linguagem / Sintaxe:** `sql`
+- **Total de Linhas:** 45
+- **Tamanho:** 1582 bytes
+
+```sql
+-- ============================================================================
+-- NATAL VAGAS - BANCO DE DADOS CLOUDFLARE D1 (SQLITE SERVERLESS)
+-- Armazenamento Gratuito: 5 GB | 5M leituras/dia | 100k escritas/dia
+-- ============================================================================
+
+-- 1. TABELA DE USUÁRIOS (CANDIDATOS & RECRUTADORES)
+CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    salt TEXT NOT NULL,
+    is_pro INTEGER DEFAULT 0,
+    pro_plan TEXT DEFAULT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+-- 2. TABELA DE CURRÍCULOS SALVOS NA NUVEM
+CREATE TABLE IF NOT EXISTS resumes (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    title TEXT DEFAULT 'Meu Currículo Profissional',
+    resume_data TEXT NOT NULL, -- JSON completo estruturado com experiências, formação, habilidades
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_resumes_user ON resumes(user_id);
+
+-- 3. TABELA DE CUPONS DE DESCONTO SOCIAL PCD (USO ÚNICO)
+CREATE TABLE IF NOT EXISTS coupons (
+    code TEXT PRIMARY KEY,
+    discount_percent INTEGER DEFAULT 50,
+    used INTEGER DEFAULT 0,
+    used_at TEXT DEFAULT NULL,
+    used_by TEXT DEFAULT NULL,
+    candidate_name TEXT DEFAULT NULL,
+    created_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
+
+```
+
+---
+
 <a id="frontend-src-indexcss"></a>
-## 62. Arquivo: `frontend/src/index.css`
+## 68. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -58211,7 +59191,7 @@ export default {
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 63. Arquivo: `frontend/src/vite-env.d.ts`
+## 69. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -58226,7 +59206,7 @@ export default {
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 64. Arquivo: `frontend/tailwind.config.js`
+## 70. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -58278,7 +59258,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 65. Arquivo: `frontend/tsconfig.json`
+## 71. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -58312,7 +59292,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 66. Arquivo: `frontend/tsconfig.node.json`
+## 72. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -58336,7 +59316,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 67. Arquivo: `backend/Dockerfile`
+## 73. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -58368,7 +59348,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 68. Arquivo: `backend/pom.xml`
+## 74. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -58486,7 +59466,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 69. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 75. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58512,7 +59492,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 70. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 76. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58554,7 +59534,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 71. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 77. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58627,7 +59607,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 72. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 78. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58693,7 +59673,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 73. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58790,7 +59770,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 74. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 80. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58828,7 +59808,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 75. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 81. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58849,7 +59829,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 76. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 82. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58905,7 +59885,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 77. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 83. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58928,7 +59908,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 78. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 84. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59068,7 +60048,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 79. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59090,7 +60070,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 80. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59146,7 +60126,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 81. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59167,7 +60147,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 82. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 88. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59190,7 +60170,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 83. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 89. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59259,7 +60239,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 84. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 90. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59310,7 +60290,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 85. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 91. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59336,7 +60316,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 86. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 92. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59373,7 +60353,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 87. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 93. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59422,7 +60402,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 88. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 94. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59613,7 +60593,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 89. Arquivo: `backend/src/main/resources/application.yml`
+## 95. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -59671,7 +60651,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 90. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 96. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -59756,7 +60736,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-add-whatsapp-jobspy"></a>
-## 91. Arquivo: `scripts/add_whatsapp_jobs.py`
+## 97. Arquivo: `scripts/add_whatsapp_jobs.py`
 - **Caminho:** `scripts/add_whatsapp_jobs.py`
 - **Nome:** `add_whatsapp_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -60717,7 +61697,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 92. Arquivo: `scripts/build_single_context_md.py`
+## 98. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -60874,7 +61854,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 93. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 99. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61006,7 +61986,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-daily-job-syncymlexample"></a>
-## 94. Arquivo: `scripts/daily-job-sync.yml.example`
+## 100. Arquivo: `scripts/daily-job-sync.yml.example`
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
@@ -61093,7 +62073,7 @@ jobs:
 ---
 
 <a id="scripts-daily-job-crawlerpy"></a>
-## 95. Arquivo: `scripts/daily_job_crawler.py`
+## 101. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61378,7 +62358,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 96. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 102. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61679,7 +62659,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 97. Arquivo: `scripts/generate_sitemap.py`
+## 103. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61861,7 +62841,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 98. Arquivo: `scripts/ingest_jobs.py`
+## 104. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62084,7 +63064,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 99. Arquivo: `scripts/rn_job_scraper.py`
+## 105. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62283,7 +63263,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 100. Arquivo: `scripts/test_efi_status.py`
+## 106. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62363,7 +63343,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 101. Arquivo: `scripts/verify_build_integrity.py`
+## 107. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62456,7 +63436,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 102. Arquivo: `scripts/verify_seo.py`
+## 108. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62539,7 +63519,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 103. Arquivo: `.env.example`
+## 109. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -62558,7 +63538,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 104. Arquivo: `.gitignore`
+## 110. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -62618,7 +63598,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 105. Arquivo: `docker-compose.yml`
+## 111. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

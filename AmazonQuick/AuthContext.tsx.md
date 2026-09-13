@@ -1,7 +1,7 @@
 # File: AuthContext.tsx
 - **Original Path:** `frontend/src/context/AuthContext.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 246
+- **Lines of Code:** 321
 
 ---
 
@@ -22,16 +22,16 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   loginWithGoogle: (credential: string) => Promise<boolean>;
-  loginWithEmail: (email: string, pass: string) => Promise<boolean>;
-  registerWithEmail: (name: string, email: string, pass: string) => Promise<boolean>;
+  loginWithEmail: (email: string, pass: string) => Promise<{ success: boolean; message?: string }>;
+  registerWithEmail: (name: string, email: string, pass: string) => Promise<{ success: boolean; message?: string }>;
   logout: () => void;
   unlockProStatus: (token?: string, plan?: string) => Promise<void> | void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const USER_STORAGE_KEY = 'natalvagas_auth_user';
-const TOKEN_STORAGE_KEY = 'natalvagas_auth_token';
+export const USER_STORAGE_KEY = 'natalvagas_auth_user';
+export const TOKEN_STORAGE_KEY = 'natalvagas_auth_token';
 export const PRO_TOKEN_KEY = 'natalvagas_pro_token';
 
 export interface ProTokenPayload {
@@ -83,21 +83,46 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Inicializa a sessão a partir do armazenamento local
+  // Inicializa a sessão a partir da nuvem ou do armazenamento local
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(USER_STORAGE_KEY);
-      const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        parsed.isPro = isProUnlocked;
-        setUser(parsed);
+    const initAuth = async () => {
+      try {
+        const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+        if (token) {
+          try {
+            const res = await fetch('/api/auth/me', {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.success && data.user) {
+                const isProUnlocked = data.user.isPro || verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+                const userObj: UserProfile = { ...data.user, isPro: isProUnlocked };
+                setUser(userObj);
+                localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userObj));
+                return;
+              }
+            }
+          } catch (apiErr) {
+            console.warn('Falha ao sincronizar com /api/auth/me, usando cache local:', apiErr);
+          }
+        }
+
+        const stored = localStorage.getItem(USER_STORAGE_KEY);
+        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          parsed.isPro = isProUnlocked;
+          setUser(parsed);
+        }
+      } catch (e) {
+        console.error('Erro ao restaurar sessão:', e);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (e) {
-      console.error('Erro ao restaurar sessão:', e);
-    } finally {
-      setIsLoading(false);
-    }
+    };
+
+    initAuth();
   }, []);
 
   // Login simulado ou integrado com Google Credential
@@ -146,44 +171,94 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const loginWithEmail = async (email: string, _pass: string): Promise<boolean> => {
+  const loginWithEmail = async (email: string, pass: string): Promise<{ success: boolean; message?: string }> => {
     setIsLoading(true);
     try {
-      const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-      const name = email.split('@')[0].replace(/[._]/g, ' ');
-      const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
 
-      const loggedUser: UserProfile = {
-        id: `user_${Date.now()}`,
-        name: formattedName,
-        email,
-        isPro: isProUnlocked,
-        createdAt: new Date().toISOString()
-      };
+      const data = await res.json().catch(() => ({}));
 
-      setUser(loggedUser);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
-      return true;
+      if (res.ok && data.success) {
+        const isProUnlocked = data.user.isPro || verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        const loggedUser: UserProfile = { ...data.user, isPro: isProUnlocked };
+        setUser(loggedUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
+        if (data.token) {
+          localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
+        }
+        return { success: true, message: data.message };
+      }
+
+      // Fallback local se a API estiver offline/em desenvolvimento
+      if (!res.ok && res.status !== 401 && res.status !== 404 && res.status !== 409) {
+        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        const name = email.split('@')[0].replace(/[._]/g, ' ');
+        const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+        const loggedUser: UserProfile = {
+          id: `user_${Date.now()}`,
+          name: formattedName,
+          email,
+          isPro: isProUnlocked,
+          createdAt: new Date().toISOString()
+        };
+        setUser(loggedUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
+        return { success: true };
+      }
+
+      return { success: false, message: data.message || 'E-mail ou senha incorretos.' };
+    } catch (err) {
+      return { success: false, message: 'Erro de conexão ao autenticar. Tente novamente.' };
     } finally {
       setIsLoading(false);
     }
   };
 
-  const registerWithEmail = async (name: string, email: string, _pass: string): Promise<boolean> => {
+  const registerWithEmail = async (name: string, email: string, pass: string): Promise<{ success: boolean; message?: string }> => {
     setIsLoading(true);
     try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password: pass })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
+        const newUser: UserProfile = { ...data.user, isPro: isProUnlocked };
+        setUser(newUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+        if (data.token) {
+          localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
+        }
+        return { success: true, message: data.message };
+      }
+
+      // Se for erro de validação (ex: e-mail duplicado), retorna mensagem exata
+      if (data.message) {
+        return { success: false, message: data.message };
+      }
+
+      // Fallback local em caso de indisponibilidade
       const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-      const newUser: UserProfile = {
+      const fallbackUser: UserProfile = {
         id: `user_${Date.now()}`,
         name,
         email,
         isPro: isProUnlocked,
         createdAt: new Date().toISOString()
       };
-
-      setUser(newUser);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
-      return true;
+      setUser(fallbackUser);
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(fallbackUser));
+      return { success: true };
+    } catch (err) {
+      return { success: false, message: 'Erro de conexão ao criar conta. Tente novamente.' };
     } finally {
       setIsLoading(false);
     }

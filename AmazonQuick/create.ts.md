@@ -1,12 +1,21 @@
 # File: create.ts
 - **Original Path:** `frontend/functions/api/coupons/create.ts`
 - **Language / Type:** `typescript`
-- **Lines of Code:** 145
+- **Lines of Code:** 162
 
 ---
 
 ```typescript
+interface D1Database {
+  prepare: (query: string) => {
+    bind: (...args: any[]) => {
+      run: () => Promise<{ success: boolean; meta?: any }>;
+    };
+  };
+}
+
 interface Env {
+  DB?: D1Database;
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
     put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
@@ -82,6 +91,14 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       usedAt: null,
       usedBy: null
     };
+
+    // Armazena no Cloudflare D1 se disponível
+    if (env && env.DB) {
+      await env.DB.prepare(`
+        INSERT OR REPLACE INTO coupons (code, discount_percent, used, candidate_name, created_at)
+        VALUES (?, ?, 0, ?, ?)
+      `).bind(code, discountPercent, candidate, couponData.createdAt).run();
+    }
 
     // Armazena no KV se disponível
     if (env && env.PAYMENTS_KV) {
