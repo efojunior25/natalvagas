@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 96 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 98 arquivos.
 
 ---
 
@@ -92,16 +92,18 @@
 84. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
 85. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
 86. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-87. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-88. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-89. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-90. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-91. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-92. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-93. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-94. [`.env.example`](#envexample)
-95. [`.gitignore`](#gitignore)
-96. [`docker-compose.yml`](#docker-composeyml)
+87. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+88. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+89. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+90. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+91. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+92. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+93. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+94. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+95. [`.env.example`](#envexample)
+96. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
+97. [`.gitignore`](#gitignore)
+98. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -9305,11 +9307,2111 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
-- **Total de Linhas:** 31806
-- **Tamanho:** 2330398 bytes
+- **Total de Linhas:** 33906
+- **Tamanho:** 2509954 bytes
 
 ```json
 [
+  {
+    "id": 2026092316,
+    "title": "Auxiliar Jurídico - Focarerh | Natal",
+    "slug": "auxiliar-juridico-focarerh-natal-empresa-confidencial-natal-2026092316",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "PJ",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Auxiliar Jurídico   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Auxiliar nas rotinas administrativas e jurídicas do escritório; Realizar organização e controle de documentos, contratos e processos; Acompanhar prazos processuais e movimentações no sistema PJe; Prestar suporte à equipe jurídica e atendimento às demandas operacionais do escritório.    \n \n  Horários  \n\n De segunda à sexta; 44 horas semanais    \n \n  Requisitos  \n\n • Graduação em Direito (a partir do 9º período) ou bacharel em direito    • Experiência prévia em rotinas jurídicas e administrativas    • Conhecimento no sistema PJe e Pacote Office (Excel e Word)    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     vagas@focarerh.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagas@focarerh.com.br",
+    "publishedAt": "2026-07-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092317,
+    "title": "Auxiliar De Serviços Gerais - Mr. Cupcake | Natal",
+    "slug": "auxiliar-de-servicos-gerais-mr-cupcake-natal-empresa-confidencial-natal-2026092317",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n Vaga de Emprego para \n    Auxiliar de Serviços Gerais      \n \n  \n      Localização  \n\n Natal - RN    \n \n  Atividades  \n\n Para executar trabalhos de limpeza e conservação em geral nas dependências internas e externas da loja.    \n   Horários  \n\n Não informado    \n   \n  \n  Requisitos  \n\n • Responsabilidade    • Proatividade    • Boa comunicação    • Vontade de aprender    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo para: \n\n  curriculoconfeitarianatal@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculoconfeitarianatal@gmail.com",
+    "publishedAt": "2026-07-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092318,
+    "title": "Panfletista - Mútuo Proteção Veicular | Natal",
+    "slug": "panfletista-mutuo-protecao-veicular-natal-empresa-confidencial-natal-2026092318",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Panfletista   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Fazer entrega e distribuição de panfletos, divulgação externa de estabelecimento, promoções, atendimento e abordagem ao público.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Comunicativo    • Proatividade    • Disposição    \n \n  Benefícios  \n\n • Carteira assinada    • Salário fixo    • Ajuda de custo    • Bonificação por resultados    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     mutuocurriculos@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "mutuocurriculos@gmail.com",
+    "publishedAt": "2026-07-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092319,
+    "title": "Ajudante De Carga E Descarga - Comercial Do Trigo | Natal",
+    "slug": "ajudante-de-carga-e-descarga-comercial-do-trigo-natal-empresa-confidencial-natal-2026092319",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para         Ajudante de Carga e Descarga    \n\n \n \n  Localização  \n\n  Pajuçara  \n\n \n \n  Atividades  \n\n  Armazenamento de mercadorias ;  descarregar mercadorias , entre outras atividades.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n •  Ensino fundamental completo     •  Experiência na área     •  Habilidade com serviços pesados     • Pontualidade    \n \n  Benefícios  \n\n  Salário comercial     \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     logistica@comercialdotrigo.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "logistica@comercialdotrigo.com",
+    "publishedAt": "2026-03-10",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092320,
+    "title": "Cumim -  Zeh Cozinha | Natal",
+    "slug": "cumim-zeh-cozinha-natal-empresa-confidencial-natal-2026092320",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para         Cumim    \n\n \n \n  Localização  \n\n  Tirol ,  Petrópolis  e  Lagoa Nova  \n\n \n \n  Atividades  \n\n  Auxiliar o garçom no atendimento, servir refeições e bebidas aos clientes; Organizar mesas e utensílios, limpeza e organização do salão.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Não informado     \n    \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     selecao.zeh@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "selecao.zeh@gmail.com",
+    "publishedAt": "2026-03-10",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092321,
+    "title": "Auxiliar / Analista Contábil - Wr Assessoria Contábil | Natal",
+    "slug": "auxiliar-analista-contabil-wr-assessoria-contabil-natal-empresa-confidencial-natal-2026092321",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para         Auxiliar / Analista Contábil    \n\n \n \n  Localização  \n\n  Tirol  \n\n \n \n  Atividades  \n\n Realizar lançamentos contábeis, conciliações, encerramento, demonstrações e outras atividades pertinentes ao cargo.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Domínio das  obrigações contábeis     • Facilidade com tecnologia    • Superior em  Ciências Contábeis  cursando a partir do 3º período ou finalizado com  CRC     • Experiência com o   Sistema Alterdata   será um diferencial    \n   Benefícios  \n\n • Faixa salarial de R$ 1.652,86 a R$ 2.120,00    •  Vale transporte     •  Comissionamento por produtividade     \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     altusdho@gmail.com",
+    "salaryMin": 1652.86,
+    "salaryMax": 1652.86,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "altusdho@gmail.com",
+    "publishedAt": "2026-03-10",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092322,
+    "title": "Pedreiro - 2Ls Engenharia | Parnamirim",
+    "slug": "pedreiro-2ls-engenharia-parnamirim-empresa-confidencial-parnamirim-2026092322",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Pedreiro   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n  Realizar trabalhos de alvenaria, concreto e outros materiais guiando-se por desenhos, esquemas e especificações; Utilizar projetos e instrumentos para construir, reformar ou reparar as construções.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Experiência em carteira    \n \n  Benefícios  \n\n • Registro em carteira    • Salário da categoria    • Vale transporte    • Vale alimentação    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    Desculpe, vaga já preenchida!",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.empregodorn.com.br/2026/01/pedreiro-2ls-engenharia-parnamirim.html",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092323,
+    "title": "Marceneiro - Serafini Móveis | Candelária",
+    "slug": "marceneiro-serafini-moveis-candelaria-empresa-confidencial-natal-2026092323",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Marceneiro   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Produzir móveis de madeira e peças de decoração em MDF; Realizar leitura de desenhos e cortes de chapas de madeiras em máquinas, cumprindo com as normas de segurança e qualidade do trabalho.  \n  \n  Horários  \n\n De segunda à sexta    \n \n  Requisitos  \n\n Com experiência    \n \n  Benefícios  \n\n • Alimentação    • Vale transporte    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     serafinimoveis@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "serafinimoveis@gmail.com",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092324,
+    "title": "Fisioterapeuta - Santo Pilates | Capim Macio",
+    "slug": "fisioterapeuta-santo-pilates-capim-macio-empresa-confidencial-natal-2026092324",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Fisioterapeuta   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Prevenir, identificar e recuperar traumas causados por acidentes, má formação genética ou vício de postura; Restaurar e desenvolver a capacidade física do paciente.  \n  \n  Horários  \n\n Manhã e tarde    \n \n  Requisitos  \n\n • Graduação em Fisioterapia    • Conselho ativo    • Certificação em Pilates    • Disponibilidade de horário    • Afinidade e experiência com idosos    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     santopilatesnatal@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "santopilatesnatal@gmail.com",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092325,
+    "title": "Vendedor - Ivanlux | Alecrim",
+    "slug": "vendedor-ivanlux-alecrim-empresa-confidencial-natal-2026092325",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Realizar vendas presenciais e on-line de materiais elétricos e construção visando satisfação e fidelidade.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Ensino médio completo    • Conhecimento básico em informática    • Conhecimento básico em eletricidade    \n     Perfil Profissional     • Atencioso    • Proativo    • Agil    • Boa comunicação    • Trabalho em equipe    \n \n  Benefícios  \n\n • Salário compatível com o mercado    • Comissão sobre vendas    • Vale transporte    • Alimentação    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rh@ivanlux.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh@ivanlux.com.br",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092326,
+    "title": "Assistente Administrativo - Ivanlux | Alecrim",
+    "slug": "assistente-administrativo-ivanlux-alecrim-empresa-confidencial-natal-2026092326",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Assistente Administrativo   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Assistir o gestor, dando suporte necessário na execução das tarefas de forma organizada e eficiente.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Curso superior em Administração ou curso técnico na área    • Conhecimento em  Excel     \n     Perfil Profissional     • Organizado    • Proativo    • Comprometido    • Boa comunicação    \n \n  Benefícios  \n\n • Salário compatível com o mercado    • Vale transporte    • Alimentação    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rh@ivanlux.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh@ivanlux.com.br",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092327,
+    "title": "Vendedor - Reserva Moda Masculina | Natal",
+    "slug": "vendedor-reserva-moda-masculina-natal-empresa-confidencial-natal-2026092327",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Realizar atendimento a clientes, negociar preço, prazo, condições de pagamento e descontos da venda, orientar quanto às especificações dos produtos e/ou serviços; criar conteúdos para redes sociais.     \n \n  Horários  \n\n Não informado     \n    \n  Requisitos  \n\n • Gostar de vendas    • Organizado    • Motivado    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 9612-4690",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84996124690",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092328,
+    "title": "Administração - Gestão De Pessoas E Voluntários - Reforamar | Candelária",
+    "slug": "administracao-gestao-de-pessoas-e-voluntarios-reforamar-candelaria-empresa-confidencial-natal-2026092328",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Administração   \n\n \n \n  Localização  \n\n Candelária, Natal - RN \n\n \n \n  Atividades  \n\n Captação, acolhimento e integração; Organizar programas de benefícios, premiações, certificados e brindes; Promover encontros e ações de engajamento; organizar processos seletivos, integrações e avaliações de desempenho.    \n \n  Horários  \n\n 25 horas semanais    \n \n  Requisitos  \n\n • Experiência com atendimento ao público e gestão de pessoas    • Comunicação interpessoal    • Proatividade    • Trabalho em equipe    • Inteligência emocional    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 8719-1461",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84987191461",
+    "publishedAt": "2026-01-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092329,
+    "title": "Operadora De Caixa - My Store | Natal",
+    "slug": "operadora-de-caixa-my-store-natal-empresa-confidencial-natal-2026092329",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Operadora de Caixa   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n  Receber valores de vendas de produtos e serviços, atender público em estabelecimentos, realizar a abertura e fechamento de caixa e emitir notas fiscais.     \n \n  Horários  \n\n De segunda à sábado; horário comercial    \n \n  Requisitos  \n\n • Ensino médio completo    • Desejável conhecimento básico em informática e sistemas de ponto de vendas    • Experiência na função será um diferencial    • Disponibilidade de horário    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     vagasmpconsultoria@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagasmpconsultoria@gmail.com",
+    "publishedAt": "2025-11-01",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092330,
+    "title": "Pedreiro - Trutto Engenharia | Natal",
+    "slug": "pedreiro-trutto-engenharia-natal-empresa-confidencial-natal-2026092330",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Pedreiro   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Para atuar em execução de obras; realizar trabalhos de alvenaria, concreto e outros materiais guiando-se por desenhos, esquemas e especificações; utilizar projetos e instrumentos para construir, reformar ou reparar as construções.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Não informado     \n    \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:      recrutamento.trutto@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "recrutamento.trutto@gmail.com",
+    "publishedAt": "2025-11-01",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092331,
+    "title": "Vendedor - Sport Fino Calçados | Natal",
+    "slug": "vendedor-sport-fino-calcados-natal-empresa-confidencial-natal-2026092331",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Realizar atendimento a clientes, negociar preço, prazo, condições de pagamento e descontos da venda, orientar quanto às especificações dos produtos e/ou serviços.   \n  \n  Horários  \n\n Não informado     \n    \n  Requisitos  \n\n Com experiência em vendas    \n     Perfil Profissional     • Responsável    • Proativo    • Boa comunicação    • Vontade de aprender    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 3113-1054",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.empregodorn.com.br/2025/05/vendedor-sport-fino-calcados-natal.html",
+    "publishedAt": "2025-11-01",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092332,
+    "title": "Vendedor - Ótica Visão De Todos | Parnamirim",
+    "slug": "vendedor-otica-visao-de-todos-parnamirim-empresa-confidencial-parnamirim-2026092332",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n Para trabalhar em empresa do ramo de ótica.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n • Experiência no ramo óptico    • Boa comunicação    • Simpatia, dinamismo, atitude    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     parnamirim.rn@visaodetodos.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "parnamirim.rn@visaodetodos.com",
+    "publishedAt": "2025-10-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092333,
+    "title": "Auxiliar De Cozinha - Let'S Pizza | Natal",
+    "slug": "auxiliar-de-cozinha-lets-pizza-natal-empresa-confidencial-natal-2026092333",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Auxiliar de Cozinha   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Auxiliar na preparação de ingredientes; montagem de pizzas; preparo de massas; controle de estoque.    \n \n  Horários  \n\n Escala 6x1; 16:30 às 00:50 (com 1 hora de descanso)    \n \n  Requisitos  \n • Ensino médio completo    • Disponibilidade de horário    \n     Perfil Profissional     • Flexibilidade    • Fácil adaptação    • Excelência no atendimento ao cliente    \n \n  Benefícios  \n\n • Salário R$ 1.518,00    • Vale transporte    • Refeição no local    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     letspizzavaga@gmail.com",
+    "salaryMin": 1518.0,
+    "salaryMax": 1518.0,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "letspizzavaga@gmail.com",
+    "publishedAt": "2025-10-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092334,
+    "title": "Vendedora - Outlet Moda Potiguar | Parnamirim",
+    "slug": "vendedora-outlet-moda-potiguar-parnamirim-empresa-confidencial-parnamirim-2026092334",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedora   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n  Realiza atendimento a clientes, controlar os pedidos dos clientes, qualidade dos produtos e prazo de entrega estabelecido; auxiliar os clientes na escolha; demonstrar funcionamento.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Com experiência    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     outletmodapotiguar@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "outletmodapotiguar@gmail.com",
+    "publishedAt": "2025-10-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092335,
+    "title": "Recepcionista - Neuza Lins Recrutamento | Natal",
+    "slug": "recepcionista-neuza-lins-recrutamento-natal-empresa-confidencial-natal-2026092335",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Recepcionista   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Para trabalhar em empresa do segmento clínica média e odontológica; atendimento ao público; organização de agendas; fichas; preenchimento de contratos; venda de serviços.    \n \n  Horários  \n\n Comercial; de segunda à sexta    \n \n  Requisitos  \n\n • Ensino médio completo    • Experiência na função    \n \n  Benefícios  \n\n • Salário comercial    • Comissão    • Vale refeição    • Vale transporte    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     vagasrhnatal@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagasrhnatal@gmail.com",
+    "publishedAt": "2025-10-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092336,
+    "title": "Mestre De Obras - Waf Construções | Parnamirim",
+    "slug": "mestre-de-obras-waf-construcoes-parnamirim-empresa-confidencial-parnamirim-2026092336",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Mestre de Obras   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n  Liderar equipes de trabalhadores da construção civil em canteiros, controlar equipamentos e materiais, inspecionar qualidade de matérias-primas utilizadas e administrar cronograma de obras.  \n  \n  Horários  \n\n 44 horas semanais; de segunda à sexta, das 07:00 às 17:00    \n \n  Requisitos  \n\n • Experiência comprovada    • Conhecimento em leitura e interpretação de projetos    • Familiaridade com equipamentos e ferramentas    \n \n  Benefícios  \n\n • Remuneração da categoria    • Vale transporte    • Vale alimentação    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     dpwafconstrutora@hotmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "dpwafconstrutora@hotmail.com",
+    "publishedAt": "2025-10-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092337,
+    "title": "Montador De Móveis - Grupo Chez | Extremoz",
+    "slug": "montador-de-moveis-grupo-chez-extremoz-empresa-confidencial-extremoz-2026092337",
+    "companyName": "Empresa Confidencial",
+    "city": "Extremoz",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Montador de Móveis   \n\n \n \n  Localização  \n\n Extremoz - RN \n\n \n \n  Atividades  \n\n  Atuar com montagem de móveis, realizar o atendimento ao cliente e manter a organização do local.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Não informado     \n    \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rh@grupochez.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh@grupochez.com.br",
+    "publishedAt": "2025-10-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092338,
+    "title": "Mecânico Automotivo - Dom Car | Natal",
+    "slug": "mecanico-automotivo-dom-car-natal-empresa-confidencial-natal-2026092338",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Mecânico Automotivo   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Realizar manutenção mecânica preventiva e corretiva de veículos, montar e trocar peças, lubrificar motor, regular mecanismos e alinhar direção; auxiliar o cliente quanto à substituição e aproveitamento de componentes.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Com experiência     \n    \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rh.domcar@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh.domcar@gmail.com",
+    "publishedAt": "2025-10-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092339,
+    "title": "Vendedor(A) Externa - Grupo Morada | Natal",
+    "slug": "vendedora-externa-grupo-morada-natal-empresa-confidencial-natal-2026092339",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor(a) Externa   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Para trabalhar em empresa do ramo de funerária; empresa referência em inovação e excelência.    \n \n  Horários  \n\n Não informado     \n    \n  Requisitos  \n\n Não informado    \n \n  Benefícios  \n\n • Carteira assinada    • Plano de saúde    • Plano odontológico    • Vale alimentação    • Salário fixo + variável    • Vale transporte    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     curriculosrn@moradadapaz.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculosrn@moradadapaz.com.br",
+    "publishedAt": "2025-10-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092340,
+    "title": "Líder Comercial - Rutra Consultoria E Construção | Natal",
+    "slug": "lider-comercial-rutra-consultoria-e-construcao-natal-empresa-confidencial-natal-2026092340",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Líder Comercial   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Vendas, prospecção e qualificação de leads; negociação e fechamento de negócios.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Experiência comprovada em vendas    • Boa comunicação verbal e escrita    • Organizado    • Proativo    • Focado    \n \n  Benefícios  \n\n • Salário    • Comissão    • Vale transporte    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 9406-9342",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84994069342",
+    "publishedAt": "2025-10-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092341,
+    "title": "Vendedor Atendente - Retífica Mafra | Parnamirim",
+    "slug": "vendedor-atendente-retifica-mafra-parnamirim-empresa-confidencial-parnamirim-2026092341",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor Atendente   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n Realizar atendimento a clientes, negociar preço, prazo, condições de pagamento e descontos da venda, orientar quanto às especificações dos produtos e/ou serviços.    \n \n  Horários  \n\n 44 horas semanais    \n \n  Requisitos  \n\n • Conhecimento no segmento mecânico    • Será um diferencial ter conhecimento no segmento de auto peças    • Experiência com vendas    \n \n  Benefícios  \n\n • Salário da categoria    • Vale transporte    • Comissão    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     retificamafrarh@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "retificamafrarh@gmail.com",
+    "publishedAt": "2025-10-08",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092342,
+    "title": "Servente De Obras - Ll Empreendimentos | Parnamirim",
+    "slug": "servente-de-obras-ll-empreendimentos-parnamirim-empresa-confidencial-parnamirim-2026092342",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Servente de Obras   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n  Preparar canteiro de obras e massa de concreto, limpar e compactar solos, verificar máquinas e equipamentos de construção civil e participar na demolição de edificações.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Preferencialmente residir em Parnamirim ou regiões próximas    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rhselecaoparnamirim@outlook.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rhselecaoparnamirim@outlook.com",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092343,
+    "title": "Auxiliar De Almoxarifado - Ll Imóveis | Parnamirim",
+    "slug": "auxiliar-de-almoxarifado-ll-imoveis-parnamirim-empresa-confidencial-parnamirim-2026092343",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Auxiliar de Almoxarifado   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n Recebimento, conferência, estocagem e distribuição; organização e registro em sistemas; elaboração de relatórios; zelar pela qualidade e integridade dos itens armazenados.    \n \n  Horários  \n\n De segunda à quinta, das 07:00 às 17:00 e nas sextas, das 07:00 às 16:00 (com 1 hora de intervalo)    \n \n  Requisitos  \n\n • Possuir CNH A ou B    • Proficiência em informática    • Experiência    \n \n  Benefícios  \n\n • Auxílio alimentação    • Auxilio transporte    • Cesta básica    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rhselecaoparnamirim@outlook.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rhselecaoparnamirim@outlook.com",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092344,
+    "title": "Empregada Doméstica - Light Clean | Natal",
+    "slug": "empregada-domestica-light-clean-natal-empresa-confidencial-natal-2026092344",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Empregada Doméstica   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Cuidar da limpeza e conservação, lavar e passar roupas, cozinhar e atividades do dia-a-dia.  \n  \n  Horários  \n\n Terça à sábado    \n \n  Requisitos  \n\n • Experiência na função    • Disponibilidade de horário    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     lightcleanprocesso@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "lightcleanprocesso@gmail.com",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092345,
+    "title": "Assistente Comercial - Tudobrisa Climatizadores | Parnamirim",
+    "slug": "assistente-comercial-tudobrisa-climatizadores-parnamirim-empresa-confidencial-parnamirim-2026092345",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Assistente Comercial   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n Para trabalhar em empresa do ramo de climatizadores.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Com experiência em vendas    • Boa comunicação    • Proatividade    • Pontualidade    • Habilidade com planilhas e sistemas    \n \n  Benefícios  \n\n • Salário    • Comissão    • Ajuda de custo    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     marcio@tudoclima.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "marcio@tudoclima.com.br",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092346,
+    "title": "Auxiliar De Serviços Gerais - Anibaltec | Mossoró",
+    "slug": "auxiliar-de-servicos-gerais-anibaltec-mossoro-empresa-confidencial-mossoro-2026092346",
+    "companyName": "Empresa Confidencial",
+    "city": "Mossoró",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Auxiliar de Serviços Gerais   \n\n \n \n  Localização  \n\n Mossoró - RN \n\n \n \n  Atividades  \n\n Executar serviços gerais (limpeza).    \n \n  Horários  \n\n Não informado     \n    \n  Requisitos  \n\n • Ensino fundamental completo    • Proativo(a)    • Organizado(a)    • Experiência    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     rh@tef.net.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh@tef.net.br",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092347,
+    "title": "Esteticista - Persona Dermatologia | Natal",
+    "slug": "esteticista-persona-dermatologia-natal-empresa-confidencial-natal-2026092347",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Esteticista   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Para trabalhar em clínica; realizar procedimentos faciais e corporais.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n Formação técnica ou superior em estética, cosméticos, fisioterapia ou áreas afins    • Experiência comprovada na área    • Boa comunicação    • Conhecimento em vendas e aparelhos estéticos será um diferencial    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     selecaopersonadermatologia@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "selecaopersonadermatologia@gmail.com",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092348,
+    "title": "Auxiliar Administrativo - Persona Dermatologia | Natal",
+    "slug": "auxiliar-administrativo-persona-dermatologia-natal-empresa-confidencial-natal-2026092348",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Auxiliar Administrativo   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Rotinas administrativas da clínica.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n • Desejável experiência    • Boa comunicação    • Relacionamento interpessoal    • Conhecimento em  Pacote Office  (principalmente Excel)    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     selecaopersonadermatologia@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "selecaopersonadermatologia@gmail.com",
+    "publishedAt": "2025-10-06",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092349,
+    "title": "Técnico(A) De Suporte - Jopavi | Natal",
+    "slug": "tecnicoa-de-suporte-jopavi-natal-empresa-confidencial-natal-2026092349",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Técnico(a) de Suporte   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Prestar suporte técnico de software e hardware, elaborar e acompanhar planos de ações, administrar rede e implantar softwares, a fim de otimizar as rotinas, reduzir os custos e implementar soluções.  \n  \n  Horários  \n\n De segunda à sexta; carga horária: 8 horas    \n \n  Requisitos  \n\n • Experiência em suporte técnico e sistema de ponto    • Conhecimento em sistemas operacionais, redes e hardware    • Carteira de habilitação (categoria B)    • Conhecimento em SQL Server e PostgreSQL será um diferencial    \n     Perfil Profissional     • Boa comunicação    \n \n  Benefícios  \n\n • Salário compatível com o mercado    • Ajuda de custo    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     relacionamento@jopavi.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "relacionamento@jopavi.com.br",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092350,
+    "title": "Auxiliar De Limpeza - Golden Tulip | Natal",
+    "slug": "auxiliar-de-limpeza-golden-tulip-natal-empresa-confidencial-natal-2026092350",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Auxiliar de Limpeza   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Realizar a conservação e limpeza de ambientes.  \n  \n  Horários  \n\n Não informado     \n    \n  Requisitos  \n\n • Ensino fundamental completo    • Comprometimento com a higiene e segurança do trabalho    • Capacidade de trabalhar em equipe    • Disponibilidade de horários    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     gtpn.vagas@goldentulip.com.br",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "gtpn.vagas@goldentulip.com.br",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092351,
+    "title": "Vendedora - Stomp | Natal",
+    "slug": "vendedora-stomp-natal-empresa-confidencial-natal-2026092351",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedora   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Para trabalhar em loja de vestuário em shopping.    \n \n  Horários  \n\n Das 13:40 às 22:00    \n \n  Requisitos  \n\n Não informado    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     curriculumsloja@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculumsloja@gmail.com",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092352,
+    "title": "Estoquista - Bella'S Center | Natal E Parnamirim",
+    "slug": "estoquista-bellas-center-natal-e-parnamirim-empresa-confidencial-parnamirim-2026092352",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Estoquista   \n\n \n \n  Localização  \n\n Natal e Parnamirim - RN \n\n \n \n  Atividades  \n\n Controle de estoque; recebimento, conferência e reposição.    \n \n  Horários  \n\n De segunda à sábado, das 08:00 às 18:00    \n \n  Requisitos  \n\n • Ensino médio completo    • Experiência na função    \n \n  Benefícios  \n\n • Salário R$ 1.565,00    • Vale transporte ou ajuda de custo    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     vagasrhnatal@gmail.com",
+    "salaryMin": 1565.0,
+    "salaryMax": 1565.0,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagasrhnatal@gmail.com",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092353,
+    "title": "Vendedor(A) De Loja - Bella'S Center | Parnamirim",
+    "slug": "vendedora-de-loja-bellas-center-parnamirim-empresa-confidencial-parnamirim-2026092353",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor(a) de Loja   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n Atender clientes e efetivar as vendas; organização da loja; abastecimento das prateleiras.    \n \n  Horários  \n\n De segunda à sábado; horário comercial    \n \n  Requisitos  \n\n • Ensino médio completo    • Desenvoltura para atuar com vendas    \n \n  Benefícios  \n\n • Salário comercial    • Comissão    • Premiação    • Vale transporte    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     vagasrhnatal@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagasrhnatal@gmail.com",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092354,
+    "title": "Vendedor(A) - Cartão De Todos | Parnamirim",
+    "slug": "vendedora-cartao-de-todos-parnamirim-empresa-confidencial-parnamirim-2026092354",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor(a)   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n Realizar vendas e informar sobre os produtos; prospecção de novos clientes.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Comunicativo    • Proativo    • Foco em resultados    \n \n  Benefícios  \n\n • Salário    • Comissão    • Ajuda de custo (transporte e alimentação)    • Cesta básica    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     parnamirim.rn@cartaodetodos.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "parnamirim.rn@cartaodetodos.com",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092355,
+    "title": "Atendimento Ao Cliente - Polibuchas | Natal",
+    "slug": "atendimento-ao-cliente-polibuchas-natal-empresa-confidencial-natal-2026092355",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Atendimento ao Cliente   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Atender o cliente de forma cordial e proativa; vendas online e presenciais.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n • Proativo(a)    • Trabalho em equipe    • Organização    • Dinâmico(a)    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     atendimentopoli.buchas@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "atendimentopoli.buchas@gmail.com",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092356,
+    "title": "Recepcionista - Clínica Palmira Carlos | Parnamirim",
+    "slug": "recepcionista-clinica-palmira-carlos-parnamirim-empresa-confidencial-parnamirim-2026092356",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Recepcionista   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n  Responsável por atender o público, tanto pessoalmente quanto por telefone ou e-mail; fazer agendamentos, dar informações e orientar a circulação das pessoas e visitantes.  \n  \n  Horários  \n\n Não informado     \n    \n  Requisitos  \n\n • Ensino médio completo    • Conhecimento básico em informática    • Habilidade com redes sociais    \n     Perfil Profissional     • Proativo    • Bom relacionamento interpessoal    • Boa comunicação    • Boa escrita    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     curriculocpc2@gmail.com     Desculpe, vaga já preenchida!",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculocpc2@gmail.com",
+    "publishedAt": "2025-10-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092357,
+    "title": "Recepcionista - Medway Assessoria | Natal",
+    "slug": "recepcionista-medway-assessoria-natal-empresa-confidencial-natal-2026092357",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Recepcionista     \n  \n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Responsável por atender o público, tanto pessoalmente quanto por telefone ou e-mail; fazer agendamentos, dar informações e orientar a circulação das pessoas e visitantes.  \n  \n  Horários  \n\n Noturno, até às 22:00    \n \n  Requisitos  \n\n • Experiência em atendimento    • Noção de informática básica    • Disponibilidade de horário    \n     Perfil Profissional     • Boa escrita e comunicação    • Proatividade    • Organização    \n \n  Benefícios  \n\n Não informado    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     supervisaoredemedway@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "supervisaoredemedway@gmail.com",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092358,
+    "title": "Garçom - Piazzolla Pizzaria | Natal",
+    "slug": "garcom-piazzolla-pizzaria-natal-empresa-confidencial-natal-2026092358",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Garçom   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Servir alimentos e bebidas aos clientes, anotar pedidos e organizar e limpar mesas e cadeiras.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n • Desejável com experiência    • Preferencialmente que more nas proximidades de Ponta Negra    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 9431-9197",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84994319197",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092359,
+    "title": "Serviços Gerais - Dona Help | Natal",
+    "slug": "servicos-gerais-dona-help-natal-empresa-confidencial-natal-2026092359",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Serviços Gerais     \n  \n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Para trabalhar em condomínios, residências e empresas;   auxiliar na realização de serviços em geral, atividades de limpeza e conservação de instalações.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Não informado     \n    \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 8879-6836",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84988796836",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092360,
+    "title": "Cozinheira - Minuto Massas | Parnamirim",
+    "slug": "cozinheira-minuto-massas-parnamirim-empresa-confidencial-parnamirim-2026092360",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Cozinheira   \n\n \n \n  Localização  \n\n Parnamirim - RN \n\n \n \n  Atividades  \n\n  Preparar pratos, atentando para as especificações da comanda ou cardápio; manipular e temperar alimentos e verificar o estado de conservação dos ingredientes utilizados, para atender as exigências dos pedidos e assegurar o padrão de qualidade.  \n  \n  Horários  \n\n De terça à domingo, das 07:00 às 15:00, escala 6x1    \n \n  Requisitos  \n\n Experiência com à la carte    \n \n  Benefícios  \n\n • Salário da categoria    • Ajuda de custo    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 9922-0124",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84999220124",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092361,
+    "title": "Estoquista - Mari Boutique | Natal",
+    "slug": "estoquista-mari-boutique-natal-empresa-confidencial-natal-2026092361",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Estoquista   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n  Fazer recebimento, conferência e verificação de validades dos produtos; Controlar avarias e perdas, organizar estoques, realizar balanços e inventários. Emitir relatórios, verificar operações de entrada e saída e armazenar mercadorias.  \n  \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Com experiência comprovada    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     mariboutiquecurriculo@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "mariboutiquecurriculo@gmail.com",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092362,
+    "title": "Vendedor Interno - Multy Telecom | Natal",
+    "slug": "vendedor-interno-multy-telecom-natal-empresa-confidencial-natal-2026092362",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Vendedor Interno   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Para trabalhar em empresa do ramo de telecomunicações.    \n \n  Horários  \n\n De segunda à sexta    \n \n  Requisitos  \n\n • Conhecimento básico em informática    • Com experiência anterior será um diferencial    \n     Perfil Profissional     • Boa comunicação    • Excelência em atendimento    • Proatividade    \n \n  Benefícios  \n\n • Salário comercial    • Celular corporativo    • Bonificação    • Comissão    • Vale transporte ou ajuda de custo    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     multytelecom@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "multytelecom@gmail.com",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092363,
+    "title": "Atendente De Suporte Técnico - Neuza Lins Recrutamento | Natal",
+    "slug": "atendente-de-suporte-tecnico-neuza-lins-recrutamento-natal-empresa-confidencial-natal-2026092363",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Atendente de Suporte Técnico     \n  \n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Atendimento ao usuário e a equipe técnica externa; atender chamados recebidos; registrar os atendimentos via sistemas.    \n \n  Horários  \n\n De segunda à sexta    \n \n  Requisitos  \n\n • Cursando Redes de Computadores ou Gestão da Tecnologia da Informação    • Curso Técnico em Informática    • Experiência em atendimento ao cliente    • Conhecimento intermediário de  Pacote Office     \n \n  Benefícios  \n\n • Salário R$ 1.884,42    • Vale alimentação    • Vale combustível    \n \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     vagasrhnatal@gmail.com",
+    "salaryMin": 1884.42,
+    "salaryMax": 1884.42,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagasrhnatal@gmail.com",
+    "publishedAt": "2025-06-26",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092364,
+    "title": "Designer Gráfico - Casa Dos Óculos | Natal",
+    "slug": "designer-grafico-casa-dos-oculos-natal-empresa-confidencial-natal-2026092364",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Designer Gráfico   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Criação de artes para gravação a laser para personalização de óculos.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Domínio em softwares de criação vetorial (CorelDRAW ou similares)    \n     Perfil Profissional     • Atenção aos detalhes    • Proatividade    • Trabalho em equipe    \n \n  Benefícios  \n\n • Salário fixo    • Bonificação    • Passagens    • Alimentação    \n   \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:    (84) 9 9956-0368",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84999560368",
+    "publishedAt": "2025-06-26",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092365,
+    "title": "Assistente Financeiro | Natal",
+    "slug": "assistente-financeiro-natal-empresa-confidencial-natal-2026092365",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Descrição  \n\n  Vaga de Emprego para        Assistente Financeiro   \n\n \n \n  Localização  \n\n Natal - RN \n\n \n \n  Atividades  \n\n Rotinas financeiras com atuação com atuação em processos de faturamento, conciliações bancárias; lançamento e controle de contas a pagar e a receber; apoio a emissão de relatórios financeiros e fechamento mensal.    \n \n  Horários  \n\n Não informado    \n \n  Requisitos  \n\n Ensino superior completo ou em andamento em Gestão Financeira, Administração, Ciências Contábeis, ou áreas correlatas    \n \n  Benefícios  \n\n Não informado     \n    \n  Candidatar  \n\n Interessados, enviar currículo \n\npara:     josilenegestaoegente@gmail.com",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "josilenegestaoegente@gmail.com",
+    "publishedAt": "2025-06-26",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092366,
+    "title": "Trabalhe Na Uninassau",
+    "slug": "trabalhe-na-uninassau-empresa-confidencial-natal-2026092366",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O Grupo Ser Educacional mantém respeitadas instituições de ensino que operam em linha com a sua Visão, Missão, Valores e com seu jeito de ser e fazer. Como uma das maiores companhias da área de educação do país, com mais de 11 mil colaboradores, o Grupo e suas instituições estão comprometidos, acima de tudo, com o ser humano e sua realização pessoal e profissional.  \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  Seu compromisso com a empregabilidade e o empreendedorismo é resultado da consciência de seu papel na formação de indivíduos focados no crescimento pessoal em termos mais amplos.  \n     \n    ➜ VEJA MAIS EMPRESAS EM:      ESCOLAS     \n  Como vetores de crescimento e criação de valor, o grupo Ser Educacional tem como identidade:  - A liderança para decidir, inovar e reinventar;  - A competência de articular e mobilizar conhecimentos, experiências, habilidades e atitudes;  - A ousadia para empreender, construir e gerar riquezas com responsabilidade;  - A solidez de um grupo firme e estável.  \n  Todos esses atributos, potencializados pelo modelo de gestão profissional e pela Governança Corporativa, somados ao seu modelo sistêmico, garantem ao Grupo, segurança, perenidade e reconhecimento.  \n     COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse a      página de carreiras da          UNINASSAU      \n  \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2022/05/trabalhe-na-uninassau.html",
+    "publishedAt": "2026-07-16",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092367,
+    "title": "Trabalhe Na Ri Happy",
+    "slug": "trabalhe-na-ri-happy-empresa-confidencial-natal-2026092367",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "JOVEM_APRENDIZ",
+    "description": "Vem fazer parte do nosso time! ​​  Se você é uma pessoa que adora trabalho e diversão, não faltam desafios e aprendizados em nossas oportunidades de atuação, venha fazer parte do nosso time!  Em 1988, um pediatra e um administrador da área de informática, resolveram se unir com um sonho comum.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n      \n  Foi assim que, com muito esforço, imaginação e talento, nasceu a Ri Happy Brinquedos. Eles ainda não sabiam, mas esse era o começo de uma jornada que ia transformar o mercado de brinquedos no Brasil, a maneira que pais e filhos brincam juntos e a vida de milhões de crianças ao longo das décadas.  \n     \n    MAIS EMPRESAS EM:      DEPARTAMENTO   /   ARTIGOS DIVERSOS     \n  Com o sucesso vindo desse lindo trabalho e do encantamento dos nossos clientes, a marca cresceu e se tornou o Grupo Ri Happy, do qual começou também a fazer parte em 2012 a PBKIDS, uma das mais amadas lojas de brinquedos do país.   \n  Mais tarde em 2013 nasceu a Ri Happy Baby, focada em trazer carinho e cuidado para mamães e bebês, permitindo que a gente consiga acompanhar e divertir as crianças e suas famílias  desde o primeiro momento.  \n          COMO SE CANDIDATAR:           ➜ Para se candidatar às vagas, acesse a      página da          Ri Happy na   plataforma Gupy         \n     ➜ Para se candidatar às      vagas temporárias        \n    ➜ Em  Estado , selecione:  Rio Grande do Norte (RN)    \n   \n  \n  \n   Conteúdos Relaciona",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/05/trabalhe-na-ri-happy.html",
+    "publishedAt": "2025-09-01",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092368,
+    "title": "Vagas Na Potiguar Honda: Veja Como Se Candidatar E Trabalhar Na Empresa",
+    "slug": "vagas-na-potiguar-honda-veja-como-se-candidatar-e-trabalhar-na-empresa-empresa-confidencial-natal-2026092368",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Viver sobre duas rodas é sinônimo de liberdade e na Potiguar Honda você pode conquistar esse sonho. Desde sua fundação, em 1973, a Potiguar Honda tornou-se uma concessionária referência em credibilidade, qualidade e satisfação para quem procura a sua moto Honda.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n   Trabalhamos com motocicletas, quadriciclos, produtos de força, peças e serviços de assistência técnica. Tudo com selo de qualidade Honda.   \n     \n    Cuidado com o meio ambiente     Referência no cuidado e harmonia com o meio ambiente, a Potiguar Honda conquistou o selo Green Dealer de Concessionária Ecológica, devido aos programas de reciclagem e a Unidade de Tratamento de Água e Óleo.    \n    Além disso, a nossa unidade de João Câmara utiliza energia solar para atender 100% da sua demanda energética.    \n       Humanização     O Grupo Potiguar e os Heróis da Liga do Super Atendimento estão sempre prontos para recebê-los de braços abertos, com um atendimento acima de tudo humano e caloroso. Tudo isso para atender o nosso propósito, que é “Ativar o Desenvolvimento Humano”.            COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse a      página da Potiguar Honda na plataforma Jobfy          \n\n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n       ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2022/05/trabalhe-na-potiguar-honda.html",
+    "publishedAt": "2025-09-01",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092369,
+    "title": "Praiamar Hotel: Oportunidades De Trabalho No Setor Hoteleiro",
+    "slug": "praiamar-hotel-oportunidades-de-trabalho-no-setor-hoteleiro-empresa-confidencial-natal-2026092369",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O Praiamar Hotel, localizado em Natal, é um dos estabelecimentos hoteleiros mais renomados do Rio Grande do Norte, com uma forte presença no mercado de turismo.   \n\n  \n  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  \n  \n    \n  Situado na Praia de Ponta Negra, uma das praias mais icônicas da cidade, o hotel atrai turistas de todas as partes do mundo, o que faz dele um excelente local para profissionais que buscam crescimento e oportunidades de emprego na área de hotelaria.  \n           Fonte: Site / Hotel PraiaMar      \n   Estrutura do Praiamar Hotel   O Praiamar Hotel se destaca não apenas pela localização privilegiada, mas também por sua infraestrutura completa e voltada ao conforto dos hóspedes.   \n  O hotel oferece desde quartos modernos até uma variedade de opções de lazer e entretenimento, incluindo piscinas, áreas de convivência, restaurante e bares.   \n  Esses aspectos demandam uma equipe dedicada e multidisciplinar, que garanta um atendimento impecável e uma experiência inesquecível aos visitantes.  \n        COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse a      página do Praiamar Hotel / Água Marinha na plataforma Faceponto         \n \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2024/11/praiamar-hotel-oportunidades-de.html",
+    "publishedAt": "2025-08-29",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092370,
+    "title": "Trabalhe No Carrefour - Como Se Candidatar",
+    "slug": "trabalhe-no-carrefour-como-se-candidatar-empresa-confidencial-natal-2026092370",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Um Negócio Feito por Pessoas.  Desde 1975 no Brasil, reunindo uma equipe com mais de 70.000 colaboradores que representam a diversidade deste país. Venha fazer parte dessa história também.   Já imaginou trabalhar no maior empregador privado do país?         \n  \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n Junto com os fornecedores e parceiros, estão sempre comprometidos em satisfazer e encantar os consumidores todos os dias, construindo a sua história com a sociedade.    \n         \n\n  \n      ➜  EMPRESAS EM:    SUPERMERCADOS      \n    A rede de lojas está espalhada por todo o país com as bandeiras Carrefour Hipermercado, Carrefour Bairro, Carrefour Express, Carrefour Drogaria, Carrefour Posto, Atacadão e Supeco.    \n    O Carrefour tem várias oportunidades. E as pessoas também tem possibilidades de mudarem de carreira ao longo do tempo.    \n           COMO SE CANDIDATAR:               ➜ Para se candidatar às vagas, acesse a      página do Carrefour na plataforma PandaPé         \n     ⚠ Se precisar de ajuda durante o processo, visite a     Central de Ajuda PandaPé       e esclareça suas dúvidas.        \n \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n     ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/carrefour.html",
+    "publishedAt": "2025-08-28",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092371,
+    "title": "Centauro: A Oportunidade De Carreira Que Une Paixão E Inovação",
+    "slug": "centauro-a-oportunidade-de-carreira-que-une-paixao-e-inovacao-empresa-confidencial-natal-2026092371",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Centauro é referência no mercado esportivo da América Latina, combinando inovação, agilidade e resiliência com um forte espírito de cooperação e liderança. Esses valores são a base para que cada colaborador alcance sua melhor versão, contribuindo para o sucesso coletivo.     \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n  Desde 1981, quando inaugurou sua primeira loja, a Centauro cresceu exponencialmente, consolidando-se como a maior rede de artigos esportivos da América Latina. Com mais de 7 mil colaboradores, 190 lojas em mais de 20 estados brasileiros e um e-commerce que recebe mais de 10 milhões de acessos mensais, a Centauro continua a revolucionar o setor esportivo.  \n     \n\n  \n  \n  \n     \n  .botao-acao {\n    display: inline-block;\n    background-color: #fc8810; /* Laranja vibrante */\n    color: #fff; /* Texto branco */\n    padding: 12px 40px;\n    font-size: 15px;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 4px;\n    transition: background-color 0.3s ease-in-out;\n    font-weight: bold;\n  }\n\n  .botao-acao:hover {\n    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */\n  }\n\n  @media screen and (max-width: 600px) {\n    .botao-acao {\n      display: inline-block;\n      width: auto;\n      text-align: center;\n    }\n  }\n \n\n    ➜ MAIS EMPRESAS EM: DEPARTAMENTO     Você permanecerá no mesmo site  \n\n  \n  \n  \n      Uma Plataforma Completa para os Apaixonados por Esporte   A Centauro não é apenas uma ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/12/trabalhe-na-centauro.html",
+    "publishedAt": "2025-08-26",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092372,
+    "title": "Trabalhe No Nordestão: Faça Parte Da Maior Rede Do Rio Grande Do Norte!",
+    "slug": "trabalhe-no-nordestao-faca-parte-da-maior-rede-do-rio-grande-do-norte-empresa-confidencial-natal-2026092372",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O  Supermercado Nordestão  é mais do que uma rede de supermercados; é uma verdadeira paixão pelo Brasil e pelo Rio Grande do Norte.   Com mais de 1 milhão de clientes por mês, são líderes absolutos no mercado potiguar, entregando excelência em atendimento, qualidade e inovação.     \n      ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n      \n   Por Que Escolher o Nordestão?     Liderança consolidada no mercado. \n  Ambiente de trabalho humanizado e inclusivo. \n  Oportunidades de crescimento e desenvolvimento. \n  \n     \n     ➜  EMPRESAS EM:          SUPERMERCADOS       \n     Uma Trajetória de Sucesso   Ao longo de nossos 47 anos de história, construímos um legado de conquistas. Desde os primeiros passos de nossos fundadores, marcados pela coragem e união, até o esforço de milhares de colaboradores dedicados, nossa trajetória é uma celebração de trabalho, confiança e alegria.  \n  Esse compromisso resultou em conquistas extraordinárias:    Prêmio Top of Mind  em todas as pesquisas realizadas.\n  1º lugar  no Nordeste em vendas por check-out.\n  64,7% de participação  no mercado varejista de Natal/RN.\n  1º lugar no Nordeste  em vendas por metro quadrado.\n  \n\n  Com nove grandes lojas climatizadas, atendemos diariamente a milhares de pessoas, garantindo uma experiência de compra única e acolhedora.  \n       COMO SE CANDIDATAR:      ➜    Para se candidatar às vagas, acesse a      página do Nordestão na plataforma PandaPé        \n       ⚠ Não está conseguind",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/03/trabalhe-no-nordestao.html",
+    "publishedAt": "2025-08-22",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092373,
+    "title": "Trabalhe No Tábua De Carne",
+    "slug": "trabalhe-no-tabua-de-carne-empresa-confidencial-natal-2026092373",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O Tábua de Carne Restaurante deu início às suas atividades em 1990, na cidade de João Pessoa, PB. Tudo começou devido ao fechamento do Paraiban (Banco do Estado da Paraíba) e diante do desemprego das três sócias, surgiu a ideia de abrir um restaurante.  \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n    \n  Devido à tradição de Picuí-PB (cidade natal dos sócios) em comida regional, mais especificamente na famosa carne de sol, optou-se por um restaurante regional, especializado na culinária nordestina, com destaque para a carne de sol.   \n     \n         ➜  MAIS EMPRESAS EM:       RESTAURANTES     \n  No início das atividades os três casais trabalhavam na unidade de João Pessoa e com o apoio dos amigos e qualidade dos produtos vendidos, se tornou um grande sucesso.   \n  Em 1991, um dos casais abriu seu próprio restaurante na cidade de Campina Grande, na Av. Manoel Tavares, e em julho de 1992, os outros dois casais se uniram e abriram a primeira filial do Tábua de Carne em Natal (RN), no início da Av. Eng. Roberto Freire.  \n     COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas, envie currículo para o e-mail:        curriculos@tabuadecarne.com.br      \n\n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .bt",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculos@tabuadecarne.com.br",
+    "publishedAt": "2025-08-19",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092374,
+    "title": "Vagas Na Comjol: Veja Como Se Candidatar E Trabalhar Na Empresa",
+    "slug": "vagas-na-comjol-veja-como-se-candidatar-e-trabalhar-na-empresa-empresa-confidencial-natal-2026092374",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A COMJOL é uma empresa comercial de materiais para construção e acabamento e é composta por uma rede de quatro lojas de atendimento ao público, uma central de atendimento ao profissional da construção civil e uma central de atendimento ao revendedor.   \n\n  \n  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  \n  \n    \n  Com o objetivo em sempre fazer bonito para os clientes, por isso, lhes oferecem - ou as suas obras - os melhores e mais variados produtos por preço justo, além de todo o conforto de estacionamento, financiamentos, trocas, entrega rápida, lanchonete e melhor atendimento.  \n     \n    ➜   EMPRESAS EM:   DEPARTAMENTO      \n    Missão    “Ser a empresa de melhor preço e maior variedade em materiais para acabamentos do Rio Grande do Norte”  \n    Visão    “Estar entre as empresas líderes de mercado no segmento de comércio de materiais para acabamento do Nordeste”  \n  Escolha o melhor pra você também. Faça bonito, faça Comjol.  \n\n  \n  \n  \n  \n  \n        COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse a      página da Comjol na plataforma QVende          \n    \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: c",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/01/trabalhe-na-comjol.html",
+    "publishedAt": "2025-08-18",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092375,
+    "title": "Trabalhe No Grau Técnico",
+    "slug": "trabalhe-no-grau-tecnico-empresa-confidencial-parnamirim-2026092375",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O avanço tecnológico vem quebrando fronteiras econômicas, sociais e culturais, trazendo uma maior facilidade no acesso à informação, à liberdade de expressão e à inclusão social.   \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  No entanto, também a ocorrência de algumas situações ruins, como a desintegração dos valores humanos, o consumo desenfreado, a marginalização social e a agressão ao meio ambiente.   \n     \n   ➜  VEJA MAIS EMPRESAS EM:       ESCOLAS      \n  Por isso, devemos despertar no ser humano a importância do conhecimento técnico, como também em conscientizá-lo para a solidariedade, o respeito ao próximo e o trabalho em equipe.  \n  O Centro de Ensino Grau Técnico visa a abrir caminhos para oportunidades que beneficiem tanto o indivíduo quanto ao coletivo, orientando a realização profissional e a inserção social por meio de uma educação estimuladora e operadora de inovações na sociedade.  \n             COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas na unidade  Zona Norte , envie currículo para o e-mail:       eduardoluna.pedagogico@grautecnicorn.com.br        \n     ➜ Para se candidatar às vagas na unidade  Natal , envie currículo para o e-mail:       coordenacaopedagogicagp@gmail.com              \n      ➜ Para se candidatar às vagas em   Parnamirim   , envie currículo para o e-mail:           pedagogico.graupn@gmail.com             \n       \n  \n  \n     Conteúdos Relacionados \n     \n        .card-relacionados {\n      ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "coordenacaopedagogicagp@gmail.com",
+    "publishedAt": "2025-08-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092376,
+    "title": "Trabalhe Na Drogarias Globo: Oportunidades Em Uma Das Maiores Redes Do Nordeste",
+    "slug": "trabalhe-na-drogarias-globo-oportunidades-em-uma-das-maiores-redes-do-nordeste-empresa-confidencial-natal-2026092376",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Drogarias Globo é uma das maiores redes de farmácias do Nordeste, destacando-se pela qualidade no atendimento e compromisso com a saúde e bem-estar dos clientes. Com uma história de crescimento sólido, a empresa foi fundada em Natal (RN) por João Patriota e, atualmente, tem sua sede em Teresina, no Piauí.   \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n      \n  Desde sua aquisição pelo Grupo Jorge Batista, a rede tem expandido sua presença, atendendo a diversos estados, incluindo Rio Grande do Norte, Paraíba, Piauí, Maranhão, Pará e Bahia.  \n     \n     ➜  VEJA MAIS EMPRESAS EM:          F ARMÁCIAS      \n  Se você busca uma  oportunidade de emprego em farmácias , a Drogarias Globo pode ser o lugar ideal para desenvolver sua carreira. Com mais de  150 unidades , a rede oferece diversas vagas para balconistas, farmacêuticos, atendentes, operadores de caixa e cargos administrativos.  \n   Por que trabalhar na Drogarias Globo?  A Drogarias Globo investe no crescimento profissional de seus colaboradores, proporcionando treinamentos e capacitações constantes. Alguns dos programas internos que fazem a diferença no desenvolvimento da equipe são:  \n  ✅ Programa voltado para a cultura organizacional e desenvolvimento de competências.\n✅ Treinamento especializado para melhorar a experiência dos clientes.\n✅ Qualificação profissional para quem deseja atuar no atendimento e na dispensação de medicamentos.   \n     COMO SE CANDIDATAR:      ➜ Para se candida",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/02/trabalhe-na-drogaria-globo.html",
+    "publishedAt": "2025-08-11",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092377,
+    "title": "Vagas Na Reis Magos: Veja Como Se Candidatar E Trabalhar Na Empresa",
+    "slug": "vagas-na-reis-magos-veja-como-se-candidatar-e-trabalhar-na-empresa-empresa-confidencial-natal-2026092377",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A partir de agora, você pode participar do processo da melhor pizzaria de Natal, eleita pelos mais diversos e conceituados canais de pesquisa e principalmente, pelos clientes sempre tão fiéis.  \n      ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n\n    \n  E essa conquista aos longos 35 anos, se deu com total compromisso, responsabilidade, respeito e qualidade no que fazem. A Famiglia Reis Magos foi fundada em 1984, conta com mais de 35 anos e com 10 filiais em todo o estado do Rio Grande do Norte.  \n     \n    ➜  MAIS EMPRESAS EM:      RESTAURANTES      \n  A empresa é um grupo familiar, especializada na culinária italiana, com deliciosas pizzas e massas para atender aos clientes mais exigentes.  \n  Esperam que você atenda as expectativas da empresa, como também alcance seus objetivos e a projeção dos seus sonhos.  \n\n  \n  \n  \n  \n  \n  \n  \n                            COMO SE CANDIDATAR:         ➜ Para se candidatar às vagas na Reis Magos, envie currículo para o e-mail:        selecaorh@reismagos.com.br         \n   \n  \n  \n  \n  \n    Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            padding: 8px 1",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "selecaorh@reismagos.com.br",
+    "publishedAt": "2025-08-11",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092378,
+    "title": "Corte Fácil Atacarejo Está Contratando? Saiba Como Se Inscrever",
+    "slug": "corte-facil-atacarejo-esta-contratando-saiba-como-se-inscrever-empresa-confidencial-natal-2026092378",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A história do Corte Fácil Atacarejo não começou na sua fundação, ela surge da demanda que a distribuidora MM FRIOS tinha em atender o público da grande natal com mais conforto, praticidade e sofisticação.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n    \n  Esta distribuidora atua no mercado potiguar desde 2014, e é fruto de uma amizade entre dois colegas, que hoje são os sócios do grupo Medeiros & Medeiros, grupo ao qual as duas empresas pertencem.  \n     \n    ➜  MAIS EMPRESAS EM:        ATACADISTA          \n  Com uma grande diversidade de produtos do ramo alimentício, a CORTE FÁCIL tem por objetivo oferecer aos clientes preço baixo com qualidade, e a praticidade de comprar em pequenas quantidades, com o preço de atacado.   \n   O cliente encontrará na loja desde produtos em porções até peças inteiras, embalagens maiores e menores, tudo para atender o uso comercial ou doméstico.   \n        COMO SE CANDIDATAR:           ➜ Para se candidatar às vagas, acesse a      página do Corte Fácil Atacarejo na plataforma Qvende             \n\n  \n  \n   Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n           ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2022/06/trabalhe-no-corte-facil-atacarejo.html",
+    "publishedAt": "2025-08-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092379,
+    "title": "Trabalhe No Ponto Dos Botões",
+    "slug": "trabalhe-no-ponto-dos-botoes-empresa-confidencial-natal-2026092379",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O Ponto dos Botões Comercial LTDA é uma tradicional empresa do Rio Grande do Norte que atua nos segmentos de aviamento, artesanato, papelaria, tecidos e produtos sazonais.    \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n    Fundada em 1994, a empresa conta com duas unidades na cidade de Natal. Uma situada na Av. Coronel Estavam no bairro do alecrim, e a outra na Av. Senador Salgado Filho no Shopping Via Direta.    \n           \n      ➜  EMPRESAS EM:       ARTIGOS DIVERSOS       \n    Ser a melhor empresa consiste em:     • Ser considerados pelos clientes como a melhor opção de compras.     • Ser uma excelente opção de desenvolvimento profissional no setor de varejo;       • Ser um excelente canal de distribuição para os nossos fornecedores;     • Ser referência em variedade e qualidade de produtos e torná-los disponíveis a todo o Brasil.   \n       COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas no Ponto dos Botões, envie currículo para o e-mail:         talentos.pontodosbotoes@gmail.com        \n   \n  \n  \n  \n\n  \n  \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            pad",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "talentos.pontodosbotoes@gmail.com",
+    "publishedAt": "2025-08-07",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092380,
+    "title": "Redemais -  Como Se Candidatar",
+    "slug": "redemais-como-se-candidatar-empresa-confidencial-parnamirim-2026092380",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A RedeMAIS é uma bem sucedida experiência de associativismo no Rio Grande do Norte. Hoje a RedeMAIS é uma empresa do ramo de supermercados que reúne o esforço de mais de uma dezena de empreendedores. Seu começo foi em 1997, como uma central de compras.    \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n   Hoje, a RedeMAIS é a união de 12 empresas e 21 lojas no Rio Grande do Norte. A junção dessas empresas visa oferecer produtos de qualidade com preços competitivos.    \n        \n      ➜  MAIS EMPRESAS EM:           SUPERMERCADOS       \n   A RedeMAIS tem lojas em todo o Rio Grande do Norte, nas cidades de Natal, Parnamirim, Ceará-Mirim, Cruzeta, Currais Novos, Macau, Nova Cruz, São José de Mipibú, João Câmara, Santa Cruz e São Gonçalo. São gerados aproximadamente 1.500 empregos diretos e 700 empregos indiretos.    \n     Nossa Missão     Surpreender o cliente com a melhor experiência em supermercado de vizinhança.    \n        Nossa Visão      Consolidar a Rede Mais através de padronização, inovações e excelência no atendimento.    \n            COMO SE CANDIDATAR:             ➜ Para se candidatar às vagas na RedeMAIS, acesse a      página            \"Trabalhe Conosco\"      no site da empresa        \n       ➜ Cadastre seu currículo diretamente ou clique em  Vagas  para ver todas as vagas disponíveis      \n          \n    \n    \n       Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/04/trabalhe-na-redemais.html",
+    "publishedAt": "2025-08-05",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092381,
+    "title": "Vagas No Mar Vermelho: Veja Como Se Candidatar Para Trabalhar Na Empresa",
+    "slug": "vagas-no-mar-vermelho-veja-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-parnamirim-2026092381",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O Mar Vermelho Atacado e Varejo, foi fundado em 2018 pelo grupo Mar Vermelho que detém lojas em Natal e é um dos grandes grupos comerciais do RN.      \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n        \n    É possível destacar que além de toda a credibilidade e eficiência nos preços herdadas do Grupo, o Mar Vermelho Atacado conta com uma ampla estrutura para atender os seus clientes.     \n       \n\n  \n  \n  \n    ➜  EMPRESAS EM:    SUPERMERCADOS    \n\n  \n  \n  \n      Um mix variado de produtos e também com uma equipe especializada para sempre melhor lhe atender.     \n    Atualmente o Mar Vermelho Atacado e Varejo conta com três lojas, uma localizada na Ceasa, Loja BR-Natal e Loja Parnamirim.    \n                COMO SE CANDIDATAR:        ➜ Para se candidatar às vagas no Mar Vermelho, envie currículo para o e-mail:         trabalheconosco@marvermelhoatacado.com.br        \n           \n  \n  \n   Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            padding: 8px 16px;\n            background-color: #fc8810;\n            color: #fff;\n            text-decoration: none;\n            border-radius: 4px;\n    ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "publishedAt": "2025-08-01",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092382,
+    "title": "Docelândia: Uma História De Doçura E Oportunidades",
+    "slug": "docelandia-uma-historia-de-docura-e-oportunidades-empresa-confidencial-natal-2026092382",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A  Docelândia  nasceu com a força de uma tradição sólida no comércio de doces e produtos para festas, sendo um marco no Rio Grande do Norte. Sua origem remonta à Distribuidora de Caramelos Natal, fundada em 1973 na cidade de Natal, pioneira no segmento no Estado.    \n \n  ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n Desde então, a empresa expandiu suas operações e se tornou referência como uma das bombonieres mais diversificadas da região.  \n     \n    ➜  MAIS EMPRESAS EM:       ALIMENTAÇÃO        \n Mais que Doces: Um Propósito Familiar   A Docelândia vai além de uma simples loja de doces e artigos para festas. É uma família que busca estar presente nos momentos mais especiais de seus clientes, seja no conforto de casa, em um encontro com amigos ou até em uma ida ao cinema. A marca é sinônimo de doçura, afeto e conexão com o cotidiano do povo potiguar.  \n   Visão Empreendedora e Crescimento   Guiada pela vocação para o comércio e o empreendedorismo visionário de seus sócios, a Docelândia cresceu para atender às demandas do mercado. Hoje, oferece uma vasta gama de produtos de alta qualidade, diversificando suas opções para atender diferentes perfis de consumidores.\n\n      COMO SE CANDIDATAR:      ➜ Envie seu currículo para o e-mail:       trabalheconosco@docelandia.com.br        \n  \n  \n  \n   \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16p",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@docelandia.com.br",
+    "publishedAt": "2025-07-31",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092383,
+    "title": "Trabalhe Na Brisanet",
+    "slug": "trabalhe-na-brisanet-empresa-confidencial-natal-2026092383",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Brisanet é uma empresa do segmento de telecomunicações (banda larga, tv a cabo, telefonia fixa e móvel), criada em 1998 pelo empreendedor José Roberto Nogueira, em Pereiro, sua cidade natal localizada na região semi-árida cearense.  \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n  Surgimos do sonho de prover internet de qualidade e com preço acessível onde nenhum outro provedor queria levar: o interior nordestino. Contribuindo para o desenvolvimento de regiões carentes de oportunidades e investimentos, por meio da inclusão digital, movimentação da economia e geração de empregos.  \n      \n        ➜    MAIS EMPRESAS EM:           TECNOLOGIA      \n Ano após ano, inovando em tecnologia e ampliando a atuação, contando atualmente com mais de 5.000 colaboradores e estando presente em mais de 200 cidades nos estados do Ceará, Paraíba, Pernambuco, Rio Grande do Norte e Alagoas  \n  Totalizando mais de 600 mil assinantes e levando conexão de alta qualidade, com velocidade três vezes maior do que a média brasileira e próxima a dos Estados Unidos e da Coréia do Sul.   \n     COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse a      página da Brisanet na plataforma Recrut.AI          \n     ➜ Ao entrar no site da Recrut.AI, desça a página até chegar em  Localidades , selecione a cidade desejada e clique em  Filtrar .    \n  \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/01/trabalhe-na-brisanet.html",
+    "publishedAt": "2025-07-31",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092384,
+    "title": "Assaí: Uma História De Sucesso E Oportunidades",
+    "slug": "assai-uma-historia-de-sucesso-e-oportunidades-empresa-confidencial-natal-2026092384",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Fundado em 1974, na cidade de São Paulo, o  Assaí Atacadista  começou sua trajetória com um objetivo claro: atender pequenos transformadores e empreendedores que buscavam abastecimento diário de qualidade. Desde então, a marca se consolidou como referência no segmento atacadista no Brasil.   \n           ANÚNCIOS\n\n    \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n  \n  \n   \n \n    Um Crescimento Impulsionado pela Parceria com o GPA  Em 2007, o Assaí passou a integrar o GPA (Grupo Pão de Açúcar), pertencente ao Grupo Casino, maior varejista do Brasil. Essa parceria foi um divisor de águas, permitindo que o atacadista expandisse significativamente suas operações. De 14 lojas, a rede saltou para 172 unidades, gerando mais de  45 mil empregos diretos  em diversas regiões do país.      \n        \n   \n    ➜  MAIS EMPRESAS E   M:   ATACADISTA        \n      O Compromisso do Assaí    O Assaí é mais do que um atacadista; é um parceiro dos empreendedores brasileiros. Com mais de 7 mil itens à disposição, o cliente encontra desde alimentos e perecíveis até produtos de higiene, limpeza, embalagens e bazar. O modelo de negócios é pensado para quem precisa repor o estoque diariamente, sem a necessidade de grandes compras.    \n    Além disso, o serviço de Televendas possibilita negociar diretamente com os gerentes, garantindo condições personalizadas e ofertas que atendem às necessidades do cliente.    \n  \n  \n  \n        COMO SE CANDIDATAR:        ➜ Acesse a      página do Assaí",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/assai.html",
+    "publishedAt": "2025-07-30",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092385,
+    "title": "Trabalhe Na Riachuelo: Descubra Oportunidades E Como Se Candidatar",
+    "slug": "trabalhe-na-riachuelo-descubra-oportunidades-e-como-se-candidatar-empresa-confidencial-natal-2026092385",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Riachuelo está em busca de profissionais que enxerguem desafios como oportunidades. Com mais de 40 mil colaboradores, a empresa promove o desenvolvimento profissional individual como uma peça-chave para o crescimento coletivo.      \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n      Reconhecida por democratizar a moda no Brasil, a Riachuelo também se destaca por oferecer um ambiente de trabalho acolhedor, produtivo e focado no bem-estar de sua equipe.          \n        \n            ➜      MAIS EMPRESAS EM:         VESTUÁRIO        \n    \n     Por que trabalhar na Riachuelo?    Ser parte da Riachuelo é mais do que integrar uma equipe de sucesso; é se tornar um  RCHLOVER ! A empresa valoriza e recompensa o desempenho dos colaboradores, reconhecendo suas contribuições para o crescimento do negócio.   \n  Além disso, a Riachuelo foi eleita uma das melhores empresas para se trabalhar no Brasil.  \n  Se você é apaixonado por moda e deseja atuar em uma empresa inovadora, repleta de oportunidades de crescimento, seu lugar pode ser aqui!     \n          COMO   SE   CANDIDATAR:        1. É simples! As oportunidades de emprego estão disponíveis na     página oficial do Grupo Guararapes na plataforma Gupy    . Acesse, cadastre seu currículo e encontre a vaga ideal para você.     2. Na opção   Estado  , selecione:   Rio Grande do Norte (RN)   \n\n 3. Se precisar de ajuda, visite a    Central de Ajuda Gupy    para orientações.    \n   \n  \n  \n  \n   Conteúdo",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/riachuelo.html",
+    "publishedAt": "2025-07-29",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092386,
+    "title": "Trabalhe Na Teleperformance - Como Se Candidatar",
+    "slug": "trabalhe-na-teleperformance-como-se-candidatar-empresa-confidencial-natal-2026092386",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Teleperformance é uma das maiores e mais respeitadas empresas globais no setor de Customer Experience Management, oferecendo soluções inovadoras para atendimento ao cliente, suporte técnico, e serviços de back-office.  \n\n  \n  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n\n  \n  \n    Presente em diversos países, a companhia se destaca não apenas pela qualidade dos serviços prestados, mas também pelas inúmeras oportunidades de emprego que oferece.  \n     \n   ➜  MAIS EMPRESAS EM:   ORGANIZAÇÃO      \n  Na Teleperformance, a diversidade e a inclusão são pilares fundamentais. A empresa valoriza e promove um ambiente onde todos os colaboradores podem ser autênticos e contribuir com suas perspectivas únicas.   \n  Essa cultura inclusiva não apenas enriquece o ambiente de trabalho, mas também melhora a qualidade dos serviços oferecidos aos clientes.  \n     COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse a      página da Teleperformance na plataforma Pandapé         \n      ou através do      site oficial da Teleperformance        \n\n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionado",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2024/07/trabalhe-na-teleperformance-como-se.html",
+    "publishedAt": "2025-07-29",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092387,
+    "title": "Jmt Service: Conquiste Sua Oportunidade De Emprego Com A Líder Em Terceirização",
+    "slug": "jmt-service-conquiste-sua-oportunidade-de-emprego-com-a-lider-em-terceirizacao-empresa-confidencial-natal-2026092387",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A  JMT Service  é referência no mercado de terceirização, destacando-se pela qualidade nos serviços de limpeza, higienização e conservação predial. A missão é superar as expectativas dos clientes com soluções eficientes, produtos qualificados e uma gestão responsável, priorizando o bem-estar e o crescimento dos colaboradores, clientes e da sociedade.      \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n    \n    Por que escolher a JMT Service?    O compromisso é oferecer excelência em todos os projetos, seja no setor público ou privado. Trabalhando para atender às exigências do mercado e construir parcerias de longo prazo, sempre com foco na sustentabilidade, desenvolvimento e perpetuação da empresa.\n\n    \n          fonte: JMT Service / Site        \n        ➜  VEJA MAIS EMPRESAS EM:         TERCEIRIZAÇÃO DE MÃO DE OBRA         \n         Mercados de Atuação     Setor Público   Prestam serviços para órgãos de infraestrutura, saúde, administração e educação, com equipes treinadas e prontas para atender às demandas específicas de cada área.  \n   Setor Privado   Atendem empresas dos mais variados segmentos, incluindo:\n\n   Escolas e universidades \n  Bancos e shoppings \n  Hospitais e clínicas \n  Supermercados e indústrias \n  Prédios comerciais e residenciais \n   \n   Em ambos os casos, garantem um padrão de excelência, com atendimento personalizado e soluções adaptadas às necessidades de cada cliente.  \n             Como se candidatar às vagas na JMT ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "recrutamento@jmtservice.com.br",
+    "publishedAt": "2025-07-25",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092388,
+    "title": "Empregos No Camarões: Saiba Como Se Candidatar Às Oportunidades",
+    "slug": "empregos-no-camaroes-saiba-como-se-candidatar-as-oportunidades-empresa-confidencial-natal-2026092388",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Se você está em busca de emprego em Natal e deseja trabalhar em um dos restaurantes mais renomados do Brasil, o   Camarões Restaurante   é a escolha certa. Com uma história que começou em 05 de julho de 1989, o Camarões rapidamente conquistou um lugar especial no coração e no paladar dos potiguares.   \n        ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n     A Trajetória de Sucesso      O restaurante nasceu de forma modesta, com apenas 12 mesas, mas o sabor e a excelência no atendimento fizeram o negócio prosperar. Hoje, cerca de 4 mil clientes almoçam ou jantam diariamente em suas unidades, localizadas exclusivamente em Natal, no Rio Grande do Norte.     \n        \n    ➜  MAIS EMPRESAS EM:      RESTAURANTES      \n          Unidades do Camarões        Ponta Negra :  duas unidades nesse charmoso bairro. \n    Natal Shopping :  unidade reformada em 2023, com ambiente ampliado e buffet variado. \n    Midway Mall :  no terceiro piso do maior shopping da cidade. \n   \n     Reconhecimento e Excelência     Desde 2002, o Camarões é destaque no prêmio Top Natal, promovido pelo jornal Tribuna do Norte, sendo o restaurante mais lembrado pelos natalenses em todas as edições. Além disso, em 2015, figurou entre os 10 restaurantes preferidos dos viajantes de todo o Brasil.   \n\n  \n  \n  \n  \n  \n         COMO SE CANDIDATAR:         ➜ Se você deseja fazer parte da Família Camarões,      inscreva-se através da plataforma QuarkRH          \n        \n  \n  \n   Conteú",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/restaurante-camaroes.html",
+    "publishedAt": "2025-07-24",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092389,
+    "title": "Trabalhe No Cei",
+    "slug": "trabalhe-no-cei-empresa-confidencial-natal-2026092389",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A perspectiva da educação integral norteia a existência do CEI – Centro de Educação Integrada – desde a sua origem, em 1988, tendo sido precedido pelo Instituto Infantil de Alfabetização e Artes, IIAA, fundado em 1972, apenas com o serviço da educação infantil.     \n      ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n      \n   Há quase 50 anos o CEI acredita na força e na importância da educação para o pensar. Cuidando da formação integral dos alunos, não apenas preparando para as melhores universidades do país e do mundo, mas também estimulando a formação humana, ética e socioemocional.   \n     \n     ➜  MAIS EMPRESAS EM:        ESCOLAS        \n    A escola dispõe de estruturas pedagógicas e ambientes apropriados à continuidade da sua missão educacional no Rio Grande do Norte, que assegura resultados significativos, principalmente os obtidos por seus alunos nas olimpíadas do conhecimento e nos exames de ingressos nas universidades públicas e privadas do Brasil e do mundo.    \n    Presentes no Rio Grande do Norte e com 48 anos de história, a escola responsável por ensinar a pensar nos três níveis da educação básica, estimulando o aluno ao desenvolvimento de habilidades, à construção de competências e à educação de valores sociais que garantam a sua formação integral.     \n          COMO SE CANDIDATAR:              ➜ Para se candidatar às vagas    , acesse a      página do CEI Romualdo e Roberto Freire na plataforma Gupy         \n      ➜ ou acesse ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2022/04/trabalhe-no-colegio-cei.html",
+    "publishedAt": "2025-07-23",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092390,
+    "title": "Trabalhe No Atacadão: Vagas Na Maior Rede Atacadista",
+    "slug": "trabalhe-no-atacadao-vagas-na-maior-rede-atacadista-empresa-confidencial-natal-2026092390",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Se você busca uma oportunidade de trabalho em uma das maiores empresas do país, o  Atacadão  pode ser o lugar certo para você. Reconhecida como a maior rede atacadista do Brasil, a empresa possui 191 lojas de autosserviço e 28 atacados de distribuição, estrategicamente localizados em várias regiões do país.  \n        ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  Com uma infraestrutura moderna e eficiente, o Atacadão se destaca no cenário nacional ao oferecer uma experiência de compra completa.    \n       \n          ➜  MAIS EMPRESAS EM:        ATACADISTA           Seu catálogo conta com cerca de 10 mil itens, incluindo:\n\n  Alimentos em geral;\n Frios e laticínios;\n Hortifruti;\n Bebidas, conservas e enlatados;\n Doces e biscoitos;\n Produtos de higiene pessoal;\n Artigos de limpeza e bazar;\n Linha pet e automotiva.\n   \n  Além de atender bem seus clientes, a empresa também é um excelente lugar para trabalhar, empregando mais de 50 mil colaboradores treinados e capacitados para oferecer o melhor atendimento.    \n       Por Que Trabalhar no Atacadão?    O Atacadão é mais do que um local de trabalho; é uma plataforma de crescimento e desenvolvimento profissional. Com programas internos de capacitação, a empresa investe em seus talentos, oferecendo oportunidades de carreira e expansão. Além disso, a organização atua regularmente com processos seletivos para fortalecer seu time e acompanhar seu constante plano de crescimento.  \n        COMO SE CANDIDA",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/trabalhe-no-atacadao.html",
+    "publishedAt": "2025-07-22",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092391,
+    "title": "Vagas No Super Show: Veja Como Trabalhar Em Uma Das Maiores Redes De Supermercados",
+    "slug": "vagas-no-super-show-veja-como-trabalhar-em-uma-das-maiores-redes-de-supermercados-empresa-confidencial-parnamirim-2026092391",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "O  Grupo Super Show , fundado em 2005 por varejistas do Rio Grande do Norte, consolidou-se como uma das principais redes de supermercados do estado e do Brasil.  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n               \n    Com uma trajetória marcada por crescimento e inovação, é hoje a 20ª maior central de compras do país, oferecendo preços competitivos e atendimento de alta qualidade.    \n        \n\n  \n  \n  \n       ➜  EMPRESAS EM:        SUPERMERCADOS          \n            Presença e Expansão     O Grupo Super Show está presente em diversas cidades, incluindo: \n\n   Natal \n  Parnamirim \n  São Gonçalo do Amarante \n  Macaíba \n  Monte Alegre \n  Nova Cruz \n  Santo Antônio \n  Canguaretama \n  Passa e Fica \n  \n\n  A rede continua a expandir sua atuação, sempre focada em atender melhor você e sua família.    \n     Valores da Empresa          • Comprometimento com a Associação     \n\n   • Honestidade  \n\n   • Transparência  \n\n   • Respeito  \n\n  • Determinação\n\n           COMO SE CANDIDATAR:      O Grupo Super Show oferece diversas oportunidades de trabalho em suas unidades. Confira como se candidatar: \n\n   Envie seu currículo para os seguintes e-mails (de acordo com a unidade de sua preferência):      ➜ Super Show Bis:         selecaosupershowbis@gmail.com          \n        ➜ Super Show Ayrton Senna:             grupomaia.rh@gmail.com          \n      ➜ Super Show Varejão:         selecao.ssvs@yahoo.com          \n      ➜ Super Show Bandeirantes:    ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "supershowseridoselecao@gmail.com",
+    "publishedAt": "2025-07-21",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092392,
+    "title": "Trabalhe No Vale Do Pará -  Como Se Candidatar",
+    "slug": "trabalhe-no-vale-do-para-como-se-candidatar-empresa-confidencial-natal-2026092392",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Saiba um pouco mais da história do Vale do Pará, sobre o caminho percorrido e seu compromisso com os clientes!  Em 1969 o Sr. Manoel Joaquim da Silva iniciou suas atividades no setor alimentício em Natal - RN.     \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n     Com o tino comercial aguçado no ano de 1984 ele observou o desenvolvimento imobiliário em Natal.   E foi assim que surgiu o desejo de mudar a característica do seu comércio entrando para o ramo de Material de Construção e Madeireira.    \n        \n   ➜  MAIS EMPRESAS EM:       MATERIAL DE CONSTRUÇÃO       \n    Nascendo, assim, a Madeireira Vale do Pará em homenagem ao estado onde o Sr. Manoel comprava madeira para revender.    \n    A Madeireira Vale do Pará inicialmente surgiu nas Quintas, com um preço bastante competitivo frente aos concorrentes o que fez a empresa crescer significativamente muito rapidamente.   \n         COMO SE CANDIDATAR:         ➜ Para se candidatar às vagas no Vale do Pará, envie currículo para o e-mail:          rh@valedopara.com.br        \n       \n    \n    \n      Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh@valedopara.com.br",
+    "publishedAt": "2025-07-12",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092393,
+    "title": "Trabalhe No Hospital Rio Grande",
+    "slug": "trabalhe-no-hospital-rio-grande-empresa-confidencial-natal-2026092393",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A saúde é um dos bens mais preciosos que um indivíduo pode possuir, e ter acesso a serviços médicos de qualidade é essencial para garantir uma vida saudável. Nesse contexto, o Hospital Rio Grande surge como uma instituição de saúde de destaque, dedicada a fornecer atendimento médico excepcional e abrangente à comunidade.    \n\n  \n  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n\n  \n  \n      O Hospital Rio Grande foi inaugurado no dia 27 de março de 2018 a partir da visão empreendedora de dois grandes grupos que atuam na área da saúde, a Delfin Saúde, referência em diagnóstico por imagem e Incor Natal, especialista em clínica e procedimentos de média e alta complexidade ligados ao coração.    \n        \n      ➜ VEJA MAIS EMPRESAS EM:   HOSPITAIS        \n       História e Fundação   O Hospital Rio Grande foi estabelecido com o propósito claro de servir a população. Desde o início, o hospital se comprometeu a oferecer atendimento médico de alta qualidade e a melhorar a saúde da população.  \n  O Hospital Rio Grande é um complexo hospitalar, na qualidade de hospital geral, composto pelas mais variadas especialidades, com foco na oncologia, cardiologia, ortopedia, clínico geral e urologia, com um amplo suporte de cirurgias e unidades de terapias intensivas.  \n     COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas, acesse o      site do Hospital Rio Grande          \n       Ajuda   :   Ao entrar no site, clique no ícone de menu (3 traços no",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2024/08/trabalhe-no-hospital-rio-grande.html",
+    "publishedAt": "2025-07-11",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092394,
+    "title": "Trabalhe No Salesiano",
+    "slug": "trabalhe-no-salesiano-empresa-confidencial-natal-2026092394",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "JOVEM_APRENDIZ",
+    "description": "A Rede Salesiana Brasil – Escolas é a maior rede de escolas católicas do país. Atua no mercado educacional brasileiro há mais de 120 anos e hoje atende cerca de 90 mil jovens e crianças nas mais de 100 escolas espalhadas em todo território nacional.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n   O Objetivo da RSB Escolas é proporcionar aprendizagem de qualidade, com atenção especial à diversidade, à centralidade do jovem, sobretudo nos aspectos afetivo e emocional, e nas sensibilidades e linguagens. Aprendizagens, também com foco na qualidade e pertinências dos objetivos e dos conteúdos, sem perder de vista o contexto e a contemporaneidade.    \n      \n    ➜  VEJA MAIS EMPRESAS EM:        ESCOLAS       \n    O Colégio Salesiano São José é uma instituição particular de ensino que tem o compromisso de vivenciar esta pedagogia na sua essência cumprindo a missão de educar evangelizando e evangelizar educando, formando crianças e jovens para a vida.    \n    O sistema preventivo de Dom Bosco tem como objetivo formar “Bons cristãos e Honestos Cidadãos”. Por isso, as três bases do Sistema Preventivo se articulam numa única proposta educativa.            COMO SE CANDIDATAR:           ➜ Para se candidatar às vagas, acesse a      página do Salesiano na plataforma Pandapé                \n             ⚠ Está tendo dificuldade? Visite a    Central de Ajuda Pandapé        \n  \n  \n  \n\n  \n  \n           \n    \n    \n      Conteúdos Relacionados -->\n     \n",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/12/trabalhe-no-salesiano.html",
+    "publishedAt": "2025-07-10",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092395,
+    "title": "Trabalhe Na Mundo Pet / Cobasi",
+    "slug": "trabalhe-na-mundo-pet-cobasi-empresa-confidencial-natal-2026092395",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Mundo Pet, lugar onde você e o seu pet viverão momentos inesquecíveis! Chamados para servir com excelência aos animais de estimação e encantar pessoas. Ser surpreendido positivamente sempre será a melhor experiência. Por isso, o maior retorno é a quantidade de UAUs de clientes e amigos.  \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  Ter um bichinho de estimação é sinônimo de companheirismo, alegria e muito amor. Não importando qual o tipo de animal você tenha em casa, mas o laço que se cria ao depositar nele todo o nosso amor e cuidado.   \n      \n    ➜ MAIS EMPRESAS EM:     PET SHOP      \n  A Mundo Pet tem como base fazer com que pessoas se conheçam. O local é um ambiente de encontros. Então, o maior intuito é estreitar os laços da comunidade pet, seja clubes de raça ou fãs de uma determinada espécie.         \n  Este estreitamento pode acontecer dentro dos eventos de adoção em parceria com as ONGs protetoras de animais, que fazem um trabalho extremamente importante para a comunidade.  \n     COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas, acesse a      página da Mundo Pet / Cobasi na plataforma Pandapé        \n    Não está conseguindo se candidatar?  visite a    Central de Ajuda Pandapé      \n  Também promovem a posse responsável. Ser um tutor de Pet é um ato de humanidade e requer muita responsabilidade. A Mundo Pet dá assistência aos clientes da melhor forma possível.  \n\n  \n  \n   Conteúdos Relacionados -->\n     \n        .car",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/10/trabalhe-na-mundo-pet.html",
+    "publishedAt": "2025-07-09",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092396,
+    "title": "Trabalhe No Pittsburg - Faça Parte Do Time De Sucesso!",
+    "slug": "trabalhe-no-pittsburg-faca-parte-do-time-de-sucesso-empresa-confidencial-parnamirim-2026092396",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Você está em busca de uma oportunidade para crescer profissionalmente em uma empresa sólida e reconhecida? O  PittsBurg  está contratando e pode ter a vaga ideal para você!   \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n   \n Desde 1984, somos referência no setor de  fast food e delivery , oferecendo não apenas os melhores lanches, mas também um ambiente de trabalho dinâmico e cheio de oportunidades para quem deseja  desenvolver carreira na área de alimentação .  \n     \n   ➜  MAIS EMPRESAS EM:      ALIMENTAÇÃO     \n    Por Que Trabalhar no PittsBurg?    Oportunidade de crescimento  – Valorizamos e incentivamos o desenvolvimento profissional da nossa equipe.  \n   Treinamentos constantes  – Aprenda e se aperfeiçoe com cursos e capacitações internas.  \n   Salário compatível com o mercado  – Oferecemos remuneração atrativa e benefícios.  \n   Empresa reconhecida e premiada  – Trabalhe em uma rede consolidada e com credibilidade no mercado.  \n   Ambiente de trabalho motivador  – Somos uma equipe unida, focada no respeito e na colaboração.   \n  \n\n \n\n      COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas no   PittsBurg Natal  , envie currículo para o email:      daniel@pittsburg.com.br         \n      ➜ Para se candidatar às vagas no   PittsBurg Ponta Negra  , envie currículo para o e-mail:      andrealmeida@pittsburg.com.br         \n      ➜ Para se candidatar às vagas no   PittsBurg Parnamirim  , envie currículo para o e-mail:      eduarda",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "eduardapitts@gmail.com",
+    "publishedAt": "2025-07-07",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092397,
+    "title": "Vagas Na Pague Menos: Veja Como Se Candidatar Para Trabalhar Na Farmácia",
+    "slug": "vagas-na-pague-menos-veja-como-se-candidatar-para-trabalhar-na-farmacia-empresa-confidencial-natal-2026092397",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Viva plenamente é o propósito da marca Pague Menos, que em 39 anos de mercado vem trazendo mais saúde, brasilidade, cidadania e melhor preço para todo o Brasil. A Rede está presente em todos os Estados brasileiros e no Distrito Federal, desde 2009. Conta com mais de 1.100 lojas, 820 unidades do Clinic Farma e mais de 20 mil colaboradores que atuam em 327 municípios.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n      \n  Para cuidar de cada Brasileiro, a Pague Menos aposta em serviços como o consultório farmacêutico Clinic Farma, o SAC Farma com atendimento das 06h às 00h para todo o Brasil e nossa farmácia de manipulação. Tudo isso e muito mais para garantir saúde a todos os brasileiros.  \n      \n   ➜  MAIS EMPRESAS EM:       FARMÁCIAS      \n    Melhor preço     Com uma rede grande, conseguimos ter os melhores preços e as maiores ofertas. Com o Desconto Só Meu, o cliente aproveita preços exclusivos em seus produtos preferidos. O Programa de Fidelidade Sempre oferece preços ainda mais baixos e ainda oferecemos o genérico mais barato do Brasil.   \n     Cidadania    Entre nossas missões, está o de fazer a diferença na vida de cada brasileiro. Inclusive com ações de cidadania. Doamos cadeiras de rodas e ambulâncias, plantamos milhares de mudas pelo país com o Cidade Verde, incentivamos novos talentos com o Concurso Literário e Nossa Gente Nossa Arte e muitas outras ações.  \n        COMO SE CANDIDATAR:           ➜ Para se candidatar às vagas, ac",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/11/trabalhe-na-pague-menos.html",
+    "publishedAt": "2025-07-04",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092398,
+    "title": "Trabalhe No Farofa D’Água",
+    "slug": "trabalhe-no-farofa-dagua-empresa-confidencial-caico-2026092398",
+    "companyName": "Empresa Confidencial",
+    "city": "Caicó",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Fundado em 1994 pelo casal Moisés e Ilka Medeiros, o restaurante Farofa D’água nasceu com o intuito simples de vender comidas regionais, tendo como prato principal a carne de sol, que vinha de sua região, o Seridó.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n   O nome do restaurante, inclusive, foi criado em alusão ao principal acompanhamento desse prato tão delicioso que é a carne de sol, a farofa d´água. Ao longo de sua trajetória o restaurante passou por dois endereços anteriores até chegar ao seu ponto atual.    \n     \n   ➜  MAIS EMPRESAS EM:    RESTAURANTES     \n  Primeiro o da inauguração, na Rua Jardim de Ala com a Praia de Tibau, em Ponta Negra. Depois passou uma temporada na Av. Engenheiro Roberto Freire.   \n  Foi então que a marca Farofa D’água passou a ser mais conhecida do público Natalense, graças à exposição que a “Estrada de Ponta Negra” proporcionou ao nome do restaurante, que logo deixou de ser um pequeno negócio para se transformar em um dos restaurantes mais apreciados e conhecidos de Natal.  \n           COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas no Farofa D’água,     envie currículo para o e-mail:      ellen.farofadagua@yahoo.com        \n  \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "ellen.farofadagua@yahoo.com",
+    "publishedAt": "2025-07-02",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092399,
+    "title": "Trabalhe Na Drogasil",
+    "slug": "trabalhe-na-drogasil-empresa-confidencial-natal-2026092399",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Com quase um século de história, a Drogasil faz parte da RD (formada pelas bandeiras Drogasil, Droga Raia e Onofre), a maior rede de farmácias do Brasil.   Juntos, tem quase 2000 lojas espalhadas pelo país.       \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n         \n    E mais de 38 mil funcionários empenhados em cuidar de perto da saúde e bem-estar das pessoas em todos os momentos da vida. Fazer o que é certo, de forma transparente e com honestidade, seja qual for a situação.    \n           \n\n  \n  \n     \n  .botao-acao {\n    display: inline-block;\n    background-color: #fc8810; /* Laranja vibrante */\n    color: #fff; /* Texto branco */\n    padding: 12px 40px;\n    font-size: 15px;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 4px;\n    transition: background-color 0.3s ease-in-out;\n    font-weight: bold;\n  }\n\n  .botao-acao:hover {\n    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */\n  }\n\n  @media screen and (max-width: 600px) {\n    .botao-acao {\n      display: inline-block;\n      width: auto;\n      text-align: center;\n    }\n  }\n \n\n    ➜  MAIS EMPRESAS EM:    FARMÁCIAS    \n\n  \n  \n       Relações de confiança     Ter interesse genuíno nas pessoas, cultivando relações de confiança.    \n     Eficiência     Fazer sempre muito bem feito, com o melhor resultado.          \n     Visão de longo prazo     Agir hoje criando valor no futuro para nós e para toda a sociedade.    \n     Inovação     Inovar hoje para ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/04/trabalhe-na-drogasil.html",
+    "publishedAt": "2025-06-28",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092400,
+    "title": "Vagas Na Sabor De Pão: Veja Como Se Candidatar E Trabalhar Na Padaria",
+    "slug": "vagas-na-sabor-de-pao-veja-como-se-candidatar-e-trabalhar-na-padaria-empresa-confidencial-natal-2026092400",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A Sabor de Pão surgiu em 1998 e foi fundada por Joab de Araújo Dantas, que iniciou sua carreira nos negócios muito novo, procurando uma maneira de fugir da pobreza. Pode-se dizer que “do zero” o Joab conseguiu se tornar um empresário bem-sucedido.   \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n      \n  Hoje, é uma das maiores padarias, supermercado e restaurante do Nordeste. Acreditando que, agindo em um setor que literalmente alimenta a população, os clientes merecem o maior carinho possível.   \n     \n\n  \n  \n  \n    ➜  MAIS EMPRESAS EM:      ALIMENTAÇÃO      \n  Ao longo dos anos, a Sabor de Pão tem assistido às mudanças no mercado: expansão, queda, etc.  \n  Nesta caminhada, fazendo parcerias com grandes empresas prosperando junto com elas, investimos em energia solar para redução de gastos e mantemos sempre os padrões exigidos.  \n        COMO SE CANDIDATAR:         ➜ Para se candidatar às vagas na Sabor de Pão, envie currículo para o e-mail  :        rh.sabordepao@gmail.com          \n    \n  \n  \n  \n   Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            padding: 8px 16px;\n            backgro",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "rh.sabordepao@gmail.com",
+    "publishedAt": "2025-06-27",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092401,
+    "title": "Vagas No Ferreira Costa: Veja Como Se Candidatar Para Trabalhar Na Empresa",
+    "slug": "vagas-no-ferreira-costa-veja-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-natal-2026092401",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "JOVEM_APRENDIZ",
+    "description": "Apaixonados pelo que fazem. Desafiando há mais de 135 anos a construir uma história inspiradora. Nasceram no agreste de Pernambuco e, hoje, é o 5º maior Home Center do Brasil. Cuidando de mais de 4000 famílias que crescem junto com a empresa.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  Uma empresa família que valoriza quem é de casa. Todas as pessoas têm a possibilidade de crescer e construir uma carreira para se orgulhar. Sim, todas podem.  \n       \n    ➜  MAIS EMPRESAS EM:        DEPARTAMENTO      \n  Na empresa, se cresce por mérito, talento e oportunidades. Apoiam os funcionários com ferramentas, recursos e conteúdo de forma dinâmica, contínua e rápida. Valorizam os talentos e as competências da equipe, que é apaixonada pelo que faz.  \n   As nossas pessoas são o maior legado e a empresa tem o compromisso de formar gente da gente. Investindo em programas de desenvolvimento, capacitação e sucessão de carreira.    \n       COMO SE CANDIDATAR:          ➜ Para se candidatar às vagas, acesse o      Portal do Candidato Ferreira Costa        \n   ➜ Na caixa de pesquisa, digite:  Natal    \n\n  \n  \n   Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-directi",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/02/trabalhe-no-ferreira-costa.html",
+    "publishedAt": "2025-06-26",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092402,
+    "title": "Vagas No Loucos Por Coxinha: Veja Como Se Candidatar",
+    "slug": "vagas-no-loucos-por-coxinha-veja-como-se-candidatar-empresa-confidencial-natal-2026092402",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Desde o início da sua trajetória buscando melhorar os processos, assim como entender as necessidades das pessoas, sempre tendo em mente que uma pessoa apaixonada é sinônimo de sentimento bom, por esse motivo são apaixonados por pessoas e pelas coxinhas.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n  Sempre buscando levar felicidade e amor através dos produtos. Loucos por Coxinha iniciou suas atividades voltadas ao segmento fast-food em 2014. Fruto do sonho de um jovem empreendedor chamado Pablo Farias e da disposição de trabalho de seu amigo Vitor Azevedo.   \n     \n     ➜ MAIS EMPRESAS EM:      ALIMENTAÇÃO      \n  No início era apenas uma “unidade móvel” de vendas, depois chegaram outras 10 unidades. O modelo de unidade móvel avançou por 2 anos. Realinharam o planejamento e refizeram o modelo.  \n  Em 2015 iniciaram o modelo de quiosque (que prevalece até o dia de hoje). Focando em centros comerciais, estacionamentos de supermercados e shoppings centers.              \n\n  \n  \n   \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            padding: 8px 16px;\n            background-color: #fc8810;\n            color: #f",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2023/02/trabalhe-no-loucos-por-coxinha.html",
+    "publishedAt": "2025-06-24",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092403,
+    "title": "Favorito Supermercados: Crescimento, Empregos E Valorização De Pessoas",
+    "slug": "favorito-supermercados-crescimento-empregos-e-valorizacao-de-pessoas-empresa-confidencial-parnamirim-2026092403",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A história da Rede Favorito Supermercados é marcada por determinação e empreendedorismo. Tudo começou em 1981, quando o empresário Venício Gama assumiu os negócios da família. O caminho até a criação do primeiro supermercado foi pavimentado com experiências diversas.    \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n    Foi em 1990 que Venício realizou o sonho de ter um negócio próprio, inaugurando o primeiro Supermercado Gama, em Parnamirim. Desde o início, ele se destacou por uma filosofia de constante inovação e melhoria.      \n      \n  \n   \n      ➜ EMPRESAS EM:       SUPERMERCADOS     \n    Hoje, a Rede Favorito conta com mais de 900 colaboradores e é referência no segmento de supermercados no Rio Grande do Norte.     \n   \n  Hoje, a Rede Favorito possui 9 lojas em 5 cidades, sendo um pilar do desenvolvimento econômico e social da região.      \n        Por Que Trabalhar no Favorito?   O Favorito Supermercados é mais do que uma rede de lojas; é uma comunidade que valoriza cada colaborador. Com o título de Great Place to Work, a empresa se destaca como um dos melhores ambientes de trabalho do Brasil.\n\n   Benefícios de Trabalhar no Favorito : \n\n  Certificação de qualidade no ambiente de trabalho.\n Mais de 900 oportunidades de emprego, beneficiando centenas de famílias.\n Treinamentos e incentivo ao crescimento profissional.\n Valorização da equipe como peça-chave para o sucesso do negócio.\n  \n       COMO SE CANDIDATAR :     ➜ Acesse a página",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "dh@favoritosupermercados.com.br",
+    "publishedAt": "2025-06-21",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092404,
+    "title": "Trabalhe No Magazine Luiza",
+    "slug": "trabalhe-no-magazine-luiza-empresa-confidencial-natal-2026092404",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "JOVEM_APRENDIZ",
+    "description": "O Magazine Luiza possui mais de 1000 lojas, está presente em 18 estados do país e seu modelo de negócio hoje caracteriza-se como uma plataforma digital com pontos físicos. Trabalham de forma colaborativa, com transparência, humildade e respeito. Tem energia positiva e comemoram os resultados.  \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n    \n Fazem acontecer e trabalham duro, sem medo de errar.   Estão em constante aprendizado, sempre exercendo autonomia com responsabilidade.   Colocando o cliente no centro das decisões e tendo paixão por servir    \n \n  \n    \n      ➜ EMPRESAS EM:        ARTIGOS DIVERSOS      \n    Trabalhar em colaboração é um dos traços fortes da cultura da empresa porque acreditam que os melhores resultados vêm de decisões conjuntas.   \n  Por isso, você será entrevistado por diferentes pessoas, de diferentes áreas. Elas tomarão juntas a decisão sobre a escolha do candidato.  \n    COMO SE CANDIDATAR:     ➜ Para se candidatar às vagas, acesse a   página de carreiras Magazine Luiza          \n\n  \n  \n   Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            padding: 8px 16px;",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/magazine-luiza.html",
+    "publishedAt": "2025-06-20",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092405,
+    "title": "Como Trabalhar Na Renner: Veja Como Enviar Seu Currículo",
+    "slug": "como-trabalhar-na-renner-veja-como-enviar-seu-curriculo-empresa-confidencial-natal-2026092405",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "JOVEM_APRENDIZ",
+    "description": "A Renner é um ecossistema de moda e lifestyle conectado aos clientes por meio de canais digitais e mais de 600 lojas no Brasil, Argentina e Uruguai. Desde o início, tudo que fazem é para encantar. Foi assim que a história começou, em 1965, conquistando marcos importantes.     \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n  Como ter sido a primeira corporação brasileira a ter 100% das ações negociadas em bolsa, também listados no Novo Mercado - importante grau nos níveis de governança corporativa da B3. Estando construindo uma jornada de sustentabilidade, com compromissos por uma moda cada vez mais responsável. Hoje sendo o maior varejista de moda do Brasil.  \n     \n        ➜      MAIS EMPRESAS EM:       VESTUÁRIO      \n  Por meio dos negócios Renner, Camicado, Youcom, Ashua, Realize e Repassa encantam colaboradores, clientes e todos que fazem parte dessa rede, sempre com muita colaboração e olhar para pessoas. Digitalização, inovação e sustentabilidade: isso é Lojas Renner S.A.      \n  Encantar a todos é a maior realização. É por meio da sólida cultura, onde Encantamento e Gente são prioridades, que os tornou a maior varejista de moda do Brasil.   \n  Durante 55 anos, foram muitas transformações e, hoje, sendo um ecossistema de moda e lifestyle formado pelas marcas: Renner, que tem roupas e acessórios em diferentes estilos; Camicado, empresa do segmento de casa e decoração; Youcom, especializada em moda jovem; e ASHUA Curve & Plus Size, ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/10/trabalhe-na-renner.html",
+    "publishedAt": "2025-06-20",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092406,
+    "title": "Vagas No Mcdonald'S: Como Se Candidatar Para Trabalhar Na Rede",
+    "slug": "vagas-no-mcdonalds-como-se-candidatar-para-trabalhar-na-rede-empresa-confidencial-natal-2026092406",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Com mais de 50 mil funcionários no Brasil, o McDonald's é um dos maiores empregadores de jovens do país. Todos os anos, realizam o sonho do primeiro emprego de muita gente! Do atual quadro de funcionários, cerca de 76% têm menos de 25 anos de idade e estão em sua primeira experiência.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  É uma das empresas que mais oferece chances de ascensão profissional com várias oportunidades de desenvolvimento. Incentivam o estudo e o aprimoramento.  \n     \n   ➜  MAIS EMPRESAS EM:       ALIMENTAÇÃO      \n  E tem orgulho de dizer que hoje aqui no Brasil, mais da metade dos gerentes ingressaram na companhia como atendentes, o primeiro degrau na escala hierárquica da empresa. Anualmente, são investidos cerca de R$40 milhões em treinamento e desenvolvimento de funcionários.  \n  Todos têm espaço e oportunidade, não admitem discriminação e exigem o mesmo respeito para todos os funcionários, sem qualquer distinção de gênero, idade, raça, orientação, religião ou aparência física.  \n\n  \n  \n  \n  \n  \n       COMO SE CANDIDATAR:        ➜ Para se candidatar às vagas, acesse a   página do        McDonald's na     plataforma Gupy         \n   ➜ Na opção  Estado , selecione:  Rio Grande do Norte (RN)    \n   ⚠ Está tendo dificuldade para se candidatar? Visite a    Central de Ajuda Gupy    \n  \n  \n  \n    Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2022/02/trabalhe-no-mcdonalds.html",
+    "publishedAt": "2025-06-19",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092407,
+    "title": "Vagas No Hapvida: Veja Como Se Candidatar Para Trabalhar Na Empresa",
+    "slug": "vagas-no-hapvida-veja-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-natal-2026092407",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Temos consciência da importância de ter e manter a saúde.   Essa constatação foi, talvez, o motivo em levar assistência médica de qualidade por onde o empreendedorismo permitisse.   Hoje, mais de 40 anos depois, olhando o passado com satisfação de ter cumprido boa parte desse desafio.     \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n   \n  O Hapvida tem orgulho de fazer bem a tantas pessoas e de contribuir com a saúde de tantas famílias. Tendo certeza de que o futuro os convida a continuar, com o mesmo empenho, a encarar novos objetivos.    \n  \n     \n    ➜  MAIS EMPRESAS EM:   SAÚDE       \n    Oferecer o melhor e mais moderno da tecnologia sem abrir mão do carinho no atendimento e na saudável relação interna entre os funcionários e empresas.   Isso é fundamental.     \n    Quem pensa apenas em equipamentos, deixa de entender que o foco da medicina é o bem-estar da pessoa.     \n    Acreditam que a experiência, um aperto de mão, um sorriso, ou mesmo um olhar pode, sim, salvar vidas e, por isso, não abrem mão de excelentes profissionais.     \n\n  \n  \n  \n \n  \n  \n     \n Obviamente, investindo no que há de mais moderno, mas não esquecendo, em momento algum, que são as relações humanizadas que favorecem a posição privilegiada na qual o Hapvida Saúde se encontra atualmente.    \n          COMO SE CANDIDATAR:         ➜ Para se candidatar às vagas, acesse a   página do Hapvida na plataforma Gupy     \n\n ➜   Na opção  Estado,  selecione:  Rio Grande do No",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2020/08/hapvida.html",
+    "publishedAt": "2025-06-18",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092408,
+    "title": "Vagas Na Prosegur: Como Se Candidatar Para Trabalhar Na Empresa",
+    "slug": "vagas-na-prosegur-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-natal-2026092408",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Garantimos a segurança das pessoas, empresas e da sociedade como um todo.   Mais de 40 anos na vanguarda da inovação.   Na Prosegur, trabalhamos para fazer do mundo um lugar mais seguro.         \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n    Proporcionamos a nossos clientes as soluções mais avançadas do mercado, dotadas de um alto componente tecnológico e projetadas para agregar valor ao serviço.     \n          \n   ➜  EMPRESAS EM:    TERCEIRIZAÇÃO     \n     Somos uma empresa na qual a inovação, a equipe humana e a orientação absoluta ao cliente marcam a diferença.    \n    A Prosegur no mundo    Estamos presentes em 26 países, com o desafio de oferecer serviços de alto valor agregado. Para tanto, adaptamos as melhores práticas globais às singularidades de cada mercado, em um setor altamente regulado e que varia conforme a legislação de cada país.    \n      COMO SE CANDIDATAR:         ➜ Para se candidatar às vagas, acesse a   página de carreiras da Prosegur      \n   \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .btn-container {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .btn-relacionados {\n            padding: 8px 16px;\n            background-color: #fc8810;",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2021/02/trabalhe-na-prosegur.html",
+    "publishedAt": "2025-06-17",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092409,
+    "title": "Vagas No Grupo Scopo: Veja Como Se Candidatar",
+    "slug": "vagas-no-grupo-scopo-veja-como-se-candidatar-empresa-confidencial-natal-2026092409",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A   Scopo Consultoria  , com raízes potiguares, destaca-se no mercado ao oferecer soluções estratégicas que elevam a gestão de pessoas e processos.   \n\n  \n  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n\n  \n  \n    Com uma abordagem personalizada e um compromisso inabalável com a excelência, a Scopo é a parceira ideal para empresas que desejam alcançar resultados consistentes e duradouros.  \n           Fonte: Freepik      \n   ➜  VER EMPRESAS EM:    CONSULTORIAS     \n  O Que Faz da Scopo uma Referência?  A Scopo conta com uma   equipe multidisciplinar   dedicada a transformar desafios em oportunidades. Seu trabalho vai além da consultoria tradicional, atuando como parceira estratégica para empresas que buscam crescimento sustentável.  \n  Entre os serviços oferecidos, destacam-se:    Consultoria Organizacional:   Elevação da performance organizacional com estratégias práticas.\n\n   Recrutamento e Seleção:   Identificação e atração de talentos alinhados às necessidades específicas de cada cliente.  \n     COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas, acesse a      página do Grupo Scopo na plataforma Sólides       \n    ⚠ Não consegue se candidatar? Visite a   Central de Ajuda Sólides        \n   \n  \n  \n  \n    Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-sha",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2024/10/grupo-scopo-como-se-candidatar.html",
+    "publishedAt": "2025-06-16",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092410,
+    "title": "Vagas De Emprego Na Iskisita Atakado: Como Trabalhar Na Empresa",
+    "slug": "vagas-de-emprego-na-iskisita-atakado-como-trabalhar-na-empresa-empresa-confidencial-caico-2026092410",
+    "companyName": "Empresa Confidencial",
+    "city": "Caicó",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "A  Iskisita Atakado  nasceu em 1967, fruto do sonho de dois irmãos vindos do Seridó, no interior do Rio Grande do Norte. Motivados a buscar um futuro melhor, trocaram a tranquilidade do campo pelas oportunidades da cidade grande, dando início a uma trajetória de sucesso no comércio.    \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n     \n    O Início de Um Sonho  A primeira loja foi um modesto armarinho localizado no coração da cidade, na Rua Princesa Isabel, nº 552. Naquela época, o comércio de aviamentos prosperava, já que muitas pessoas ainda confeccionavam roupas com costureiras.     \n         \n        ➜  EMPRESAS EM:          ARTIGOS DIVERSOS        \n    A dedicação dos fundadores era evidente: atendiam os clientes pessoalmente, escolhiam produtos de qualidade e viajavam ao sul do país em busca das melhores novidades. Desde o princípio, o compromisso com a excelência era uma prioridade para a Iskisita.    \n    Expansão e Consolidação   Com o sucesso da loja inicial, em apenas cinco anos a Iskisita expandiu suas operações para o bairro Alecrim, inaugurando sua primeira filial na Rua Presidente Bandeira. O novo espaço reforçou a marca como referência no setor, oferecendo produtos de grandes fábricas nacionais.  \n    COMO SE CANDIDATAR:     ➜        Se você busca uma oportunidade de emprego em uma empresa sólida e reconhecida, envie seu currículo para o e-mail:      curriculo@iskisita.com.br         \n      \n\n    \n  \n  \n   Conteúdos Relaciona",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculo@iskisita.com.br",
+    "publishedAt": "2025-06-16",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092411,
+    "title": "Trabalhe No Bomdia Supermercado",
+    "slug": "trabalhe-no-bomdia-supermercado-empresa-confidencial-parnamirim-2026092411",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Um supermercado feito por e para famílias. Buscando sempre trazer os melhores serviços e preços para os clientes. O Bomdia supermercado é lugar de economia!   O Bomdia Supermercado iniciou suas atividades em outubro de 2003, com 5 caixas e 35 colaboradores     \n  \n  \n  \n    \n     \n  ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n   Na unidade hoje denominada Loja 01, localizada no bairro do Alecrim. Desde então, a rede Bomdia cresceu e hoje conta com seis lojas e dois atacados, localizados nos principais bairros de Natal e região metropolitana.   \n     \n       ➜ MAIS EMPRESAS EM:         SUPERMERCADOS        \n     Missão     Conquistar a satisfação e confiança dos clientes através de uma experiência de compra confortável, bem como oferecer produtos de qualidade e com preço justo todo dia, por meio de um modelo de gestão focado na solidez do negócio.    \n     Visão     Ser o melhor supermercado das regiões onde atua, através do reconhecimento dos clientes e funcionários como sendo uma empresa de excelência, que busca sempre respeitar os valores morais e éticos em todas as condutas.    \n\n  \n  \n  \n  \n  \n                 COMO SE CANDIDATAR:                ➜ Para se candidatar às vagas no Bomdia Supermercado, envie currículo para o e-mail:          curriculo@bomdiasupermercado.com.br       \n        \n    \n    \n      Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n           ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculo@bomdiasupermercado.com.br",
+    "publishedAt": "2025-06-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092412,
+    "title": "Trabalhe No Baratão Das Embalagens",
+    "slug": "trabalhe-no-baratao-das-embalagens-empresa-confidencial-parnamirim-2026092412",
+    "companyName": "Empresa Confidencial",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Há uma década, o  Baratão das Embalagens  iniciou sua trajetória com apenas um vendedor, um motoqueiro e a determinação de seu proprietário. Hoje, a empresa se destaca como referência no mercado de embalagens, descartáveis e produtos de limpeza, consolidando-se como pioneira e líder no setor de distribuição e autosserviço.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n    Estrutura Moderna e Ampla Presença no Rio Grande do Norte   O Baratão conta com uma das maiores e mais modernas infraestruturas do país no segmento. Seu  Centro de Distribuição , localizado na Grande Natal, é um marco logístico que proporciona maior capacidade de estoque e agilidade nas entregas, garantindo excelência no atendimento aos clientes.   \n     \n   ➜  VEJA MAIS EMPRESAS EM:       VAREJO      \n    Além disso, a empresa possui unidades estratégicas em cidades como    Natal, Parnamirim e Mossoró , oferecendo acesso facilitado e produtos diversificados para atender tanto o varejo quanto o atacado.      \n      Faça Parte do Time Baratão das Embalagens    Sonha em trabalhar em uma das maiores empresas de embalagens do estado? O Baratão das Embalagens está sempre em busca de talentos para fortalecer sua equipe.\n\n    COMO SE CANDIDATAR        ➜ Envie seu currículo para:      selecao@obarataodasembalagens.com.br         e aguarde o contato da equipe de recrutamento.    \n     \n  \n  \n   Conteúdos Relacionados \n     \n        .card-relacionados {\n            width: auto;",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "selecao@obarataodasembalagens.com.br",
+    "publishedAt": "2025-06-13",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092413,
+    "title": "Trabalhe Na Bomfim Cargas",
+    "slug": "trabalhe-na-bomfim-cargas-empresa-confidencial-natal-2026092413",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Uma empresa ética e dedicada, atenta as necessidades de clientes e colaboradores. Há mais de 30 anos desconstruindo barreiras e conectando o Brasil com transporte eficiente de cargas. Primando pela excelência nos serviços, sempre voltados a padronização dos processos, treinamento sistemático das equipes, resultando num serviço com alto nível de qualidade nas informações e operações.    \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n    \n  A tecnologia de ponta está agregada aos nossos serviços com uma frota equipada com os mais modernos equipamentos de monitoramento, nos tornando aptos a suportar de pequenas a grandes operações.  \n     \n  Para garantir todo o processo do transporte possuímos licenças específicas da ANVISA, obedecendo a todas as exigências legais e autorizadas por este órgão.  \n  Você ainda conta com uma assessoria especializada, para montagem de projetos específicos e dedicados, atendendo às especificidades da sua operação.  \n  Geramos um serviço de qualidade, para que o cliente tenha um resultado de excelência!  \n     COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas, acesse a   página da Bomfim Cargas na plataforma Sólides       \n    \n  \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n     ",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://www.vagasempregosnatal.com.br/2022/07/trabalhe-na-bomfim-cargas.html",
+    "publishedAt": "2025-05-28",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092414,
+    "title": "Trabalhe Na Depyl Action",
+    "slug": "trabalhe-na-depyl-action-empresa-confidencial-natal-2026092414",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Um novo conceito em depilação. Depois de mais de 10 anos vendendo cera com ingredientes naturais em farmácias, supermercados, salões de beleza, lojas de cosméticos e feiras,  descobriram que não bastava ter um bom produto.   \n\n  \n  \n     ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n  \n  \n  \n   \n  Se quisessem realmente proporcionar uma experiência de depilação diferente para as pessoas, precisariam também de um bom serviço.  \n     \n   ➜  MAIS EMPRESAS EM:    PERFUMARIA     \n  Tinham um produto tão bom e faziam isso com tanto amor, que queriam mudar esse paradigma da depilação, vista como um momento de sofrimento, e transformá-la em um momento de cuidado consigo, de autoestima e bem-estar.  \n   O poder do empreendedorismo feminino   Se quisessem realmente proporcionar uma experiência diferente, a empresa teria que inovar: apostaram na criação de um ambiente moderno e elegante, especializado em depilação, com profissionais treinadas para cuidar das pessoas com todo o carinho e cuidado que merecem.  \n  A primeira loja nasceu em Brasília. Ainda não tinham um padrão, manual, contrato, nada. Apenas o sonho. E foi compartilhando esse sonho com a parceira que se tornaria a primeira franqueada que, em poucos meses, foi inaugurada a primeira loja da Depyl Action no Brasil.  \n     COMO SE CANDIDATAR:      ➜ Para se candidatar às vagas, envie currículo para o e-mail:      depylnatal.adm@gmail.com      \n  Em seguida veio a loja de Belém, depois a de São Luís",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "depylnatal.adm@gmail.com",
+    "publishedAt": "2025-05-21",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
+  {
+    "id": 2026092415,
+    "title": "Trabalhe Na Shokante",
+    "slug": "trabalhe-na-shokante-empresa-confidencial-natal-2026092415",
+    "companyName": "Empresa Confidencial",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Sobre A SH!  Lojas modernas, espaçosas e bem iluminadas. Roupas, femininas, masculinas e infantis, que acompanham as tendências da moda mundial.   \n   ANÚNCIOS\n\n  \n \n  \n \n     (adsbygoogle = window.adsbygoogle || []).push({});\n \n    \n  Um ambiente onde o cliente se sente a vontade, porque foi projetado para oferecer “moda acessível” oferecendo novas tendências com preço justo, afinal todos tem o direito de se vestir bem.  \n          Loja Shokante em Capim Macio - Facebook/Shokante Modas       \n    VEJA MAIS EMPRESAS EM:      VESTUÁRIO     \n  A Shokante, como o próprio nome sugere, eleva a auto estima de sua clientela trazendo desde 2003, o que há de novo na moda sem perder o foco no custo benefício.   \n  Para isso, conta com um sistema de distribuição e pesquisa super eficiente, fazendo com que ao entrar numa loja Shokante, você encontre novidade praticamente todos os dias!  \n     COMO SE CANDIDATAR:       ➜ Para se candidatar às vagas na Shokante, envie currículo para o e-mail:       vagashokante@gmail.com      \n   \n  \n  \n \n  \n  \n    Como parte da estratégia de mercado, apostamos na criação e no fortalecimento da rede de lojas investindo numa comunicação moderna e apoiada por uma identidade visual reformulada no ano de 2016.   \n  \n  \n  \n   Conteúdos Relacionados -->\n     \n        .card-relacionados {\n            width: auto;\n            border: 1px solid #ccc;\n            border-radius: 8px;\n            padding: 16px;\n            margin: 16px;\n            box-shadow: 0 4px 8",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vagashokante@gmail.com",
+    "publishedAt": "2025-05-17",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "status": "APPROVED",
+    "isFeatured": false
+  },
   {
     "state": "RN",
     "salaryCurrency": "BRL",
@@ -41276,8 +43378,8 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 8044
-- **Tamanho:** 309757 bytes
+- **Total de Linhas:** 8644
+- **Tamanho:** 334292 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -41415,6 +43517,606 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   <!-- URLs do Blog Guia de Carreira RN -->
 
   <!-- URLs das Vagas Ativas no RN -->
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-juridico-focarerh-natal-empresa-confidencial-natal-2026092316</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-servicos-gerais-mr-cupcake-natal-empresa-confidencial-natal-2026092317</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/panfletista-mutuo-protecao-veicular-natal-empresa-confidencial-natal-2026092318</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/ajudante-de-carga-e-descarga-comercial-do-trigo-natal-empresa-confidencial-natal-2026092319</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/cumim-zeh-cozinha-natal-empresa-confidencial-natal-2026092320</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-analista-contabil-wr-assessoria-contabil-natal-empresa-confidencial-natal-2026092321</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/pedreiro-2ls-engenharia-parnamirim-empresa-confidencial-parnamirim-2026092322</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/marceneiro-serafini-moveis-candelaria-empresa-confidencial-natal-2026092323</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/fisioterapeuta-santo-pilates-capim-macio-empresa-confidencial-natal-2026092324</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-ivanlux-alecrim-empresa-confidencial-natal-2026092325</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/assistente-administrativo-ivanlux-alecrim-empresa-confidencial-natal-2026092326</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-reserva-moda-masculina-natal-empresa-confidencial-natal-2026092327</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/administracao-gestao-de-pessoas-e-voluntarios-reforamar-candelaria-empresa-confidencial-natal-2026092328</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/operadora-de-caixa-my-store-natal-empresa-confidencial-natal-2026092329</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/pedreiro-trutto-engenharia-natal-empresa-confidencial-natal-2026092330</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-sport-fino-calcados-natal-empresa-confidencial-natal-2026092331</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-otica-visao-de-todos-parnamirim-empresa-confidencial-parnamirim-2026092332</loc>
+    <lastmod>2025-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-lets-pizza-natal-empresa-confidencial-natal-2026092333</loc>
+    <lastmod>2025-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-outlet-moda-potiguar-parnamirim-empresa-confidencial-parnamirim-2026092334</loc>
+    <lastmod>2025-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/recepcionista-neuza-lins-recrutamento-natal-empresa-confidencial-natal-2026092335</loc>
+    <lastmod>2025-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/mestre-de-obras-waf-construcoes-parnamirim-empresa-confidencial-parnamirim-2026092336</loc>
+    <lastmod>2025-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/montador-de-moveis-grupo-chez-extremoz-empresa-confidencial-extremoz-2026092337</loc>
+    <lastmod>2025-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/mecanico-automotivo-dom-car-natal-empresa-confidencial-natal-2026092338</loc>
+    <lastmod>2025-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-externa-grupo-morada-natal-empresa-confidencial-natal-2026092339</loc>
+    <lastmod>2025-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/lider-comercial-rutra-consultoria-e-construcao-natal-empresa-confidencial-natal-2026092340</loc>
+    <lastmod>2025-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-atendente-retifica-mafra-parnamirim-empresa-confidencial-parnamirim-2026092341</loc>
+    <lastmod>2025-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/servente-de-obras-ll-empreendimentos-parnamirim-empresa-confidencial-parnamirim-2026092342</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-almoxarifado-ll-imoveis-parnamirim-empresa-confidencial-parnamirim-2026092343</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/empregada-domestica-light-clean-natal-empresa-confidencial-natal-2026092344</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/assistente-comercial-tudobrisa-climatizadores-parnamirim-empresa-confidencial-parnamirim-2026092345</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-servicos-gerais-anibaltec-mossoro-empresa-confidencial-mossoro-2026092346</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/esteticista-persona-dermatologia-natal-empresa-confidencial-natal-2026092347</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-administrativo-persona-dermatologia-natal-empresa-confidencial-natal-2026092348</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/tecnicoa-de-suporte-jopavi-natal-empresa-confidencial-natal-2026092349</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-limpeza-golden-tulip-natal-empresa-confidencial-natal-2026092350</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-stomp-natal-empresa-confidencial-natal-2026092351</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/estoquista-bellas-center-natal-e-parnamirim-empresa-confidencial-parnamirim-2026092352</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-de-loja-bellas-center-parnamirim-empresa-confidencial-parnamirim-2026092353</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-cartao-de-todos-parnamirim-empresa-confidencial-parnamirim-2026092354</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/atendimento-ao-cliente-polibuchas-natal-empresa-confidencial-natal-2026092355</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/recepcionista-clinica-palmira-carlos-parnamirim-empresa-confidencial-parnamirim-2026092356</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/recepcionista-medway-assessoria-natal-empresa-confidencial-natal-2026092357</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/garcom-piazzolla-pizzaria-natal-empresa-confidencial-natal-2026092358</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/servicos-gerais-dona-help-natal-empresa-confidencial-natal-2026092359</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/cozinheira-minuto-massas-parnamirim-empresa-confidencial-parnamirim-2026092360</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/estoquista-mari-boutique-natal-empresa-confidencial-natal-2026092361</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-interno-multy-telecom-natal-empresa-confidencial-natal-2026092362</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/atendente-de-suporte-tecnico-neuza-lins-recrutamento-natal-empresa-confidencial-natal-2026092363</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/designer-grafico-casa-dos-oculos-natal-empresa-confidencial-natal-2026092364</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/assistente-financeiro-natal-empresa-confidencial-natal-2026092365</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-uninassau-empresa-confidencial-natal-2026092366</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-ri-happy-empresa-confidencial-natal-2026092367</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-na-potiguar-honda-veja-como-se-candidatar-e-trabalhar-na-empresa-empresa-confidencial-natal-2026092368</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/praiamar-hotel-oportunidades-de-trabalho-no-setor-hoteleiro-empresa-confidencial-natal-2026092369</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-carrefour-como-se-candidatar-empresa-confidencial-natal-2026092370</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/centauro-a-oportunidade-de-carreira-que-une-paixao-e-inovacao-empresa-confidencial-natal-2026092371</loc>
+    <lastmod>2025-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-nordestao-faca-parte-da-maior-rede-do-rio-grande-do-norte-empresa-confidencial-natal-2026092372</loc>
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-tabua-de-carne-empresa-confidencial-natal-2026092373</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-na-comjol-veja-como-se-candidatar-e-trabalhar-na-empresa-empresa-confidencial-natal-2026092374</loc>
+    <lastmod>2025-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-grau-tecnico-empresa-confidencial-parnamirim-2026092375</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-drogarias-globo-oportunidades-em-uma-das-maiores-redes-do-nordeste-empresa-confidencial-natal-2026092376</loc>
+    <lastmod>2025-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-na-reis-magos-veja-como-se-candidatar-e-trabalhar-na-empresa-empresa-confidencial-natal-2026092377</loc>
+    <lastmod>2025-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/corte-facil-atacarejo-esta-contratando-saiba-como-se-inscrever-empresa-confidencial-natal-2026092378</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-ponto-dos-botoes-empresa-confidencial-natal-2026092379</loc>
+    <lastmod>2025-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/redemais-como-se-candidatar-empresa-confidencial-parnamirim-2026092380</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-mar-vermelho-veja-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-parnamirim-2026092381</loc>
+    <lastmod>2025-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/docelandia-uma-historia-de-docura-e-oportunidades-empresa-confidencial-natal-2026092382</loc>
+    <lastmod>2025-07-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-brisanet-empresa-confidencial-natal-2026092383</loc>
+    <lastmod>2025-07-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/assai-uma-historia-de-sucesso-e-oportunidades-empresa-confidencial-natal-2026092384</loc>
+    <lastmod>2025-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-riachuelo-descubra-oportunidades-e-como-se-candidatar-empresa-confidencial-natal-2026092385</loc>
+    <lastmod>2025-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-teleperformance-como-se-candidatar-empresa-confidencial-natal-2026092386</loc>
+    <lastmod>2025-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/jmt-service-conquiste-sua-oportunidade-de-emprego-com-a-lider-em-terceirizacao-empresa-confidencial-natal-2026092387</loc>
+    <lastmod>2025-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/empregos-no-camaroes-saiba-como-se-candidatar-as-oportunidades-empresa-confidencial-natal-2026092388</loc>
+    <lastmod>2025-07-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-cei-empresa-confidencial-natal-2026092389</loc>
+    <lastmod>2025-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-atacadao-vagas-na-maior-rede-atacadista-empresa-confidencial-natal-2026092390</loc>
+    <lastmod>2025-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-super-show-veja-como-trabalhar-em-uma-das-maiores-redes-de-supermercados-empresa-confidencial-parnamirim-2026092391</loc>
+    <lastmod>2025-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-vale-do-para-como-se-candidatar-empresa-confidencial-natal-2026092392</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-hospital-rio-grande-empresa-confidencial-natal-2026092393</loc>
+    <lastmod>2025-07-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-salesiano-empresa-confidencial-natal-2026092394</loc>
+    <lastmod>2025-07-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-mundo-pet-cobasi-empresa-confidencial-natal-2026092395</loc>
+    <lastmod>2025-07-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-pittsburg-faca-parte-do-time-de-sucesso-empresa-confidencial-parnamirim-2026092396</loc>
+    <lastmod>2025-07-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-na-pague-menos-veja-como-se-candidatar-para-trabalhar-na-farmacia-empresa-confidencial-natal-2026092397</loc>
+    <lastmod>2025-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-farofa-dagua-empresa-confidencial-caico-2026092398</loc>
+    <lastmod>2025-07-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-drogasil-empresa-confidencial-natal-2026092399</loc>
+    <lastmod>2025-06-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-na-sabor-de-pao-veja-como-se-candidatar-e-trabalhar-na-padaria-empresa-confidencial-natal-2026092400</loc>
+    <lastmod>2025-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-ferreira-costa-veja-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-natal-2026092401</loc>
+    <lastmod>2025-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-loucos-por-coxinha-veja-como-se-candidatar-empresa-confidencial-natal-2026092402</loc>
+    <lastmod>2025-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/favorito-supermercados-crescimento-empregos-e-valorizacao-de-pessoas-empresa-confidencial-parnamirim-2026092403</loc>
+    <lastmod>2025-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-magazine-luiza-empresa-confidencial-natal-2026092404</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/como-trabalhar-na-renner-veja-como-enviar-seu-curriculo-empresa-confidencial-natal-2026092405</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-mcdonalds-como-se-candidatar-para-trabalhar-na-rede-empresa-confidencial-natal-2026092406</loc>
+    <lastmod>2025-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-hapvida-veja-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-natal-2026092407</loc>
+    <lastmod>2025-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-na-prosegur-como-se-candidatar-para-trabalhar-na-empresa-empresa-confidencial-natal-2026092408</loc>
+    <lastmod>2025-06-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-no-grupo-scopo-veja-como-se-candidatar-empresa-confidencial-natal-2026092409</loc>
+    <lastmod>2025-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-de-emprego-na-iskisita-atakado-como-trabalhar-na-empresa-empresa-confidencial-caico-2026092410</loc>
+    <lastmod>2025-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-bomdia-supermercado-empresa-confidencial-parnamirim-2026092411</loc>
+    <lastmod>2025-06-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-no-baratao-das-embalagens-empresa-confidencial-parnamirim-2026092412</loc>
+    <lastmod>2025-06-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-bomfim-cargas-empresa-confidencial-natal-2026092413</loc>
+    <lastmod>2025-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-depyl-action-empresa-confidencial-natal-2026092414</loc>
+    <lastmod>2025-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/trabalhe-na-shokante-empresa-confidencial-natal-2026092415</loc>
+    <lastmod>2025-05-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/agente-de-cobranca-dentalmed-natal-2026091101</loc>
     <lastmod>2026-09-11</lastmod>
@@ -54565,8 +57267,293 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 
 ---
 
+<a id="scripts-daily-job-crawlerpy"></a>
+## 87. Arquivo: `scripts/daily_job_crawler.py`
+- **Caminho:** `scripts/daily_job_crawler.py`
+- **Nome:** `daily_job_crawler.py`
+- **Linguagem / Sintaxe:** `python`
+- **Total de Linhas:** 271
+- **Tamanho:** 10399 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Daily Job Crawler — Natal Vagas
+Busca as publicações mais recentes nos feeds oficiais do Rio Grande do Norte,
+identifica vagas inéditas, higieniza os dados e atualiza o catálogo jobs.json.
+Projetado para execução rápida e automática via GitHub Actions.
+"""
+
+import urllib.request
+import json
+import re
+import os
+import sys
+import unicodedata
+from datetime import datetime
+
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+jobs_json_file = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
+
+def slugify(text: str) -> str:
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
+    text = re.sub(r'[^\w\s-]', '', text.lower())
+    return re.sub(r'[-\s]+', '-', text).strip('-')
+
+def decode_cloudflare_email(encoded: str) -> str:
+    try:
+        r = int(encoded[:2], 16)
+        return "".join([chr(int(encoded[i:i+2], 16) ^ r) for i in range(2, len(encoded), 2)])
+    except Exception:
+        return ""
+
+def clean_html(html_text: str) -> str:
+    text = re.sub(r'<br\s*/?>', '\n', html_text)
+    text = re.sub(r'</p>', '\n\n', text)
+    text = re.sub(r'</li>', '\n', text)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = text.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&quot;', '"')
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+def parse_city(text: str, title: str) -> str:
+    full = (title + " " + text).lower()
+    cidades_rn = [
+        ("Parnamirim", ["parnamirim", "cohabinal", "nova parnamirim", "eulalia"]),
+        ("Mossoró", ["mossoro", "mossoró"]),
+        ("Macaíba", ["macaiba", "macaíba"]),
+        ("São Gonçalo do Amarante", ["sao goncalo", "são gonçalo", "aeroporto"]),
+        ("Ceará-Mirim", ["ceara-mirim", "ceará-mirim", "ceara mirim"]),
+        ("Caicó", ["caico", "caicó", "seridó"]),
+        ("Currais Novos", ["currais novos"]),
+        ("Assú", ["assu", "açu"]),
+        ("Extremoz", ["extremoz", "pitangui"]),
+        ("Tibau do Sul / Pipa", ["tibau do sul", "praia da pipa", "pipa"]),
+        ("Natal", ["natal", "alecrim", "tirol", "midway", "ponta negra", "capim macio", "candelaria", "candelária", "zona norte", "zona sul", "zona leste", "zona oeste", "cidade alta"])
+    ]
+    for cid, keys in cidades_rn:
+        for k in keys:
+            if k in full:
+                return cid
+    return "Natal"
+
+def parse_work_model(text: str) -> str:
+    lower = text.lower()
+    if "remoto" in lower or "home office" in lower or "100% home" in lower:
+        return "REMOTO"
+    if "híbrido" in lower or "hibrido" in lower:
+        return "HIBRIDO"
+    return "PRESENCIAL"
+
+def parse_contract_type(title: str, text: str) -> str:
+    full = (title + " " + text).lower()
+    if "estágio" in full or "estagio" in full:
+        return "ESTAGIO"
+    if "aprendiz" in full:
+        return "JOVEM_APRENDIZ"
+    if "temporário" in full or "temporario" in full:
+        return "TEMPORARIO"
+    if "pj" in full or "prestador" in full:
+        return "PJ"
+    return "CLT"
+
+def extract_salary(text: str):
+    m = re.search(r'R\$\s*([\d\.,]+)', text)
+    if m:
+        val_str = m.group(1).replace('.', '').replace(',', '.')
+        try:
+            val = float(val_str)
+            if 500 <= val <= 25000:
+                return val, val
+        except ValueError:
+            pass
+    return None, None
+
+def extract_contacts(raw_html: str, text: str):
+    cf_matches = re.findall(r'data-cfemail="([a-fA-F0-9]+)"', raw_html)
+    emails = []
+    for cf in cf_matches:
+        dec = decode_cloudflare_email(cf)
+        if dec and '@' in dec:
+            emails.append(dec.strip())
+            
+    plain_emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', text)
+    for em in plain_emails:
+        clean_em = em.lower().strip()
+        if not clean_em.endswith(('png', 'jpg', 'jpeg', 'gif', 'js', 'css')) and clean_em not in emails:
+            emails.append(clean_em)
+            
+    phones = re.findall(r'(?:\(?\s*84\s*\)?\s*)?(?:9\s*)?[89]\d{3}[-\s]?\d{4}', text)
+    cleaned_phones = []
+    for p in phones:
+        digits = re.sub(r'\D', '', p)
+        if len(digits) in [8, 9, 10, 11]:
+            if not digits.startswith('84'):
+                if len(digits) == 9:
+                    digits = '84' + digits
+                elif len(digits) == 8:
+                    digits = '849' + digits
+            cleaned_phones.append(digits)
+            
+    return list(set(emails)), list(set(cleaned_phones))
+
+def fetch_feed(url: str):
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NatalVagasCrawler/2.0"}
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as res:
+            return json.loads(res.read().decode('utf-8'))
+    except Exception as e:
+        print(f"⚠️ Erro ao consultar feed {url}: {e}")
+        return None
+
+def main():
+    print("🤖 Iniciando Daily Job Crawler — Natal Vagas...")
+    
+    if not os.path.exists(jobs_json_file):
+        print(f"❌ Catálogo {jobs_json_file} não encontrado!")
+        sys.exit(1)
+        
+    with open(jobs_json_file, "r", encoding="utf-8") as f:
+        existing_records = json.load(f)
+        
+    print(f"📦 Catálogo atual: {len(existing_records)} vagas carregadas.")
+    
+    existing_slugs = {j.get('slug') for j in existing_records if j.get('slug')}
+    existing_keys = {
+        re.sub(r'\W+', '', f"{j.get('title', '')}_{j.get('companyName', '')}").lower()
+        for j in existing_records
+    }
+    
+    current_max_id = max([j.get('id', 0) for j in existing_records] + [2026090000])
+    
+    # Consulta os feeds mais recentes (últimas publicações)
+    feed_urls = [
+        "https://www.empregodorn.com.br/feeds/posts/default?alt=json&max-results=50",
+        "https://www.vagasempregosnatal.com.br/feeds/posts/default?alt=json&max-results=50"
+    ]
+    
+    entries = []
+    for f_url in feed_urls:
+        data = fetch_feed(f_url)
+        if data and 'feed' in data and 'entry' in data['feed']:
+            entries.extend(data['feed']['entry'])
+            
+    print(f"🔎 Encontradas {len(entries)} publicações recentes nos feeds.")
+    
+    new_jobs = []
+    for entry in entries:
+        raw_title = entry.get('title', {}).get('$t', '').strip()
+        if not raw_title:
+            continue
+            
+        content_obj = entry.get('content') or entry.get('summary') or {}
+        raw_html = content_obj.get('$t', '')
+        text = clean_html(raw_html)
+        
+        # Limpa título
+        title = raw_title
+        title = re.sub(r'^(?:vaga\s*de\s*(?:emprego|estágio|estagio)?\s*para|vaga\s*de|oportunidade\s*para|urgente:?)\s*', '', title, flags=re.IGNORECASE)
+        title = re.sub(r'\s*-\s*natal\s*(?:e\s*região|e\s*grande\s*natal|/rn)?\s*$', '', title, flags=re.IGNORECASE)
+        title = re.sub(r'\s*-\s*rn\s*$', '', title, flags=re.IGNORECASE)
+        title = title.strip(' -–—:').title()
+        
+        # Extrai empresa
+        company = "Empresa Confidencial"
+        m_comp = re.search(r'(?:empresa|clínica|loja|restaurante|supermercado|hospital|indústria|escola|hotel)\s*(?:parceira|local|confidencial)?\s*:\s*([A-Za-z0-9À-ÿ\s&.-]+)', text, re.IGNORECASE)
+        if m_comp:
+            c_name = m_comp.group(1).strip()
+            if 3 < len(c_name) < 40 and not any(kw in c_name.lower() for kw in ['requisitos', 'atividades', 'benefícios', 'salário']):
+                company = c_name.title()
+                
+        t_key = re.sub(r'\W+', '', f"{title}_{company}").lower()
+        if t_key in existing_keys:
+            continue
+            
+        published = entry.get('published', {}).get('$t', datetime.now().isoformat())
+        if len(published) > 10:
+            published = published[:10]
+            
+        city = parse_city(text, raw_title)
+        work_model = parse_work_model(text)
+        contract_type = parse_contract_type(title, text)
+        sal_min, sal_max = extract_salary(text)
+        emails, phones = extract_contacts(raw_html, text)
+        
+        current_max_id += 1
+        slug = f"{slugify(title)}-{slugify(company)}-{slugify(city)}-{current_max_id}"
+        
+        if slug in existing_slugs:
+            continue
+            
+        # Determina canal de candidatura
+        if emails:
+            app_channel = "EMAIL"
+            app_target = emails[0]
+        elif phones:
+            app_channel = "WHATSAPP"
+            app_target = phones[0]
+        else:
+            orig_link = ""
+            for l in entry.get('link', []):
+                if l.get('rel') == 'alternate':
+                    orig_link = l.get('href', '')
+                    break
+            app_channel = "LINK"
+            app_target = orig_link or "https://natalvagas.com.br"
+            
+        job_obj = {
+            "id": current_max_id,
+            "title": title,
+            "slug": slug,
+            "companyName": company,
+            "city": city,
+            "state": "RN",
+            "workModel": work_model,
+            "contractType": contract_type,
+            "description": text[:1500] if len(text) > 1500 else text,
+            "salaryMin": sal_min,
+            "salaryMax": sal_max,
+            "salaryCurrency": "BRL",
+            "hideSalary": (sal_min is None),
+            "applicationChannel": app_channel,
+            "applicationTarget": app_target,
+            "publishedAt": published,
+            "expiresAt": "2026-12-31T23:59:59-03:00",
+            "status": "APPROVED",
+            "isFeatured": False
+        }
+        
+        new_jobs.append(job_obj)
+        existing_slugs.add(slug)
+        existing_keys.add(t_key)
+        
+    print(f"✨ Novas vagas identificadas: {len(new_jobs)}")
+    
+    if len(new_jobs) > 0:
+        # Coloca as novas vagas no início para aparecerem primeiro
+        updated_records = new_jobs + existing_records
+        with open(jobs_json_file, "w", encoding="utf-8") as f:
+            json.dump(updated_records, f, ensure_ascii=False, indent=2)
+            
+        print(f"✅ Catálogo jobs.json atualizado com sucesso! Total consolidado: {len(updated_records)} vagas.")
+        # Código de saída 0 com flag
+        sys.exit(0)
+    else:
+        print("ℹ️ Nenhuma nova vaga no momento. Catálogo já está 100% atualizado.")
+        sys.exit(0)
+
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 87. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 88. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54867,7 +57854,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 88. Arquivo: `scripts/generate_sitemap.py`
+## 89. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55048,7 +58035,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 89. Arquivo: `scripts/ingest_jobs.py`
+## 90. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55271,7 +58258,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 90. Arquivo: `scripts/rn_job_scraper.py`
+## 91. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55470,7 +58457,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 91. Arquivo: `scripts/test_efi_status.py`
+## 92. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55550,7 +58537,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 92. Arquivo: `scripts/verify_build_integrity.py`
+## 93. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55643,7 +58630,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 93. Arquivo: `scripts/verify_seo.py`
+## 94. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55726,7 +58713,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 94. Arquivo: `.env.example`
+## 95. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -55744,8 +58731,95 @@ POSTGRES_PORT=5432
 
 ---
 
+<a id="github-workflows-daily-job-syncyml"></a>
+## 96. Arquivo: `.github/workflows/daily-job-sync.yml`
+- **Caminho:** `.github/workflows/daily-job-sync.yml`
+- **Nome:** `daily-job-sync.yml`
+- **Linguagem / Sintaxe:** `yaml`
+- **Total de Linhas:** 73
+- **Tamanho:** 2307 bytes
+
+```yaml
+name: Atualização Diária de Vagas (Natal Vagas)
+
+on:
+  schedule:
+    # Executa todos os dias às 09:00 UTC (06:00 horário de Brasília / Natal)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Permite disparar manualmente pelo botão "Run workflow" no GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-jobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar Repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Instalar Dependências Python
+        run: |
+          pip install requests pillow
+
+      - name: 🤖 Rastrear Novas Vagas no RN
+        run: |
+          python3 scripts/daily_job_crawler.py
+
+      - name: 🗺️ Regenerar Sitemap XML
+        run: |
+          python3 scripts/generate_sitemap.py
+
+      - name: 🛡️ Teste de Integridade Pré-Build
+        run: |
+          python3 scripts/verify_build_integrity.py
+
+      - name: ⚡ Configurar Node.js & Cache do Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 🏗️ Validar Build de Produção
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: 🔄 Sincronizar Documentação & Contexto
+        run: |
+          python3 scripts/convert_to_amazon_quick.py
+          python3 scripts/build_single_context_md.py
+
+      - name: 🚀 Commit e Deploy Automático na Cloudflare
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "$(git status --porcelain frontend/public/data/jobs.json)" ]; then
+            git add frontend/public/data/jobs.json frontend/public/sitemap.xml AmazonQuick/ APP_NATAL_VAGAS.md APP_NATAL_VAGAS_COMPLETO.md
+            git commit -m "chore(auto): atualização diária do catálogo de vagas e sitemap [skip ci]"
+            git push origin main
+            echo "Novas vagas publicadas com sucesso na branch main!"
+          else
+            echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
+          fi
+
+```
+
+---
+
 <a id="gitignore"></a>
-## 95. Arquivo: `.gitignore`
+## 97. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -55802,7 +58876,7 @@ certs/
 ---
 
 <a id="docker-composeyml"></a>
-## 96. Arquivo: `docker-compose.yml`
+## 98. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

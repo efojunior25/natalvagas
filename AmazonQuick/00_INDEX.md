@@ -9,6 +9,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | Arquivo Markdown | Caminho Original no Projeto | Linhas | Tipo |
 | :--- | :--- | :--- | :--- |
 | [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
+| [daily-job-sync.yml.md](./daily-job-sync.yml.md) | `.github/workflows/daily-job-sync.yml` | 73 | `.yml` |
 | [gitignore.md](./gitignore.md) | `.gitignore` | 43 | `config` |
 | [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 248 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
@@ -48,11 +49,11 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [postcss.config.js.md](./postcss.config.js.md) | `frontend/postcss.config.js` | 6 | `.js` |
 | [redirects.md](./redirects.md) | `frontend/public/_redirects` | 2 | `config` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
-| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 31806 | `.json` |
+| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 33906 | `.json` |
 | [manifest.json.md](./manifest.json.md) | `frontend/public/manifest.json` | 33 | `.json` |
 | [manifest.webmanifest.md](./manifest.webmanifest.md) | `frontend/public/manifest.webmanifest` | 33 | `.webmanifest` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
-| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8044 | `.xml` |
+| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8644 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 559 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
@@ -97,6 +98,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 42 | `.ts` |
 | [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
 | [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
+| [daily_job_crawler.py.md](./daily_job_crawler.py.md) | `scripts/daily_job_crawler.py` | 271 | `.py` |
 | [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 287 | `.py` |
 | [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 167 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
@@ -106,4 +108,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 96 arquivos convertidos com sucesso.
+**Total de Arquivos:** 98 arquivos convertidos com sucesso.
