@@ -65,7 +65,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
-| [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
+| [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 226 | `.tsx` |
 | [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 114 | `.tsx` |
 | [CookieConsentBanner.tsx.md](./CookieConsentBanner.tsx.md) | `frontend/src/components/CookieConsentBanner.tsx` | 92 | `.tsx` |
 | [CourseRecommendations.tsx.md](./CourseRecommendations.tsx.md) | `frontend/src/components/CourseRecommendations.tsx` | 95 | `.tsx` |
