@@ -92,16 +92,16 @@
 84. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
 85. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
 86. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-87. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-88. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-89. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-90. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-91. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-92. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-93. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-94. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-95. [`.env.example`](#envexample)
-96. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
+87. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+88. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+89. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+90. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+91. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+92. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+93. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+94. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+95. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+96. [`.env.example`](#envexample)
 97. [`.gitignore`](#gitignore)
 98. [`docker-compose.yml`](#docker-composeyml)
 
@@ -522,8 +522,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 559
-- **Tamanho:** 22200 bytes
+- **Total de Linhas:** 567
+- **Tamanho:** 22538 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
@@ -715,8 +715,16 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       return matchesQuery && matchesCity && matchesModel && matchesNoExperience;
     }).sort((a, b) => {
+      // 1. Vagas em destaque VIP sempre no topo
       if (a.isFeatured && !b.isFeatured) return -1;
       if (!a.isFeatured && b.isFeatured) return 1;
+
+      // 2. Empresas com nome identificado têm prioridade; vagas confidenciais vão para o final
+      const aConf = /confidencial/i.test(a.companyName);
+      const bConf = /confidencial/i.test(b.companyName);
+      if (!aConf && bConf) return -1;
+      if (aConf && !bConf) return 1;
+
       return 0;
     });
   }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, seoConfig]);
@@ -57267,8 +57275,95 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 
 ---
 
+<a id="scripts-daily-job-syncymlexample"></a>
+## 87. Arquivo: `scripts/daily-job-sync.yml.example`
+- **Caminho:** `scripts/daily-job-sync.yml.example`
+- **Nome:** `daily-job-sync.yml.example`
+- **Linguagem / Sintaxe:** `text`
+- **Total de Linhas:** 73
+- **Tamanho:** 2307 bytes
+
+```text
+name: Atualização Diária de Vagas (Natal Vagas)
+
+on:
+  schedule:
+    # Executa todos os dias às 09:00 UTC (06:00 horário de Brasília / Natal)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Permite disparar manualmente pelo botão "Run workflow" no GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-jobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar Repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Instalar Dependências Python
+        run: |
+          pip install requests pillow
+
+      - name: 🤖 Rastrear Novas Vagas no RN
+        run: |
+          python3 scripts/daily_job_crawler.py
+
+      - name: 🗺️ Regenerar Sitemap XML
+        run: |
+          python3 scripts/generate_sitemap.py
+
+      - name: 🛡️ Teste de Integridade Pré-Build
+        run: |
+          python3 scripts/verify_build_integrity.py
+
+      - name: ⚡ Configurar Node.js & Cache do Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 🏗️ Validar Build de Produção
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: 🔄 Sincronizar Documentação & Contexto
+        run: |
+          python3 scripts/convert_to_amazon_quick.py
+          python3 scripts/build_single_context_md.py
+
+      - name: 🚀 Commit e Deploy Automático na Cloudflare
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "$(git status --porcelain frontend/public/data/jobs.json)" ]; then
+            git add frontend/public/data/jobs.json frontend/public/sitemap.xml AmazonQuick/ APP_NATAL_VAGAS.md APP_NATAL_VAGAS_COMPLETO.md
+            git commit -m "chore(auto): atualização diária do catálogo de vagas e sitemap [skip ci]"
+            git push origin main
+            echo "Novas vagas publicadas com sucesso na branch main!"
+          else
+            echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
+          fi
+
+```
+
+---
+
 <a id="scripts-daily-job-crawlerpy"></a>
-## 87. Arquivo: `scripts/daily_job_crawler.py`
+## 88. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -57553,7 +57648,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 88. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 89. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -57854,7 +57949,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 89. Arquivo: `scripts/generate_sitemap.py`
+## 90. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58035,7 +58130,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 90. Arquivo: `scripts/ingest_jobs.py`
+## 91. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58258,7 +58353,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 91. Arquivo: `scripts/rn_job_scraper.py`
+## 92. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58457,7 +58552,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 92. Arquivo: `scripts/test_efi_status.py`
+## 93. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58537,7 +58632,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 93. Arquivo: `scripts/verify_build_integrity.py`
+## 94. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58630,7 +58725,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 94. Arquivo: `scripts/verify_seo.py`
+## 95. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58713,7 +58808,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 95. Arquivo: `.env.example`
+## 96. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -58726,93 +58821,6 @@ POSTGRES_DB=natalvagas_db
 POSTGRES_USER=natalvagas_user
 POSTGRES_PASSWORD=sua_senha_segura_aqui
 POSTGRES_PORT=5432
-
-```
-
----
-
-<a id="github-workflows-daily-job-syncyml"></a>
-## 96. Arquivo: `.github/workflows/daily-job-sync.yml`
-- **Caminho:** `.github/workflows/daily-job-sync.yml`
-- **Nome:** `daily-job-sync.yml`
-- **Linguagem / Sintaxe:** `yaml`
-- **Total de Linhas:** 73
-- **Tamanho:** 2307 bytes
-
-```yaml
-name: Atualização Diária de Vagas (Natal Vagas)
-
-on:
-  schedule:
-    # Executa todos os dias às 09:00 UTC (06:00 horário de Brasília / Natal)
-    - cron: '0 9 * * *'
-  workflow_dispatch: # Permite disparar manualmente pelo botão "Run workflow" no GitHub
-
-permissions:
-  contents: write
-
-jobs:
-  sync-jobs:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Clonar Repositório
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: 🐍 Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: 📦 Instalar Dependências Python
-        run: |
-          pip install requests pillow
-
-      - name: 🤖 Rastrear Novas Vagas no RN
-        run: |
-          python3 scripts/daily_job_crawler.py
-
-      - name: 🗺️ Regenerar Sitemap XML
-        run: |
-          python3 scripts/generate_sitemap.py
-
-      - name: 🛡️ Teste de Integridade Pré-Build
-        run: |
-          python3 scripts/verify_build_integrity.py
-
-      - name: ⚡ Configurar Node.js & Cache do Frontend
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: 🏗️ Validar Build de Produção
-        run: |
-          cd frontend
-          npm ci
-          npm run build
-
-      - name: 🔄 Sincronizar Documentação & Contexto
-        run: |
-          python3 scripts/convert_to_amazon_quick.py
-          python3 scripts/build_single_context_md.py
-
-      - name: 🚀 Commit e Deploy Automático na Cloudflare
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          if [ -n "$(git status --porcelain frontend/public/data/jobs.json)" ]; then
-            git add frontend/public/data/jobs.json frontend/public/sitemap.xml AmazonQuick/ APP_NATAL_VAGAS.md APP_NATAL_VAGAS_COMPLETO.md
-            git commit -m "chore(auto): atualização diária do catálogo de vagas e sitemap [skip ci]"
-            git push origin main
-            echo "Novas vagas publicadas com sucesso na branch main!"
-          else
-            echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
-          fi
 
 ```
 

@@ -9,7 +9,6 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | Arquivo Markdown | Caminho Original no Projeto | Linhas | Tipo |
 | :--- | :--- | :--- | :--- |
 | [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
-| [daily-job-sync.yml.md](./daily-job-sync.yml.md) | `.github/workflows/daily-job-sync.yml` | 73 | `.yml` |
 | [gitignore.md](./gitignore.md) | `.gitignore` | 43 | `config` |
 | [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 248 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
@@ -55,7 +54,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8644 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
-| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 559 | `.tsx` |
+| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 567 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
 | [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 97 | `.tsx` |
@@ -98,6 +97,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 42 | `.ts` |
 | [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
 | [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
+| [daily-job-sync.yml.example.md](./daily-job-sync.yml.example.md) | `scripts/daily-job-sync.yml.example` | 73 | `.example` |
 | [daily_job_crawler.py.md](./daily_job_crawler.py.md) | `scripts/daily_job_crawler.py` | 271 | `.py` |
 | [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 287 | `.py` |
 | [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 167 | `.py` |

@@ -187,8 +187,16 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       return matchesQuery && matchesCity && matchesModel && matchesNoExperience;
     }).sort((a, b) => {
+      // 1. Vagas em destaque VIP sempre no topo
       if (a.isFeatured && !b.isFeatured) return -1;
       if (!a.isFeatured && b.isFeatured) return 1;
+
+      // 2. Empresas com nome identificado têm prioridade; vagas confidenciais vão para o final
+      const aConf = /confidencial/i.test(a.companyName);
+      const bConf = /confidencial/i.test(b.companyName);
+      if (!aConf && bConf) return -1;
+      if (aConf && !bConf) return 1;
+
       return 0;
     });
   }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, seoConfig]);
