@@ -65,7 +65,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [CourseRecommendations.tsx.md](./CourseRecommendations.tsx.md) | `frontend/src/components/CourseRecommendations.tsx` | 95 | `.tsx` |
 | [FaqSection.tsx.md](./FaqSection.tsx.md) | `frontend/src/components/FaqSection.tsx` | 107 | `.tsx` |
 | [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 168 | `.tsx` |
-| [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 104 | `.tsx` |
+| [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 108 | `.tsx` |
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 155 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
 | [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 362 | `.tsx` |

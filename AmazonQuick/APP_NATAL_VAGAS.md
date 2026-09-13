@@ -533,7 +533,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 587
-- **Tamanho:** 23429 bytes
+- **Tamanho:** 23775 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
@@ -887,18 +887,18 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
         {/* Barra de Filtros e Contagem */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-brand-500" />
               {seoConfig ? seoConfig.h1 : 'Oportunidades em Destaque no RN'}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-              Mostrando <span className="font-bold text-brand-600">{visibleJobs.length}</span> de{' '}
-              <span className="font-bold text-slate-800">{filteredJobs.length}</span> vagas ativas no filtro
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              Mostrando <span className="font-bold text-brand-600 dark:text-brand-400">{visibleJobs.length}</span> de{' '}
+              <span className="font-bold text-slate-800 dark:text-slate-200">{filteredJobs.length}</span> vagas ativas no filtro
             </p>
           </div>
 
           {/* Filtro Rápido de Modalidade */}
-          <div className="flex items-center gap-1.5 p-1 bg-white border border-slate-200 rounded-xl text-xs font-medium self-stretch sm:self-auto overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium self-stretch sm:self-auto overflow-x-auto no-scrollbar">
             {['TODOS', 'PRESENCIAL', 'HIBRIDO', 'REMOTO'].map((model) => (
               <button
                 key={model}
@@ -909,7 +909,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
                 className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                   selectedWorkModel === model 
                     ? 'bg-brand-600 text-white shadow-xs' 
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'
                 }`}
               >
                 {model === 'TODOS' ? 'Todos' : model.charAt(0) + model.slice(1).toLowerCase()}
@@ -953,7 +953,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
               <div className="mt-12 text-center">
                 <button
                   onClick={handleLoadMore}
-                  className="px-6 py-3.5 bg-white hover:bg-slate-50 active:scale-98 text-slate-800 font-bold text-sm rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-98 text-slate-800 dark:text-slate-200 font-bold text-sm rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
                   <ChevronDown className="w-4 h-4 text-brand-500" />
                   <span>Carregar mais vagas ({filteredJobs.length - visibleJobs.length} restantes)</span>
@@ -962,10 +962,10 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
             )}
           </>
         ) : (
-          <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 max-w-lg mx-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-slate-200 dark:border-slate-800 max-w-lg mx-auto">
             <AlertCircle className="w-12 h-12 text-brand-500 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-800">Nenhuma vaga encontrada</h3>
-            <p className="text-sm text-slate-500 mt-2 mb-6">
+            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Nenhuma vaga encontrada</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 mb-6">
               Não encontramos vagas com os filtros atuais. Tente buscar por outros termos ou limpar os filtros.
             </p>
             <button
@@ -1510,7 +1510,7 @@ export default AuthModal;
 - **Nome:** `CityPills.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 114
-- **Tamanho:** 4006 bytes
+- **Tamanho:** 4384 bytes
 
 ```tsx
 import React from 'react';
@@ -1559,7 +1559,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
   return (
     <nav aria-label="Filtro rápido por cidade e categoria no RN" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
       <div className="flex items-center gap-2 min-w-max">
-        <span className="text-xs font-bold text-slate-500 flex items-center gap-1 mr-1">
+        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1 mr-1">
           <MapPin className="w-3.5 h-3.5 text-brand-500" />
           Polos no RN:
         </span>
@@ -1571,7 +1571,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
           className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
             !selectedCity && !onlyNoExperience && !onlyPcd
               ? 'bg-brand-600 text-white shadow-xs'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
           }`}
         >
           Todas as Cidades
@@ -1584,7 +1584,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
           className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
             onlyPcd
               ? 'bg-blue-600 text-white shadow-xs ring-2 ring-blue-400/30'
-              : 'bg-blue-50 text-blue-800 hover:bg-blue-100 border border-blue-300'
+              : 'bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-300 dark:border-blue-800/60'
           }`}
         >
           <span>♿ Vagas PcD</span>
@@ -1597,7 +1597,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
           className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
             onlyNoExperience
               ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-400/30'
-              : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-300'
+              : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-emerald-300 dark:border-emerald-800/60'
           }`}
         >
           <span>🌱 Sem Experiência / 1º Emprego</span>
@@ -1616,7 +1616,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
               className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 isSelected
                   ? 'bg-brand-600 text-white shadow-xs'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
               }`}
             >
               {city}
@@ -1744,7 +1744,7 @@ export default CookieConsentBanner;
 - **Nome:** `CourseRecommendations.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 95
-- **Tamanho:** 3886 bytes
+- **Tamanho:** 4373 bytes
 
 ```tsx
 import React from 'react';
@@ -1791,20 +1791,20 @@ const COURSES: Course[] = [
 
 export const CourseRecommendations: React.FC = () => {
   return (
-    <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5 mb-6">
+    <section className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xs transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-5 mb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-600 flex items-center gap-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
             <GraduationCap className="w-4 h-4" /> Qualificação Profissional no RN
           </span>
-          <h3 className="text-xl font-black text-slate-900 mt-1">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mt-1">
             Cursos com Certificado Válido para o seu Currículo
           </h3>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Candidatos com cursos profissionalizantes têm até 4x mais chances de serem chamados para entrevistas.
           </p>
         </div>
-        <div className="shrink-0 flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full self-start sm:self-auto">
+        <div className="shrink-0 flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 border border-transparent dark:border-emerald-800/50 px-3 py-1.5 rounded-full self-start sm:self-auto">
           <Award className="w-4 h-4" /> Certificado reconhecido
         </div>
       </div>
@@ -1816,22 +1816,22 @@ export const CourseRecommendations: React.FC = () => {
             href={course.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col justify-between p-4 rounded-2xl border border-slate-100 bg-slate-50/70 hover:bg-white hover:border-brand-300 hover:shadow-md transition-all group cursor-pointer"
+            className="flex flex-col justify-between p-4 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/60 hover:bg-white dark:hover:bg-slate-800 hover:border-brand-300 dark:hover:border-brand-500 hover:shadow-md transition-all group cursor-pointer"
           >
             <div>
-              <span className="text-[10px] font-bold uppercase text-brand-600 bg-brand-50 px-2 py-0.5 rounded-md">
+              <span className="text-[10px] font-bold uppercase text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/60 px-2 py-0.5 rounded-md">
                 {course.category}
               </span>
-              <h4 className="font-bold text-slate-900 text-sm mt-2 group-hover:text-brand-600 transition-colors">
+              <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                 {course.title}
               </h4>
-              <p className="text-xs text-slate-500 mt-1.5 leading-relaxed flex items-start gap-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed flex items-start gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <span>{course.highlight}</span>
               </p>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-brand-600">
+            <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between text-xs font-bold text-brand-600 dark:text-brand-400">
               <span>Conhecer Curso</span>
               <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>
@@ -1853,7 +1853,7 @@ export default CourseRecommendations;
 - **Nome:** `FaqSection.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 107
-- **Tamanho:** 5191 bytes
+- **Tamanho:** 5543 bytes
 
 ```tsx
 import React, { useState } from 'react';
@@ -1905,7 +1905,7 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className="mt-14 pt-10 border-t border-slate-200">
+    <section className="mt-14 pt-10 border-t border-slate-200 dark:border-slate-800 transition-colors">
       {/* Script com Schema JSON-LD FAQPage para o Google */}
       <script
         type="application/ld+json"
@@ -1914,14 +1914,14 @@ export const FaqSection: React.FC = () => {
 
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-2 border border-brand-200">
-            <Sparkles className="w-3.5 h-3.5 text-brand-600" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-2 border border-brand-200 dark:border-brand-800/60">
+            <Sparkles className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
             Dúvidas Frequentes & SEO Potiguar
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Perguntas Frequentes sobre Empregos no RN
           </h2>
-          <p className="mt-2 text-sm text-slate-500 max-w-xl mx-auto">
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
             Tire suas dúvidas sobre o mercado de trabalho em Natal, candidatura segura e funcionamento do portal.
           </p>
         </div>
@@ -1932,26 +1932,26 @@ export const FaqSection: React.FC = () => {
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs transition-colors"
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xs transition-colors"
               >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors cursor-pointer"
+                  className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base font-bold text-slate-800 flex items-center gap-2.5">
-                    <HelpCircle className="w-4 h-4 text-brand-500 shrink-0" />
+                  <span className="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                    <HelpCircle className="w-4 h-4 text-brand-500 dark:text-brand-400 shrink-0" />
                     {item.question}
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-brand-600' : ''
+                      isOpen ? 'rotate-180 text-brand-600 dark:text-brand-400' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-4 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+                  <div className="px-5 pb-4 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
                     {item.answer}
                   </div>
                 )}
@@ -2155,8 +2155,8 @@ export const Footer: React.FC = () => {
 - **Caminho:** `frontend/src/components/HeroBanner.tsx`
 - **Nome:** `HeroBanner.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 104
-- **Tamanho:** 5315 bytes
+- **Total de Linhas:** 108
+- **Tamanho:** 6424 bytes
 
 ```tsx
 import React, { useState } from 'react';
@@ -2177,37 +2177,37 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-surface-lightBg py-8 sm:py-12 md:py-16 border-b border-slate-200">
+    <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-surface-lightBg dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 py-8 sm:py-12 md:py-16 border-b border-slate-200 dark:border-slate-800 transition-colors">
       
       {/* Elemento Decorativo Sutil */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Badge Regional */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-brand-100 text-brand-700 text-[11px] sm:text-xs font-semibold mb-4 sm:mb-6 border border-brand-200 shadow-2xs">
+        <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-brand-100 dark:bg-brand-950/70 text-brand-700 dark:text-brand-300 text-[11px] sm:text-xs font-semibold mb-4 sm:mb-6 border border-brand-200 dark:border-brand-800/60 shadow-2xs">
           <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse shrink-0" />
           <span className="truncate">Vagas em Natal e no Rio Grande do Norte</span>
         </div>
 
         {/* Headline Principal Otimizada para SEO e Mobile */}
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-snug sm:leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-snug sm:leading-tight">
           Vagas de Emprego em Natal <br className="hidden sm:inline" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-cyan-300">
             e no Rio Grande do Norte
           </span>
         </h1>
 
-        <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Encontre vagas de trabalho, estágio e jovem aprendiz em Natal, Mossoró, Parnamirim e região, com fontes verificadas e candidatura direta.
         </p>
 
         {/* Barra de Pesquisa de Alta Conversão */}
         <form 
           onSubmit={handleSubmit}
-          className="mt-6 sm:mt-8 p-2 sm:p-2.5 bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl shadow-slate-200/60 border border-slate-200 flex flex-col sm:flex-row gap-2 max-w-3xl mx-auto"
+          className="mt-6 sm:mt-8 p-2 sm:p-2.5 bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl shadow-slate-200/60 dark:shadow-slate-950/80 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row gap-2 max-w-3xl mx-auto transition-colors"
         >
-          <div className="flex-1 flex items-center gap-2.5 px-3 py-2.5 bg-slate-50/80 rounded-xl border border-slate-100 focus-within:border-brand-500 focus-within:bg-white transition-all">
+          <div className="flex-1 flex items-center gap-2.5 px-3 py-2.5 bg-slate-50/80 dark:bg-slate-800/90 rounded-xl border border-slate-100 dark:border-slate-700 focus-within:border-brand-500 dark:focus-within:border-brand-400 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all">
             <Briefcase className="w-5 h-5 text-slate-400 shrink-0" />
             <input 
               type="text" 
@@ -2215,20 +2215,24 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
               placeholder="Cargo, função ou empresa (ex: Atendente, Vendedor)"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-transparent text-sm text-slate-800 placeholder-slate-400 focus:outline-none"
+              className="w-full bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none"
             />
           </div>
 
-          <div className="sm:w-56 flex items-center gap-2.5 px-3 py-2.5 bg-slate-50/80 rounded-xl border border-slate-100 focus-within:border-brand-500 focus-within:bg-white transition-all">
+          <div className="sm:w-56 flex items-center gap-2.5 px-3 py-2.5 bg-slate-50/80 dark:bg-slate-800/90 rounded-xl border border-slate-100 dark:border-slate-700 focus-within:border-brand-500 dark:focus-within:border-brand-400 focus-within:bg-white dark:focus-within:bg-slate-800 transition-all">
             <MapPin className="w-5 h-5 text-slate-400 shrink-0" />
             <select 
               aria-label="Filtrar por cidade"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full bg-transparent text-sm text-slate-800 focus:outline-none cursor-pointer"
+              className="w-full bg-transparent text-sm text-slate-800 dark:text-slate-100 focus:outline-none cursor-pointer"
             >
-              <option value="">Todas as Cidades</option>
-              {cities.map(name => <option key={name} value={name}>{name}</option>)}
+              <option value="" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Todas as Cidades</option>
+              {cities.map(name => (
+                <option key={name} value={name} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+                  {name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -2242,8 +2246,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
         </form>
 
         {/* Termos Mais Buscados - Rolagem Suave no Mobile */}
-        <div className="mt-4 sm:mt-5 w-full flex items-center justify-start sm:justify-center gap-2 text-xs text-slate-500 overflow-x-auto no-scrollbar py-1 px-1">
-          <span className="font-semibold text-slate-600 shrink-0">Mais buscados:</span>
+        <div className="mt-4 sm:mt-5 w-full flex items-center justify-start sm:justify-center gap-2 text-xs text-slate-500 dark:text-slate-400 overflow-x-auto no-scrollbar py-1 px-1">
+          <span className="font-semibold text-slate-600 dark:text-slate-300 shrink-0">Mais buscados:</span>
           {['Auxiliar Administrativo', 'Atendente', 'Vendedor', 'Jovem Aprendiz', 'Estágio', 'Parnamirim', 'Mossoró'].map((term) => (
             <button
               key={term}
@@ -2252,7 +2256,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
                 setQuery(term);
                 onSearch(term, city);
               }}
-              className="shrink-0 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-brand-50 hover:text-brand-700 active:scale-95 transition-all cursor-pointer text-xs font-medium border border-slate-200/80"
+              className="shrink-0 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-slate-700 hover:text-brand-700 dark:hover:text-brand-300 active:scale-95 transition-all cursor-pointer text-xs font-medium border border-slate-200/80 dark:border-slate-700"
             >
               {term}
             </button>

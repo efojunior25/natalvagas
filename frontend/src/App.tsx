@@ -349,18 +349,18 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
         {/* Barra de Filtros e Contagem */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-brand-500" />
               {seoConfig ? seoConfig.h1 : 'Oportunidades em Destaque no RN'}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-              Mostrando <span className="font-bold text-brand-600">{visibleJobs.length}</span> de{' '}
-              <span className="font-bold text-slate-800">{filteredJobs.length}</span> vagas ativas no filtro
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              Mostrando <span className="font-bold text-brand-600 dark:text-brand-400">{visibleJobs.length}</span> de{' '}
+              <span className="font-bold text-slate-800 dark:text-slate-200">{filteredJobs.length}</span> vagas ativas no filtro
             </p>
           </div>
 
           {/* Filtro Rápido de Modalidade */}
-          <div className="flex items-center gap-1.5 p-1 bg-white border border-slate-200 rounded-xl text-xs font-medium self-stretch sm:self-auto overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-medium self-stretch sm:self-auto overflow-x-auto no-scrollbar">
             {['TODOS', 'PRESENCIAL', 'HIBRIDO', 'REMOTO'].map((model) => (
               <button
                 key={model}
@@ -371,7 +371,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
                 className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                   selectedWorkModel === model 
                     ? 'bg-brand-600 text-white shadow-xs' 
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'
                 }`}
               >
                 {model === 'TODOS' ? 'Todos' : model.charAt(0) + model.slice(1).toLowerCase()}
@@ -415,7 +415,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
               <div className="mt-12 text-center">
                 <button
                   onClick={handleLoadMore}
-                  className="px-6 py-3.5 bg-white hover:bg-slate-50 active:scale-98 text-slate-800 font-bold text-sm rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-98 text-slate-800 dark:text-slate-200 font-bold text-sm rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
                   <ChevronDown className="w-4 h-4 text-brand-500" />
                   <span>Carregar mais vagas ({filteredJobs.length - visibleJobs.length} restantes)</span>
@@ -424,10 +424,10 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
             )}
           </>
         ) : (
-          <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 max-w-lg mx-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-slate-200 dark:border-slate-800 max-w-lg mx-auto">
             <AlertCircle className="w-12 h-12 text-brand-500 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-800">Nenhuma vaga encontrada</h3>
-            <p className="text-sm text-slate-500 mt-2 mb-6">
+            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Nenhuma vaga encontrada</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 mb-6">
               Não encontramos vagas com os filtros atuais. Tente buscar por outros termos ou limpar os filtros.
             </p>
             <button

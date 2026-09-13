@@ -52,7 +52,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
   return (
     <nav aria-label="Filtro rápido por cidade e categoria no RN" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
       <div className="flex items-center gap-2 min-w-max">
-        <span className="text-xs font-bold text-slate-500 flex items-center gap-1 mr-1">
+        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1 mr-1">
           <MapPin className="w-3.5 h-3.5 text-brand-500" />
           Polos no RN:
         </span>
@@ -64,7 +64,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
           className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
             !selectedCity && !onlyNoExperience && !onlyPcd
               ? 'bg-brand-600 text-white shadow-xs'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
           }`}
         >
           Todas as Cidades
@@ -77,7 +77,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
           className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
             onlyPcd
               ? 'bg-blue-600 text-white shadow-xs ring-2 ring-blue-400/30'
-              : 'bg-blue-50 text-blue-800 hover:bg-blue-100 border border-blue-300'
+              : 'bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-300 dark:border-blue-800/60'
           }`}
         >
           <span>♿ Vagas PcD</span>
@@ -90,7 +90,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
           className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
             onlyNoExperience
               ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-400/30'
-              : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-300'
+              : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-emerald-300 dark:border-emerald-800/60'
           }`}
         >
           <span>🌱 Sem Experiência / 1º Emprego</span>
@@ -109,7 +109,7 @@ export const CityPills: React.FC<CityPillsProps> = ({
               className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 isSelected
                   ? 'bg-brand-600 text-white shadow-xs'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
               }`}
             >
               {city}
