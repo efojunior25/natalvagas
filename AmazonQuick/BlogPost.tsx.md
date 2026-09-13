@@ -1,7 +1,7 @@
 # File: BlogPost.tsx
 - **Original Path:** `frontend/src/pages/BlogPost.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 267
+- **Lines of Code:** 264
 
 ---
 
@@ -87,7 +87,7 @@ export const BlogPost: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       {/* Schema JSON-LD NewsArticle */}
       <script
         type="application/ld+json"
@@ -99,37 +99,37 @@ export const BlogPost: React.FC = () => {
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full">
         
         {/* Breadcrumbs */}
-        <nav aria-label="Navegação estrutural" className="flex items-center gap-1.5 text-xs text-slate-400 mb-6 flex-wrap">
-          <Link to="/" className="hover:text-brand-600 transition-colors">Início</Link>
+        <nav aria-label="Navegação estrutural" className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500 mb-6 flex-wrap">
+          <Link to="/" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Início</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link to="/blog" className="hover:text-brand-600 transition-colors">Blog</Link>
+          <Link to="/blog" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Blog</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-slate-600 font-medium truncate max-w-[200px] sm:max-w-xs">{post.title}</span>
+          <span className="text-slate-600 dark:text-slate-400 font-medium truncate max-w-[200px] sm:max-w-xs">{post.title}</span>
         </nav>
 
-        <article className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs p-6 sm:p-10">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs p-6 sm:p-10">
           
           {/* Cabeçalho do Artigo */}
-          <header className="space-y-4 border-b border-slate-100 pb-6">
+          <header className="space-y-4 border-b border-slate-100 dark:border-slate-800 pb-6">
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider border border-brand-100">
+              <span className="px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase tracking-wider border border-brand-100 dark:border-brand-800">
                 {post.categoryLabel}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               {post.excerpt}
             </p>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs text-slate-500 border-t border-slate-100">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1.5 font-medium">
-                  <User className="w-4 h-4 text-brand-600" />
-                  <span>{post.author.name}</span>
+                  <User className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                  <span className="text-slate-700 dark:text-slate-300">{post.author.name}</span>
                 </div>
                 <span>•</span>
                 <div className="flex items-center gap-1">
@@ -147,16 +147,16 @@ export const BlogPost: React.FC = () => {
               <button
                 type="button"
                 onClick={handleShareWhatsApp}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-xs font-bold transition-colors cursor-pointer border border-emerald-200"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-xl text-xs font-bold transition-colors cursor-pointer border border-emerald-200 dark:border-emerald-800"
               >
-                <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+                <Share2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Compartilhar no WhatsApp</span>
               </button>
             </div>
           </header>
 
           {/* Imagem de Capa do Artigo */}
-          <div className="my-8 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 max-h-96">
+          <div className="my-8 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 max-h-96">
             <img
               src={post.coverImage}
               alt={post.coverImageAlt}
@@ -170,45 +170,42 @@ export const BlogPost: React.FC = () => {
           </div>
 
           {/* Conteúdo do Artigo */}
-          <div className="prose prose-slate max-w-none text-slate-700 text-base leading-relaxed space-y-4">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-base leading-relaxed space-y-4">
             {post.content.map((paragraph, idx) => {
               if (paragraph.startsWith('### ')) {
                 return (
-                  <h2 key={idx} className="text-xl sm:text-2xl font-black text-slate-900 mt-8 mb-3">
+                  <h2 key={idx} className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-8 mb-3">
                     {paragraph.replace('### ', '')}
                   </h2>
                 );
               }
               if (paragraph.startsWith('- ') || paragraph.startsWith('1. ') || paragraph.startsWith('2. ') || paragraph.startsWith('3. ') || paragraph.startsWith('4. ') || paragraph.startsWith('5. ')) {
                 return (
-                  <div key={idx} className="pl-4 py-1 text-slate-700 border-l-2 border-brand-300 bg-brand-50/20 rounded-r-lg">
+                  <div key={idx} className="pl-4 py-1 text-slate-700 dark:text-slate-300 border-l-2 border-brand-300 dark:border-brand-600 bg-brand-50/20 dark:bg-brand-950/30 rounded-r-lg">
                     <p dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                   </div>
                 );
               }
               return (
                 <p 
-                  key={idx}
-                  dangerouslySetInnerHTML={{ 
-                    __html: paragraph
-                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-brand-600 font-bold underline hover:text-brand-800">$1</a>')
-                  }}
+                  key={idx} 
+                  dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} 
                 />
               );
             })}
           </div>
 
-          {/* Box de Ação / Criar Currículo */}
-          <div className="mt-10 p-6 bg-gradient-to-r from-brand-50 via-white to-brand-50/50 rounded-2xl border border-brand-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase text-brand-600 flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5" /> Dica Prática Natal Vagas
-              </span>
-              <h3 className="font-bold text-slate-900 text-base mt-1">
+          {/* Callout de Conversão de Currículo */}
+          <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-brand-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800/80 border border-brand-200 dark:border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="space-y-1 text-center sm:text-left">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 dark:text-brand-300">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Destaque-se no Mercado Potiguar</span>
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white text-base mt-1">
                 Coloque estas dicas em prática agora mesmo!
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Gere seu currículo profissional aprovado por IA sem custos e candidate-se hoje às vagas do RN.
               </p>
             </div>
@@ -222,10 +219,10 @@ export const BlogPost: React.FC = () => {
           </div>
 
           {/* Tags do Artigo */}
-          <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-2 flex-wrap text-xs">
-            <span className="font-semibold text-slate-400">Tags:</span>
+          <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 flex-wrap text-xs">
+            <span className="font-semibold text-slate-400 dark:text-slate-500">Tags:</span>
             {post.tags.map((tag) => (
-              <span key={tag} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-md">
+              <span key={tag} className="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">
                 #{tag}
               </span>
             ))}
@@ -241,7 +238,7 @@ export const BlogPost: React.FC = () => {
         {/* Artigos Relacionados */}
         {relatedPosts.length > 0 && (
           <section className="mt-12 space-y-4">
-            <h3 className="text-lg font-black text-slate-900">
+            <h3 className="text-lg font-black text-slate-900 dark:text-white">
               Outros Artigos que Podem te Interessar
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -249,15 +246,15 @@ export const BlogPost: React.FC = () => {
                 <Link
                   key={rel.id}
                   to={`/blog/${rel.slug}`}
-                  className="p-4 bg-white rounded-2xl border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group block"
+                  className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-600 hover:shadow-md transition-all group block"
                 >
-                  <span className="text-[10px] font-bold text-brand-600 uppercase">
+                  <span className="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase">
                     {rel.categoryLabel}
                   </span>
-                  <h4 className="font-bold text-sm text-slate-900 group-hover:text-brand-600 transition-colors mt-1 line-clamp-2">
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors mt-1 line-clamp-2">
                     {rel.title}
                   </h4>
-                  <span className="text-[11px] text-slate-400 mt-2 block">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 mt-2 block">
                     {rel.readTime}
                   </span>
                 </Link>

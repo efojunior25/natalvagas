@@ -45,26 +45,26 @@ export const BlogList: React.FC = () => {
   const featuredPost = BLOG_POSTS.find(p => p.isFeatured) || BLOG_POSTS[0];
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       {/* Hero do Blog */}
-      <header className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-surface-lightBg py-10 sm:py-14 border-b border-slate-200">
+      <header className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-surface-lightBg dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 py-10 sm:py-14 border-b border-slate-200 dark:border-slate-800">
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold mb-4 border border-brand-200">
-            <BookOpen className="w-3.5 h-3.5 text-brand-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-4 border border-brand-200 dark:border-brand-800">
+            <BookOpen className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
             <span>Blog & Carreiras no RN</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Notícias de Emprego, Guias e <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">
               Dicas Profissionais no RN
             </span>
           </h1>
 
-          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Informações verificadas sobre processos seletivos locais, agendamento no SINE Natal, primeiros empregos e modelos de currículo de alta conversão.
           </p>
 
@@ -76,7 +76,7 @@ export const BlogList: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar artigos por tema (ex: SINE, currículo, jovem aprendiz)..."
-              className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl border border-slate-200 text-xs sm:text-sm focus:border-brand-500 focus:outline-hidden shadow-xs"
+              className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:outline-hidden shadow-xs"
             />
           </div>
 
@@ -89,7 +89,7 @@ export const BlogList: React.FC = () => {
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   selectedCategory === cat.id
                     ? 'bg-brand-600 text-white shadow-xs'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 {cat.label}
@@ -110,9 +110,9 @@ export const BlogList: React.FC = () => {
 
         {/* Artigo em Destaque Principal (Quando não estiver filtrando por texto) */}
         {!searchQuery && selectedCategory === 'TODOS' && featuredPost && (
-          <article className="mb-10 bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-lg transition-all group">
+          <article className="mb-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-lg transition-all group">
             <Link to={`/blog/${featuredPost.slug}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-5 h-56 md:h-full min-h-[220px] relative overflow-hidden bg-slate-100">
+              <div className="md:col-span-5 h-56 md:h-full min-h-[220px] relative overflow-hidden bg-slate-100 dark:bg-slate-800">
                 <img
                   src={featuredPost.coverImage}
                   alt={featuredPost.coverImageAlt}
@@ -125,22 +125,22 @@ export const BlogList: React.FC = () => {
 
               <div className="md:col-span-7 p-6 sm:p-8 space-y-3">
                 <div className="flex items-center gap-3 text-xs text-slate-400">
-                  <span className="text-brand-600 font-bold uppercase">{featuredPost.categoryLabel}</span>
+                  <span className="text-brand-600 dark:text-brand-400 font-bold uppercase">{featuredPost.categoryLabel}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {featuredPost.publishedAt.split('-').reverse().join('/')}</span>
                 </div>
 
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-brand-600 transition-colors leading-snug">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors leading-snug">
                   {featuredPost.title}
                 </h2>
 
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {featuredPost.excerpt}
                 </p>
 
-                <div className="pt-2 flex items-center gap-1.5 text-sm font-bold text-brand-600 group-hover:translate-x-1 transition-transform">
+                <div className="pt-2 flex items-center gap-1.5 text-sm font-bold text-brand-600 dark:text-brand-400 group-hover:translate-x-1 transition-transform">
                   <span>Ler artigo completo</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -154,17 +154,17 @@ export const BlogList: React.FC = () => {
           {filteredPosts.map((post) => (
             <article 
               key={post.id}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group"
+              className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-md hover:border-brand-300 dark:hover:border-brand-500 transition-all flex flex-col justify-between group"
             >
               <Link to={`/blog/${post.slug}`} className="block">
-                <div className="h-44 overflow-hidden relative bg-slate-100">
+                <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-800">
                   <img
                     src={post.coverImage}
                     alt={post.coverImageAlt}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
                     loading="lazy"
                   />
-                  <span className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-xs text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-2xs">
+                  <span className="absolute top-2.5 left-2.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xs text-slate-800 dark:text-slate-200 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-2xs">
                     {post.categoryLabel}
                   </span>
                 </div>
@@ -176,21 +176,21 @@ export const BlogList: React.FC = () => {
                     <span>{post.publishedAt.split('-').reverse().join('/')}</span>
                   </div>
 
-                  <h3 className="font-bold text-base text-slate-900 group-hover:text-brand-600 transition-colors leading-snug line-clamp-2">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors leading-snug line-clamp-2">
                     {post.title}
                   </h3>
 
-                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
                     {post.excerpt}
                   </p>
                 </div>
               </Link>
 
-              <div className="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+              <div className="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
                 <span className="text-slate-400 text-[11px]">Por {post.author.name}</span>
                 <Link
                   to={`/blog/${post.slug}`}
-                  className="font-bold text-brand-600 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                  className="font-bold text-brand-600 dark:text-brand-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>Ler</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -201,8 +201,8 @@ export const BlogList: React.FC = () => {
         </div>
 
         {filteredPosts.length === 0 && (
-          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs max-w-md mx-auto">
-            <p className="text-base font-bold text-slate-700">Nenhum artigo encontrado</p>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-xs max-w-md mx-auto">
+            <p className="text-base font-bold text-slate-700 dark:text-slate-200">Nenhum artigo encontrado</p>
             <p className="text-xs text-slate-400 mt-1">Tente buscar por termos mais genéricos.</p>
             <button
               onClick={() => {

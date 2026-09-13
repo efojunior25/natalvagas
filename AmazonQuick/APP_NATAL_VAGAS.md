@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 111 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 113 arquivos.
 
 ---
 
@@ -45,78 +45,80 @@
 37. [`frontend/functions/api/auth/me.ts`](#frontend-functions-api-auth-mets)
 38. [`frontend/functions/api/auth/register.ts`](#frontend-functions-api-auth-registerts)
 39. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
-40. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
-41. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
-42. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
-43. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-44. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-45. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-46. [`frontend/functions/api/resumes/index.ts`](#frontend-functions-api-resumes-indexts)
-47. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-48. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
-49. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-50. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-51. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-52. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-53. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-54. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
-55. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-56. [`frontend/public/_redirects`](#frontend-public--redirects)
-57. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-58. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
-59. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
-60. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-61. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-62. [`frontend/public/sw.js`](#frontend-public-swjs)
-63. [`frontend/.env.example`](#frontend-envexample)
-64. [`frontend/index.html`](#frontend-indexhtml)
-65. [`frontend/package-lock.json`](#frontend-package-lockjson)
-66. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-67. [`frontend/schema.sql`](#frontend-schemasql)
-68. [`frontend/src/index.css`](#frontend-src-indexcss)
-69. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-70. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-71. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-72. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-73. [`backend/Dockerfile`](#backend-dockerfile)
-74. [`backend/pom.xml`](#backend-pomxml)
-75. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-76. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-77. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-78. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-79. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-80. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-81. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-82. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-83. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-84. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-85. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-86. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-87. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-88. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-89. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-90. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-91. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-92. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-93. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-94. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-95. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-96. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-97. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
-98. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-99. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-100. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
-101. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-102. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-103. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-104. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-105. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-106. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-107. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-108. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-109. [`.env.example`](#envexample)
-110. [`.gitignore`](#gitignore)
-111. [`docker-compose.yml`](#docker-composeyml)
+40. [`frontend/functions/api/categories.ts`](#frontend-functions-api-categoriests)
+41. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
+42. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
+43. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
+44. [`frontend/functions/api/jobs/index.ts`](#frontend-functions-api-jobs-indexts)
+45. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+46. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+47. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+48. [`frontend/functions/api/resumes/index.ts`](#frontend-functions-api-resumes-indexts)
+49. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+50. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
+51. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+52. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+53. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+54. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+55. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+56. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
+57. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+58. [`frontend/public/_redirects`](#frontend-public--redirects)
+59. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+60. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
+61. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
+62. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+63. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+64. [`frontend/public/sw.js`](#frontend-public-swjs)
+65. [`frontend/.env.example`](#frontend-envexample)
+66. [`frontend/index.html`](#frontend-indexhtml)
+67. [`frontend/package-lock.json`](#frontend-package-lockjson)
+68. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+69. [`frontend/schema.sql`](#frontend-schemasql)
+70. [`frontend/src/index.css`](#frontend-src-indexcss)
+71. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+72. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+73. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+74. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+75. [`backend/Dockerfile`](#backend-dockerfile)
+76. [`backend/pom.xml`](#backend-pomxml)
+77. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+78. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+79. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+80. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+81. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+82. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+83. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+84. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+85. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+86. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+87. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+88. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+89. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+90. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+91. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+92. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+93. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+94. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+95. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+96. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+97. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+98. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+99. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
+100. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+101. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+102. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+103. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+104. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+105. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+106. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+107. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+108. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+109. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+110. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+111. [`.env.example`](#envexample)
+112. [`.gitignore`](#gitignore)
+113. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -2401,7 +2403,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
 - **Nome:** `JobModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 320
-- **Tamanho:** 15991 bytes
+- **Tamanho:** 17575 bytes
 
 ```tsx
 import React, { useEffect, useState } from 'react';
@@ -2509,30 +2511,30 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
       />
 
       <div 
-        className="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[94vh] sm:max-h-[90vh] flex flex-col animate-scaleUp"
+        className="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden max-h-[94vh] sm:max-h-[90vh] flex flex-col animate-scaleUp text-slate-800 dark:text-slate-100"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Cabeçalho */}
-        <div className="p-4 sm:p-6 bg-gradient-to-r from-brand-50 to-white border-b border-slate-200 flex items-start justify-between gap-3">
+        <div className="p-4 sm:p-6 bg-gradient-to-r from-brand-50 to-white dark:from-slate-800 dark:to-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-3">
           <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0 flex-1">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-brand-600 font-bold text-lg sm:text-xl uppercase overflow-hidden shrink-0 mt-0.5 sm:mt-0">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex items-center justify-center text-brand-600 dark:text-brand-400 font-bold text-lg sm:text-xl uppercase overflow-hidden shrink-0 mt-0.5 sm:mt-0">
               {job.companyLogoUrl ? (
                 <img src={job.companyLogoUrl} alt={job.companyName} className="w-full h-full object-cover" />
               ) : (
-                <Building2 className="w-6 h-6 sm:w-7 sm:h-7 text-slate-400" />
+                <Building2 className="w-6 h-6 sm:w-7 sm:h-7 text-slate-400 dark:text-slate-500" />
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <span className="text-[11px] sm:text-xs font-semibold text-brand-600 uppercase tracking-wider block truncate">
+              <span className="text-[11px] sm:text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wider block truncate">
                 {job.companyName}
               </span>
-              <h2 className="text-lg sm:text-2xl font-black text-slate-900 leading-snug break-words">
+              <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white leading-snug break-words">
                 {job.title}
               </h2>
-              <div className="mt-1 flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-slate-500">
+              <div className="mt-1 flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-slate-500 dark:text-slate-400">
                 <span className="inline-flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <MapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
                   {job.neighborhood ? `${job.neighborhood}, ` : ''}{job.city}/RN
                 </span>
                 <span>•</span>
@@ -2544,49 +2546,49 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
           <button 
             onClick={onClose}
             aria-label="Fechar detalhes da vaga"
-            className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors shrink-0 cursor-pointer"
+            className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Conteúdo com Scroll */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 text-slate-700 text-sm leading-relaxed">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
           
           {/* Alerta de Vaga Inclusiva PcD */}
           {(job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
-            <div className="p-3.5 bg-blue-50/80 border border-blue-200 rounded-2xl flex items-center gap-3 text-blue-900 text-xs shadow-2xs">
+            <div className="p-3.5 bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 rounded-2xl flex items-center gap-3 text-blue-900 dark:text-blue-300 text-xs shadow-2xs">
               <span className="text-xl shrink-0">♿</span>
               <div>
-                <strong className="block text-blue-950 font-bold text-xs sm:text-sm">Vaga Afirmativa / Acessível para PcD</strong>
-                <span className="text-blue-800">Esta vaga acolhe candidaturas de Pessoas com Deficiência (Lei nº 8.213/91).</span>
+                <strong className="block text-blue-950 dark:text-blue-200 font-bold text-xs sm:text-sm">Vaga Afirmativa / Acessível para PcD</strong>
+                <span className="text-blue-800 dark:text-blue-300">Esta vaga acolhe candidaturas de Pessoas com Deficiência (Lei nº 8.213/91).</span>
               </div>
             </div>
           )}
 
           {/* Informações Rápidas */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div>
-              <span className="text-[11px] font-semibold text-slate-400 uppercase">Regime</span>
-              <p className="font-semibold text-slate-800">{job.contractType === 'NAO_INFORMADO' ? 'Não informado' : job.contractType}</p>
+              <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase">Regime</span>
+              <p className="font-semibold text-slate-800 dark:text-slate-200">{job.contractType === 'NAO_INFORMADO' ? 'Não informado' : job.contractType}</p>
             </div>
             <div>
-              <span className="text-[11px] font-semibold text-slate-400 uppercase">Salário</span>
-              <p className="font-semibold text-emerald-600">
+              <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase">Salário</span>
+              <p className="font-semibold text-emerald-600 dark:text-emerald-400">
                 {!job.hideSalary && job.salaryMin 
                   ? `R$ ${job.salaryMin.toLocaleString('pt-BR')}` 
                   : 'Não informado'}
               </p>
             </div>
             <div>
-              <span className="text-[11px] font-semibold text-slate-400 uppercase">Local</span>
-              <p className="font-semibold text-slate-800">{job.city}/RN</p>
+              <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase">Local</span>
+              <p className="font-semibold text-slate-800 dark:text-slate-200">{job.city}/RN</p>
             </div>
           </div>
 
           {job.sourceUrl && (
-            <div className="p-4 bg-brand-50 rounded-xl text-sm space-y-1">
-              <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-700 underline">Fonte: {job.sourceName}</a>
+            <div className="p-4 bg-brand-50 dark:bg-brand-950/40 border border-brand-100 dark:border-brand-900/50 rounded-xl text-sm space-y-1 text-slate-700 dark:text-slate-300">
+              <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-700 dark:text-brand-400 underline">Fonte: {job.sourceName}</a>
               <p>Conferida em {job.verifiedAt?.split('-').reverse().join('/')}. A disponibilidade pode mudar na fonte.</p>
               <p>{job.expiresAt ? `Inscrições até ${job.expiresAt.slice(0, 10).split('-').reverse().join('/')}` : 'Prazo de inscrição não informado pela empresa.'}</p>
             </div>
@@ -2594,10 +2596,10 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
 
           {/* Descrição */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
               Descrição da Vaga
             </h3>
-            <div className="whitespace-pre-line text-slate-700">
+            <div className="whitespace-pre-line text-slate-700 dark:text-slate-300">
               {job.description}
             </div>
           </div>
@@ -2605,10 +2607,10 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
           {/* Requisitos */}
           {job.requirements && (
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
                 Requisitos e Qualificações
               </h3>
-              <div className="whitespace-pre-line text-slate-700 bg-slate-50/50 p-4 rounded-xl border border-slate-100">
+              <div className="whitespace-pre-line text-slate-700 dark:text-slate-300 bg-slate-50/50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
                 {job.requirements}
               </div>
             </div>
@@ -2617,18 +2619,18 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
           {/* Benefícios */}
           {job.benefits && (
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
                 Benefícios
               </h3>
-              <div className="whitespace-pre-line text-slate-700">
+              <div className="whitespace-pre-line text-slate-700 dark:text-slate-300">
                 {job.benefits}
               </div>
             </div>
           )}
 
           {/* Alerta Anti-Golpe */}
-          <div className="p-3.5 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-xs flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <div className="p-3.5 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/50 text-amber-900 dark:text-amber-300 text-xs flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
             <p>
               <strong>Dica de Segurança:</strong> O Natal Vagas nunca cobra taxas de candidatos. Desconfie de ofertas que exijam pagamento para participar de processos seletivos ou comprar cursos preparatórios.
             </p>
@@ -2637,15 +2639,15 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
         </div>
 
         {/* Botão de Ação / Candidatura */}
-        <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200">
+        <div className="p-4 sm:p-6 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           {showEmailOptions && job.applicationChannel === 'EMAIL' ? (
             <section aria-label="Candidatura por e-mail" className="space-y-3">
-              <h3 className="font-bold text-slate-900">Envie seu currículo por e-mail</h3>
-              <p className="text-sm text-slate-600">Escolha onde escrever. Revise a mensagem e anexe seu currículo antes de enviar.</p>
-              <p className="text-sm text-slate-700 break-all">Destinatário: <strong>{job.applicationTarget}</strong></p>
+              <h3 className="font-bold text-slate-900 dark:text-white">Envie seu currículo por e-mail</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Escolha onde escrever. Revise a mensagem e anexe seu currículo antes de enviar.</p>
+              <p className="text-sm text-slate-700 dark:text-slate-300 break-all">Destinatário: <strong>{job.applicationTarget}</strong></p>
               <div className="flex flex-wrap gap-2">
-                <a href={gmailUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-3 rounded-xl bg-brand-600 text-white font-semibold text-sm">Abrir Gmail no navegador</a>
-                <a href={outlookUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-3 rounded-xl border border-slate-300 bg-white font-semibold text-sm">Abrir Outlook no navegador</a>
+                <a href={gmailUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm">Abrir Gmail no navegador</a>
+                <a href={outlookUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm">Abrir Outlook no navegador</a>
                 <button type="button" onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(job.applicationTarget);
@@ -2653,13 +2655,13 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
                   } catch {
                     setCopyStatus('Não foi possível copiar. Selecione e copie o endereço exibido acima.');
                   }
-                }} className="px-4 py-3 rounded-xl border border-slate-300 bg-white font-semibold text-sm">Copiar endereço de e-mail</button>
+                }} className="px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm cursor-pointer">Copiar endereço de e-mail</button>
               </div>
-              <p role="status" className="text-sm text-slate-600">{copyStatus || 'Você poderá precisar entrar na sua conta. Nenhum e-mail é enviado automaticamente.'}</p>
-              <button type="button" onClick={() => setShowEmailOptions(false)} className="text-sm text-brand-700 underline">Voltar aos detalhes</button>
+              <p role="status" className="text-sm text-slate-600 dark:text-slate-400">{copyStatus || 'Você poderá precisar entrar na sua conta. Nenhum e-mail é enviado automaticamente.'}</p>
+              <button type="button" onClick={() => setShowEmailOptions(false)} className="text-sm text-brand-700 dark:text-brand-400 underline cursor-pointer">Voltar aos detalhes</button>
             </section>
           ) : <>
-          <p className="text-xs text-slate-500 mb-3">{job.applicationChannel === 'EMAIL' ? 'Escolha seu serviço de e-mail para preparar a candidatura.' : job.applicationChannel === 'WHATSAPP' ? 'Converse com o responsável pela vaga no WhatsApp.' : 'A candidatura será feita na página da empresa, aberta em uma nova aba.'}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{job.applicationChannel === 'EMAIL' ? 'Escolha seu serviço de e-mail para preparar a candidatura.' : job.applicationChannel === 'WHATSAPP' ? 'Converse com o responsável pela vaga no WhatsApp.' : 'A candidatura será feita na página da empresa, aberta em uma nova aba.'}</p>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <button
@@ -2685,19 +2687,19 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
                   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
                   window.open(whatsappUrl, '_blank');
                 }}
-                className="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer active:scale-95 shadow-2xs"
+                className="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer active:scale-95 shadow-2xs"
               >
-                <Share2 className="w-4 h-4 text-emerald-600" />
+                <Share2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Compartilhar Vaga</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setIsSocialModalOpen(true)}
-                className="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-pink-200 bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-pink-200 dark:border-pink-900/50 bg-pink-50 dark:bg-pink-950/40 hover:bg-pink-100 dark:hover:bg-pink-900/50 text-pink-700 dark:text-pink-300 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                 title="Gerar Arte para Instagram Feed ou Story"
               >
-                <Instagram className="w-3.5 h-3.5 text-pink-600" />
+                <Instagram className="w-3.5 h-3.5 text-pink-600 dark:text-pink-400" />
                 <span>Gerar Card</span>
               </button>
             </div>
@@ -3110,8 +3112,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 - **Caminho:** `frontend/src/components/PostJobModal.tsx`
 - **Nome:** `PostJobModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 523
-- **Tamanho:** 25268 bytes
+- **Total de Linhas:** 550
+- **Tamanho:** 26833 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
@@ -3125,8 +3127,21 @@ interface PostJobModalProps {
   onJobCreated: () => void;
 }
 
+const DEFAULT_CATEGORIES: Category[] = [
+  { id: 1, name: 'Administrativo & Financeiro', slug: 'administrativo' },
+  { id: 2, name: 'Atendimento & Vendas', slug: 'vendas' },
+  { id: 3, name: 'Saúde, Clínica & Farmácia', slug: 'saude' },
+  { id: 4, name: 'Tecnologia, TI & Design', slug: 'tecnologia' },
+  { id: 5, name: 'Logística, Estoque & Operacional', slug: 'logistica' },
+  { id: 6, name: 'Educação & Estágio', slug: 'estagios' },
+  { id: 7, name: 'Gastronomia, Bares & Restaurantes', slug: 'gastronomia' },
+  { id: 8, name: 'Construção Civil & Manutenção', slug: 'construcao' },
+  { id: 9, name: 'Serviços Gerais & Segurança', slug: 'servicos-gerais' },
+  { id: 10, name: 'Outros Setores', slug: 'outros' }
+];
+
 export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJobCreated }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>(DEFAULT_CATEGORIES);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successSlug, setSuccessSlug] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -3154,8 +3169,14 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   useEffect(() => {
     if (isOpen) {
       axios.get('/api/categories')
-        .then(res => setCategories(res.data))
-        .catch(err => console.error('Erro ao carregar categorias:', err));
+        .then(res => {
+          if (Array.isArray(res.data) && res.data.length > 0) {
+            setCategories(res.data);
+          }
+        })
+        .catch(() => {
+          setCategories(DEFAULT_CATEGORIES);
+        });
     }
   }, [isOpen]);
 
@@ -3266,10 +3287,18 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={handleReset}
-                className="w-full sm:w-auto px-6 py-3 bg-brand-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand-700 transition-all"
+                className="w-full sm:w-auto px-6 py-3 bg-brand-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand-700 transition-all cursor-pointer"
               >
                 Ver no Mural de Vagas
               </button>
+              <a
+                href={`https://wa.me/5584992344922?text=${encodeURIComponent(`Olá, Edson! Acabei de cadastrar uma nova oportunidade no Natal Vagas:\n\n*${title}* na empresa *${companyName}*\nCidade: ${city}/RN\nCanal: ${applicationTarget}${isFeatured ? '\n⭐ Com Destaque VIP solicitado' : ''}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-md transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Avisar Edson no WhatsApp</span>
+              </a>
             </div>
           </div>
         ) : (
@@ -5410,7 +5439,7 @@ export default WhatsAppCommunityBanner;
 - **Nome:** `AboutUs.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 114
-- **Tamanho:** 6203 bytes
+- **Tamanho:** 7058 bytes
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -5426,34 +5455,34 @@ export const AboutUs: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <article className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8 text-slate-700 text-sm sm:text-base leading-relaxed">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-3 border border-brand-200">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-3 border border-brand-200 dark:border-brand-800">
               <Sparkles className="w-3.5 h-3.5" />
               Nossa História & Missão
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Sobre o Natal Vagas
             </h1>
-            <p className="text-slate-500 mt-2">
+            <p className="text-slate-500 dark:text-slate-400 mt-2">
               Conectando os talentos do Rio Grande do Norte às melhores empresas da região.
             </p>
           </header>
 
           <section className="space-y-4">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Heart className="w-5 h-5 text-rose-500" />
               O Que é o Natal Vagas?
             </h2>
@@ -5466,57 +5495,57 @@ export const AboutUs: React.FC = () => {
           </section>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold">
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+              <div className="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold">
                 <Target className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-base">Foco Regional</h3>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">Foco Regional</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Oportunidades em Natal, Mossoró, Parnamirim, Macaíba, São Gonçalo do Amarante, Caicó e outras cidades potiguares.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
                 <CheckCircle className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-base">Fontes Verificadas</h3>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">Fontes Verificadas</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Todas as vagas vêm com link oficial da empresa (Gupy, Pandapé, portais de carreira) para candidatura direta sem pegadinhas.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+              <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
                 <Users className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-base">100% Gratuito</h3>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">100% Gratuito</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Gratuito tanto para o candidato pesquisar e se candidatar quanto para empresas cadastrarem seus anúncios.
               </p>
             </div>
           </div>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               Nosso Processo Editorial e Curadoria
             </h2>
             <p>
               Nossa equipe monitora diariamente os principais canais oficiais de grandes e médias empresas no RN. Antes de um anúncio entrar no portal, checamos:
             </p>
-            <ul className="list-disc pl-5 space-y-1 text-slate-600">
+            <ul className="list-disc pl-5 space-y-1 text-slate-600 dark:text-slate-400">
               <li>A idoneidade da empresa contratante e a existência real da oportunidade.</li>
               <li>A vigência do prazo de inscrição para não exibir anúncios expirados.</li>
               <li>O direcionamento seguro para a página de inscrição oficial da empresa.</li>
             </ul>
           </section>
 
-          <section className="p-5 rounded-2xl bg-brand-50 border border-brand-100 text-brand-950 space-y-2">
-            <div className="flex items-center gap-2 font-bold text-brand-800">
-              <MapPin className="w-5 h-5 text-brand-600" />
+          <section className="p-5 rounded-2xl bg-brand-50 dark:bg-brand-950/40 border border-brand-100 dark:border-brand-900/50 text-brand-950 dark:text-brand-200 space-y-2">
+            <div className="flex items-center gap-2 font-bold text-brand-800 dark:text-brand-300">
+              <MapPin className="w-5 h-5 text-brand-600 dark:text-brand-400" />
               Sede e Atuação
             </div>
-            <p className="text-sm text-brand-900">
+            <p className="text-sm text-brand-900 dark:text-brand-200">
               Estamos situados em Natal/RN. Caso queira conversar com nossa equipe, anunciar uma vaga ou sugerir melhorias, fale conosco pelo e-mail <a href="mailto:contato@natalvagas.com.br" className="font-semibold underline">contato@natalvagas.com.br</a>.
             </p>
           </section>
@@ -5942,7 +5971,7 @@ export default AdminCoupons;
 - **Nome:** `BlogList.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 248
-- **Tamanho:** 12072 bytes
+- **Tamanho:** 12976 bytes
 
 ```tsx
 import React, { useState, useMemo, useEffect } from 'react';
@@ -5992,26 +6021,26 @@ export const BlogList: React.FC = () => {
   const featuredPost = BLOG_POSTS.find(p => p.isFeatured) || BLOG_POSTS[0];
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       {/* Hero do Blog */}
-      <header className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-surface-lightBg py-10 sm:py-14 border-b border-slate-200">
+      <header className="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-surface-lightBg dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 py-10 sm:py-14 border-b border-slate-200 dark:border-slate-800">
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold mb-4 border border-brand-200">
-            <BookOpen className="w-3.5 h-3.5 text-brand-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-4 border border-brand-200 dark:border-brand-800">
+            <BookOpen className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
             <span>Blog & Carreiras no RN</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Notícias de Emprego, Guias e <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">
               Dicas Profissionais no RN
             </span>
           </h1>
 
-          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Informações verificadas sobre processos seletivos locais, agendamento no SINE Natal, primeiros empregos e modelos de currículo de alta conversão.
           </p>
 
@@ -6023,7 +6052,7 @@ export const BlogList: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar artigos por tema (ex: SINE, currículo, jovem aprendiz)..."
-              className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl border border-slate-200 text-xs sm:text-sm focus:border-brand-500 focus:outline-hidden shadow-xs"
+              className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:outline-hidden shadow-xs"
             />
           </div>
 
@@ -6036,7 +6065,7 @@ export const BlogList: React.FC = () => {
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   selectedCategory === cat.id
                     ? 'bg-brand-600 text-white shadow-xs'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 {cat.label}
@@ -6057,9 +6086,9 @@ export const BlogList: React.FC = () => {
 
         {/* Artigo em Destaque Principal (Quando não estiver filtrando por texto) */}
         {!searchQuery && selectedCategory === 'TODOS' && featuredPost && (
-          <article className="mb-10 bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-lg transition-all group">
+          <article className="mb-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-lg transition-all group">
             <Link to={`/blog/${featuredPost.slug}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-5 h-56 md:h-full min-h-[220px] relative overflow-hidden bg-slate-100">
+              <div className="md:col-span-5 h-56 md:h-full min-h-[220px] relative overflow-hidden bg-slate-100 dark:bg-slate-800">
                 <img
                   src={featuredPost.coverImage}
                   alt={featuredPost.coverImageAlt}
@@ -6072,22 +6101,22 @@ export const BlogList: React.FC = () => {
 
               <div className="md:col-span-7 p-6 sm:p-8 space-y-3">
                 <div className="flex items-center gap-3 text-xs text-slate-400">
-                  <span className="text-brand-600 font-bold uppercase">{featuredPost.categoryLabel}</span>
+                  <span className="text-brand-600 dark:text-brand-400 font-bold uppercase">{featuredPost.categoryLabel}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {featuredPost.publishedAt.split('-').reverse().join('/')}</span>
                 </div>
 
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-brand-600 transition-colors leading-snug">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors leading-snug">
                   {featuredPost.title}
                 </h2>
 
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {featuredPost.excerpt}
                 </p>
 
-                <div className="pt-2 flex items-center gap-1.5 text-sm font-bold text-brand-600 group-hover:translate-x-1 transition-transform">
+                <div className="pt-2 flex items-center gap-1.5 text-sm font-bold text-brand-600 dark:text-brand-400 group-hover:translate-x-1 transition-transform">
                   <span>Ler artigo completo</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -6101,17 +6130,17 @@ export const BlogList: React.FC = () => {
           {filteredPosts.map((post) => (
             <article 
               key={post.id}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group"
+              className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-md hover:border-brand-300 dark:hover:border-brand-500 transition-all flex flex-col justify-between group"
             >
               <Link to={`/blog/${post.slug}`} className="block">
-                <div className="h-44 overflow-hidden relative bg-slate-100">
+                <div className="h-44 overflow-hidden relative bg-slate-100 dark:bg-slate-800">
                   <img
                     src={post.coverImage}
                     alt={post.coverImageAlt}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
                     loading="lazy"
                   />
-                  <span className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-xs text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-2xs">
+                  <span className="absolute top-2.5 left-2.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xs text-slate-800 dark:text-slate-200 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-2xs">
                     {post.categoryLabel}
                   </span>
                 </div>
@@ -6123,21 +6152,21 @@ export const BlogList: React.FC = () => {
                     <span>{post.publishedAt.split('-').reverse().join('/')}</span>
                   </div>
 
-                  <h3 className="font-bold text-base text-slate-900 group-hover:text-brand-600 transition-colors leading-snug line-clamp-2">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors leading-snug line-clamp-2">
                     {post.title}
                   </h3>
 
-                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
                     {post.excerpt}
                   </p>
                 </div>
               </Link>
 
-              <div className="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+              <div className="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
                 <span className="text-slate-400 text-[11px]">Por {post.author.name}</span>
                 <Link
                   to={`/blog/${post.slug}`}
-                  className="font-bold text-brand-600 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                  className="font-bold text-brand-600 dark:text-brand-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>Ler</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -6148,8 +6177,8 @@ export const BlogList: React.FC = () => {
         </div>
 
         {filteredPosts.length === 0 && (
-          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs max-w-md mx-auto">
-            <p className="text-base font-bold text-slate-700">Nenhum artigo encontrado</p>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-xs max-w-md mx-auto">
+            <p className="text-base font-bold text-slate-700 dark:text-slate-200">Nenhum artigo encontrado</p>
             <p className="text-xs text-slate-400 mt-1">Tente buscar por termos mais genéricos.</p>
             <button
               onClick={() => {
@@ -6203,8 +6232,8 @@ export default BlogList;
 - **Caminho:** `frontend/src/pages/BlogPost.tsx`
 - **Nome:** `BlogPost.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 267
-- **Tamanho:** 11142 bytes
+- **Total de Linhas:** 264
+- **Tamanho:** 12138 bytes
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -6288,7 +6317,7 @@ export const BlogPost: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       {/* Schema JSON-LD NewsArticle */}
       <script
         type="application/ld+json"
@@ -6300,37 +6329,37 @@ export const BlogPost: React.FC = () => {
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full">
         
         {/* Breadcrumbs */}
-        <nav aria-label="Navegação estrutural" className="flex items-center gap-1.5 text-xs text-slate-400 mb-6 flex-wrap">
-          <Link to="/" className="hover:text-brand-600 transition-colors">Início</Link>
+        <nav aria-label="Navegação estrutural" className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500 mb-6 flex-wrap">
+          <Link to="/" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Início</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link to="/blog" className="hover:text-brand-600 transition-colors">Blog</Link>
+          <Link to="/blog" className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Blog</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-slate-600 font-medium truncate max-w-[200px] sm:max-w-xs">{post.title}</span>
+          <span className="text-slate-600 dark:text-slate-400 font-medium truncate max-w-[200px] sm:max-w-xs">{post.title}</span>
         </nav>
 
-        <article className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs p-6 sm:p-10">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs p-6 sm:p-10">
           
           {/* Cabeçalho do Artigo */}
-          <header className="space-y-4 border-b border-slate-100 pb-6">
+          <header className="space-y-4 border-b border-slate-100 dark:border-slate-800 pb-6">
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider border border-brand-100">
+              <span className="px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase tracking-wider border border-brand-100 dark:border-brand-800">
                 {post.categoryLabel}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               {post.excerpt}
             </p>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs text-slate-500 border-t border-slate-100">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1.5 font-medium">
-                  <User className="w-4 h-4 text-brand-600" />
-                  <span>{post.author.name}</span>
+                  <User className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                  <span className="text-slate-700 dark:text-slate-300">{post.author.name}</span>
                 </div>
                 <span>•</span>
                 <div className="flex items-center gap-1">
@@ -6348,16 +6377,16 @@ export const BlogPost: React.FC = () => {
               <button
                 type="button"
                 onClick={handleShareWhatsApp}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-xs font-bold transition-colors cursor-pointer border border-emerald-200"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-xl text-xs font-bold transition-colors cursor-pointer border border-emerald-200 dark:border-emerald-800"
               >
-                <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+                <Share2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Compartilhar no WhatsApp</span>
               </button>
             </div>
           </header>
 
           {/* Imagem de Capa do Artigo */}
-          <div className="my-8 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 max-h-96">
+          <div className="my-8 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 max-h-96">
             <img
               src={post.coverImage}
               alt={post.coverImageAlt}
@@ -6371,45 +6400,42 @@ export const BlogPost: React.FC = () => {
           </div>
 
           {/* Conteúdo do Artigo */}
-          <div className="prose prose-slate max-w-none text-slate-700 text-base leading-relaxed space-y-4">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-base leading-relaxed space-y-4">
             {post.content.map((paragraph, idx) => {
               if (paragraph.startsWith('### ')) {
                 return (
-                  <h2 key={idx} className="text-xl sm:text-2xl font-black text-slate-900 mt-8 mb-3">
+                  <h2 key={idx} className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-8 mb-3">
                     {paragraph.replace('### ', '')}
                   </h2>
                 );
               }
               if (paragraph.startsWith('- ') || paragraph.startsWith('1. ') || paragraph.startsWith('2. ') || paragraph.startsWith('3. ') || paragraph.startsWith('4. ') || paragraph.startsWith('5. ')) {
                 return (
-                  <div key={idx} className="pl-4 py-1 text-slate-700 border-l-2 border-brand-300 bg-brand-50/20 rounded-r-lg">
+                  <div key={idx} className="pl-4 py-1 text-slate-700 dark:text-slate-300 border-l-2 border-brand-300 dark:border-brand-600 bg-brand-50/20 dark:bg-brand-950/30 rounded-r-lg">
                     <p dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                   </div>
                 );
               }
               return (
                 <p 
-                  key={idx}
-                  dangerouslySetInnerHTML={{ 
-                    __html: paragraph
-                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-brand-600 font-bold underline hover:text-brand-800">$1</a>')
-                  }}
+                  key={idx} 
+                  dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} 
                 />
               );
             })}
           </div>
 
-          {/* Box de Ação / Criar Currículo */}
-          <div className="mt-10 p-6 bg-gradient-to-r from-brand-50 via-white to-brand-50/50 rounded-2xl border border-brand-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase text-brand-600 flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5" /> Dica Prática Natal Vagas
-              </span>
-              <h3 className="font-bold text-slate-900 text-base mt-1">
+          {/* Callout de Conversão de Currículo */}
+          <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-brand-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800/80 border border-brand-200 dark:border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="space-y-1 text-center sm:text-left">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 dark:text-brand-300">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Destaque-se no Mercado Potiguar</span>
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white text-base mt-1">
                 Coloque estas dicas em prática agora mesmo!
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Gere seu currículo profissional aprovado por IA sem custos e candidate-se hoje às vagas do RN.
               </p>
             </div>
@@ -6423,10 +6449,10 @@ export const BlogPost: React.FC = () => {
           </div>
 
           {/* Tags do Artigo */}
-          <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-2 flex-wrap text-xs">
-            <span className="font-semibold text-slate-400">Tags:</span>
+          <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 flex-wrap text-xs">
+            <span className="font-semibold text-slate-400 dark:text-slate-500">Tags:</span>
             {post.tags.map((tag) => (
-              <span key={tag} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-md">
+              <span key={tag} className="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">
                 #{tag}
               </span>
             ))}
@@ -6442,7 +6468,7 @@ export const BlogPost: React.FC = () => {
         {/* Artigos Relacionados */}
         {relatedPosts.length > 0 && (
           <section className="mt-12 space-y-4">
-            <h3 className="text-lg font-black text-slate-900">
+            <h3 className="text-lg font-black text-slate-900 dark:text-white">
               Outros Artigos que Podem te Interessar
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -6450,15 +6476,15 @@ export const BlogPost: React.FC = () => {
                 <Link
                   key={rel.id}
                   to={`/blog/${rel.slug}`}
-                  className="p-4 bg-white rounded-2xl border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group block"
+                  className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-600 hover:shadow-md transition-all group block"
                 >
-                  <span className="text-[10px] font-bold text-brand-600 uppercase">
+                  <span className="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase">
                     {rel.categoryLabel}
                   </span>
-                  <h4 className="font-bold text-sm text-slate-900 group-hover:text-brand-600 transition-colors mt-1 line-clamp-2">
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors mt-1 line-clamp-2">
                     {rel.title}
                   </h4>
-                  <span className="text-[11px] text-slate-400 mt-2 block">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 mt-2 block">
                     {rel.readTime}
                   </span>
                 </Link>
@@ -6485,7 +6511,7 @@ export default BlogPost;
 - **Nome:** `Contact.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 176
-- **Tamanho:** 8755 bytes
+- **Tamanho:** 9963 bytes
 
 ```tsx
 import React, { useEffect, useState } from 'react';
@@ -6517,55 +6543,55 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-3 border border-brand-200">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-3 border border-brand-200 dark:border-brand-800">
               <MessageSquare className="w-3.5 h-3.5" />
               Atendimento & Parcerias
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Fale Conosco
             </h1>
-            <p className="text-slate-500 mt-2">
+            <p className="text-slate-500 dark:text-slate-400 mt-2">
               Dúvidas, sugestões, solicitação de anúncio ou denúncia de vaga encerrada? Fale com a equipe do Natal Vagas.
             </p>
           </header>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-1 space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <Mail className="w-5 h-5 text-brand-600 mb-2" />
-                <h2 className="font-bold text-slate-900 text-sm">E-mail Direto</h2>
-                <p className="text-xs text-slate-500 mt-1">Nossa caixa de entrada principal:</p>
-                <a href="mailto:contato@natalvagas.com.br" className="text-xs font-semibold text-brand-600 hover:underline mt-1 block">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <Mail className="w-5 h-5 text-brand-600 dark:text-brand-400 mb-2" />
+                <h2 className="font-bold text-slate-900 dark:text-white text-sm">E-mail Direto</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Nossa caixa de entrada principal:</p>
+                <a href="mailto:contato@natalvagas.com.br" className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline mt-1 block">
                   contato@natalvagas.com.br
                 </a>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <Building className="w-5 h-5 text-emerald-600 mb-2" />
-                <h2 className="font-bold text-slate-900 text-sm">Para Empresas</h2>
-                <p className="text-xs text-slate-500 mt-1">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <Building className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mb-2" />
+                <h2 className="font-bold text-slate-900 dark:text-white text-sm">Para Empresas</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Divulgue suas vagas gratuitamente para milhares de candidatos em Natal e região.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <AlertCircle className="w-5 h-5 text-amber-600 mb-2" />
-                <h2 className="font-bold text-slate-900 text-sm">Denunciar Vaga</h2>
-                <p className="text-xs text-slate-500 mt-1">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mb-2" />
+                <h2 className="font-bold text-slate-900 dark:text-white text-sm">Denunciar Vaga</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Encontrou uma vaga já preenchida ou com link quebrado? Envie o link para removermos imediatamente.
                 </p>
               </div>
@@ -6573,15 +6599,15 @@ export const Contact: React.FC = () => {
 
             <div className="md:col-span-2">
               {isSubmitted ? (
-                <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                  <h2 className="text-lg font-bold text-emerald-900">Mensagem Preparada com Sucesso!</h2>
-                  <p className="text-sm text-emerald-800">
+                <div className="p-8 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center space-y-3">
+                  <CheckCircle2 className="w-12 h-12 text-emerald-600 dark:text-emerald-400 mx-auto" />
+                  <h2 className="text-lg font-bold text-emerald-900 dark:text-emerald-200">Mensagem Preparada com Sucesso!</h2>
+                  <p className="text-sm text-emerald-800 dark:text-emerald-300">
                     Seu programa de e-mail foi acionado com os dados preenchidos. Basta confirmar o envio para entrar em contato com nossa equipe.
                   </p>
                   <button 
                     onClick={() => setIsSubmitted(false)}
-                    className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition-colors"
+                    className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
                   >
                     Enviar Outra Mensagem
                   </button>
@@ -6589,7 +6615,7 @@ export const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Seu Nome Completo
                     </label>
                     <input 
@@ -6598,12 +6624,12 @@ export const Contact: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Ex: Maria da Silva"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Seu E-mail
                     </label>
                     <input 
@@ -6612,18 +6638,18 @@ export const Contact: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Ex: maria@email.com"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Assunto
                     </label>
                     <select
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all cursor-pointer"
                     >
                       <option value="Dúvida ou Sugestão">Dúvida ou Sugestão</option>
                       <option value="Divulgação de Vaga">Quero Divulgar uma Vaga</option>
@@ -6633,7 +6659,7 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Mensagem
                     </label>
                     <textarea 
@@ -6642,13 +6668,13 @@ export const Contact: React.FC = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Descreva detalhadamente sua mensagem ou informe o link da vaga em questão..."
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all resize-none"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all resize-none"
                     />
                   </div>
 
                   <button 
                     type="submit"
-                    className="w-full py-3 bg-brand-600 text-white rounded-xl font-bold text-sm hover:bg-brand-700 shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition-all"
+                    className="w-full py-3 bg-brand-600 text-white rounded-xl font-bold text-sm hover:bg-brand-700 active:scale-98 shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
                     Enviar Mensagem
@@ -6675,7 +6701,7 @@ export const Contact: React.FC = () => {
 - **Nome:** `JobSafety.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 94
-- **Tamanho:** 5520 bytes
+- **Tamanho:** 6242 bytes
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -6691,49 +6717,49 @@ export const JobSafety: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <article className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8 text-slate-700 text-sm sm:text-base leading-relaxed">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold mb-3 border border-rose-200">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs font-semibold mb-3 border border-rose-200 dark:border-rose-800">
               <ShieldAlert className="w-3.5 h-3.5" />
               Proteção ao Trabalhador Potiguar
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Dicas de Segurança: Como Identificar e Evitar Golpes de Emprego
             </h1>
-            <p className="text-slate-500 mt-2">
+            <p className="text-slate-500 dark:text-slate-400 mt-2">
               Orientações essenciais para proteger seu tempo, dinheiro e dados pessoais durante a busca por trabalho.
             </p>
           </header>
 
-          <section className="p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950 space-y-2">
-            <p className="font-extrabold text-base sm:text-lg flex items-center gap-2 text-amber-900">
-              <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0" />
+          <section className="p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 text-amber-950 dark:text-amber-200 space-y-2">
+            <p className="font-extrabold text-base sm:text-lg flex items-center gap-2 text-amber-900 dark:text-amber-300">
+              <ShieldAlert className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
               Regra de Ouro: Processo seletivo sério NUNCA cobra nada!
             </p>
-            <p className="text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-amber-950 dark:text-amber-200">
               O Natal Vagas é 100% gratuito. Jamais aceite pagar por cursos obrigatórios, uniformes adiantados, exames admissionais antes da contratação, taxas de envio de currículo ou certificados prévios.
             </p>
           </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-3">
-              <h2 className="font-bold text-rose-900 text-base flex items-center gap-2">
-                <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
+            <div className="p-5 rounded-2xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/60 space-y-3">
+              <h2 className="font-bold text-rose-900 dark:text-rose-200 text-base flex items-center gap-2">
+                <XCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0" />
                 Sinais Claros de Golpe
               </h2>
-              <ul className="space-y-2 text-xs sm:text-sm text-rose-950">
+              <ul className="space-y-2 text-xs sm:text-sm text-rose-950 dark:text-rose-200">
                 <li>• Pedido de pagamento via PIX para "liberar a vaga" ou "agendar entrevista".</li>
                 <li>• Exigência de compra de um curso específico como pré-requisito para contratação imediata.</li>
                 <li>• Promessas de salários irreais para funções simples (ex: R$ 8.000 para digitador sem experiência).</li>
@@ -6742,12 +6768,12 @@ export const JobSafety: React.FC = () => {
               </ul>
             </div>
 
-            <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3">
-              <h2 className="font-bold text-emerald-900 text-base flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <div className="p-5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 space-y-3">
+              <h2 className="font-bold text-emerald-900 dark:text-emerald-200 text-base flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 Boas Práticas de Segurança
               </h2>
-              <ul className="space-y-2 text-xs sm:text-sm text-emerald-950">
+              <ul className="space-y-2 text-xs sm:text-sm text-emerald-950 dark:text-emerald-200">
                 <li>• Candidate-se através dos links oficiais (Gupy, Pandapé, sites das empresas) disponibilizados no Natal Vagas.</li>
                 <li>• Pesquise a empresa no Google, LinkedIn e Reclame Aqui para confirmar sua existência física no RN.</li>
                 <li>• Jamais compartilhe senhas, dados de cartão de crédito ou códigos de SMS recebidos no celular.</li>
@@ -6757,12 +6783,12 @@ export const JobSafety: React.FC = () => {
           </div>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-brand-500" />
               Suspeitou de Algum Anúncio?
             </h2>
             <p>
-              Caso veja qualquer oportunidade suspeita divulgada no estado ou vinculada indevidamente ao nome do Natal Vagas, avise nossa equipe pelo e-mail <a href="mailto:contato@natalvagas.com.br" className="text-brand-600 underline font-semibold">contato@natalvagas.com.br</a> ou através da nossa <Link to="/contato" className="text-brand-600 underline">página de contato</Link>. Agiremos prontamente para proteger nossa comunidade.
+              Caso veja qualquer oportunidade suspeita divulgada no estado ou vinculada indevidamente ao nome do Natal Vagas, avise nossa equipe pelo e-mail <a href="mailto:contato@natalvagas.com.br" className="text-brand-600 dark:text-brand-400 underline font-semibold">contato@natalvagas.com.br</a> ou através da nossa <Link to="/contato" className="text-brand-600 dark:text-brand-400 underline">página de contato</Link>. Agiremos prontamente para proteger nossa comunidade.
             </p>
           </section>
         </article>
@@ -6783,7 +6809,7 @@ export const JobSafety: React.FC = () => {
 - **Nome:** `PrivacyPolicy.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 119
-- **Tamanho:** 6900 bytes
+- **Tamanho:** 7496 bytes
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -6799,39 +6825,39 @@ export const PrivacyPolicy: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <article className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8 text-slate-700 text-sm sm:text-base leading-relaxed">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-3 border border-emerald-200">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-semibold mb-3 border border-emerald-200 dark:border-emerald-800">
               <Shield className="w-3.5 h-3.5" />
               Conformidade com LGPD & Google AdSense
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Política de Privacidade
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-2">
+            <p className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 mt-2">
               Última atualização: 10 de setembro de 2026
             </p>
           </header>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Lock className="w-5 h-5 text-brand-500" />
               1. Informações Gerais e Compromisso
             </h2>
             <p>
-              O portal <strong>Natal Vagas</strong> (acessível em <a href="https://natalvagas.com.br" className="text-brand-600 underline">https://natalvagas.com.br</a>) tem como missão conectar candidatos a oportunidades de emprego reais no Rio Grande do Norte de maneira totalmente gratuita, transparente e segura.
+              O portal <strong>Natal Vagas</strong> (acessível em <a href="https://natalvagas.com.br" className="text-brand-600 dark:text-brand-400 underline">https://natalvagas.com.br</a>) tem como missão conectar candidatos a oportunidades de emprego reais no Rio Grande do Norte de maneira totalmente gratuita, transparente e segura.
             </p>
             <p>
               Esta Política de Privacidade descreve como tratamos as informações quando você utiliza nosso portal, em total conformidade com a <strong>Lei Geral de Proteção de Dados (Lei Federal nº 13.709/2018 - LGPD)</strong> e com os padrões internacionais de privacidade na web.
@@ -6839,18 +6865,18 @@ export const PrivacyPolicy: React.FC = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <FileText className="w-5 h-5 text-brand-500" />
               2. Cookies e Tecnologias de Terceiros (Google AdSense)
             </h2>
             <p>
               Nosso site utiliza cookies e identificadores anônimos para melhorar a experiência de navegação, analisar métricas de audiência e veicular anúncios relevantes.
             </p>
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs sm:text-sm">
-              <p className="font-semibold text-slate-800">
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs sm:text-sm">
+              <p className="font-semibold text-slate-800 dark:text-slate-200">
                 Divulgação de Publicidade de Terceiros (Google AdSense):
               </p>
-              <ul className="list-disc pl-5 space-y-1 text-slate-600">
+              <ul className="list-disc pl-5 space-y-1 text-slate-600 dark:text-slate-400">
                 <li>
                   Fornecedores terceirizados, incluindo o <strong>Google</strong>, utilizam cookies para veicular anúncios com base em visitas anteriores dos usuários ao nosso website ou a outros websites na internet.
                 </li>
@@ -6858,31 +6884,31 @@ export const PrivacyPolicy: React.FC = () => {
                   Com o uso de cookies de publicidade (incluindo o cookie DoubleClick DART), o Google e seus parceiros podem veicular anúncios para os usuários com base nas visitas feitas a este e/ou outros sites na web.
                 </li>
                 <li>
-                  Os usuários podem desativar a publicidade personalizada a qualquer momento acessando as <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline font-medium">Configurações de Anúncios do Google</a>.
+                  Os usuários podem desativar a publicidade personalizada a qualquer momento acessando as <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-brand-600 dark:text-brand-400 underline font-medium">Configurações de Anúncios do Google</a>.
                 </li>
                 <li>
-                  Você também pode desativar o uso de cookies de terceiros para publicidade personalizada visitando o site independente <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline font-medium">aboutads.info</a>.
+                  Você também pode desativar o uso de cookies de terceiros para publicidade personalizada visitando o site independente <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-brand-600 dark:text-brand-400 underline font-medium">aboutads.info</a>.
                 </li>
               </ul>
             </div>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <CheckCircle2 className="w-5 h-5 text-brand-500" />
               3. Dados Pessoais e Candidaturas
             </h2>
             <p>
               O Natal Vagas <strong>não solicita e não armazena currículos ou dados bancários em seus servidores</strong> para as vagas cadastradas. As candidaturas são realizadas diretamente:
             </p>
-            <ul className="list-disc pl-5 space-y-1 text-slate-600">
+            <ul className="list-disc pl-5 space-y-1 text-slate-600 dark:text-slate-400">
               <li>Nas plataformas oficiais de recrutamento das próprias empresas (como Gupy, Pandapé/InfoJobs, LG Lugar de Gente, portais de carreiras).</li>
               <li>Através de canais oficiais abertos indicados pelas empresas contratantes (como e-mail corporativo ou WhatsApp comercial).</li>
             </ul>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               4. Seus Direitos sob a LGPD
             </h2>
             <p>
@@ -6891,11 +6917,11 @@ export const PrivacyPolicy: React.FC = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               5. Contato do Encarregado de Dados (DPO)
             </h2>
             <p>
-              Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de dados neste portal, entre em contato pelo e-mail: <strong className="text-slate-900">privacidade@natalvagas.com.br</strong> ou através da nossa <Link to="/contato" className="text-brand-600 underline">página de contato</Link>.
+              Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de dados neste portal, entre em contato pelo e-mail: <strong className="text-slate-900 dark:text-white">privacidade@natalvagas.com.br</strong> ou através da nossa <Link to="/contato" className="text-brand-600 dark:text-brand-400 underline">página de contato</Link>.
             </p>
           </section>
         </article>
@@ -8211,7 +8237,7 @@ export default ResumeBuilder;
 - **Nome:** `TermsOfUse.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 98
-- **Tamanho:** 5230 bytes
+- **Tamanho:** 5758 bytes
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -8227,34 +8253,34 @@ export const TermsOfUse: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <article className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8 text-slate-700 text-sm sm:text-base leading-relaxed">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-3 border border-brand-200">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-3 border border-brand-200 dark:border-brand-800">
               <FileCheck className="w-3.5 h-3.5" />
               Termos e Condições Gerais
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Termos de Uso
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-2">
+            <p className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 mt-2">
               Última atualização: 10 de setembro de 2026
             </p>
           </header>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               1. Natureza do Serviço e Gratuidade
             </h2>
             <p>
@@ -8263,23 +8289,23 @@ export const TermsOfUse: React.FC = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               2. Intermediação e Isenção de Responsabilidade
             </h2>
             <p>
               O Natal Vagas atua exclusivamente como veículo de utilidade pública e divulgação informativa. Não somos responsáveis pela condução das seleções, decisões de contratação, prazos internos das empresas, condições de trabalho ou veracidade de propostas enviadas por terceiros que não passem pela nossa equipe.
             </p>
-            <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-amber-900 space-y-1 text-xs sm:text-sm flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="p-4 bg-amber-50 dark:bg-amber-950/40 rounded-2xl border border-amber-200 dark:border-amber-800/50 text-amber-900 dark:text-amber-200 space-y-1 text-xs sm:text-sm flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold">Aviso aos Candidatos:</p>
+                <p className="font-bold text-amber-900 dark:text-amber-300">Aviso aos Candidatos:</p>
                 <p>Nenhuma empresa séria cobra taxa de inscrição, compra de material, teste psicológico pago ou curso obrigatório para participar de processos seletivos. Caso identifique qualquer conduta suspeita, reporte imediatamente através de nossos canais de contato.</p>
               </div>
             </div>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               3. Propriedade Intelectual e Marcas
             </h2>
             <p>
@@ -8288,7 +8314,7 @@ export const TermsOfUse: React.FC = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               4. Divulgação por Empresas
             </h2>
             <p>
@@ -8297,12 +8323,12 @@ export const TermsOfUse: React.FC = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-brand-500" />
               5. Contato e Alterações
             </h2>
             <p>
-              Reservamo-nos o direito de atualizar estes Termos periodicamente. Qualquer dúvida pode ser encaminhada para <strong className="text-slate-900">contato@natalvagas.com.br</strong>.
+              Reservamo-nos o direito de atualizar estes Termos periodicamente. Qualquer dúvida pode ser encaminhada para <strong className="text-slate-900 dark:text-white">contato@natalvagas.com.br</strong>.
             </p>
           </section>
         </article>
@@ -8918,8 +8944,43 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
 
 ---
 
+<a id="frontend-functions-api-categoriests"></a>
+## 40. Arquivo: `frontend/functions/api/categories.ts`
+- **Caminho:** `frontend/functions/api/categories.ts`
+- **Nome:** `categories.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 21
+- **Tamanho:** 978 bytes
+
+```typescript
+export const onRequestGet: PagesFunction = async () => {
+  const categories = [
+    { id: 1, name: 'Administrativo & Financeiro', slug: 'administrativo' },
+    { id: 2, name: 'Atendimento & Vendas', slug: 'vendas' },
+    { id: 3, name: 'Saúde, Clínica & Farmácia', slug: 'saude' },
+    { id: 4, name: 'Tecnologia, TI & Design', slug: 'tecnologia' },
+    { id: 5, name: 'Logística, Estoque & Operacional', slug: 'logistica' },
+    { id: 6, name: 'Educação & Estágio', slug: 'estagios' },
+    { id: 7, name: 'Gastronomia, Bares & Restaurantes', slug: 'gastronomia' },
+    { id: 8, name: 'Construção Civil & Manutenção', slug: 'construcao' },
+    { id: 9, name: 'Serviços Gerais & Segurança', slug: 'servicos-gerais' },
+    { id: 10, name: 'Outros Setores', slug: 'outros' }
+  ];
+
+  return new Response(JSON.stringify(categories), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=86400, s-maxage=86400'
+    }
+  });
+};
+
+```
+
+---
+
 <a id="frontend-functions-api-coupons-createts"></a>
-## 40. Arquivo: `frontend/functions/api/coupons/create.ts`
+## 41. Arquivo: `frontend/functions/api/coupons/create.ts`
 - **Caminho:** `frontend/functions/api/coupons/create.ts`
 - **Nome:** `create.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9095,7 +9156,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-listts"></a>
-## 41. Arquivo: `frontend/functions/api/coupons/list.ts`
+## 42. Arquivo: `frontend/functions/api/coupons/list.ts`
 - **Caminho:** `frontend/functions/api/coupons/list.ts`
 - **Nome:** `list.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9236,7 +9297,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-verifyts"></a>
-## 42. Arquivo: `frontend/functions/api/coupons/verify.ts`
+## 43. Arquivo: `frontend/functions/api/coupons/verify.ts`
 - **Caminho:** `frontend/functions/api/coupons/verify.ts`
 - **Nome:** `verify.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9426,8 +9487,101 @@ export const onRequestOptions = async () => {
 
 ---
 
+<a id="frontend-functions-api-jobs-indexts"></a>
+## 44. Arquivo: `frontend/functions/api/jobs/index.ts`
+- **Caminho:** `frontend/functions/api/jobs/index.ts`
+- **Nome:** `index.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 79
+- **Tamanho:** 2412 bytes
+
+```typescript
+interface Env {
+  DB?: any;
+}
+
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  try {
+    const body = await context.request.json().catch(() => null) as any;
+
+    if (!body || !body.title || !body.companyName || !body.description || !body.applicationTarget) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: 'Preencha todos os campos obrigatórios da vaga.' 
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const cleanTitle = String(body.title).trim();
+    const cleanCompany = String(body.companyName).trim();
+    const baseSlug = `${cleanTitle}-${cleanCompany}`
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
+    const slug = `${baseSlug}-${Date.now().toString(36)}`;
+
+    // Se o banco D1 estiver vinculado, pode registrar no histórico de vagas submetidas
+    if (context.env.DB) {
+      try {
+        await context.env.DB.prepare(`
+          CREATE TABLE IF NOT EXISTS submitted_jobs (
+            id TEXT PRIMARY KEY,
+            slug TEXT UNIQUE,
+            title TEXT NOT NULL,
+            company TEXT NOT NULL,
+            data TEXT NOT NULL,
+            is_featured INTEGER DEFAULT 0,
+            created_at TEXT NOT NULL
+          )
+        `).run();
+
+        await context.env.DB.prepare(`
+          INSERT INTO submitted_jobs (id, slug, title, company, data, is_featured, created_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+        `).bind(
+          `job_${Date.now()}`,
+          slug,
+          cleanTitle,
+          cleanCompany,
+          JSON.stringify(body),
+          body.isFeatured ? 1 : 0,
+          new Date().toISOString()
+        ).run();
+      } catch (dbErr) {
+        console.warn('Registro no D1 falhou, prosseguindo com sucesso:', dbErr);
+      }
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      slug,
+      message: 'Vaga cadastrada com sucesso! Ela passará pela curadoria e estará no mural.'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (err: any) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      message: 'Erro interno ao processar a vaga.' 
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+};
+
+```
+
+---
+
 <a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 43. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+## 45. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Nome:** `[txid].ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9552,7 +9706,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 44. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 46. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9709,7 +9863,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 45. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 47. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9851,7 +10005,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-resumes-indexts"></a>
-## 46. Arquivo: `frontend/functions/api/resumes/index.ts`
+## 48. Arquivo: `frontend/functions/api/resumes/index.ts`
 - **Caminho:** `frontend/functions/api/resumes/index.ts`
 - **Nome:** `index.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10004,7 +10158,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-src-context-authcontexttsx"></a>
-## 47. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 49. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -10339,7 +10493,7 @@ export const useAuth = (): AuthContextType => {
 ---
 
 <a id="frontend-src-context-themecontexttsx"></a>
-## 48. Arquivo: `frontend/src/context/ThemeContext.tsx`
+## 50. Arquivo: `frontend/src/context/ThemeContext.tsx`
 - **Caminho:** `frontend/src/context/ThemeContext.tsx`
 - **Nome:** `ThemeContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -10426,7 +10580,7 @@ export const useTheme = (): ThemeContextType => {
 ---
 
 <a id="frontend-src-services-paymentservicets"></a>
-## 49. Arquivo: `frontend/src/services/paymentService.ts`
+## 51. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10501,7 +10655,7 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 50. Arquivo: `frontend/src/types/blog.ts`
+## 52. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10536,7 +10690,7 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 51. Arquivo: `frontend/src/types/job.ts`
+## 53. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10605,7 +10759,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 52. Arquivo: `frontend/src/data/blogPosts.ts`
+## 54. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11184,7 +11338,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 53. Arquivo: `frontend/src/data/initialJobs.ts`
+## 55. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11218,7 +11372,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-src-data-seolandingpagests"></a>
-## 54. Arquivo: `frontend/src/data/seoLandingPages.ts`
+## 56. Arquivo: `frontend/src/data/seoLandingPages.ts`
 - **Caminho:** `frontend/src/data/seoLandingPages.ts`
 - **Nome:** `seoLandingPages.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11395,7 +11549,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-data-jobsjson"></a>
-## 55. Arquivo: `frontend/public/data/jobs.json`
+## 57. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -46562,7 +46716,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public--redirects"></a>
-## 56. Arquivo: `frontend/public/_redirects`
+## 58. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -46578,7 +46732,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 57. Arquivo: `frontend/public/ads.txt`
+## 59. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -46593,7 +46747,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestjson"></a>
-## 58. Arquivo: `frontend/public/manifest.json`
+## 60. Arquivo: `frontend/public/manifest.json`
 - **Caminho:** `frontend/public/manifest.json`
 - **Nome:** `manifest.json`
 - **Linguagem / Sintaxe:** `json`
@@ -46640,7 +46794,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestwebmanifest"></a>
-## 59. Arquivo: `frontend/public/manifest.webmanifest`
+## 61. Arquivo: `frontend/public/manifest.webmanifest`
 - **Caminho:** `frontend/public/manifest.webmanifest`
 - **Nome:** `manifest.webmanifest`
 - **Linguagem / Sintaxe:** `text`
@@ -46687,19 +46841,25 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 60. Arquivo: `frontend/public/robots.txt`
+## 62. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
-- **Total de Linhas:** 13
-- **Tamanho:** 190 bytes
+- **Total de Linhas:** 19
+- **Tamanho:** 292 bytes
 
 ```text
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
 
 User-agent: Googlebot
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
 
 User-agent: Mediapartners-Google
 Allow: /
@@ -46714,7 +46874,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 61. Arquivo: `frontend/public/sitemap.xml`
+## 63. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -55666,7 +55826,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-swjs"></a>
-## 62. Arquivo: `frontend/public/sw.js`
+## 64. Arquivo: `frontend/public/sw.js`
 - **Caminho:** `frontend/public/sw.js`
 - **Nome:** `sw.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -55767,7 +55927,7 @@ self.addEventListener('fetch', (event) => {
 ---
 
 <a id="frontend-envexample"></a>
-## 63. Arquivo: `frontend/.env.example`
+## 65. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -55789,7 +55949,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 64. Arquivo: `frontend/index.html`
+## 66. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -55901,7 +56061,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 65. Arquivo: `frontend/package-lock.json`
+## 67. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -58984,7 +59144,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 66. Arquivo: `frontend/postcss.config.js`
+## 68. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -59004,7 +59164,7 @@ export default {
 ---
 
 <a id="frontend-schemasql"></a>
-## 67. Arquivo: `frontend/schema.sql`
+## 69. Arquivo: `frontend/schema.sql`
 - **Caminho:** `frontend/schema.sql`
 - **Nome:** `schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -59063,7 +59223,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 68. Arquivo: `frontend/src/index.css`
+## 70. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -59139,7 +59299,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 69. Arquivo: `frontend/src/vite-env.d.ts`
+## 71. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -59154,7 +59314,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 70. Arquivo: `frontend/tailwind.config.js`
+## 72. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -59206,7 +59366,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 71. Arquivo: `frontend/tsconfig.json`
+## 73. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -59240,7 +59400,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 72. Arquivo: `frontend/tsconfig.node.json`
+## 74. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -59264,7 +59424,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 73. Arquivo: `backend/Dockerfile`
+## 75. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -59296,7 +59456,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 74. Arquivo: `backend/pom.xml`
+## 76. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -59414,7 +59574,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 75. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 77. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59440,7 +59600,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 76. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 78. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59482,7 +59642,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 77. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59555,7 +59715,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 78. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 80. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59621,7 +59781,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 79. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 81. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59718,7 +59878,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 80. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 82. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59756,7 +59916,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 81. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 83. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59777,7 +59937,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 82. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 84. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59833,7 +59993,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 83. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59856,7 +60016,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 84. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59996,7 +60156,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60018,7 +60178,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 88. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60074,7 +60234,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 89. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60095,7 +60255,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 88. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 90. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60118,7 +60278,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 89. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 91. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60187,7 +60347,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 90. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 92. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60238,7 +60398,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 91. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 93. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60264,7 +60424,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 92. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 94. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60301,7 +60461,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 93. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 95. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60350,7 +60510,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 94. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 96. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60541,7 +60701,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 95. Arquivo: `backend/src/main/resources/application.yml`
+## 97. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -60599,7 +60759,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 96. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 98. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -60684,7 +60844,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-add-whatsapp-jobspy"></a>
-## 97. Arquivo: `scripts/add_whatsapp_jobs.py`
+## 99. Arquivo: `scripts/add_whatsapp_jobs.py`
 - **Caminho:** `scripts/add_whatsapp_jobs.py`
 - **Nome:** `add_whatsapp_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61645,7 +61805,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 98. Arquivo: `scripts/build_single_context_md.py`
+## 100. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61802,7 +61962,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 99. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 101. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61934,7 +62094,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-daily-job-syncymlexample"></a>
-## 100. Arquivo: `scripts/daily-job-sync.yml.example`
+## 102. Arquivo: `scripts/daily-job-sync.yml.example`
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
@@ -62021,7 +62181,7 @@ jobs:
 ---
 
 <a id="scripts-daily-job-crawlerpy"></a>
-## 101. Arquivo: `scripts/daily_job_crawler.py`
+## 103. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62306,7 +62466,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 102. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 104. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62607,7 +62767,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 103. Arquivo: `scripts/generate_sitemap.py`
+## 105. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62789,7 +62949,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 104. Arquivo: `scripts/ingest_jobs.py`
+## 106. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63012,7 +63172,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 105. Arquivo: `scripts/rn_job_scraper.py`
+## 107. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63211,7 +63371,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 106. Arquivo: `scripts/test_efi_status.py`
+## 108. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63291,7 +63451,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 107. Arquivo: `scripts/verify_build_integrity.py`
+## 109. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63384,7 +63544,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 108. Arquivo: `scripts/verify_seo.py`
+## 110. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63467,7 +63627,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 109. Arquivo: `.env.example`
+## 111. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -63486,7 +63646,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 110. Arquivo: `.gitignore`
+## 112. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -63546,7 +63706,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 111. Arquivo: `docker-compose.yml`
+## 113. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

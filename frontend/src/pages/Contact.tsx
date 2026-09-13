@@ -27,55 +27,55 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-3 border border-brand-200">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-3 border border-brand-200 dark:border-brand-800">
               <MessageSquare className="w-3.5 h-3.5" />
               Atendimento & Parcerias
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Fale Conosco
             </h1>
-            <p className="text-slate-500 mt-2">
+            <p className="text-slate-500 dark:text-slate-400 mt-2">
               Dúvidas, sugestões, solicitação de anúncio ou denúncia de vaga encerrada? Fale com a equipe do Natal Vagas.
             </p>
           </header>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-1 space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <Mail className="w-5 h-5 text-brand-600 mb-2" />
-                <h2 className="font-bold text-slate-900 text-sm">E-mail Direto</h2>
-                <p className="text-xs text-slate-500 mt-1">Nossa caixa de entrada principal:</p>
-                <a href="mailto:contato@natalvagas.com.br" className="text-xs font-semibold text-brand-600 hover:underline mt-1 block">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <Mail className="w-5 h-5 text-brand-600 dark:text-brand-400 mb-2" />
+                <h2 className="font-bold text-slate-900 dark:text-white text-sm">E-mail Direto</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Nossa caixa de entrada principal:</p>
+                <a href="mailto:contato@natalvagas.com.br" className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline mt-1 block">
                   contato@natalvagas.com.br
                 </a>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <Building className="w-5 h-5 text-emerald-600 mb-2" />
-                <h2 className="font-bold text-slate-900 text-sm">Para Empresas</h2>
-                <p className="text-xs text-slate-500 mt-1">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <Building className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mb-2" />
+                <h2 className="font-bold text-slate-900 dark:text-white text-sm">Para Empresas</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Divulgue suas vagas gratuitamente para milhares de candidatos em Natal e região.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <AlertCircle className="w-5 h-5 text-amber-600 mb-2" />
-                <h2 className="font-bold text-slate-900 text-sm">Denunciar Vaga</h2>
-                <p className="text-xs text-slate-500 mt-1">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mb-2" />
+                <h2 className="font-bold text-slate-900 dark:text-white text-sm">Denunciar Vaga</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Encontrou uma vaga já preenchida ou com link quebrado? Envie o link para removermos imediatamente.
                 </p>
               </div>
@@ -83,15 +83,15 @@ export const Contact: React.FC = () => {
 
             <div className="md:col-span-2">
               {isSubmitted ? (
-                <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                  <h2 className="text-lg font-bold text-emerald-900">Mensagem Preparada com Sucesso!</h2>
-                  <p className="text-sm text-emerald-800">
+                <div className="p-8 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center space-y-3">
+                  <CheckCircle2 className="w-12 h-12 text-emerald-600 dark:text-emerald-400 mx-auto" />
+                  <h2 className="text-lg font-bold text-emerald-900 dark:text-emerald-200">Mensagem Preparada com Sucesso!</h2>
+                  <p className="text-sm text-emerald-800 dark:text-emerald-300">
                     Seu programa de e-mail foi acionado com os dados preenchidos. Basta confirmar o envio para entrar em contato com nossa equipe.
                   </p>
                   <button 
                     onClick={() => setIsSubmitted(false)}
-                    className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition-colors"
+                    className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
                   >
                     Enviar Outra Mensagem
                   </button>
@@ -99,7 +99,7 @@ export const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Seu Nome Completo
                     </label>
                     <input 
@@ -108,12 +108,12 @@ export const Contact: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Ex: Maria da Silva"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Seu E-mail
                     </label>
                     <input 
@@ -122,18 +122,18 @@ export const Contact: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Ex: maria@email.com"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Assunto
                     </label>
                     <select
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all cursor-pointer"
                     >
                       <option value="Dúvida ou Sugestão">Dúvida ou Sugestão</option>
                       <option value="Divulgação de Vaga">Quero Divulgar uma Vaga</option>
@@ -143,7 +143,7 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Mensagem
                     </label>
                     <textarea 
@@ -152,13 +152,13 @@ export const Contact: React.FC = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Descreva detalhadamente sua mensagem ou informe o link da vaga em questão..."
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:bg-white focus:border-brand-500 focus:outline-none transition-all resize-none"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:border-brand-500 focus:outline-hidden transition-all resize-none"
                     />
                   </div>
 
                   <button 
                     type="submit"
-                    className="w-full py-3 bg-brand-600 text-white rounded-xl font-bold text-sm hover:bg-brand-700 shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition-all"
+                    className="w-full py-3 bg-brand-600 text-white rounded-xl font-bold text-sm hover:bg-brand-700 active:scale-98 shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
                     Enviar Mensagem

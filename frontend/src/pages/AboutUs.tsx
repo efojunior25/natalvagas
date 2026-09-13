@@ -11,34 +11,34 @@ export const AboutUs: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       <Navbar onOpenPostJob={() => {}} />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-10 w-full">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 mb-6 group transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 mb-6 group transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Voltar para as vagas
         </Link>
 
-        <article className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8 text-slate-700 text-sm sm:text-base leading-relaxed">
-          <header className="border-b border-slate-100 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-3 border border-brand-200">
+        <article className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xs space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <header className="border-b border-slate-100 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-3 border border-brand-200 dark:border-brand-800">
               <Sparkles className="w-3.5 h-3.5" />
               Nossa História & Missão
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Sobre o Natal Vagas
             </h1>
-            <p className="text-slate-500 mt-2">
+            <p className="text-slate-500 dark:text-slate-400 mt-2">
               Conectando os talentos do Rio Grande do Norte às melhores empresas da região.
             </p>
           </header>
 
           <section className="space-y-4">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Heart className="w-5 h-5 text-rose-500" />
               O Que é o Natal Vagas?
             </h2>
@@ -51,57 +51,57 @@ export const AboutUs: React.FC = () => {
           </section>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold">
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+              <div className="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold">
                 <Target className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-base">Foco Regional</h3>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">Foco Regional</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Oportunidades em Natal, Mossoró, Parnamirim, Macaíba, São Gonçalo do Amarante, Caicó e outras cidades potiguares.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
                 <CheckCircle className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-base">Fontes Verificadas</h3>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">Fontes Verificadas</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Todas as vagas vêm com link oficial da empresa (Gupy, Pandapé, portais de carreira) para candidatura direta sem pegadinhas.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2">
+              <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
                 <Users className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-base">100% Gratuito</h3>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">100% Gratuito</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Gratuito tanto para o candidato pesquisar e se candidatar quanto para empresas cadastrarem seus anúncios.
               </p>
             </div>
           </div>
 
           <section className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               Nosso Processo Editorial e Curadoria
             </h2>
             <p>
               Nossa equipe monitora diariamente os principais canais oficiais de grandes e médias empresas no RN. Antes de um anúncio entrar no portal, checamos:
             </p>
-            <ul className="list-disc pl-5 space-y-1 text-slate-600">
+            <ul className="list-disc pl-5 space-y-1 text-slate-600 dark:text-slate-400">
               <li>A idoneidade da empresa contratante e a existência real da oportunidade.</li>
               <li>A vigência do prazo de inscrição para não exibir anúncios expirados.</li>
               <li>O direcionamento seguro para a página de inscrição oficial da empresa.</li>
             </ul>
           </section>
 
-          <section className="p-5 rounded-2xl bg-brand-50 border border-brand-100 text-brand-950 space-y-2">
-            <div className="flex items-center gap-2 font-bold text-brand-800">
-              <MapPin className="w-5 h-5 text-brand-600" />
+          <section className="p-5 rounded-2xl bg-brand-50 dark:bg-brand-950/40 border border-brand-100 dark:border-brand-900/50 text-brand-950 dark:text-brand-200 space-y-2">
+            <div className="flex items-center gap-2 font-bold text-brand-800 dark:text-brand-300">
+              <MapPin className="w-5 h-5 text-brand-600 dark:text-brand-400" />
               Sede e Atuação
             </div>
-            <p className="text-sm text-brand-900">
+            <p className="text-sm text-brand-900 dark:text-brand-200">
               Estamos situados em Natal/RN. Caso queira conversar com nossa equipe, anunciar uma vaga ou sugerir melhorias, fale conosco pelo e-mail <a href="mailto:contato@natalvagas.com.br" className="font-semibold underline">contato@natalvagas.com.br</a>.
             </p>
           </section>

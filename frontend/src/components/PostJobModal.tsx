@@ -9,8 +9,21 @@ interface PostJobModalProps {
   onJobCreated: () => void;
 }
 
+const DEFAULT_CATEGORIES: Category[] = [
+  { id: 1, name: 'Administrativo & Financeiro', slug: 'administrativo' },
+  { id: 2, name: 'Atendimento & Vendas', slug: 'vendas' },
+  { id: 3, name: 'Saúde, Clínica & Farmácia', slug: 'saude' },
+  { id: 4, name: 'Tecnologia, TI & Design', slug: 'tecnologia' },
+  { id: 5, name: 'Logística, Estoque & Operacional', slug: 'logistica' },
+  { id: 6, name: 'Educação & Estágio', slug: 'estagios' },
+  { id: 7, name: 'Gastronomia, Bares & Restaurantes', slug: 'gastronomia' },
+  { id: 8, name: 'Construção Civil & Manutenção', slug: 'construcao' },
+  { id: 9, name: 'Serviços Gerais & Segurança', slug: 'servicos-gerais' },
+  { id: 10, name: 'Outros Setores', slug: 'outros' }
+];
+
 export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJobCreated }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>(DEFAULT_CATEGORIES);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successSlug, setSuccessSlug] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -38,8 +51,14 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   useEffect(() => {
     if (isOpen) {
       axios.get('/api/categories')
-        .then(res => setCategories(res.data))
-        .catch(err => console.error('Erro ao carregar categorias:', err));
+        .then(res => {
+          if (Array.isArray(res.data) && res.data.length > 0) {
+            setCategories(res.data);
+          }
+        })
+        .catch(() => {
+          setCategories(DEFAULT_CATEGORIES);
+        });
     }
   }, [isOpen]);
 
@@ -150,10 +169,18 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={handleReset}
-                className="w-full sm:w-auto px-6 py-3 bg-brand-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand-700 transition-all"
+                className="w-full sm:w-auto px-6 py-3 bg-brand-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand-700 transition-all cursor-pointer"
               >
                 Ver no Mural de Vagas
               </button>
+              <a
+                href={`https://wa.me/5584992344922?text=${encodeURIComponent(`Olá, Edson! Acabei de cadastrar uma nova oportunidade no Natal Vagas:\n\n*${title}* na empresa *${companyName}*\nCidade: ${city}/RN\nCanal: ${applicationTarget}${isFeatured ? '\n⭐ Com Destaque VIP solicitado' : ''}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-md transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Avisar Edson no WhatsApp</span>
+              </a>
             </div>
           </div>
         ) : (

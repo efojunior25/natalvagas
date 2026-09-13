@@ -43,9 +43,11 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [me.ts.md](./me.ts.md) | `frontend/functions/api/auth/me.ts` | 94 | `.ts` |
 | [register.ts.md](./register.ts.md) | `frontend/functions/api/auth/register.ts` | 115 | `.ts` |
 | [sign-pro.ts.md](./sign-pro.ts.md) | `frontend/functions/api/auth/sign-pro.ts` | 87 | `.ts` |
+| [categories.ts.md](./categories.ts.md) | `frontend/functions/api/categories.ts` | 21 | `.ts` |
 | [create.ts.md](./create.ts.md) | `frontend/functions/api/coupons/create.ts` | 162 | `.ts` |
 | [list.ts.md](./list.ts.md) | `frontend/functions/api/coupons/list.ts` | 127 | `.ts` |
 | [verify.ts.md](./verify.ts.md) | `frontend/functions/api/coupons/verify.ts` | 177 | `.ts` |
+| [index.ts.md](./index.ts.md) | `frontend/functions/api/jobs/index.ts` | 79 | `.ts` |
 | [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 111 | `.ts` |
 | [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 143 | `.ts` |
 | [verify-code.ts.md](./verify-code.ts.md) | `frontend/functions/api/payments/verify-code.ts` | 128 | `.ts` |
@@ -59,7 +61,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 35154 | `.json` |
 | [manifest.json.md](./manifest.json.md) | `frontend/public/manifest.json` | 33 | `.json` |
 | [manifest.webmanifest.md](./manifest.webmanifest.md) | `frontend/public/manifest.webmanifest` | 33 | `.webmanifest` |
-| [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
+| [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 19 | `.txt` |
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8938 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
 | [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
@@ -75,7 +77,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 155 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
 | [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 362 | `.tsx` |
-| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 523 | `.tsx` |
+| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 550 | `.tsx` |
 | [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 813 | `.tsx` |
 | [PwaInstallPrompt.tsx.md](./PwaInstallPrompt.tsx.md) | `frontend/src/components/PwaInstallPrompt.tsx` | 111 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
@@ -93,7 +95,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [AboutUs.tsx.md](./AboutUs.tsx.md) | `frontend/src/pages/AboutUs.tsx` | 114 | `.tsx` |
 | [AdminCoupons.tsx.md](./AdminCoupons.tsx.md) | `frontend/src/pages/AdminCoupons.tsx` | 390 | `.tsx` |
 | [BlogList.tsx.md](./BlogList.tsx.md) | `frontend/src/pages/BlogList.tsx` | 248 | `.tsx` |
-| [BlogPost.tsx.md](./BlogPost.tsx.md) | `frontend/src/pages/BlogPost.tsx` | 267 | `.tsx` |
+| [BlogPost.tsx.md](./BlogPost.tsx.md) | `frontend/src/pages/BlogPost.tsx` | 264 | `.tsx` |
 | [Contact.tsx.md](./Contact.tsx.md) | `frontend/src/pages/Contact.tsx` | 176 | `.tsx` |
 | [JobSafety.tsx.md](./JobSafety.tsx.md) | `frontend/src/pages/JobSafety.tsx` | 94 | `.tsx` |
 | [PrivacyPolicy.tsx.md](./PrivacyPolicy.tsx.md) | `frontend/src/pages/PrivacyPolicy.tsx` | 119 | `.tsx` |
@@ -121,4 +123,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 111 arquivos convertidos com sucesso.
+**Total de Arquivos:** 113 arquivos convertidos com sucesso.
