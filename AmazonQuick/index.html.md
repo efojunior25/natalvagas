@@ -1,7 +1,7 @@
 # File: index.html
 - **Original Path:** `frontend/index.html`
 - **Language / Type:** `html`
-- **Lines of Code:** 77
+- **Lines of Code:** 98
 
 ---
 
@@ -16,6 +16,14 @@
     <meta name="description" content="Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos e empresas de forma 100% gratuita." />
     <meta name="keywords" content="vagas de emprego natal rn, empregos natal, trabalho parnamirim, vagas mossoró, estágio natal, jovem aprendiz natal, sine natal, natal vagas" />
     <link rel="canonical" href="https://natalvagas.com.br/" />
+
+    <!-- PWA & Mobile Capabilities -->
+    <meta name="theme-color" content="#059669" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Natal Vagas" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-7415792754049263">
@@ -81,6 +89,19 @@
   <body class="bg-surface-lightBg text-slate-900 antialiased selection:bg-brand-500 selection:text-white transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(reg) {
+            console.log('[PWA] Service Worker registrado com sucesso no escopo:', reg.scope);
+          }).catch(function(err) {
+            console.warn('[PWA] Falha ao registrar Service Worker:', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
 

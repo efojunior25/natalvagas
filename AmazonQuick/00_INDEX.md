@@ -37,22 +37,24 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [application.yml.md](./application.yml.md) | `backend/src/main/resources/application.yml` | 44 | `.yml` |
 | [V1__init_schema.sql.md](./V1__init_schema.sql.md) | `backend/src/main/resources/db/migration/V1__init_schema.sql` | 71 | `.sql` |
 | [docker-compose.yml.md](./docker-compose.yml.md) | `docker-compose.yml` | 22 | `.yml` |
-| [env.md](./env.md) | `frontend/.env` | 8 | `config` |
 | [frontend.env.example.md](./frontend.env.example.md) | `frontend/.env.example` | 8 | `.example` |
 | [sign-pro.ts.md](./sign-pro.ts.md) | `frontend/functions/api/auth/sign-pro.ts` | 87 | `.ts` |
 | [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 111 | `.ts` |
 | [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 143 | `.ts` |
 | [verify-code.ts.md](./verify-code.ts.md) | `frontend/functions/api/payments/verify-code.ts` | 128 | `.ts` |
-| [index.html.md](./index.html.md) | `frontend/index.html` | 77 | `.html` |
+| [index.html.md](./index.html.md) | `frontend/index.html` | 98 | `.html` |
 | [package-lock.json.md](./package-lock.json.md) | `frontend/package-lock.json` | 3069 | `.json` |
 | [package.json.md](./package.json.md) | `frontend/package.json` | 33 | `.json` |
 | [postcss.config.js.md](./postcss.config.js.md) | `frontend/postcss.config.js` | 6 | `.js` |
 | [redirects.md](./redirects.md) | `frontend/public/_redirects` | 2 | `config` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
 | [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 31806 | `.json` |
+| [manifest.json.md](./manifest.json.md) | `frontend/public/manifest.json` | 33 | `.json` |
+| [manifest.webmanifest.md](./manifest.webmanifest.md) | `frontend/public/manifest.webmanifest` | 33 | `.webmanifest` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8044 | `.xml` |
-| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 555 | `.tsx` |
+| [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
+| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 559 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
 | [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 97 | `.tsx` |
@@ -61,11 +63,12 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [FaqSection.tsx.md](./FaqSection.tsx.md) | `frontend/src/components/FaqSection.tsx` | 107 | `.tsx` |
 | [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 168 | `.tsx` |
 | [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 104 | `.tsx` |
-| [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 127 | `.tsx` |
-| [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 292 | `.tsx` |
+| [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 146 | `.tsx` |
+| [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 309 | `.tsx` |
 | [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 350 | `.tsx` |
 | [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 523 | `.tsx` |
 | [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 655 | `.tsx` |
+| [PwaInstallPrompt.tsx.md](./PwaInstallPrompt.tsx.md) | `frontend/src/components/PwaInstallPrompt.tsx` | 111 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
 | [SeoCategoryHero.tsx.md](./SeoCategoryHero.tsx.md) | `frontend/src/components/SeoCategoryHero.tsx` | 77 | `.tsx` |
 | [SocialPostGeneratorModal.tsx.md](./SocialPostGeneratorModal.tsx.md) | `frontend/src/components/SocialPostGeneratorModal.tsx` | 334 | `.tsx` |
@@ -98,8 +101,9 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 167 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
 | [rn_job_scraper.py.md](./rn_job_scraper.py.md) | `scripts/rn_job_scraper.py` | 185 | `.py` |
+| [test_efi_status.py.md](./test_efi_status.py.md) | `scripts/test_efi_status.py` | 66 | `.py` |
 | [verify_build_integrity.py.md](./verify_build_integrity.py.md) | `scripts/verify_build_integrity.py` | 79 | `.py` |
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 92 arquivos convertidos com sucesso.
+**Total de Arquivos:** 96 arquivos convertidos com sucesso.

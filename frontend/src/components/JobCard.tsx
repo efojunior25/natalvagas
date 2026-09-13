@@ -8,10 +8,27 @@ interface JobCardProps {
 }
 
 export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
-  const handleShareWhatsApp = (e: React.MouseEvent) => {
+  const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const text = `Confira esta vaga em Natal/RN: *${job.title}* na empresa *${job.companyName}*\n\nAcesse: https://natalvagas.com.br/vaga/${job.slug}`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+    const shareTitle = `${job.title} — ${job.companyName} (${job.city}/RN)`;
+    const shareText = `🔥 Vaga de *${job.title}* na empresa *${job.companyName}* em ${job.city}/RN!\n\nConfira os requisitos e candidate-se de graça no Natal Vagas:`;
+    const shareUrl = `https://natalvagas.com.br/vaga/${job.slug}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: `${shareText}\n${shareUrl}`,
+          url: shareUrl,
+        });
+        return;
+      } catch (err) {
+        // Cancelamento pelo usuário ou fallback
+      }
+    }
+
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -63,14 +80,16 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
             </div>
           </div>
 
-          {/* Botão Compartilhar WhatsApp */}
+          {/* Botão Compartilhar WhatsApp / Redes */}
           <button
-            onClick={handleShareWhatsApp}
-            title={`Compartilhar vaga de ${job.title} no WhatsApp`}
-            aria-label={`Compartilhar vaga de ${job.title} no WhatsApp`}
-            className="p-2 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors cursor-pointer shrink-0"
+            type="button"
+            onClick={handleShare}
+            title={`Compartilhar vaga de ${job.title} no WhatsApp ou amigos`}
+            aria-label={`Compartilhar vaga de ${job.title}`}
+            className="p-1.5 sm:px-2.5 sm:py-1 rounded-xl text-emerald-700 bg-emerald-50 hover:bg-emerald-100 hover:text-emerald-800 border border-emerald-200 transition-all cursor-pointer shrink-0 flex items-center gap-1 text-[11px] font-bold shadow-2xs active:scale-95"
           >
-            <Share2 className="w-4 h-4" />
+            <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="hidden sm:inline">Compartilhar</span>
           </button>
         </div>
 

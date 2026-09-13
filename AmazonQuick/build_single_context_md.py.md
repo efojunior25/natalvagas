@@ -18,9 +18,9 @@ os.makedirs(amazon_quick_dir, exist_ok=True)
 amazon_out_vagas = os.path.join(amazon_quick_dir, 'APP_NATAL_VAGAS.md')
 amazon_out_completo = os.path.join(amazon_quick_dir, 'APP_NATAL_VAGAS_COMPLETO.md')
 
-ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch'}
-ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
-ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md'}
+ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch', 'certs'}
+ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.pem', '.key', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
+ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md', '.env', '.env.local'}
 
 ext_lang_map = {
     '.ts': 'typescript',

@@ -5,9 +5,9 @@ base_dir = '/home/edson-oliveira/Documentos/SaaS/Natal Vagas'
 target_dir = os.path.join(base_dir, 'AmazonQuick')
 os.makedirs(target_dir, exist_ok=True)
 
-ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch'}
-ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
-ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md'}
+ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch', 'certs'}
+ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.pem', '.key', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
+ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md', '.env', '.env.local'}
 
 ext_lang_map = {
     '.ts': 'typescript',

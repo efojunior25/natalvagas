@@ -1,7 +1,7 @@
 # File: JobModal.tsx
 - **Original Path:** `frontend/src/components/JobModal.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 292
+- **Lines of Code:** 309
 
 ---
 
@@ -255,14 +255,31 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <button
                 type="button"
-                onClick={() => {
-                  const text = `Vaga: *${job.title}* em Natal/RN: https://natalvagas.com.br/vaga/${job.slug}`;
-                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+                onClick={async () => {
+                  const shareTitle = `${job.title} — ${job.companyName} (${job.city}/RN)`;
+                  const shareText = `🔥 Vaga de *${job.title}* na empresa *${job.companyName}* em ${job.city}/RN!\n\nConfira os requisitos e candidate-se de graça no Natal Vagas:`;
+                  const shareUrl = `https://natalvagas.com.br/vaga/${job.slug}`;
+
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                        title: shareTitle,
+                        text: `${shareText}\n${shareUrl}`,
+                        url: shareUrl,
+                      });
+                      return;
+                    } catch (err) {
+                      // Cancelamento pelo usuário ou fallback
+                    }
+                  }
+
+                  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
+                  window.open(whatsappUrl, '_blank');
                 }}
-                className="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer active:scale-95 shadow-2xs"
               >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>Compartilhar</span>
+                <Share2 className="w-4 h-4 text-emerald-600" />
+                <span>Compartilhar Vaga</span>
               </button>
 
               <button

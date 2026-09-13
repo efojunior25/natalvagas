@@ -15,6 +15,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { WhatsAppCommunityBanner } from './components/WhatsAppCommunityBanner';
 import { CourseRecommendations } from './components/CourseRecommendations';
 import { SEO_LANDING_PAGES, SEO_LANDING_MAP } from './data/seoLandingPages';
+import { PwaInstallPrompt } from './components/PwaInstallPrompt';
 
 // Lazy loading para páginas institucionais e modais (reduz bundle inicial)
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
@@ -548,6 +549,9 @@ export const App: React.FC = () => {
 
       {/* Banner de Consentimento de Cookies (LGPD & Google AdSense) */}
       <CookieConsentBanner />
+
+      {/* Banner PWA de Instalação no Celular */}
+      <PwaInstallPrompt />
     </>
   );
 };

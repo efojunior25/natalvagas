@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 92 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 96 arquivos.
 
 ---
 
@@ -25,79 +25,83 @@
 17. [`frontend/src/components/Navbar.tsx`](#frontend-src-components-navbartsx)
 18. [`frontend/src/components/PostJobModal.tsx`](#frontend-src-components-postjobmodaltsx)
 19. [`frontend/src/components/ProPaymentModal.tsx`](#frontend-src-components-propaymentmodaltsx)
-20. [`frontend/src/components/ResumeLaunchOfferModal.tsx`](#frontend-src-components-resumelaunchoffermodaltsx)
-21. [`frontend/src/components/SeoCategoryHero.tsx`](#frontend-src-components-seocategoryherotsx)
-22. [`frontend/src/components/SocialPostGeneratorModal.tsx`](#frontend-src-components-socialpostgeneratormodaltsx)
-23. [`frontend/src/components/WhatsAppCommunityBanner.tsx`](#frontend-src-components-whatsappcommunitybannertsx)
-24. [`frontend/src/pages/AboutUs.tsx`](#frontend-src-pages-aboutustsx)
-25. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
-26. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
-27. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
-28. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
-29. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
-30. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
-31. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
-32. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
-33. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-34. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-35. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-36. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-37. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-38. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-39. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-40. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-41. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-42. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
-43. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-44. [`frontend/public/_redirects`](#frontend-public--redirects)
-45. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-46. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-47. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-48. [`frontend/.env`](#frontend-env)
-49. [`frontend/.env.example`](#frontend-envexample)
-50. [`frontend/index.html`](#frontend-indexhtml)
-51. [`frontend/package-lock.json`](#frontend-package-lockjson)
-52. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-53. [`frontend/src/index.css`](#frontend-src-indexcss)
-54. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-55. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-56. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-57. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-58. [`backend/Dockerfile`](#backend-dockerfile)
-59. [`backend/pom.xml`](#backend-pomxml)
-60. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-61. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-62. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-63. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-64. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-65. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-66. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-67. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-68. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-69. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-70. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-71. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-72. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-73. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-74. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-75. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-76. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-77. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-78. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-79. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-80. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-81. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-82. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-83. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-84. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-85. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-86. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-87. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-88. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-89. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-90. [`.env.example`](#envexample)
-91. [`.gitignore`](#gitignore)
-92. [`docker-compose.yml`](#docker-composeyml)
+20. [`frontend/src/components/PwaInstallPrompt.tsx`](#frontend-src-components-pwainstallprompttsx)
+21. [`frontend/src/components/ResumeLaunchOfferModal.tsx`](#frontend-src-components-resumelaunchoffermodaltsx)
+22. [`frontend/src/components/SeoCategoryHero.tsx`](#frontend-src-components-seocategoryherotsx)
+23. [`frontend/src/components/SocialPostGeneratorModal.tsx`](#frontend-src-components-socialpostgeneratormodaltsx)
+24. [`frontend/src/components/WhatsAppCommunityBanner.tsx`](#frontend-src-components-whatsappcommunitybannertsx)
+25. [`frontend/src/pages/AboutUs.tsx`](#frontend-src-pages-aboutustsx)
+26. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
+27. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
+28. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
+29. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
+30. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
+31. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
+32. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
+33. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
+34. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+35. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+36. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+37. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+38. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+39. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+40. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+41. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+42. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+43. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
+44. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+45. [`frontend/public/_redirects`](#frontend-public--redirects)
+46. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+47. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
+48. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
+49. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+50. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+51. [`frontend/public/sw.js`](#frontend-public-swjs)
+52. [`frontend/.env.example`](#frontend-envexample)
+53. [`frontend/index.html`](#frontend-indexhtml)
+54. [`frontend/package-lock.json`](#frontend-package-lockjson)
+55. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+56. [`frontend/src/index.css`](#frontend-src-indexcss)
+57. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+58. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+59. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+60. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+61. [`backend/Dockerfile`](#backend-dockerfile)
+62. [`backend/pom.xml`](#backend-pomxml)
+63. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+64. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+65. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+66. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+67. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+68. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+69. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+70. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+71. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+72. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+73. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+74. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+75. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+76. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+77. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+78. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+79. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+80. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+81. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+82. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+83. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+84. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+85. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+86. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+87. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+88. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+89. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+90. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+91. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+92. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+93. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+94. [`.env.example`](#envexample)
+95. [`.gitignore`](#gitignore)
+96. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -516,8 +520,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 555
-- **Tamanho:** 22054 bytes
+- **Total de Linhas:** 559
+- **Tamanho:** 22200 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
@@ -537,6 +541,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { WhatsAppCommunityBanner } from './components/WhatsAppCommunityBanner';
 import { CourseRecommendations } from './components/CourseRecommendations';
 import { SEO_LANDING_PAGES, SEO_LANDING_MAP } from './data/seoLandingPages';
+import { PwaInstallPrompt } from './components/PwaInstallPrompt';
 
 // Lazy loading para páginas institucionais e modais (reduz bundle inicial)
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
@@ -1070,6 +1075,9 @@ export const App: React.FC = () => {
 
       {/* Banner de Consentimento de Cookies (LGPD & Google AdSense) */}
       <CookieConsentBanner />
+
+      {/* Banner PWA de Instalação no Celular */}
+      <PwaInstallPrompt />
     </>
   );
 };
@@ -2208,8 +2216,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
 - **Caminho:** `frontend/src/components/JobCard.tsx`
 - **Nome:** `JobCard.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 127
-- **Tamanho:** 6478 bytes
+- **Total de Linhas:** 146
+- **Tamanho:** 7231 bytes
 
 ```tsx
 import React from 'react';
@@ -2222,10 +2230,27 @@ interface JobCardProps {
 }
 
 export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
-  const handleShareWhatsApp = (e: React.MouseEvent) => {
+  const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const text = `Confira esta vaga em Natal/RN: *${job.title}* na empresa *${job.companyName}*\n\nAcesse: https://natalvagas.com.br/vaga/${job.slug}`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+    const shareTitle = `${job.title} — ${job.companyName} (${job.city}/RN)`;
+    const shareText = `🔥 Vaga de *${job.title}* na empresa *${job.companyName}* em ${job.city}/RN!\n\nConfira os requisitos e candidate-se de graça no Natal Vagas:`;
+    const shareUrl = `https://natalvagas.com.br/vaga/${job.slug}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: `${shareText}\n${shareUrl}`,
+          url: shareUrl,
+        });
+        return;
+      } catch (err) {
+        // Cancelamento pelo usuário ou fallback
+      }
+    }
+
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -2277,14 +2302,16 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
             </div>
           </div>
 
-          {/* Botão Compartilhar WhatsApp */}
+          {/* Botão Compartilhar WhatsApp / Redes */}
           <button
-            onClick={handleShareWhatsApp}
-            title={`Compartilhar vaga de ${job.title} no WhatsApp`}
-            aria-label={`Compartilhar vaga de ${job.title} no WhatsApp`}
-            className="p-2 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors cursor-pointer shrink-0"
+            type="button"
+            onClick={handleShare}
+            title={`Compartilhar vaga de ${job.title} no WhatsApp ou amigos`}
+            aria-label={`Compartilhar vaga de ${job.title}`}
+            className="p-1.5 sm:px-2.5 sm:py-1 rounded-xl text-emerald-700 bg-emerald-50 hover:bg-emerald-100 hover:text-emerald-800 border border-emerald-200 transition-all cursor-pointer shrink-0 flex items-center gap-1 text-[11px] font-bold shadow-2xs active:scale-95"
           >
-            <Share2 className="w-4 h-4" />
+            <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="hidden sm:inline">Compartilhar</span>
           </button>
         </div>
 
@@ -2349,8 +2376,8 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
 - **Caminho:** `frontend/src/components/JobModal.tsx`
 - **Nome:** `JobModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 292
-- **Tamanho:** 14427 bytes
+- **Total de Linhas:** 309
+- **Tamanho:** 15262 bytes
 
 ```tsx
 import React, { useEffect, useState } from 'react';
@@ -2602,14 +2629,31 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <button
                 type="button"
-                onClick={() => {
-                  const text = `Vaga: *${job.title}* em Natal/RN: https://natalvagas.com.br/vaga/${job.slug}`;
-                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+                onClick={async () => {
+                  const shareTitle = `${job.title} — ${job.companyName} (${job.city}/RN)`;
+                  const shareText = `🔥 Vaga de *${job.title}* na empresa *${job.companyName}* em ${job.city}/RN!\n\nConfira os requisitos e candidate-se de graça no Natal Vagas:`;
+                  const shareUrl = `https://natalvagas.com.br/vaga/${job.slug}`;
+
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                        title: shareTitle,
+                        text: `${shareText}\n${shareUrl}`,
+                        url: shareUrl,
+                      });
+                      return;
+                    } catch (err) {
+                      // Cancelamento pelo usuário ou fallback
+                    }
+                  }
+
+                  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
+                  window.open(whatsappUrl, '_blank');
                 }}
-                className="flex-1 sm:flex-none justify-center px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="flex-1 sm:flex-none justify-center px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer active:scale-95 shadow-2xs"
               >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>Compartilhar</span>
+                <Share2 className="w-4 h-4 text-emerald-600" />
+                <span>Compartilhar Vaga</span>
               </button>
 
               <button
@@ -4220,8 +4264,133 @@ export default ProPaymentModal;
 
 ---
 
+<a id="frontend-src-components-pwainstallprompttsx"></a>
+## 20. Arquivo: `frontend/src/components/PwaInstallPrompt.tsx`
+- **Caminho:** `frontend/src/components/PwaInstallPrompt.tsx`
+- **Nome:** `PwaInstallPrompt.tsx`
+- **Linguagem / Sintaxe:** `tsx`
+- **Total de Linhas:** 111
+- **Tamanho:** 4217 bytes
+
+```tsx
+import React, { useState, useEffect } from 'react';
+import { Download, X } from 'lucide-react';
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
+
+export const PwaInstallPrompt: React.FC = () => {
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Não exibe se já estiver rodando em modo standalone (PWA já instalado)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+      (window.navigator as any).standalone === true;
+    if (isStandalone) return;
+
+    // Não exibe se o usuário dispensou nas últimas 72 horas
+    const dismissedAt = localStorage.getItem('natalvagas_pwa_dismissed_at');
+    if (dismissedAt) {
+      const hoursSinceDismiss = (Date.now() - parseInt(dismissedAt, 10)) / (1000 * 60 * 60);
+      if (hoursSinceDismiss < 72) return;
+    }
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      setIsVisible(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    try {
+      await deferredPrompt.prompt();
+      const choiceResult = await deferredPrompt.userChoice;
+      if (choiceResult.outcome === 'accepted') {
+        setIsVisible(false);
+      }
+    } catch (err) {
+      console.warn('Erro ao disparar prompt de instalação do PWA:', err);
+    } finally {
+      setDeferredPrompt(null);
+    }
+  };
+
+  const handleDismiss = () => {
+    setIsVisible(false);
+    localStorage.setItem('natalvagas_pwa_dismissed_at', Date.now().toString());
+  };
+
+  if (!isVisible || !deferredPrompt) return null;
+
+  return (
+    <aside
+      aria-label="Instalar aplicativo Natal Vagas"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 animate-in slide-in-from-bottom-5 duration-300"
+    >
+      <div className="bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700/80 flex items-center justify-between gap-3.5">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 p-0.5 shrink-0 shadow-xs flex items-center justify-center">
+            <img
+              src="/assets/pwa-192x192.png"
+              alt="Ícone Natal Vagas"
+              className="w-full h-full object-cover rounded-[10px]"
+            />
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5">
+              <h4 className="text-xs sm:text-sm font-bold text-white truncate">
+                Instale o App Natal Vagas
+              </h4>
+              <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-extrabold shrink-0">
+                Grátis
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-300 truncate mt-0.5">
+              Acesso rápido a 1.400 vagas no RN sem gastar memória.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={handleInstallClick}
+            className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Instalar</span>
+          </button>
+          
+          <button
+            onClick={handleDismiss}
+            aria-label="Fechar aviso"
+            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </aside>
+  );
+};
+
+```
+
+---
+
 <a id="frontend-src-components-resumelaunchoffermodaltsx"></a>
-## 20. Arquivo: `frontend/src/components/ResumeLaunchOfferModal.tsx`
+## 21. Arquivo: `frontend/src/components/ResumeLaunchOfferModal.tsx`
 - **Caminho:** `frontend/src/components/ResumeLaunchOfferModal.tsx`
 - **Nome:** `ResumeLaunchOfferModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4391,7 +4560,7 @@ export default ResumeLaunchOfferModal;
 ---
 
 <a id="frontend-src-components-seocategoryherotsx"></a>
-## 21. Arquivo: `frontend/src/components/SeoCategoryHero.tsx`
+## 22. Arquivo: `frontend/src/components/SeoCategoryHero.tsx`
 - **Caminho:** `frontend/src/components/SeoCategoryHero.tsx`
 - **Nome:** `SeoCategoryHero.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4482,7 +4651,7 @@ export const SeoCategoryHero: React.FC<SeoCategoryHeroProps> = ({ config, totalM
 ---
 
 <a id="frontend-src-components-socialpostgeneratormodaltsx"></a>
-## 22. Arquivo: `frontend/src/components/SocialPostGeneratorModal.tsx`
+## 23. Arquivo: `frontend/src/components/SocialPostGeneratorModal.tsx`
 - **Caminho:** `frontend/src/components/SocialPostGeneratorModal.tsx`
 - **Nome:** `SocialPostGeneratorModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4830,7 +4999,7 @@ export default SocialPostGeneratorModal;
 ---
 
 <a id="frontend-src-components-whatsappcommunitybannertsx"></a>
-## 23. Arquivo: `frontend/src/components/WhatsAppCommunityBanner.tsx`
+## 24. Arquivo: `frontend/src/components/WhatsAppCommunityBanner.tsx`
 - **Caminho:** `frontend/src/components/WhatsAppCommunityBanner.tsx`
 - **Nome:** `WhatsAppCommunityBanner.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4976,7 +5145,7 @@ export default WhatsAppCommunityBanner;
 ---
 
 <a id="frontend-src-pages-aboutustsx"></a>
-## 24. Arquivo: `frontend/src/pages/AboutUs.tsx`
+## 25. Arquivo: `frontend/src/pages/AboutUs.tsx`
 - **Caminho:** `frontend/src/pages/AboutUs.tsx`
 - **Nome:** `AboutUs.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5104,7 +5273,7 @@ export const AboutUs: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-bloglisttsx"></a>
-## 25. Arquivo: `frontend/src/pages/BlogList.tsx`
+## 26. Arquivo: `frontend/src/pages/BlogList.tsx`
 - **Caminho:** `frontend/src/pages/BlogList.tsx`
 - **Nome:** `BlogList.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5366,7 +5535,7 @@ export default BlogList;
 ---
 
 <a id="frontend-src-pages-blogposttsx"></a>
-## 26. Arquivo: `frontend/src/pages/BlogPost.tsx`
+## 27. Arquivo: `frontend/src/pages/BlogPost.tsx`
 - **Caminho:** `frontend/src/pages/BlogPost.tsx`
 - **Nome:** `BlogPost.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5647,7 +5816,7 @@ export default BlogPost;
 ---
 
 <a id="frontend-src-pages-contacttsx"></a>
-## 27. Arquivo: `frontend/src/pages/Contact.tsx`
+## 28. Arquivo: `frontend/src/pages/Contact.tsx`
 - **Caminho:** `frontend/src/pages/Contact.tsx`
 - **Nome:** `Contact.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5837,7 +6006,7 @@ export const Contact: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-jobsafetytsx"></a>
-## 28. Arquivo: `frontend/src/pages/JobSafety.tsx`
+## 29. Arquivo: `frontend/src/pages/JobSafety.tsx`
 - **Caminho:** `frontend/src/pages/JobSafety.tsx`
 - **Nome:** `JobSafety.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5945,7 +6114,7 @@ export const JobSafety: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-privacypolicytsx"></a>
-## 29. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
+## 30. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
 - **Caminho:** `frontend/src/pages/PrivacyPolicy.tsx`
 - **Nome:** `PrivacyPolicy.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -6078,7 +6247,7 @@ export const PrivacyPolicy: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-resumebuildertsx"></a>
-## 30. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
+## 31. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
 - **Caminho:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Nome:** `ResumeBuilder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7278,7 +7447,7 @@ export default ResumeBuilder;
 ---
 
 <a id="frontend-src-pages-termsofusetsx"></a>
-## 31. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
+## 32. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
 - **Caminho:** `frontend/src/pages/TermsOfUse.tsx`
 - **Nome:** `TermsOfUse.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7390,7 +7559,7 @@ export const TermsOfUse: React.FC = () => {
 ---
 
 <a id="frontend-functions-api-auth-sign-prots"></a>
-## 32. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
+## 33. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
 - **Caminho:** `frontend/functions/api/auth/sign-pro.ts`
 - **Nome:** `sign-pro.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7491,7 +7660,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
 ---
 
 <a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 33. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+## 34. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Nome:** `[txid].ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7616,7 +7785,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 34. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 35. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7773,7 +7942,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 35. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 36. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7915,7 +8084,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-src-context-authcontexttsx"></a>
-## 36. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 37. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -8175,7 +8344,7 @@ export const useAuth = (): AuthContextType => {
 ---
 
 <a id="frontend-src-services-paymentservicets"></a>
-## 37. Arquivo: `frontend/src/services/paymentService.ts`
+## 38. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8250,7 +8419,7 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 38. Arquivo: `frontend/src/types/blog.ts`
+## 39. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8285,7 +8454,7 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 39. Arquivo: `frontend/src/types/job.ts`
+## 40. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8353,7 +8522,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 40. Arquivo: `frontend/src/data/blogPosts.ts`
+## 41. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8932,7 +9101,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 41. Arquivo: `frontend/src/data/initialJobs.ts`
+## 42. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8966,7 +9135,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-src-data-seolandingpagests"></a>
-## 42. Arquivo: `frontend/src/data/seoLandingPages.ts`
+## 43. Arquivo: `frontend/src/data/seoLandingPages.ts`
 - **Caminho:** `frontend/src/data/seoLandingPages.ts`
 - **Nome:** `seoLandingPages.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9132,7 +9301,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-data-jobsjson"></a>
-## 43. Arquivo: `frontend/public/data/jobs.json`
+## 44. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -40951,7 +41120,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public--redirects"></a>
-## 44. Arquivo: `frontend/public/_redirects`
+## 45. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -40967,7 +41136,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 45. Arquivo: `frontend/public/ads.txt`
+## 46. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -40981,8 +41150,102 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 
 ---
 
+<a id="frontend-public-manifestjson"></a>
+## 47. Arquivo: `frontend/public/manifest.json`
+- **Caminho:** `frontend/public/manifest.json`
+- **Nome:** `manifest.json`
+- **Linguagem / Sintaxe:** `json`
+- **Total de Linhas:** 33
+- **Tamanho:** 864 bytes
+
+```json
+{
+  "name": "Natal Vagas — Empregos no RN",
+  "short_name": "Natal Vagas",
+  "description": "Portal líder de empregos em Natal, Mossoró, Parnamirim e no RN. Mais de 1.400 vagas de emprego reais e verificadas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#059669",
+  "lang": "pt-BR",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/assets/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
+
+```
+
+---
+
+<a id="frontend-public-manifestwebmanifest"></a>
+## 48. Arquivo: `frontend/public/manifest.webmanifest`
+- **Caminho:** `frontend/public/manifest.webmanifest`
+- **Nome:** `manifest.webmanifest`
+- **Linguagem / Sintaxe:** `text`
+- **Total de Linhas:** 33
+- **Tamanho:** 864 bytes
+
+```text
+{
+  "name": "Natal Vagas — Empregos no RN",
+  "short_name": "Natal Vagas",
+  "description": "Portal líder de empregos em Natal, Mossoró, Parnamirim e no RN. Mais de 1.400 vagas de emprego reais e verificadas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#059669",
+  "lang": "pt-BR",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/assets/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
+
+```
+
+---
+
 <a id="frontend-public-robotstxt"></a>
-## 46. Arquivo: `frontend/public/robots.txt`
+## 49. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -41009,7 +41272,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 47. Arquivo: `frontend/public/sitemap.xml`
+## 50. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -49066,30 +49329,109 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 
 ---
 
-<a id="frontend-env"></a>
-## 48. Arquivo: `frontend/.env`
-- **Caminho:** `frontend/.env`
-- **Nome:** `.env`
-- **Linguagem / Sintaxe:** `bash`
-- **Total de Linhas:** 8
-- **Tamanho:** 229 bytes
+<a id="frontend-public-swjs"></a>
+## 51. Arquivo: `frontend/public/sw.js`
+- **Caminho:** `frontend/public/sw.js`
+- **Nome:** `sw.js`
+- **Linguagem / Sintaxe:** `javascript`
+- **Total de Linhas:** 87
+- **Tamanho:** 2673 bytes
 
-```bash
-# Google AdSense Publisher ID Oficial
-VITE_ADSENSE_CLIENT_ID=ca-pub-7415792754049263
+```javascript
+// Natal Vagas PWA Service Worker (v1.0.0)
+const CACHE_NAME = 'natalvagas-pwa-v1';
+const PRECACHE_ASSETS = [
+  '/',
+  '/index.html',
+  '/manifest.webmanifest',
+  '/assets/logo-natalvagas.jpg',
+  '/assets/pwa-192x192.png',
+  '/assets/pwa-512x512.png'
+];
 
-# Contato Oficial do Suporte no WhatsApp
-VITE_WHATSAPP_NUMBER=5584992344922
+// Instalação: Pré-cache dos ativos fundamentais da casca da aplicação (App Shell)
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(PRECACHE_ASSETS);
+    }).then(() => self.skipWaiting())
+  );
+});
 
-# URL Canônica do Portal
-VITE_SITE_URL=https://natalvagas.com.br
+// Ativação: Limpeza de caches obsoletos de versões anteriores
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Interceptação de requisições: Estratégias inteligentes de cache
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Ignora requisições de outras origens ou de APIs externas (ex: AdSense, Google Fonts, etc.)
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // Ignora chamadas de API serverless do backend
+  if (url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // 1. Catálogo de Vagas (/data/jobs.json): Network First com Fallback para Cache
+  if (url.pathname.includes('/data/jobs.json')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const resClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, resClone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // 2. Navegação de Páginas HTML (SPA): Network First com Fallback para index.html
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
+  // 3. Ativos Estáticos (JS, CSS, Imagens, Fontes): Stale-While-Revalidate
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      const fetchPromise = fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || fetchPromise;
+    })
+  );
+});
 
 ```
 
 ---
 
 <a id="frontend-envexample"></a>
-## 49. Arquivo: `frontend/.env.example`
+## 52. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -49111,12 +49453,12 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 50. Arquivo: `frontend/index.html`
+## 53. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
-- **Total de Linhas:** 77
-- **Tamanho:** 4100 bytes
+- **Total de Linhas:** 98
+- **Tamanho:** 5048 bytes
 
 ```html
 <!doctype html>
@@ -49129,6 +49471,14 @@ VITE_SITE_URL=https://natalvagas.com.br
     <meta name="description" content="Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos e empresas de forma 100% gratuita." />
     <meta name="keywords" content="vagas de emprego natal rn, empregos natal, trabalho parnamirim, vagas mossoró, estágio natal, jovem aprendiz natal, sine natal, natal vagas" />
     <link rel="canonical" href="https://natalvagas.com.br/" />
+
+    <!-- PWA & Mobile Capabilities -->
+    <meta name="theme-color" content="#059669" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Natal Vagas" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-7415792754049263">
@@ -49194,6 +49544,19 @@ VITE_SITE_URL=https://natalvagas.com.br
   <body class="bg-surface-lightBg text-slate-900 antialiased selection:bg-brand-500 selection:text-white transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(reg) {
+            console.log('[PWA] Service Worker registrado com sucesso no escopo:', reg.scope);
+          }).catch(function(err) {
+            console.warn('[PWA] Falha ao registrar Service Worker:', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
 
@@ -49202,7 +49565,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 51. Arquivo: `frontend/package-lock.json`
+## 54. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -52285,7 +52648,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 52. Arquivo: `frontend/postcss.config.js`
+## 55. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -52305,7 +52668,7 @@ export default {
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 53. Arquivo: `frontend/src/index.css`
+## 56. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -52369,7 +52732,7 @@ export default {
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 54. Arquivo: `frontend/src/vite-env.d.ts`
+## 57. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -52384,7 +52747,7 @@ export default {
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 55. Arquivo: `frontend/tailwind.config.js`
+## 58. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -52436,7 +52799,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 56. Arquivo: `frontend/tsconfig.json`
+## 59. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -52470,7 +52833,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 57. Arquivo: `frontend/tsconfig.node.json`
+## 60. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -52494,7 +52857,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 58. Arquivo: `backend/Dockerfile`
+## 61. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -52526,7 +52889,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 59. Arquivo: `backend/pom.xml`
+## 62. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -52644,7 +53007,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 60. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 63. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52670,7 +53033,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 61. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 64. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52712,7 +53075,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 62. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 65. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52785,7 +53148,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 63. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 66. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52851,7 +53214,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 64. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 67. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52948,7 +53311,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 65. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 68. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52986,7 +53349,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 66. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 69. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53007,7 +53370,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 67. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 70. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53063,7 +53426,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 68. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 71. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53086,7 +53449,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 69. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 72. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53226,7 +53589,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 70. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 73. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53248,7 +53611,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 71. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 74. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53304,7 +53667,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 72. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 75. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53325,7 +53688,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 73. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 76. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53348,7 +53711,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 74. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 77. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53417,7 +53780,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 75. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 78. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53468,7 +53831,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 76. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53494,7 +53857,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 77. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 80. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53531,7 +53894,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 78. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 81. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53580,7 +53943,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 79. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 82. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53771,7 +54134,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 80. Arquivo: `backend/src/main/resources/application.yml`
+## 83. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -53829,7 +54192,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 81. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 84. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -53914,12 +54277,12 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 82. Arquivo: `scripts/build_single_context_md.py`
+## 85. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
 - **Total de Linhas:** 143
-- **Tamanho:** 5689 bytes
+- **Tamanho:** 5736 bytes
 
 ```python
 import os
@@ -53934,9 +54297,9 @@ os.makedirs(amazon_quick_dir, exist_ok=True)
 amazon_out_vagas = os.path.join(amazon_quick_dir, 'APP_NATAL_VAGAS.md')
 amazon_out_completo = os.path.join(amazon_quick_dir, 'APP_NATAL_VAGAS_COMPLETO.md')
 
-ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch'}
-ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
-ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md'}
+ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch', 'certs'}
+ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.pem', '.key', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
+ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md', '.env', '.env.local'}
 
 ext_lang_map = {
     '.ts': 'typescript',
@@ -54071,12 +54434,12 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 83. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 86. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
 - **Total de Linhas:** 118
-- **Tamanho:** 4134 bytes
+- **Tamanho:** 4181 bytes
 
 `````python
 import os
@@ -54086,9 +54449,9 @@ base_dir = '/home/edson-oliveira/Documentos/SaaS/Natal Vagas'
 target_dir = os.path.join(base_dir, 'AmazonQuick')
 os.makedirs(target_dir, exist_ok=True)
 
-ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch'}
-ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
-ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md'}
+ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch', 'certs'}
+ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.pem', '.key', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
+ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md', '.env', '.env.local'}
 
 ext_lang_map = {
     '.ts': 'typescript',
@@ -54203,7 +54566,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 84. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 87. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54504,7 +54867,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 85. Arquivo: `scripts/generate_sitemap.py`
+## 88. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54685,7 +55048,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 86. Arquivo: `scripts/ingest_jobs.py`
+## 89. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54908,7 +55271,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 87. Arquivo: `scripts/rn_job_scraper.py`
+## 90. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55106,8 +55469,88 @@ if __name__ == "__main__":
 
 ---
 
+<a id="scripts-test-efi-statuspy"></a>
+## 91. Arquivo: `scripts/test_efi_status.py`
+- **Caminho:** `scripts/test_efi_status.py`
+- **Nome:** `test_efi_status.py`
+- **Linguagem / Sintaxe:** `python`
+- **Total de Linhas:** 66
+- **Tamanho:** 2482 bytes
+
+```python
+#!/usr/bin/env python3
+import os
+import sys
+import base64
+import requests
+
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+cert_path = os.path.join(repo_root, 'certs', 'cert.pem')
+key_path = os.path.join(repo_root, 'certs', 'key.pem')
+
+env_file = os.path.join(repo_root, '.env')
+if os.path.exists(env_file):
+    with open(env_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                k, v = line.split('=', 1)
+                os.environ.setdefault(k.strip(), v.strip())
+
+client_id = os.environ.get('EFI_CLIENT_ID')
+client_secret = os.environ.get('EFI_CLIENT_SECRET')
+pix_key = os.environ.get('PIX_KEY', 'pix@natalvagas.com.br')
+
+if not client_id or not client_secret:
+    print("❌ Variáveis EFI_CLIENT_ID ou EFI_CLIENT_SECRET não definidas no ambiente ou .env.")
+    sys.exit(1)
+
+if not os.path.exists(cert_path) or not os.path.exists(key_path):
+    print("❌ Certificados não encontrados na pasta certs/.")
+    sys.exit(1)
+
+auth_str = f'{client_id}:{client_secret}'
+b64_auth = base64.b64encode(auth_str.encode()).decode()
+cert = (cert_path, key_path)
+
+print("🔍 1. Testando Autenticação OAuth2 com a Efí...")
+try:
+    res = requests.post(
+        'https://pix.api.efipay.com.br/oauth/token',
+        json={'grant_type': 'client_credentials'},
+        headers={'Authorization': f'Basic {b64_auth}', 'Content-Type': 'application/json'},
+        cert=cert,
+        timeout=10
+    )
+    if res.status_code != 200:
+        print(f"❌ Falha na autenticação: {res.status_code} - {res.text}")
+        sys.exit(1)
+    
+    token = res.json()['access_token']
+    print("   ✓ Autenticado com sucesso na API de Produção da Efí!")
+except Exception as e:
+    print(f"❌ Erro de conexão com a Efí: {e}")
+    sys.exit(1)
+
+print(f"\n🔍 2. Consultando Webhook da Chave Pix {pix_key}...")
+headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
+try:
+    wh_res = requests.get(f'https://pix.api.efipay.com.br/v2/webhook/{pix_key}', headers=headers, cert=cert, timeout=10)
+    if wh_res.status_code == 200:
+        print(f"   ✓ Webhook Ativo: {wh_res.json().get('webhookUrl')}")
+    else:
+        print(f"⚠️ Status Webhook: {wh_res.status_code} - {wh_res.text}")
+except Exception as e:
+    print(f"❌ Erro ao consultar Webhook: {e}")
+
+print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
+
+```
+
+---
+
 <a id="scripts-verify-build-integritypy"></a>
-## 88. Arquivo: `scripts/verify_build_integrity.py`
+## 92. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55200,7 +55643,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 89. Arquivo: `scripts/verify_seo.py`
+## 93. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -55283,7 +55726,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 90. Arquivo: `.env.example`
+## 94. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -55302,7 +55745,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 91. Arquivo: `.gitignore`
+## 95. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -55359,7 +55802,7 @@ certs/
 ---
 
 <a id="docker-composeyml"></a>
-## 92. Arquivo: `docker-compose.yml`
+## 96. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`
