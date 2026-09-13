@@ -113,22 +113,23 @@ def main():
     print("=== INICIANDO COLETA DE 500+ VAGAS NO RN ===")
     
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    jobs_json_file = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
     initial_jobs_file = os.path.join(repo_root, "frontend", "src", "data", "initialJobs.ts")
     
-    # 1. Carrega dados existentes
-    with open(initial_jobs_file, "r", encoding="utf-8") as f:
-        content = f.read()
+    # 1. Carrega dados existentes do jobs.json
+    if os.path.exists(jobs_json_file):
+        with open(jobs_json_file, "r", encoding="utf-8") as f:
+            existing_records = json.load(f)
+    else:
+        with open(initial_jobs_file, "r", encoding="utf-8") as f:
+            content = f.read()
+        m = re.search(r'const records:\s*JobRecord\[\]\s*=\s*(\[.*?\]);', content, re.DOTALL)
+        existing_records = json.loads(m.group(1))
 
-    m = re.search(r'const records:\s*JobRecord\[\]\s*=\s*(\[.*?\]);', content, re.DOTALL)
-    if not m:
-        print("Erro: Não encontrou bloco records em initialJobs.ts")
-        sys.exit(1)
-        
-    existing_records = json.loads(m.group(1))
     print(f"Total de vagas atuais em catálogo: {len(existing_records)}")
     
     existing_slugs = set(r.get('slug') for r in existing_records)
-    existing_titles = set(r.get('title', '').strip().lower() for r in existing_records)
+    existing_keys = set((r.get('title', '').strip().lower(), r.get('companyName', '').strip().lower()) for r in existing_records)
     
     # Encontra maior ID atual
     max_id = 2026091100
@@ -141,23 +142,15 @@ def main():
     
     collected_entries = []
     
-    # 2. Busca paginada no feed do Emprego do RN
-    # Cada página pode trazer até 150 vagas
+    # 2. Busca paginada no feed do Emprego do RN com índices expandidos
     base_empregodorn = "https://www.empregodorn.com.br/feeds/posts/default"
-    for start_idx in [1, 151, 301, 451, 601]:
+    for start_idx in range(1201, 5500, 150):
         print(f"Consultando empregodorn.com.br (start={start_idx})...")
         batch = fetch_feed_batch(base_empregodorn, start_idx, 150)
         print(f"-> Retornados {len(batch)} itens.")
         collected_entries.extend(batch)
-        if len(batch) < 50:
+        if len(batch) < 20 or len(collected_entries) >= 1200:
             break
-            
-    # 3. Busca no feed do Vagas Empregos Natal
-    base_vagasnatal = "https://www.vagasempregosnatal.com.br/feeds/posts/default"
-    print(f"Consultando vagasempregosnatal.com.br (start=1)...")
-    batch2 = fetch_feed_batch(base_vagasnatal, 1, 150)
-    print(f"-> Retornados {len(batch2)} itens.")
-    collected_entries.extend(batch2)
     
     print(f"\nTotal bruto de postagens coletadas: {len(collected_entries)}")
     
@@ -180,9 +173,9 @@ def main():
             
         title, company = parse_title_and_company(raw_title)
         
-        # Evita duplicados por título exato
-        t_key = f"{title.lower()}_{company.lower()}"
-        if t_key in existing_titles:
+        # Evita duplicados por título + empresa
+        t_key = (title.lower(), company.lower())
+        if t_key in existing_keys:
             continue
             
         # Emails protegidos
@@ -199,10 +192,23 @@ def main():
         work_model = parse_work_model(cleaned_desc)
         contract_type = parse_contract_type(cleaned_desc + " " + title)
         
-        # Canal de candidatura
+        # Canal de candidatura (Email, WhatsApp ou Link)
+        whatsapp_match = re.search(r'(?:whatsapp|zap|whats)[^\d]*(\(?84\)?\s*9?\d{4}[-\s]?\d{4})', cleaned_desc, re.IGNORECASE)
         if valid_emails:
             app_channel = "EMAIL"
             app_target = valid_emails[0]
+        elif whatsapp_match:
+            raw_phone = re.sub(r'\D', '', whatsapp_match.group(1))
+            if len(raw_phone) == 11:
+                app_channel = "WHATSAPP"
+                app_target = "55" + raw_phone
+            elif len(raw_phone) == 9:
+                app_channel = "WHATSAPP"
+                app_target = "5584" + raw_phone
+            else:
+                links = [l.get('href') for l in entry.get('link', []) if l.get('rel') == 'alternate']
+                app_channel = "LINK"
+                app_target = links[0] if links else "https://natalvagas.com.br"
         else:
             links = [l.get('href') for l in entry.get('link', []) if l.get('rel') == 'alternate']
             app_channel = "LINK"
@@ -212,7 +218,7 @@ def main():
         if slug in existing_slugs:
             continue
             
-        # Tenta extrair requisitos ou benefícios
+        # Extrair requisitos ou benefícios
         req_match = re.search(r'(?:requisitos|exig[êe]ncias|perfil)[^\n:]*[:\n]+(.*?)(?=\n\s*(?:benef[íi]cios|sal[áa]rio|hor[áa]rio|atividades|como se candidatar|$))', cleaned_desc, re.IGNORECASE | re.DOTALL)
         requirements = req_match.group(1).strip()[:300] if req_match else None
         
@@ -233,7 +239,9 @@ def main():
             "applicationChannel": app_channel,
             "applicationTarget": app_target,
             "publishedAt": published,
-            "expiresAt": "2026-10-31T23:59:59-03:00"
+            "expiresAt": "2026-11-30T23:59:59-03:00",
+            "status": "APPROVED",
+            "isFeatured": False
         }
         
         if requirements:
@@ -243,24 +251,35 @@ def main():
             
         new_jobs.append(job_obj)
         existing_slugs.add(slug)
-        existing_titles.add(t_key)
+        existing_keys.add(t_key)
         current_id += 1
+        
+        if len(new_jobs) >= 550:
+            print(f"Meta de 500+ novas vagas atingida ({len(new_jobs)} vagas)! Finalizando coleta.")
+            break
         
     print(f"\n Novas vagas prontas para inserção: {len(new_jobs)}")
     
-    # Se alcançamos uma quantidade significativa, gravamos
     if len(new_jobs) > 0:
         all_records = existing_records + new_jobs
         print(f"Total consolidado de vagas: {len(all_records)}")
         
-        # Reconstrói o arquivo initialJobs.ts
-        json_str = json.dumps(all_records, ensure_ascii=False, indent=2)
-        new_content = content[:m.start(1)] + json_str + content[m.end(1):]
+        # 1. Salva em frontend/public/data/jobs.json
+        with open(jobs_json_file, "w", encoding="utf-8") as f:
+            json.dump(all_records, f, ensure_ascii=False, indent=2)
+        print(" jobs.json atualizado com sucesso!")
         
-        with open(initial_jobs_file, "w", encoding="utf-8") as f:
-            f.write(new_content)
-            
-        print(" initialJobs.ts atualizado com sucesso!")
+        # 2. Sincroniza em initialJobs.ts
+        if os.path.exists(initial_jobs_file):
+            with open(initial_jobs_file, "r", encoding="utf-8") as f:
+                content = f.read()
+            m = re.search(r'const records:\s*JobRecord\[\]\s*=\s*(\[.*?\]);', content, re.DOTALL)
+            if m:
+                json_str = json.dumps(all_records, ensure_ascii=False, indent=2)
+                new_content = content[:m.start(1)] + json_str + content[m.end(1):]
+                with open(initial_jobs_file, "w", encoding="utf-8") as f:
+                    f.write(new_content)
+                print(" initialJobs.ts atualizado com sucesso!")
     else:
         print("Nenhuma nova vaga encontrada para adicionar.")
 

@@ -18,7 +18,7 @@
 O **Natal Vagas** é uma plataforma digital e SaaS desenvolvida para resolver a dor do desemprego e contratação no estado do **Rio Grande do Norte**, com foco na Grande Natal (Natal, Parnamirim, Macaíba, São Gonçalo do Amarante, Extremoz, Ceará-Mirim) e principais polos regionais (Mossoró, Caicó, Currais Novos, Assú, Tibau do Sul/Pipa).
 
 ### Proposta de Valor:
-- **Para os Candidatos (100% Gratuito):** Acesso rápido, sem necessidade de cadastro burocrático inicial, a mais de **840 vagas reais e verificadas** no RN, com filtros de polos geográficos, modalidade (Presencial, Híbrido, Remoto), filtro dedicado **"🌱 Sem Experiência / 1º Emprego"** e um **Gerador de Currículos Profissionais Padrão ATS**.
+- **Para os Candidatos (100% Gratuito):** Acesso rápido, sem necessidade de cadastro burocrático inicial, a mais de **1.400 vagas reais e verificadas** no RN, com filtros de polos geográficos, modalidade (Presencial, Híbrido, Remoto), filtro dedicado **"🌱 Sem Experiência / 1º Emprego"** e um **Gerador de Currículos Profissionais Padrão ATS**.
 - **Para as Empresas e Recrutadores:** Divulgação de vagas simples e gratuita, com opção de upgrade para **Vaga em Destaque VIP** para triplicar o alcance de currículos.
 - **Para o Operador (Edson Oliveira):** Um modelo de micro-SaaS enxuto, de altíssimo tráfego orgânico, monetizado via **Google AdSense**, **Planos PRO do Gerador de Currículo (Pix instantâneo Efí Bank)** e **Infoprodutos/Cursos Profissionalizantes Afiliados**.
 
@@ -53,7 +53,7 @@ graph TD
     end
 
     subgraph Data Pipeline
-        PythonScripts[scripts/fetch_500_rn_jobs.py] -->|Mineração e Higienização| InitialJobs[frontend/src/data/initialJobs.ts]
+        PythonScripts[scripts/fetch_500_rn_jobs.py] -->|Mineração e Higienização| JobsJson[frontend/public/data/jobs.json]
         PythonScripts -->|SEO Indexing| Sitemap[frontend/public/sitemap.xml]
     end
 ```
@@ -106,7 +106,9 @@ Natal Vagas/
     │
     ├── public/
     │   ├── _redirects              # Regra SPA da Cloudflare (/* /index.html 200)
-    │   ├── sitemap.xml             # Sitemap oficial com 840+ vagas e páginas
+    │   ├── data/
+    │   │   └── jobs.json           # Catálogo oficial consolidado com 1.400 vagas ativas no RN
+    │   ├── sitemap.xml             # Sitemap oficial com 1.326+ URLs de vagas indexadas
     │   ├── robots.txt              # Diretrizes para robôs de busca (Googlebot)
     │   ├── ads.txt                 # Validação de publisher Google AdSense
     │   └── assets/                 # Logotipos oficiais e imagens do portal
@@ -144,7 +146,7 @@ Natal Vagas/
         │   └── TermsOfUse.tsx      # Termos de Uso do Portal
         │
         ├── data/
-        │   ├── initialJobs.ts      # Banco local de 843 vagas ativas no RN
+        │   ├── initialJobs.ts      # Tipagem e fallback de vagas
         │   └── blogPosts.ts        # Artigos completos do blog
         │
         ├── context/
@@ -160,7 +162,7 @@ Natal Vagas/
 ## 4. Regras de Negócio e Funcionalidades Principais
 
 ### A. Catálogo e Filtro de Vagas
-- **Volume:** Mais de **840 vagas reais** no Rio Grande do Norte ativas no catálogo.
+- **Volume:** Mais de **1.400 vagas reais** no Rio Grande do Norte ativas no catálogo.
 - **Filtros Combináveis:**
   1. Busca textual por título, empresa ou bairro.
   2. Polo regional (`Natal`, `Mossoró`, `Parnamirim`, `Macaíba`, `São Gonçalo do Amarante`, `Currais Novos`, `Caicó`).

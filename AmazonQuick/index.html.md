@@ -13,7 +13,7 @@
     <link rel="icon" type="image/jpeg" href="/assets/logo-natalvagas.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Natal Vagas — Vagas de Emprego em Natal e Região Metropolitana (RN)</title>
-    <meta name="description" content="Encontre mais de 120 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos e empresas de forma 100% gratuita." />
+    <meta name="description" content="Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos e empresas de forma 100% gratuita." />
     <meta name="keywords" content="vagas de emprego natal rn, empregos natal, trabalho parnamirim, vagas mossoró, estágio natal, jovem aprendiz natal, sine natal, natal vagas" />
     <link rel="canonical" href="https://natalvagas.com.br/" />
 

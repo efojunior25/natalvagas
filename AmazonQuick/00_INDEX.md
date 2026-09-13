@@ -10,7 +10,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | :--- | :--- | :--- | :--- |
 | [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
 | [gitignore.md](./gitignore.md) | `.gitignore` | 43 | `config` |
-| [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 246 | `.md` |
+| [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 248 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
 | [Dockerfile.md](./Dockerfile.md) | `backend/Dockerfile` | 18 | `config` |
 | [pom.xml.md](./pom.xml.md) | `backend/pom.xml` | 104 | `.xml` |
@@ -49,9 +49,9 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [postcss.config.js.md](./postcss.config.js.md) | `frontend/postcss.config.js` | 6 | `.js` |
 | [redirects.md](./redirects.md) | `frontend/public/_redirects` | 2 | `config` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
-| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 1 | `.json` |
+| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 31806 | `.json` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
-| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 4736 | `.xml` |
+| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 7964 | `.xml` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 445 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
@@ -71,7 +71,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [WhatsAppCommunityBanner.tsx.md](./WhatsAppCommunityBanner.tsx.md) | `frontend/src/components/WhatsAppCommunityBanner.tsx` | 132 | `.tsx` |
 | [AuthContext.tsx.md](./AuthContext.tsx.md) | `frontend/src/context/AuthContext.tsx` | 246 | `.tsx` |
 | [blogPosts.ts.md](./blogPosts.ts.md) | `frontend/src/data/blogPosts.ts` | 565 | `.ts` |
-| [initialJobs.ts.md](./initialJobs.ts.md) | `frontend/src/data/initialJobs.ts` | 14495 | `.ts` |
+| [initialJobs.ts.md](./initialJobs.ts.md) | `frontend/src/data/initialJobs.ts` | 20 | `.ts` |
 | [index.css.md](./index.css.md) | `frontend/src/index.css` | 50 | `.css` |
 | [main.tsx.md](./main.tsx.md) | `frontend/src/main.tsx` | 17 | `.tsx` |
 | [AboutUs.tsx.md](./AboutUs.tsx.md) | `frontend/src/pages/AboutUs.tsx` | 114 | `.tsx` |
@@ -92,7 +92,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 42 | `.ts` |
 | [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
 | [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
-| [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 268 | `.py` |
+| [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 287 | `.py` |
 | [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 136 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
 | [rn_job_scraper.py.md](./rn_job_scraper.py.md) | `scripts/rn_job_scraper.py` | 185 | `.py` |

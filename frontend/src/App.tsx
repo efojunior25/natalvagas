@@ -72,12 +72,12 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       }
     } else {
       setActiveJob(null);
-      document.title = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 800 Oportunidades';
+      document.title = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 1.400 Oportunidades';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute(
           'content',
-          'Encontre mais de 800 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
+          'Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
         );
       }
     }
