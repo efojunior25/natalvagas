@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 90 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 92 arquivos.
 
 ---
 
@@ -26,76 +26,78 @@
 18. [`frontend/src/components/PostJobModal.tsx`](#frontend-src-components-postjobmodaltsx)
 19. [`frontend/src/components/ProPaymentModal.tsx`](#frontend-src-components-propaymentmodaltsx)
 20. [`frontend/src/components/ResumeLaunchOfferModal.tsx`](#frontend-src-components-resumelaunchoffermodaltsx)
-21. [`frontend/src/components/SocialPostGeneratorModal.tsx`](#frontend-src-components-socialpostgeneratormodaltsx)
-22. [`frontend/src/components/WhatsAppCommunityBanner.tsx`](#frontend-src-components-whatsappcommunitybannertsx)
-23. [`frontend/src/pages/AboutUs.tsx`](#frontend-src-pages-aboutustsx)
-24. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
-25. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
-26. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
-27. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
-28. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
-29. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
-30. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
-31. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
-32. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-33. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-34. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-35. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-36. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-37. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-38. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-39. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-40. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-41. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-42. [`frontend/public/_redirects`](#frontend-public--redirects)
-43. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-44. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-45. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-46. [`frontend/.env`](#frontend-env)
-47. [`frontend/.env.example`](#frontend-envexample)
-48. [`frontend/index.html`](#frontend-indexhtml)
-49. [`frontend/package-lock.json`](#frontend-package-lockjson)
-50. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-51. [`frontend/src/index.css`](#frontend-src-indexcss)
-52. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-53. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-54. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-55. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-56. [`backend/Dockerfile`](#backend-dockerfile)
-57. [`backend/pom.xml`](#backend-pomxml)
-58. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-59. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-60. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-61. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-62. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-63. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-64. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-65. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-66. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-67. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-68. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-69. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-70. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-71. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-72. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-73. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-74. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-75. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-76. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-77. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-78. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-79. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-80. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-81. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-82. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-83. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-84. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-85. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-86. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-87. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-88. [`.env.example`](#envexample)
-89. [`.gitignore`](#gitignore)
-90. [`docker-compose.yml`](#docker-composeyml)
+21. [`frontend/src/components/SeoCategoryHero.tsx`](#frontend-src-components-seocategoryherotsx)
+22. [`frontend/src/components/SocialPostGeneratorModal.tsx`](#frontend-src-components-socialpostgeneratormodaltsx)
+23. [`frontend/src/components/WhatsAppCommunityBanner.tsx`](#frontend-src-components-whatsappcommunitybannertsx)
+24. [`frontend/src/pages/AboutUs.tsx`](#frontend-src-pages-aboutustsx)
+25. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
+26. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
+27. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
+28. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
+29. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
+30. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
+31. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
+32. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
+33. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+34. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+35. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+36. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+37. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+38. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+39. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+40. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+41. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+42. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
+43. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+44. [`frontend/public/_redirects`](#frontend-public--redirects)
+45. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+46. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+47. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+48. [`frontend/.env`](#frontend-env)
+49. [`frontend/.env.example`](#frontend-envexample)
+50. [`frontend/index.html`](#frontend-indexhtml)
+51. [`frontend/package-lock.json`](#frontend-package-lockjson)
+52. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+53. [`frontend/src/index.css`](#frontend-src-indexcss)
+54. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+55. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+56. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+57. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+58. [`backend/Dockerfile`](#backend-dockerfile)
+59. [`backend/pom.xml`](#backend-pomxml)
+60. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+61. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+62. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+63. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+64. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+65. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+66. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+67. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+68. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+69. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+70. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+71. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+72. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+73. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+74. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+75. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+76. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+77. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+78. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+79. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+80. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+81. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+82. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+83. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+84. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+85. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+86. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+87. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+88. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+89. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+90. [`.env.example`](#envexample)
+91. [`.gitignore`](#gitignore)
+92. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -514,14 +516,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 445
-- **Tamanho:** 18010 bytes
+- **Total de Linhas:** 555
+- **Tamanho:** 22054 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useParams, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
+import { SeoCategoryHero } from './components/SeoCategoryHero';
 import { JobCard } from './components/JobCard';
 import { JobModal } from './components/JobModal';
 import { CityPills } from './components/CityPills';
@@ -529,10 +532,11 @@ import { FaqSection } from './components/FaqSection';
 import { AdPlaceholder } from './components/AdPlaceholder';
 import { Footer } from './components/Footer';
 import { Job } from './types/job';
-import { Sparkles, AlertCircle, Loader2, PlusCircle, ChevronDown } from 'lucide-react';
+import { Sparkles, AlertCircle, Loader2, ChevronDown } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { WhatsAppCommunityBanner } from './components/WhatsAppCommunityBanner';
 import { CourseRecommendations } from './components/CourseRecommendations';
+import { SEO_LANDING_PAGES, SEO_LANDING_MAP } from './data/seoLandingPages';
 
 // Lazy loading para páginas institucionais e modais (reduz bundle inicial)
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
@@ -551,9 +555,10 @@ interface HomePageProps {
   jobs: Job[];
   isLoading: boolean;
   onJobCreated: () => void;
+  seoCategorySlug?: string;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) => {
+const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoCategorySlug }) => {
   const { slug } = useParams<{ slug?: string }>();
   const navigate = useNavigate();
   const [activeJob, setActiveJob] = useState<Job | null>(null);
@@ -563,6 +568,32 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
   const [onlyNoExperience, setOnlyNoExperience] = useState<boolean>(false);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
+
+  // Identifica se estamos em uma landing page programática de SEO
+  const seoConfig = useMemo(() => {
+    return seoCategorySlug ? SEO_LANDING_MAP.get(seoCategorySlug) : undefined;
+  }, [seoCategorySlug]);
+
+  // Sincroniza os filtros com a página de SEO acessada
+  useEffect(() => {
+    if (seoConfig) {
+      if (seoConfig.city) setSelectedCity(seoConfig.city);
+      else setSelectedCity('');
+
+      if (seoConfig.onlyNoExperience) setOnlyNoExperience(true);
+      else setOnlyNoExperience(false);
+
+      if (seoConfig.workModel) setSelectedWorkModel(seoConfig.workModel);
+      else setSelectedWorkModel('TODOS');
+
+      setVisibleCount(PAGE_SIZE);
+    } else if (!slug) {
+      setSelectedCity('');
+      setOnlyNoExperience(false);
+      setSelectedWorkModel('TODOS');
+      setVisibleCount(PAGE_SIZE);
+    }
+  }, [seoConfig, slug]);
 
   // Mapa de indexação O(1) por slug e id para performance instantânea
   const jobsLookupMap = useMemo(() => {
@@ -575,33 +606,55 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
     return map;
   }, [jobs]);
 
-  // Trata abertura direta por URL (/vaga/:slug)
+  // Trata abertura direta por URL (/vaga/:slug) e metadados dinâmicos de SEO
   useEffect(() => {
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+
     if (slug) {
       const found = jobsLookupMap.get(slug);
       if (found) {
         setActiveJob(found);
-        document.title = `${found.title} — ${found.companyName} | Natal Vagas`;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) {
-          metaDesc.setAttribute(
-            'content',
-            `Vaga de ${found.title} na empresa ${found.companyName} em ${found.city}/RN. Requisitos, benefícios e link oficial para candidatura no Natal Vagas.`
-          );
-        }
+        const pageTitle = `${found.title} — ${found.companyName} | Natal Vagas`;
+        const description = `Vaga de ${found.title} na empresa ${found.companyName} em ${found.city}/RN. Requisitos, benefícios e link oficial para candidatura no Natal Vagas.`;
+        
+        document.title = pageTitle;
+        if (metaDesc) metaDesc.setAttribute('content', description);
+        if (ogTitle) ogTitle.setAttribute('content', pageTitle);
+        if (ogDesc) ogDesc.setAttribute('content', description);
+        if (ogUrl) ogUrl.setAttribute('content', `https://natalvagas.com.br/vaga/${found.slug}`);
+        canonical.setAttribute('href', `https://natalvagas.com.br/vaga/${found.slug}`);
       }
+    } else if (seoConfig) {
+      setActiveJob(null);
+      document.title = seoConfig.metaTitle;
+      if (metaDesc) metaDesc.setAttribute('content', seoConfig.metaDescription);
+      if (ogTitle) ogTitle.setAttribute('content', seoConfig.metaTitle);
+      if (ogDesc) ogDesc.setAttribute('content', seoConfig.metaDescription);
+      if (ogUrl) ogUrl.setAttribute('content', `https://natalvagas.com.br${seoConfig.path}`);
+      canonical.setAttribute('href', `https://natalvagas.com.br${seoConfig.path}`);
     } else {
       setActiveJob(null);
-      document.title = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 1.400 Oportunidades';
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute(
-          'content',
-          'Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.'
-        );
-      }
+      const defaultTitle = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 1.400 Oportunidades';
+      const defaultDesc = 'Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.';
+      
+      document.title = defaultTitle;
+      if (metaDesc) metaDesc.setAttribute('content', defaultDesc);
+      if (ogTitle) ogTitle.setAttribute('content', defaultTitle);
+      if (ogDesc) ogDesc.setAttribute('content', defaultDesc);
+      if (ogUrl) ogUrl.setAttribute('content', 'https://natalvagas.com.br/');
+      canonical.setAttribute('href', 'https://natalvagas.com.br/');
     }
-  }, [slug, jobs]);
+  }, [slug, jobsLookupMap, seoConfig]);
 
   const handleSearch = (query: string, city: string) => {
     setSearchQuery(query);
@@ -616,20 +669,34 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const handleCloseModal = () => {
     setActiveJob(null);
     if (slug) {
-      navigate('/');
+      if (seoConfig) {
+        navigate(seoConfig.path);
+      } else {
+        navigate('/');
+      }
     }
   };
 
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
       if (job.status !== 'APPROVED' || (job.expiresAt && Date.parse(job.expiresAt) < Date.now())) return false;
+      
+      // Filtro estrito de categoria por tipo de contrato (ex: estágio ou jovem aprendiz)
+      if (seoConfig?.contractType && job.contractType !== seoConfig.contractType) {
+        return false;
+      }
+
       const matchesQuery = 
         !searchQuery || 
         job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         job.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (job.neighborhood && job.neighborhood.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesCity = !selectedCity || job.city.toLowerCase() === selectedCity.toLowerCase();
+      // Permite sinônimos regionais como Assú e Açu
+      const matchesCity = !selectedCity || 
+        job.city.toLowerCase() === selectedCity.toLowerCase() ||
+        (selectedCity.toLowerCase() === 'assú' && job.city.toLowerCase() === 'açu');
+
       const matchesModel = selectedWorkModel === 'TODOS' || job.workModel === selectedWorkModel;
       const matchesNoExperience = !onlyNoExperience || (
         job.contractType === 'ESTAGIO' ||
@@ -645,7 +712,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
       if (!a.isFeatured && b.isFeatured) return 1;
       return 0;
     });
-  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience]);
+  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, seoConfig]);
 
   // Lista visível com paginação progressiva para alta performance e Core Web Vitals
   const visibleJobs = useMemo(() => {
@@ -656,10 +723,11 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
     setVisibleCount((prev) => prev + PAGE_SIZE);
   };
 
-  // Schema.org ItemList para o Google indexar a coleção de empregos da página inicial
+  // Schema.org ItemList para o Google indexar a coleção de empregos da página
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
+    name: seoConfig ? seoConfig.h1 : 'Vagas de Emprego em Natal e no RN',
     itemListElement: visibleJobs.slice(0, 15).map((job, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -690,6 +758,35 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
     })),
   };
 
+  // Schema BreadcrumbList para páginas de SEO programático
+  const breadcrumbSchema = useMemo(() => {
+    if (!seoConfig) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Início',
+          item: 'https://natalvagas.com.br/'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Vagas no RN',
+          item: 'https://natalvagas.com.br/#vagas'
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: seoConfig.h1,
+          item: `https://natalvagas.com.br${seoConfig.path}`
+        }
+      ]
+    };
+  }, [seoConfig]);
+
   const topCities = ['Natal', 'Mossoró', 'Parnamirim', 'Macaíba', 'São Gonçalo do Amarante', 'Currais Novos', 'Caicó'];
 
   return (
@@ -700,14 +797,26 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
 
+      {/* Schema JSON-LD Breadcrumbs para páginas de categoria */}
+      {breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      )}
+
       {/* Barra de Navegação */}
       <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
 
-      {/* Seção Hero com Banner e Busca */}
-      <HeroBanner 
-        onSearch={handleSearch} 
-        cities={[...new Set(jobs.map(job => job.city))].sort((a, b) => a.localeCompare(b, 'pt-BR'))} 
-      />
+      {/* Seção Hero: Landing Page Dedicada de SEO ou Banner Padrão com Busca */}
+      {seoConfig ? (
+        <SeoCategoryHero config={seoConfig} totalMatchingJobs={filteredJobs.length} />
+      ) : (
+        <HeroBanner 
+          onSearch={handleSearch} 
+          cities={[...new Set(jobs.map(job => job.city))].sort((a, b) => a.localeCompare(b, 'pt-BR'))} 
+        />
+      )}
 
       {/* Anúncio Banner de Topo (AdSense) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -737,11 +846,11 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-brand-500" />
-              Oportunidades em Destaque no RN
+              {seoConfig ? seoConfig.h1 : 'Oportunidades em Destaque no RN'}
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
               Mostrando <span className="font-bold text-brand-600">{visibleJobs.length}</span> de{' '}
-              <span className="font-bold text-slate-800">{filteredJobs.length}</span> vagas ativas no estado
+              <span className="font-bold text-slate-800">{filteredJobs.length}</span> vagas ativas no filtro
             </p>
           </div>
 
@@ -768,106 +877,92 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
 
         {/* Loading State */}
         {isLoading ? (
-          <div className="py-20 flex flex-col items-center justify-center text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin text-brand-500 mb-3" />
-            <p className="text-sm">Carregando oportunidades atualizadas em Natal...</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl p-6 border border-slate-200 animate-pulse">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-slate-100 rounded w-3/4" />
+                    <div className="h-3 bg-slate-100 rounded w-1/2" />
+                  </div>
+                </div>
+                <div className="h-16 bg-slate-50 rounded-xl mb-4" />
+                <div className="h-8 bg-slate-100 rounded-xl w-full" />
+              </div>
+            ))}
           </div>
         ) : filteredJobs.length > 0 ? (
           <>
-            {/* Grid com os Cards Otimizados */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+            {/* Grid Responsivo de Vagas */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {visibleJobs.map((job) => (
-                <JobCard 
-                  key={job.id} 
-                  job={job} 
-                  onApply={handleApply} 
+                <JobCard
+                  key={job.id}
+                  job={job}
+                  onApply={handleApply}
                 />
               ))}
             </div>
 
-            {/* Botão de Paginação Progressiva ("Carregar mais vagas") */}
-            {visibleCount < filteredJobs.length && (
-              <div className="mt-8 flex justify-center">
+            {/* Paginação Progressiva / Carregar Mais */}
+            {visibleJobs.length < filteredJobs.length && (
+              <div className="mt-12 text-center">
                 <button
-                  type="button"
                   onClick={handleLoadMore}
-                  className="px-6 py-3.5 bg-white hover:bg-slate-50 active:scale-98 text-slate-800 font-bold text-sm rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3.5 bg-white hover:bg-slate-50 active:scale-98 text-slate-800 font-bold text-sm rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
-                  <span>Carregar mais vagas ({filteredJobs.length - visibleCount} restantes)</span>
-                  <ChevronDown className="w-4 h-4 text-brand-600" />
+                  <ChevronDown className="w-4 h-4 text-brand-500" />
+                  <span>Carregar mais vagas ({filteredJobs.length - visibleJobs.length} restantes)</span>
                 </button>
               </div>
             )}
           </>
         ) : (
-          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs max-w-lg mx-auto">
-            <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+          <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 max-w-lg mx-auto">
+            <AlertCircle className="w-12 h-12 text-brand-500 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-800">Nenhuma vaga encontrada</h3>
-            <p className="text-sm text-slate-500 mt-1">
-              Tente buscar por termos mais genéricos ou limpe os filtros de cidade.
+            <p className="text-sm text-slate-500 mt-2 mb-6">
+              Não encontramos vagas com os filtros atuais. Tente buscar por outros termos ou limpar os filtros.
             </p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCity('');
                 setSelectedWorkModel('TODOS');
-                setVisibleCount(PAGE_SIZE);
+                setOnlyNoExperience(false);
+                if (seoConfig) navigate('/');
               }}
-              className="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-700 transition-colors cursor-pointer"
+              className="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
             >
-              Limpar Filtros
+              Ver todas as vagas do RN
             </button>
           </div>
         )}
 
-        {/* Banner de Retenção e Alertas no WhatsApp */}
-        <div className="mt-8">
-          <WhatsAppCommunityBanner />
-        </div>
-
-        {/* Anúncio Banner de Meio/Fim da Página */}
-        <div className="mt-8">
+        {/* Anúncio Banner de Meio de Página */}
+        <div className="mt-12">
           <AdPlaceholder format="horizontal" />
         </div>
 
-        {/* Recomendações de Cursos Profissionalizantes com Certificado */}
-        <div className="mt-8">
-          <CourseRecommendations />
-        </div>
+        {/* Seção das Comunidades Oficiais no WhatsApp / Telegram */}
+        <WhatsAppCommunityBanner />
 
-        {/* Banner Institucional de Novas Oportunidades */}
-        <div className="mt-8 relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
-          <div className="max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-600">
-              Para Empresas & Recrutadores
-            </span>
-            <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
-              Precisa contratar profissionais em Natal e Região?
-            </h3>
-            <p className="text-sm text-slate-600 mt-2">
-              Divulgue suas vagas diretamente no Natal Vagas de forma rápida. Alcance candidatos qualificados em todos os bairros da capital e cidades vizinhas.
-            </p>
-          </div>
+        {/* Vitrine de Cursos Recomendados */}
+        <CourseRecommendations />
 
-          <button
-            onClick={() => setIsPostJobOpen(true)}
-            className="shrink-0 px-6 py-3.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm rounded-2xl shadow-lg shadow-brand-500/25 flex items-center gap-2 transition-all cursor-pointer"
-          >
-            <PlusCircle className="w-4 h-4" />
-            <span>Divulgar Vaga Gratuitamente</span>
-          </button>
-        </div>
-
-        {/* Seção FAQ com Schema.org FAQPage para Rich Snippets no Google */}
+        {/* Seção de Dúvidas Frequentes (SEO FAQPage) */}
         <FaqSection />
 
       </main>
 
       {/* Modal de Detalhes da Vaga */}
-      <JobModal 
-        job={activeJob} 
-        onClose={handleCloseModal} 
-      />
+      {activeJob && (
+        <JobModal
+          job={activeJob}
+          onClose={handleCloseModal}
+        />
+      )}
 
       {/* Modal de Anúncio de Vaga por Empresas (Lazy Loaded) */}
       <Suspense fallback={null}>
@@ -943,6 +1038,23 @@ export const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
           <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          
+          {/* Rotas de Programmatic SEO Dedicadas por Cidade e Categoria */}
+          {SEO_LANDING_PAGES.map((page) => (
+            <Route 
+              key={page.slug}
+              path={page.path}
+              element={
+                <HomePage
+                  jobs={jobs}
+                  isLoading={isLoading}
+                  onJobCreated={fetchJobs}
+                  seoCategorySlug={page.slug}
+                />
+              }
+            />
+          ))}
+
           <Route path="/criar-curriculo" element={<ResumeBuilder />} />
           <Route path="/gerador-curriculo" element={<Navigate to="/criar-curriculo" replace />} />
           <Route path="/blog" element={<BlogList />} />
@@ -1349,20 +1461,41 @@ export default AuthModal;
 - **Caminho:** `frontend/src/components/CityPills.tsx`
 - **Nome:** `CityPills.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 74
-- **Tamanho:** 2530 bytes
+- **Total de Linhas:** 97
+- **Tamanho:** 3396 bytes
 
 ```tsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 
 interface CityPillsProps {
   cities: string[];
   selectedCity: string;
-  onSelectCity: (city: string) => void;
+  onSelectCity?: (city: string) => void;
   onlyNoExperience?: boolean;
   onToggleNoExperience?: () => void;
+  isSeoLanding?: boolean;
 }
+
+const CITY_SLUG_MAP: Record<string, string> = {
+  'natal': '/vagas-natal',
+  'parnamirim': '/vagas-parnamirim',
+  'mossoró': '/vagas-mossoro',
+  'mossoro': '/vagas-mossoro',
+  'macaíba': '/vagas-macaiba',
+  'macaiba': '/vagas-macaiba',
+  'são gonçalo do amarante': '/vagas-sao-goncalo',
+  'sao goncalo do amarante': '/vagas-sao-goncalo',
+  'caicó': '/vagas-caico',
+  'caico': '/vagas-caico',
+  'currais novos': '/vagas-currais-novos',
+  'ceará-mirim': '/vagas-ceara-mirim',
+  'ceara-mirim': '/vagas-ceara-mirim',
+  'assú': '/vagas-assu',
+  'assu': '/vagas-assu',
+  'açu': '/vagas-assu',
+};
 
 export const CityPills: React.FC<CityPillsProps> = ({ 
   cities, 
@@ -1372,55 +1505,57 @@ export const CityPills: React.FC<CityPillsProps> = ({
   onToggleNoExperience
 }) => {
   return (
-    <nav aria-label="Filtro rápido por cidade" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+    <nav aria-label="Filtro rápido por cidade e categoria no RN" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
       <div className="flex items-center gap-2 min-w-max">
         <span className="text-xs font-bold text-slate-500 flex items-center gap-1 mr-1">
           <MapPin className="w-3.5 h-3.5 text-brand-500" />
           Polos no RN:
         </span>
 
-        <button
-          type="button"
-          onClick={() => onSelectCity('')}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-            !selectedCity
+        {/* Link para todas as cidades */}
+        <Link
+          to="/"
+          onClick={() => onSelectCity && onSelectCity('')}
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+            !selectedCity && !onlyNoExperience
               ? 'bg-brand-600 text-white shadow-xs'
               : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
           }`}
         >
           Todas as Cidades
-        </button>
+        </Link>
 
         {/* Filtro Especial: Sem Experiência / Primeiro Emprego */}
-        {onToggleNoExperience && (
-          <button
-            type="button"
-            onClick={onToggleNoExperience}
-            className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
-              onlyNoExperience
-                ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-400/30'
-                : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-300'
-            }`}
-          >
-            <span>🌱 Sem Experiência / 1º Emprego</span>
-          </button>
-        )}
+        <Link
+          to={onlyNoExperience ? '/' : '/vagas-sem-experiencia'}
+          onClick={() => onToggleNoExperience && onToggleNoExperience()}
+          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
+            onlyNoExperience
+              ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-400/30'
+              : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-300'
+          }`}
+        >
+          <span>🌱 Sem Experiência / 1º Emprego</span>
+        </Link>
 
+        {/* Polos regionais com links canônicos */}
         {cities.map((city) => {
           const isSelected = selectedCity.toLowerCase() === city.toLowerCase();
+          const targetUrl = CITY_SLUG_MAP[city.toLowerCase()] || '/';
+
           return (
-            <button
+            <Link
               key={city}
-              type="button"
-              onClick={() => onSelectCity(isSelected ? '' : city)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+              to={isSelected ? '/' : targetUrl}
+              onClick={() => onSelectCity && onSelectCity(isSelected ? '' : city)}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 isSelected
                   ? 'bg-brand-600 text-white shadow-xs'
                   : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
               }`}
             >
               {city}
-            </button>
+            </Link>
           );
         })}
       </div>
@@ -1773,8 +1908,8 @@ export const FaqSection: React.FC = () => {
 - **Caminho:** `frontend/src/components/Footer.tsx`
 - **Nome:** `Footer.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 125
-- **Tamanho:** 6889 bytes
+- **Total de Linhas:** 168
+- **Tamanho:** 9927 bytes
 
 ```tsx
 import React from 'react';
@@ -1801,7 +1936,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              O maior portal de empregos em Natal e no RN. Vagas verificadas e atualizadas diariamente de forma 100% gratuita.
+              O maior portal de empregos em Natal e no RN. Mais de 1.400 vagas verificadas e atualizadas diariamente de forma 100% gratuita.
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-brand-300">
               <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
@@ -1885,6 +2020,49 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
+        </div>
+
+        {/* Links de SEO Programático: Polos no RN e Categorias Estratégicas */}
+        <div className="py-8 border-b border-slate-800 space-y-5 text-xs text-slate-400">
+          <div>
+            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
+              Vagas por Cidade no Rio Grande do Norte:
+            </h4>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              <Link to="/vagas-natal" className="hover:text-brand-400 transition-colors">Vagas em Natal (1.000+)</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-parnamirim" className="hover:text-brand-400 transition-colors">Vagas em Parnamirim</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-mossoro" className="hover:text-brand-400 transition-colors">Vagas em Mossoró</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-macaiba" className="hover:text-brand-400 transition-colors">Vagas em Macaíba</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-sao-goncalo" className="hover:text-brand-400 transition-colors">Vagas em São Gonçalo do Amarante</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-caico" className="hover:text-brand-400 transition-colors">Vagas em Caicó</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-currais-novos" className="hover:text-brand-400 transition-colors">Vagas em Currais Novos</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-ceara-mirim" className="hover:text-brand-400 transition-colors">Vagas em Ceará-Mirim</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-assu" className="hover:text-brand-400 transition-colors">Vagas em Assú / Açu</Link>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
+              Categorias e Modalidades:
+            </h4>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              <Link to="/vagas-sem-experiencia" className="hover:text-emerald-400 text-emerald-300/90 font-medium transition-colors">🌱 Vagas Sem Experiência / 1º Emprego</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-estagio-rn" className="hover:text-brand-400 transition-colors">🎓 Vagas de Estágio no RN</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-jovem-aprendiz-rn" className="hover:text-brand-400 transition-colors">🌟 Jovem Aprendiz</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-home-office-rn" className="hover:text-brand-400 transition-colors">🏠 Vagas Home Office / Remoto</Link>
+            </div>
+          </div>
         </div>
 
         {/* Alerta de Segurança e Direitos Autorais */}
@@ -4212,8 +4390,99 @@ export default ResumeLaunchOfferModal;
 
 ---
 
+<a id="frontend-src-components-seocategoryherotsx"></a>
+## 21. Arquivo: `frontend/src/components/SeoCategoryHero.tsx`
+- **Caminho:** `frontend/src/components/SeoCategoryHero.tsx`
+- **Nome:** `SeoCategoryHero.tsx`
+- **Linguagem / Sintaxe:** `tsx`
+- **Total de Linhas:** 77
+- **Tamanho:** 3426 bytes
+
+```tsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ChevronRight, ArrowLeft, Briefcase, MapPin, Sparkles } from 'lucide-react';
+import { SeoLandingConfig } from '../data/seoLandingPages';
+
+interface SeoCategoryHeroProps {
+  config: SeoLandingConfig;
+  totalMatchingJobs: number;
+}
+
+export const SeoCategoryHero: React.FC<SeoCategoryHeroProps> = ({ config, totalMatchingJobs }) => {
+  return (
+    <section className="bg-gradient-to-b from-brand-900 via-brand-800 to-brand-700 text-white pt-8 pb-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-brand-600/30">
+      {/* Elementos visuais de fundo sutis */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Breadcrumb de Navegação Estruturada */}
+        <nav aria-label="Breadcrumb" className="mb-4">
+          <ol className="flex items-center flex-wrap gap-1.5 text-xs text-brand-200">
+            <li>
+              <Link to="/" className="hover:text-white transition-colors flex items-center gap-1">
+                Início
+              </Link>
+            </li>
+            <li><ChevronRight className="w-3.5 h-3.5 text-brand-300/70" /></li>
+            <li>
+              <Link to="/" className="hover:text-white transition-colors">
+                Vagas no RN
+              </Link>
+            </li>
+            <li><ChevronRight className="w-3.5 h-3.5 text-brand-300/70" /></li>
+            <li className="font-semibold text-white">
+              {config.city ? `Vagas em ${config.city}` : config.h1}
+            </li>
+          </ol>
+        </nav>
+
+        {/* Badge e Identificador do Polo/Categoria */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-sm border border-white/20 mb-3 shadow-xs">
+          {config.city ? <MapPin className="w-3.5 h-3.5 text-emerald-300" /> : <Sparkles className="w-3.5 h-3.5 text-amber-300" />}
+          <span>{config.badge}</span>
+        </div>
+
+        {/* H1 Principal Otimizado para SEO */}
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white mb-3">
+          {config.h1}
+        </h1>
+
+        {/* Texto descritivo e contextual */}
+        <p className="text-sm sm:text-base text-brand-100 max-w-3xl leading-relaxed mb-5">
+          {config.introText}
+        </p>
+
+        {/* Barra de Status e Ações */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/15">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-brand-100">
+            <Briefcase className="w-4 h-4 text-emerald-300" />
+            <span>
+              <strong className="text-white text-base">{totalMatchingJobs}</strong> vagas encontradas neste filtro
+            </span>
+          </div>
+
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 active:scale-98 text-white text-xs font-bold transition-all border border-white/20 shadow-xs"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Ver todas as vagas do RN</span>
+          </Link>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
 <a id="frontend-src-components-socialpostgeneratormodaltsx"></a>
-## 21. Arquivo: `frontend/src/components/SocialPostGeneratorModal.tsx`
+## 22. Arquivo: `frontend/src/components/SocialPostGeneratorModal.tsx`
 - **Caminho:** `frontend/src/components/SocialPostGeneratorModal.tsx`
 - **Nome:** `SocialPostGeneratorModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4561,7 +4830,7 @@ export default SocialPostGeneratorModal;
 ---
 
 <a id="frontend-src-components-whatsappcommunitybannertsx"></a>
-## 22. Arquivo: `frontend/src/components/WhatsAppCommunityBanner.tsx`
+## 23. Arquivo: `frontend/src/components/WhatsAppCommunityBanner.tsx`
 - **Caminho:** `frontend/src/components/WhatsAppCommunityBanner.tsx`
 - **Nome:** `WhatsAppCommunityBanner.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4707,7 +4976,7 @@ export default WhatsAppCommunityBanner;
 ---
 
 <a id="frontend-src-pages-aboutustsx"></a>
-## 23. Arquivo: `frontend/src/pages/AboutUs.tsx`
+## 24. Arquivo: `frontend/src/pages/AboutUs.tsx`
 - **Caminho:** `frontend/src/pages/AboutUs.tsx`
 - **Nome:** `AboutUs.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -4835,7 +5104,7 @@ export const AboutUs: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-bloglisttsx"></a>
-## 24. Arquivo: `frontend/src/pages/BlogList.tsx`
+## 25. Arquivo: `frontend/src/pages/BlogList.tsx`
 - **Caminho:** `frontend/src/pages/BlogList.tsx`
 - **Nome:** `BlogList.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5097,7 +5366,7 @@ export default BlogList;
 ---
 
 <a id="frontend-src-pages-blogposttsx"></a>
-## 25. Arquivo: `frontend/src/pages/BlogPost.tsx`
+## 26. Arquivo: `frontend/src/pages/BlogPost.tsx`
 - **Caminho:** `frontend/src/pages/BlogPost.tsx`
 - **Nome:** `BlogPost.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5378,7 +5647,7 @@ export default BlogPost;
 ---
 
 <a id="frontend-src-pages-contacttsx"></a>
-## 26. Arquivo: `frontend/src/pages/Contact.tsx`
+## 27. Arquivo: `frontend/src/pages/Contact.tsx`
 - **Caminho:** `frontend/src/pages/Contact.tsx`
 - **Nome:** `Contact.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5568,7 +5837,7 @@ export const Contact: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-jobsafetytsx"></a>
-## 27. Arquivo: `frontend/src/pages/JobSafety.tsx`
+## 28. Arquivo: `frontend/src/pages/JobSafety.tsx`
 - **Caminho:** `frontend/src/pages/JobSafety.tsx`
 - **Nome:** `JobSafety.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5676,7 +5945,7 @@ export const JobSafety: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-privacypolicytsx"></a>
-## 28. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
+## 29. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
 - **Caminho:** `frontend/src/pages/PrivacyPolicy.tsx`
 - **Nome:** `PrivacyPolicy.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5809,7 +6078,7 @@ export const PrivacyPolicy: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-resumebuildertsx"></a>
-## 29. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
+## 30. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
 - **Caminho:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Nome:** `ResumeBuilder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7009,7 +7278,7 @@ export default ResumeBuilder;
 ---
 
 <a id="frontend-src-pages-termsofusetsx"></a>
-## 30. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
+## 31. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
 - **Caminho:** `frontend/src/pages/TermsOfUse.tsx`
 - **Nome:** `TermsOfUse.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7121,7 +7390,7 @@ export const TermsOfUse: React.FC = () => {
 ---
 
 <a id="frontend-functions-api-auth-sign-prots"></a>
-## 31. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
+## 32. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
 - **Caminho:** `frontend/functions/api/auth/sign-pro.ts`
 - **Nome:** `sign-pro.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7222,7 +7491,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
 ---
 
 <a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 32. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+## 33. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Nome:** `[txid].ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7347,7 +7616,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 33. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 34. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7504,7 +7773,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 34. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 35. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7646,7 +7915,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-src-context-authcontexttsx"></a>
-## 35. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 36. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7906,7 +8175,7 @@ export const useAuth = (): AuthContextType => {
 ---
 
 <a id="frontend-src-services-paymentservicets"></a>
-## 36. Arquivo: `frontend/src/services/paymentService.ts`
+## 37. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7981,7 +8250,7 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 37. Arquivo: `frontend/src/types/blog.ts`
+## 38. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8016,7 +8285,7 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 38. Arquivo: `frontend/src/types/job.ts`
+## 39. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8084,7 +8353,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 39. Arquivo: `frontend/src/data/blogPosts.ts`
+## 40. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8663,7 +8932,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 40. Arquivo: `frontend/src/data/initialJobs.ts`
+## 41. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8696,8 +8965,174 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 
 ---
 
+<a id="frontend-src-data-seolandingpagests"></a>
+## 42. Arquivo: `frontend/src/data/seoLandingPages.ts`
+- **Caminho:** `frontend/src/data/seoLandingPages.ts`
+- **Nome:** `seoLandingPages.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 152
+- **Tamanho:** 8449 bytes
+
+```typescript
+import { ContractType, WorkModel } from '../types/job';
+
+export interface SeoLandingConfig {
+  slug: string;
+  path: string;
+  h1: string;
+  metaTitle: string;
+  metaDescription: string;
+  badge: string;
+  introText: string;
+  city?: string;
+  contractType?: ContractType;
+  workModel?: WorkModel;
+  onlyNoExperience?: boolean;
+}
+
+export const SEO_LANDING_PAGES: SeoLandingConfig[] = [
+  {
+    slug: 'vagas-natal',
+    path: '/vagas-natal',
+    h1: 'Vagas de Emprego em Natal / RN',
+    metaTitle: 'Vagas de Emprego em Natal / RN — Mais de 1.000 Oportunidades | Natal Vagas',
+    metaDescription: 'Encontre mais de 1.000 vagas de emprego abertas em Natal/RN. Vagas no comércio, saúde, tecnologia, turismo e serviços. Candidatura rápida e 100% gratuita.',
+    badge: 'Capital & Polo Econômico',
+    introText: 'Natal concentra o maior polo comercial, de serviços, saúde e turismo do Rio Grande do Norte. Encontre oportunidades em bairros como Tirol, Petrópolis, Alecrim, Ponta Negra, Lagoa Nova e Candelária.',
+    city: 'Natal'
+  },
+  {
+    slug: 'vagas-parnamirim',
+    path: '/vagas-parnamirim',
+    h1: 'Vagas de Emprego em Parnamirim / RN',
+    metaTitle: 'Vagas de Emprego em Parnamirim / RN — Oportunidades Abertas | Natal Vagas',
+    metaDescription: 'Confira as vagas de emprego abertas em Parnamirim/RN. Oportunidades no comércio, logística, indústria e serviços na Região Metropolitana.',
+    badge: 'Grande Natal & Logística',
+    introText: 'Parnamirim é um dos municípios que mais cresce no estado, com forte presença no comércio, logística, construção civil e polos de distribuição na Grande Natal.',
+    city: 'Parnamirim'
+  },
+  {
+    slug: 'vagas-mossoro',
+    path: '/vagas-mossoro',
+    h1: 'Vagas de Emprego em Mossoró / RN',
+    metaTitle: 'Vagas de Emprego em Mossoró / RN — Oportunidades no Oeste | Natal Vagas',
+    metaDescription: 'Vagas de emprego abertas em Mossoró/RN. Encontre oportunidades no comércio, petróleo e gás, fruticultura, serviços e saúde no Oeste Potiguar.',
+    badge: 'Capital do Oeste Potiguar',
+    introText: 'Mossoró é a segunda maior cidade do RN e capital econômica do Oeste Potiguar, destacando-se nos setores de comércio, agronegócio, energia, petróleo e serviços.',
+    city: 'Mossoró'
+  },
+  {
+    slug: 'vagas-macaiba',
+    path: '/vagas-macaiba',
+    h1: 'Vagas de Emprego em Macaíba / RN',
+    metaTitle: 'Vagas de Emprego em Macaíba / RN — Oportunidades Industriais | Natal Vagas',
+    metaDescription: 'Encontre vagas de emprego em Macaíba/RN. Oportunidades nos polos industriais, galpões de distribuição e comércio da Região Metropolitana de Natal.',
+    badge: 'Distrito Industrial & Distribuição',
+    introText: 'Macaíba abriga importantes distritos industriais e centros de distribuição logística conectados diretamente às principais rodovias do Rio Grande do Norte.',
+    city: 'Macaíba'
+  },
+  {
+    slug: 'vagas-sao-goncalo',
+    path: '/vagas-sao-goncalo',
+    h1: 'Vagas de Emprego em São Gonçalo do Amarante / RN',
+    metaTitle: 'Vagas de Emprego em São Gonçalo do Amarante / RN | Natal Vagas',
+    metaDescription: 'Confira oportunidades de trabalho em São Gonçalo do Amarante/RN. Vagas no aeroporto internacional, logística e comércio regional.',
+    badge: 'Polo Aeroportuário & Logística',
+    introText: 'Com a presença do Aeroporto Internacional Aluízio Alves, São Gonçalo do Amarante se consolidou como ponto estratégico de transporte, logística e serviços.',
+    city: 'São Gonçalo do Amarante'
+  },
+  {
+    slug: 'vagas-caico',
+    path: '/vagas-caico',
+    h1: 'Vagas de Emprego em Caicó / RN',
+    metaTitle: 'Vagas de Emprego em Caicó / RN — Polo do Seridó | Natal Vagas',
+    metaDescription: 'Oportunidades de emprego abertas em Caicó e região do Seridó potiguar. Vagas em confecção, laticínios, comércio e serviços.',
+    badge: 'Coração do Seridó',
+    introText: 'Caicó é a principal referência econômica e cultural da região do Seridó, com forte mercado no comércio varejista, polo têxtil, alimentício e serviços.',
+    city: 'Caicó'
+  },
+  {
+    slug: 'vagas-currais-novos',
+    path: '/vagas-currais-novos',
+    h1: 'Vagas de Emprego em Currais Novos / RN',
+    metaTitle: 'Vagas de Emprego em Currais Novos / RN | Natal Vagas',
+    metaDescription: 'Confira vagas de trabalho abertas em Currais Novos/RN. Oportunidades em mineração, comércio, educação e serviços no Seridó Oriental.',
+    badge: 'Seridó Oriental',
+    introText: 'Currais Novos se destaca pelo comércio dinâmico, setor de mineração, energia renovável e polo educacional no interior do estado.',
+    city: 'Currais Novos'
+  },
+  {
+    slug: 'vagas-ceara-mirim',
+    path: '/vagas-ceara-mirim',
+    h1: 'Vagas de Emprego em Ceará-Mirim / RN',
+    metaTitle: 'Vagas de Emprego em Ceará-Mirim / RN | Natal Vagas',
+    metaDescription: 'Vagas de emprego abertas em Ceará-Mirim/RN. Oportunidades no setor agropecuário, comércio local e Região Metropolitana de Natal.',
+    badge: 'Vale do Ceará-Mirim',
+    introText: 'Ceará-Mirim alia vocação agrícola e industrial ao crescimento comercial e de serviços na zona norte da Grande Natal.',
+    city: 'Ceará-Mirim'
+  },
+  {
+    slug: 'vagas-assu',
+    path: '/vagas-assu',
+    h1: 'Vagas de Emprego em Assú (Açu) / RN',
+    metaTitle: 'Vagas de Emprego em Assú / RN — Polo do Vale do Açu | Natal Vagas',
+    metaDescription: 'Oportunidades de trabalho em Assú/RN. Vagas em agronegócio, fruticultura irrigada, comércio e energia no Vale do Açu.',
+    badge: 'Vale do Açu & Agronegócio',
+    introText: 'O município de Assú é polo de fruticultura irrigada, geração de energia e comércio estratégico no Vale do Açu.',
+    city: 'Assú'
+  },
+  {
+    slug: 'vagas-sem-experiencia',
+    path: '/vagas-sem-experiencia',
+    h1: 'Vagas Sem Experiência e 1º Emprego no RN',
+    metaTitle: 'Vagas Sem Experiência e Primeiro Emprego no RN | Natal Vagas',
+    metaDescription: 'Encontre vagas de emprego que não exigem experiência prévia em Natal, Parnamirim, Mossoró e no RN. Oportunidades para iniciar no mercado de trabalho.',
+    badge: '🌱 Porta de Entrada no Mercado',
+    introText: 'Seleção especial de oportunidades para quem busca ingressar no mercado de trabalho ou iniciar em uma nova área, com vagas de jovem aprendiz, estágio e cargos operacionais que não exigem experiência.',
+    onlyNoExperience: true
+  },
+  {
+    slug: 'vagas-estagio-rn',
+    path: '/vagas-estagio-rn',
+    h1: 'Vagas de Estágio no Rio Grande do Norte',
+    metaTitle: 'Vagas de Estágio em Natal e no RN — Oportunidades para Estudantes | Natal Vagas',
+    metaDescription: 'Vagas de estágio remunerado em Natal, Parnamirim, Mossoró e todo o RN. Oportunidades para nível médio, técnico e superior.',
+    badge: '🎓 Estudantes Médio / Técnico / Superior',
+    introText: 'Programas de estágio com bolsa-auxílio remunerada e benefícios para estudantes em Natal e no interior do RN desenvolverem suas carreiras.',
+    contractType: 'ESTAGIO'
+  },
+  {
+    slug: 'vagas-jovem-aprendiz-rn',
+    path: '/vagas-jovem-aprendiz-rn',
+    h1: 'Vagas de Jovem Aprendiz no RN',
+    metaTitle: 'Vagas de Jovem Aprendiz em Natal e no RN | Natal Vagas',
+    metaDescription: 'Oportunidades do programa Jovem Aprendiz (Lei da Aprendizagem) no Rio Grande do Norte. Vagas para jovens de 14 a 24 anos com capacitação profissional.',
+    badge: '🌟 Programa Jovem Aprendiz (14 a 24 anos)',
+    introText: 'Vagas com carteira assinada, cursos de capacitação técnica profissional e jornada compatível com os estudos conforme a Lei da Aprendizagem.',
+    contractType: 'JOVEM_APRENDIZ'
+  },
+  {
+    slug: 'vagas-home-office-rn',
+    path: '/vagas-home-office-rn',
+    h1: 'Vagas Home Office e Trabalho Remoto no RN',
+    metaTitle: 'Vagas Home Office e Trabalho Remoto no RN | Natal Vagas',
+    metaDescription: 'Vagas de emprego home office e modelo remoto abertas para profissionais no Rio Grande do Norte. Trabalhe de qualquer lugar do estado.',
+    badge: '🏠 100% Remoto & Home Office',
+    introText: 'Oportunidades para trabalhar de casa com flexibilidade para empresas do RN, nacionais e multinacionais contratando profissionais potiguares.',
+    workModel: 'REMOTO'
+  }
+];
+
+export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
+  SEO_LANDING_PAGES.map(page => [page.slug, page])
+);
+
+```
+
+---
+
 <a id="frontend-public-data-jobsjson"></a>
-## 41. Arquivo: `frontend/public/data/jobs.json`
+## 43. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -40516,7 +40951,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-public--redirects"></a>
-## 42. Arquivo: `frontend/public/_redirects`
+## 44. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -40532,7 +40967,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 43. Arquivo: `frontend/public/ads.txt`
+## 45. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -40547,7 +40982,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 44. Arquivo: `frontend/public/robots.txt`
+## 46. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -40574,12 +41009,12 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 45. Arquivo: `frontend/public/sitemap.xml`
+## 47. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 7964
-- **Tamanho:** 307436 bytes
+- **Total de Linhas:** 8044
+- **Tamanho:** 309757 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -40629,6 +41064,86 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   </url>
   <url>
     <loc>https://natalvagas.com.br/blog</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Páginas Canônicas de Programmatic SEO por Polo e Categoria -->
+  <url>
+    <loc>https://natalvagas.com.br/vagas-natal</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-parnamirim</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-mossoro</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-macaiba</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-sao-goncalo</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-caico</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-currais-novos</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-ceara-mirim</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-assu</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-sem-experiencia</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-estagio-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-jovem-aprendiz-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-home-office-rn</loc>
     <lastmod>2026-09-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -48552,7 +49067,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-env"></a>
-## 46. Arquivo: `frontend/.env`
+## 48. Arquivo: `frontend/.env`
 - **Caminho:** `frontend/.env`
 - **Nome:** `.env`
 - **Linguagem / Sintaxe:** `bash`
@@ -48574,7 +49089,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-envexample"></a>
-## 47. Arquivo: `frontend/.env.example`
+## 49. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -48596,7 +49111,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 48. Arquivo: `frontend/index.html`
+## 50. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -48687,7 +49202,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 49. Arquivo: `frontend/package-lock.json`
+## 51. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -51770,7 +52285,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 50. Arquivo: `frontend/postcss.config.js`
+## 52. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -51790,7 +52305,7 @@ export default {
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 51. Arquivo: `frontend/src/index.css`
+## 53. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -51854,7 +52369,7 @@ export default {
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 52. Arquivo: `frontend/src/vite-env.d.ts`
+## 54. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -51869,7 +52384,7 @@ export default {
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 53. Arquivo: `frontend/tailwind.config.js`
+## 55. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -51921,7 +52436,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 54. Arquivo: `frontend/tsconfig.json`
+## 56. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -51955,7 +52470,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 55. Arquivo: `frontend/tsconfig.node.json`
+## 57. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -51979,7 +52494,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 56. Arquivo: `backend/Dockerfile`
+## 58. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -52011,7 +52526,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 57. Arquivo: `backend/pom.xml`
+## 59. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -52129,7 +52644,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 58. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 60. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52155,7 +52670,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 59. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 61. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52197,7 +52712,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 60. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 62. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52270,7 +52785,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 61. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 63. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52336,7 +52851,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 62. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 64. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52433,7 +52948,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 63. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 65. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52471,7 +52986,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 64. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 66. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52492,7 +53007,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 65. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 67. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52548,7 +53063,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 66. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 68. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52571,7 +53086,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 67. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 69. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52711,7 +53226,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 68. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 70. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52733,7 +53248,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 69. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 71. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52789,7 +53304,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 70. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 72. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52810,7 +53325,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 71. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 73. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52833,7 +53348,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 72. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 74. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52902,7 +53417,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 73. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 75. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52953,7 +53468,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 74. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 76. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -52979,7 +53494,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 75. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 77. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53016,7 +53531,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 76. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 78. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53065,7 +53580,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 77. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -53256,7 +53771,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 78. Arquivo: `backend/src/main/resources/application.yml`
+## 80. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -53314,7 +53829,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 79. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 81. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -53399,7 +53914,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 80. Arquivo: `scripts/build_single_context_md.py`
+## 82. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -53556,7 +54071,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 81. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 83. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -53688,7 +54203,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 82. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 84. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -53989,12 +54504,12 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 83. Arquivo: `scripts/generate_sitemap.py`
+## 85. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
-- **Total de Linhas:** 136
-- **Tamanho:** 4406 bytes
+- **Total de Linhas:** 167
+- **Tamanho:** 5130 bytes
 
 ```python
 import re
@@ -54075,8 +54590,39 @@ xml_lines = [
     '    <priority>0.9</priority>',
     '  </url>',
     '',
-    '  <!-- URLs do Blog Guia de Carreira RN -->',
+    '  <!-- Páginas Canônicas de Programmatic SEO por Polo e Categoria -->',
 ]
+
+seo_landing_slugs = [
+    'vagas-natal',
+    'vagas-parnamirim',
+    'vagas-mossoro',
+    'vagas-macaiba',
+    'vagas-sao-goncalo',
+    'vagas-caico',
+    'vagas-currais-novos',
+    'vagas-ceara-mirim',
+    'vagas-assu',
+    'vagas-sem-experiencia',
+    'vagas-estagio-rn',
+    'vagas-jovem-aprendiz-rn',
+    'vagas-home-office-rn',
+]
+
+for s_slug in seo_landing_slugs:
+    xml_lines.extend([
+        '  <url>',
+        f'    <loc>{base_url}/{s_slug}</loc>',
+        f'    <lastmod>{today}</lastmod>',
+        '    <changefreq>daily</changefreq>',
+        '    <priority>0.9</priority>',
+        '  </url>'
+    ])
+
+xml_lines.extend([
+    '',
+    '  <!-- URLs do Blog Guia de Carreira RN -->',
+])
 
 blog_posts_path = os.path.join(repo_root, "frontend", "src", "data", "blogPosts.ts")
 if os.path.exists(blog_posts_path):
@@ -54139,7 +54685,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 84. Arquivo: `scripts/ingest_jobs.py`
+## 86. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54362,7 +54908,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 85. Arquivo: `scripts/rn_job_scraper.py`
+## 87. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54561,7 +55107,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 86. Arquivo: `scripts/verify_build_integrity.py`
+## 88. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54654,7 +55200,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 87. Arquivo: `scripts/verify_seo.py`
+## 89. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -54737,7 +55283,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 88. Arquivo: `.env.example`
+## 90. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -54756,7 +55302,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 89. Arquivo: `.gitignore`
+## 91. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -54813,7 +55359,7 @@ certs/
 ---
 
 <a id="docker-composeyml"></a>
-## 90. Arquivo: `docker-compose.yml`
+## 92. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

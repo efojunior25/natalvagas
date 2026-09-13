@@ -51,15 +51,15 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
 | [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 31806 | `.json` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
-| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 7964 | `.xml` |
-| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 445 | `.tsx` |
+| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8044 | `.xml` |
+| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 555 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
-| [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 74 | `.tsx` |
+| [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 97 | `.tsx` |
 | [CookieConsentBanner.tsx.md](./CookieConsentBanner.tsx.md) | `frontend/src/components/CookieConsentBanner.tsx` | 92 | `.tsx` |
 | [CourseRecommendations.tsx.md](./CourseRecommendations.tsx.md) | `frontend/src/components/CourseRecommendations.tsx` | 95 | `.tsx` |
 | [FaqSection.tsx.md](./FaqSection.tsx.md) | `frontend/src/components/FaqSection.tsx` | 107 | `.tsx` |
-| [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 125 | `.tsx` |
+| [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 168 | `.tsx` |
 | [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 104 | `.tsx` |
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 127 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 292 | `.tsx` |
@@ -67,11 +67,13 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 523 | `.tsx` |
 | [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 655 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
+| [SeoCategoryHero.tsx.md](./SeoCategoryHero.tsx.md) | `frontend/src/components/SeoCategoryHero.tsx` | 77 | `.tsx` |
 | [SocialPostGeneratorModal.tsx.md](./SocialPostGeneratorModal.tsx.md) | `frontend/src/components/SocialPostGeneratorModal.tsx` | 334 | `.tsx` |
 | [WhatsAppCommunityBanner.tsx.md](./WhatsAppCommunityBanner.tsx.md) | `frontend/src/components/WhatsAppCommunityBanner.tsx` | 132 | `.tsx` |
 | [AuthContext.tsx.md](./AuthContext.tsx.md) | `frontend/src/context/AuthContext.tsx` | 246 | `.tsx` |
 | [blogPosts.ts.md](./blogPosts.ts.md) | `frontend/src/data/blogPosts.ts` | 565 | `.ts` |
 | [initialJobs.ts.md](./initialJobs.ts.md) | `frontend/src/data/initialJobs.ts` | 20 | `.ts` |
+| [seoLandingPages.ts.md](./seoLandingPages.ts.md) | `frontend/src/data/seoLandingPages.ts` | 152 | `.ts` |
 | [index.css.md](./index.css.md) | `frontend/src/index.css` | 50 | `.css` |
 | [main.tsx.md](./main.tsx.md) | `frontend/src/main.tsx` | 17 | `.tsx` |
 | [AboutUs.tsx.md](./AboutUs.tsx.md) | `frontend/src/pages/AboutUs.tsx` | 114 | `.tsx` |
@@ -93,11 +95,11 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
 | [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
 | [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 287 | `.py` |
-| [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 136 | `.py` |
+| [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 167 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
 | [rn_job_scraper.py.md](./rn_job_scraper.py.md) | `scripts/rn_job_scraper.py` | 185 | `.py` |
 | [verify_build_integrity.py.md](./verify_build_integrity.py.md) | `scripts/verify_build_integrity.py` | 79 | `.py` |
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 90 arquivos convertidos com sucesso.
+**Total de Arquivos:** 92 arquivos convertidos com sucesso.

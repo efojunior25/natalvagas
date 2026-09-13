@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              O maior portal de empregos em Natal e no RN. Vagas verificadas e atualizadas diariamente de forma 100% gratuita.
+              O maior portal de empregos em Natal e no RN. Mais de 1.400 vagas verificadas e atualizadas diariamente de forma 100% gratuita.
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-brand-300">
               <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
@@ -106,6 +106,49 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
+        </div>
+
+        {/* Links de SEO Programático: Polos no RN e Categorias Estratégicas */}
+        <div className="py-8 border-b border-slate-800 space-y-5 text-xs text-slate-400">
+          <div>
+            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
+              Vagas por Cidade no Rio Grande do Norte:
+            </h4>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              <Link to="/vagas-natal" className="hover:text-brand-400 transition-colors">Vagas em Natal (1.000+)</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-parnamirim" className="hover:text-brand-400 transition-colors">Vagas em Parnamirim</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-mossoro" className="hover:text-brand-400 transition-colors">Vagas em Mossoró</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-macaiba" className="hover:text-brand-400 transition-colors">Vagas em Macaíba</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-sao-goncalo" className="hover:text-brand-400 transition-colors">Vagas em São Gonçalo do Amarante</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-caico" className="hover:text-brand-400 transition-colors">Vagas em Caicó</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-currais-novos" className="hover:text-brand-400 transition-colors">Vagas em Currais Novos</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-ceara-mirim" className="hover:text-brand-400 transition-colors">Vagas em Ceará-Mirim</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-assu" className="hover:text-brand-400 transition-colors">Vagas em Assú / Açu</Link>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
+              Categorias e Modalidades:
+            </h4>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              <Link to="/vagas-sem-experiencia" className="hover:text-emerald-400 text-emerald-300/90 font-medium transition-colors">🌱 Vagas Sem Experiência / 1º Emprego</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-estagio-rn" className="hover:text-brand-400 transition-colors">🎓 Vagas de Estágio no RN</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-jovem-aprendiz-rn" className="hover:text-brand-400 transition-colors">🌟 Jovem Aprendiz</Link>
+              <span className="text-slate-700">•</span>
+              <Link to="/vagas-home-office-rn" className="hover:text-brand-400 transition-colors">🏠 Vagas Home Office / Remoto</Link>
+            </div>
+          </div>
         </div>
 
         {/* Alerta de Segurança e Direitos Autorais */}

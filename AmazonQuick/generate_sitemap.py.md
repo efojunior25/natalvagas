@@ -1,7 +1,7 @@
 # File: generate_sitemap.py
 - **Original Path:** `scripts/generate_sitemap.py`
 - **Language / Type:** `python`
-- **Lines of Code:** 136
+- **Lines of Code:** 167
 
 ---
 
@@ -84,8 +84,39 @@ xml_lines = [
     '    <priority>0.9</priority>',
     '  </url>',
     '',
-    '  <!-- URLs do Blog Guia de Carreira RN -->',
+    '  <!-- Páginas Canônicas de Programmatic SEO por Polo e Categoria -->',
 ]
+
+seo_landing_slugs = [
+    'vagas-natal',
+    'vagas-parnamirim',
+    'vagas-mossoro',
+    'vagas-macaiba',
+    'vagas-sao-goncalo',
+    'vagas-caico',
+    'vagas-currais-novos',
+    'vagas-ceara-mirim',
+    'vagas-assu',
+    'vagas-sem-experiencia',
+    'vagas-estagio-rn',
+    'vagas-jovem-aprendiz-rn',
+    'vagas-home-office-rn',
+]
+
+for s_slug in seo_landing_slugs:
+    xml_lines.extend([
+        '  <url>',
+        f'    <loc>{base_url}/{s_slug}</loc>',
+        f'    <lastmod>{today}</lastmod>',
+        '    <changefreq>daily</changefreq>',
+        '    <priority>0.9</priority>',
+        '  </url>'
+    ])
+
+xml_lines.extend([
+    '',
+    '  <!-- URLs do Blog Guia de Carreira RN -->',
+])
 
 blog_posts_path = os.path.join(repo_root, "frontend", "src", "data", "blogPosts.ts")
 if os.path.exists(blog_posts_path):
