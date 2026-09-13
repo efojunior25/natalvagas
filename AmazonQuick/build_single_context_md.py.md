@@ -1,3 +1,11 @@
+# File: build_single_context_md.py
+- **Original Path:** `scripts/build_single_context_md.py`
+- **Language / Type:** `python`
+- **Lines of Code:** 143
+
+---
+
+```python
 import os
 import sys
 
@@ -141,3 +149,5 @@ print(f" -> {root_out_completo}")
 print(f" -> {amazon_out_vagas}")
 print(f" -> {amazon_out_completo}")
 print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linhas de código.")
+
+```

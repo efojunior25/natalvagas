@@ -1,7 +1,7 @@
 # File: convert_to_amazon_quick.py
 - **Original Path:** `scripts/convert_to_amazon_quick.py`
 - **Language / Type:** `python`
-- **Lines of Code:** 110
+- **Lines of Code:** 118
 
 ---
 
@@ -15,6 +15,7 @@ os.makedirs(target_dir, exist_ok=True)
 
 ignored_dirs = {'.git', 'node_modules', 'dist', 'target', '.tempmediaStorage', '.user_uploaded', 'AmazonQuick', 'scratch'}
 ignored_exts = {'.jpg', '.jpeg', '.png', '.p12', '.class', '.jar', '.ico', '.svg', '.woff', '.woff2', '.ttf', '.eot'}
+ignored_filenames = {'APP_NATAL_VAGAS.md', 'APP_NATAL_VAGAS_COMPLETO.md'}
 
 ext_lang_map = {
     '.ts': 'typescript',
@@ -31,7 +32,8 @@ ext_lang_map = {
     '.yaml': 'yaml',
     '.xml': 'xml',
     '.txt': 'text',
-    '.sh': 'bash'
+    '.sh': 'bash',
+    '.md': 'markdown'
 }
 
 files_to_convert = []
@@ -39,6 +41,8 @@ files_to_convert = []
 for root, dirs, filenames in os.walk(base_dir):
     dirs[:] = [d for d in dirs if d not in ignored_dirs]
     for f in filenames:
+        if f in ignored_filenames:
+            continue
         ext = os.path.splitext(f)[1].lower()
         if ext not in ignored_exts and not f.endswith('.p12'):
             full_path = os.path.join(root, f)
@@ -54,7 +58,11 @@ index_entries = []
 
 for rel_path, full_path, filename, ext in files_to_convert:
     # Determine clean output filename
-    if filename.startswith('.'):
+    if rel_path == 'frontend/.env.example':
+        out_name = 'frontend.env.example.md'
+    elif rel_path == '.env.example':
+        out_name = 'root.env.example.md'
+    elif filename.startswith('.'):
         out_name = filename.lstrip('.') + '.md'
     elif filename.startswith('_'):
         out_name = filename.lstrip('_') + '.md'

@@ -1,7 +1,7 @@
 # File: .gitignore
 - **Original Path:** `.gitignore`
 - **Language / Type:** `text`
-- **Lines of Code:** 36
+- **Lines of Code:** 43
 
 ---
 
@@ -36,6 +36,13 @@ yarn-error.log*
 # Docker & Database
 pgdata/
 .env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+!.env.example
+!**/.env.example
 
 # Certificates and Secrets
 *.p12

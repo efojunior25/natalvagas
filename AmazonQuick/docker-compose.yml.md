@@ -12,11 +12,11 @@ services:
     container_name: natalvagas-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: natalvagas_db
-      POSTGRES_USER: natalvagas_user
-      POSTGRES_PASSWORD: natalvagas_secret_password
+      POSTGRES_DB: ${POSTGRES_DB:-natalvagas_db}
+      POSTGRES_USER: ${POSTGRES_USER:-natalvagas_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-natalvagas_secret_password}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:

@@ -1,7 +1,7 @@
 # File: package.json
 - **Original Path:** `frontend/package.json`
 - **Language / Type:** `json`
-- **Lines of Code:** 31
+- **Lines of Code:** 32
 
 ---
 
@@ -14,7 +14,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:smoke": "python3 ../scripts/verify_build_integrity.py"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",

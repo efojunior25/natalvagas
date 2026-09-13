@@ -8,7 +8,8 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 
 | Arquivo Markdown | Caminho Original no Projeto | Linhas | Tipo |
 | :--- | :--- | :--- | :--- |
-| [gitignore.md](./gitignore.md) | `.gitignore` | 36 | `config` |
+| [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
+| [gitignore.md](./gitignore.md) | `.gitignore` | 43 | `config` |
 | [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 246 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
 | [Dockerfile.md](./Dockerfile.md) | `backend/Dockerfile` | 18 | `config` |
@@ -35,18 +36,21 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [application.yml.md](./application.yml.md) | `backend/src/main/resources/application.yml` | 42 | `.yml` |
 | [V1__init_schema.sql.md](./V1__init_schema.sql.md) | `backend/src/main/resources/db/migration/V1__init_schema.sql` | 71 | `.sql` |
 | [docker-compose.yml.md](./docker-compose.yml.md) | `docker-compose.yml` | 22 | `.yml` |
+| [env.md](./env.md) | `frontend/.env` | 8 | `config` |
+| [frontend.env.example.md](./frontend.env.example.md) | `frontend/.env.example` | 8 | `.example` |
 | [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 97 | `.ts` |
-| [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 109 | `.ts` |
+| [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 125 | `.ts` |
 | [verify-code.ts.md](./verify-code.ts.md) | `frontend/functions/api/payments/verify-code.ts` | 101 | `.ts` |
 | [index.html.md](./index.html.md) | `frontend/index.html` | 77 | `.html` |
 | [package-lock.json.md](./package-lock.json.md) | `frontend/package-lock.json` | 3059 | `.json` |
-| [package.json.md](./package.json.md) | `frontend/package.json` | 31 | `.json` |
+| [package.json.md](./package.json.md) | `frontend/package.json` | 32 | `.json` |
 | [postcss.config.js.md](./postcss.config.js.md) | `frontend/postcss.config.js` | 6 | `.js` |
 | [redirects.md](./redirects.md) | `frontend/public/_redirects` | 2 | `config` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
+| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 1 | `.json` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 5114 | `.xml` |
-| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 417 | `.tsx` |
+| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 434 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
 | [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 74 | `.tsx` |
@@ -84,12 +88,14 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [tsconfig.json.md](./tsconfig.json.md) | `frontend/tsconfig.json` | 20 | `.json` |
 | [tsconfig.node.json.md](./tsconfig.node.json.md) | `frontend/tsconfig.node.json` | 10 | `.json` |
 | [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 42 | `.ts` |
-| [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 110 | `.py` |
+| [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
+| [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
 | [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 268 | `.py` |
 | [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 125 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
 | [rn_job_scraper.py.md](./rn_job_scraper.py.md) | `scripts/rn_job_scraper.py` | 185 | `.py` |
+| [verify_build_integrity.py.md](./verify_build_integrity.py.md) | `scripts/verify_build_integrity.py` | 79 | `.py` |
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 82 arquivos convertidos com sucesso.
+**Total de Arquivos:** 88 arquivos convertidos com sucesso.
