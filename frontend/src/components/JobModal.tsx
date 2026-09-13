@@ -147,6 +147,17 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
         {/* Conteúdo com Scroll */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 text-slate-700 text-sm leading-relaxed">
           
+          {/* Alerta de Vaga Inclusiva PcD */}
+          {(job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+            <div className="p-3.5 bg-blue-50/80 border border-blue-200 rounded-2xl flex items-center gap-3 text-blue-900 text-xs shadow-2xs">
+              <span className="text-xl shrink-0">♿</span>
+              <div>
+                <strong className="block text-blue-950 font-bold text-xs sm:text-sm">Vaga Afirmativa / Acessível para PcD</strong>
+                <span className="text-blue-800">Esta vaga acolhe candidaturas de Pessoas com Deficiência (Lei nº 8.213/91).</span>
+              </div>
+            </div>
+          )}
+
           {/* Informações Rápidas */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
             <div>

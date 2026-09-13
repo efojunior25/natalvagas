@@ -1,7 +1,7 @@
 # File: ProPaymentModal.tsx
 - **Original Path:** `frontend/src/components/ProPaymentModal.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 655
+- **Lines of Code:** 771
 
 ---
 
@@ -137,6 +137,12 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   const [isValidatingCode, setIsValidatingCode] = useState<boolean>(false);
   const [showCodeInput, setShowCodeInput] = useState<boolean>(false);
 
+  // Controle de Desconto Social PcD (50% OFF) com Laudo
+  const [isPcdDiscountApplied, setIsPcdDiscountApplied] = useState<boolean>(false);
+  const [pcdCoupon, setPcdCoupon] = useState<string>("");
+  const [pcdCouponError, setPcdCouponError] = useState<string>("");
+  const [showPcdInput, setShowPcdInput] = useState<boolean>(false);
+
   // Trava a rolagem da tela e escuta tecla Escape
   useEffect(() => {
     if (!isOpen) return;
@@ -260,18 +266,40 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     }
   };
 
+  const effectivePrice = isPcdDiscountApplied 
+    ? (currentPlanData.amount * 0.5).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    : currentPlanData.currentPrice;
+
+  const handleApplyPcdCoupon = (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = pcdCoupon.trim().toUpperCase();
+    if (clean === "PCD50" || clean === "INCLUSAO50" || clean === "LAUDO50") {
+      setIsPcdDiscountApplied(true);
+      setPcdCouponError("");
+    } else {
+      setPcdCouponError("Cupom inválido. Envie seu laudo médico no WhatsApp para receber o código de 50% de desconto.");
+    }
+  };
+
   const whatsappMessage = encodeURIComponent(
-    "Olá! Fiz o pagamento de R$ " + currentPlanData.currentPrice + " para o Plano " + currentPlanData.title + " no Natal Vagas.\n\n" +
+    "Olá! Fiz o pagamento de R$ " + effectivePrice + (isPcdDiscountApplied ? " (com Desconto Social PcD 50%)" : "") + " para o Plano " + currentPlanData.title + " no Natal Vagas.\n\n" +
     "E-mail da conta: " + (user?.email || "Não informado") + "\n" +
     "Nome: " + (user?.name || "Candidato") + "\n\n" +
     "Segue o comprovante:"
   );
 
   const whatsappCardMessage = encodeURIComponent(
-    "Olá! Gostaria de pagar o Plano " + currentPlanData.title + " (R$ " + currentPlanData.currentPrice + ") no Cartão de Crédito sem juros.\n\n" +
+    "Olá! Gostaria de pagar o Plano " + currentPlanData.title + " (R$ " + effectivePrice + (isPcdDiscountApplied ? " com Desconto PcD 50%" : "") + ") no Cartão de Crédito sem juros.\n\n" +
     "E-mail: " + (user?.email || "Não informado") + "\n" +
     "Nome: " + (user?.name || "Candidato") + "\n\n" +
     "Poderia me enviar o link seguro de pagamento?"
+  );
+
+  const whatsappLaudoMessage = encodeURIComponent(
+    "Olá, Edson! Sou candidato PcD no Natal Vagas e gostaria de solicitar meu desconto de 50% no Plano PRO (" + currentPlanData.title + ").\n\n" +
+    "Segue meu Laudo Médico em anexo para sua avaliação.\n" +
+    "Meu e-mail cadastrado no site: " + (user?.email || "Não informado") + "\n" +
+    "Meu nome: " + (user?.name || "Candidato")
   );
 
   return createPortal(
@@ -360,11 +388,13 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   }`}
                 >
                   <span className="inline-block px-1 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[8px] font-black uppercase mb-1">
-                    75% OFF
+                    {isPcdDiscountApplied ? "50% PcD" : "75% OFF"}
                   </span>
                   <div className="font-bold text-[11px] text-slate-900 leading-tight">1 Mês</div>
-                  <div className="text-[10px] text-slate-400 line-through">R$ 39,90</div>
-                  <div className="text-base font-black text-emerald-600">R$ 9,90</div>
+                  <div className="text-[10px] text-slate-400 line-through">{isPcdDiscountApplied ? "R$ 9,90" : "R$ 39,90"}</div>
+                  <div className="text-base font-black text-emerald-600">
+                    {isPcdDiscountApplied ? "R$ 4,95" : "R$ 9,90"}
+                  </div>
                   <div className="text-[9px] text-slate-500">30 dias</div>
                 </button>
 
@@ -378,11 +408,13 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   }`}
                 >
                   <span className="inline-block px-1 py-0.5 rounded bg-brand-100 text-brand-800 text-[8px] font-black uppercase mb-1">
-                    POPULAR
+                    {isPcdDiscountApplied ? "50% PcD" : "POPULAR"}
                   </span>
                   <div className="font-bold text-[11px] text-slate-900 leading-tight">1 Ano</div>
-                  <div className="text-[10px] text-slate-400 line-through">R$ 99,90</div>
-                  <div className="text-base font-black text-brand-600">R$ 39,90</div>
+                  <div className="text-[10px] text-slate-400 line-through">{isPcdDiscountApplied ? "R$ 39,90" : "R$ 99,90"}</div>
+                  <div className="text-base font-black text-brand-600">
+                    {isPcdDiscountApplied ? "R$ 19,95" : "R$ 39,90"}
+                  </div>
                   <div className="text-[9px] text-slate-500">12 meses</div>
                 </button>
 
@@ -396,13 +428,92 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   }`}
                 >
                   <span className="inline-block px-1 py-0.5 rounded bg-amber-100 text-amber-900 text-[8px] font-black uppercase mb-1">
-                    👑 VITALÍCIO
+                    {isPcdDiscountApplied ? "50% PcD" : "👑 VITALÍCIO"}
                   </span>
                   <div className="font-bold text-[11px] text-slate-900 leading-tight">Para Sempre</div>
-                  <div className="text-[10px] text-slate-400 line-through">R$ 199,90</div>
-                  <div className="text-base font-black text-amber-600">R$ 99,90</div>
+                  <div className="text-[10px] text-slate-400 line-through">{isPcdDiscountApplied ? "R$ 99,90" : "R$ 199,90"}</div>
+                  <div className="text-base font-black text-amber-600">
+                    {isPcdDiscountApplied ? "R$ 49,95" : "R$ 99,90"}
+                  </div>
                   <div className="text-[9px] text-slate-500">Vitalício</div>
                 </button>
+              </div>
+            </div>
+
+            {/* Card de Desconto Social PcD (50% OFF) */}
+            <div className="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/90 rounded-2xl">
+              <div className="flex items-start gap-2.5">
+                <span className="text-xl shrink-0 mt-0.5">♿</span>
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-1">
+                    <h4 className="text-xs font-bold text-blue-950">Desconto Social PcD (50% OFF)</h4>
+                    <span className="text-[9px] font-black bg-blue-200 text-blue-900 px-1.5 py-0.5 rounded-full uppercase">
+                      Inclusão
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-blue-900 mt-1 leading-relaxed">
+                    Candidatos com deficiência têm <strong>50% de desconto</strong> em qualquer plano mediante validação do laudo médico pelo administrador.
+                  </p>
+                  
+                  {isPcdDiscountApplied ? (
+                    <div className="mt-2 p-2 bg-emerald-100 border border-emerald-300 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                      <span className="flex items-center gap-1.5">
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        Desconto PcD Ativo: 50% OFF aplicado no Pix!
+                      </span>
+                      <button 
+                        type="button" 
+                        onClick={() => setIsPcdDiscountApplied(false)}
+                        className="text-[10px] text-emerald-700 underline hover:text-emerald-900 cursor-pointer"
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <a
+                        href={"https://wa.me/5584992344922?text=" + whatsappLaudoMessage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white rounded-lg text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                        <span>Enviar Laudo no WhatsApp</span>
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setShowPcdInput(!showPcdInput)}
+                        className="text-xs text-blue-700 hover:text-blue-900 font-semibold underline underline-offset-2 cursor-pointer"
+                      >
+                        Já recebi meu cupom
+                      </button>
+                    </div>
+                  )}
+
+                  {showPcdInput && !isPcdDiscountApplied && (
+                    <form onSubmit={handleApplyPcdCoupon} className="mt-2 flex flex-wrap items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Código: PCD50"
+                        value={pcdCoupon}
+                        onChange={(e) => {
+                          setPcdCoupon(e.target.value);
+                          setPcdCouponError("");
+                        }}
+                        className="w-36 px-2.5 py-1 text-xs border border-blue-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 uppercase font-bold text-slate-800 bg-white"
+                      />
+                      <button
+                        type="submit"
+                        className="px-3 py-1 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                      >
+                        Ativar 50%
+                      </button>
+                      {pcdCouponError && (
+                        <span className="w-full text-[11px] text-red-600 font-medium block">{pcdCouponError}</span>
+                      )}
+                    </form>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -470,7 +581,10 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                       />
                     </div>
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
-                      Valor com Desconto: <strong>R$ {currentPlanData.currentPrice}</strong>
+                      Valor a Pagar: <strong className="text-emerald-600 text-xs">R$ {effectivePrice}</strong>
+                      {isPcdDiscountApplied && (
+                        <span className="text-[10px] text-blue-600 block font-semibold">♿ Desconto PcD 50% Ativado</span>
+                      )}
                     </span>
                   </div>
 
@@ -489,40 +603,42 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     )}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={handleCopyPayload}
-                    className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
-                      copiedType === "payload"
-                        ? "bg-emerald-600 text-white border-emerald-600"
-                        : "bg-brand-600 hover:bg-brand-700 text-white border-brand-600"
-                    }`}
-                  >
-                    {copiedType === "payload" ? (
-                      <>
-                        <Check className="w-4 h-4" />
-                        <span>Código Pix Copiado com Sucesso!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        <span>Copiar Código Pix Copia e Cola (R$ {currentPlanData.currentPrice})</span>
-                      </>
-                    )}
-                  </button>
+                  {isPcdDiscountApplied ? (
+                    <div className="w-full mb-2 p-2 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 text-left">
+                      💡 Com o <strong>Desconto PcD de 50%</strong>, transfira exatamente <strong>R$ {effectivePrice}</strong> para a <strong>Chave Pix E-mail</strong> abaixo e envie o comprovante no botão verde para ativação imediata:
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleCopyPayload}
+                      className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
+                        copiedType === "payload"
+                          ? "bg-emerald-600 text-white border-emerald-600"
+                          : "bg-brand-600 hover:bg-brand-700 text-white border-brand-600"
+                      }`}
+                    >
+                      {copiedType === "payload" ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          <span>Código Pix Copiado com Sucesso!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copiar Código Pix Copia e Cola (R$ {effectivePrice})</span>
+                        </>
+                      )}
+                    </button>
+                  )}
 
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className={`w-full mt-2 py-1.5 px-3 rounded-lg text-[11px] font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
-                      copiedType === "email"
-                        ? "bg-emerald-50 border-emerald-400 text-emerald-700"
-                        : "bg-white border-slate-200 hover:bg-slate-100 text-slate-600"
-                    }`}
+                    className={`w-full ${isPcdDiscountApplied ? 'py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold' : 'mt-2 py-1.5 px-3 bg-white border-slate-200 hover:bg-slate-100 text-slate-600 font-semibold'} rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer border`}
                   >
-                    <Mail className="w-3.5 h-3.5 text-slate-400" />
+                    <Mail className={`w-3.5 h-3.5 ${isPcdDiscountApplied ? 'text-white' : 'text-slate-400'}`} />
                     <span>
-                      {copiedType === "email" ? "Chave E-mail Copiada!" : "Chave Pix E-mail: " + pixEmailKey}
+                      {copiedType === "email" ? "Chave E-mail Copiada!" : "Copiar Chave Pix E-mail: " + pixEmailKey}
                     </span>
                   </button>
                 </div>

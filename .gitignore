@@ -41,3 +41,6 @@ pgdata/
 *.pem
 certs/
 
+# Imagens de triagem temporárias
+imagens vagas/
+

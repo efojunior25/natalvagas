@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 98 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 99 arquivos.
 
 ---
 
@@ -90,20 +90,21 @@
 82. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
 83. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
 84. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-85. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-86. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-87. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
-88. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-89. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-90. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-91. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-92. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-93. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-94. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-95. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-96. [`.env.example`](#envexample)
-97. [`.gitignore`](#gitignore)
-98. [`docker-compose.yml`](#docker-composeyml)
+85. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
+86. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+87. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+88. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+89. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+90. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+91. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+92. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+93. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+94. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+95. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+96. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+97. [`.env.example`](#envexample)
+98. [`.gitignore`](#gitignore)
+99. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -522,8 +523,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 567
-- **Tamanho:** 22538 bytes
+- **Total de Linhas:** 584
+- **Tamanho:** 23110 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
@@ -574,6 +575,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
   const [onlyNoExperience, setOnlyNoExperience] = useState<boolean>(false);
+  const [onlyPcd, setOnlyPcd] = useState<boolean>(false);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
   // Identifica se estamos em uma landing page programática de SEO
@@ -590,6 +592,9 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       if (seoConfig.onlyNoExperience) setOnlyNoExperience(true);
       else setOnlyNoExperience(false);
 
+      if (seoConfig.onlyPcd) setOnlyPcd(true);
+      else setOnlyPcd(false);
+
       if (seoConfig.workModel) setSelectedWorkModel(seoConfig.workModel);
       else setSelectedWorkModel('TODOS');
 
@@ -597,6 +602,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
     } else if (!slug) {
       setSelectedCity('');
       setOnlyNoExperience(false);
+      setOnlyPcd(false);
       setSelectedWorkModel('TODOS');
       setVisibleCount(PAGE_SIZE);
     }
@@ -713,7 +719,14 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
         )
       );
 
-      return matchesQuery && matchesCity && matchesModel && matchesNoExperience;
+      const matchesPcd = !onlyPcd || (
+        Boolean(job.isPcd) ||
+        /pcd|pessoa com deficiência|deficiência|afirmativa para pcd/i.test(
+          `${job.title} ${job.requirements || ''} ${job.description}`
+        )
+      );
+
+      return matchesQuery && matchesCity && matchesModel && matchesNoExperience && matchesPcd;
     }).sort((a, b) => {
       // 1. Vagas em destaque VIP sempre no topo
       if (a.isFeatured && !b.isFeatured) return -1;
@@ -727,7 +740,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       return 0;
     });
-  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, seoConfig]);
+  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, onlyPcd, seoConfig]);
 
   // Lista visível com paginação progressiva para alta performance e Core Web Vitals
   const visibleJobs = useMemo(() => {
@@ -852,6 +865,11 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
           onlyNoExperience={onlyNoExperience}
           onToggleNoExperience={() => {
             setOnlyNoExperience(prev => !prev);
+            setVisibleCount(PAGE_SIZE);
+          }}
+          onlyPcd={onlyPcd}
+          onTogglePcd={() => {
+            setOnlyPcd(prev => !prev);
             setVisibleCount(PAGE_SIZE);
           }}
         />
@@ -1479,8 +1497,8 @@ export default AuthModal;
 - **Caminho:** `frontend/src/components/CityPills.tsx`
 - **Nome:** `CityPills.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 97
-- **Tamanho:** 3396 bytes
+- **Total de Linhas:** 114
+- **Tamanho:** 4006 bytes
 
 ```tsx
 import React from 'react';
@@ -1493,6 +1511,8 @@ interface CityPillsProps {
   onSelectCity?: (city: string) => void;
   onlyNoExperience?: boolean;
   onToggleNoExperience?: () => void;
+  onlyPcd?: boolean;
+  onTogglePcd?: () => void;
   isSeoLanding?: boolean;
 }
 
@@ -1520,7 +1540,9 @@ export const CityPills: React.FC<CityPillsProps> = ({
   selectedCity, 
   onSelectCity,
   onlyNoExperience,
-  onToggleNoExperience
+  onToggleNoExperience,
+  onlyPcd,
+  onTogglePcd
 }) => {
   return (
     <nav aria-label="Filtro rápido por cidade e categoria no RN" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
@@ -1535,12 +1557,25 @@ export const CityPills: React.FC<CityPillsProps> = ({
           to="/"
           onClick={() => onSelectCity && onSelectCity('')}
           className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
-            !selectedCity && !onlyNoExperience
+            !selectedCity && !onlyNoExperience && !onlyPcd
               ? 'bg-brand-600 text-white shadow-xs'
               : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
           }`}
         >
           Todas as Cidades
+        </Link>
+
+        {/* Filtro Especial: Vagas PcD */}
+        <Link
+          to={onlyPcd ? '/' : '/vagas-pcd-rn'}
+          onClick={() => onTogglePcd && onTogglePcd()}
+          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
+            onlyPcd
+              ? 'bg-blue-600 text-white shadow-xs ring-2 ring-blue-400/30'
+              : 'bg-blue-50 text-blue-800 hover:bg-blue-100 border border-blue-300'
+          }`}
+        >
+          <span>♿ Vagas PcD</span>
         </Link>
 
         {/* Filtro Especial: Sem Experiência / Primeiro Emprego */}
@@ -2226,8 +2261,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
 - **Caminho:** `frontend/src/components/JobCard.tsx`
 - **Nome:** `JobCard.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 146
-- **Tamanho:** 7231 bytes
+- **Total de Linhas:** 155
+- **Tamanho:** 7910 bytes
 
 ```tsx
 import React from 'react';
@@ -2273,11 +2308,20 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
       }`}
     >
       <div>
-        {/* Selo Vaga em Destaque (Se contratado) */}
-        {job.isFeatured && (
-          <div className="mb-3 inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold text-amber-800 bg-amber-100 border border-amber-300/80 px-2.5 py-0.5 rounded-full shadow-2xs">
-            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 fill-amber-400 animate-pulse shrink-0" />
-            <span>VAGA EM DESTAQUE VIP</span>
+        {/* Selos de Destaque e Acessibilidade PcD */}
+        {(job.isFeatured || job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            {job.isFeatured && (
+              <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold text-amber-800 bg-amber-100 border border-amber-300/80 px-2.5 py-0.5 rounded-full shadow-2xs">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 fill-amber-400 animate-pulse shrink-0" />
+                <span>VAGA EM DESTAQUE VIP</span>
+              </div>
+            )}
+            {(job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+              <div className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-blue-800 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full shadow-2xs">
+                <span>♿ Vaga PcD</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -2386,8 +2430,8 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
 - **Caminho:** `frontend/src/components/JobModal.tsx`
 - **Nome:** `JobModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 309
-- **Tamanho:** 15262 bytes
+- **Total de Linhas:** 320
+- **Tamanho:** 15991 bytes
 
 ```tsx
 import React, { useEffect, useState } from 'react';
@@ -2539,6 +2583,17 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
         {/* Conteúdo com Scroll */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 text-slate-700 text-sm leading-relaxed">
           
+          {/* Alerta de Vaga Inclusiva PcD */}
+          {(job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+            <div className="p-3.5 bg-blue-50/80 border border-blue-200 rounded-2xl flex items-center gap-3 text-blue-900 text-xs shadow-2xs">
+              <span className="text-xl shrink-0">♿</span>
+              <div>
+                <strong className="block text-blue-950 font-bold text-xs sm:text-sm">Vaga Afirmativa / Acessível para PcD</strong>
+                <span className="text-blue-800">Esta vaga acolhe candidaturas de Pessoas com Deficiência (Lei nº 8.213/91).</span>
+              </div>
+            </div>
+          )}
+
           {/* Informações Rápidas */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
             <div>
@@ -3610,8 +3665,8 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
 - **Caminho:** `frontend/src/components/ProPaymentModal.tsx`
 - **Nome:** `ProPaymentModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 655
-- **Tamanho:** 29309 bytes
+- **Total de Linhas:** 771
+- **Tamanho:** 36272 bytes
 
 ```tsx
 import React, { useState, useEffect } from "react";
@@ -3745,6 +3800,12 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   const [isValidatingCode, setIsValidatingCode] = useState<boolean>(false);
   const [showCodeInput, setShowCodeInput] = useState<boolean>(false);
 
+  // Controle de Desconto Social PcD (50% OFF) com Laudo
+  const [isPcdDiscountApplied, setIsPcdDiscountApplied] = useState<boolean>(false);
+  const [pcdCoupon, setPcdCoupon] = useState<string>("");
+  const [pcdCouponError, setPcdCouponError] = useState<string>("");
+  const [showPcdInput, setShowPcdInput] = useState<boolean>(false);
+
   // Trava a rolagem da tela e escuta tecla Escape
   useEffect(() => {
     if (!isOpen) return;
@@ -3868,18 +3929,40 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     }
   };
 
+  const effectivePrice = isPcdDiscountApplied 
+    ? (currentPlanData.amount * 0.5).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    : currentPlanData.currentPrice;
+
+  const handleApplyPcdCoupon = (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = pcdCoupon.trim().toUpperCase();
+    if (clean === "PCD50" || clean === "INCLUSAO50" || clean === "LAUDO50") {
+      setIsPcdDiscountApplied(true);
+      setPcdCouponError("");
+    } else {
+      setPcdCouponError("Cupom inválido. Envie seu laudo médico no WhatsApp para receber o código de 50% de desconto.");
+    }
+  };
+
   const whatsappMessage = encodeURIComponent(
-    "Olá! Fiz o pagamento de R$ " + currentPlanData.currentPrice + " para o Plano " + currentPlanData.title + " no Natal Vagas.\n\n" +
+    "Olá! Fiz o pagamento de R$ " + effectivePrice + (isPcdDiscountApplied ? " (com Desconto Social PcD 50%)" : "") + " para o Plano " + currentPlanData.title + " no Natal Vagas.\n\n" +
     "E-mail da conta: " + (user?.email || "Não informado") + "\n" +
     "Nome: " + (user?.name || "Candidato") + "\n\n" +
     "Segue o comprovante:"
   );
 
   const whatsappCardMessage = encodeURIComponent(
-    "Olá! Gostaria de pagar o Plano " + currentPlanData.title + " (R$ " + currentPlanData.currentPrice + ") no Cartão de Crédito sem juros.\n\n" +
+    "Olá! Gostaria de pagar o Plano " + currentPlanData.title + " (R$ " + effectivePrice + (isPcdDiscountApplied ? " com Desconto PcD 50%" : "") + ") no Cartão de Crédito sem juros.\n\n" +
     "E-mail: " + (user?.email || "Não informado") + "\n" +
     "Nome: " + (user?.name || "Candidato") + "\n\n" +
     "Poderia me enviar o link seguro de pagamento?"
+  );
+
+  const whatsappLaudoMessage = encodeURIComponent(
+    "Olá, Edson! Sou candidato PcD no Natal Vagas e gostaria de solicitar meu desconto de 50% no Plano PRO (" + currentPlanData.title + ").\n\n" +
+    "Segue meu Laudo Médico em anexo para sua avaliação.\n" +
+    "Meu e-mail cadastrado no site: " + (user?.email || "Não informado") + "\n" +
+    "Meu nome: " + (user?.name || "Candidato")
   );
 
   return createPortal(
@@ -3968,11 +4051,13 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   }`}
                 >
                   <span className="inline-block px-1 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[8px] font-black uppercase mb-1">
-                    75% OFF
+                    {isPcdDiscountApplied ? "50% PcD" : "75% OFF"}
                   </span>
                   <div className="font-bold text-[11px] text-slate-900 leading-tight">1 Mês</div>
-                  <div className="text-[10px] text-slate-400 line-through">R$ 39,90</div>
-                  <div className="text-base font-black text-emerald-600">R$ 9,90</div>
+                  <div className="text-[10px] text-slate-400 line-through">{isPcdDiscountApplied ? "R$ 9,90" : "R$ 39,90"}</div>
+                  <div className="text-base font-black text-emerald-600">
+                    {isPcdDiscountApplied ? "R$ 4,95" : "R$ 9,90"}
+                  </div>
                   <div className="text-[9px] text-slate-500">30 dias</div>
                 </button>
 
@@ -3986,11 +4071,13 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   }`}
                 >
                   <span className="inline-block px-1 py-0.5 rounded bg-brand-100 text-brand-800 text-[8px] font-black uppercase mb-1">
-                    POPULAR
+                    {isPcdDiscountApplied ? "50% PcD" : "POPULAR"}
                   </span>
                   <div className="font-bold text-[11px] text-slate-900 leading-tight">1 Ano</div>
-                  <div className="text-[10px] text-slate-400 line-through">R$ 99,90</div>
-                  <div className="text-base font-black text-brand-600">R$ 39,90</div>
+                  <div className="text-[10px] text-slate-400 line-through">{isPcdDiscountApplied ? "R$ 39,90" : "R$ 99,90"}</div>
+                  <div className="text-base font-black text-brand-600">
+                    {isPcdDiscountApplied ? "R$ 19,95" : "R$ 39,90"}
+                  </div>
                   <div className="text-[9px] text-slate-500">12 meses</div>
                 </button>
 
@@ -4004,13 +4091,92 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   }`}
                 >
                   <span className="inline-block px-1 py-0.5 rounded bg-amber-100 text-amber-900 text-[8px] font-black uppercase mb-1">
-                    👑 VITALÍCIO
+                    {isPcdDiscountApplied ? "50% PcD" : "👑 VITALÍCIO"}
                   </span>
                   <div className="font-bold text-[11px] text-slate-900 leading-tight">Para Sempre</div>
-                  <div className="text-[10px] text-slate-400 line-through">R$ 199,90</div>
-                  <div className="text-base font-black text-amber-600">R$ 99,90</div>
+                  <div className="text-[10px] text-slate-400 line-through">{isPcdDiscountApplied ? "R$ 99,90" : "R$ 199,90"}</div>
+                  <div className="text-base font-black text-amber-600">
+                    {isPcdDiscountApplied ? "R$ 49,95" : "R$ 99,90"}
+                  </div>
                   <div className="text-[9px] text-slate-500">Vitalício</div>
                 </button>
+              </div>
+            </div>
+
+            {/* Card de Desconto Social PcD (50% OFF) */}
+            <div className="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/90 rounded-2xl">
+              <div className="flex items-start gap-2.5">
+                <span className="text-xl shrink-0 mt-0.5">♿</span>
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-1">
+                    <h4 className="text-xs font-bold text-blue-950">Desconto Social PcD (50% OFF)</h4>
+                    <span className="text-[9px] font-black bg-blue-200 text-blue-900 px-1.5 py-0.5 rounded-full uppercase">
+                      Inclusão
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-blue-900 mt-1 leading-relaxed">
+                    Candidatos com deficiência têm <strong>50% de desconto</strong> em qualquer plano mediante validação do laudo médico pelo administrador.
+                  </p>
+                  
+                  {isPcdDiscountApplied ? (
+                    <div className="mt-2 p-2 bg-emerald-100 border border-emerald-300 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                      <span className="flex items-center gap-1.5">
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        Desconto PcD Ativo: 50% OFF aplicado no Pix!
+                      </span>
+                      <button 
+                        type="button" 
+                        onClick={() => setIsPcdDiscountApplied(false)}
+                        className="text-[10px] text-emerald-700 underline hover:text-emerald-900 cursor-pointer"
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <a
+                        href={"https://wa.me/5584992344922?text=" + whatsappLaudoMessage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white rounded-lg text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                        <span>Enviar Laudo no WhatsApp</span>
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setShowPcdInput(!showPcdInput)}
+                        className="text-xs text-blue-700 hover:text-blue-900 font-semibold underline underline-offset-2 cursor-pointer"
+                      >
+                        Já recebi meu cupom
+                      </button>
+                    </div>
+                  )}
+
+                  {showPcdInput && !isPcdDiscountApplied && (
+                    <form onSubmit={handleApplyPcdCoupon} className="mt-2 flex flex-wrap items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Código: PCD50"
+                        value={pcdCoupon}
+                        onChange={(e) => {
+                          setPcdCoupon(e.target.value);
+                          setPcdCouponError("");
+                        }}
+                        className="w-36 px-2.5 py-1 text-xs border border-blue-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 uppercase font-bold text-slate-800 bg-white"
+                      />
+                      <button
+                        type="submit"
+                        className="px-3 py-1 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                      >
+                        Ativar 50%
+                      </button>
+                      {pcdCouponError && (
+                        <span className="w-full text-[11px] text-red-600 font-medium block">{pcdCouponError}</span>
+                      )}
+                    </form>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -4078,7 +4244,10 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                       />
                     </div>
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
-                      Valor com Desconto: <strong>R$ {currentPlanData.currentPrice}</strong>
+                      Valor a Pagar: <strong className="text-emerald-600 text-xs">R$ {effectivePrice}</strong>
+                      {isPcdDiscountApplied && (
+                        <span className="text-[10px] text-blue-600 block font-semibold">♿ Desconto PcD 50% Ativado</span>
+                      )}
                     </span>
                   </div>
 
@@ -4097,40 +4266,42 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     )}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={handleCopyPayload}
-                    className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
-                      copiedType === "payload"
-                        ? "bg-emerald-600 text-white border-emerald-600"
-                        : "bg-brand-600 hover:bg-brand-700 text-white border-brand-600"
-                    }`}
-                  >
-                    {copiedType === "payload" ? (
-                      <>
-                        <Check className="w-4 h-4" />
-                        <span>Código Pix Copiado com Sucesso!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        <span>Copiar Código Pix Copia e Cola (R$ {currentPlanData.currentPrice})</span>
-                      </>
-                    )}
-                  </button>
+                  {isPcdDiscountApplied ? (
+                    <div className="w-full mb-2 p-2 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 text-left">
+                      💡 Com o <strong>Desconto PcD de 50%</strong>, transfira exatamente <strong>R$ {effectivePrice}</strong> para a <strong>Chave Pix E-mail</strong> abaixo e envie o comprovante no botão verde para ativação imediata:
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleCopyPayload}
+                      className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
+                        copiedType === "payload"
+                          ? "bg-emerald-600 text-white border-emerald-600"
+                          : "bg-brand-600 hover:bg-brand-700 text-white border-brand-600"
+                      }`}
+                    >
+                      {copiedType === "payload" ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          <span>Código Pix Copiado com Sucesso!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copiar Código Pix Copia e Cola (R$ {effectivePrice})</span>
+                        </>
+                      )}
+                    </button>
+                  )}
 
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className={`w-full mt-2 py-1.5 px-3 rounded-lg text-[11px] font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
-                      copiedType === "email"
-                        ? "bg-emerald-50 border-emerald-400 text-emerald-700"
-                        : "bg-white border-slate-200 hover:bg-slate-100 text-slate-600"
-                    }`}
+                    className={`w-full ${isPcdDiscountApplied ? 'py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold' : 'mt-2 py-1.5 px-3 bg-white border-slate-200 hover:bg-slate-100 text-slate-600 font-semibold'} rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer border`}
                   >
-                    <Mail className="w-3.5 h-3.5 text-slate-400" />
+                    <Mail className={`w-3.5 h-3.5 ${isPcdDiscountApplied ? 'text-white' : 'text-slate-400'}`} />
                     <span>
-                      {copiedType === "email" ? "Chave E-mail Copiada!" : "Chave Pix E-mail: " + pixEmailKey}
+                      {copiedType === "email" ? "Chave E-mail Copiada!" : "Copiar Chave Pix E-mail: " + pixEmailKey}
                     </span>
                   </button>
                 </div>
@@ -8468,8 +8639,8 @@ export interface BlogPost {
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 54
-- **Tamanho:** 1316 bytes
+- **Total de Linhas:** 55
+- **Tamanho:** 1335 bytes
 
 ```typescript
 export interface Category {
@@ -8508,6 +8679,7 @@ export interface Job {
   applicationTarget: string;
   status: JobStatus;
   isFeatured: boolean;
+  isPcd?: boolean;
   viewsCount: number;
   publishedAt: string;
   createdAt: string;
@@ -9149,8 +9321,8 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 - **Caminho:** `frontend/src/data/seoLandingPages.ts`
 - **Nome:** `seoLandingPages.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 152
-- **Tamanho:** 8449 bytes
+- **Total de Linhas:** 163
+- **Tamanho:** 9169 bytes
 
 ```typescript
 import { ContractType, WorkModel } from '../types/job';
@@ -9167,6 +9339,7 @@ export interface SeoLandingConfig {
   contractType?: ContractType;
   workModel?: WorkModel;
   onlyNoExperience?: boolean;
+  onlyPcd?: boolean;
 }
 
 export const SEO_LANDING_PAGES: SeoLandingConfig[] = [
@@ -9299,6 +9472,16 @@ export const SEO_LANDING_PAGES: SeoLandingConfig[] = [
     badge: '🏠 100% Remoto & Home Office',
     introText: 'Oportunidades para trabalhar de casa com flexibilidade para empresas do RN, nacionais e multinacionais contratando profissionais potiguares.',
     workModel: 'REMOTO'
+  },
+  {
+    slug: 'vagas-pcd-rn',
+    path: '/vagas-pcd-rn',
+    h1: 'Vagas de Emprego PcD em Natal e no RN',
+    metaTitle: 'Vagas de Emprego PcD em Natal / RN — Oportunidades Inclusivas | Natal Vagas',
+    metaDescription: 'Encontre vagas de emprego exclusivas e afirmativas para Pessoas com Deficiência (PcD) em Natal, Parnamirim, Mossoró e todo o RN. Vagas na Lei de Cotas com candidatura gratuita.',
+    badge: '♿ Inclusão & Acessibilidade',
+    introText: 'Vagas inclusivas e oportunidades afirmativas para Pessoas com Deficiência (PcD) no Rio Grande do Norte, em consonância com a Lei de Cotas (Lei nº 8.213/91). Valorizamos a diversidade e o talento potiguar.',
+    onlyPcd: true
   }
 ];
 
@@ -9315,11 +9498,1259 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
-- **Total de Linhas:** 33906
-- **Tamanho:** 2509954 bytes
+- **Total de Linhas:** 35154
+- **Tamanho:** 2563362 bytes
 
 ```json
 [
+  {
+    "id": 2026092416,
+    "title": "Auxiliar de Cozinha - Home Sushi Home",
+    "slug": "auxiliar-de-cozinha-home-sushi-home-natal",
+    "companyName": "Home Sushi Home",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Auxiliar no preparo e pré-preparo de alimentos; higienizar, cortar e organizar ingredientes; manter a limpeza da cozinha, equipamentos e utensílios; seguir boas práticas de manipulação e apoiar a equipe nas rotinas da cozinha. Escala 6x1 com foco em período noturno e fins de semana.",
+    "requirements": "Conhecimento em higiene e manipulação de alimentos; agilidade, organização e foco em produtividade; proatividade, disciplina e bom trabalho em equipe.",
+    "benefits": "Salário fixo + Plano de Bonificação + Vale Transporte.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculo@segantiniconsultoria.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092417,
+    "title": "Garçom / Garçonete - Wāza Oriental",
+    "slug": "garcom-garconete-waza-oriental-natal",
+    "companyName": "Wāza Oriental",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Recepcionar clientes, anotar pedidos e esclarecer dúvidas sobre o cardápio; preparar mesas e manter o ambiente limpo e organizado; organizar pedidos, embalar e despachar entregas pelo iFood; zelar pela limpeza diária e postura profissional. Escala de segunda a sábado das 16:30 às 00:20 em Tirol, Natal/RN.",
+    "requirements": "Excelente comunicação verbal, cordialidade e postura adequada no atendimento; vivência como garçom ou garçonete em restaurantes; cuidado com higiene pessoal.",
+    "benefits": "Salário R$ 1.715,00 + Participação no rateio da taxa de serviço + Vale Transporte + Alimentação no local.",
+    "salaryMin": 1715.0,
+    "salaryMax": 1715.0,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculo@segantiniconsultoria.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092418,
+    "title": "Auxiliar de Cozinha - Golden Tulip Ponta Negra",
+    "slug": "auxiliar-de-cozinha-golden-tulip-natal",
+    "companyName": "Golden Tulip Natal Ponta Negra",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Atuar na rotina de cozinha do hotel, auxiliando no preparo de pratos, organização e higienização de equipamentos e bancadas. Disponibilidade para horários flexíveis incluindo finais de semana e feriados.",
+    "requirements": "Ensino Médio completo; agilidade e organização; comprometimento com higiene e segurança do trabalho; capacidade de trabalhar em equipe.",
+    "benefits": "Benefícios da rede hoteleira HotelCare.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "gtpn.vagas@goldentulip.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092419,
+    "title": "Camareira - Golden Tulip Ponta Negra",
+    "slug": "camareira-golden-tulip-natal",
+    "companyName": "Golden Tulip Natal Ponta Negra",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Responsável pela higienização, organização e arrumação dos apartamentos e áreas sociais do hotel, reposição de enxoval e amenities. Escala hoteleira com horários flexíveis.",
+    "requirements": "Ensino Fundamental completo; experiência anterior na função será um diferencial; comprometimento com higiene e segurança; trabalho em equipe.",
+    "benefits": "Benefícios da rede HotelCare.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "gtpn.vagas@goldentulip.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092420,
+    "title": "Fiscal de Carga - Transbordo BR-101",
+    "slug": "fiscal-de-carga-grupo-duarte-natal",
+    "companyName": "Grupo Duarte",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Fiscalização de cargas no transbordo do Grupo Duarte na BR-101 (Locações, Engenharia e Gestão Ambiental). Registro e controle de movimentação de veículos e resíduos.",
+    "requirements": "Ensino Médio completo; familiaridade com sistemas e uso de computador ou celular para registros.",
+    "benefits": "Benefícios da categoria de engenharia e gestão ambiental.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "selecao@grupoduartern.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092421,
+    "title": "Ajudante de Motorista - Ferreira Distribuidora",
+    "slug": "ajudante-de-motorista-ferreira-distribuidora-natal",
+    "companyName": "Ferreira Distribuidora",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Auxiliar nas entregas de mercadorias, carga e descarga de produtos em clientes na Grande Natal e conferência de notas.",
+    "requirements": "Disposição física, organização e pontualidade.",
+    "benefits": "Salário da categoria + Vale Transporte.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "vendas@ferreiradistribuidora.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092422,
+    "title": "Atendente de Restaurante - Burger King Midway Mall",
+    "slug": "atendente-burger-king-midway-natal",
+    "companyName": "Burger King (Zamp)",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Atendimento ao cliente, operação de caixa, preparo e montagem de alimentos, limpeza e higienização, e demais atividades pertinentes ao cargo no restaurante Burger King do Midway Mall.",
+    "requirements": "+18 anos de idade; Ensino Médio completo ou cursando; não exige experiência prévia.",
+    "benefits": "Plano de Saúde, Plano Odontológico, Seguro de Vida, Total Pass (academias), Psicoterapia, Participação nos Lucros, Alimentação no Local, Vale Transporte, Trilha de Carreira.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "midway15884@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092423,
+    "title": "Auxiliar de Padaria - Super Show Supermercados",
+    "slug": "auxiliar-de-padaria-super-show-gomes-natal",
+    "companyName": "Super Show Supermercados",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Auxiliar na produção de pães, salgados e doces, abastecimento de balcão e atendimento a clientes no Supermercado Gomes.",
+    "requirements": "Conhecimento na área será um diferencial; boa vontade e agilidade.",
+    "benefits": "Salário comercial + benefícios da categoria supermercadista.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "contato@supergomes.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092424,
+    "title": "Balconista de Frios - Super Show Supermercados",
+    "slug": "balconista-de-frios-super-show-gomes-natal",
+    "companyName": "Super Show Supermercados",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Fatiamento de queijos, embutidos e carnes, pesagem, embalagem e organização de gôndolas e balcões de frios.",
+    "requirements": "Experiência ou conhecimento na área será um diferencial; higiene e atenção ao cliente.",
+    "benefits": "Salário comercial + benefícios do setor supermercadista.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "contato@supergomes.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092425,
+    "title": "Repositor FLV (Hortifrúti) - Super Show Supermercados",
+    "slug": "repositor-flv-super-show-gomes-natal",
+    "companyName": "Super Show Supermercados",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Seleção, higienização, pesagem e reposição de frutas, legumes e verduras (FLV) no salão de vendas.",
+    "requirements": "Disposição física, agilidade e cuidado no manuseio de alimentos.",
+    "benefits": "Salário comercial + benefícios da categoria.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "contato@supergomes.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092426,
+    "title": "Professor de Musculação - Academia Star Fitness",
+    "slug": "professor-musculacao-star-fitness-parnamirim",
+    "companyName": "Star Fitness Academia",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Prescrição e acompanhamento de treinos de musculação, orientação aos alunos sobre postura e execução de exercícios, e avaliação física na unidade de Parnamirim.",
+    "requirements": "Graduação completa em Educação Física (Bacharelado) e registro ativo no CREF.",
+    "benefits": "Remuneração competitiva + acesso livre à academia.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "starfitnessparnamirim@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092427,
+    "title": "Estagiário de Educação Física - Academia Star Fitness",
+    "slug": "estagio-educacao-fisica-star-fitness-parnamirim",
+    "companyName": "Star Fitness Academia",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "ESTAGIO",
+    "description": "Apoio aos professores na sala de musculação, orientação básica aos alunos e organização dos equipamentos.",
+    "requirements": "Cursando Educação Física (Bacharelado a partir do 3º ou 4º período).",
+    "benefits": "Bolsa estágio + auxílio transporte + musculação gratuita.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "starfitnessparnamirim@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092428,
+    "title": "Instrutor de Massoterapia - Grau Técnico Zona Norte",
+    "slug": "instrutor-massoterapia-grau-tecnico-natal",
+    "companyName": "Grau Técnico",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "PJ",
+    "description": "Ministrar aulas práticas e teóricas no curso de Massoterapia na unidade da Zona Norte em Natal/RN.",
+    "requirements": "Experiência comprovada na área de massoterapia; disponibilidade de horário; possuir MEI ativo.",
+    "benefits": "Remuneração por hora-aula / prestação de serviços MEI.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "eduardoluna.pedagogico@grautecnicorn.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092429,
+    "title": "Vendedor(a) de Planos Pet - Pet de Todos",
+    "slug": "vendedor-pet-de-todos-parnamirim",
+    "companyName": "Pet de Todos",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Realizar vendas e informar sobre os benefícios do plano de saúde pet. Prospecção ativa de novos clientes e fechamento de contratos em Parnamirim.",
+    "requirements": "Ser comunicativo(a), proativo(a) e com forte foco em metas e resultados.",
+    "benefits": "Salário fixo + Comissões atrativas + Premiações.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "renata.petdetodos@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092430,
+    "title": "Vendedora de Cosméticos e Maquiagem - Ponto da Make",
+    "slug": "vendedora-maquiagem-ponto-da-make-natal",
+    "companyName": "Ponto da Make",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Atendimento consultivo em loja de maquiagem, acessórios, skincare e perfumaria. Demonstração de produtos e apoio em redes sociais.",
+    "requirements": "Experiência de vendas; noção em maquiagem e redes sociais; amar o universo da beleza e atitude proativa.",
+    "benefits": "Salário fixo + Comissões sobre metas + Desconto em produtos.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84991799534",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092431,
+    "title": "Auxiliar Administrativa - AWJ Semijoias",
+    "slug": "auxiliar-administrativa-awj-semijoias-parnamirim",
+    "companyName": "AWJ Semijoias",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Rotinas administrativas para escritório, organização de documentos, planilhas e atendimento geral. Horário: segunda a sexta das 08h às 18h no Centro de Parnamirim. Início imediato.",
+    "requirements": "Experiência em rotinas administrativas para escritório; organização; responsabilidade; boa comunicação.",
+    "benefits": "Salário compatível + Vale Transporte.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "Awj26@hotmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092432,
+    "title": "Analista de Departamento Pessoal - Grupo Mevos",
+    "slug": "analista-departamento-pessoal-grupo-mevos-natal",
+    "companyName": "Grupo Mevos",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Processamento e conferência de folha de pagamento, admissões, demissões, férias e benefícios; controle e gestão de ponto eletrônico; cálculo de encargos trabalhistas e previdenciários; atendimento a colaboradores.",
+    "requirements": "Ensino superior completo em Administração, Ciências Contábeis ou áreas correlatas; Pacote Office; experiência comprovada em DP; domínio do e-Social; diferencial: sistema Metadados.",
+    "benefits": "Salário compatível + Plano de Saúde + Vale Alimentação + Vale Transporte.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "talentos@mevos.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092433,
+    "title": "Analista de Departamento Pessoal (Aceita PcD ♿) - Grupo Interfort",
+    "slug": "analista-departamento-pessoal-interfort-pcd-natal",
+    "companyName": "Grupo Interfort",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Executar fechamento de folha de pagamento, cálculo de rescisões e férias, rotinas de admissão, controle de benefícios, encargos trabalhistas, e-Social e DCTFWeb. VAGA INCLUSIVA: Aceitamos expressamente currículos de Pessoas com Deficiência (PcD).",
+    "requirements": "Ensino superior completo ou cursando em Administração, RH, Contabilidade ou áreas correlatas; sólidos conhecimentos em DP; e-Social e legislação trabalhista.",
+    "benefits": "Salário + Vale Alimentação (VA) + Vale Transporte (VT).",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "Curriculos@grupointerfort.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": true,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092434,
+    "title": "ASG (Auxiliar de Serviços Gerais) - Restaurante Pittsburg",
+    "slug": "asg-auxiliar-servicos-gerais-pittsburg-natal",
+    "companyName": "Pittsburg",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Limpeza do salão (varrer, lavar e sanitizar pisos, mesas e cadeiras), higienização de banheiros, áreas externas, gestão e descarte de resíduos, suporte à cozinha e conservação de materiais. Escala 44h semanais.",
+    "requirements": "Ensino Médio completo; vivência anterior com limpeza (diferencial em restaurantes); atenção aos detalhes e flexibilidade de horários.",
+    "benefits": "Salário Comercial + Gorjetas + Vale-transporte / Ajuda de Custo + Alimentação na empresa + Plano Odontológico.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "daniel@pittsburg.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092435,
+    "title": "Supervisor(a) Operacional de Restaurante - Pittsburg",
+    "slug": "supervisor-operacional-pittsburg-natal",
+    "companyName": "Pittsburg",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Gestão de equipe, treinamento de novos colaboradores, escalas e postos de trabalho; supervisão de operação e qualidade de alimentos; controle de tempo de espera (Delivery/Balcão); abertura e fechamento de caixa; garantia de excelência no atendimento. Carga: 44h semanais (Fechamento).",
+    "requirements": "Ensino Superior em Administração, Gestão Comercial, Gastronomia, Hotelaria ou áreas correlatas; experiência em liderança de equipes de restaurantes/fast food.",
+    "benefits": "Remuneração R$ 2.572,50 + Gorjetas + Adicional Noturno + Vale Transporte / Ajuda de custo + Alimentação + Plano Odontológico.",
+    "salaryMin": 2572.5,
+    "salaryMax": 2572.5,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "daniel@pittsburg.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092436,
+    "title": "Assistente de CS (Customer Success) - Ágil Contabilidade",
+    "slug": "assistente-cs-agil-contabilidade-natal",
+    "companyName": "Ágil Contabilidade",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Atendimento e sucesso do cliente contábil, acompanhamento de demandas, relacionamento e pós-venda. Horário: segunda a sexta das 8h às 17h.",
+    "requirements": "Cursando graduação em Administração, Marketing ou áreas afins; experiência anterior na função; afinidade com tecnologia e boa comunicação.",
+    "benefits": "Salário fixo + Ajuda de custos + Plano de saúde Unimed após experiência + Day off de aniversário + Plano de carreira.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "julyanamacedo.consultoria@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092437,
+    "title": "Auxiliar de Confeitaria - MCcupcake",
+    "slug": "auxiliar-de-confeitaria-mccupcake-natal",
+    "companyName": "MCcupcake Confeitaria",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Auxiliar na confecção, montagem e decoração de cupcakes, bolos e doces artesanais, organização do ateliê de confeitaria e controle de ingredientes.",
+    "requirements": "Responsabilidade, proatividade, boa comunicação e vontade de aprender rotinas de confeitaria.",
+    "benefits": "Salário da categoria + Vale Transporte + Lanche no local.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "curriculoconfeitarianatal@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092438,
+    "title": "Auxiliar Fiscal para Escritório Contábil - BRAVA",
+    "slug": "auxiliar-fiscal-brava-recrutamento-natal",
+    "companyName": "BRAVA Recrutamento e Seleção",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Importação e lançamentos fiscais, emissão de notas e DAS, certidões e regularização de pendências fiscais em escritório de contabilidade no Barro Vermelho, Natal/RN. Segunda a sexta 8h às 12h e 13h às 17h.",
+    "requirements": "Mínimo 2 anos de experiência em escritório de contabilidade; Técnico ou Superior em Contabilidade; Sistema Domínio; Simples Nacional e MEI.",
+    "benefits": "Vale-transporte + Oportunidade de crescimento + Ambiente acolhedor + Aprendizado contínuo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "bravacandidatos@gmail.com",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092439,
+    "title": "Estoquista - LD Distribuidora",
+    "slug": "estoquista-ld-distribuidora-natal",
+    "companyName": "LD Distribuidora",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Organização, controle de estoque, contagem e separação de produtos em distribuidora.",
+    "requirements": "Organização, atenção e trabalho em equipe.",
+    "benefits": "Ambiente colaborativo, oportunidade de crescimento e valorização de pessoas.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84999501380",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092440,
+    "title": "Auxiliar de Logística - LD Distribuidora",
+    "slug": "auxiliar-de-logistica-ld-distribuidora-natal",
+    "companyName": "LD Distribuidora",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Apoio nas rotinas de recebimento, triagem, separação e expedição de mercadorias para entrega.",
+    "requirements": "Agilidade, disposição física e compromisso com horários.",
+    "benefits": "Salário da categoria + Vale Transporte + Benefícios internos.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84999501380",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092441,
+    "title": "Vendedora de Loja - LD Distribuidora",
+    "slug": "vendedora-loja-ld-distribuidora-natal",
+    "companyName": "LD Distribuidora",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Atendimento consultivo a clientes, organização da loja, demonstração de produtos e apoio em vendas internas.",
+    "requirements": "Boa comunicação, simpatia e experiência com vendas.",
+    "benefits": "Salário comercial + Comissões + Oportunidade de crescimento.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84999501380",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092442,
+    "title": "Operador(a) de Caixa - LD Distribuidora",
+    "slug": "operador-de-caixa-ld-distribuidora-natal",
+    "companyName": "LD Distribuidora",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Abertura e fechamento de caixa, registro de produtos, recebimento em dinheiro, cartões e Pix, e emissão de notas.",
+    "requirements": "Atenção a números, agilidade e cordialidade com o público.",
+    "benefits": "Salário fixo + Quebra de caixa + Vale Transporte.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84999501380",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092443,
+    "title": "Lavador de Carro (Lavagem e Acabamento) - Olavo Montenegro",
+    "slug": "lavador-de-carro-olavo-montenegro-parnamirim",
+    "companyName": "Lava Jato Olavo Montenegro",
+    "city": "Parnamirim",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "TEMPORARIO",
+    "description": "Lavagem, aspiração e acabamento de veículos em lava-jato localizado na Av. Olavo Montenegro, 1154 (ao lado do Vila Montenegro). Pagamento por diária, início imediato.",
+    "requirements": "Ser maior de 18 anos; não necessita experiência; proativo e ágil.",
+    "benefits": "Pagamento por diária.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "WHATSAPP",
+    "applicationTarget": "84987086106",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092444,
+    "title": "Monitor de Brinquedos Infláveis - Cidade Satélite",
+    "slug": "monitor-brinquedos-inflaveis-cidade-satelite-natal",
+    "companyName": "Recreação e Eventos Infantis",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "TEMPORARIO",
+    "description": "Monitoramento e segurança de crianças em brinquedos infláveis em eventos na Cidade Satélite. Período: 15h às 22h. Pagamento: R$ 110 por diária + lanche.",
+    "requirements": "Pontualidade, cuidado com crianças e energia.",
+    "benefits": "Diária R$ 110 + lanche no local.",
+    "salaryMin": 110.0,
+    "salaryMax": 110.0,
+    "salaryCurrency": "BRL",
+    "hideSalary": false,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://natalvagas.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092445,
+    "title": "Auxiliar de Depósito (Vaga Exclusiva PcD ♿) - Mar Vermelho Atacado",
+    "slug": "auxiliar-deposito-pcd-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Vaga afirmativa e exclusiva para Pessoa com Deficiência (PcD). Organização, estocagem, contagem e conferência de mercadorias no depósito do atacado.",
+    "requirements": "Laudo médico comprobatório; atenção aos detalhes; vontade de aprender.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": true,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092446,
+    "title": "Auxiliar de Loja (Vaga Exclusiva PcD ♿) - Mar Vermelho Atacado",
+    "slug": "auxiliar-loja-pcd-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Vaga afirmativa e exclusiva para Pessoa com Deficiência (PcD). Apoio no salão de vendas, organização de prateleiras e atendimento cordial aos clientes.",
+    "requirements": "Laudo médico comprobatório; boa comunicação interpessoal.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": true,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092447,
+    "title": "Embalador (Vaga Exclusiva PcD ♿) - Mar Vermelho Atacado",
+    "slug": "embalador-pcd-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Vaga afirmativa e exclusiva para Pessoa com Deficiência (PcD). Embalar compras dos clientes nos caixas do atacado com agilidade e zelo pelos produtos.",
+    "requirements": "Laudo médico comprobatório; agilidade e atenção aos clientes.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": true,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092448,
+    "title": "Assistente Fiscal - Mar Vermelho Atacado",
+    "slug": "assistente-fiscal-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Rotinas fiscais de atacado e varejo, apuração de tributos e escrituração de notas fiscais de entrada e saída.",
+    "requirements": "Experiência ou formação na área contábil/fiscal.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092449,
+    "title": "Auxiliar de Açougue - Mar Vermelho Atacado",
+    "slug": "auxiliar-acougue-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Cortes, desossa, pesagem, embalagem e organização do balcão e câmara de carnes do atacado.",
+    "requirements": "Experiência prévia em açougue ou manipulação de carnes.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092450,
+    "title": "Auxiliar de Depósito - Mar Vermelho Atacado",
+    "slug": "auxiliar-deposito-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Movimentação de paletes, carga e descarga de carretas e organização de estoque central do atacado.",
+    "requirements": "Disposição física, agilidade e trabalho em equipe.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092451,
+    "title": "Balconista de Frios - Mar Vermelho Atacado",
+    "slug": "balconista-frios-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Fatiamento de queijos e embutidos, pesagem e atendimento direto aos clientes no balcão de laticínios.",
+    "requirements": "Experiência na função e boa comunicação com o cliente.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092452,
+    "title": "Repositor de Frios - Mar Vermelho Atacado",
+    "slug": "repositor-frios-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Reposição de iogurtes, laticínios e congelados nas câmaras frias e ilhas de congelados.",
+    "requirements": "Atenção ao controle de validade e organização.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092453,
+    "title": "Repositor de Hortifrúti - Mar Vermelho Atacado",
+    "slug": "repositor-hortifruti-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Seleção, organização e abastecimento contínuo do setor de frutas, legumes e verduras no atacado.",
+    "requirements": "Agilidade e cuidado no manuseio de alimentos frescos.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092454,
+    "title": "Repositor de Mercearia - Mar Vermelho Atacado",
+    "slug": "repositor-mercearia-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Abastecimento de gôndolas de alimentos secos, bebidas e produtos de limpeza.",
+    "requirements": "Disposição física e organização.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092455,
+    "title": "Auxiliar de Frios (Pleno) - Mar Vermelho Atacado",
+    "slug": "auxiliar-frios-pleno-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Coordenação de rotinas de câmaras frigoríficas, controle de validade e conferência de lote de laticínios e embutidos.",
+    "requirements": "Experiência prévia comprovada no setor de frios.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092456,
+    "title": "Auxiliar de Loja Hortifrúti (Pleno) - Mar Vermelho Atacado",
+    "slug": "auxiliar-loja-horti-pleno-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Supervisão da qualidade e exposição de produtos FLV no salão de vendas do atacado.",
+    "requirements": "Experiência consistente no setor de hortifrúti.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092457,
+    "title": "Auxiliar de Loja Mercearia (Pleno) - Mar Vermelho Atacado",
+    "slug": "auxiliar-loja-mercearia-pleno-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Planejamento de reposição, layout e precificação no setor de mercearia.",
+    "requirements": "Experiência prévia em varejo ou atacado.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092458,
+    "title": "Conferente de Mercadorias - Mar Vermelho Atacado",
+    "slug": "conferente-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Conferência física de cargas com notas fiscais, verificação de avarias e controle de divergências na expedição e recebimento.",
+    "requirements": "Experiência como conferente em depósito ou supermercado.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092459,
+    "title": "Estoquista (Auditoria de Estoque) - Mar Vermelho Atacado",
+    "slug": "estoquista-auditoria-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Inventários rotativos, auditoria de perdas e contagem sistemática de produtos de alto giro.",
+    "requirements": "Atenção minuciosa a detalhes e experiência em controle de estoque.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092460,
+    "title": "Fiscal de Caixa - Mar Vermelho Atacado",
+    "slug": "fiscal-de-caixa-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Apoio operacional aos operadores de caixa, sangrias, cancelamentos e encerramento de turno.",
+    "requirements": "Experiência como fiscal de caixa ou liderança de frente de loja.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092461,
+    "title": "Fiscal de Prevenção de Perdas - Mar Vermelho Atacado",
+    "slug": "fiscal-prevencao-perdas-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Monitoramento de salão e portaria, inspeção de carrinhos e prevenção de furtos e extravios.",
+    "requirements": "Postura ética, atenção aos detalhes e experiência na área.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092462,
+    "title": "Forneiro de Padaria - Mar Vermelho Atacado",
+    "slug": "forneiro-padaria-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Operação e controle de fornos industriais para assamento uniforme de pães e salgados.",
+    "requirements": "Experiência em fornos de panificação.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
+  {
+    "id": 2026092463,
+    "title": "Operador de Empilhadeira - Mar Vermelho Atacado",
+    "slug": "operador-empilhadeira-mar-vermelho-natal",
+    "companyName": "Mar Vermelho Atacado",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Operação de empilhadeira elétrica e a combustão para movimentação e verticalização de cargas em porta-paletes do atacado.",
+    "requirements": "CNH B e curso de formação de Operador de Empilhadeira válido.",
+    "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+    "salaryMin": null,
+    "salaryMax": null,
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "EMAIL",
+    "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+    "status": "APPROVED",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-13T12:00:00-03:00",
+    "createdAt": "2026-09-13T12:00:00-03:00",
+    "expiresAt": "2026-12-31T23:59:59-03:00",
+    "viewsCount": 0
+  },
   {
     "id": 2026092316,
     "title": "Auxiliar Jurídico - Focarerh | Natal",
@@ -43386,8 +44817,8 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 8644
-- **Tamanho:** 334292 bytes
+- **Total de Linhas:** 8938
+- **Tamanho:** 344171 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -43521,10 +44952,304 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://natalvagas.com.br/vagas-pcd-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
 
   <!-- URLs do Blog Guia de Carreira RN -->
 
   <!-- URLs das Vagas Ativas no RN -->
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-home-sushi-home-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/garcom-garconete-waza-oriental-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-golden-tulip-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/camareira-golden-tulip-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/fiscal-de-carga-grupo-duarte-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/ajudante-de-motorista-ferreira-distribuidora-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/atendente-burger-king-midway-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-padaria-super-show-gomes-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/balconista-de-frios-super-show-gomes-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/repositor-flv-super-show-gomes-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/professor-musculacao-star-fitness-parnamirim</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/estagio-educacao-fisica-star-fitness-parnamirim</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/instrutor-massoterapia-grau-tecnico-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedor-pet-de-todos-parnamirim</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-maquiagem-ponto-da-make-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-administrativa-awj-semijoias-parnamirim</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/analista-departamento-pessoal-grupo-mevos-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/analista-departamento-pessoal-interfort-pcd-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/asg-auxiliar-servicos-gerais-pittsburg-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/supervisor-operacional-pittsburg-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/assistente-cs-agil-contabilidade-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-confeitaria-mccupcake-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-fiscal-brava-recrutamento-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/estoquista-ld-distribuidora-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-de-logistica-ld-distribuidora-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vendedora-loja-ld-distribuidora-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/operador-de-caixa-ld-distribuidora-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/lavador-de-carro-olavo-montenegro-parnamirim</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/monitor-brinquedos-inflaveis-cidade-satelite-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-deposito-pcd-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-loja-pcd-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/embalador-pcd-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/assistente-fiscal-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-acougue-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-deposito-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/balconista-frios-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/repositor-frios-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/repositor-hortifruti-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/repositor-mercearia-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-frios-pleno-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-loja-horti-pleno-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/auxiliar-loja-mercearia-pleno-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/conferente-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/estoquista-auditoria-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/fiscal-de-caixa-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/fiscal-prevencao-perdas-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/forneiro-padaria-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/operador-empilhadeira-mar-vermelho-natal</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/auxiliar-juridico-focarerh-natal-empresa-confidencial-natal-2026092316</loc>
     <lastmod>2026-07-08</lastmod>
@@ -56986,8 +58711,969 @@ ON CONFLICT (name) DO NOTHING;
 
 ---
 
+<a id="scripts-add-whatsapp-jobspy"></a>
+## 85. Arquivo: `scripts/add_whatsapp_jobs.py`
+- **Caminho:** `scripts/add_whatsapp_jobs.py`
+- **Nome:** `add_whatsapp_jobs.py`
+- **Linguagem / Sintaxe:** `python`
+- **Total de Linhas:** 947
+- **Tamanho:** 47267 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Cadastra as 48 vagas mineradas das 24 fotos do WhatsApp em frontend/public/data/jobs.json.
+Mantém consistência com a arquitetura de dados e marca as vagas PcD.
+"""
+import json
+import os
+import sys
+
+jobs_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "public", "data", "jobs.json"))
+
+WHATSAPP_JOBS = [
+    {
+        "title": "Auxiliar de Cozinha - Home Sushi Home",
+        "slug": "auxiliar-de-cozinha-home-sushi-home-natal",
+        "companyName": "Home Sushi Home",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Auxiliar no preparo e pré-preparo de alimentos; higienizar, cortar e organizar ingredientes; manter a limpeza da cozinha, equipamentos e utensílios; seguir boas práticas de manipulação e apoiar a equipe nas rotinas da cozinha. Escala 6x1 com foco em período noturno e fins de semana.",
+        "requirements": "Conhecimento em higiene e manipulação de alimentos; agilidade, organização e foco em produtividade; proatividade, disciplina e bom trabalho em equipe.",
+        "benefits": "Salário fixo + Plano de Bonificação + Vale Transporte.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "curriculo@segantiniconsultoria.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Garçom / Garçonete - Wāza Oriental",
+        "slug": "garcom-garconete-waza-oriental-natal",
+        "companyName": "Wāza Oriental",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "salaryMin": 1715.00,
+        "salaryMax": 1715.00,
+        "salaryCurrency": "BRL",
+        "hideSalary": False,
+        "description": "Recepcionar clientes, anotar pedidos e esclarecer dúvidas sobre o cardápio; preparar mesas e manter o ambiente limpo e organizado; organizar pedidos, embalar e despachar entregas pelo iFood; zelar pela limpeza diária e postura profissional. Escala de segunda a sábado das 16:30 às 00:20 em Tirol, Natal/RN.",
+        "requirements": "Excelente comunicação verbal, cordialidade e postura adequada no atendimento; vivência como garçom ou garçonete em restaurantes; cuidado com higiene pessoal.",
+        "benefits": "Salário R$ 1.715,00 + Participação no rateio da taxa de serviço + Vale Transporte + Alimentação no local.",
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "curriculo@segantiniconsultoria.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Cozinha - Golden Tulip Ponta Negra",
+        "slug": "auxiliar-de-cozinha-golden-tulip-natal",
+        "companyName": "Golden Tulip Natal Ponta Negra",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Atuar na rotina de cozinha do hotel, auxiliando no preparo de pratos, organização e higienização de equipamentos e bancadas. Disponibilidade para horários flexíveis incluindo finais de semana e feriados.",
+        "requirements": "Ensino Médio completo; agilidade e organização; comprometimento com higiene e segurança do trabalho; capacidade de trabalhar em equipe.",
+        "benefits": "Benefícios da rede hoteleira HotelCare.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "gtpn.vagas@goldentulip.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Camareira - Golden Tulip Ponta Negra",
+        "slug": "camareira-golden-tulip-natal",
+        "companyName": "Golden Tulip Natal Ponta Negra",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Responsável pela higienização, organização e arrumação dos apartamentos e áreas sociais do hotel, reposição de enxoval e amenities. Escala hoteleira com horários flexíveis.",
+        "requirements": "Ensino Fundamental completo; experiência anterior na função será um diferencial; comprometimento com higiene e segurança; trabalho em equipe.",
+        "benefits": "Benefícios da rede HotelCare.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "gtpn.vagas@goldentulip.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Fiscal de Carga - Transbordo BR-101",
+        "slug": "fiscal-de-carga-grupo-duarte-natal",
+        "companyName": "Grupo Duarte",
+        "city": "Parnamirim",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Fiscalização de cargas no transbordo do Grupo Duarte na BR-101 (Locações, Engenharia e Gestão Ambiental). Registro e controle de movimentação de veículos e resíduos.",
+        "requirements": "Ensino Médio completo; familiaridade com sistemas e uso de computador ou celular para registros.",
+        "benefits": "Benefícios da categoria de engenharia e gestão ambiental.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "selecao@grupoduartern.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Ajudante de Motorista - Ferreira Distribuidora",
+        "slug": "ajudante-de-motorista-ferreira-distribuidora-natal",
+        "companyName": "Ferreira Distribuidora",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Auxiliar nas entregas de mercadorias, carga e descarga de produtos em clientes na Grande Natal e conferência de notas.",
+        "requirements": "Disposição física, organização e pontualidade.",
+        "benefits": "Salário da categoria + Vale Transporte.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "vendas@ferreiradistribuidora.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Atendente de Restaurante - Burger King Midway Mall",
+        "slug": "atendente-burger-king-midway-natal",
+        "companyName": "Burger King (Zamp)",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Atendimento ao cliente, operação de caixa, preparo e montagem de alimentos, limpeza e higienização, e demais atividades pertinentes ao cargo no restaurante Burger King do Midway Mall.",
+        "requirements": "+18 anos de idade; Ensino Médio completo ou cursando; não exige experiência prévia.",
+        "benefits": "Plano de Saúde, Plano Odontológico, Seguro de Vida, Total Pass (academias), Psicoterapia, Participação nos Lucros, Alimentação no Local, Vale Transporte, Trilha de Carreira.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "midway15884@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Padaria - Super Show Supermercados",
+        "slug": "auxiliar-de-padaria-super-show-gomes-natal",
+        "companyName": "Super Show Supermercados",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Auxiliar na produção de pães, salgados e doces, abastecimento de balcão e atendimento a clientes no Supermercado Gomes.",
+        "requirements": "Conhecimento na área será um diferencial; boa vontade e agilidade.",
+        "benefits": "Salário comercial + benefícios da categoria supermercadista.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "contato@supergomes.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Balconista de Frios - Super Show Supermercados",
+        "slug": "balconista-de-frios-super-show-gomes-natal",
+        "companyName": "Super Show Supermercados",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Fatiamento de queijos, embutidos e carnes, pesagem, embalagem e organização de gôndolas e balcões de frios.",
+        "requirements": "Experiência ou conhecimento na área será um diferencial; higiene e atenção ao cliente.",
+        "benefits": "Salário comercial + benefícios do setor supermercadista.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "contato@supergomes.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Repositor FLV (Hortifrúti) - Super Show Supermercados",
+        "slug": "repositor-flv-super-show-gomes-natal",
+        "companyName": "Super Show Supermercados",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Seleção, higienização, pesagem e reposição de frutas, legumes e verduras (FLV) no salão de vendas.",
+        "requirements": "Disposição física, agilidade e cuidado no manuseio de alimentos.",
+        "benefits": "Salário comercial + benefícios da categoria.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "contato@supergomes.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Professor de Musculação - Academia Star Fitness",
+        "slug": "professor-musculacao-star-fitness-parnamirim",
+        "companyName": "Star Fitness Academia",
+        "city": "Parnamirim",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Prescrição e acompanhamento de treinos de musculação, orientação aos alunos sobre postura e execução de exercícios, e avaliação física na unidade de Parnamirim.",
+        "requirements": "Graduação completa em Educação Física (Bacharelado) e registro ativo no CREF.",
+        "benefits": "Remuneração competitiva + acesso livre à academia.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "starfitnessparnamirim@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Estagiário de Educação Física - Academia Star Fitness",
+        "slug": "estagio-educacao-fisica-star-fitness-parnamirim",
+        "companyName": "Star Fitness Academia",
+        "city": "Parnamirim",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "ESTAGIO",
+        "description": "Apoio aos professores na sala de musculação, orientação básica aos alunos e organização dos equipamentos.",
+        "requirements": "Cursando Educação Física (Bacharelado a partir do 3º ou 4º período).",
+        "benefits": "Bolsa estágio + auxílio transporte + musculação gratuita.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "starfitnessparnamirim@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Instrutor de Massoterapia - Grau Técnico Zona Norte",
+        "slug": "instrutor-massoterapia-grau-tecnico-natal",
+        "companyName": "Grau Técnico",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "PJ",
+        "description": "Ministrar aulas práticas e teóricas no curso de Massoterapia na unidade da Zona Norte em Natal/RN.",
+        "requirements": "Experiência comprovada na área de massoterapia; disponibilidade de horário; possuir MEI ativo.",
+        "benefits": "Remuneração por hora-aula / prestação de serviços MEI.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "eduardoluna.pedagogico@grautecnicorn.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Vendedor(a) de Planos Pet - Pet de Todos",
+        "slug": "vendedor-pet-de-todos-parnamirim",
+        "companyName": "Pet de Todos",
+        "city": "Parnamirim",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Realizar vendas e informar sobre os benefícios do plano de saúde pet. Prospecção ativa de novos clientes e fechamento de contratos em Parnamirim.",
+        "requirements": "Ser comunicativo(a), proativo(a) e com forte foco em metas e resultados.",
+        "benefits": "Salário fixo + Comissões atrativas + Premiações.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "renata.petdetodos@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Vendedora de Cosméticos e Maquiagem - Ponto da Make",
+        "slug": "vendedora-maquiagem-ponto-da-make-natal",
+        "companyName": "Ponto da Make",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Atendimento consultivo em loja de maquiagem, acessórios, skincare e perfumaria. Demonstração de produtos e apoio em redes sociais.",
+        "requirements": "Experiência de vendas; noção em maquiagem e redes sociais; amar o universo da beleza e atitude proativa.",
+        "benefits": "Salário fixo + Comissões sobre metas + Desconto em produtos.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "WHATSAPP",
+        "applicationTarget": "84991799534",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar Administrativa - AWJ Semijoias",
+        "slug": "auxiliar-administrativa-awj-semijoias-parnamirim",
+        "companyName": "AWJ Semijoias",
+        "city": "Parnamirim",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Rotinas administrativas para escritório, organização de documentos, planilhas e atendimento geral. Horário: segunda a sexta das 08h às 18h no Centro de Parnamirim. Início imediato.",
+        "requirements": "Experiência em rotinas administrativas para escritório; organização; responsabilidade; boa comunicação.",
+        "benefits": "Salário compatível + Vale Transporte.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "Awj26@hotmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Analista de Departamento Pessoal - Grupo Mevos",
+        "slug": "analista-departamento-pessoal-grupo-mevos-natal",
+        "companyName": "Grupo Mevos",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Processamento e conferência de folha de pagamento, admissões, demissões, férias e benefícios; controle e gestão de ponto eletrônico; cálculo de encargos trabalhistas e previdenciários; atendimento a colaboradores.",
+        "requirements": "Ensino superior completo em Administração, Ciências Contábeis ou áreas correlatas; Pacote Office; experiência comprovada em DP; domínio do e-Social; diferencial: sistema Metadados.",
+        "benefits": "Salário compatível + Plano de Saúde + Vale Alimentação + Vale Transporte.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "talentos@mevos.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Analista de Departamento Pessoal (Aceita PcD ♿) - Grupo Interfort",
+        "slug": "analista-departamento-pessoal-interfort-pcd-natal",
+        "companyName": "Grupo Interfort",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Executar fechamento de folha de pagamento, cálculo de rescisões e férias, rotinas de admissão, controle de benefícios, encargos trabalhistas, e-Social e DCTFWeb. VAGA INCLUSIVA: Aceitamos expressamente currículos de Pessoas com Deficiência (PcD).",
+        "requirements": "Ensino superior completo ou cursando em Administração, RH, Contabilidade ou áreas correlatas; sólidos conhecimentos em DP; e-Social e legislação trabalhista.",
+        "benefits": "Salário + Vale Alimentação (VA) + Vale Transporte (VT).",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "Curriculos@grupointerfort.com.br",
+        "isFeatured": False,
+        "isPcd": True
+    },
+    {
+        "title": "ASG (Auxiliar de Serviços Gerais) - Restaurante Pittsburg",
+        "slug": "asg-auxiliar-servicos-gerais-pittsburg-natal",
+        "companyName": "Pittsburg",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Limpeza do salão (varrer, lavar e sanitizar pisos, mesas e cadeiras), higienização de banheiros, áreas externas, gestão e descarte de resíduos, suporte à cozinha e conservação de materiais. Escala 44h semanais.",
+        "requirements": "Ensino Médio completo; vivência anterior com limpeza (diferencial em restaurantes); atenção aos detalhes e flexibilidade de horários.",
+        "benefits": "Salário Comercial + Gorjetas + Vale-transporte / Ajuda de Custo + Alimentação na empresa + Plano Odontológico.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "daniel@pittsburg.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Supervisor(a) Operacional de Restaurante - Pittsburg",
+        "slug": "supervisor-operacional-pittsburg-natal",
+        "companyName": "Pittsburg",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "salaryMin": 2572.50,
+        "salaryMax": 2572.50,
+        "salaryCurrency": "BRL",
+        "hideSalary": False,
+        "description": "Gestão de equipe, treinamento de novos colaboradores, escalas e postos de trabalho; supervisão de operação e qualidade de alimentos; controle de tempo de espera (Delivery/Balcão); abertura e fechamento de caixa; garantia de excelência no atendimento. Carga: 44h semanais (Fechamento).",
+        "requirements": "Ensino Superior em Administração, Gestão Comercial, Gastronomia, Hotelaria ou áreas correlatas; experiência em liderança de equipes de restaurantes/fast food.",
+        "benefits": "Remuneração R$ 2.572,50 + Gorjetas + Adicional Noturno + Vale Transporte / Ajuda de custo + Alimentação + Plano Odontológico.",
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "daniel@pittsburg.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Assistente de CS (Customer Success) - Ágil Contabilidade",
+        "slug": "assistente-cs-agil-contabilidade-natal",
+        "companyName": "Ágil Contabilidade",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Atendimento e sucesso do cliente contábil, acompanhamento de demandas, relacionamento e pós-venda. Horário: segunda a sexta das 8h às 17h.",
+        "requirements": "Cursando graduação em Administração, Marketing ou áreas afins; experiência anterior na função; afinidade com tecnologia e boa comunicação.",
+        "benefits": "Salário fixo + Ajuda de custos + Plano de saúde Unimed após experiência + Day off de aniversário + Plano de carreira.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "julyanamacedo.consultoria@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Confeitaria - MCcupcake",
+        "slug": "auxiliar-de-confeitaria-mccupcake-natal",
+        "companyName": "MCcupcake Confeitaria",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Auxiliar na confecção, montagem e decoração de cupcakes, bolos e doces artesanais, organização do ateliê de confeitaria e controle de ingredientes.",
+        "requirements": "Responsabilidade, proatividade, boa comunicação e vontade de aprender rotinas de confeitaria.",
+        "benefits": "Salário da categoria + Vale Transporte + Lanche no local.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "curriculoconfeitarianatal@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar Fiscal para Escritório Contábil - BRAVA",
+        "slug": "auxiliar-fiscal-brava-recrutamento-natal",
+        "companyName": "BRAVA Recrutamento e Seleção",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Importação e lançamentos fiscais, emissão de notas e DAS, certidões e regularização de pendências fiscais em escritório de contabilidade no Barro Vermelho, Natal/RN. Segunda a sexta 8h às 12h e 13h às 17h.",
+        "requirements": "Mínimo 2 anos de experiência em escritório de contabilidade; Técnico ou Superior em Contabilidade; Sistema Domínio; Simples Nacional e MEI.",
+        "benefits": "Vale-transporte + Oportunidade de crescimento + Ambiente acolhedor + Aprendizado contínuo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "bravacandidatos@gmail.com",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Estoquista - LD Distribuidora",
+        "slug": "estoquista-ld-distribuidora-natal",
+        "companyName": "LD Distribuidora",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Organização, controle de estoque, contagem e separação de produtos em distribuidora.",
+        "requirements": "Organização, atenção e trabalho em equipe.",
+        "benefits": "Ambiente colaborativo, oportunidade de crescimento e valorização de pessoas.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "WHATSAPP",
+        "applicationTarget": "84999501380",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Logística - LD Distribuidora",
+        "slug": "auxiliar-de-logistica-ld-distribuidora-natal",
+        "companyName": "LD Distribuidora",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Apoio nas rotinas de recebimento, triagem, separação e expedição de mercadorias para entrega.",
+        "requirements": "Agilidade, disposição física e compromisso com horários.",
+        "benefits": "Salário da categoria + Vale Transporte + Benefícios internos.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "WHATSAPP",
+        "applicationTarget": "84999501380",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Vendedora de Loja - LD Distribuidora",
+        "slug": "vendedora-loja-ld-distribuidora-natal",
+        "companyName": "LD Distribuidora",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Atendimento consultivo a clientes, organização da loja, demonstração de produtos e apoio em vendas internas.",
+        "requirements": "Boa comunicação, simpatia e experiência com vendas.",
+        "benefits": "Salário comercial + Comissões + Oportunidade de crescimento.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "WHATSAPP",
+        "applicationTarget": "84999501380",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Operador(a) de Caixa - LD Distribuidora",
+        "slug": "operador-de-caixa-ld-distribuidora-natal",
+        "companyName": "LD Distribuidora",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Abertura e fechamento de caixa, registro de produtos, recebimento em dinheiro, cartões e Pix, e emissão de notas.",
+        "requirements": "Atenção a números, agilidade e cordialidade com o público.",
+        "benefits": "Salário fixo + Quebra de caixa + Vale Transporte.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "WHATSAPP",
+        "applicationTarget": "84999501380",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Lavador de Carro (Lavagem e Acabamento) - Olavo Montenegro",
+        "slug": "lavador-de-carro-olavo-montenegro-parnamirim",
+        "companyName": "Lava Jato Olavo Montenegro",
+        "city": "Parnamirim",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "TEMPORARIO",
+        "description": "Lavagem, aspiração e acabamento de veículos em lava-jato localizado na Av. Olavo Montenegro, 1154 (ao lado do Vila Montenegro). Pagamento por diária, início imediato.",
+        "requirements": "Ser maior de 18 anos; não necessita experiência; proativo e ágil.",
+        "benefits": "Pagamento por diária.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "WHATSAPP",
+        "applicationTarget": "84987086106",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Monitor de Brinquedos Infláveis - Cidade Satélite",
+        "slug": "monitor-brinquedos-inflaveis-cidade-satelite-natal",
+        "companyName": "Recreação e Eventos Infantis",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "TEMPORARIO",
+        "salaryMin": 110.00,
+        "salaryMax": 110.00,
+        "salaryCurrency": "BRL",
+        "hideSalary": False,
+        "description": "Monitoramento e segurança de crianças em brinquedos infláveis em eventos na Cidade Satélite. Período: 15h às 22h. Pagamento: R$ 110 por diária + lanche.",
+        "requirements": "Pontualidade, cuidado com crianças e energia.",
+        "benefits": "Diária R$ 110 + lanche no local.",
+        "applicationChannel": "LINK",
+        "applicationTarget": "https://natalvagas.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    # Mar Vermelho Atacado (21 Vagas)
+    {
+        "title": "Auxiliar de Depósito (Vaga Exclusiva PcD ♿) - Mar Vermelho Atacado",
+        "slug": "auxiliar-deposito-pcd-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "isPcd": True,
+        "description": "Vaga afirmativa e exclusiva para Pessoa com Deficiência (PcD). Organização, estocagem, contagem e conferência de mercadorias no depósito do atacado.",
+        "requirements": "Laudo médico comprobatório; atenção aos detalhes; vontade de aprender.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False
+    },
+    {
+        "title": "Auxiliar de Loja (Vaga Exclusiva PcD ♿) - Mar Vermelho Atacado",
+        "slug": "auxiliar-loja-pcd-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "isPcd": True,
+        "description": "Vaga afirmativa e exclusiva para Pessoa com Deficiência (PcD). Apoio no salão de vendas, organização de prateleiras e atendimento cordial aos clientes.",
+        "requirements": "Laudo médico comprobatório; boa comunicação interpessoal.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False
+    },
+    {
+        "title": "Embalador (Vaga Exclusiva PcD ♿) - Mar Vermelho Atacado",
+        "slug": "embalador-pcd-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "isPcd": True,
+        "description": "Vaga afirmativa e exclusiva para Pessoa com Deficiência (PcD). Embalar compras dos clientes nos caixas do atacado com agilidade e zelo pelos produtos.",
+        "requirements": "Laudo médico comprobatório; agilidade e atenção aos clientes.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False
+    },
+    {
+        "title": "Assistente Fiscal - Mar Vermelho Atacado",
+        "slug": "assistente-fiscal-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Rotinas fiscais de atacado e varejo, apuração de tributos e escrituração de notas fiscais de entrada e saída.",
+        "requirements": "Experiência ou formação na área contábil/fiscal.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Açougue - Mar Vermelho Atacado",
+        "slug": "auxiliar-acougue-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Cortes, desossa, pesagem, embalagem e organização do balcão e câmara de carnes do atacado.",
+        "requirements": "Experiência prévia em açougue ou manipulação de carnes.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Depósito - Mar Vermelho Atacado",
+        "slug": "auxiliar-deposito-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Movimentação de paletes, carga e descarga de carretas e organização de estoque central do atacado.",
+        "requirements": "Disposição física, agilidade e trabalho em equipe.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Balconista de Frios - Mar Vermelho Atacado",
+        "slug": "balconista-frios-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Fatiamento de queijos e embutidos, pesagem e atendimento direto aos clientes no balcão de laticínios.",
+        "requirements": "Experiência na função e boa comunicação com o cliente.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Repositor de Frios - Mar Vermelho Atacado",
+        "slug": "repositor-frios-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Reposição de iogurtes, laticínios e congelados nas câmaras frias e ilhas de congelados.",
+        "requirements": "Atenção ao controle de validade e organização.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Repositor de Hortifrúti - Mar Vermelho Atacado",
+        "slug": "repositor-hortifruti-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Seleção, organização e abastecimento contínuo do setor de frutas, legumes e verduras no atacado.",
+        "requirements": "Agilidade e cuidado no manuseio de alimentos frescos.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Repositor de Mercearia - Mar Vermelho Atacado",
+        "slug": "repositor-mercearia-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Abastecimento de gôndolas de alimentos secos, bebidas e produtos de limpeza.",
+        "requirements": "Disposição física e organização.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Frios (Pleno) - Mar Vermelho Atacado",
+        "slug": "auxiliar-frios-pleno-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Coordenação de rotinas de câmaras frigoríficas, controle de validade e conferência de lote de laticínios e embutidos.",
+        "requirements": "Experiência prévia comprovada no setor de frios.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Loja Hortifrúti (Pleno) - Mar Vermelho Atacado",
+        "slug": "auxiliar-loja-horti-pleno-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Supervisão da qualidade e exposição de produtos FLV no salão de vendas do atacado.",
+        "requirements": "Experiência consistente no setor de hortifrúti.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Auxiliar de Loja Mercearia (Pleno) - Mar Vermelho Atacado",
+        "slug": "auxiliar-loja-mercearia-pleno-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Planejamento de reposição, layout e precificação no setor de mercearia.",
+        "requirements": "Experiência prévia em varejo ou atacado.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Conferente de Mercadorias - Mar Vermelho Atacado",
+        "slug": "conferente-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Conferência física de cargas com notas fiscais, verificação de avarias e controle de divergências na expedição e recebimento.",
+        "requirements": "Experiência como conferente em depósito ou supermercado.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Estoquista (Auditoria de Estoque) - Mar Vermelho Atacado",
+        "slug": "estoquista-auditoria-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Inventários rotativos, auditoria de perdas e contagem sistemática de produtos de alto giro.",
+        "requirements": "Atenção minuciosa a detalhes e experiência em controle de estoque.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Fiscal de Caixa - Mar Vermelho Atacado",
+        "slug": "fiscal-de-caixa-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Apoio operacional aos operadores de caixa, sangrias, cancelamentos e encerramento de turno.",
+        "requirements": "Experiência como fiscal de caixa ou liderança de frente de loja.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Fiscal de Prevenção de Perdas - Mar Vermelho Atacado",
+        "slug": "fiscal-prevencao-perdas-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Monitoramento de salão e portaria, inspeção de carrinhos e prevenção de furtos e extravios.",
+        "requirements": "Postura ética, atenção aos detalhes e experiência na área.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Forneiro de Padaria - Mar Vermelho Atacado",
+        "slug": "forneiro-padaria-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Operação e controle de fornos industriais para assamento uniforme de pães e salgados.",
+        "requirements": "Experiência em fornos de panificação.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    },
+    {
+        "title": "Operador de Empilhadeira - Mar Vermelho Atacado",
+        "slug": "operador-empilhadeira-mar-vermelho-natal",
+        "companyName": "Mar Vermelho Atacado",
+        "city": "Natal",
+        "state": "RN",
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "description": "Operação de empilhadeira elétrica e a combustão para movimentação e verticalização de cargas em porta-paletes do atacado.",
+        "requirements": "CNH B e curso de formação de Operador de Empilhadeira válido.",
+        "benefits": "Salário compatível + Vale-transporte + Refeição na empresa + Seguro de vida + Convênio farmácia + Plano odontológico + Cartão corporativo.",
+        "salaryCurrency": "BRL",
+        "hideSalary": True,
+        "applicationChannel": "EMAIL",
+        "applicationTarget": "trabalheconosco@marvermelhoatacado.com.br",
+        "isFeatured": False,
+        "isPcd": False
+    }
+]
+
+def main():
+    if not os.path.exists(jobs_file):
+        print(f"❌ Arquivo não encontrado: {jobs_file}")
+        sys.exit(1)
+        
+    with open(jobs_file, "r", encoding="utf-8") as f:
+        existing = json.load(f)
+        
+    print(f"Catálogo atual: {len(existing)} vagas.")
+    
+    max_id = max(j.get("id", 0) for j in existing)
+    existing_slugs = {j.get("slug") for j in existing}
+    
+    created_jobs = []
+    for item in WHATSAPP_JOBS:
+        slug = item["slug"]
+        if slug in existing_slugs:
+            print(f"⚠️ Slug já existente, pulando: {slug}")
+            continue
+            
+        max_id += 1
+        job_obj = {
+            "id": max_id,
+            "title": item["title"],
+            "slug": slug,
+            "companyName": item["companyName"],
+            "city": item["city"],
+            "state": item["state"],
+            "workModel": item["workModel"],
+            "contractType": item["contractType"],
+            "description": item["description"],
+            "requirements": item.get("requirements", ""),
+            "benefits": item.get("benefits", ""),
+            "salaryMin": item.get("salaryMin"),
+            "salaryMax": item.get("salaryMax"),
+            "salaryCurrency": "BRL",
+            "hideSalary": item.get("hideSalary", True),
+            "applicationChannel": item["applicationChannel"],
+            "applicationTarget": item["applicationTarget"],
+            "status": "APPROVED",
+            "isFeatured": False,
+            "isPcd": item.get("isPcd", False),
+            "publishedAt": "2026-09-13T12:00:00-03:00",
+            "createdAt": "2026-09-13T12:00:00-03:00",
+            "expiresAt": "2026-12-31T23:59:59-03:00",
+            "viewsCount": 0
+        }
+        created_jobs.append(job_obj)
+        existing_slugs.add(slug)
+        
+    print(f"Novas vagas estruturadas prontas para inserção: {len(created_jobs)}")
+    
+    # Inserir no topo para figurarem imediatamente como novidade
+    updated = created_jobs + existing
+    
+    with open(jobs_file, "w", encoding="utf-8") as f:
+        json.dump(updated, f, ensure_ascii=False, indent=2)
+        
+    print(f"✅ Catálogo consolidado com sucesso! Total de vagas: {len(updated)}")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
 <a id="scripts-build-single-context-mdpy"></a>
-## 85. Arquivo: `scripts/build_single_context_md.py`
+## 86. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -57144,7 +59830,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 86. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 87. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -57276,7 +59962,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-daily-job-syncymlexample"></a>
-## 87. Arquivo: `scripts/daily-job-sync.yml.example`
+## 88. Arquivo: `scripts/daily-job-sync.yml.example`
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
@@ -57363,7 +60049,7 @@ jobs:
 ---
 
 <a id="scripts-daily-job-crawlerpy"></a>
-## 88. Arquivo: `scripts/daily_job_crawler.py`
+## 89. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -57648,7 +60334,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 89. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 90. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -57949,12 +60635,12 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 90. Arquivo: `scripts/generate_sitemap.py`
+## 91. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
-- **Total de Linhas:** 167
-- **Tamanho:** 5130 bytes
+- **Total de Linhas:** 168
+- **Tamanho:** 5150 bytes
 
 ```python
 import re
@@ -58052,6 +60738,7 @@ seo_landing_slugs = [
     'vagas-estagio-rn',
     'vagas-jovem-aprendiz-rn',
     'vagas-home-office-rn',
+    'vagas-pcd-rn',
 ]
 
 for s_slug in seo_landing_slugs:
@@ -58130,7 +60817,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 91. Arquivo: `scripts/ingest_jobs.py`
+## 92. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58353,7 +61040,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 92. Arquivo: `scripts/rn_job_scraper.py`
+## 93. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58552,7 +61239,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 93. Arquivo: `scripts/test_efi_status.py`
+## 94. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58632,7 +61319,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 94. Arquivo: `scripts/verify_build_integrity.py`
+## 95. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58725,7 +61412,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 95. Arquivo: `scripts/verify_seo.py`
+## 96. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -58808,7 +61495,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 96. Arquivo: `.env.example`
+## 97. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -58827,7 +61514,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 97. Arquivo: `.gitignore`
+## 98. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -58884,7 +61571,7 @@ certs/
 ---
 
 <a id="docker-composeyml"></a>
-## 98. Arquivo: `docker-compose.yml`
+## 99. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

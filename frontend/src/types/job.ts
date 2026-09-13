@@ -34,6 +34,7 @@ export interface Job {
   applicationTarget: string;
   status: JobStatus;
   isFeatured: boolean;
+  isPcd?: boolean;
   viewsCount: number;
   publishedAt: string;
   createdAt: string;

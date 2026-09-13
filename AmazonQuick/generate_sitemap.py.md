@@ -1,7 +1,7 @@
 # File: generate_sitemap.py
 - **Original Path:** `scripts/generate_sitemap.py`
 - **Language / Type:** `python`
-- **Lines of Code:** 167
+- **Lines of Code:** 168
 
 ---
 
@@ -101,6 +101,7 @@ seo_landing_slugs = [
     'vagas-estagio-rn',
     'vagas-jovem-aprendiz-rn',
     'vagas-home-office-rn',
+    'vagas-pcd-rn',
 ]
 
 for s_slug in seo_landing_slugs:

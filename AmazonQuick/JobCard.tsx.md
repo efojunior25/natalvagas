@@ -1,7 +1,7 @@
 # File: JobCard.tsx
 - **Original Path:** `frontend/src/components/JobCard.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 146
+- **Lines of Code:** 155
 
 ---
 
@@ -49,11 +49,20 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
       }`}
     >
       <div>
-        {/* Selo Vaga em Destaque (Se contratado) */}
-        {job.isFeatured && (
-          <div className="mb-3 inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold text-amber-800 bg-amber-100 border border-amber-300/80 px-2.5 py-0.5 rounded-full shadow-2xs">
-            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 fill-amber-400 animate-pulse shrink-0" />
-            <span>VAGA EM DESTAQUE VIP</span>
+        {/* Selos de Destaque e Acessibilidade PcD */}
+        {(job.isFeatured || job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            {job.isFeatured && (
+              <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold text-amber-800 bg-amber-100 border border-amber-300/80 px-2.5 py-0.5 rounded-full shadow-2xs">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 fill-amber-400 animate-pulse shrink-0" />
+                <span>VAGA EM DESTAQUE VIP</span>
+              </div>
+            )}
+            {(job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+              <div className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-blue-800 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full shadow-2xs">
+                <span>♿ Vaga PcD</span>
+              </div>
+            )}
           </div>
         )}
 

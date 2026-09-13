@@ -1,7 +1,7 @@
 # File: job.ts
 - **Original Path:** `frontend/src/types/job.ts`
 - **Language / Type:** `typescript`
-- **Lines of Code:** 54
+- **Lines of Code:** 55
 
 ---
 
@@ -42,6 +42,7 @@ export interface Job {
   applicationTarget: string;
   status: JobStatus;
   isFeatured: boolean;
+  isPcd?: boolean;
   viewsCount: number;
   publishedAt: string;
   createdAt: string;

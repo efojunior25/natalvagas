@@ -12,6 +12,7 @@ export interface SeoLandingConfig {
   contractType?: ContractType;
   workModel?: WorkModel;
   onlyNoExperience?: boolean;
+  onlyPcd?: boolean;
 }
 
 export const SEO_LANDING_PAGES: SeoLandingConfig[] = [
@@ -144,6 +145,16 @@ export const SEO_LANDING_PAGES: SeoLandingConfig[] = [
     badge: '🏠 100% Remoto & Home Office',
     introText: 'Oportunidades para trabalhar de casa com flexibilidade para empresas do RN, nacionais e multinacionais contratando profissionais potiguares.',
     workModel: 'REMOTO'
+  },
+  {
+    slug: 'vagas-pcd-rn',
+    path: '/vagas-pcd-rn',
+    h1: 'Vagas de Emprego PcD em Natal e no RN',
+    metaTitle: 'Vagas de Emprego PcD em Natal / RN — Oportunidades Inclusivas | Natal Vagas',
+    metaDescription: 'Encontre vagas de emprego exclusivas e afirmativas para Pessoas com Deficiência (PcD) em Natal, Parnamirim, Mossoró e todo o RN. Vagas na Lei de Cotas com candidatura gratuita.',
+    badge: '♿ Inclusão & Acessibilidade',
+    introText: 'Vagas inclusivas e oportunidades afirmativas para Pessoas com Deficiência (PcD) no Rio Grande do Norte, em consonância com a Lei de Cotas (Lei nº 8.213/91). Valorizamos a diversidade e o talento potiguar.',
+    onlyPcd: true
   }
 ];
 

@@ -1,7 +1,7 @@
 # File: CityPills.tsx
 - **Original Path:** `frontend/src/components/CityPills.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 97
+- **Lines of Code:** 114
 
 ---
 
@@ -16,6 +16,8 @@ interface CityPillsProps {
   onSelectCity?: (city: string) => void;
   onlyNoExperience?: boolean;
   onToggleNoExperience?: () => void;
+  onlyPcd?: boolean;
+  onTogglePcd?: () => void;
   isSeoLanding?: boolean;
 }
 
@@ -43,7 +45,9 @@ export const CityPills: React.FC<CityPillsProps> = ({
   selectedCity, 
   onSelectCity,
   onlyNoExperience,
-  onToggleNoExperience
+  onToggleNoExperience,
+  onlyPcd,
+  onTogglePcd
 }) => {
   return (
     <nav aria-label="Filtro rápido por cidade e categoria no RN" className="mb-6 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
@@ -58,12 +62,25 @@ export const CityPills: React.FC<CityPillsProps> = ({
           to="/"
           onClick={() => onSelectCity && onSelectCity('')}
           className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
-            !selectedCity && !onlyNoExperience
+            !selectedCity && !onlyNoExperience && !onlyPcd
               ? 'bg-brand-600 text-white shadow-xs'
               : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
           }`}
         >
           Todas as Cidades
+        </Link>
+
+        {/* Filtro Especial: Vagas PcD */}
+        <Link
+          to={onlyPcd ? '/' : '/vagas-pcd-rn'}
+          onClick={() => onTogglePcd && onTogglePcd()}
+          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
+            onlyPcd
+              ? 'bg-blue-600 text-white shadow-xs ring-2 ring-blue-400/30'
+              : 'bg-blue-50 text-blue-800 hover:bg-blue-100 border border-blue-300'
+          }`}
+        >
+          <span>♿ Vagas PcD</span>
         </Link>
 
         {/* Filtro Especial: Sem Experiência / Primeiro Emprego */}

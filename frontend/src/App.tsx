@@ -46,6 +46,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedWorkModel, setSelectedWorkModel] = useState<string>('TODOS');
   const [onlyNoExperience, setOnlyNoExperience] = useState<boolean>(false);
+  const [onlyPcd, setOnlyPcd] = useState<boolean>(false);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
   // Identifica se estamos em uma landing page programática de SEO
@@ -62,6 +63,9 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       if (seoConfig.onlyNoExperience) setOnlyNoExperience(true);
       else setOnlyNoExperience(false);
 
+      if (seoConfig.onlyPcd) setOnlyPcd(true);
+      else setOnlyPcd(false);
+
       if (seoConfig.workModel) setSelectedWorkModel(seoConfig.workModel);
       else setSelectedWorkModel('TODOS');
 
@@ -69,6 +73,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
     } else if (!slug) {
       setSelectedCity('');
       setOnlyNoExperience(false);
+      setOnlyPcd(false);
       setSelectedWorkModel('TODOS');
       setVisibleCount(PAGE_SIZE);
     }
@@ -185,7 +190,14 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
         )
       );
 
-      return matchesQuery && matchesCity && matchesModel && matchesNoExperience;
+      const matchesPcd = !onlyPcd || (
+        Boolean(job.isPcd) ||
+        /pcd|pessoa com deficiência|deficiência|afirmativa para pcd/i.test(
+          `${job.title} ${job.requirements || ''} ${job.description}`
+        )
+      );
+
+      return matchesQuery && matchesCity && matchesModel && matchesNoExperience && matchesPcd;
     }).sort((a, b) => {
       // 1. Vagas em destaque VIP sempre no topo
       if (a.isFeatured && !b.isFeatured) return -1;
@@ -199,7 +211,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       return 0;
     });
-  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, seoConfig]);
+  }, [jobs, searchQuery, selectedCity, selectedWorkModel, onlyNoExperience, onlyPcd, seoConfig]);
 
   // Lista visível com paginação progressiva para alta performance e Core Web Vitals
   const visibleJobs = useMemo(() => {
@@ -324,6 +336,11 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
           onlyNoExperience={onlyNoExperience}
           onToggleNoExperience={() => {
             setOnlyNoExperience(prev => !prev);
+            setVisibleCount(PAGE_SIZE);
+          }}
+          onlyPcd={onlyPcd}
+          onTogglePcd={() => {
+            setOnlyPcd(prev => !prev);
             setVisibleCount(PAGE_SIZE);
           }}
         />

@@ -93,6 +93,7 @@ seo_landing_slugs = [
     'vagas-estagio-rn',
     'vagas-jovem-aprendiz-rn',
     'vagas-home-office-rn',
+    'vagas-pcd-rn',
 ]
 
 for s_slug in seo_landing_slugs:
