@@ -1,7 +1,7 @@
 # File: App.tsx
 - **Original Path:** `frontend/src/App.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 584
+- **Lines of Code:** 587
 
 ---
 
@@ -35,6 +35,7 @@ const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder').then(m => ({ de
 const BlogList = lazy(() => import('./pages/BlogList').then(m => ({ default: m.BlogList })));
 const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
+const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
 
 const PAGE_SIZE = 24;
 
@@ -297,7 +298,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
   const topCities = ['Natal', 'Mossoró', 'Parnamirim', 'Macaíba', 'São Gonçalo do Amarante', 'Currais Novos', 'Caicó'];
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       {/* Schema JSON-LD ItemList / JobPosting para Google for Jobs */}
       <script
         type="application/ld+json"
@@ -576,6 +577,8 @@ export const App: React.FC = () => {
           <Route path="/sobre" element={<AboutUs />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/dicas-seguranca" element={<JobSafety />} />
+          <Route path="/admin" element={<AdminCoupons />} />
+          <Route path="/admin/cupons" element={<AdminCoupons />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

@@ -1,7 +1,7 @@
 # File: .gitignore
 - **Original Path:** `.gitignore`
 - **Language / Type:** `text`
-- **Lines of Code:** 43
+- **Lines of Code:** 46
 
 ---
 
@@ -48,6 +48,9 @@ pgdata/
 *.p12
 *.pem
 certs/
+
+# Imagens de triagem temporárias
+imagens vagas/
 
 
 ```

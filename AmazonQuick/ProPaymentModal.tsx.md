@@ -1,7 +1,7 @@
 # File: ProPaymentModal.tsx
 - **Original Path:** `frontend/src/components/ProPaymentModal.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 771
+- **Lines of Code:** 813
 
 ---
 
@@ -141,6 +141,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   const [isPcdDiscountApplied, setIsPcdDiscountApplied] = useState<boolean>(false);
   const [pcdCoupon, setPcdCoupon] = useState<string>("");
   const [pcdCouponError, setPcdCouponError] = useState<string>("");
+  const [pcdCouponSuccess, setPcdCouponSuccess] = useState<string>("");
+  const [isValidatingCoupon, setIsValidatingCoupon] = useState<boolean>(false);
   const [showPcdInput, setShowPcdInput] = useState<boolean>(false);
 
   // Trava a rolagem da tela e escuta tecla Escape
@@ -270,14 +272,38 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     ? (currentPlanData.amount * 0.5).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     : currentPlanData.currentPrice;
 
-  const handleApplyPcdCoupon = (e: React.FormEvent) => {
+  const handleApplyPcdCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     const clean = pcdCoupon.trim().toUpperCase();
-    if (clean === "PCD50" || clean === "INCLUSAO50" || clean === "LAUDO50") {
-      setIsPcdDiscountApplied(true);
-      setPcdCouponError("");
-    } else {
-      setPcdCouponError("Cupom inválido. Envie seu laudo médico no WhatsApp para receber o código de 50% de desconto.");
+    if (!clean) {
+      setPcdCouponError("Digite o código do cupom.");
+      return;
+    }
+
+    setIsValidatingCoupon(true);
+    setPcdCouponError("");
+    setPcdCouponSuccess("");
+
+    try {
+      const res = await fetch("/api/coupons/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: clean, email: user?.email || "" })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        setIsPcdDiscountApplied(true);
+        setPcdCouponSuccess(data.message || "Cupom validado com sucesso! 50% de desconto aplicado.");
+        setPcdCouponError("");
+      } else {
+        setPcdCouponError(data.message || "Cupom inválido ou já utilizado. Envie seu laudo no WhatsApp para receber seu cupom de uso único.");
+      }
+    } catch (err) {
+      setPcdCouponError("Erro de conexão ao validar o cupom. Verifique sua conexão e tente novamente.");
+    } finally {
+      setIsValidatingCoupon(false);
     }
   };
 
@@ -494,24 +520,40 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     <form onSubmit={handleApplyPcdCoupon} className="mt-2 flex flex-wrap items-center gap-2">
                       <input
                         type="text"
-                        placeholder="Código: PCD50"
+                        placeholder="Digite seu cupom"
                         value={pcdCoupon}
+                        disabled={isValidatingCoupon}
                         onChange={(e) => {
                           setPcdCoupon(e.target.value);
                           setPcdCouponError("");
                         }}
-                        className="w-36 px-2.5 py-1 text-xs border border-blue-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 uppercase font-bold text-slate-800 bg-white"
+                        className="w-36 px-2.5 py-1 text-xs border border-blue-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 uppercase font-bold text-slate-800 bg-white disabled:bg-slate-100"
                       />
                       <button
                         type="submit"
-                        className="px-3 py-1 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                        disabled={isValidatingCoupon}
+                        className="px-3 py-1 bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
                       >
-                        Ativar 50%
+                        {isValidatingCoupon ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Validando...</span>
+                          </>
+                        ) : (
+                          <span>Ativar 50%</span>
+                        )}
                       </button>
                       {pcdCouponError && (
                         <span className="w-full text-[11px] text-red-600 font-medium block">{pcdCouponError}</span>
                       )}
                     </form>
+                  )}
+
+                  {isPcdDiscountApplied && (
+                    <div className="mt-2 text-xs font-bold text-emerald-700 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>{pcdCouponSuccess || "Cupom PcD de 50% ativado com sucesso!"}</span>
+                    </div>
                   )}
                 </div>
               </div>

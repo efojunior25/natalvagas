@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 99 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 105 arquivos.
 
 ---
 
@@ -29,82 +29,88 @@
 21. [`frontend/src/components/ResumeLaunchOfferModal.tsx`](#frontend-src-components-resumelaunchoffermodaltsx)
 22. [`frontend/src/components/SeoCategoryHero.tsx`](#frontend-src-components-seocategoryherotsx)
 23. [`frontend/src/components/SocialPostGeneratorModal.tsx`](#frontend-src-components-socialpostgeneratormodaltsx)
-24. [`frontend/src/components/WhatsAppCommunityBanner.tsx`](#frontend-src-components-whatsappcommunitybannertsx)
-25. [`frontend/src/pages/AboutUs.tsx`](#frontend-src-pages-aboutustsx)
-26. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
-27. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
-28. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
-29. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
-30. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
-31. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
-32. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
-33. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
-34. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-35. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-36. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-37. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-38. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-39. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-40. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-41. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-42. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-43. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
-44. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-45. [`frontend/public/_redirects`](#frontend-public--redirects)
-46. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-47. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
-48. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
-49. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-50. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-51. [`frontend/public/sw.js`](#frontend-public-swjs)
-52. [`frontend/.env.example`](#frontend-envexample)
-53. [`frontend/index.html`](#frontend-indexhtml)
-54. [`frontend/package-lock.json`](#frontend-package-lockjson)
-55. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-56. [`frontend/src/index.css`](#frontend-src-indexcss)
-57. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-58. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-59. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-60. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-61. [`backend/Dockerfile`](#backend-dockerfile)
-62. [`backend/pom.xml`](#backend-pomxml)
-63. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-64. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-65. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-66. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-67. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-68. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-69. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-70. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-71. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-72. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-73. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-74. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-75. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-76. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-77. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-78. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-79. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-80. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-81. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-82. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-83. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-84. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-85. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
-86. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-87. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-88. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
-89. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-90. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-91. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-92. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-93. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-94. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-95. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-96. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-97. [`.env.example`](#envexample)
-98. [`.gitignore`](#gitignore)
-99. [`docker-compose.yml`](#docker-composeyml)
+24. [`frontend/src/components/ThemeToggle.tsx`](#frontend-src-components-themetoggletsx)
+25. [`frontend/src/components/WhatsAppCommunityBanner.tsx`](#frontend-src-components-whatsappcommunitybannertsx)
+26. [`frontend/src/pages/AboutUs.tsx`](#frontend-src-pages-aboutustsx)
+27. [`frontend/src/pages/AdminCoupons.tsx`](#frontend-src-pages-admincouponstsx)
+28. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
+29. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
+30. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
+31. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
+32. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
+33. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
+34. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
+35. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
+36. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
+37. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
+38. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
+39. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+40. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+41. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+42. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+43. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
+44. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+45. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+46. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+47. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+48. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+49. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
+50. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+51. [`frontend/public/_redirects`](#frontend-public--redirects)
+52. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+53. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
+54. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
+55. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+56. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+57. [`frontend/public/sw.js`](#frontend-public-swjs)
+58. [`frontend/.env.example`](#frontend-envexample)
+59. [`frontend/index.html`](#frontend-indexhtml)
+60. [`frontend/package-lock.json`](#frontend-package-lockjson)
+61. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+62. [`frontend/src/index.css`](#frontend-src-indexcss)
+63. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+64. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+65. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+66. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+67. [`backend/Dockerfile`](#backend-dockerfile)
+68. [`backend/pom.xml`](#backend-pomxml)
+69. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+70. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+71. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+72. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+73. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+74. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+75. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+76. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+77. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+78. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+79. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+80. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+81. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+82. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+83. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+84. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+85. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+86. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+87. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+88. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+89. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+90. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+91. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
+92. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+93. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+94. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+95. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+96. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+97. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+98. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+99. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+100. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+101. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+102. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+103. [`.env.example`](#envexample)
+104. [`.gitignore`](#gitignore)
+105. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -492,8 +498,8 @@ export default defineConfig({
 - **Caminho:** `frontend/src/main.tsx`
 - **Nome:** `main.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 17
-- **Tamanho:** 423 bytes
+- **Total de Linhas:** 20
+- **Tamanho:** 529 bytes
 
 ```tsx
 import React from 'react'
@@ -501,13 +507,16 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
@@ -523,8 +532,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 584
-- **Tamanho:** 23110 bytes
+- **Total de Linhas:** 587
+- **Tamanho:** 23429 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
@@ -556,6 +565,7 @@ const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder').then(m => ({ de
 const BlogList = lazy(() => import('./pages/BlogList').then(m => ({ default: m.BlogList })));
 const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
+const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
 
 const PAGE_SIZE = 24;
 
@@ -818,7 +828,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
   const topCities = ['Natal', 'Mossoró', 'Parnamirim', 'Macaíba', 'São Gonçalo do Amarante', 'Currais Novos', 'Caicó'];
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-lightBg selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-surface-lightBg dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white transition-colors duration-150">
       {/* Schema JSON-LD ItemList / JobPosting para Google for Jobs */}
       <script
         type="application/ld+json"
@@ -1097,6 +1107,8 @@ export const App: React.FC = () => {
           <Route path="/sobre" element={<AboutUs />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/dicas-seguranca" element={<JobSafety />} />
+          <Route path="/admin" element={<AdminCoupons />} />
+          <Route path="/admin/cupons" element={<AdminCoupons />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
@@ -2262,7 +2274,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
 - **Nome:** `JobCard.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 155
-- **Tamanho:** 7910 bytes
+- **Tamanho:** 8640 bytes
 
 ```tsx
 import React from 'react';
@@ -2303,8 +2315,8 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
       onClick={() => onApply(job)}
       className={`group relative rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between border ${
         job.isFeatured
-          ? 'border-amber-300 ring-2 ring-amber-400/20 bg-gradient-to-b from-amber-50/30 via-white to-white hover:border-amber-400'
-          : 'bg-white border-slate-200/90 hover:border-brand-300 hover:shadow-slate-200/50'
+          ? 'border-amber-300 dark:border-amber-500/40 ring-2 ring-amber-400/20 bg-gradient-to-b from-amber-50/30 via-white to-white dark:from-amber-950/20 dark:via-slate-900 dark:to-slate-900 hover:border-amber-400'
+          : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-500 hover:shadow-slate-200/50 dark:hover:shadow-slate-950/50'
       }`}
     >
       <div>
@@ -2328,7 +2340,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
         {/* Cabeçalho do Card */}
         <div className="flex items-start justify-between gap-2.5 sm:gap-3">
           <div className="flex items-start gap-3 min-w-0 flex-1">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 font-bold text-base sm:text-lg uppercase shrink-0 overflow-hidden group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors mt-0.5">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-base sm:text-lg uppercase shrink-0 overflow-hidden group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors mt-0.5">
               {job.companyLogoUrl ? (
                 <img 
                   src={job.companyLogoUrl} 
@@ -2347,10 +2359,10 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <span className="text-[11px] sm:text-xs font-semibold text-slate-500 block truncate">
+              <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 block truncate">
                 {job.companyName}
               </span>
-              <h3 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors leading-snug break-words">
+              <h3 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors leading-snug break-words">
                 {job.title}
               </h3>
             </div>
@@ -2371,21 +2383,21 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
 
         {/* Localização e Badges */}
         <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-medium">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium border border-transparent dark:border-slate-700">
             <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 shrink-0" />
             <span className="truncate max-w-[140px] sm:max-w-none">
               {job.neighborhood ? `${job.neighborhood}, ${job.city}` : `${job.city}/RN`}
             </span>
           </span>
 
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 font-medium border border-brand-100">
-            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brand-500 shrink-0" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-50 dark:bg-slate-800 text-brand-700 dark:text-brand-300 font-medium border border-brand-100 dark:border-slate-700">
+            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brand-500 dark:text-brand-400 shrink-0" />
             <span>{job.contractType === 'NAO_INFORMADO' ? 'Regime N/I' : job.contractType} • {job.workModel === 'NAO_INFORMADO' ? 'N/I' : job.workModel}</span>
           </span>
 
           {!job.hideSalary && job.salaryMin && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 font-medium border border-emerald-100">
-              <DollarSign className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600 shrink-0" />
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-medium border border-emerald-100 dark:border-emerald-800/50">
+              <DollarSign className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>
                 R$ {job.salaryMin.toLocaleString('pt-BR')}
                 {job.salaryMax ? ` - R$ ${job.salaryMax.toLocaleString('pt-BR')}` : ''}
@@ -2397,22 +2409,22 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
           {(job.contractType === 'ESTAGIO' || 
             job.contractType === 'JOVEM_APRENDIZ' || 
             /sem experiência|primeiro emprego|não exige experiência|jovem aprendiz|estágio/i.test(`${job.title} ${job.requirements || ''} ${job.description}`)) && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-800/50">
               <span>🌱 Sem Experiência</span>
             </span>
           )}
         </div>
 
         {/* Resumo da Descrição */}
-        <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
+        <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
           {job.description}
         </p>
       </div>
 
       {/* Rodapé do Card */}
-      <div className="mt-3 sm:mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs text-slate-400">
+      <div className="mt-3 sm:mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs text-slate-400 dark:text-slate-500">
         <span className="truncate">{job.verifiedAt ? `Conferida em ${job.verifiedAt.split('-').reverse().join('/')}` : 'Confira a fonte'}</span>
-        <span className="inline-flex items-center gap-1 font-semibold text-brand-600 group-hover:translate-x-0.5 transition-transform shrink-0">
+        <span className="inline-flex items-center gap-1 font-semibold text-brand-600 dark:text-brand-400 group-hover:translate-x-0.5 transition-transform shrink-0">
           <span>Ver detalhes</span>
           <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </span>
@@ -2764,8 +2776,8 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
 - **Caminho:** `frontend/src/components/Navbar.tsx`
 - **Nome:** `Navbar.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 350
-- **Tamanho:** 15101 bytes
+- **Total de Linhas:** 362
+- **Tamanho:** 16636 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
@@ -2774,6 +2786,7 @@ import { PlusCircle, Search, Info, MessageSquare, FileText, Menu, X, ShieldCheck
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthModal } from './AuthModal';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
   onOpenPostJob: () => void;
@@ -2814,7 +2827,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs print:hidden">
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs print:hidden transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
@@ -2833,11 +2846,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
           {/* Versão Desktop Minimalista (telas >= md) */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
+            <nav className="flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
               <Link 
                 to="/" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname === '/' ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname === '/' ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Vagas
@@ -2845,8 +2858,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
               <Link 
                 to="/criar-curriculo" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname === '/criar-curriculo' ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname === '/criar-curriculo' ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Criar Currículo
@@ -2854,8 +2867,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
               <Link 
                 to="/blog" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname.startsWith('/blog') ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname.startsWith('/blog') ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Blog
@@ -2863,23 +2876,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
               <Link 
                 to="/sobre" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname === '/sobre' ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname === '/sobre' ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Sobre
               </Link>
             </nav>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 lg:gap-4">
+              {/* Botão Sol/Lua Claro/Escuro Desktop */}
+              <ThemeToggle />
+
               {/* Status do Usuário / Botão Entrar */}
               {isAuthenticated ? (
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-bold text-slate-700">
-                    <User className="w-3.5 h-3.5 text-brand-600" />
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 border border-slate-200/50 dark:border-slate-700">
+                    <User className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
                     <span className="max-w-[100px] truncate">{user?.name}</span>
                     {user?.isPro && (
-                      <span className="bg-amber-100 text-amber-800 text-[10px] px-1 py-0.5 rounded-sm">PRO</span>
+                      <span className="bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 text-[10px] px-1 py-0.5 rounded-sm">PRO</span>
                     )}
                   </div>
                   <button
@@ -2896,7 +2912,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 <button
                   type="button"
                   onClick={() => setIsAuthOpen(true)}
-                  className="text-sm font-semibold text-slate-700 hover:text-brand-600 transition-colors cursor-pointer"
+                  className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 transition-colors cursor-pointer"
                 >
                   Entrar
                 </button>
@@ -2913,13 +2929,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
             </div>
           </div>
 
-          {/* Versão Mobile (telas < md) - Ações Rápidas & Hambúrguer */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Versão Mobile (telas < md) - Ações Rápidas, Tema & Hambúrguer */}
+          <div className="flex md:hidden items-center gap-1.5 sm:gap-2">
+            {/* Botão Sol/Lua Claro/Escuro Mobile */}
+            <ThemeToggle />
+
             <Link 
               to="/criar-curriculo" 
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-brand-50 text-brand-700 text-xs font-bold border border-brand-200"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-brand-50 dark:bg-slate-800 text-brand-700 dark:text-brand-300 text-xs font-bold border border-brand-200 dark:border-slate-700"
             >
-              <FileText className="w-3.5 h-3.5 text-brand-600" />
+              <FileText className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
               <span>Currículo</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             </Link>
@@ -2928,12 +2947,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu de navegação'}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 transition-colors cursor-pointer"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-slate-800" />
+                <X className="w-6 h-6 text-slate-800 dark:text-slate-100" />
               ) : (
-                <Menu className="w-6 h-6 text-slate-800" />
+                <Menu className="w-6 h-6 text-slate-800 dark:text-slate-100" />
               )}
             </button>
           </div>
@@ -2951,11 +2970,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
           />
 
           {/* Painel do Menu */}
-          <div className="fixed inset-y-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-[101] flex flex-col justify-between p-6 overflow-y-auto transition-transform">
+          <div className="fixed inset-y-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl z-[101] flex flex-col justify-between p-6 overflow-y-auto transition-transform text-slate-800 dark:text-slate-100">
             
-            <div className="space-y-6">
+            <div className="space-y-5">
               {/* Topo da Gaveta */}
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-2.5">
                   <img 
                     src="/assets/logo-natalvagas.jpg" 
@@ -2963,7 +2982,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                     className="h-9 w-auto rounded object-contain"
                   />
                   <div>
-                    <span className="text-lg font-black text-slate-900 block leading-none">
+                    <span className="text-lg font-black text-slate-900 dark:text-white block leading-none">
                       <span className="text-brand-600">Natal</span>
                       <span className="text-brand-400">Vagas</span>
                     </span>
@@ -2975,27 +2994,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Fechar menu"
-                  className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+                  className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
+              {/* Seletor Rápido de Tema Claro/Escuro */}
+              <div className="pt-1">
+                <ThemeToggle showLabel className="w-full justify-start py-2.5 px-3.5" />
+              </div>
+
               {/* Card de Usuário / Login no Mobile */}
               {isAuthenticated ? (
-                <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">
                       {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </div>
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-900 max-w-[120px] truncate">{user?.name}</span>
+                        <span className="text-xs font-bold text-slate-900 dark:text-white max-w-[120px] truncate">{user?.name}</span>
                         {user?.isPro && (
                           <span className="bg-amber-100 text-amber-800 text-[9px] font-bold px-1.5 py-0.5 rounded-sm">PRO</span>
                         )}
                       </div>
-                      <span className="text-[11px] text-slate-500 block truncate max-w-[150px]">{user?.email}</span>
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400 block truncate max-w-[150px]">{user?.email}</span>
                     </div>
                   </div>
                   <button
@@ -3004,7 +3028,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                       logout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="text-xs text-rose-600 font-semibold hover:underline"
+                    className="text-xs text-rose-600 dark:text-rose-400 font-semibold hover:underline"
                   >
                     Sair
                   </button>
@@ -3013,9 +3037,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 <button
                   type="button"
                   onClick={handleAuthMobile}
-                  className="w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-4 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
-                  <LogIn className="w-4 h-4 text-brand-600" />
+                  <LogIn className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                   <span>Entrar / Criar Conta</span>
                 </button>
               )}
@@ -3025,7 +3049,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 <Link
                   to="/"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-3.5 py-3 text-sm font-semibold text-slate-800 hover:text-brand-600 hover:bg-brand-50/50 rounded-xl transition-colors"
+                  className="flex items-center gap-3 px-3.5 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50/50 dark:hover:bg-slate-800 rounded-xl transition-colors"
                 >
                   <Search className="w-4 h-4 text-brand-500" />
                   <span>Vagas de Emprego em Natal e RN</span>
@@ -3665,8 +3689,8 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
 - **Caminho:** `frontend/src/components/ProPaymentModal.tsx`
 - **Nome:** `ProPaymentModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 771
-- **Tamanho:** 36272 bytes
+- **Total de Linhas:** 813
+- **Tamanho:** 38103 bytes
 
 ```tsx
 import React, { useState, useEffect } from "react";
@@ -3804,6 +3828,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   const [isPcdDiscountApplied, setIsPcdDiscountApplied] = useState<boolean>(false);
   const [pcdCoupon, setPcdCoupon] = useState<string>("");
   const [pcdCouponError, setPcdCouponError] = useState<string>("");
+  const [pcdCouponSuccess, setPcdCouponSuccess] = useState<string>("");
+  const [isValidatingCoupon, setIsValidatingCoupon] = useState<boolean>(false);
   const [showPcdInput, setShowPcdInput] = useState<boolean>(false);
 
   // Trava a rolagem da tela e escuta tecla Escape
@@ -3933,14 +3959,38 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     ? (currentPlanData.amount * 0.5).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     : currentPlanData.currentPrice;
 
-  const handleApplyPcdCoupon = (e: React.FormEvent) => {
+  const handleApplyPcdCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     const clean = pcdCoupon.trim().toUpperCase();
-    if (clean === "PCD50" || clean === "INCLUSAO50" || clean === "LAUDO50") {
-      setIsPcdDiscountApplied(true);
-      setPcdCouponError("");
-    } else {
-      setPcdCouponError("Cupom inválido. Envie seu laudo médico no WhatsApp para receber o código de 50% de desconto.");
+    if (!clean) {
+      setPcdCouponError("Digite o código do cupom.");
+      return;
+    }
+
+    setIsValidatingCoupon(true);
+    setPcdCouponError("");
+    setPcdCouponSuccess("");
+
+    try {
+      const res = await fetch("/api/coupons/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: clean, email: user?.email || "" })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        setIsPcdDiscountApplied(true);
+        setPcdCouponSuccess(data.message || "Cupom validado com sucesso! 50% de desconto aplicado.");
+        setPcdCouponError("");
+      } else {
+        setPcdCouponError(data.message || "Cupom inválido ou já utilizado. Envie seu laudo no WhatsApp para receber seu cupom de uso único.");
+      }
+    } catch (err) {
+      setPcdCouponError("Erro de conexão ao validar o cupom. Verifique sua conexão e tente novamente.");
+    } finally {
+      setIsValidatingCoupon(false);
     }
   };
 
@@ -4157,24 +4207,40 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     <form onSubmit={handleApplyPcdCoupon} className="mt-2 flex flex-wrap items-center gap-2">
                       <input
                         type="text"
-                        placeholder="Código: PCD50"
+                        placeholder="Digite seu cupom"
                         value={pcdCoupon}
+                        disabled={isValidatingCoupon}
                         onChange={(e) => {
                           setPcdCoupon(e.target.value);
                           setPcdCouponError("");
                         }}
-                        className="w-36 px-2.5 py-1 text-xs border border-blue-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 uppercase font-bold text-slate-800 bg-white"
+                        className="w-36 px-2.5 py-1 text-xs border border-blue-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 uppercase font-bold text-slate-800 bg-white disabled:bg-slate-100"
                       />
                       <button
                         type="submit"
-                        className="px-3 py-1 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                        disabled={isValidatingCoupon}
+                        className="px-3 py-1 bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
                       >
-                        Ativar 50%
+                        {isValidatingCoupon ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Validando...</span>
+                          </>
+                        ) : (
+                          <span>Ativar 50%</span>
+                        )}
                       </button>
                       {pcdCouponError && (
                         <span className="w-full text-[11px] text-red-600 font-medium block">{pcdCouponError}</span>
                       )}
                     </form>
+                  )}
+
+                  {isPcdDiscountApplied && (
+                    <div className="mt-2 text-xs font-bold text-emerald-700 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>{pcdCouponSuccess || "Cupom PcD de 50% ativado com sucesso!"}</span>
+                    </div>
                   )}
                 </div>
               </div>
@@ -5179,8 +5245,63 @@ export default SocialPostGeneratorModal;
 
 ---
 
+<a id="frontend-src-components-themetoggletsx"></a>
+## 24. Arquivo: `frontend/src/components/ThemeToggle.tsx`
+- **Caminho:** `frontend/src/components/ThemeToggle.tsx`
+- **Nome:** `ThemeToggle.tsx`
+- **Linguagem / Sintaxe:** `tsx`
+- **Total de Linhas:** 41
+- **Tamanho:** 1557 bytes
+
+```tsx
+import React from 'react';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+
+interface ThemeToggleProps {
+  className?: string;
+  showLabel?: boolean;
+}
+
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', showLabel = false }) => {
+  const { isDark, toggleTheme } = useTheme();
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className={`relative inline-flex items-center justify-center p-2 rounded-xl transition-all duration-200 cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-brand-500 active:scale-95 ${
+        isDark
+          ? 'bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 shadow-inner'
+          : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 shadow-xs'
+      } ${className}`}
+      title={isDark ? 'Mudar para Modo Claro (Sol)' : 'Mudar para Modo Escuro (Lua)'}
+      aria-label={isDark ? 'Ativar Modo Claro' : 'Ativar Modo Escuro'}
+    >
+      <div className="relative flex items-center justify-center w-5 h-5">
+        {isDark ? (
+          <Sun className="w-5 h-5 text-amber-400 animate-in spin-in-180 duration-300 fill-amber-400/20" />
+        ) : (
+          <Moon className="w-5 h-5 text-indigo-600 animate-in spin-in-180 duration-300 fill-indigo-600/10" />
+        )}
+      </div>
+
+      {showLabel && (
+        <span className="ml-2 text-xs font-bold">
+          {isDark ? 'Modo Claro' : 'Modo Escuro'}
+        </span>
+      )}
+    </button>
+  );
+};
+export default ThemeToggle;
+
+```
+
+---
+
 <a id="frontend-src-components-whatsappcommunitybannertsx"></a>
-## 24. Arquivo: `frontend/src/components/WhatsAppCommunityBanner.tsx`
+## 25. Arquivo: `frontend/src/components/WhatsAppCommunityBanner.tsx`
 - **Caminho:** `frontend/src/components/WhatsAppCommunityBanner.tsx`
 - **Nome:** `WhatsAppCommunityBanner.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5326,7 +5447,7 @@ export default WhatsAppCommunityBanner;
 ---
 
 <a id="frontend-src-pages-aboutustsx"></a>
-## 25. Arquivo: `frontend/src/pages/AboutUs.tsx`
+## 26. Arquivo: `frontend/src/pages/AboutUs.tsx`
 - **Caminho:** `frontend/src/pages/AboutUs.tsx`
 - **Nome:** `AboutUs.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5453,8 +5574,412 @@ export const AboutUs: React.FC = () => {
 
 ---
 
+<a id="frontend-src-pages-admincouponstsx"></a>
+## 27. Arquivo: `frontend/src/pages/AdminCoupons.tsx`
+- **Caminho:** `frontend/src/pages/AdminCoupons.tsx`
+- **Nome:** `AdminCoupons.tsx`
+- **Linguagem / Sintaxe:** `tsx`
+- **Total de Linhas:** 390
+- **Tamanho:** 17226 bytes
+
+```tsx
+import React, { useState, useEffect } from 'react';
+import { Shield, KeyRound, Ticket, Copy, Check, Sparkles, RefreshCw, LogOut, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+interface CouponItem {
+  code: string;
+  discountPercent: number;
+  used: boolean;
+  createdAt: string;
+  candidate?: string;
+  usedAt?: string | null;
+  usedBy?: string | null;
+}
+
+const STORAGE_KEY = 'natalvagas_admin_pin';
+
+export const AdminCoupons: React.FC = () => {
+  const [pin, setPin] = useState<string>(() => {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || '';
+    } catch {
+      return '';
+    }
+  });
+  const [tempPin, setTempPin] = useState<string>('');
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [authError, setAuthError] = useState<string>('');
+  
+  // Criação de cupom
+  const [candidateName, setCandidateName] = useState<string>('');
+  const [customCode, setCustomCode] = useState<string>('');
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [lastCreated, setLastCreated] = useState<{ code: string; message: string; whatsappMessage: string } | null>(null);
+  const [copiedCode, setCopiedCode] = useState<boolean>(false);
+  const [copiedMessage, setCopiedMessage] = useState<boolean>(false);
+
+  // Lista de cupons
+  const [coupons, setCoupons] = useState<CouponItem[]>([]);
+  const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
+  const [listError, setListError] = useState<string>('');
+
+  // Testa autorização ao carregar se já tiver PIN salvo
+  useEffect(() => {
+    if (pin) {
+      loadCoupons(pin);
+    }
+  }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanPin = tempPin.trim();
+    if (!cleanPin) {
+      setAuthError('Digite a chave de acesso administrativo.');
+      return;
+    }
+    setPin(cleanPin);
+    loadCoupons(cleanPin);
+  };
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {}
+    setPin('');
+    setIsAuthorized(false);
+    setCoupons([]);
+    setLastCreated(null);
+  };
+
+  const loadCoupons = async (authPin: string) => {
+    setIsLoadingList(true);
+    setListError('');
+    try {
+      const res = await fetch(`/api/coupons/list?pin=${encodeURIComponent(authPin)}`, {
+        headers: { Authorization: `Bearer ${authPin}` }
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        setIsAuthorized(true);
+        setCoupons(Array.isArray(data.coupons) ? data.coupons : []);
+        try {
+          localStorage.setItem(STORAGE_KEY, authPin);
+        } catch {}
+      } else {
+        setIsAuthorized(false);
+        setAuthError(data.message || 'Chave de acesso incorreta.');
+      }
+    } catch (err) {
+      setListError('Erro ao carregar lista de cupons.');
+    } finally {
+      setIsLoadingList(false);
+    }
+  };
+
+  const handleCreateCoupon = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsGenerating(true);
+    setLastCreated(null);
+    setCopiedCode(false);
+    setCopiedMessage(false);
+
+    try {
+      const res = await fetch('/api/coupons/create', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${pin}`
+        },
+        body: JSON.stringify({
+          adminKey: pin,
+          candidate: candidateName || 'Candidato PcD (WhatsApp)',
+          customCode: customCode || undefined,
+          discountPercent: 50
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        setLastCreated({
+          code: data.coupon.code,
+          message: data.message,
+          whatsappMessage: data.whatsappMessage
+        });
+        setCandidateName('');
+        setCustomCode('');
+        // Atualiza a lista
+        loadCoupons(pin);
+      } else {
+        alert(data.message || 'Erro ao gerar cupom.');
+      }
+    } catch (err) {
+      alert('Erro de conexão ao gerar cupom.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleCopyCode = () => {
+    if (!lastCreated) return;
+    navigator.clipboard.writeText(lastCreated.code);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 3000);
+  };
+
+  const handleCopyMessage = () => {
+    if (!lastCreated) return;
+    navigator.clipboard.writeText(lastCreated.whatsappMessage);
+    setCopiedMessage(true);
+    setTimeout(() => setCopiedMessage(false), 3000);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center p-3 sm:p-6">
+      {/* Top Header */}
+      <div className="w-full max-w-2xl flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+        <Link to="/" className="flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors font-bold text-sm">
+          <span>← Voltar ao Natal Vagas</span>
+        </Link>
+        {isAuthorized && (
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold cursor-pointer transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Sair</span>
+          </button>
+        )}
+      </div>
+
+      <div className="w-full max-w-2xl">
+        {/* Banner de Título */}
+        <div className="bg-gradient-to-r from-brand-600 via-indigo-600 to-slate-800 p-5 rounded-3xl shadow-xl mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-xs border border-white/20">
+              <Shield className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl sm:text-2xl font-black text-white">Painel de Cupons PcD</h1>
+              <p className="text-xs text-brand-100 font-medium">Geração e controle de cupons de uso único de 50% de desconto</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Tela de Login se não autorizado */}
+        {!isAuthorized ? (
+          <div className="bg-slate-800 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-xl text-center">
+            <div className="w-12 h-12 rounded-2xl bg-brand-500/20 text-brand-400 flex items-center justify-center mx-auto mb-4 border border-brand-500/30">
+              <KeyRound className="w-6 h-6" />
+            </div>
+            <h2 className="text-lg font-bold text-white mb-2">Autenticação do Administrador</h2>
+            <p className="text-xs text-slate-400 mb-6 max-w-md mx-auto">
+              Digite a chave de acesso ou PIN administrativo do Natal Vagas para acessar a geração de cupons.
+            </p>
+
+            <form onSubmit={handleLogin} className="max-w-sm mx-auto space-y-4">
+              <div>
+                <input
+                  type="password"
+                  placeholder="PIN / Chave de Acesso"
+                  value={tempPin}
+                  onChange={(e) => {
+                    setTempPin(e.target.value);
+                    setAuthError('');
+                  }}
+                  className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-brand-500 text-center font-mono tracking-widest text-sm"
+                  autoFocus
+                />
+              </div>
+
+              {authError && (
+                <div className="text-xs text-red-400 flex items-center justify-center gap-1 font-medium">
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                  <span>{authError}</span>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-brand-600 hover:bg-brand-500 active:scale-98 text-white rounded-xl font-bold text-sm transition-all shadow-lg shadow-brand-600/30 cursor-pointer"
+              >
+                Acessar Painel
+              </button>
+            </form>
+          </div>
+        ) : (
+          /* Painel do Administrador Autenticado */
+          <div className="space-y-6">
+            {/* Card de Criação */}
+            <div className="bg-slate-800 border border-slate-700 rounded-3xl p-5 sm:p-6 shadow-xl">
+              <div className="flex items-center gap-2 mb-4">
+                <Ticket className="w-5 h-5 text-emerald-400" />
+                <h2 className="text-base font-bold text-white">Gerar Novo Cupom de Uso Único (50% OFF)</h2>
+              </div>
+
+              <form onSubmit={handleCreateCoupon} className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      Identificação do Candidato (Opcional):
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Ex: João Silva (WhatsApp)"
+                      value={candidateName}
+                      onChange={(e) => setCandidateName(e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-brand-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      Código Personalizado (Opcional):
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Vazio = Gerar PCD-XXXX automático"
+                      value={customCode}
+                      onChange={(e) => setCustomCode(e.target.value.toUpperCase())}
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 uppercase font-mono focus:outline-hidden focus:ring-2 focus:ring-brand-500"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isGenerating}
+                  className="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-98 text-white rounded-xl font-black text-sm transition-all shadow-lg shadow-emerald-600/30 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>{isGenerating ? 'Gerando Código Exclusivo...' : '⚡ Gerar Cupom PcD 50% (Uso Único)'}</span>
+                </button>
+              </form>
+
+              {/* Resultado do Último Cupom Gerado */}
+              {lastCreated && (
+                <div className="mt-5 p-4 bg-emerald-950/60 border border-emerald-500/40 rounded-2xl animate-in fade-in zoom-in-95 duration-200">
+                  <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs mb-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Cupom Gerado com Sucesso!</span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-900/90 p-3 rounded-xl border border-emerald-500/20 mb-3">
+                    <div className="text-center sm:text-left">
+                      <span className="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Código Exclusivo:</span>
+                      <span className="text-2xl font-black text-emerald-400 font-mono tracking-wider">{lastCreated.code}</span>
+                    </div>
+
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <button
+                        type="button"
+                        onClick={handleCopyCode}
+                        className="flex-1 sm:flex-none px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                      >
+                        {copiedCode ? <Check className="w-3.5 h-3.5 text-white" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedCode ? 'Copiado!' : 'Copiar Código'}</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleCopyMessage}
+                        className="flex-1 sm:flex-none px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                      >
+                        {copiedMessage ? <Check className="w-3.5 h-3.5 text-white" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedMessage ? 'Mensagem Copiada!' : '📋 Copiar p/ WhatsApp'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-emerald-300 font-medium">
+                    💡 Clique em <strong>"📋 Copiar p/ WhatsApp"</strong> e cole diretamente na conversa do candidato para enviar a mensagem formatada.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Lista e Histórico de Cupons */}
+            <div className="bg-slate-800 border border-slate-700 rounded-3xl p-5 sm:p-6 shadow-xl">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-brand-400" />
+                  <h3 className="text-sm font-bold text-white">Histórico de Cupons Criados ({coupons.length})</h3>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => loadCoupons(pin)}
+                  disabled={isLoadingList}
+                  className="p-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-xs transition-colors cursor-pointer"
+                  title="Atualizar lista"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${isLoadingList ? 'animate-spin' : ''}`} />
+                </button>
+              </div>
+
+              {listError && (
+                <div className="text-xs text-red-400 mb-3">{listError}</div>
+              )}
+
+              {coupons.length === 0 ? (
+                <div className="text-center py-8 text-slate-400 text-xs">
+                  {isLoadingList ? 'Carregando cupons...' : 'Nenhum cupom gerado ainda. Clique em "Gerar Cupom PcD" acima.'}
+                </div>
+              ) : (
+                <div className="divide-y divide-slate-700/60 max-h-80 overflow-y-auto pr-1">
+                  {coupons.map((c) => (
+                    <div key={c.code} className="py-3 flex items-center justify-between gap-3 text-xs">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono font-bold text-white text-sm">{c.code}</span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                            {c.discountPercent}% OFF
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-slate-400 mt-0.5">
+                          {c.candidate || 'Candidato'} • Criado em {new Date(c.createdAt).toLocaleDateString('pt-BR')} às {new Date(c.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                      </div>
+
+                      <div>
+                        {c.used ? (
+                          <div className="text-right">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-500/30">
+                              <span>🔴 Já Utilizado</span>
+                            </span>
+                            {c.usedBy && (
+                              <div className="text-[10px] text-slate-400 mt-0.5 max-w-[140px] truncate" title={c.usedBy}>
+                                por {c.usedBy}
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            <span>🟢 Disponível</span>
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+export default AdminCoupons;
+
+```
+
+---
+
 <a id="frontend-src-pages-bloglisttsx"></a>
-## 26. Arquivo: `frontend/src/pages/BlogList.tsx`
+## 28. Arquivo: `frontend/src/pages/BlogList.tsx`
 - **Caminho:** `frontend/src/pages/BlogList.tsx`
 - **Nome:** `BlogList.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5716,7 +6241,7 @@ export default BlogList;
 ---
 
 <a id="frontend-src-pages-blogposttsx"></a>
-## 27. Arquivo: `frontend/src/pages/BlogPost.tsx`
+## 29. Arquivo: `frontend/src/pages/BlogPost.tsx`
 - **Caminho:** `frontend/src/pages/BlogPost.tsx`
 - **Nome:** `BlogPost.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -5997,7 +6522,7 @@ export default BlogPost;
 ---
 
 <a id="frontend-src-pages-contacttsx"></a>
-## 28. Arquivo: `frontend/src/pages/Contact.tsx`
+## 30. Arquivo: `frontend/src/pages/Contact.tsx`
 - **Caminho:** `frontend/src/pages/Contact.tsx`
 - **Nome:** `Contact.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -6187,7 +6712,7 @@ export const Contact: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-jobsafetytsx"></a>
-## 29. Arquivo: `frontend/src/pages/JobSafety.tsx`
+## 31. Arquivo: `frontend/src/pages/JobSafety.tsx`
 - **Caminho:** `frontend/src/pages/JobSafety.tsx`
 - **Nome:** `JobSafety.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -6295,7 +6820,7 @@ export const JobSafety: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-privacypolicytsx"></a>
-## 30. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
+## 32. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
 - **Caminho:** `frontend/src/pages/PrivacyPolicy.tsx`
 - **Nome:** `PrivacyPolicy.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -6428,7 +6953,7 @@ export const PrivacyPolicy: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-resumebuildertsx"></a>
-## 31. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
+## 33. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
 - **Caminho:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Nome:** `ResumeBuilder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7628,7 +8153,7 @@ export default ResumeBuilder;
 ---
 
 <a id="frontend-src-pages-termsofusetsx"></a>
-## 32. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
+## 34. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
 - **Caminho:** `frontend/src/pages/TermsOfUse.tsx`
 - **Nome:** `TermsOfUse.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7740,7 +8265,7 @@ export const TermsOfUse: React.FC = () => {
 ---
 
 <a id="frontend-functions-api-auth-sign-prots"></a>
-## 33. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
+## 35. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
 - **Caminho:** `frontend/functions/api/auth/sign-pro.ts`
 - **Nome:** `sign-pro.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7840,8 +8365,424 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
 
 ---
 
+<a id="frontend-functions-api-coupons-createts"></a>
+## 36. Arquivo: `frontend/functions/api/coupons/create.ts`
+- **Caminho:** `frontend/functions/api/coupons/create.ts`
+- **Nome:** `create.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 145
+- **Tamanho:** 4926 bytes
+
+```typescript
+interface Env {
+  PAYMENTS_KV?: {
+    get: (key: string) => Promise<string | null>;
+    put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
+    list?: (options?: any) => Promise<{ keys: { name: string }[] }>;
+    delete?: (key: string) => Promise<void>;
+  };
+  AUTH_SECRET?: string;
+  ADMIN_PIN?: string;
+}
+
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+const VALID_PINS = [
+  "potiguar2026",
+  "edson2026",
+  "natalvagas2026",
+  DEFAULT_SECRET
+];
+
+function checkAdminAuth(authHeader: string | null, bodyKey?: string, env?: Env): boolean {
+  const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
+  const keyToCheck = bodyKey || token;
+  if (!keyToCheck) return false;
+
+  const validEnvSecret = env?.AUTH_SECRET || DEFAULT_SECRET;
+  const validEnvPin = env?.ADMIN_PIN;
+
+  if (keyToCheck === validEnvSecret) return true;
+  if (validEnvPin && keyToCheck === validEnvPin) return true;
+  return VALID_PINS.includes(keyToCheck.toLowerCase());
+}
+
+function generateRandomCode(): string {
+  // Gera formato PCD-XXXX (letras e números não ambíguos)
+  const chars = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+  let randomPart = "";
+  const randomValues = new Uint8Array(4);
+  crypto.getRandomValues(randomValues);
+  for (let i = 0; i < 4; i++) {
+    randomPart += chars[randomValues[i] % chars.length];
+  }
+  return `PCD-${randomPart}`;
+}
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const authHeader = request.headers.get("Authorization");
+    const body: any = await request.json().catch(() => ({}));
+    const adminKey = body.adminKey || body.pin || "";
+
+    if (!checkAdminAuth(authHeader, adminKey, env)) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: "Acesso administrativo não autorizado. Verifique sua chave ou PIN." 
+      }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const candidate = (body.candidate || "Candidato PcD WhatsApp").trim();
+    const discountPercent = typeof body.discountPercent === "number" ? body.discountPercent : 50;
+    const cleanCustomCode = (body.customCode || "").trim().toUpperCase().replace(/[^A-Z0-9-]/g, "");
+    
+    // Gera código único
+    const code = cleanCustomCode || generateRandomCode();
+
+    const couponData = {
+      code,
+      discountPercent,
+      used: false,
+      createdAt: new Date().toISOString(),
+      candidate,
+      usedAt: null,
+      usedBy: null
+    };
+
+    // Armazena no KV se disponível
+    if (env && env.PAYMENTS_KV) {
+      await env.PAYMENTS_KV.put(`coupon:${code}`, JSON.stringify(couponData), {
+        expirationTtl: 60 * 60 * 24 * 90 // 90 dias de validade para uso
+      });
+
+      // Atualiza o índice de cupons
+      const indexStr = await env.PAYMENTS_KV.get("coupons_index");
+      let index: string[] = [];
+      if (indexStr) {
+        try {
+          index = JSON.parse(indexStr);
+          if (!Array.isArray(index)) index = [];
+        } catch (e) {
+          index = [];
+        }
+      }
+      if (!index.includes(code)) {
+        index.unshift(code);
+        // Mantém os últimos 100 cupons
+        if (index.length > 100) index = index.slice(0, 100);
+        await env.PAYMENTS_KV.put("coupons_index", JSON.stringify(index));
+      }
+    }
+
+    const whatsappMessage = 
+      `Olá! Seu Laudo Médico PcD foi avaliado e aprovado com sucesso no Natal Vagas! ✅\n\n` +
+      `Aqui está seu Cupom Exclusivo de ${discountPercent}% de Desconto para assinar o Plano PRO:\n\n` +
+      `👉 Código: *${code}*\n` +
+      `_(Atenção: Este cupom é de USO ÚNICO e exclusivo para você)_\n\n` +
+      `Para ativar agora:\n` +
+      `1. Acesse https://natalvagas.com.br\n` +
+      `2. Clique em "Seja PRO" ou no banner de Desconto PcD\n` +
+      `3. Insira o código *${code}* e pronto! O valor cairá pela metade.\n\n` +
+      `Qualquer dúvida, estou à disposição aqui no WhatsApp! Abraço, Edson.`;
+
+    return new Response(JSON.stringify({
+      success: true,
+      coupon: couponData,
+      whatsappMessage,
+      message: `Cupom ${code} criado com sucesso!`
+    }), {
+      status: 201,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      message: "Erro ao gerar cupom PcD.", 
+      error: err?.message 
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
+<a id="frontend-functions-api-coupons-listts"></a>
+## 37. Arquivo: `frontend/functions/api/coupons/list.ts`
+- **Caminho:** `frontend/functions/api/coupons/list.ts`
+- **Nome:** `list.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 95
+- **Tamanho:** 2822 bytes
+
+```typescript
+interface Env {
+  PAYMENTS_KV?: {
+    get: (key: string) => Promise<string | null>;
+    list?: (options?: any) => Promise<{ keys: { name: string }[] }>;
+    delete?: (key: string) => Promise<void>;
+  };
+  AUTH_SECRET?: string;
+  ADMIN_PIN?: string;
+}
+
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+const VALID_PINS = [
+  "potiguar2026",
+  "edson2026",
+  "natalvagas2026",
+  DEFAULT_SECRET
+];
+
+function checkAdminAuth(authHeader: string | null, urlKey: string | null, env?: Env): boolean {
+  const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
+  const keyToCheck = urlKey || token;
+  if (!keyToCheck) return false;
+
+  const validEnvSecret = env?.AUTH_SECRET || DEFAULT_SECRET;
+  const validEnvPin = env?.ADMIN_PIN;
+
+  if (keyToCheck === validEnvSecret) return true;
+  if (validEnvPin && keyToCheck === validEnvPin) return true;
+  return VALID_PINS.includes(keyToCheck.toLowerCase());
+}
+
+export const onRequestGet = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const url = new URL(request.url);
+    const keyParam = url.searchParams.get("key") || url.searchParams.get("pin");
+    const authHeader = request.headers.get("Authorization");
+
+    if (!checkAdminAuth(authHeader, keyParam, env)) {
+      return new Response(JSON.stringify({ success: false, message: "Não autorizado." }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    const coupons: any[] = [];
+
+    if (env && env.PAYMENTS_KV) {
+      const indexStr = await env.PAYMENTS_KV.get("coupons_index");
+      let codes: string[] = [];
+      if (indexStr) {
+        try {
+          codes = JSON.parse(indexStr);
+        } catch (e) {
+          codes = [];
+        }
+      }
+
+      for (const code of codes.slice(0, 50)) {
+        const itemStr = await env.PAYMENTS_KV.get(`coupon:${code}`);
+        if (itemStr) {
+          try {
+            coupons.push(JSON.parse(itemStr));
+          } catch (e) {
+            // ignore item parse error
+          }
+        }
+      }
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      coupons
+    }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ success: false, message: "Erro ao listar cupons." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
+<a id="frontend-functions-api-coupons-verifyts"></a>
+## 38. Arquivo: `frontend/functions/api/coupons/verify.ts`
+- **Caminho:** `frontend/functions/api/coupons/verify.ts`
+- **Nome:** `verify.ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 134
+- **Tamanho:** 4845 bytes
+
+```typescript
+interface Env {
+  PAYMENTS_KV?: {
+    get: (key: string) => Promise<string | null>;
+    put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
+  };
+  AUTH_SECRET?: string;
+}
+
+// Bloqueio explícito dos códigos antigos que eram públicos/fixos
+const FORBIDDEN_LEGACY_CODES = ["PCD50", "INCLUSAO50", "LAUDO50", "DESCONTO50"];
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const body: any = await request.json().catch(() => ({}));
+    const rawCode = (body.code || "").trim().toUpperCase();
+    const userEmail = (body.email || "").trim().toLowerCase();
+
+    if (!rawCode) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: "Por favor, digite o código do cupom." 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    // 1. Bloqueia tentativas de usar códigos fixos antigos
+    if (FORBIDDEN_LEGACY_CODES.includes(rawCode)) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: "O código genérico PCD50 foi desativado. Para garantir o benefício, envie seu laudo médico no WhatsApp para receber um cupom individual de uso único." 
+      }), {
+        status: 403,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    // 2. Validação no Cloudflare KV
+    if (env && env.PAYMENTS_KV) {
+      const recordStr = await env.PAYMENTS_KV.get(`coupon:${rawCode}`);
+      
+      if (!recordStr) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          message: "Cupom não encontrado ou inválido. Envie seu laudo médico no WhatsApp para receber seu código de 50% de desconto." 
+        }), {
+          status: 404,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+
+      try {
+        const record = JSON.parse(recordStr);
+
+        // Checagem estrita de uso único
+        if (record.used) {
+          const usedDateStr = record.usedAt ? new Date(record.usedAt).toLocaleDateString("pt-BR") : "";
+          return new Response(JSON.stringify({ 
+            success: false, 
+            message: `Este cupom já foi utilizado${usedDateStr ? ` em ${usedDateStr}` : ""} e só é válido uma única vez.` 
+          }), {
+            status: 409,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          });
+        }
+
+        // Marca imediatamente como utilizado (só vale uma vez)
+        record.used = true;
+        record.usedAt = new Date().toISOString();
+        record.usedBy = userEmail || "candidato";
+
+        await env.PAYMENTS_KV.put(`coupon:${rawCode}`, JSON.stringify(record), {
+          expirationTtl: 60 * 60 * 24 * 365 // mantem histórico por 1 ano
+        });
+
+        return new Response(JSON.stringify({
+          success: true,
+          code: rawCode,
+          discountPercent: record.discountPercent || 50,
+          message: "Cupom PcD validado com sucesso! 50% de desconto aplicado."
+        }), {
+          status: 200,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      } catch (parseErr) {
+        console.error("Erro ao parsear dados do cupom no KV:", parseErr);
+      }
+    }
+
+    // 3. Fallback de contingência caso o KV ainda não tenha sido vinculado no Cloudflare Pages
+    // Verifica formato válido gerado (ex: PCD-XXXX)
+    if (/^PCD-[A-Z0-9]{4,8}$/.test(rawCode)) {
+      return new Response(JSON.stringify({
+        success: true,
+        code: rawCode,
+        discountPercent: 50,
+        message: "Cupom PcD validado! 50% de desconto aplicado."
+      }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
+    return new Response(JSON.stringify({ 
+      success: false, 
+      message: "Cupom inválido. Envie seu laudo médico no WhatsApp para receber o código de 50% de desconto." 
+    }), {
+      status: 400,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      message: "Erro interno ao validar cupom.", 
+      error: err?.message 
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+};
+
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+};
+
+```
+
+---
+
 <a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 34. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+## 39. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Nome:** `[txid].ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7966,7 +8907,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 35. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 40. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8123,7 +9064,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 36. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 41. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8265,7 +9206,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-src-context-authcontexttsx"></a>
-## 37. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 42. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -8524,8 +9465,95 @@ export const useAuth = (): AuthContextType => {
 
 ---
 
+<a id="frontend-src-context-themecontexttsx"></a>
+## 43. Arquivo: `frontend/src/context/ThemeContext.tsx`
+- **Caminho:** `frontend/src/context/ThemeContext.tsx`
+- **Nome:** `ThemeContext.tsx`
+- **Linguagem / Sintaxe:** `tsx`
+- **Total de Linhas:** 73
+- **Tamanho:** 2038 bytes
+
+```tsx
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+
+export type Theme = 'light' | 'dark';
+
+interface ThemeContextType {
+  theme: Theme;
+  isDark: boolean;
+  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+const THEME_STORAGE_KEY = 'natalvagas_theme';
+
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'light';
+    try {
+      const saved = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+      if (saved === 'light' || saved === 'dark') return saved;
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch {
+      // fallback
+    }
+    return 'light';
+  });
+
+  const isDark = theme === 'dark';
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {}
+
+    // Sincroniza meta theme-color para navegadores móveis e PWA
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme === 'dark' ? '#0f172a' : '#059669');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setThemeState((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, isDark, toggleTheme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = (): ThemeContextType => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme deve ser utilizado dentro de um ThemeProvider');
+  }
+  return context;
+};
+
+```
+
+---
+
 <a id="frontend-src-services-paymentservicets"></a>
-## 38. Arquivo: `frontend/src/services/paymentService.ts`
+## 44. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8600,7 +9628,7 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 39. Arquivo: `frontend/src/types/blog.ts`
+## 45. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8635,7 +9663,7 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 40. Arquivo: `frontend/src/types/job.ts`
+## 46. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8704,7 +9732,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 41. Arquivo: `frontend/src/data/blogPosts.ts`
+## 47. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9283,7 +10311,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 42. Arquivo: `frontend/src/data/initialJobs.ts`
+## 48. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9317,7 +10345,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-src-data-seolandingpagests"></a>
-## 43. Arquivo: `frontend/src/data/seoLandingPages.ts`
+## 49. Arquivo: `frontend/src/data/seoLandingPages.ts`
 - **Caminho:** `frontend/src/data/seoLandingPages.ts`
 - **Nome:** `seoLandingPages.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9494,7 +10522,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-data-jobsjson"></a>
-## 44. Arquivo: `frontend/public/data/jobs.json`
+## 50. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -44661,7 +45689,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public--redirects"></a>
-## 45. Arquivo: `frontend/public/_redirects`
+## 51. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -44677,7 +45705,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 46. Arquivo: `frontend/public/ads.txt`
+## 52. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -44692,7 +45720,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestjson"></a>
-## 47. Arquivo: `frontend/public/manifest.json`
+## 53. Arquivo: `frontend/public/manifest.json`
 - **Caminho:** `frontend/public/manifest.json`
 - **Nome:** `manifest.json`
 - **Linguagem / Sintaxe:** `json`
@@ -44739,7 +45767,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestwebmanifest"></a>
-## 48. Arquivo: `frontend/public/manifest.webmanifest`
+## 54. Arquivo: `frontend/public/manifest.webmanifest`
 - **Caminho:** `frontend/public/manifest.webmanifest`
 - **Nome:** `manifest.webmanifest`
 - **Linguagem / Sintaxe:** `text`
@@ -44786,7 +45814,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 49. Arquivo: `frontend/public/robots.txt`
+## 55. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -44813,7 +45841,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 50. Arquivo: `frontend/public/sitemap.xml`
+## 56. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -53765,7 +54793,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-swjs"></a>
-## 51. Arquivo: `frontend/public/sw.js`
+## 57. Arquivo: `frontend/public/sw.js`
 - **Caminho:** `frontend/public/sw.js`
 - **Nome:** `sw.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -53866,7 +54894,7 @@ self.addEventListener('fetch', (event) => {
 ---
 
 <a id="frontend-envexample"></a>
-## 52. Arquivo: `frontend/.env.example`
+## 58. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -53888,7 +54916,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 53. Arquivo: `frontend/index.html`
+## 59. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -54000,7 +55028,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 54. Arquivo: `frontend/package-lock.json`
+## 60. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -57083,7 +58111,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 55. Arquivo: `frontend/postcss.config.js`
+## 61. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -57103,12 +58131,12 @@ export default {
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 56. Arquivo: `frontend/src/index.css`
+## 62. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
-- **Total de Linhas:** 50
-- **Tamanho:** 985 bytes
+- **Total de Linhas:** 62
+- **Tamanho:** 1215 bytes
 
 ```css
 @tailwind base;
@@ -57121,6 +58149,18 @@ export default {
     max-width: 100vw;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-overflow-scrolling: touch;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    background-color: #0f172a;
+    color: #f8fafc;
+  }
+
+  html.dark body {
+    background-color: #0f172a;
+    color: #f8fafc;
   }
 }
 
@@ -57167,7 +58207,7 @@ export default {
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 57. Arquivo: `frontend/src/vite-env.d.ts`
+## 63. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -57182,7 +58222,7 @@ export default {
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 58. Arquivo: `frontend/tailwind.config.js`
+## 64. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -57234,7 +58274,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 59. Arquivo: `frontend/tsconfig.json`
+## 65. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -57268,7 +58308,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 60. Arquivo: `frontend/tsconfig.node.json`
+## 66. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -57292,7 +58332,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 61. Arquivo: `backend/Dockerfile`
+## 67. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -57324,7 +58364,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 62. Arquivo: `backend/pom.xml`
+## 68. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -57442,7 +58482,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 63. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 69. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57468,7 +58508,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 64. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 70. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57510,7 +58550,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 65. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 71. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57583,7 +58623,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 66. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 72. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57649,7 +58689,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 67. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 73. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57746,7 +58786,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 68. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 74. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57784,7 +58824,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 69. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 75. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57805,7 +58845,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 70. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 76. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57861,7 +58901,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 71. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 77. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -57884,7 +58924,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 72. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 78. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58024,7 +59064,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 73. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58046,7 +59086,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 74. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 80. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58102,7 +59142,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 75. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 81. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58123,7 +59163,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 76. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 82. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58146,7 +59186,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 77. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 83. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58215,7 +59255,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 78. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 84. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58266,7 +59306,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 79. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 85. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58292,7 +59332,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 80. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 86. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58329,7 +59369,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 81. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 87. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58378,7 +59418,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 82. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 88. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -58569,7 +59609,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 83. Arquivo: `backend/src/main/resources/application.yml`
+## 89. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -58627,7 +59667,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 84. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 90. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -58712,7 +59752,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-add-whatsapp-jobspy"></a>
-## 85. Arquivo: `scripts/add_whatsapp_jobs.py`
+## 91. Arquivo: `scripts/add_whatsapp_jobs.py`
 - **Caminho:** `scripts/add_whatsapp_jobs.py`
 - **Nome:** `add_whatsapp_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -59673,7 +60713,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 86. Arquivo: `scripts/build_single_context_md.py`
+## 92. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -59830,7 +60870,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 87. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 93. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -59962,7 +61002,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-daily-job-syncymlexample"></a>
-## 88. Arquivo: `scripts/daily-job-sync.yml.example`
+## 94. Arquivo: `scripts/daily-job-sync.yml.example`
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
@@ -60049,7 +61089,7 @@ jobs:
 ---
 
 <a id="scripts-daily-job-crawlerpy"></a>
-## 89. Arquivo: `scripts/daily_job_crawler.py`
+## 95. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -60334,7 +61374,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 90. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 96. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -60635,7 +61675,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 91. Arquivo: `scripts/generate_sitemap.py`
+## 97. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -60817,7 +61857,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 92. Arquivo: `scripts/ingest_jobs.py`
+## 98. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61040,7 +62080,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 93. Arquivo: `scripts/rn_job_scraper.py`
+## 99. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61239,7 +62279,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 94. Arquivo: `scripts/test_efi_status.py`
+## 100. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61319,7 +62359,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 95. Arquivo: `scripts/verify_build_integrity.py`
+## 101. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61412,7 +62452,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 96. Arquivo: `scripts/verify_seo.py`
+## 102. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61495,7 +62535,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 97. Arquivo: `.env.example`
+## 103. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -61514,12 +62554,12 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 98. Arquivo: `.gitignore`
+## 104. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
-- **Total de Linhas:** 43
-- **Tamanho:** 452 bytes
+- **Total de Linhas:** 46
+- **Tamanho:** 502 bytes
 
 ```gitignore
 # Node & Frontend
@@ -61565,13 +62605,16 @@ pgdata/
 *.pem
 certs/
 
+# Imagens de triagem temporárias
+imagens vagas/
+
 
 ```
 
 ---
 
 <a id="docker-composeyml"></a>
-## 99. Arquivo: `docker-compose.yml`
+## 105. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

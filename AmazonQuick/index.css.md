@@ -1,7 +1,7 @@
 # File: index.css
 - **Original Path:** `frontend/src/index.css`
 - **Language / Type:** `css`
-- **Lines of Code:** 50
+- **Lines of Code:** 62
 
 ---
 
@@ -16,6 +16,18 @@
     max-width: 100vw;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-overflow-scrolling: touch;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    background-color: #0f172a;
+    color: #f8fafc;
+  }
+
+  html.dark body {
+    background-color: #0f172a;
+    color: #f8fafc;
   }
 }
 

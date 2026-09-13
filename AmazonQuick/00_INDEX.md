@@ -9,7 +9,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | Arquivo Markdown | Caminho Original no Projeto | Linhas | Tipo |
 | :--- | :--- | :--- | :--- |
 | [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
-| [gitignore.md](./gitignore.md) | `.gitignore` | 43 | `config` |
+| [gitignore.md](./gitignore.md) | `.gitignore` | 46 | `config` |
 | [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 248 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
 | [Dockerfile.md](./Dockerfile.md) | `backend/Dockerfile` | 18 | `config` |
@@ -39,6 +39,9 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [docker-compose.yml.md](./docker-compose.yml.md) | `docker-compose.yml` | 22 | `.yml` |
 | [frontend.env.example.md](./frontend.env.example.md) | `frontend/.env.example` | 8 | `.example` |
 | [sign-pro.ts.md](./sign-pro.ts.md) | `frontend/functions/api/auth/sign-pro.ts` | 87 | `.ts` |
+| [create.ts.md](./create.ts.md) | `frontend/functions/api/coupons/create.ts` | 145 | `.ts` |
+| [list.ts.md](./list.ts.md) | `frontend/functions/api/coupons/list.ts` | 95 | `.ts` |
+| [verify.ts.md](./verify.ts.md) | `frontend/functions/api/coupons/verify.ts` | 134 | `.ts` |
 | [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 111 | `.ts` |
 | [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 143 | `.ts` |
 | [verify-code.ts.md](./verify-code.ts.md) | `frontend/functions/api/payments/verify-code.ts` | 128 | `.ts` |
@@ -54,7 +57,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 13 | `.txt` |
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8938 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
-| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 584 | `.tsx` |
+| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 278 | `.tsx` |
 | [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 114 | `.tsx` |
@@ -65,21 +68,24 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 104 | `.tsx` |
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 155 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
-| [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 350 | `.tsx` |
+| [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 362 | `.tsx` |
 | [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 523 | `.tsx` |
-| [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 771 | `.tsx` |
+| [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 813 | `.tsx` |
 | [PwaInstallPrompt.tsx.md](./PwaInstallPrompt.tsx.md) | `frontend/src/components/PwaInstallPrompt.tsx` | 111 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
 | [SeoCategoryHero.tsx.md](./SeoCategoryHero.tsx.md) | `frontend/src/components/SeoCategoryHero.tsx` | 77 | `.tsx` |
 | [SocialPostGeneratorModal.tsx.md](./SocialPostGeneratorModal.tsx.md) | `frontend/src/components/SocialPostGeneratorModal.tsx` | 334 | `.tsx` |
+| [ThemeToggle.tsx.md](./ThemeToggle.tsx.md) | `frontend/src/components/ThemeToggle.tsx` | 41 | `.tsx` |
 | [WhatsAppCommunityBanner.tsx.md](./WhatsAppCommunityBanner.tsx.md) | `frontend/src/components/WhatsAppCommunityBanner.tsx` | 132 | `.tsx` |
 | [AuthContext.tsx.md](./AuthContext.tsx.md) | `frontend/src/context/AuthContext.tsx` | 246 | `.tsx` |
+| [ThemeContext.tsx.md](./ThemeContext.tsx.md) | `frontend/src/context/ThemeContext.tsx` | 73 | `.tsx` |
 | [blogPosts.ts.md](./blogPosts.ts.md) | `frontend/src/data/blogPosts.ts` | 565 | `.ts` |
 | [initialJobs.ts.md](./initialJobs.ts.md) | `frontend/src/data/initialJobs.ts` | 20 | `.ts` |
 | [seoLandingPages.ts.md](./seoLandingPages.ts.md) | `frontend/src/data/seoLandingPages.ts` | 163 | `.ts` |
-| [index.css.md](./index.css.md) | `frontend/src/index.css` | 50 | `.css` |
-| [main.tsx.md](./main.tsx.md) | `frontend/src/main.tsx` | 17 | `.tsx` |
+| [index.css.md](./index.css.md) | `frontend/src/index.css` | 62 | `.css` |
+| [main.tsx.md](./main.tsx.md) | `frontend/src/main.tsx` | 20 | `.tsx` |
 | [AboutUs.tsx.md](./AboutUs.tsx.md) | `frontend/src/pages/AboutUs.tsx` | 114 | `.tsx` |
+| [AdminCoupons.tsx.md](./AdminCoupons.tsx.md) | `frontend/src/pages/AdminCoupons.tsx` | 390 | `.tsx` |
 | [BlogList.tsx.md](./BlogList.tsx.md) | `frontend/src/pages/BlogList.tsx` | 248 | `.tsx` |
 | [BlogPost.tsx.md](./BlogPost.tsx.md) | `frontend/src/pages/BlogPost.tsx` | 267 | `.tsx` |
 | [Contact.tsx.md](./Contact.tsx.md) | `frontend/src/pages/Contact.tsx` | 176 | `.tsx` |
@@ -109,4 +115,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
 
 ---
-**Total de Arquivos:** 99 arquivos convertidos com sucesso.
+**Total de Arquivos:** 105 arquivos convertidos com sucesso.

@@ -1,7 +1,7 @@
 # File: Navbar.tsx
 - **Original Path:** `frontend/src/components/Navbar.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 350
+- **Lines of Code:** 362
 
 ---
 
@@ -12,6 +12,7 @@ import { PlusCircle, Search, Info, MessageSquare, FileText, Menu, X, ShieldCheck
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthModal } from './AuthModal';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
   onOpenPostJob: () => void;
@@ -52,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs print:hidden">
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs print:hidden transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
@@ -71,11 +72,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
           {/* Versão Desktop Minimalista (telas >= md) */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
+            <nav className="flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
               <Link 
                 to="/" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname === '/' ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname === '/' ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Vagas
@@ -83,8 +84,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
               <Link 
                 to="/criar-curriculo" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname === '/criar-curriculo' ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname === '/criar-curriculo' ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Criar Currículo
@@ -92,8 +93,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
               <Link 
                 to="/blog" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname.startsWith('/blog') ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname.startsWith('/blog') ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Blog
@@ -101,23 +102,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 
               <Link 
                 to="/sobre" 
-                className={`transition-colors hover:text-brand-600 ${
-                  location.pathname === '/sobre' ? 'text-brand-600 font-bold' : ''
+                className={`transition-colors hover:text-brand-600 dark:hover:text-brand-400 ${
+                  location.pathname === '/sobre' ? 'text-brand-600 dark:text-brand-400 font-bold' : ''
                 }`}
               >
                 Sobre
               </Link>
             </nav>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 lg:gap-4">
+              {/* Botão Sol/Lua Claro/Escuro Desktop */}
+              <ThemeToggle />
+
               {/* Status do Usuário / Botão Entrar */}
               {isAuthenticated ? (
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-bold text-slate-700">
-                    <User className="w-3.5 h-3.5 text-brand-600" />
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 border border-slate-200/50 dark:border-slate-700">
+                    <User className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
                     <span className="max-w-[100px] truncate">{user?.name}</span>
                     {user?.isPro && (
-                      <span className="bg-amber-100 text-amber-800 text-[10px] px-1 py-0.5 rounded-sm">PRO</span>
+                      <span className="bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 text-[10px] px-1 py-0.5 rounded-sm">PRO</span>
                     )}
                   </div>
                   <button
@@ -134,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 <button
                   type="button"
                   onClick={() => setIsAuthOpen(true)}
-                  className="text-sm font-semibold text-slate-700 hover:text-brand-600 transition-colors cursor-pointer"
+                  className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 transition-colors cursor-pointer"
                 >
                   Entrar
                 </button>
@@ -151,13 +155,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
             </div>
           </div>
 
-          {/* Versão Mobile (telas < md) - Ações Rápidas & Hambúrguer */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Versão Mobile (telas < md) - Ações Rápidas, Tema & Hambúrguer */}
+          <div className="flex md:hidden items-center gap-1.5 sm:gap-2">
+            {/* Botão Sol/Lua Claro/Escuro Mobile */}
+            <ThemeToggle />
+
             <Link 
               to="/criar-curriculo" 
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-brand-50 text-brand-700 text-xs font-bold border border-brand-200"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-brand-50 dark:bg-slate-800 text-brand-700 dark:text-brand-300 text-xs font-bold border border-brand-200 dark:border-slate-700"
             >
-              <FileText className="w-3.5 h-3.5 text-brand-600" />
+              <FileText className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
               <span>Currículo</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             </Link>
@@ -166,12 +173,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu de navegação'}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 transition-colors cursor-pointer"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-slate-800" />
+                <X className="w-6 h-6 text-slate-800 dark:text-slate-100" />
               ) : (
-                <Menu className="w-6 h-6 text-slate-800" />
+                <Menu className="w-6 h-6 text-slate-800 dark:text-slate-100" />
               )}
             </button>
           </div>
@@ -189,11 +196,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
           />
 
           {/* Painel do Menu */}
-          <div className="fixed inset-y-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-[101] flex flex-col justify-between p-6 overflow-y-auto transition-transform">
+          <div className="fixed inset-y-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl z-[101] flex flex-col justify-between p-6 overflow-y-auto transition-transform text-slate-800 dark:text-slate-100">
             
-            <div className="space-y-6">
+            <div className="space-y-5">
               {/* Topo da Gaveta */}
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-2.5">
                   <img 
                     src="/assets/logo-natalvagas.jpg" 
@@ -201,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                     className="h-9 w-auto rounded object-contain"
                   />
                   <div>
-                    <span className="text-lg font-black text-slate-900 block leading-none">
+                    <span className="text-lg font-black text-slate-900 dark:text-white block leading-none">
                       <span className="text-brand-600">Natal</span>
                       <span className="text-brand-400">Vagas</span>
                     </span>
@@ -213,27 +220,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Fechar menu"
-                  className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+                  className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
+              {/* Seletor Rápido de Tema Claro/Escuro */}
+              <div className="pt-1">
+                <ThemeToggle showLabel className="w-full justify-start py-2.5 px-3.5" />
+              </div>
+
               {/* Card de Usuário / Login no Mobile */}
               {isAuthenticated ? (
-                <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">
                       {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </div>
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-900 max-w-[120px] truncate">{user?.name}</span>
+                        <span className="text-xs font-bold text-slate-900 dark:text-white max-w-[120px] truncate">{user?.name}</span>
                         {user?.isPro && (
                           <span className="bg-amber-100 text-amber-800 text-[9px] font-bold px-1.5 py-0.5 rounded-sm">PRO</span>
                         )}
                       </div>
-                      <span className="text-[11px] text-slate-500 block truncate max-w-[150px]">{user?.email}</span>
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400 block truncate max-w-[150px]">{user?.email}</span>
                     </div>
                   </div>
                   <button
@@ -242,7 +254,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                       logout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="text-xs text-rose-600 font-semibold hover:underline"
+                    className="text-xs text-rose-600 dark:text-rose-400 font-semibold hover:underline"
                   >
                     Sair
                   </button>
@@ -251,9 +263,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 <button
                   type="button"
                   onClick={handleAuthMobile}
-                  className="w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-4 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
-                  <LogIn className="w-4 h-4 text-brand-600" />
+                  <LogIn className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                   <span>Entrar / Criar Conta</span>
                 </button>
               )}
@@ -263,7 +275,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
                 <Link
                   to="/"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-3.5 py-3 text-sm font-semibold text-slate-800 hover:text-brand-600 hover:bg-brand-50/50 rounded-xl transition-colors"
+                  className="flex items-center gap-3 px-3.5 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50/50 dark:hover:bg-slate-800 rounded-xl transition-colors"
                 >
                   <Search className="w-4 h-4 text-brand-500" />
                   <span>Vagas de Emprego em Natal e RN</span>
