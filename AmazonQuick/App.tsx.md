@@ -1,7 +1,7 @@
 # File: App.tsx
 - **Original Path:** `frontend/src/App.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 434
+- **Lines of Code:** 445
 
 ---
 
@@ -52,10 +52,21 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const [onlyNoExperience, setOnlyNoExperience] = useState<boolean>(false);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
+  // Mapa de indexação O(1) por slug e id para performance instantânea
+  const jobsLookupMap = useMemo(() => {
+    const map = new Map<string, Job>();
+    for (let i = 0; i < jobs.length; i++) {
+      const j = jobs[i];
+      if (j.slug) map.set(j.slug, j);
+      if (j.id) map.set(String(j.id), j);
+    }
+    return map;
+  }, [jobs]);
+
   // Trata abertura direta por URL (/vaga/:slug)
   useEffect(() => {
     if (slug) {
-      const found = jobs.find(j => j.slug === slug || String(j.id) === slug);
+      const found = jobsLookupMap.get(slug);
       if (found) {
         setActiveJob(found);
         document.title = `${found.title} — ${found.companyName} | Natal Vagas`;

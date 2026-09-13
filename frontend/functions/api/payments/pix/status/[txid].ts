@@ -2,6 +2,23 @@ interface Env {
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
   };
+  AUTH_SECRET?: string;
+}
+
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+
+async function signHMAC(secret: string, data: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', key, enc.encode(data));
+  const hashArray = Array.from(new Uint8Array(signature));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 export const onRequestGet = async ({ params, env }: { params: { txid: string }; env?: Env }) => {
@@ -49,13 +66,10 @@ export const onRequestGet = async ({ params, env }: { params: { txid: string }; 
       issuedAt: Date.now(),
       expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
     };
-    const b64 = btoa(JSON.stringify(tokenPayload));
-    let hash = 0;
-    for (let i = 0; i < b64.length; i++) {
-      hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-      hash |= 0;
-    }
-    const token = `${b64}.${Math.abs(hash).toString(36)}`;
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(tokenPayload))));
+    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const signature = await signHMAC(secret, b64);
+    const token = `${b64}.${signature}`;
 
     return new Response(JSON.stringify({
       status: 'approved',

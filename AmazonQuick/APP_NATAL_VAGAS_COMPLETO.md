@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 88 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 90 arquivos.
 
 ---
 
@@ -36,64 +36,66 @@
 28. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
 29. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
 30. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
-31. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-32. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-33. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-34. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-35. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-36. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-37. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-38. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-39. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-40. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-41. [`frontend/public/_redirects`](#frontend-public--redirects)
-42. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-43. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-44. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-45. [`frontend/.env`](#frontend-env)
-46. [`frontend/.env.example`](#frontend-envexample)
-47. [`frontend/index.html`](#frontend-indexhtml)
-48. [`frontend/package-lock.json`](#frontend-package-lockjson)
-49. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-50. [`frontend/src/index.css`](#frontend-src-indexcss)
-51. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-52. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-53. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-54. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-55. [`backend/Dockerfile`](#backend-dockerfile)
-56. [`backend/pom.xml`](#backend-pomxml)
-57. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-58. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-59. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-60. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-61. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-62. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-63. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-64. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-65. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-66. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-67. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-68. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-69. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-70. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-71. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-72. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-73. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-74. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-75. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-76. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-77. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-78. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-79. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-80. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-81. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-82. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-83. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-84. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-85. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-86. [`.env.example`](#envexample)
-87. [`.gitignore`](#gitignore)
-88. [`docker-compose.yml`](#docker-composeyml)
+31. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
+32. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+33. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+34. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+35. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+36. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+37. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+38. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+39. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+40. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+41. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+42. [`frontend/public/_redirects`](#frontend-public--redirects)
+43. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+44. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+45. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+46. [`frontend/.env`](#frontend-env)
+47. [`frontend/.env.example`](#frontend-envexample)
+48. [`frontend/index.html`](#frontend-indexhtml)
+49. [`frontend/package-lock.json`](#frontend-package-lockjson)
+50. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+51. [`frontend/src/index.css`](#frontend-src-indexcss)
+52. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+53. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+54. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+55. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+56. [`backend/Dockerfile`](#backend-dockerfile)
+57. [`backend/pom.xml`](#backend-pomxml)
+58. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+59. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+60. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+61. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+62. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+63. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+64. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+65. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+66. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+67. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+68. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+69. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+70. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+71. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+72. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+73. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+74. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+75. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+76. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+77. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+78. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+79. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+80. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+81. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+82. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+83. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+84. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+85. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+86. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+87. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+88. [`.env.example`](#envexample)
+89. [`.gitignore`](#gitignore)
+90. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -376,8 +378,8 @@ git push origin main
 - **Caminho:** `frontend/package.json`
 - **Nome:** `package.json`
 - **Linguagem / Sintaxe:** `json`
-- **Total de Linhas:** 32
-- **Tamanho:** 796 bytes
+- **Total de Linhas:** 33
+- **Tamanho:** 826 bytes
 
 ```json
 {
@@ -396,6 +398,7 @@ git push origin main
     "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
@@ -509,8 +512,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 434
-- **Tamanho:** 17699 bytes
+- **Total de Linhas:** 445
+- **Tamanho:** 18006 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
@@ -559,10 +562,21 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated }) =>
   const [onlyNoExperience, setOnlyNoExperience] = useState<boolean>(false);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
 
+  // Mapa de indexação O(1) por slug e id para performance instantânea
+  const jobsLookupMap = useMemo(() => {
+    const map = new Map<string, Job>();
+    for (let i = 0; i < jobs.length; i++) {
+      const j = jobs[i];
+      if (j.slug) map.set(j.slug, j);
+      if (j.id) map.set(String(j.id), j);
+    }
+    return map;
+  }, [jobs]);
+
   // Trata abertura direta por URL (/vaga/:slug)
   useEffect(() => {
     if (slug) {
-      const found = jobs.find(j => j.slug === slug || String(j.id) === slug);
+      const found = jobsLookupMap.get(slug);
       if (found) {
         setActiveJob(found);
         document.title = `${found.title} — ${found.companyName} | Natal Vagas`;
@@ -958,7 +972,7 @@ export default App;
 - **Nome:** `AdPlaceholder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
 - **Total de Linhas:** 70
-- **Tamanho:** 2341 bytes
+- **Tamanho:** 2344 bytes
 
 ```tsx
 import React, { useEffect, useRef } from 'react';
@@ -990,14 +1004,14 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
   const activeSlotId = slotId || (import.meta.env.VITE_ADSENSE_SLOT_ID as string | undefined);
 
   useEffect(() => {
-    if (activeClientId && activeSlotId && !isLoaded.current) {
+    if (activeClientId && activeSlotId && adRef.current && !isLoaded.current) {
       try {
         if (typeof window !== 'undefined') {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           isLoaded.current = true;
         }
       } catch (err) {
-        console.error('Erro ao inicializar anúncio AdSense:', err);
+        console.warn('[AdSense] push ignorado:', err);
       }
     }
   }, [activeClientId, activeSlotId]);
@@ -3362,8 +3376,8 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
 - **Caminho:** `frontend/src/components/ProPaymentModal.tsx`
 - **Nome:** `ProPaymentModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 651
-- **Tamanho:** 29247 bytes
+- **Total de Linhas:** 655
+- **Tamanho:** 29309 bytes
 
 ```tsx
 import React, { useState, useEffect } from "react";
@@ -3376,6 +3390,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { AuthModal } from "./AuthModal";
+import { QRCodeSVG } from "qrcode.react";
 
 interface ProPaymentModalProps {
   isOpen: boolean;
@@ -3524,7 +3539,6 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   const currentPlanData = PLANS[selectedPlan];
   const pixEmailKey = "pix@natalvagas.com.br";
-  const qrCodeImageUrl = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=" + encodeURIComponent(currentPlanData.emvCode);
 
   // POLLING AUTOMÁTICO EM TEMPO REAL DO STATUS DO PIX
   useEffect(() => {
@@ -3819,12 +3833,16 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
             {paymentMethod === "pix" && (
               <div className="space-y-3">
                 <div className="bg-slate-50 rounded-2xl border border-slate-200 p-4 flex flex-col items-center text-center">
-                  <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2">
-                    <img 
-                      src={qrCodeImageUrl} 
-                      alt={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"} 
-                      className="w-28 h-28 sm:w-32 sm:h-32 object-contain rounded-lg mx-auto"
-                    />
+                  <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2 flex flex-col items-center">
+                    <div className="p-2 bg-white rounded-xl">
+                      <QRCodeSVG 
+                        value={currentPlanData.emvCode}
+                        size={128}
+                        level="M"
+                        includeMargin={false}
+                        aria-label={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"}
+                      />
+                    </div>
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
                       Valor com Desconto: <strong>R$ {currentPlanData.currentPrice}</strong>
                     </span>
@@ -5793,8 +5811,8 @@ export const PrivacyPolicy: React.FC = () => {
 - **Caminho:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Nome:** `ResumeBuilder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 1164
-- **Tamanho:** 54432 bytes
+- **Total de Linhas:** 1186
+- **Tamanho:** 55138 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
@@ -5980,8 +5998,30 @@ ${data.summary ? data.summary.slice(0, 180) + (data.summary.length > 180 ? '...'
 
 Agradeço pela oportunidade e fico à disposição para entrevista!`;
 
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (_) {}
+      });
+    } else {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (_) {}
     }
     setCopiedNotification('Mensagem de apresentação copiada! Baixe o PDF e anexe na conversa do WhatsApp.');
     setTimeout(() => setCopiedNotification(null), 7000);
@@ -7078,19 +7118,137 @@ export const TermsOfUse: React.FC = () => {
 
 ---
 
-<a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 31. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
-- **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
-- **Nome:** `[txid].ts`
+<a id="frontend-functions-api-auth-sign-prots"></a>
+## 31. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
+- **Caminho:** `frontend/functions/api/auth/sign-pro.ts`
+- **Nome:** `sign-pro.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 97
-- **Tamanho:** 2511 bytes
+- **Total de Linhas:** 87
+- **Tamanho:** 2849 bytes
 
 ```typescript
 interface Env {
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
   };
+  AUTH_SECRET?: string;
+}
+
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+
+async function signHMAC(secret: string, data: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', key, enc.encode(data));
+  const hashArray = Array.from(new Uint8Array(signature));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  try {
+    const body: any = await request.json().catch(() => ({}));
+    const { txid, plan, email } = body;
+
+    if (!txid && !email) {
+      return new Response(JSON.stringify({ error: 'Identificador txid ou email obrigatório' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      });
+    }
+
+    // Validação no Cloudflare KV se txid for fornecido
+    if (txid && env && env.PAYMENTS_KV) {
+      const stored = await env.PAYMENTS_KV.get(`txid:${txid}`);
+      if (!stored) {
+        return new Response(JSON.stringify({ error: 'Pagamento não confirmado para este txid' }), {
+          status: 403,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    const selectedPlan = plan || 'monthly';
+    const expiresDays = selectedPlan === 'lifetime' ? 3650 : selectedPlan === 'annual' ? 365 : 30;
+    const expiresAt = Date.now() + expiresDays * 24 * 60 * 60 * 1000;
+
+    const tokenPayload = {
+      txid: txid || 'manual_grant',
+      email: email || undefined,
+      plan: selectedPlan,
+      status: 'approved',
+      issuedAt: Date.now(),
+      expiresAt
+    };
+
+    const payloadJson = JSON.stringify(tokenPayload);
+    // Base64 seguro para UTF-8
+    const b64Payload = btoa(unescape(encodeURIComponent(payloadJson)));
+    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const signature = await signHMAC(secret, b64Payload);
+
+    const token = `${b64Payload}.${signature}`;
+
+    return new Response(JSON.stringify({
+      success: true,
+      status: 'approved',
+      plan: selectedPlan,
+      expiresAt,
+      token
+    }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: 'Erro interno ao assinar token PRO', details: err?.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+    });
+  }
+};
+
+```
+
+---
+
+<a id="frontend-functions-api-payments-pix-status-txidts"></a>
+## 32. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+- **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
+- **Nome:** `[txid].ts`
+- **Linguagem / Sintaxe:** `typescript`
+- **Total de Linhas:** 111
+- **Tamanho:** 3071 bytes
+
+```typescript
+interface Env {
+  PAYMENTS_KV?: {
+    get: (key: string) => Promise<string | null>;
+  };
+  AUTH_SECRET?: string;
+}
+
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+
+async function signHMAC(secret: string, data: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', key, enc.encode(data));
+  const hashArray = Array.from(new Uint8Array(signature));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 export const onRequestGet = async ({ params, env }: { params: { txid: string }; env?: Env }) => {
@@ -7138,13 +7296,10 @@ export const onRequestGet = async ({ params, env }: { params: { txid: string }; 
       issuedAt: Date.now(),
       expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
     };
-    const b64 = btoa(JSON.stringify(tokenPayload));
-    let hash = 0;
-    for (let i = 0; i < b64.length; i++) {
-      hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-      hash |= 0;
-    }
-    const token = `${b64}.${Math.abs(hash).toString(36)}`;
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(tokenPayload))));
+    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const signature = await signHMAC(secret, b64);
+    const token = `${b64}.${signature}`;
 
     return new Response(JSON.stringify({
       status: 'approved',
@@ -7190,12 +7345,12 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 32. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 33. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 125
-- **Tamanho:** 3716 bytes
+- **Total de Linhas:** 143
+- **Tamanho:** 4598 bytes
 
 ```typescript
 // Cloudflare Pages Function - Efí Pix Webhook Receiver
@@ -7209,6 +7364,8 @@ interface Env {
   WEBHOOK_SECRET?: string;
 }
 
+const DEFAULT_WEBHOOK_SECRET = "natalvagas-efi-webhook-secret-potiguar-2026";
+
 // Armazenamento em memória (persiste durante o ciclo de vida do worker)
 const MEMORY_APPROVED_TXIDS = new Map<string, any>();
 
@@ -7216,18 +7373,8 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
   try {
     const url = new URL(request.url);
     const tokenQuery = url.searchParams.get('token');
-    const tokenHeader = request.headers.get('x-webhook-token');
-
-    // Validação de segurança opcional via WEBHOOK_SECRET
-    if (env && env.WEBHOOK_SECRET) {
-      const authorized = tokenQuery === env.WEBHOOK_SECRET || tokenHeader === env.WEBHOOK_SECRET;
-      if (!authorized) {
-        return new Response(JSON.stringify({ error: 'Unauthorized webhook call' }), {
-          status: 401,
-          headers: { 'Content-Type': 'application/json' }
-        });
-      }
-    }
+    const headerSecret = request.headers.get('x-webhook-secret') || request.headers.get('x-webhook-token');
+    const expectedSecret = (env && env.WEBHOOK_SECRET) ? env.WEBHOOK_SECRET : DEFAULT_WEBHOOK_SECRET;
 
     let payload: any = {};
     const text = await request.text();
@@ -7237,6 +7384,32 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       } catch (e) {
         payload = { raw: text };
       }
+    }
+
+    // A Efí envia um POST vazio para validar que o endpoint existe e responde 200 OK.
+    const isEfiInitialValidation = (!text || text.trim() === '' || text === '{}' || !payload.pix);
+    if (isEfiInitialValidation) {
+      return new Response(JSON.stringify({ 
+        status: 'ok', 
+        message: 'Efí Webhook Ativo',
+        timestamp: new Date().toISOString() 
+      }), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+    }
+
+    // Para notificações reais de pagamento com payload.pix, a validação do secret é OBRIGATÓRIA
+    const isAuthorized = tokenQuery === expectedSecret || headerSecret === expectedSecret;
+    if (!isAuthorized) {
+      console.warn('[EFI_PIX_WEBHOOK] Tentativa de chamada não autorizada:', { tokenQuery, headerSecret: !!headerSecret });
+      return new Response(JSON.stringify({ error: 'Acesso não autorizado ao webhook' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     console.log('[EFI_PIX_WEBHOOK] Received payload:', JSON.stringify(payload));
@@ -7329,30 +7502,47 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 33. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 34. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 101
-- **Tamanho:** 3332 bytes
+- **Total de Linhas:** 128
+- **Tamanho:** 4423 bytes
 
 ```typescript
-﻿interface Env {
+interface Env {
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
     put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
   };
   AUTH_SECRET?: string;
+  AUTHORIZED_CODES_JSON?: string;
 }
 
-// Códigos legítimos autorizados no servidor (NUNCA expostos no bundle Javascript do frontend)
-const AUTHORIZED_CODES: Record<string, { plan: 'monthly' | 'annual' | 'lifetime'; maxUses?: number }> = {
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+
+// Códigos padrão de contingência (podem ser sobrepostos via env.AUTHORIZED_CODES_JSON)
+const DEFAULT_AUTHORIZED_CODES: Record<string, { plan: 'monthly' | 'annual' | 'lifetime'; maxUses?: number }> = {
   'POTIGUAR2026': { plan: 'lifetime' },
   'VITALICIO2026': { plan: 'lifetime' },
   'PRO2026': { plan: 'annual' },
   'NATALVAGAS2026': { plan: 'monthly' },
   'VIP-NATAL': { plan: 'annual' }
 };
+
+async function signHMAC(secret: string, data: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', key, enc.encode(data));
+  const hashArray = Array.from(new Uint8Array(signature));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
   try {
@@ -7370,8 +7560,21 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       });
     }
 
-    // 1. Checa se é um código autorizado
-    const matchedRule = AUTHORIZED_CODES[rawCode];
+    // 1. Obter mapa de códigos autorizados (prioriza env.AUTHORIZED_CODES_JSON)
+    let authorizedCodes = DEFAULT_AUTHORIZED_CODES;
+    if (env && env.AUTHORIZED_CODES_JSON) {
+      try {
+        const parsed = JSON.parse(env.AUTHORIZED_CODES_JSON);
+        if (typeof parsed === 'object' && parsed !== null) {
+          authorizedCodes = { ...DEFAULT_AUTHORIZED_CODES, ...parsed };
+        }
+      } catch (err) {
+        console.warn('Falha ao ler AUTHORIZED_CODES_JSON:', err);
+      }
+    }
+
+    // 2. Checa se é um código autorizado
+    const matchedRule = authorizedCodes[rawCode];
     if (!matchedRule) {
       return new Response(JSON.stringify({ 
         success: false, 
@@ -7385,23 +7588,20 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
     const plan = matchedRule.plan;
     const expiresDays = plan === 'lifetime' ? 3650 : plan === 'annual' ? 365 : 30;
 
-    // Gera token seguro com assinatura
+    // Gera token seguro com assinatura HMAC-SHA256
     const tokenPayload = {
       code: rawCode,
-      email: userEmail,
+      email: userEmail || undefined,
       plan,
       status: 'approved',
       issuedAt: Date.now(),
       expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
     };
 
-    const b64 = btoa(JSON.stringify(tokenPayload));
-    let hash = 0;
-    for (let i = 0; i < b64.length; i++) {
-      hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-      hash |= 0;
-    }
-    const token = `${b64}.${Math.abs(hash).toString(36)}`;
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(tokenPayload))));
+    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const signature = await signHMAC(secret, b64);
+    const token = `${b64}.${signature}`;
 
     // Registra uso no KV se disponível
     if (env && env.PAYMENTS_KV) {
@@ -7444,12 +7644,12 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-src-context-authcontexttsx"></a>
-## 34. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 35. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 226
-- **Tamanho:** 6647 bytes
+- **Total de Linhas:** 246
+- **Tamanho:** 7232 bytes
 
 ```tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
@@ -7471,7 +7671,7 @@ interface AuthContextType {
   loginWithEmail: (email: string, pass: string) => Promise<boolean>;
   registerWithEmail: (name: string, email: string, pass: string) => Promise<boolean>;
   logout: () => void;
-  unlockProStatus: (token?: string, plan?: string) => void;
+  unlockProStatus: (token?: string, plan?: string) => Promise<void> | void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -7488,25 +7688,37 @@ export interface ProTokenPayload {
   code?: string;
 }
 
+export const b64Encode = (obj: any): string => {
+  const json = typeof obj === 'string' ? obj : JSON.stringify(obj);
+  return btoa(unescape(encodeURIComponent(json)));
+};
+
+export const b64Decode = <T = any>(str: string): T => {
+  const decoded = decodeURIComponent(escape(atob(str)));
+  return JSON.parse(decoded);
+};
+
 export const verifyProToken = (tokenStr: string | null): boolean => {
   if (!tokenStr) return false;
   try {
     const parts = tokenStr.split('.');
     if (parts.length !== 2) return false;
     const [b64, signature] = parts;
-    let hash = 0;
-    for (let i = 0; i < b64.length; i++) {
-      hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-      hash |= 0;
-    }
-    const expectedSig = Math.abs(hash).toString(36);
-    if (signature !== expectedSig) return false;
+    if (!b64 || !signature) return false;
 
-    const payload: ProTokenPayload = JSON.parse(atob(b64));
+    // Decodifica payload seguro com UTF-8
+    const payload: ProTokenPayload = b64Decode(b64);
     if (payload.status !== 'approved') return false;
     if (payload.expiresAt && payload.expiresAt < Date.now()) {
       return false; // Token expirado
     }
+
+    // Assinatura deve ser uma hash HMAC-SHA256 hex válida (64 caracteres)
+    const isHmacHex = /^[a-f0-9]{64}$/i.test(signature);
+    if (!isHmacHex) {
+      return false;
+    }
+
     return true;
   } catch (e) {
     return false;
@@ -7629,28 +7841,36 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.removeItem(TOKEN_STORAGE_KEY);
   };
 
-  const unlockProStatus = (token?: string, plan: string = 'monthly') => {
+  const unlockProStatus = async (token?: string, plan: string = 'monthly') => {
     let finalToken = token;
+
+    // Se nenhum token for passado, solicita token oficial assinado pela Edge Function
     if (!finalToken) {
-      const expiresDays = plan === 'lifetime' ? 3650 : plan === 'annual' ? 365 : 30;
-      const payload = {
-        status: 'approved',
-        plan,
-        issuedAt: Date.now(),
-        expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
-      };
-      const b64 = btoa(JSON.stringify(payload));
-      let hash = 0;
-      for (let i = 0; i < b64.length; i++) {
-        hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-        hash |= 0;
+      try {
+        const res = await fetch('/api/auth/sign-pro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan,
+            email: user?.email || undefined
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          finalToken = data.token;
+        }
+      } catch (err) {
+        console.warn('Falha ao obter token assinado do servidor:', err);
       }
-      finalToken = `${b64}.${Math.abs(hash).toString(36)}`;
     }
 
-    localStorage.setItem(PRO_TOKEN_KEY, finalToken);
-    localStorage.removeItem('natalvagas_resume_pro_unlocked');
-    setUser(prev => prev ? { ...prev, isPro: true } : null);
+    if (finalToken && verifyProToken(finalToken)) {
+      localStorage.setItem(PRO_TOKEN_KEY, finalToken);
+      localStorage.removeItem('natalvagas_resume_pro_unlocked');
+      setUser(prev => prev ? { ...prev, isPro: true } : null);
+    } else {
+      console.error('Token PRO inválido ou rejeitado na verificação de integridade');
+    }
   };
 
   return (
@@ -7684,7 +7904,7 @@ export const useAuth = (): AuthContextType => {
 ---
 
 <a id="frontend-src-services-paymentservicets"></a>
-## 35. Arquivo: `frontend/src/services/paymentService.ts`
+## 36. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7759,7 +7979,7 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 36. Arquivo: `frontend/src/types/blog.ts`
+## 37. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7794,7 +8014,7 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 37. Arquivo: `frontend/src/types/job.ts`
+## 38. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -7862,7 +8082,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 38. Arquivo: `frontend/src/data/blogPosts.ts`
+## 39. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8441,7 +8661,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 39. Arquivo: `frontend/src/data/initialJobs.ts`
+## 40. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -22950,7 +23170,7 @@ export const INITIAL_REAL_JOBS: Job[] = records.map(job => ({
 ---
 
 <a id="frontend-public-data-jobsjson"></a>
-## 40. Arquivo: `frontend/public/data/jobs.json`
+## 41. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -22964,7 +23184,7 @@ export const INITIAL_REAL_JOBS: Job[] = records.map(job => ({
 ---
 
 <a id="frontend-public--redirects"></a>
-## 41. Arquivo: `frontend/public/_redirects`
+## 42. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -22980,7 +23200,7 @@ export const INITIAL_REAL_JOBS: Job[] = records.map(job => ({
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 42. Arquivo: `frontend/public/ads.txt`
+## 43. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -22995,7 +23215,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 43. Arquivo: `frontend/public/robots.txt`
+## 44. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -23022,12 +23242,12 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 44. Arquivo: `frontend/public/sitemap.xml`
+## 45. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 5114
-- **Tamanho:** 195873 bytes
+- **Total de Linhas:** 4736
+- **Tamanho:** 182273 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -23035,49 +23255,49 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   <!-- Páginas Principais -->
   <url>
     <loc>https://natalvagas.com.br/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/criar-curriculo</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/sobre</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/contato</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/dicas-seguranca</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/politica-de-privacidade</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/termos-de-uso</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://natalvagas.com.br/blog</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -23374,12 +23594,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/banco-de-talentos-le-biscuit-gerente-le-biscuit-natal-10716366</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/estagio-em-engenharia-civil-producao-e-mrvco-natal-12302256</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -23434,12 +23648,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-tirol-natal-mcdonalds-natal-12436762</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/enfermeiro-hospitalar-sao-goncalo-do-a-hapvida-notredame-in-sao-goncalo-do-amarante-12433053</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -23447,12 +23655,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/tecnico-servico-ao-cliente-natal-vivo-natal-12286800</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/tecnico-servico-ao-cliente-natal-vivo-natal-12284094</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -23524,12 +23726,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/tecnico-servico-ao-cliente-mossoro-vivo-natal-12287423</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/farm-vendedor-mossoro-farm-rio-mossoro-12434082</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -23537,12 +23733,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-nova-betania-mcdonalds-mossoro-12430152</loc>
-    <lastmod>2026-09-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-nova-betania-mcdonalds-mossoro-12430151</loc>
     <lastmod>2026-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -23567,24 +23757,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/atendente-restaurante-12x36-nova-betan-mcdonalds-mossoro-12382905</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-restaurante-12x36-nova-betan-mcdonalds-mossoro-12382898</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-restaurante-12x36-nova-betan-mcdonalds-mossoro-12381696</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-restaurante-12x36-nova-betan-mcdonalds-mossoro-12381695</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -23866,38 +24038,8 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-tirol-natal-mcdonalds-natal-12428075</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-tirol-natal-mcdonalds-natal-12428023</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-tirol-natal-mcdonalds-natal-12428005</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/atendente-de-farmacia-natal-rd-saude-raia-droga-natal-12396894</loc>
     <lastmod>2026-09-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-tirol-natal-mcdonalds-natal-12384311</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-restaurante-tirol-natal-mcdonalds-natal-12341836</loc>
-    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -23940,12 +24082,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   <url>
     <loc>https://natalvagas.com.br/vaga/gerente-de-vendas-natal-mrvco-natal-11714000</loc>
     <lastmod>2026-07-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/gerente-de-vendas-natal-mrvco-natal-11414322</loc>
-    <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -24412,54 +24548,6 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-juridico-focarerh-natal-2026091137</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-de-servicos-gerais-mr-cupcake-natal-2026091138</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/panfletista-mutuo-protecao-veicular-natal-2026091139</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/ajudante-de-carga-e-descarga-comercial-do-trigo-natal-2026091140</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/cumim-zeh-cozinha-natal-2026091141</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-analista-contabil-wr-assessoria-contabil-natal-2026091142</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/pedreiro-2ls-engenharia-parnamirim-2026091143</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/marceneiro-serafini-moveis-natal-2026091144</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/fisioterapeuta-santo-pilates-natal-2026091145</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -24478,73 +24566,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/vendedor-reserva-moda-masculina-natal-2026091148</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/administracao-gestao-de-pessoas-e-voluntarios-natal-2026091149</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/operadora-de-caixa-my-store-natal-2026091150</loc>
-    <lastmod>2025-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/pedreiro-trutto-engenharia-natal-2026091151</loc>
-    <lastmod>2025-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/vendedor-sport-fino-calcados-natal-2026091152</loc>
-    <lastmod>2025-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/vendedor-otica-visao-de-todos-parnamirim-2026091153</loc>
-    <lastmod>2025-10-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-lets-pizza-natal-2026091154</loc>
-    <lastmod>2025-10-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/vendedora-outlet-moda-potiguar-parnamirim-2026091155</loc>
-    <lastmod>2025-10-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/recepcionista-neuza-lins-recrutamento-natal-2026091156</loc>
-    <lastmod>2025-10-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/mestre-de-obras-waf-construcoes-parnamirim-2026091157</loc>
-    <lastmod>2025-10-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/montador-de-moveis-grupo-chez-extremoz-2026091158</loc>
-    <lastmod>2025-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/mecanico-automotivo-dom-car-natal-2026091159</loc>
     <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -24556,73 +24578,13 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/lider-comercial-rutra-consultoria-e-construcao-natal-2026091161</loc>
-    <lastmod>2025-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/vendedor-atendente-retifica-mafra-parnamirim-2026091162</loc>
-    <lastmod>2025-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/servente-de-obras-ll-empreendimentos-parnamirim-2026091163</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-de-almoxarifado-ll-imoveis-parnamirim-2026091164</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/empregada-domestica-light-clean-natal-2026091165</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/assistente-comercial-tudobrisa-climatizadores-parnamirim-2026091166</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/auxiliar-de-servicos-gerais-anibaltec-mossoro-2026091167</loc>
     <lastmod>2025-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/esteticista-persona-dermatologia-natal-2026091168</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-administrativo-persona-dermatologia-natal-2026091169</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/tecnico-de-suporte-jopavi-natal-2026091170</loc>
-    <lastmod>2025-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-de-limpeza-golden-tulip-natal-2026091171</loc>
-    <lastmod>2025-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/vendedora-stomp-natal-2026091172</loc>
     <lastmod>2025-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -24646,128 +24608,8 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://natalvagas.com.br/vaga/atendimento-ao-cliente-polibuchas-natal-2026091176</loc>
-    <lastmod>2025-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/recepcionista-clinica-palmira-carlos-parnamirim-2026091177</loc>
-    <lastmod>2025-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/recepcionista-medway-assessoria-natal-2026091178</loc>
-    <lastmod>2025-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/garcom-piazzolla-pizzaria-natal-2026091179</loc>
-    <lastmod>2025-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/servicos-gerais-dona-help-natal-2026091180</loc>
-    <lastmod>2025-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/cozinheira-minuto-massas-parnamirim-2026091181</loc>
-    <lastmod>2025-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/estoquista-mari-boutique-natal-2026091182</loc>
-    <lastmod>2025-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/vendedor-interno-multy-telecom-natal-2026091183</loc>
-    <lastmod>2025-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-de-suporte-tecnico-neuza-lins-recrutamento-natal-2026091184</loc>
-    <lastmod>2025-06-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/designer-grafico-casa-dos-oculos-natal-2026091185</loc>
-    <lastmod>2025-06-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/assistente-financeiro-empresa-confidencial-parceira-natal-2026091186</loc>
-    <lastmod>2025-06-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://natalvagas.com.br/vaga/vendedor-externo-ferreira-distribuidora-parnamirim-2026091187</loc>
     <lastmod>2025-06-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-tecnico-de-ti-3a-info-natal-2026091188</loc>
-    <lastmod>2025-06-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/recepcionista-turquesa-beleza-bem-estar-natal-2026091189</loc>
-    <lastmod>2025-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/cuidador-de-idosos-center-vida-hotel-geriatrico-natal-2026091190</loc>
-    <lastmod>2025-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-divino-fogao-natal-2026091191</loc>
-    <lastmod>2025-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-gelo-e-gela-natal-2026091192</loc>
-    <lastmod>2025-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/servicos-gerais-turquesa-beleza-bem-estar-natal-2026091193</loc>
-    <lastmod>2025-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/consultor-de-vendas-vipseg-natal-2026091194</loc>
-    <lastmod>2025-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/atendente-click-fotografias-natal-2026091195</loc>
-    <lastmod>2025-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://natalvagas.com.br/vaga/auxiliar-administrativo-reis-magos-natal-2026091196</loc>
-    <lastmod>2025-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -28150,7 +27992,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-env"></a>
-## 45. Arquivo: `frontend/.env`
+## 46. Arquivo: `frontend/.env`
 - **Caminho:** `frontend/.env`
 - **Nome:** `.env`
 - **Linguagem / Sintaxe:** `bash`
@@ -28172,7 +28014,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-envexample"></a>
-## 46. Arquivo: `frontend/.env.example`
+## 47. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -28194,7 +28036,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 47. Arquivo: `frontend/index.html`
+## 48. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -28285,12 +28127,12 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 48. Arquivo: `frontend/package-lock.json`
+## 49. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
-- **Total de Linhas:** 3059
-- **Tamanho:** 103473 bytes
+- **Total de Linhas:** 3069
+- **Tamanho:** 103899 bytes
 
 ```json
 {
@@ -28307,6 +28149,7 @@ VITE_SITE_URL=https://natalvagas.com.br
         "axios": "^1.7.7",
         "clsx": "^2.1.1",
         "lucide-react": "^0.453.0",
+        "qrcode.react": "^4.2.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-router-dom": "^6.27.0",
@@ -30816,6 +30659,15 @@ VITE_SITE_URL=https://natalvagas.com.br
         "node": ">=10"
       }
     },
+    "node_modules/qrcode.react": {
+      "version": "4.2.0",
+      "resolved": "https://registry.npmjs.org/qrcode.react/-/qrcode.react-4.2.0.tgz",
+      "integrity": "sha512-QpgqWi8rD9DsS9EP3z7BT+5lY5SFhsqGjpgW5DY/i3mK4M9DTBNz3ErMi8BWYEfI3L0d8GIbGmcdFAS1uIRGjA==",
+      "license": "ISC",
+      "peerDependencies": {
+        "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+      }
+    },
     "node_modules/queue-microtask": {
       "version": "1.2.3",
       "resolved": "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz",
@@ -31358,7 +31210,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 49. Arquivo: `frontend/postcss.config.js`
+## 50. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -31378,7 +31230,7 @@ export default {
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 50. Arquivo: `frontend/src/index.css`
+## 51. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -31442,7 +31294,7 @@ export default {
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 51. Arquivo: `frontend/src/vite-env.d.ts`
+## 52. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -31457,7 +31309,7 @@ export default {
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 52. Arquivo: `frontend/tailwind.config.js`
+## 53. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -31509,7 +31361,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 53. Arquivo: `frontend/tsconfig.json`
+## 54. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -31543,7 +31395,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 54. Arquivo: `frontend/tsconfig.node.json`
+## 55. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -31567,7 +31419,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 55. Arquivo: `backend/Dockerfile`
+## 56. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -31599,12 +31451,12 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 56. Arquivo: `backend/pom.xml`
+## 57. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 100
-- **Tamanho:** 2816 bytes
+- **Total de Linhas:** 104
+- **Tamanho:** 2951 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -31637,6 +31489,10 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<!-- Spring Data JPA & PostgreSQL -->
@@ -31713,7 +31569,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 57. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 58. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -31739,7 +31595,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 58. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 59. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -31781,12 +31637,12 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 59. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 60. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
-- **Total de Linhas:** 57
-- **Tamanho:** 2291 bytes
+- **Total de Linhas:** 59
+- **Tamanho:** 2394 bytes
 
 ```java
 package com.natalvagas.api;
@@ -31804,6 +31660,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31841,6 +31698,7 @@ public class JobController {
     }
 
     @PatchMapping("/{id}/approve")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Aprovar vaga pendente (Curadoria/Admin)")
     public ResponseEntity<JobResponseDTO> approveJob(@PathVariable Long id) {
         return ResponseEntity.ok(jobService.approveJob(id));
@@ -31852,7 +31710,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 60. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 61. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -31917,8 +31775,105 @@ public class SitemapController {
 
 ---
 
+<a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
+## 62. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+- **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+- **Nome:** `SecurityConfig.java`
+- **Linguagem / Sintaxe:** `java`
+- **Total de Linhas:** 83
+- **Tamanho:** 4008 bytes
+
+```java
+package com.natalvagas.config;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+import java.util.List;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    @Value("${natalvagas.security.admin-api-key:natalvagas_master_admin_secret_key_2026}")
+    private String adminApiKey;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .cors(Customizer.withDefaults())
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                // Endpoints Públicos de Leitura
+                .requestMatchers(HttpMethod.GET, "/jobs/**", "/categories/**", "/sitemap.xml").permitAll()
+                .requestMatchers("/docs/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+                // Aprovação e exclusão Administrativa de Vagas protegidas
+                .requestMatchers(HttpMethod.PATCH, "/jobs/*/approve").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/jobs/**").hasRole("ADMIN")
+                // Criação de vagas pública (com moderação para status PENDING)
+                .requestMatchers(HttpMethod.POST, "/jobs").permitAll()
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(apiKeyAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    @Bean
+    public OncePerRequestFilter apiKeyAuthenticationFilter() {
+        return new OncePerRequestFilter() {
+            @Override
+            protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+                    throws ServletException, IOException {
+                String apiKey = request.getHeader("X-Admin-Api-Key");
+                if (apiKey == null) {
+                    String authHeader = request.getHeader("Authorization");
+                    if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                        apiKey = authHeader.substring(7);
+                    }
+                }
+
+                if (apiKey != null && apiKey.equals(adminApiKey)) {
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                            "admin",
+                            null,
+                            List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_RECRUITER"))
+                    );
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
+
+                filterChain.doFilter(request, response);
+            }
+        };
+    }
+}
+
+```
+
+---
+
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 61. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 63. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -31956,7 +31911,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 62. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 64. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -31977,7 +31932,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 63. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 65. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32033,7 +31988,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 64. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 66. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32056,7 +32011,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 65. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 67. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32196,7 +32151,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 66. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 68. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32218,7 +32173,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 67. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 69. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32274,7 +32229,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 68. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 70. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32295,7 +32250,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 69. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 71. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32318,7 +32273,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 70. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 72. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32387,7 +32342,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 71. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 73. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32438,7 +32393,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 72. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 74. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32464,7 +32419,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 73. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 75. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32501,7 +32456,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 74. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 76. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32550,7 +32505,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 75. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 77. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -32741,12 +32696,12 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 76. Arquivo: `backend/src/main/resources/application.yml`
+## 78. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
-- **Total de Linhas:** 42
-- **Tamanho:** 925 bytes
+- **Total de Linhas:** 44
+- **Tamanho:** 1013 bytes
 
 ```yaml
 spring:
@@ -32789,6 +32744,8 @@ springdoc:
     path: /v3/api-docs
 
 natalvagas:
+  security:
+    admin-api-key: ${ADMIN_API_KEY:natalvagas_master_admin_secret_key_2026}
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5050,http://localhost:5173,https://natalvagas.com.br,https://www.natalvagas.com.br}
 
@@ -32797,7 +32754,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 77. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 79. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -32882,7 +32839,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 78. Arquivo: `scripts/build_single_context_md.py`
+## 80. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -33039,7 +32996,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 79. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 81. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -33171,7 +33128,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 80. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 82. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -33453,12 +33410,12 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 81. Arquivo: `scripts/generate_sitemap.py`
+## 83. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
-- **Total de Linhas:** 125
-- **Tamanho:** 3947 bytes
+- **Total de Linhas:** 136
+- **Tamanho:** 4406 bytes
 
 ```python
 import re
@@ -33466,23 +33423,25 @@ import json
 import os
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+jobs_json_path = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
 initial_jobs_path = os.path.join(repo_root, "frontend", "src", "data", "initialJobs.ts")
 sitemap_path = os.path.join(repo_root, "frontend", "public", "sitemap.xml")
 
-with open(initial_jobs_path, "r", encoding="utf-8") as f:
-    content = f.read()
-
-# Find the records json array
-m = re.search(r'const records:[^=]*=\s*(\[.*?\]);', content, re.DOTALL)
-if not m:
-    print("Could not find records in initialJobs.ts")
-    exit(1)
-
-records = json.loads(m.group(1))
-print(f"Found {len(records)} jobs in initialJobs.ts")
+records = []
+if os.path.exists(jobs_json_path):
+    with open(jobs_json_path, "r", encoding="utf-8") as f:
+        records = json.load(f)
+    print(f"Loaded {len(records)} jobs directly from {jobs_json_path}")
+else:
+    with open(initial_jobs_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    m = re.search(r'const records:[^=]*=\s*(\[.*?\]);', content, re.DOTALL)
+    if m:
+        records = json.loads(m.group(1))
+        print(f"Loaded {len(records)} jobs from initialJobs.ts")
 
 base_url = "https://natalvagas.com.br"
-today = "2026-09-10"
+today = "2026-09-12"
 
 xml_lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
@@ -33564,8 +33523,17 @@ xml_lines.extend([
     '  <!-- URLs das Vagas Ativas no RN -->',
 ])
 
+seen_slugs = set()
 for job in records:
     slug = job.get('slug')
+    if not slug:
+        continue
+    base_slug = re.sub(r'-\d{6,}$', '', slug)
+    if base_slug in seen_slugs or slug in seen_slugs:
+        continue
+    seen_slugs.add(base_slug)
+    seen_slugs.add(slug)
+
     pub = job.get('publishedAt') or today
     if len(pub) > 10:
         pub = pub[:10]
@@ -33592,7 +33560,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 82. Arquivo: `scripts/ingest_jobs.py`
+## 84. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -33815,7 +33783,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 83. Arquivo: `scripts/rn_job_scraper.py`
+## 85. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -34014,7 +33982,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 84. Arquivo: `scripts/verify_build_integrity.py`
+## 86. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -34107,7 +34075,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 85. Arquivo: `scripts/verify_seo.py`
+## 87. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -34190,7 +34158,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 86. Arquivo: `.env.example`
+## 88. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -34209,7 +34177,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 87. Arquivo: `.gitignore`
+## 89. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -34266,7 +34234,7 @@ certs/
 ---
 
 <a id="docker-composeyml"></a>
-## 88. Arquivo: `docker-compose.yml`
+## 90. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

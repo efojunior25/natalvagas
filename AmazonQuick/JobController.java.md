@@ -1,7 +1,7 @@
 # File: JobController.java
 - **Original Path:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Language / Type:** `java`
-- **Lines of Code:** 57
+- **Lines of Code:** 59
 
 ---
 
@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -58,6 +59,7 @@ public class JobController {
     }
 
     @PatchMapping("/{id}/approve")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Aprovar vaga pendente (Curadoria/Admin)")
     public ResponseEntity<JobResponseDTO> approveJob(@PathVariable Long id) {
         return ResponseEntity.ok(jobService.approveJob(id));

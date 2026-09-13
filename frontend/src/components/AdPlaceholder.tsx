@@ -27,14 +27,14 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
   const activeSlotId = slotId || (import.meta.env.VITE_ADSENSE_SLOT_ID as string | undefined);
 
   useEffect(() => {
-    if (activeClientId && activeSlotId && !isLoaded.current) {
+    if (activeClientId && activeSlotId && adRef.current && !isLoaded.current) {
       try {
         if (typeof window !== 'undefined') {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           isLoaded.current = true;
         }
       } catch (err) {
-        console.error('Erro ao inicializar anúncio AdSense:', err);
+        console.warn('[AdSense] push ignorado:', err);
       }
     }
   }, [activeClientId, activeSlotId]);

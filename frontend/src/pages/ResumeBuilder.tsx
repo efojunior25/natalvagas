@@ -181,8 +181,30 @@ ${data.summary ? data.summary.slice(0, 180) + (data.summary.length > 180 ? '...'
 
 Agradeço pela oportunidade e fico à disposição para entrevista!`;
 
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (_) {}
+      });
+    } else {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (_) {}
     }
     setCopiedNotification('Mensagem de apresentação copiada! Baixe o PDF e anexe na conversa do WhatsApp.');
     setTimeout(() => setCopiedNotification(null), 7000);

@@ -1,7 +1,7 @@
 # File: pom.xml
 - **Original Path:** `backend/pom.xml`
 - **Language / Type:** `xml`
-- **Lines of Code:** 100
+- **Lines of Code:** 104
 
 ---
 
@@ -36,6 +36,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<!-- Spring Data JPA & PostgreSQL -->

@@ -17,7 +17,7 @@ interface AuthContextType {
   loginWithEmail: (email: string, pass: string) => Promise<boolean>;
   registerWithEmail: (name: string, email: string, pass: string) => Promise<boolean>;
   logout: () => void;
-  unlockProStatus: (token?: string, plan?: string) => void;
+  unlockProStatus: (token?: string, plan?: string) => Promise<void> | void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -34,25 +34,37 @@ export interface ProTokenPayload {
   code?: string;
 }
 
+export const b64Encode = (obj: any): string => {
+  const json = typeof obj === 'string' ? obj : JSON.stringify(obj);
+  return btoa(unescape(encodeURIComponent(json)));
+};
+
+export const b64Decode = <T = any>(str: string): T => {
+  const decoded = decodeURIComponent(escape(atob(str)));
+  return JSON.parse(decoded);
+};
+
 export const verifyProToken = (tokenStr: string | null): boolean => {
   if (!tokenStr) return false;
   try {
     const parts = tokenStr.split('.');
     if (parts.length !== 2) return false;
     const [b64, signature] = parts;
-    let hash = 0;
-    for (let i = 0; i < b64.length; i++) {
-      hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-      hash |= 0;
-    }
-    const expectedSig = Math.abs(hash).toString(36);
-    if (signature !== expectedSig) return false;
+    if (!b64 || !signature) return false;
 
-    const payload: ProTokenPayload = JSON.parse(atob(b64));
+    // Decodifica payload seguro com UTF-8
+    const payload: ProTokenPayload = b64Decode(b64);
     if (payload.status !== 'approved') return false;
     if (payload.expiresAt && payload.expiresAt < Date.now()) {
       return false; // Token expirado
     }
+
+    // Assinatura deve ser uma hash HMAC-SHA256 hex válida (64 caracteres)
+    const isHmacHex = /^[a-f0-9]{64}$/i.test(signature);
+    if (!isHmacHex) {
+      return false;
+    }
+
     return true;
   } catch (e) {
     return false;
@@ -175,28 +187,36 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.removeItem(TOKEN_STORAGE_KEY);
   };
 
-  const unlockProStatus = (token?: string, plan: string = 'monthly') => {
+  const unlockProStatus = async (token?: string, plan: string = 'monthly') => {
     let finalToken = token;
+
+    // Se nenhum token for passado, solicita token oficial assinado pela Edge Function
     if (!finalToken) {
-      const expiresDays = plan === 'lifetime' ? 3650 : plan === 'annual' ? 365 : 30;
-      const payload = {
-        status: 'approved',
-        plan,
-        issuedAt: Date.now(),
-        expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
-      };
-      const b64 = btoa(JSON.stringify(payload));
-      let hash = 0;
-      for (let i = 0; i < b64.length; i++) {
-        hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-        hash |= 0;
+      try {
+        const res = await fetch('/api/auth/sign-pro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan,
+            email: user?.email || undefined
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          finalToken = data.token;
+        }
+      } catch (err) {
+        console.warn('Falha ao obter token assinado do servidor:', err);
       }
-      finalToken = `${b64}.${Math.abs(hash).toString(36)}`;
     }
 
-    localStorage.setItem(PRO_TOKEN_KEY, finalToken);
-    localStorage.removeItem('natalvagas_resume_pro_unlocked');
-    setUser(prev => prev ? { ...prev, isPro: true } : null);
+    if (finalToken && verifyProToken(finalToken)) {
+      localStorage.setItem(PRO_TOKEN_KEY, finalToken);
+      localStorage.removeItem('natalvagas_resume_pro_unlocked');
+      setUser(prev => prev ? { ...prev, isPro: true } : null);
+    } else {
+      console.error('Token PRO inválido ou rejeitado na verificação de integridade');
+    }
   };
 
   return (

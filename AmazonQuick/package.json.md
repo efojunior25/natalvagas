@@ -1,7 +1,7 @@
 # File: package.json
 - **Original Path:** `frontend/package.json`
 - **Language / Type:** `json`
-- **Lines of Code:** 32
+- **Lines of Code:** 33
 
 ---
 
@@ -22,6 +22,7 @@
     "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",

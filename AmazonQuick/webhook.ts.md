@@ -1,7 +1,7 @@
 # File: webhook.ts
 - **Original Path:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Language / Type:** `typescript`
-- **Lines of Code:** 125
+- **Lines of Code:** 143
 
 ---
 
@@ -17,6 +17,8 @@ interface Env {
   WEBHOOK_SECRET?: string;
 }
 
+const DEFAULT_WEBHOOK_SECRET = "natalvagas-efi-webhook-secret-potiguar-2026";
+
 // Armazenamento em memória (persiste durante o ciclo de vida do worker)
 const MEMORY_APPROVED_TXIDS = new Map<string, any>();
 
@@ -24,18 +26,8 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
   try {
     const url = new URL(request.url);
     const tokenQuery = url.searchParams.get('token');
-    const tokenHeader = request.headers.get('x-webhook-token');
-
-    // Validação de segurança opcional via WEBHOOK_SECRET
-    if (env && env.WEBHOOK_SECRET) {
-      const authorized = tokenQuery === env.WEBHOOK_SECRET || tokenHeader === env.WEBHOOK_SECRET;
-      if (!authorized) {
-        return new Response(JSON.stringify({ error: 'Unauthorized webhook call' }), {
-          status: 401,
-          headers: { 'Content-Type': 'application/json' }
-        });
-      }
-    }
+    const headerSecret = request.headers.get('x-webhook-secret') || request.headers.get('x-webhook-token');
+    const expectedSecret = (env && env.WEBHOOK_SECRET) ? env.WEBHOOK_SECRET : DEFAULT_WEBHOOK_SECRET;
 
     let payload: any = {};
     const text = await request.text();
@@ -45,6 +37,32 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       } catch (e) {
         payload = { raw: text };
       }
+    }
+
+    // A Efí envia um POST vazio para validar que o endpoint existe e responde 200 OK.
+    const isEfiInitialValidation = (!text || text.trim() === '' || text === '{}' || !payload.pix);
+    if (isEfiInitialValidation) {
+      return new Response(JSON.stringify({ 
+        status: 'ok', 
+        message: 'Efí Webhook Ativo',
+        timestamp: new Date().toISOString() 
+      }), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+    }
+
+    // Para notificações reais de pagamento com payload.pix, a validação do secret é OBRIGATÓRIA
+    const isAuthorized = tokenQuery === expectedSecret || headerSecret === expectedSecret;
+    if (!isAuthorized) {
+      console.warn('[EFI_PIX_WEBHOOK] Tentativa de chamada não autorizada:', { tokenQuery, headerSecret: !!headerSecret });
+      return new Response(JSON.stringify({ error: 'Acesso não autorizado ao webhook' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     console.log('[EFI_PIX_WEBHOOK] Received payload:', JSON.stringify(payload));

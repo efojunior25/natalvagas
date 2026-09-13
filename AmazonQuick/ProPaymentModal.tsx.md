@@ -1,7 +1,7 @@
 # File: ProPaymentModal.tsx
 - **Original Path:** `frontend/src/components/ProPaymentModal.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 651
+- **Lines of Code:** 655
 
 ---
 
@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { AuthModal } from "./AuthModal";
+import { QRCodeSVG } from "qrcode.react";
 
 interface ProPaymentModalProps {
   isOpen: boolean;
@@ -164,7 +165,6 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   const currentPlanData = PLANS[selectedPlan];
   const pixEmailKey = "pix@natalvagas.com.br";
-  const qrCodeImageUrl = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=" + encodeURIComponent(currentPlanData.emvCode);
 
   // POLLING AUTOMÁTICO EM TEMPO REAL DO STATUS DO PIX
   useEffect(() => {
@@ -459,12 +459,16 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
             {paymentMethod === "pix" && (
               <div className="space-y-3">
                 <div className="bg-slate-50 rounded-2xl border border-slate-200 p-4 flex flex-col items-center text-center">
-                  <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2">
-                    <img 
-                      src={qrCodeImageUrl} 
-                      alt={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"} 
-                      className="w-28 h-28 sm:w-32 sm:h-32 object-contain rounded-lg mx-auto"
-                    />
+                  <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2 flex flex-col items-center">
+                    <div className="p-2 bg-white rounded-xl">
+                      <QRCodeSVG 
+                        value={currentPlanData.emvCode}
+                        size={128}
+                        level="M"
+                        includeMargin={false}
+                        aria-label={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"}
+                      />
+                    </div>
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
                       Valor com Desconto: <strong>R$ {currentPlanData.currentPrice}</strong>
                     </span>

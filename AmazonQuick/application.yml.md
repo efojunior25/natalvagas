@@ -1,7 +1,7 @@
 # File: application.yml
 - **Original Path:** `backend/src/main/resources/application.yml`
 - **Language / Type:** `yaml`
-- **Lines of Code:** 42
+- **Lines of Code:** 44
 
 ---
 
@@ -46,6 +46,8 @@ springdoc:
     path: /v3/api-docs
 
 natalvagas:
+  security:
+    admin-api-key: ${ADMIN_API_KEY:natalvagas_master_admin_secret_key_2026}
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5050,http://localhost:5173,https://natalvagas.com.br,https://www.natalvagas.com.br}
 

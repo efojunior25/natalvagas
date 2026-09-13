@@ -1,19 +1,36 @@
-﻿interface Env {
+interface Env {
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
     put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
   };
   AUTH_SECRET?: string;
+  AUTHORIZED_CODES_JSON?: string;
 }
 
-// Códigos legítimos autorizados no servidor (NUNCA expostos no bundle Javascript do frontend)
-const AUTHORIZED_CODES: Record<string, { plan: 'monthly' | 'annual' | 'lifetime'; maxUses?: number }> = {
+const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
+
+// Códigos padrão de contingência (podem ser sobrepostos via env.AUTHORIZED_CODES_JSON)
+const DEFAULT_AUTHORIZED_CODES: Record<string, { plan: 'monthly' | 'annual' | 'lifetime'; maxUses?: number }> = {
   'POTIGUAR2026': { plan: 'lifetime' },
   'VITALICIO2026': { plan: 'lifetime' },
   'PRO2026': { plan: 'annual' },
   'NATALVAGAS2026': { plan: 'monthly' },
   'VIP-NATAL': { plan: 'annual' }
 };
+
+async function signHMAC(secret: string, data: string): Promise<string> {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', key, enc.encode(data));
+  const hashArray = Array.from(new Uint8Array(signature));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
   try {
@@ -31,8 +48,21 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       });
     }
 
-    // 1. Checa se é um código autorizado
-    const matchedRule = AUTHORIZED_CODES[rawCode];
+    // 1. Obter mapa de códigos autorizados (prioriza env.AUTHORIZED_CODES_JSON)
+    let authorizedCodes = DEFAULT_AUTHORIZED_CODES;
+    if (env && env.AUTHORIZED_CODES_JSON) {
+      try {
+        const parsed = JSON.parse(env.AUTHORIZED_CODES_JSON);
+        if (typeof parsed === 'object' && parsed !== null) {
+          authorizedCodes = { ...DEFAULT_AUTHORIZED_CODES, ...parsed };
+        }
+      } catch (err) {
+        console.warn('Falha ao ler AUTHORIZED_CODES_JSON:', err);
+      }
+    }
+
+    // 2. Checa se é um código autorizado
+    const matchedRule = authorizedCodes[rawCode];
     if (!matchedRule) {
       return new Response(JSON.stringify({ 
         success: false, 
@@ -46,23 +76,20 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
     const plan = matchedRule.plan;
     const expiresDays = plan === 'lifetime' ? 3650 : plan === 'annual' ? 365 : 30;
 
-    // Gera token seguro com assinatura
+    // Gera token seguro com assinatura HMAC-SHA256
     const tokenPayload = {
       code: rawCode,
-      email: userEmail,
+      email: userEmail || undefined,
       plan,
       status: 'approved',
       issuedAt: Date.now(),
       expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
     };
 
-    const b64 = btoa(JSON.stringify(tokenPayload));
-    let hash = 0;
-    for (let i = 0; i < b64.length; i++) {
-      hash = ((hash << 5) - hash) + b64.charCodeAt(i);
-      hash |= 0;
-    }
-    const token = `${b64}.${Math.abs(hash).toString(36)}`;
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(tokenPayload))));
+    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const signature = await signHMAC(secret, b64);
+    const token = `${b64}.${signature}`;
 
     // Registra uso no KV se disponível
     if (env && env.PAYMENTS_KV) {

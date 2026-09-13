@@ -3,23 +3,25 @@ import json
 import os
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+jobs_json_path = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
 initial_jobs_path = os.path.join(repo_root, "frontend", "src", "data", "initialJobs.ts")
 sitemap_path = os.path.join(repo_root, "frontend", "public", "sitemap.xml")
 
-with open(initial_jobs_path, "r", encoding="utf-8") as f:
-    content = f.read()
-
-# Find the records json array
-m = re.search(r'const records:[^=]*=\s*(\[.*?\]);', content, re.DOTALL)
-if not m:
-    print("Could not find records in initialJobs.ts")
-    exit(1)
-
-records = json.loads(m.group(1))
-print(f"Found {len(records)} jobs in initialJobs.ts")
+records = []
+if os.path.exists(jobs_json_path):
+    with open(jobs_json_path, "r", encoding="utf-8") as f:
+        records = json.load(f)
+    print(f"Loaded {len(records)} jobs directly from {jobs_json_path}")
+else:
+    with open(initial_jobs_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    m = re.search(r'const records:[^=]*=\s*(\[.*?\]);', content, re.DOTALL)
+    if m:
+        records = json.loads(m.group(1))
+        print(f"Loaded {len(records)} jobs from initialJobs.ts")
 
 base_url = "https://natalvagas.com.br"
-today = "2026-09-10"
+today = "2026-09-12"
 
 xml_lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
@@ -101,8 +103,17 @@ xml_lines.extend([
     '  <!-- URLs das Vagas Ativas no RN -->',
 ])
 
+seen_slugs = set()
 for job in records:
     slug = job.get('slug')
+    if not slug:
+        continue
+    base_slug = re.sub(r'-\d{6,}$', '', slug)
+    if base_slug in seen_slugs or slug in seen_slugs:
+        continue
+    seen_slugs.add(base_slug)
+    seen_slugs.add(slug)
+
     pub = job.get('publishedAt') or today
     if len(pub) > 10:
         pub = pub[:10]
