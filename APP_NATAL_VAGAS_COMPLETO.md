@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 113 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 114 arquivos.
 
 ---
 
@@ -117,8 +117,9 @@
 109. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
 110. [`scripts/verify_seo.py`](#scripts-verify-seopy)
 111. [`.env.example`](#envexample)
-112. [`.gitignore`](#gitignore)
-113. [`docker-compose.yml`](#docker-composeyml)
+112. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
+113. [`.gitignore`](#gitignore)
+114. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -63645,8 +63646,95 @@ POSTGRES_PORT=5432
 
 ---
 
+<a id="github-workflows-daily-job-syncyml"></a>
+## 112. Arquivo: `.github/workflows/daily-job-sync.yml`
+- **Caminho:** `.github/workflows/daily-job-sync.yml`
+- **Nome:** `daily-job-sync.yml`
+- **Linguagem / Sintaxe:** `yaml`
+- **Total de Linhas:** 73
+- **Tamanho:** 2307 bytes
+
+```yaml
+name: Atualização Diária de Vagas (Natal Vagas)
+
+on:
+  schedule:
+    # Executa todos os dias às 09:00 UTC (06:00 horário de Brasília / Natal)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Permite disparar manualmente pelo botão "Run workflow" no GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-jobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar Repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Instalar Dependências Python
+        run: |
+          pip install requests pillow
+
+      - name: 🤖 Rastrear Novas Vagas no RN
+        run: |
+          python3 scripts/daily_job_crawler.py
+
+      - name: 🗺️ Regenerar Sitemap XML
+        run: |
+          python3 scripts/generate_sitemap.py
+
+      - name: 🛡️ Teste de Integridade Pré-Build
+        run: |
+          python3 scripts/verify_build_integrity.py
+
+      - name: ⚡ Configurar Node.js & Cache do Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 🏗️ Validar Build de Produção
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: 🔄 Sincronizar Documentação & Contexto
+        run: |
+          python3 scripts/convert_to_amazon_quick.py
+          python3 scripts/build_single_context_md.py
+
+      - name: 🚀 Commit e Deploy Automático na Cloudflare
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "$(git status --porcelain frontend/public/data/jobs.json)" ]; then
+            git add frontend/public/data/jobs.json frontend/public/sitemap.xml AmazonQuick/ APP_NATAL_VAGAS.md APP_NATAL_VAGAS_COMPLETO.md
+            git commit -m "chore(auto): atualização diária do catálogo de vagas e sitemap [skip ci]"
+            git push origin main
+            echo "Novas vagas publicadas com sucesso na branch main!"
+          else
+            echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
+          fi
+
+```
+
+---
+
 <a id="gitignore"></a>
-## 112. Arquivo: `.gitignore`
+## 113. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -63706,7 +63794,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 113. Arquivo: `docker-compose.yml`
+## 114. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`
