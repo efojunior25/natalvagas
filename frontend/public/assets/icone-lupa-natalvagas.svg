@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Cores Oficiais Natal Vagas -->
+    <linearGradient id="lupaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Grupo Geral do Ícone Centralizado -->
+  <g transform="translate(256, 256) scale(0.9) translate(-256, -256)">
+    
+    <!-- Cabo da Lupa (Inclinado a ~45 graus) -->
+    <path d="M 335 335 L 435 435 C 445 445 445 460 435 470 C 425 480 410 480 400 470 L 300 370 Z" 
+          fill="url(#lupaGrad)" />
+
+    <!-- Aro Externo da Lupa -->
+    <circle cx="230" cy="210" r="140" fill="none" stroke="url(#lupaGrad)" stroke-width="36" />
+
+    <!-- Preenchimento Branco de Fundo da Lente -->
+    <circle cx="230" cy="210" r="122" fill="#ffffff" />
+
+    <!-- Cabeça do Profissional -->
+    <circle cx="230" cy="145" r="48" fill="url(#bodyGrad)" />
+
+    <!-- Corpo / Tronco do Profissional -->
+    <path d="M 130 285 C 130 215 170 190 230 190 C 290 190 330 215 330 285 C 300 310 260 320 230 320 C 200 320 160 310 130 285 Z" 
+          fill="url(#bodyGrad)" />
+
+    <!-- Gravata Branca no Centro do Tronco -->
+    <!-- Nó da gravata -->
+    <polygon points="222,210 238,210 235,224 225,224" fill="#ffffff" />
+    <!-- Corpo da gravata -->
+    <polygon points="225,225 235,225 240,268 230,282 220,268" fill="#ffffff" />
+
+  </g>
+</svg>

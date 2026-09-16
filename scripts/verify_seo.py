@@ -59,11 +59,12 @@ assert "LGPD" in pp
 assert "aboutads.info" in pp
 print("[OK] Política de Privacidade: contém todas as cláusulas obrigatórias do Google AdSense e LGPD.")
 
-# 6. Dist outputs
-dist_files = ["dist/index.html", "dist/404.html", "dist/robots.txt", "dist/sitemap.xml", "dist/ads.txt", "dist/_redirects"]
+# 6. Dist outputs & 200 OK SPA Architecture
+dist_files = ["dist/index.html", "dist/robots.txt", "dist/sitemap.xml", "dist/ads.txt", "dist/_redirects", "dist/_routes.json", "dist/vagas-natal/index.html", "dist/criar-curriculo/index.html"]
 for df in dist_files:
     full_p = os.path.join(frontend_dir, df)
     assert os.path.exists(full_p), f"Arquivo ausente: {df}"
-print("[OK] Build de produção (dist/): todos os arquivos estáticos e de roteamento presentes.")
+assert not os.path.exists(os.path.join(frontend_dir, "dist/404.html")), "ERRO CRÍTICO: dist/404.html não pode existir, pois forçava status 404 nas páginas do Cloudflare Pages!"
+print("[OK] Build de produção (dist/): arquivos estáticos, rotas pré-renderizadas 200 OK e _routes.json validados com sucesso.")
 
 print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")

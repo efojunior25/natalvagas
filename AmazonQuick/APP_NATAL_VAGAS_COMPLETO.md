@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 114 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 115 arquivos.
 
 ---
 
@@ -64,62 +64,63 @@
 56. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
 57. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
 58. [`frontend/public/_redirects`](#frontend-public--redirects)
-59. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-60. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
-61. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
-62. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-63. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-64. [`frontend/public/sw.js`](#frontend-public-swjs)
-65. [`frontend/.env.example`](#frontend-envexample)
-66. [`frontend/index.html`](#frontend-indexhtml)
-67. [`frontend/package-lock.json`](#frontend-package-lockjson)
-68. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-69. [`frontend/schema.sql`](#frontend-schemasql)
-70. [`frontend/src/index.css`](#frontend-src-indexcss)
-71. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-72. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-73. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-74. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-75. [`backend/Dockerfile`](#backend-dockerfile)
-76. [`backend/pom.xml`](#backend-pomxml)
-77. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-78. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-79. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-80. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-81. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-82. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-83. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-84. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-85. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-86. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-87. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-88. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-89. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-90. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-91. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-92. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-93. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-94. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-95. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-96. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-97. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-98. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-99. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
-100. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-101. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-102. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
-103. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-104. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-105. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-106. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-107. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-108. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-109. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-110. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-111. [`.env.example`](#envexample)
-112. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
-113. [`.gitignore`](#gitignore)
-114. [`docker-compose.yml`](#docker-composeyml)
+59. [`frontend/public/_routes.json`](#frontend-public--routesjson)
+60. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+61. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
+62. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
+63. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+64. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+65. [`frontend/public/sw.js`](#frontend-public-swjs)
+66. [`frontend/.env.example`](#frontend-envexample)
+67. [`frontend/index.html`](#frontend-indexhtml)
+68. [`frontend/package-lock.json`](#frontend-package-lockjson)
+69. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+70. [`frontend/schema.sql`](#frontend-schemasql)
+71. [`frontend/src/index.css`](#frontend-src-indexcss)
+72. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+73. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+74. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+75. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+76. [`backend/Dockerfile`](#backend-dockerfile)
+77. [`backend/pom.xml`](#backend-pomxml)
+78. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+79. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+80. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+81. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+82. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+83. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+84. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+85. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+86. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+87. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+88. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+89. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+90. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+91. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+92. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+93. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+94. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+95. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+96. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+97. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+98. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+99. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+100. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
+101. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+102. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+103. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+104. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+105. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+106. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+107. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+108. [`scripts/pre_render_static_routes.py`](#scripts-pre-render-static-routespy)
+109. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+110. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+111. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+112. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+113. [`.env.example`](#envexample)
+114. [`.gitignore`](#gitignore)
+115. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -405,7 +406,7 @@ git push origin main
 - **Nome:** `package.json`
 - **Linguagem / Sintaxe:** `json`
 - **Total de Linhas:** 33
-- **Tamanho:** 826 bytes
+- **Tamanho:** 876 bytes
 
 ```json
 {
@@ -415,7 +416,7 @@ git push origin main
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && python3 ../scripts/pre_render_static_routes.py",
     "preview": "vite preview",
     "test:smoke": "python3 ../scripts/verify_build_integrity.py"
   },
@@ -451,8 +452,8 @@ git push origin main
 - **Caminho:** `frontend/vite.config.ts`
 - **Nome:** `vite.config.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 42
-- **Tamanho:** 994 bytes
+- **Total de Linhas:** 28
+- **Tamanho:** 573 bytes
 
 ```typescript
 import { defineConfig, Plugin } from 'vite'
@@ -460,23 +461,9 @@ import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
 
-// Gera dist/404.html para suporte nativo a SPA em Cloudflare Pages / GitHub Pages
-function copy404Plugin(): Plugin {
-  return {
-    name: 'copy-404',
-    closeBundle() {
-      const distIndex = path.resolve(__dirname, 'dist/index.html')
-      const dist404 = path.resolve(__dirname, 'dist/404.html')
-      if (fs.existsSync(distIndex)) {
-        fs.copyFileSync(distIndex, dist404)
-      }
-    }
-  }
-}
-
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), copy404Plugin()],
+  plugins: [react()],
   server: {
     port: 5050,
     proxy: {
@@ -46721,19 +46708,37 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
-- **Total de Linhas:** 2
-- **Tamanho:** 59 bytes
+- **Total de Linhas:** 1
+- **Tamanho:** 21 bytes
 
 ```text
-/index.html  /index.html  200
-/*          /index.html  200
+/*  /index.html  200
+
+```
+
+---
+
+<a id="frontend-public--routesjson"></a>
+## 59. Arquivo: `frontend/public/_routes.json`
+- **Caminho:** `frontend/public/_routes.json`
+- **Nome:** `_routes.json`
+- **Linguagem / Sintaxe:** `json`
+- **Total de Linhas:** 5
+- **Tamanho:** 61 bytes
+
+```json
+{
+  "version": 1,
+  "include": ["/api/*"],
+  "exclude": []
+}
 
 ```
 
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 59. Arquivo: `frontend/public/ads.txt`
+## 60. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -46748,7 +46753,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestjson"></a>
-## 60. Arquivo: `frontend/public/manifest.json`
+## 61. Arquivo: `frontend/public/manifest.json`
 - **Caminho:** `frontend/public/manifest.json`
 - **Nome:** `manifest.json`
 - **Linguagem / Sintaxe:** `json`
@@ -46795,7 +46800,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestwebmanifest"></a>
-## 61. Arquivo: `frontend/public/manifest.webmanifest`
+## 62. Arquivo: `frontend/public/manifest.webmanifest`
 - **Caminho:** `frontend/public/manifest.webmanifest`
 - **Nome:** `manifest.webmanifest`
 - **Linguagem / Sintaxe:** `text`
@@ -46842,7 +46847,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 62. Arquivo: `frontend/public/robots.txt`
+## 63. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -46875,12 +46880,12 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 63. Arquivo: `frontend/public/sitemap.xml`
+## 64. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 8938
-- **Tamanho:** 344171 bytes
+- **Total de Linhas:** 9028
+- **Tamanho:** 347520 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47022,6 +47027,96 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   </url>
 
   <!-- URLs do Blog Guia de Carreira RN -->
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-fazer-curriculo-celular-passar-triagem-empresas-natal-2026</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/sine-natal-sine-rn-cadastro-agendamento-seguro-desemprego-vagas</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/jovem-aprendiz-primeiro-emprego-natal-rn-onde-se-inscrever</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/processos-seletivos-supermercados-shoppings-rn-dicas-entrevista</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/cursos-gratuitos-qualificacao-profissional-certificado-curriculo-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-enviar-curriculo-whatsapp-sem-ser-ignorado-natal-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/construcao-civil-obras-natal-parnamirim-vagas-alta</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/vagas-hotelaria-turismo-ponta-negra-via-costeira-natal</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-explicar-periodo-sem-registro-carteira-entrevista-emprego</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/mercado-trabalho-mossoro-regiao-oeste-potiguar-oportunidades</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/trabalho-home-office-teleatendimento-vendas-natal-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/direitos-trabalhistas-basicos-clt-salario-beneficios-rn-2026</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-conseguir-estagio-remunerado-natal-ensino-medio-superior</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/logistica-estoque-centros-distribuicao-br101-macaiba-parnamirim</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/5-perguntas-mais-feitas-entrevista-emprego-como-responder</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- URLs das Vagas Ativas no RN -->
   <url>
@@ -55827,7 +55922,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-swjs"></a>
-## 64. Arquivo: `frontend/public/sw.js`
+## 65. Arquivo: `frontend/public/sw.js`
 - **Caminho:** `frontend/public/sw.js`
 - **Nome:** `sw.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -55928,7 +56023,7 @@ self.addEventListener('fetch', (event) => {
 ---
 
 <a id="frontend-envexample"></a>
-## 65. Arquivo: `frontend/.env.example`
+## 66. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -55950,7 +56045,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 66. Arquivo: `frontend/index.html`
+## 67. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -56062,7 +56157,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 67. Arquivo: `frontend/package-lock.json`
+## 68. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -59145,7 +59240,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 68. Arquivo: `frontend/postcss.config.js`
+## 69. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -59165,7 +59260,7 @@ export default {
 ---
 
 <a id="frontend-schemasql"></a>
-## 69. Arquivo: `frontend/schema.sql`
+## 70. Arquivo: `frontend/schema.sql`
 - **Caminho:** `frontend/schema.sql`
 - **Nome:** `schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -59224,7 +59319,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 70. Arquivo: `frontend/src/index.css`
+## 71. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -59300,7 +59395,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 71. Arquivo: `frontend/src/vite-env.d.ts`
+## 72. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -59315,7 +59410,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 72. Arquivo: `frontend/tailwind.config.js`
+## 73. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -59367,7 +59462,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 73. Arquivo: `frontend/tsconfig.json`
+## 74. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -59401,7 +59496,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 74. Arquivo: `frontend/tsconfig.node.json`
+## 75. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -59425,7 +59520,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 75. Arquivo: `backend/Dockerfile`
+## 76. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -59457,7 +59552,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 76. Arquivo: `backend/pom.xml`
+## 77. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -59575,7 +59670,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 77. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 78. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59601,7 +59696,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 78. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59643,7 +59738,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 79. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 80. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59716,7 +59811,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 80. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 81. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59782,7 +59877,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 81. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 82. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59879,7 +59974,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 82. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 83. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59917,7 +60012,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 83. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 84. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59938,7 +60033,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 84. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -59994,7 +60089,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60017,7 +60112,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60157,7 +60252,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 88. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60179,7 +60274,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 88. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 89. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60235,7 +60330,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 89. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 90. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60256,7 +60351,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 90. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 91. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60279,7 +60374,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 91. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 92. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60348,7 +60443,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 92. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 93. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60399,7 +60494,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 93. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 94. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60425,7 +60520,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 94. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 95. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60462,7 +60557,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 95. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 96. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60511,7 +60606,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 96. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 97. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -60702,7 +60797,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 97. Arquivo: `backend/src/main/resources/application.yml`
+## 98. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -60760,7 +60855,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 98. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 99. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -60845,7 +60940,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-add-whatsapp-jobspy"></a>
-## 99. Arquivo: `scripts/add_whatsapp_jobs.py`
+## 100. Arquivo: `scripts/add_whatsapp_jobs.py`
 - **Caminho:** `scripts/add_whatsapp_jobs.py`
 - **Nome:** `add_whatsapp_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61806,7 +61901,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 100. Arquivo: `scripts/build_single_context_md.py`
+## 101. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -61963,7 +62058,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 101. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 102. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62095,7 +62190,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-daily-job-syncymlexample"></a>
-## 102. Arquivo: `scripts/daily-job-sync.yml.example`
+## 103. Arquivo: `scripts/daily-job-sync.yml.example`
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
@@ -62182,7 +62277,7 @@ jobs:
 ---
 
 <a id="scripts-daily-job-crawlerpy"></a>
-## 103. Arquivo: `scripts/daily_job_crawler.py`
+## 104. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62467,7 +62562,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 104. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 105. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -62768,12 +62863,12 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 105. Arquivo: `scripts/generate_sitemap.py`
+## 106. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
-- **Total de Linhas:** 168
-- **Tamanho:** 5150 bytes
+- **Total de Linhas:** 164
+- **Tamanho:** 4935 bytes
 
 ```python
 import re
@@ -62893,20 +62988,16 @@ blog_posts_path = os.path.join(repo_root, "frontend", "src", "data", "blogPosts.
 if os.path.exists(blog_posts_path):
     with open(blog_posts_path, "r", encoding="utf-8") as f:
         blog_content = f.read()
-    bm = re.search(r'export const blogPosts:\s*BlogPost\[\]\s*=\s*(\[.*?\]);', blog_content, re.DOTALL)
-    if bm:
-        blog_records = json.loads(bm.group(1))
-        for bp in blog_records:
-            bslug = bp.get('slug')
-            bpub = bp.get('publishedAt') or today
-            xml_lines.extend([
-                '  <url>',
-                f'    <loc>{base_url}/blog/{bslug}</loc>',
-                f'    <lastmod>{bpub}</lastmod>',
-                f'    <changefreq>monthly</changefreq>',
-                '    <priority>0.8</priority>',
-                '  </url>'
-            ])
+    blog_slugs = re.findall(r'"slug":\s*"([^"]+)"', blog_content)
+    for bslug in blog_slugs:
+        xml_lines.extend([
+            '  <url>',
+            f'    <loc>{base_url}/blog/{bslug}</loc>',
+            f'    <lastmod>{today}</lastmod>',
+            f'    <changefreq>monthly</changefreq>',
+            '    <priority>0.8</priority>',
+            '  </url>'
+        ])
 
 xml_lines.extend([
     '',
@@ -62950,7 +63041,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 106. Arquivo: `scripts/ingest_jobs.py`
+## 107. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63172,8 +63263,136 @@ if __name__ == "__main__":
 
 ---
 
+<a id="scripts-pre-render-static-routespy"></a>
+## 108. Arquivo: `scripts/pre_render_static_routes.py`
+- **Caminho:** `scripts/pre_render_static_routes.py`
+- **Nome:** `pre_render_static_routes.py`
+- **Linguagem / Sintaxe:** `python`
+- **Total de Linhas:** 114
+- **Tamanho:** 6752 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Pre-Render Static Routes for Natal Vagas
+Generates static index.html files inside dist/ for all SEO landing pages,
+institutional pages, blog posts, and active job postings.
+This ensures Cloudflare Pages serves pure 200 OK static files for Googlebot
+instead of falling back to 404.html, solving all Google Search Console indexation issues.
+"""
+
+import os
+import re
+import json
+
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+frontend_dir = os.path.join(repo_root, "frontend")
+dist_dir = os.path.join(frontend_dir, "dist")
+index_html_path = os.path.join(dist_dir, "index.html")
+
+def main():
+    print("🚀 Iniciando pré-renderização estática de rotas para SEO...")
+    
+    if not os.path.exists(index_html_path):
+        print(f"❌ {index_html_path} não encontrado! Rode o build do frontend primeiro.")
+        return
+        
+    with open(index_html_path, "r", encoding="utf-8") as f:
+        base_html = f.read()
+
+    # Certifica remoção definitiva de dist/404.html
+    dist_404 = os.path.join(dist_dir, "404.html")
+    if os.path.exists(dist_404):
+        os.remove(dist_404)
+        print("🗑️ Removido dist/404.html para habilitar status 200 OK no Cloudflare Pages.")
+
+    routes_to_generate = []
+
+    # 1. Páginas Institucionais
+    institutional = [
+        ("criar-curriculo", "Criar Currículo Grátis em PDF — Natal Vagas", "Crie seu currículo profissional formatado em PDF gratuitamente pelo celular ou computador. Modelo aceito pelas empresas de Natal e RN."),
+        ("sobre", "Quem Somos — Natal Vagas | O Portal de Empregos do RN", "Conheça a história e a missão do Natal Vagas: conectar candidatos e empresas do Rio Grande do Norte de forma 100% gratuita."),
+        ("contato", "Fale Conosco — Natal Vagas", "Entre em contato com a equipe do Natal Vagas para dúvidas, sugestões, suporte e parcerias empresariais no RN."),
+        ("dicas-seguranca", "Dicas de Segurança e Alertas Anti-Golpe — Natal Vagas", "Orientações importantes para identificar vagas seguras e se proteger de fraudes e golpes de falso emprego no RN."),
+        ("politica-de-privacidade", "Política de Privacidade — Natal Vagas", "Política de privacidade, conformidade com a LGPD e diretrizes de publicidade do Google AdSense no Natal Vagas."),
+        ("termos-de-uso", "Termos de Uso — Natal Vagas", "Termos e condições gerais de uso e navegação na plataforma de empregos Natal Vagas."),
+        ("blog", "Blog & Notícias de Emprego no RN — Natal Vagas", "Artigos, guias práticos, notícias sobre o mercado de trabalho, SINE Natal e dicas de carreira no Rio Grande do Norte.")
+    ]
+    for path_slug, title, desc in institutional:
+        routes_to_generate.append((path_slug, title, desc, f"https://natalvagas.com.br/{path_slug}"))
+
+    # 2. Programmatic SEO Landing Pages
+    seo_file = os.path.join(frontend_dir, "src", "data", "seoLandingPages.ts")
+    if os.path.exists(seo_file):
+        with open(seo_file, "r", encoding="utf-8") as f:
+            content = f.read()
+        matches = re.findall(r"slug:\s*'([^']+)',\s*path:\s*'([^']+)',\s*h1:\s*'([^']+)',\s*metaTitle:\s*'([^']+)',\s*metaDescription:\s*'([^']+)'", content)
+        for slug, path_str, h1, meta_title, meta_desc in matches:
+            clean_path = path_str.strip("/")
+            routes_to_generate.append((clean_path, meta_title, meta_desc, f"https://natalvagas.com.br/{clean_path}"))
+
+    # 3. Blog Posts
+    blog_file = os.path.join(frontend_dir, "src", "data", "blogPosts.ts")
+    if os.path.exists(blog_file):
+        with open(blog_file, "r", encoding="utf-8") as f:
+            blog_text = f.read()
+        slug_matches = re.findall(r'"slug":\s*"([^"]+)",\s*"title":\s*"([^"]+)",\s*"excerpt":\s*"([^"]+)"', blog_text)
+        for bslug, btitle, bexcerpt in slug_matches:
+            b_path = f"blog/{bslug}"
+            full_title = f"{btitle} — Natal Vagas"
+            routes_to_generate.append((b_path, full_title, bexcerpt, f"https://natalvagas.com.br/{b_path}"))
+
+    # 4. Vagas de Emprego Ativas (jobs.json)
+    jobs_json = os.path.join(frontend_dir, "public", "data", "jobs.json")
+    if os.path.exists(jobs_json):
+        with open(jobs_json, "r", encoding="utf-8") as f:
+            jobs_data = json.load(f)
+        seen_slugs = set()
+        for j in jobs_data:
+            jslug = j.get('slug')
+            if not jslug or jslug in seen_slugs:
+                continue
+            seen_slugs.add(jslug)
+            jtitle = j.get('title', 'Vaga de Emprego')
+            jcomp = j.get('companyName', 'Empresa Confidencial')
+            jcity = j.get('city', 'Natal')
+            jdesc = f"Vaga de {jtitle} na empresa {jcomp} em {jcity}/RN. Confira os requisitos e candidate-se gratuitamente no Natal Vagas."
+            j_path = f"vaga/{jslug}"
+            full_jtitle = f"{jtitle} em {jcity} ({jcomp}) — Natal Vagas"
+            routes_to_generate.append((j_path, full_jtitle, jdesc, f"https://natalvagas.com.br/{j_path}"))
+
+    count = 0
+    for rel_path, title, desc, canonical_url in routes_to_generate:
+        target_dir = os.path.join(dist_dir, rel_path)
+        os.makedirs(target_dir, exist_ok=True)
+        target_html = os.path.join(target_dir, "index.html")
+
+        # Customizar meta tags do HTML base para o Googlebot ler diretamente
+        custom_html = base_html
+        custom_html = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', custom_html)
+        custom_html = re.sub(r'<meta name="description" content=".*?"\s*/?>', f'<meta name="description" content="{desc}" />', custom_html)
+        custom_html = re.sub(r'<link rel="canonical" href=".*?"\s*/?>', f'<link rel="canonical" href="{canonical_url}" />', custom_html)
+        custom_html = re.sub(r'<meta property="og:title" content=".*?"\s*/?>', f'<meta property="og:title" content="{title}" />', custom_html)
+        custom_html = re.sub(r'<meta property="og:description" content=".*?"\s*/?>', f'<meta property="og:description" content="{desc}" />', custom_html)
+        custom_html = re.sub(r'<meta property="og:url" content=".*?"\s*/?>', f'<meta property="og:url" content="{canonical_url}" />', custom_html)
+        custom_html = re.sub(r'<meta name="twitter:title" content=".*?"\s*/?>', f'<meta name="twitter:title" content="{title}" />', custom_html)
+        custom_html = re.sub(r'<meta name="twitter:description" content=".*?"\s*/?>', f'<meta name="twitter:description" content="{desc}" />', custom_html)
+
+        with open(target_html, "w", encoding="utf-8") as out:
+            out.write(custom_html)
+        count += 1
+
+    print(f"✅ Sucesso! {count} páginas estáticas pré-renderizadas geradas em dist/ com status 200 OK nativo!")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
 <a id="scripts-rn-job-scraperpy"></a>
-## 107. Arquivo: `scripts/rn_job_scraper.py`
+## 109. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63372,7 +63591,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 108. Arquivo: `scripts/test_efi_status.py`
+## 110. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63452,7 +63671,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 109. Arquivo: `scripts/verify_build_integrity.py`
+## 111. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63545,12 +63764,12 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 110. Arquivo: `scripts/verify_seo.py`
+## 112. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
-- **Total de Linhas:** 69
-- **Tamanho:** 2801 bytes
+- **Total de Linhas:** 70
+- **Tamanho:** 3112 bytes
 
 ```python
 import os
@@ -63614,12 +63833,13 @@ assert "LGPD" in pp
 assert "aboutads.info" in pp
 print("[OK] Política de Privacidade: contém todas as cláusulas obrigatórias do Google AdSense e LGPD.")
 
-# 6. Dist outputs
-dist_files = ["dist/index.html", "dist/404.html", "dist/robots.txt", "dist/sitemap.xml", "dist/ads.txt", "dist/_redirects"]
+# 6. Dist outputs & 200 OK SPA Architecture
+dist_files = ["dist/index.html", "dist/robots.txt", "dist/sitemap.xml", "dist/ads.txt", "dist/_redirects", "dist/_routes.json", "dist/vagas-natal/index.html", "dist/criar-curriculo/index.html"]
 for df in dist_files:
     full_p = os.path.join(frontend_dir, df)
     assert os.path.exists(full_p), f"Arquivo ausente: {df}"
-print("[OK] Build de produção (dist/): todos os arquivos estáticos e de roteamento presentes.")
+assert not os.path.exists(os.path.join(frontend_dir, "dist/404.html")), "ERRO CRÍTICO: dist/404.html não pode existir, pois forçava status 404 nas páginas do Cloudflare Pages!"
+print("[OK] Build de produção (dist/): arquivos estáticos, rotas pré-renderizadas 200 OK e _routes.json validados com sucesso.")
 
 print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 
@@ -63628,7 +63848,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 111. Arquivo: `.env.example`
+## 113. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -63646,95 +63866,8 @@ POSTGRES_PORT=5432
 
 ---
 
-<a id="github-workflows-daily-job-syncyml"></a>
-## 112. Arquivo: `.github/workflows/daily-job-sync.yml`
-- **Caminho:** `.github/workflows/daily-job-sync.yml`
-- **Nome:** `daily-job-sync.yml`
-- **Linguagem / Sintaxe:** `yaml`
-- **Total de Linhas:** 73
-- **Tamanho:** 2307 bytes
-
-```yaml
-name: Atualização Diária de Vagas (Natal Vagas)
-
-on:
-  schedule:
-    # Executa todos os dias às 09:00 UTC (06:00 horário de Brasília / Natal)
-    - cron: '0 9 * * *'
-  workflow_dispatch: # Permite disparar manualmente pelo botão "Run workflow" no GitHub
-
-permissions:
-  contents: write
-
-jobs:
-  sync-jobs:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Clonar Repositório
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: 🐍 Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: 📦 Instalar Dependências Python
-        run: |
-          pip install requests pillow
-
-      - name: 🤖 Rastrear Novas Vagas no RN
-        run: |
-          python3 scripts/daily_job_crawler.py
-
-      - name: 🗺️ Regenerar Sitemap XML
-        run: |
-          python3 scripts/generate_sitemap.py
-
-      - name: 🛡️ Teste de Integridade Pré-Build
-        run: |
-          python3 scripts/verify_build_integrity.py
-
-      - name: ⚡ Configurar Node.js & Cache do Frontend
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: 🏗️ Validar Build de Produção
-        run: |
-          cd frontend
-          npm ci
-          npm run build
-
-      - name: 🔄 Sincronizar Documentação & Contexto
-        run: |
-          python3 scripts/convert_to_amazon_quick.py
-          python3 scripts/build_single_context_md.py
-
-      - name: 🚀 Commit e Deploy Automático na Cloudflare
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          if [ -n "$(git status --porcelain frontend/public/data/jobs.json)" ]; then
-            git add frontend/public/data/jobs.json frontend/public/sitemap.xml AmazonQuick/ APP_NATAL_VAGAS.md APP_NATAL_VAGAS_COMPLETO.md
-            git commit -m "chore(auto): atualização diária do catálogo de vagas e sitemap [skip ci]"
-            git push origin main
-            echo "Novas vagas publicadas com sucesso na branch main!"
-          else
-            echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
-          fi
-
-```
-
----
-
 <a id="gitignore"></a>
-## 113. Arquivo: `.gitignore`
+## 114. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -63794,7 +63927,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 114. Arquivo: `docker-compose.yml`
+## 115. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

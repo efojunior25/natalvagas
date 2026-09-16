@@ -13,7 +13,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && python3 ../scripts/pre_render_static_routes.py",
     "preview": "vite preview",
     "test:smoke": "python3 ../scripts/verify_build_integrity.py"
   },

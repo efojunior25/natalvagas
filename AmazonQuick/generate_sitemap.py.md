@@ -1,7 +1,7 @@
 # File: generate_sitemap.py
 - **Original Path:** `scripts/generate_sitemap.py`
 - **Language / Type:** `python`
-- **Lines of Code:** 168
+- **Lines of Code:** 164
 
 ---
 
@@ -123,20 +123,16 @@ blog_posts_path = os.path.join(repo_root, "frontend", "src", "data", "blogPosts.
 if os.path.exists(blog_posts_path):
     with open(blog_posts_path, "r", encoding="utf-8") as f:
         blog_content = f.read()
-    bm = re.search(r'export const blogPosts:\s*BlogPost\[\]\s*=\s*(\[.*?\]);', blog_content, re.DOTALL)
-    if bm:
-        blog_records = json.loads(bm.group(1))
-        for bp in blog_records:
-            bslug = bp.get('slug')
-            bpub = bp.get('publishedAt') or today
-            xml_lines.extend([
-                '  <url>',
-                f'    <loc>{base_url}/blog/{bslug}</loc>',
-                f'    <lastmod>{bpub}</lastmod>',
-                f'    <changefreq>monthly</changefreq>',
-                '    <priority>0.8</priority>',
-                '  </url>'
-            ])
+    blog_slugs = re.findall(r'"slug":\s*"([^"]+)"', blog_content)
+    for bslug in blog_slugs:
+        xml_lines.extend([
+            '  <url>',
+            f'    <loc>{base_url}/blog/{bslug}</loc>',
+            f'    <lastmod>{today}</lastmod>',
+            f'    <changefreq>monthly</changefreq>',
+            '    <priority>0.8</priority>',
+            '  </url>'
+        ])
 
 xml_lines.extend([
     '',

@@ -1,7 +1,7 @@
 # File: sitemap.xml
 - **Original Path:** `frontend/public/sitemap.xml`
 - **Language / Type:** `xml`
-- **Lines of Code:** 8938
+- **Lines of Code:** 9028
 
 ---
 
@@ -145,6 +145,96 @@
   </url>
 
   <!-- URLs do Blog Guia de Carreira RN -->
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-fazer-curriculo-celular-passar-triagem-empresas-natal-2026</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/sine-natal-sine-rn-cadastro-agendamento-seguro-desemprego-vagas</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/jovem-aprendiz-primeiro-emprego-natal-rn-onde-se-inscrever</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/processos-seletivos-supermercados-shoppings-rn-dicas-entrevista</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/cursos-gratuitos-qualificacao-profissional-certificado-curriculo-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-enviar-curriculo-whatsapp-sem-ser-ignorado-natal-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/construcao-civil-obras-natal-parnamirim-vagas-alta</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/vagas-hotelaria-turismo-ponta-negra-via-costeira-natal</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-explicar-periodo-sem-registro-carteira-entrevista-emprego</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/mercado-trabalho-mossoro-regiao-oeste-potiguar-oportunidades</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/trabalho-home-office-teleatendimento-vendas-natal-rn</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/direitos-trabalhistas-basicos-clt-salario-beneficios-rn-2026</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/como-conseguir-estagio-remunerado-natal-ensino-medio-superior</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/logistica-estoque-centros-distribuicao-br101-macaiba-parnamirim</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/blog/5-perguntas-mais-feitas-entrevista-emprego-como-responder</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- URLs das Vagas Ativas no RN -->
   <url>

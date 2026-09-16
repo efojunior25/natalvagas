@@ -9,7 +9,6 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | Arquivo Markdown | Caminho Original no Projeto | Linhas | Tipo |
 | :--- | :--- | :--- | :--- |
 | [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
-| [daily-job-sync.yml.md](./daily-job-sync.yml.md) | `.github/workflows/daily-job-sync.yml` | 73 | `.yml` |
 | [gitignore.md](./gitignore.md) | `.gitignore` | 46 | `config` |
 | [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 248 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
@@ -57,13 +56,14 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [package-lock.json.md](./package-lock.json.md) | `frontend/package-lock.json` | 3069 | `.json` |
 | [package.json.md](./package.json.md) | `frontend/package.json` | 33 | `.json` |
 | [postcss.config.js.md](./postcss.config.js.md) | `frontend/postcss.config.js` | 6 | `.js` |
-| [redirects.md](./redirects.md) | `frontend/public/_redirects` | 2 | `config` |
+| [redirects.md](./redirects.md) | `frontend/public/_redirects` | 1 | `config` |
+| [routes.json.md](./routes.json.md) | `frontend/public/_routes.json` | 5 | `.json` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
 | [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 35154 | `.json` |
 | [manifest.json.md](./manifest.json.md) | `frontend/public/manifest.json` | 33 | `.json` |
 | [manifest.webmanifest.md](./manifest.webmanifest.md) | `frontend/public/manifest.webmanifest` | 33 | `.webmanifest` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 19 | `.txt` |
-| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 8938 | `.xml` |
+| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 9028 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
 | [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
@@ -109,19 +109,20 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [tailwind.config.js.md](./tailwind.config.js.md) | `frontend/tailwind.config.js` | 38 | `.js` |
 | [tsconfig.json.md](./tsconfig.json.md) | `frontend/tsconfig.json` | 20 | `.json` |
 | [tsconfig.node.json.md](./tsconfig.node.json.md) | `frontend/tsconfig.node.json` | 10 | `.json` |
-| [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 42 | `.ts` |
+| [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 28 | `.ts` |
 | [add_whatsapp_jobs.py.md](./add_whatsapp_jobs.py.md) | `scripts/add_whatsapp_jobs.py` | 947 | `.py` |
 | [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
 | [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
 | [daily-job-sync.yml.example.md](./daily-job-sync.yml.example.md) | `scripts/daily-job-sync.yml.example` | 73 | `.example` |
 | [daily_job_crawler.py.md](./daily_job_crawler.py.md) | `scripts/daily_job_crawler.py` | 271 | `.py` |
 | [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 287 | `.py` |
-| [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 168 | `.py` |
+| [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 164 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
+| [pre_render_static_routes.py.md](./pre_render_static_routes.py.md) | `scripts/pre_render_static_routes.py` | 114 | `.py` |
 | [rn_job_scraper.py.md](./rn_job_scraper.py.md) | `scripts/rn_job_scraper.py` | 185 | `.py` |
 | [test_efi_status.py.md](./test_efi_status.py.md) | `scripts/test_efi_status.py` | 66 | `.py` |
 | [verify_build_integrity.py.md](./verify_build_integrity.py.md) | `scripts/verify_build_integrity.py` | 79 | `.py` |
-| [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 69 | `.py` |
+| [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 70 | `.py` |
 
 ---
-**Total de Arquivos:** 114 arquivos convertidos com sucesso.
+**Total de Arquivos:** 115 arquivos convertidos com sucesso.
