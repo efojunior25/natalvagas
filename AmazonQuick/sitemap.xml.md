@@ -1,7 +1,7 @@
 # File: sitemap.xml
 - **Original Path:** `frontend/public/sitemap.xml`
 - **Language / Type:** `xml`
-- **Lines of Code:** 9028
+- **Lines of Code:** 9118
 
 ---
 
@@ -237,6 +237,96 @@
   </url>
 
   <!-- URLs das Vagas Ativas no RN -->
+  <url>
+    <loc>https://natalvagas.com.br/vaga/feiras-de-empregabilidade-oferecem-mais-de-2-mil-vagas-de-trabalho-na-grande-natal-g1-natal-2026092464</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/mutirao-oferece-vagas-de-emprego-e-qualificacao-profissional-para-jovens-no-fim-de-agosto-em-natal-tribunadonortecombr-natal-2026092465</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/empresa-abre-40-vagas-de-emprego-em-natal-veja-cargos-e-como-se-candidatar-agora-rn-natal-2026092466</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-de-emprego-abertas-em-natal-e-no-rio-grande-do-norte-veja-oportunidades-e-como-se-candidatar-natal-em-foco-natal-2026092467</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/ferreira-costa-abre-40-vagas-de-trabalho-em-natal-por-dentro-do-rn-natal-2026092468</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/noticias-semana-s-promove-feira-de-empregabilidade-com-2-mil-vagas-em-natal-nesta-quarta-feira-portal-da-tropical-natal-2026092469</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/natal-lidera-geracao-de-empregos-no-rio-grande-do-norte-portal-diario-do-rn-natal-2026092470</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/oportunidade-mais-de-2-mil-vagas-abrem-em-feiras-de-emprego-na-grande-natal-veja-como-participar-novo-noticias-natal-2026092471</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-de-emprego-no-rn-oferecem-salarios-de-ate-r-46-mil-em-natal-e-regiao-metropolitana-o-poti-natal-2026092472</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/atacarejo-abre-40-vagas-de-emprego-no-rn-veja-como-se-candidatar-g1-natal-2026092473</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/sine-abre-77-vagas-de-empregos-no-rn-saiba-como-se-inscrever-tribunadonortecombr-natal-2026092474</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/natal-abre-400-vagas-em-cursos-gratuitos-de-qualificacao-profissional-agora-rn-natal-2026092475</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/natal-concentra-mais-da-metade-dos-empregos-formais-criados-no-rn-nos-ultimos-18-meses-portal-diario-do-rn-natal-2026092476</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/mutirao-de-aprendizagem-oferece-qualificacao-profissional-para-jovens-em-natal-veja-quem-pode-participar-g1-natal-2026092477</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/empregos-no-rn-veja-as-cidades-com-melhor-e-pior-desempenho-em-2025-tribunadonortecombr-natal-2026092478</loc>
+    <lastmod>2026-02-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-home-sushi-home-natal</loc>
     <lastmod>2026-09-13</lastmod>

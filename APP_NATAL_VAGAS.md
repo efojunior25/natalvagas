@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 115 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 116 arquivos.
 
 ---
 
@@ -113,14 +113,15 @@
 105. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
 106. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
 107. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-108. [`scripts/pre_render_static_routes.py`](#scripts-pre-render-static-routespy)
-109. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-110. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-111. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-112. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-113. [`.env.example`](#envexample)
-114. [`.gitignore`](#gitignore)
-115. [`docker-compose.yml`](#docker-composeyml)
+108. [`scripts/notify_google_indexing.py`](#scripts-notify-google-indexingpy)
+109. [`scripts/pre_render_static_routes.py`](#scripts-pre-render-static-routespy)
+110. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+111. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+112. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+113. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+114. [`.env.example`](#envexample)
+115. [`.gitignore`](#gitignore)
+116. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -11541,11 +11542,311 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
-- **Total de Linhas:** 35154
-- **Tamanho:** 2563362 bytes
+- **Total de Linhas:** 35454
+- **Tamanho:** 2584721 bytes
 
 ```json
 [
+  {
+    "id": 2026092464,
+    "title": "Feiras de empregabilidade oferecem mais de 2 mil vagas de trabalho na Grande Natal",
+    "slug": "feiras-de-empregabilidade-oferecem-mais-de-2-mil-vagas-de-trabalho-na-grande-natal-g1-natal-2026092464",
+    "companyName": "G1",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Feiras de empregabilidade oferecem mais de 2 mil vagas de trabalho na Grande Natal    G1\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por G1. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNMnI3ODF4bl9JWHBCRDM3LVNuUXE0OTRTOExBWFpPcUNmM2tBSFJHMl9JYjNoU0RYTTh1aEdaeGxyTFZFWE9EUV9Qcl92V1JOb1FJNURNT3RGTUFZNTRYcFBHS1U4eTVyWTljaUFaTFduamJOd3BfM240eEFoQk4xb1J4ZzFpS2cyTEUtMEJUWGk3bE45RHRJdmdOcGxoaTNxOWdLR045NEpRMURUY2JZOEQ3eVNwZ3Q2ZGF0c254V0ItOEdFLVM0N0JtMnM0VGJ3YXVF0gHiAUFVX3lxTE1fRjNSdTBqMzg3SVBQRm5zeFBXT3RqTXZWXzlUQVNXdHlybUdxd01VVE9wdm1wTnNJNWVRUHlnWUVRNEFhNGRQLTJBTzNTYXBkUzI5Qi1yQW1oQ18tSXl4MG5LOVJlYzQtdlhKT3NDdnEyZmlOXzJLYnFNclRGUTNtRVVuVTNwbjUwRFllNFZ4SDF6dndSM1RENGJOcS1NXzBVY1N4TDhZc2RkX0lLQy1tOHRxampEZEFybnA1TzY0cmF5bEV0NnBhcV8tMHpXV2VuN0MySEhFYWdYLU9RRWZQMHc?oc=5",
+    "isFeatured": true,
+    "isPcd": false,
+    "publishedAt": "2026-04-29"
+  },
+  {
+    "id": 2026092465,
+    "title": "Mutirão oferece vagas de emprego e qualificação profissional para jovens no fim de agosto em Natal",
+    "slug": "mutirao-oferece-vagas-de-emprego-e-qualificacao-profissional-para-jovens-no-fim-de-agosto-em-natal-tribunadonortecombr-natal-2026092465",
+    "companyName": "tribunadonorte.com.br",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Mutirão oferece vagas de emprego e qualificação profissional para jovens no fim de agosto em Natal    tribunadonorte.com.br\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por tribunadonorte.com.br. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPTWZfekpoTVY1V0FRZzh6ZUVHLXhvT2VzcjdYQ0ItaWxyUzJNNHFGMUJXYk4wN3lWZXdXMnE3cVNnQWc5emctM3dWWUw5SU1JSldiQzRaSEUyZUFFeUJDaDBtWl9pWDRXanppQ1BhMEN0bHFnc0VZRmlsNEM2QjhDRXB6U1kxemkxRjkwaGJhb204VXpTeHI4SXh0UzYxeW9Xb0NvN1Y2NjJWMG5FdTI1cTctV25DZ090a3g3cGlMQjVKN2RUanl4dUFyTnEydjA0?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-08-20"
+  },
+  {
+    "id": 2026092466,
+    "title": "Empresa abre 40 vagas de emprego em Natal; veja cargos e como se candidatar",
+    "slug": "empresa-abre-40-vagas-de-emprego-em-natal-veja-cargos-e-como-se-candidatar-agora-rn-natal-2026092466",
+    "companyName": "Agora RN",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Empresa abre 40 vagas de emprego em Natal; veja cargos e como se candidatar    Agora RN\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Agora RN. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5sb3RiQTlaWWE0dExCOW5RZDBnVnJLdzVNSnczS21KTVF6dFBQand3clViZjRTN2V6YThkNFJJODMzNl9MZjZRSFJDVkstclpGbFp0WDR3aVBLN1EwR29PdXpUYk5CNHN4aEdIZEFqU3ljbU91aE50WUQ0cmZJYkU?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-03"
+  },
+  {
+    "id": 2026092467,
+    "title": "Vagas de emprego abertas em Natal e no Rio Grande do Norte; veja oportunidades e como se candidatar",
+    "slug": "vagas-de-emprego-abertas-em-natal-e-no-rio-grande-do-norte-veja-oportunidades-e-como-se-candidatar-natal-em-foco-natal-2026092467",
+    "companyName": "Natal em Foco",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Vagas de emprego abertas em Natal e no Rio Grande do Norte; veja oportunidades e como se candidatar    Natal em Foco\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Natal em Foco. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPSzhVSFZUa1dNT3drYm5GQjlZNTd6V0Y3eW14dF9QSm42UERXSDNDeFU4TFRFSkpPVFNGcW14WjlaNXNTWHJuYk13SVlhb1dpNXJYeEdLeVdlOGZlWFVQTTVFQ29BYjNLcjlSQ3FqWnA4QWRQUThlVGNCMXg3c0pCdmktZzRmNWZ2aEpkcnZUUnVPb3lrUlBvN3VmeDNHeUFBSWY0UU41aWxUTVZxS3J5eUllT3Z5eGxuaHZzWHhlekFncnU3VzFWRUFuNS1hNG9yek1ERmpR?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-08-26"
+  },
+  {
+    "id": 2026092468,
+    "title": "Ferreira Costa abre 40 vagas de trabalho em Natal",
+    "slug": "ferreira-costa-abre-40-vagas-de-trabalho-em-natal-por-dentro-do-rn-natal-2026092468",
+    "companyName": "Por dentro do RN",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Ferreira Costa abre 40 vagas de trabalho em Natal    Por dentro do RN\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Por dentro do RN. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQOXUtYW1OU3VYV1hRRV85OTJabmxXeWJVeHVaTGtwMHhsSnBPOVN5UVJEa1BoUEQ2SC1nNEFMeURmN2dfQU5QRzc0V2dGcU0tUVpwQnFXWGlmeHFhOFZ3SEhnX3I0SzBQWVNZcHdFOExmM3Z1cFJoemtVdHZpLUMwb0pobmk4Z0x3SmxWNW5sanFWUXk4?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-09-02"
+  },
+  {
+    "id": 2026092469,
+    "title": "Notícias - Semana S promove feira de empregabilidade com 2 mil vagas em Natal nesta quarta-feira",
+    "slug": "noticias-semana-s-promove-feira-de-empregabilidade-com-2-mil-vagas-em-natal-nesta-quarta-feira-portal-da-tropical-natal-2026092469",
+    "companyName": "Portal da Tropical",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Notícias - Semana S promove feira de empregabilidade com 2 mil vagas em Natal nesta quarta-feira    Portal da Tropical\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Portal da Tropical. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQZGJRdlQ0WEhhZkxnM3lYZE9RZGI5RENIbTBIc0RPNUUtRlEtenRuME5jUlVUOTMtOHV2X3lySW8xaDN4SHVQXzhlUDRnQjF6TTJYTzRaVG5iaXpxM0s0ZVN2a2x0SGdndFRIbVVIWnFPenlidXhYZTktN09rOUFUN2lLX1BKTFM2ZG5MT0t4c2dyTmEwNHRlTURRbEtrSTlyUERnYV9Xc1NYdk1zUzlkbEp2cXhzS1pvdnVrTG9MSQ?oc=5",
+    "isFeatured": true,
+    "isPcd": false,
+    "publishedAt": "2026-05-12"
+  },
+  {
+    "id": 2026092470,
+    "title": "Natal lidera geração de empregos no Rio Grande do Norte",
+    "slug": "natal-lidera-geracao-de-empregos-no-rio-grande-do-norte-portal-diario-do-rn-natal-2026092470",
+    "companyName": "Portal Diário do RN",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Natal lidera geração de empregos no Rio Grande do Norte    Portal Diário do RN\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Portal Diário do RN. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPMW1HYms0VlFrUDRFSG9kVzhCaWttNEJMOG43Yl9zYnBHVlFNZ2dIZ0UxZkZWZ0k1OGY5RlRtc0JrVV90eHpiSE1TTlAzUTNMcFFERmM5cGtHaEtqS3JWUjI2a1hrT092Q1dOVVMxNmZ0TXZqLWd3RXZ3OXRPSkhwcm1jc29UWnNEZEhub1dWOG4yeWZPZlp2eFBiTWZHWXZwemktdnNtRmhnM2tmMlE?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-05-02"
+  },
+  {
+    "id": 2026092471,
+    "title": "Oportunidade Mais de 2 mil vagas abrem em feiras de emprego na Grande Natal; veja como participar",
+    "slug": "oportunidade-mais-de-2-mil-vagas-abrem-em-feiras-de-emprego-na-grande-natal-veja-como-participar-novo-noticias-natal-2026092471",
+    "companyName": "NOVO Notícias",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Oportunidade Mais de 2 mil vagas abrem em feiras de emprego na Grande Natal; veja como participar    NOVO Notícias\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por NOVO Notícias. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNUjVtNldmdi1UOUlkTXdhTFVWQVcwcVRwRmdFYVp4UUcwbHc5Q1lOMzBwT2IzQmxhZWk3cDVXQlRQbTJqS2JVdld6ZFQwZ0hzek5naUI3NENkUFlDb3J5WkxCMDZ1ak1DV3g1YTJhR0Utd1NxRFJwMXRua2Y2WmloV3poZTdWX0hicEFsX1phdW5fSVNoaDZ6X3pRQmZmYXJUVHkzeXlNTy1MblBZMkxobTRn?oc=5",
+    "isFeatured": true,
+    "isPcd": false,
+    "publishedAt": "2026-04-29"
+  },
+  {
+    "id": 2026092472,
+    "title": "Vagas de emprego no RN oferecem salários de até R$ 4,6 mil em Natal e região metropolitana",
+    "slug": "vagas-de-emprego-no-rn-oferecem-salarios-de-ate-r-46-mil-em-natal-e-regiao-metropolitana-o-poti-natal-2026092472",
+    "companyName": "O POTI",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Vagas de emprego no RN oferecem salários de até R$ 4,6 mil em Natal e região metropolitana    O POTI\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por O POTI. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPeGtCcXNnSG5oU1JqNEZnSjVfbU9heDVzWU9FbkdPaXBOSE1CaXJrSU45c3ZtNmtSZHB3WXQtNEVqdlBVZ0RQaGRmVTAwazBiaEN4aVNiRWh4OEZrOVFKTFFBcHBoY1lJR0NmNXBBdy1tdUtzTUJIZXUwTWhzMWNvRDNwQUNsNnc2NzBwTXBodWJBaldaV3lCeXVMN3BOMllRM2xqSjNXSld5bk84YXdr?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-07-20"
+  },
+  {
+    "id": 2026092473,
+    "title": "Atacarejo abre 40 vagas de emprego no RN; veja como se candidatar",
+    "slug": "atacarejo-abre-40-vagas-de-emprego-no-rn-veja-como-se-candidatar-g1-natal-2026092473",
+    "companyName": "G1",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Atacarejo abre 40 vagas de emprego no RN; veja como se candidatar    G1\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por G1. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPVWtVOG9NYWNNaEZPTVNoeUtNWXg1YTNqMTNDNENnNkhuRjQ1NE5XWjVVS0NuTnhGd2FfQ2h0UHNkM3AtdnNOaU1INFhYQUdNN2xzNDVjcTdhbUNsS1l1clB6TDRjemU2YjZGVEFDd3RNV1FBVDI4NHloVW9JRzFSdzI3U3QtU3BJYnF6WHY2aDhBSXMyNmVSZ3Jvd9IBqgFBVV95cUxQaW5UTi1uM0p0YmtNb1RseHZBdm1vZnU2VEh2eFBUaXByMnIwdEZ1azRpeGtCZEVLNzlsX2dxb2xaeFdFYXhuZTUwVmQ4cHlsaXEtdUIyaVE0VkMwQWhkMkVEWG04cXJnVWZIZHJ5dUo4YnFCWXgyMGxmcTZSOXl4eks5V1NlUGhRR2tpZWRxVWw1eTlzeEVUSVJDdFlZeGJITjBnOUhiWXlydw?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-03-04"
+  },
+  {
+    "id": 2026092474,
+    "title": "Sine abre 77 vagas de empregos no RN; saiba como se inscrever",
+    "slug": "sine-abre-77-vagas-de-empregos-no-rn-saiba-como-se-inscrever-tribunadonortecombr-natal-2026092474",
+    "companyName": "tribunadonorte.com.br",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Sine abre 77 vagas de empregos no RN; saiba como se inscrever    tribunadonorte.com.br\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por tribunadonorte.com.br. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPT29BWUN1OEpjLXlvN2Q4VGZvQ2QteGFjZkxmSUFnMllabERsNGZOUm52MnBMQ29EWlFpOHZjWHJFUmtoQzVjVW94Q3BfVS1LN1U2Vy0xVTlTdjZ6NUdoR0hfbmhrNUpyalZlSzhubFZMR2hhcC10RHdidXlseGhDQXRVbGgzLVpkYnU3SDVfVFVnajYwWkdadVhOTTBMYm5FTFhSR2xENFlVUmFFcEE1Mg?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2025-11-19"
+  },
+  {
+    "id": 2026092475,
+    "title": "Natal abre 400 vagas em cursos gratuitos de qualificação profissional",
+    "slug": "natal-abre-400-vagas-em-cursos-gratuitos-de-qualificacao-profissional-agora-rn-natal-2026092475",
+    "companyName": "Agora RN",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Natal abre 400 vagas em cursos gratuitos de qualificação profissional    Agora RN\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Agora RN. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1PZHNSSGVsUGZ1TFM3QkdOODhod3BpV3Y0b0duZHl6S3A1b3JRUUlmbVE3QkRuczlDMWZyUWE4WjBaalNTUDFKYlJmY0wzM09ES2p4VXRmYURsT3JhZ1Jad1QwSlhzVHFnYTFqdEFmU01FcEY5WlBIS2FhdjU?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-07-22"
+  },
+  {
+    "id": 2026092476,
+    "title": "Natal concentra mais da metade dos empregos formais criados no RN nos últimos 18 meses",
+    "slug": "natal-concentra-mais-da-metade-dos-empregos-formais-criados-no-rn-nos-ultimos-18-meses-portal-diario-do-rn-natal-2026092476",
+    "companyName": "Portal Diário do RN",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Natal concentra mais da metade dos empregos formais criados no RN nos últimos 18 meses    Portal Diário do RN\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por Portal Diário do RN. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQX0tjR3l0N0d6dTQzd1l1NUwwWDVMUEt3U3VOZlEtQmhBSFpwMEF4NTc4WEdodWdPVm1mRlNhLUhHWktaMm1jTGd1OVhPdzdMcUNqSkRTbGQ2WkVJY01feEFjakI5X0szRWkyM1F5dDhZenhtTFRBUXdhLVdINjFSdnBTVzJIakJjcENnMUdxc1dGcUpxYkJyRWN3WEZwcUppUm9KOGJrOWprYUVKc1ZFdnQxSQ?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-08-01"
+  },
+  {
+    "id": 2026092477,
+    "title": "Mutirão de Aprendizagem oferece qualificação profissional para jovens em Natal; veja quem pode participar",
+    "slug": "mutirao-de-aprendizagem-oferece-qualificacao-profissional-para-jovens-em-natal-veja-quem-pode-participar-g1-natal-2026092477",
+    "companyName": "G1",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "JOVEM_APRENDIZ",
+    "description": "Mutirão de Aprendizagem oferece qualificação profissional para jovens em Natal; veja quem pode participar    G1\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por G1. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMigwJBVV95cUxPNGJJRHZyQm9FV05HSThHYWN5YVY3S2pNdmNCc1pJNXByUGhiZXpZcEJzcEhNemdwVHhndGJtUmU1enAtUEJKLUhENU1ubmV1bE05RW82QWptdG1GWFpBb2dGd2l2Q2c1YkVqMXloMGNZV2ttSnp2Sk14VWYwd0hyZS1OM254MVc5Z2R1ckYzaHhwOE10eTdiUG5Wckp2N2pRZHVjSlM4R2h0WXJzRTEzWUcwVllESGNuWS1xU3EwN29QWlozV0V5Tl9aWXlkTWIzSDk3WnNWdFVJS1pobnVyLXZVN2hHbjF3dzlFQ0hVbUw3cXpBTjc4UzVVNFBtZXlvaUZv0gGSAkFVX3lxTFBVN19mVnRlNjlicWFJdDd5MUZsR3EyX3lqbE1STlhHM211bkd4TEVHX0d1Y3o3ZVVvVFdVa2lnZk4yVDNfbXhPczFQbkZqbWJBRVcxcTVPYmI5djVNbFJvaDZPWldLQmUwdHZSdEV3bzBqckxKNV9jVGxmREtud2pYWnFsZndOLWktWlNkVWJ2ZHBiMGFRd3RKTExBWURCaDJiYnl2ci1tRVVLWVlWeXZ3MWdnUy11SkNsNnFhLVpWeHp3c2xDdlJwa09OeTIycHpzWWhWZFJzbWRwMDFBcFp5NUVXZkJNcy14R0VaWWJ1aDhTZ0VSWS12NHJwRnJ2SjVBZ240d1BhclNJT1Q2Mnd1cEE?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-08-21"
+  },
+  {
+    "id": 2026092478,
+    "title": "Empregos no RN: veja as cidades com melhor e pior desempenho em 2025",
+    "slug": "empregos-no-rn-veja-as-cidades-com-melhor-e-pior-desempenho-em-2025-tribunadonortecombr-natal-2026092478",
+    "companyName": "tribunadonorte.com.br",
+    "city": "Natal",
+    "state": "RN",
+    "workModel": "PRESENCIAL",
+    "contractType": "CLT",
+    "description": "Empregos no RN: veja as cidades com melhor e pior desempenho em 2025    tribunadonorte.com.br\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por tribunadonorte.com.br. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição.",
+    "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+    "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+    "salaryCurrency": "BRL",
+    "hideSalary": true,
+    "applicationChannel": "LINK",
+    "applicationTarget": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNeG1uUVpGOGtLWjg4Rk1GN0V1TWVpejlRUWotdnFDY05tb2NLMHllZUZPM3c0TE55endCclBDRXMxTVBOeHNRci1XMnpWdFRKam9jMjdPbnlfU2dXLXJMdVpWeDZxRGpJNTAwU05wSzU1enhBMG5CZi1RbjN4SjN2ejBaWnF0V3ZNR3lSZ3hFX05lV1NXM0d3ME5MX3dlN2kzaS0xMDg4LTRoMzA?oc=5",
+    "isFeatured": false,
+    "isPcd": false,
+    "publishedAt": "2026-02-05"
+  },
   {
     "id": 2026092416,
     "title": "Auxiliar de Cozinha - Home Sushi Home",
@@ -46884,8 +47185,8 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
-- **Total de Linhas:** 9028
-- **Tamanho:** 347520 bytes
+- **Total de Linhas:** 9118
+- **Tamanho:** 351602 bytes
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47119,6 +47420,96 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
   </url>
 
   <!-- URLs das Vagas Ativas no RN -->
+  <url>
+    <loc>https://natalvagas.com.br/vaga/feiras-de-empregabilidade-oferecem-mais-de-2-mil-vagas-de-trabalho-na-grande-natal-g1-natal-2026092464</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/mutirao-oferece-vagas-de-emprego-e-qualificacao-profissional-para-jovens-no-fim-de-agosto-em-natal-tribunadonortecombr-natal-2026092465</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/empresa-abre-40-vagas-de-emprego-em-natal-veja-cargos-e-como-se-candidatar-agora-rn-natal-2026092466</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-de-emprego-abertas-em-natal-e-no-rio-grande-do-norte-veja-oportunidades-e-como-se-candidatar-natal-em-foco-natal-2026092467</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/ferreira-costa-abre-40-vagas-de-trabalho-em-natal-por-dentro-do-rn-natal-2026092468</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/noticias-semana-s-promove-feira-de-empregabilidade-com-2-mil-vagas-em-natal-nesta-quarta-feira-portal-da-tropical-natal-2026092469</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/natal-lidera-geracao-de-empregos-no-rio-grande-do-norte-portal-diario-do-rn-natal-2026092470</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/oportunidade-mais-de-2-mil-vagas-abrem-em-feiras-de-emprego-na-grande-natal-veja-como-participar-novo-noticias-natal-2026092471</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/vagas-de-emprego-no-rn-oferecem-salarios-de-ate-r-46-mil-em-natal-e-regiao-metropolitana-o-poti-natal-2026092472</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/atacarejo-abre-40-vagas-de-emprego-no-rn-veja-como-se-candidatar-g1-natal-2026092473</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/sine-abre-77-vagas-de-empregos-no-rn-saiba-como-se-inscrever-tribunadonortecombr-natal-2026092474</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/natal-abre-400-vagas-em-cursos-gratuitos-de-qualificacao-profissional-agora-rn-natal-2026092475</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/natal-concentra-mais-da-metade-dos-empregos-formais-criados-no-rn-nos-ultimos-18-meses-portal-diario-do-rn-natal-2026092476</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/mutirao-de-aprendizagem-oferece-qualificacao-profissional-para-jovens-em-natal-veja-quem-pode-participar-g1-natal-2026092477</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://natalvagas.com.br/vaga/empregos-no-rn-veja-as-cidades-com-melhor-e-pior-desempenho-em-2025-tribunadonortecombr-natal-2026092478</loc>
+    <lastmod>2026-02-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://natalvagas.com.br/vaga/auxiliar-de-cozinha-home-sushi-home-natal</loc>
     <lastmod>2026-09-13</lastmod>
@@ -62194,8 +62585,8 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
-- **Total de Linhas:** 73
-- **Tamanho:** 2307 bytes
+- **Total de Linhas:** 79
+- **Tamanho:** 2560 bytes
 
 ```text
 name: Atualização Diária de Vagas (Natal Vagas)
@@ -62226,7 +62617,7 @@ jobs:
 
       - name: 📦 Instalar Dependências Python
         run: |
-          pip install requests pillow
+          pip install requests pillow cryptography
 
       - name: 🤖 Rastrear Novas Vagas no RN
         run: |
@@ -62247,7 +62638,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
-      - name: 🏗️ Validar Build de Produção
+      - name: 🏗️ Validar Build de Produção & Pré-renderização Estática (200 OK)
         run: |
           cd frontend
           npm ci
@@ -62272,6 +62663,12 @@ jobs:
             echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
           fi
 
+      - name: 🛰️ Notificar Google Indexing API
+        env:
+          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+        run: |
+          python3 scripts/notify_google_indexing.py
+
 ```
 
 ---
@@ -62281,16 +62678,16 @@ jobs:
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
-- **Total de Linhas:** 271
-- **Tamanho:** 10399 bytes
+- **Total de Linhas:** 217
+- **Tamanho:** 9167 bytes
 
 ```python
 #!/usr/bin/env python3
 """
-Daily Job Crawler — Natal Vagas
-Busca as publicações mais recentes nos feeds oficiais do Rio Grande do Norte,
-identifica vagas inéditas, higieniza os dados e atualiza o catálogo jobs.json.
-Projetado para execução rápida e automática via GitHub Actions.
+Daily Job Crawler v3.0 — Natal Vagas
+Busca contínua de vagas reais, estágios, jovem aprendiz e processos seletivos no RN.
+Consome feeds de alta relevância (Google News RN, portais de carreira e vagas oficiais).
+Projetado para execução 100% autônoma via GitHub Actions.
 """
 
 import urllib.request
@@ -62299,7 +62696,8 @@ import re
 import os
 import sys
 import unicodedata
-from datetime import datetime
+import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 jobs_json_file = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
@@ -62309,26 +62707,19 @@ def slugify(text: str) -> str:
     text = re.sub(r'[^\w\s-]', '', text.lower())
     return re.sub(r'[-\s]+', '-', text).strip('-')
 
-def decode_cloudflare_email(encoded: str) -> str:
-    try:
-        r = int(encoded[:2], 16)
-        return "".join([chr(int(encoded[i:i+2], 16) ^ r) for i in range(2, len(encoded), 2)])
-    except Exception:
-        return ""
-
 def clean_html(html_text: str) -> str:
     text = re.sub(r'<br\s*/?>', '\n', html_text)
     text = re.sub(r'</p>', '\n\n', text)
     text = re.sub(r'</li>', '\n', text)
     text = re.sub(r'<[^>]+>', ' ', text)
-    text = text.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&quot;', '"')
+    text = text.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&quot;', '"').replace('&#39;', "'")
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()
 
 def parse_city(text: str, title: str) -> str:
     full = (title + " " + text).lower()
     cidades_rn = [
-        ("Parnamirim", ["parnamirim", "cohabinal", "nova parnamirim", "eulalia"]),
+        ("Parnamirim", ["parnamirim", "cohabinal", "nova parnamirim"]),
         ("Mossoró", ["mossoro", "mossoró"]),
         ("Macaíba", ["macaiba", "macaíba"]),
         ("São Gonçalo do Amarante", ["sao goncalo", "são gonçalo", "aeroporto"]),
@@ -62338,6 +62729,9 @@ def parse_city(text: str, title: str) -> str:
         ("Assú", ["assu", "açu"]),
         ("Extremoz", ["extremoz", "pitangui"]),
         ("Tibau do Sul / Pipa", ["tibau do sul", "praia da pipa", "pipa"]),
+        ("Nísia Floresta", ["nisia floresta", "nísia floresta"]),
+        ("São José de Mipibu", ["sao jose de mipibu", "são josé de mipibu"]),
+        ("Tangará", ["tangará", "tangara"]),
         ("Natal", ["natal", "alecrim", "tirol", "midway", "ponta negra", "capim macio", "candelaria", "candelária", "zona norte", "zona sul", "zona leste", "zona oeste", "cidade alta"])
     ]
     for cid, keys in cidades_rn:
@@ -62345,6 +62739,18 @@ def parse_city(text: str, title: str) -> str:
             if k in full:
                 return cid
     return "Natal"
+
+def parse_contract_type(title: str, text: str) -> str:
+    full = (title + " " + text).lower()
+    if "estágio" in full or "estagio" in full:
+        return "ESTAGIO"
+    if "aprendiz" in full:
+        return "JOVEM_APRENDIZ"
+    if "concurso" in full or "processo seletivo" in full or "edital" in full:
+        return "TEMPORARIO"
+    if "pj" in full or "prestador" in full:
+        return "PJ"
+    return "CLT"
 
 def parse_work_model(text: str) -> str:
     lower = text.lower()
@@ -62354,72 +62760,22 @@ def parse_work_model(text: str) -> str:
         return "HIBRIDO"
     return "PRESENCIAL"
 
-def parse_contract_type(title: str, text: str) -> str:
-    full = (title + " " + text).lower()
-    if "estágio" in full or "estagio" in full:
-        return "ESTAGIO"
-    if "aprendiz" in full:
-        return "JOVEM_APRENDIZ"
-    if "temporário" in full or "temporario" in full:
-        return "TEMPORARIO"
-    if "pj" in full or "prestador" in full:
-        return "PJ"
-    return "CLT"
-
-def extract_salary(text: str):
-    m = re.search(r'R\$\s*([\d\.,]+)', text)
-    if m:
-        val_str = m.group(1).replace('.', '').replace(',', '.')
-        try:
-            val = float(val_str)
-            if 500 <= val <= 25000:
-                return val, val
-        except ValueError:
-            pass
-    return None, None
-
-def extract_contacts(raw_html: str, text: str):
-    cf_matches = re.findall(r'data-cfemail="([a-fA-F0-9]+)"', raw_html)
-    emails = []
-    for cf in cf_matches:
-        dec = decode_cloudflare_email(cf)
-        if dec and '@' in dec:
-            emails.append(dec.strip())
-            
-    plain_emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', text)
-    for em in plain_emails:
-        clean_em = em.lower().strip()
-        if not clean_em.endswith(('png', 'jpg', 'jpeg', 'gif', 'js', 'css')) and clean_em not in emails:
-            emails.append(clean_em)
-            
-    phones = re.findall(r'(?:\(?\s*84\s*\)?\s*)?(?:9\s*)?[89]\d{3}[-\s]?\d{4}', text)
-    cleaned_phones = []
-    for p in phones:
-        digits = re.sub(r'\D', '', p)
-        if len(digits) in [8, 9, 10, 11]:
-            if not digits.startswith('84'):
-                if len(digits) == 9:
-                    digits = '84' + digits
-                elif len(digits) == 8:
-                    digits = '849' + digits
-            cleaned_phones.append(digits)
-            
-    return list(set(emails)), list(set(cleaned_phones))
-
-def fetch_feed(url: str):
+def fetch_rss_feed(url: str):
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NatalVagasCrawler/2.0"}
+        headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NatalVagasCrawler/3.0"}
     )
     try:
         with urllib.request.urlopen(req, timeout=15) as res:
-            return json.loads(res.read().decode('utf-8'))
+            xml_data = res.read()
+            root = ET.fromstring(xml_data)
+            return root.findall('.//item')
     except Exception as e:
-        print(f"⚠️ Erro ao consultar feed {url}: {e}")
-        return None
+        print(f"⚠️ Erro ao consultar feed RSS {url}: {e}")
+        return []
 
 def main():
-    print("🤖 Iniciando Daily Job Crawler — Natal Vagas...")
+    print("🤖 Iniciando Daily Job Crawler v3.0 — Natal Vagas...")
     
     if not os.path.exists(jobs_json_file):
         print(f"❌ Catálogo {jobs_json_file} não encontrado!")
@@ -62432,127 +62788,114 @@ def main():
     
     existing_slugs = {j.get('slug') for j in existing_records if j.get('slug')}
     existing_keys = {
-        re.sub(r'\W+', '', f"{j.get('title', '')}_{j.get('companyName', '')}").lower()
+        re.sub(r'\W+', '', f"{j.get('title', '')}_{j.get('city', '')}").lower()
         for j in existing_records
     }
     
     current_max_id = max([j.get('id', 0) for j in existing_records] + [2026090000])
     
-    # Consulta os feeds mais recentes (últimas publicações)
-    feed_urls = [
-        "https://www.empregodorn.com.br/feeds/posts/default?alt=json&max-results=50",
-        "https://www.vagasempregosnatal.com.br/feeds/posts/default?alt=json&max-results=50"
+    # 1. Consulta feeds RSS de notícias e oportunidades no RN
+    rss_queries = [
+        "vagas+emprego+natal+rn",
+        "concurso+processo+seletivo+rn",
+        "estagio+jovem+aprendiz+natal+rn"
     ]
     
-    entries = []
-    for f_url in feed_urls:
-        data = fetch_feed(f_url)
-        if data and 'feed' in data and 'entry' in data['feed']:
-            entries.extend(data['feed']['entry'])
-            
-    print(f"🔎 Encontradas {len(entries)} publicações recentes nos feeds.")
-    
     new_jobs = []
-    for entry in entries:
-        raw_title = entry.get('title', {}).get('$t', '').strip()
-        if not raw_title:
-            continue
-            
-        content_obj = entry.get('content') or entry.get('summary') or {}
-        raw_html = content_obj.get('$t', '')
-        text = clean_html(raw_html)
-        
-        # Limpa título
-        title = raw_title
-        title = re.sub(r'^(?:vaga\s*de\s*(?:emprego|estágio|estagio)?\s*para|vaga\s*de|oportunidade\s*para|urgente:?)\s*', '', title, flags=re.IGNORECASE)
-        title = re.sub(r'\s*-\s*natal\s*(?:e\s*região|e\s*grande\s*natal|/rn)?\s*$', '', title, flags=re.IGNORECASE)
-        title = re.sub(r'\s*-\s*rn\s*$', '', title, flags=re.IGNORECASE)
-        title = title.strip(' -–—:').title()
-        
-        # Extrai empresa
-        company = "Empresa Confidencial"
-        m_comp = re.search(r'(?:empresa|clínica|loja|restaurante|supermercado|hospital|indústria|escola|hotel)\s*(?:parceira|local|confidencial)?\s*:\s*([A-Za-z0-9À-ÿ\s&.-]+)', text, re.IGNORECASE)
-        if m_comp:
-            c_name = m_comp.group(1).strip()
-            if 3 < len(c_name) < 40 and not any(kw in c_name.lower() for kw in ['requisitos', 'atividades', 'benefícios', 'salário']):
-                company = c_name.title()
-                
-        t_key = re.sub(r'\W+', '', f"{title}_{company}").lower()
-        if t_key in existing_keys:
-            continue
-            
-        published = entry.get('published', {}).get('$t', datetime.now().isoformat())
-        if len(published) > 10:
-            published = published[:10]
-            
-        city = parse_city(text, raw_title)
-        work_model = parse_work_model(text)
-        contract_type = parse_contract_type(title, text)
-        sal_min, sal_max = extract_salary(text)
-        emails, phones = extract_contacts(raw_html, text)
-        
-        current_max_id += 1
-        slug = f"{slugify(title)}-{slugify(company)}-{slugify(city)}-{current_max_id}"
-        
-        if slug in existing_slugs:
-            continue
-            
-        # Determina canal de candidatura
-        if emails:
-            app_channel = "EMAIL"
-            app_target = emails[0]
-        elif phones:
-            app_channel = "WHATSAPP"
-            app_target = phones[0]
-        else:
-            orig_link = ""
-            for l in entry.get('link', []):
-                if l.get('rel') == 'alternate':
-                    orig_link = l.get('href', '')
-                    break
-            app_channel = "LINK"
-            app_target = orig_link or "https://natalvagas.com.br"
-            
-        job_obj = {
-            "id": current_max_id,
-            "title": title,
-            "slug": slug,
-            "companyName": company,
-            "city": city,
-            "state": "RN",
-            "workModel": work_model,
-            "contractType": contract_type,
-            "description": text[:1500] if len(text) > 1500 else text,
-            "salaryMin": sal_min,
-            "salaryMax": sal_max,
-            "salaryCurrency": "BRL",
-            "hideSalary": (sal_min is None),
-            "applicationChannel": app_channel,
-            "applicationTarget": app_target,
-            "publishedAt": published,
-            "expiresAt": "2026-12-31T23:59:59-03:00",
-            "status": "APPROVED",
-            "isFeatured": False
-        }
-        
-        new_jobs.append(job_obj)
-        existing_slugs.add(slug)
-        existing_keys.add(t_key)
-        
-    print(f"✨ Novas vagas identificadas: {len(new_jobs)}")
     
-    if len(new_jobs) > 0:
-        # Coloca as novas vagas no início para aparecerem primeiro
-        updated_records = new_jobs + existing_records
-        with open(jobs_json_file, "w", encoding="utf-8") as f:
-            json.dump(updated_records, f, ensure_ascii=False, indent=2)
+    for q in rss_queries:
+        url = f"https://news.google.com/rss/search?q={q}&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+        items = fetch_rss_feed(url)
+        print(f"🔎 Query '{q}': {len(items)} publicações encontradas.")
+        
+        for it in items:
+            raw_title = it.find('title').text if it.find('title') is not None else ""
+            link = it.find('link').text if it.find('link') is not None else ""
+            pub_date_str = it.find('pubDate').text if it.find('pubDate') is not None else ""
+            desc_node = it.find('description')
+            desc = clean_html(desc_node.text) if desc_node is not None and desc_node.text else ""
             
-        print(f"✅ Catálogo jobs.json atualizado com sucesso! Total consolidado: {len(updated_records)} vagas.")
-        # Código de saída 0 com flag
-        sys.exit(0)
+            if not raw_title or not link:
+                continue
+                
+            # Extrai veículo/fonte (ex: "... - G1")
+            source_match = re.search(r'\s*-\s*([A-Za-z0-9À-ÿ\s.]+)$', raw_title)
+            company_source = source_match.group(1).strip() if source_match else "Portal Parceiro RN"
+            clean_title = re.sub(r'\s*-\s*[A-Za-z0-9À-ÿ\s.]+$', '', raw_title).strip()
+            
+            # Filtro de relevância para vagas e seleções no RN
+            title_lower = clean_title.lower()
+            relevant_keywords = ['vaga', 'emprego', 'contrata', 'concurso', 'estágio', 'estagio', 'aprendiz', 'oportunidade', 'seleção', 'seletivo', 'edital', 'inscriç']
+            if not any(kw in title_lower for kw in relevant_keywords):
+                continue
+                
+            city = parse_city(desc, clean_title)
+            t_key = re.sub(r'\W+', '', f"{clean_title}_{city}").lower()
+            if t_key in existing_keys:
+                continue
+                
+            contract_type = parse_contract_type(clean_title, desc)
+            work_model = parse_work_model(desc)
+            
+            # Trata data de publicação
+            try:
+                # Exemplo: Wed, 16 Sep 2026 14:00:00 GMT
+                dt = datetime.strptime(pub_date_str[:16], "%a, %d %b %Y")
+                published_iso = dt.strftime("%Y-%m-%d")
+            except Exception:
+                published_iso = datetime.now().strftime("%Y-%m-%d")
+                
+            current_max_id += 1
+            slug = f"{slugify(clean_title)}-{slugify(company_source)}-{slugify(city)}-{current_max_id}"
+            
+            if slug in existing_slugs:
+                continue
+                
+            description_text = f"{desc}\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por {company_source}. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição."
+            
+            job_obj = {
+                "id": current_max_id,
+                "title": clean_title,
+                "slug": slug,
+                "companyName": company_source,
+                "city": city,
+                "state": "RN",
+                "workModel": work_model,
+                "contractType": contract_type,
+                "description": description_text,
+                "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
+                "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+                "salaryCurrency": "BRL",
+                "hideSalary": True,
+                "applicationChannel": "LINK",
+                "applicationTarget": link,
+                "isFeatured": ("concurso" in title_lower or "edital" in title_lower or "2 mil" in title_lower),
+                "isPcd": ("pcd" in title_lower or "deficiência" in title_lower),
+                "publishedAt": published_iso
+            }
+            
+            new_jobs.append(job_obj)
+            existing_slugs.add(slug)
+            existing_keys.add(t_key)
+            
+            # Limite seguro diário de 15 novas oportunidades para evitar inchaço
+            if len(new_jobs) >= 15:
+                break
+        if len(new_jobs) >= 15:
+            break
+            
+    print(f"✨ Novas vagas identificadas hoje: {len(new_jobs)}")
+    
+    if new_jobs:
+        # Coloca as novas vagas no topo do catálogo
+        updated_catalog = new_jobs + existing_records
+        
+        with open(jobs_json_file, "w", encoding="utf-8") as f:
+            json.dump(updated_catalog, f, ensure_ascii=False, indent=2)
+            
+        print(f"🎉 Catálogo atualizado com sucesso! Total agora: {len(updated_catalog)} vagas.")
     else:
         print("ℹ️ Nenhuma nova vaga no momento. Catálogo já está 100% atualizado.")
-        sys.exit(0)
 
 if __name__ == "__main__":
     main()
@@ -63263,8 +63606,174 @@ if __name__ == "__main__":
 
 ---
 
+<a id="scripts-notify-google-indexingpy"></a>
+## 108. Arquivo: `scripts/notify_google_indexing.py`
+- **Caminho:** `scripts/notify_google_indexing.py`
+- **Nome:** `notify_google_indexing.py`
+- **Linguagem / Sintaxe:** `python`
+- **Total de Linhas:** 152
+- **Tamanho:** 6097 bytes
+
+```python
+#!/usr/bin/env python3
+"""
+Google Indexing API Notifier — Natal Vagas
+Notifica o Googlebot instantaneamente sobre novas vagas adicionadas ao catálogo,
+fazendo com que sejam indexadas em minutos em vez de dias.
+
+Requer:
+- Conta de serviço no Google Cloud Console com a 'Web Search Indexing API' ativada.
+- O e-mail da conta de serviço adicionado como 'Proprietário' no Google Search Console.
+- Arquivo de credenciais 'service_account.json' na raiz do projeto ou variável de ambiente GOOGLE_INDEXING_KEY.
+"""
+
+import os
+import sys
+import json
+import time
+import base64
+import urllib.request
+import urllib.parse
+
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+jobs_json_file = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
+creds_file = os.path.join(repo_root, "service_account.json")
+
+def get_service_account_credentials():
+    # 1. Verifica arquivo local
+    if os.path.exists(creds_file):
+        with open(creds_file, "r", encoding="utf-8") as f:
+            return json.load(f)
+            
+    # 2. Verifica variável de ambiente (GitHub Actions Secrets)
+    env_creds = os.environ.get("GOOGLE_INDEXING_KEY")
+    if env_creds:
+        try:
+            return json.loads(env_creds)
+        except Exception:
+            pass
+            
+    return None
+
+def main():
+    print("🛰️ Iniciando Google Indexing API Notifier...")
+    
+    creds = get_service_account_credentials()
+    if not creds:
+        print("ℹ️ Credenciais da Google Indexing API ('service_account.json' ou GOOGLE_INDEXING_KEY) não encontradas.")
+        print("💡 Para ativar o aviso instantâneo ao Googlebot:")
+        print("   1. Crie uma Conta de Serviço gratuita no Google Cloud Console com a Indexing API ativada.")
+        print("   2. Adicione o e-mail da conta de serviço como Proprietário no Google Search Console.")
+        print("   3. Salve a chave JSON como 'service_account.json' ou no Secret GOOGLE_INDEXING_KEY do GitHub.")
+        print("⏩ Pulando notificação direta (o Google continuará indexando via sitemap.xml).")
+        return
+
+    if not os.path.exists(jobs_json_file):
+        print(f"❌ Catálogo {jobs_json_file} não encontrado!")
+        return
+
+    with open(jobs_json_file, "r", encoding="utf-8") as f:
+        jobs = json.load(f)
+
+    # Pega as 15 vagas mais recentes
+    recent_jobs = jobs[:15]
+    print(f"📋 Notificando as {len(recent_jobs)} vagas mais recentes para o Googlebot...")
+
+    # Gera JWT e solicita Access Token do Google
+    try:
+        import hmac
+        import hashlib
+
+        client_email = creds.get("client_email")
+        private_key = creds.get("private_key")
+        token_uri = creds.get("token_uri", "https://oauth2.googleapis.com/token")
+
+        now = int(time.time())
+        header = {"alg": "RS256", "typ": "JWT"}
+        claim = {
+            "iss": client_email,
+            "scope": "https://www.googleapis.com/auth/indexing",
+            "aud": token_uri,
+            "exp": now + 3600,
+            "iat": now
+        }
+
+        # Para assinar RS256 puro em Python sem PyJWT/cryptography instalados:
+        try:
+            from cryptography.hazmat.primitives import serialization
+            from cryptography.hazmat.primitives import hashes
+            from cryptography.hazmat.primitives.asymmetric import padding
+
+            priv_key_obj = serialization.load_pem_private_key(
+                private_key.encode("utf-8"),
+                password=None
+            )
+
+            b64_header = base64.urlsafe_b64encode(json.dumps(header).encode()).decode().rstrip("=")
+            b64_claim = base64.urlsafe_b64encode(json.dumps(claim).encode()).decode().rstrip("=")
+            signing_input = f"{b64_header}.{b64_claim}".encode()
+
+            signature = priv_key_obj.sign(signing_input, padding.PKCS1v15(), hashes.SHA256())
+            b64_sig = base64.urlsafe_b64encode(signature).decode().rstrip("=")
+            jwt_token = f"{b64_header}.{b64_claim}.{b64_sig}"
+
+            # Troca JWT por Access Token
+            token_data = urllib.parse.urlencode({
+                "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+                "assertion": jwt_token
+            }).encode()
+
+            req = urllib.request.Request(token_uri, data=token_data, headers={"Content-Type": "application/x-www-form-urlencoded"})
+            with urllib.request.urlopen(req) as res:
+                auth_res = json.loads(res.read().decode())
+                access_token = auth_res.get("access_token")
+
+            # Notifica cada URL
+            indexing_endpoint = "https://indexing.googleapis.com/v3/urlNotifications:publish"
+            success_count = 0
+            for j in recent_jobs:
+                slug = j.get("slug")
+                if not slug:
+                    continue
+                job_url = f"https://natalvagas.com.br/vaga/{slug}"
+                payload = json.dumps({
+                    "url": job_url,
+                    "type": "URL_UPDATED"
+                }).encode()
+
+                api_req = urllib.request.Request(
+                    indexing_endpoint,
+                    data=payload,
+                    headers={
+                        "Content-Type": "application/json",
+                        "Authorization": f"Bearer {access_token}"
+                    }
+                )
+                try:
+                    with urllib.request.urlopen(api_req) as api_res:
+                        if api_res.status == 200:
+                            success_count += 1
+                except Exception as ex:
+                    print(f"⚠️ Erro ao notificar URL {job_url}: {ex}")
+
+            print(f"✅ Sucesso! {success_count} URLs notificadas com sucesso direto na Google Indexing API!")
+
+        except ImportError:
+            print("ℹ️ Módulo 'cryptography' não disponível no ambiente para assinatura de token.")
+            print("⏩ Pulando notificação direta.")
+
+    except Exception as e:
+        print(f"⚠️ Falha durante autenticação com Google Indexing API: {e}")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
 <a id="scripts-pre-render-static-routespy"></a>
-## 108. Arquivo: `scripts/pre_render_static_routes.py`
+## 109. Arquivo: `scripts/pre_render_static_routes.py`
 - **Caminho:** `scripts/pre_render_static_routes.py`
 - **Nome:** `pre_render_static_routes.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63392,7 +63901,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 109. Arquivo: `scripts/rn_job_scraper.py`
+## 110. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63591,7 +64100,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 110. Arquivo: `scripts/test_efi_status.py`
+## 111. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63671,7 +64180,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 111. Arquivo: `scripts/verify_build_integrity.py`
+## 112. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63764,7 +64273,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 112. Arquivo: `scripts/verify_seo.py`
+## 113. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -63848,7 +64357,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 113. Arquivo: `.env.example`
+## 114. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -63867,7 +64376,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="gitignore"></a>
-## 114. Arquivo: `.gitignore`
+## 115. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -63927,7 +64436,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 115. Arquivo: `docker-compose.yml`
+## 116. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

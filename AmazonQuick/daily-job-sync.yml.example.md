@@ -1,7 +1,7 @@
 # File: daily-job-sync.yml.example
 - **Original Path:** `scripts/daily-job-sync.yml.example`
 - **Language / Type:** `text`
-- **Lines of Code:** 73
+- **Lines of Code:** 79
 
 ---
 
@@ -34,7 +34,7 @@ jobs:
 
       - name: 📦 Instalar Dependências Python
         run: |
-          pip install requests pillow
+          pip install requests pillow cryptography
 
       - name: 🤖 Rastrear Novas Vagas no RN
         run: |
@@ -55,7 +55,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
-      - name: 🏗️ Validar Build de Produção
+      - name: 🏗️ Validar Build de Produção & Pré-renderização Estática (200 OK)
         run: |
           cd frontend
           npm ci
@@ -79,5 +79,11 @@ jobs:
           else
             echo "Nenhuma alteração no catálogo hoje. Nada a comitar."
           fi
+
+      - name: 🛰️ Notificar Google Indexing API
+        env:
+          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+        run: |
+          python3 scripts/notify_google_indexing.py
 
 ```

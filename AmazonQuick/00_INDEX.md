@@ -59,11 +59,11 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [redirects.md](./redirects.md) | `frontend/public/_redirects` | 1 | `config` |
 | [routes.json.md](./routes.json.md) | `frontend/public/_routes.json` | 5 | `.json` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
-| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 35154 | `.json` |
+| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 35454 | `.json` |
 | [manifest.json.md](./manifest.json.md) | `frontend/public/manifest.json` | 33 | `.json` |
 | [manifest.webmanifest.md](./manifest.webmanifest.md) | `frontend/public/manifest.webmanifest` | 33 | `.webmanifest` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 19 | `.txt` |
-| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 9028 | `.xml` |
+| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 9118 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
 | [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
@@ -113,11 +113,12 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [add_whatsapp_jobs.py.md](./add_whatsapp_jobs.py.md) | `scripts/add_whatsapp_jobs.py` | 947 | `.py` |
 | [build_single_context_md.py.md](./build_single_context_md.py.md) | `scripts/build_single_context_md.py` | 143 | `.py` |
 | [convert_to_amazon_quick.py.md](./convert_to_amazon_quick.py.md) | `scripts/convert_to_amazon_quick.py` | 118 | `.py` |
-| [daily-job-sync.yml.example.md](./daily-job-sync.yml.example.md) | `scripts/daily-job-sync.yml.example` | 73 | `.example` |
-| [daily_job_crawler.py.md](./daily_job_crawler.py.md) | `scripts/daily_job_crawler.py` | 271 | `.py` |
+| [daily-job-sync.yml.example.md](./daily-job-sync.yml.example.md) | `scripts/daily-job-sync.yml.example` | 79 | `.example` |
+| [daily_job_crawler.py.md](./daily_job_crawler.py.md) | `scripts/daily_job_crawler.py` | 217 | `.py` |
 | [fetch_500_rn_jobs.py.md](./fetch_500_rn_jobs.py.md) | `scripts/fetch_500_rn_jobs.py` | 287 | `.py` |
 | [generate_sitemap.py.md](./generate_sitemap.py.md) | `scripts/generate_sitemap.py` | 164 | `.py` |
 | [ingest_jobs.py.md](./ingest_jobs.py.md) | `scripts/ingest_jobs.py` | 209 | `.py` |
+| [notify_google_indexing.py.md](./notify_google_indexing.py.md) | `scripts/notify_google_indexing.py` | 152 | `.py` |
 | [pre_render_static_routes.py.md](./pre_render_static_routes.py.md) | `scripts/pre_render_static_routes.py` | 114 | `.py` |
 | [rn_job_scraper.py.md](./rn_job_scraper.py.md) | `scripts/rn_job_scraper.py` | 185 | `.py` |
 | [test_efi_status.py.md](./test_efi_status.py.md) | `scripts/test_efi_status.py` | 66 | `.py` |
@@ -125,4 +126,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 70 | `.py` |
 
 ---
-**Total de Arquivos:** 115 arquivos convertidos com sucesso.
+**Total de Arquivos:** 116 arquivos convertidos com sucesso.
