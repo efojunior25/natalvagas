@@ -4,13 +4,15 @@ import {
   Building2, MapPin, Clock, DollarSign, Share2, CheckCircle2, 
   ExternalLink, Mail, ArrowLeft, ShieldCheck, Sparkles, AlertTriangle, 
   Copy, Check, Send, Globe, Instagram, Linkedin,
-  FileText, ChevronRight, Briefcase
+  FileText, ChevronRight, Briefcase, Edit3, Image as ImageIcon
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { AdPlaceholder } from '../components/AdPlaceholder';
 import { Job } from '../types/job';
 import { SocialPostGeneratorModal } from '../components/SocialPostGeneratorModal';
+import { AdminJobEditModal } from '../components/AdminJobEditModal';
+import { useAuth, isDeveloperEmail } from '../context/AuthContext';
 
 const PostJobModal = lazy(() => import('../components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 
@@ -21,6 +23,7 @@ interface JobDetailsPageProps {
 }
 
 export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading, onJobCreated }) => {
+  const { user } = useAuth();
   const { slug } = useParams<{ slug: string }>();
 
   const [copiedLink, setCopiedLink] = useState(false);
@@ -106,15 +109,84 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
     if (ogUrl) ogUrl.setAttribute('content', jobUrl);
   }, [currentJob]);
 
-  // Determina se a empresa ou vaga tem o Selo de Empresa Verificada
+  const [isAdminSession, setIsAdminSession] = useState(false);
+  const [isAdminEditModalOpen, setIsAdminEditModalOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      setIsAdminSession(sessionStorage.getItem('natalvagas_admin_mfa_auth') === 'true');
+    } catch {
+      setIsAdminSession(false);
+    }
+  }, []);
+
+  const isAdminLoggedIn = Boolean(isAdminSession || user?.isAdmin || isDeveloperEmail(user?.email));
+
+  // Determina se a empresa tem o Selo de Empresa Verificada (estrito para quem o administrador homologou)
   const isVerifiedCompany = useMemo(() => {
     if (!currentJob) return false;
-    return Boolean(
-      currentJob.isCompanyVerified || 
-      currentJob.isFeatured || 
-      (currentJob.verifiedAt && !/confidencial/i.test(currentJob.companyName))
-    );
+    return Boolean(currentJob.isCompanyVerified);
   }, [currentJob]);
+
+  // Detecta se a vaga possui panfleto/flyer oficial (ex: vindo do WhatsApp)
+  const flyerSrc = useMemo(() => {
+    if (!currentJob) return null;
+    if (currentJob.sourceUrl && currentJob.sourceUrl.includes('/assets/vagas/')) {
+      return currentJob.sourceUrl;
+    }
+    if (currentJob.companyLogoUrl && (currentJob.companyLogoUrl.includes('/assets/vagas/') || currentJob.companyLogoUrl.includes('WhatsApp Image'))) {
+      return currentJob.companyLogoUrl;
+    }
+    return null;
+  }, [currentJob]);
+
+  // Se a imagem for um flyer retangular/panfleto, não a tratamos como logo quadrada
+  const isCleanLogo = useMemo(() => {
+    if (!currentJob?.companyLogoUrl) return false;
+    return !currentJob.companyLogoUrl.includes('/assets/vagas/') && !currentJob.companyLogoUrl.includes('WhatsApp Image');
+  }, [currentJob]);
+
+  const handleToggleVerified = () => {
+    if (!currentJob) return;
+    const key = currentJob.slug || String(currentJob.id);
+    const updatedStatus = !currentJob.isCompanyVerified;
+    const updatedJob = { ...currentJob, isCompanyVerified: updatedStatus };
+    setLocalJob(updatedJob);
+
+    try {
+      const stored = localStorage.getItem('natalvagas_job_overrides');
+      const overrides = stored ? JSON.parse(stored) : {};
+      overrides[key] = { ...(overrides[key] || {}), isCompanyVerified: updatedStatus };
+      localStorage.setItem('natalvagas_job_overrides', JSON.stringify(overrides));
+    } catch {}
+  };
+
+  const handleToggleFeatured = () => {
+    if (!currentJob) return;
+    const key = currentJob.slug || String(currentJob.id);
+    const updatedStatus = !currentJob.isFeatured;
+    const updatedJob = { ...currentJob, isFeatured: updatedStatus };
+    setLocalJob(updatedJob);
+
+    try {
+      const stored = localStorage.getItem('natalvagas_job_overrides');
+      const overrides = stored ? JSON.parse(stored) : {};
+      overrides[key] = { ...(overrides[key] || {}), isFeatured: updatedStatus };
+      localStorage.setItem('natalvagas_job_overrides', JSON.stringify(overrides));
+    } catch {}
+  };
+
+  const handleAdminSave = (savedJob: Job) => {
+    setLocalJob(savedJob);
+    const key = savedJob.slug || String(savedJob.id);
+    try {
+      const stored = localStorage.getItem('natalvagas_job_overrides');
+      const overrides = stored ? JSON.parse(stored) : {};
+      overrides[key] = savedJob;
+      localStorage.setItem('natalvagas_job_overrides', JSON.stringify(overrides));
+    } catch {}
+    setIsAdminEditModalOpen(false);
+  };
 
   // Vagas Relacionadas (mesma cidade ou setor, excluindo a atual)
   const relatedJobs = useMemo(() => {
@@ -339,6 +411,70 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
           </div>
         </nav>
 
+        {/* Painel de Ações Rápidas do Administrador (/editdev) */}
+        {isAdminLoggedIn && (
+          <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border-2 border-amber-500/40 dark:bg-amber-950/30 dark:border-amber-600/40 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-3 w-3 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+              </span>
+              <div>
+                <span className="text-xs font-black uppercase tracking-wider text-amber-800 dark:text-amber-300 block">
+                  Modo Administrador Ativo (@natalvagas.com.br)
+                </span>
+                <span className="text-xs text-amber-700 dark:text-amber-400">
+                  Gerenciando vaga #{currentJob.id}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsAdminEditModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
+              >
+                <Edit3 className="w-3.5 h-3.5" />
+                <span>Editar Vaga</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleToggleVerified}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
+                  isVerifiedCompany
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                    : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100'
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>{isVerifiedCompany ? 'Remover Selo Verificado' : 'Ativar Selo Verificado'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleToggleFeatured}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
+                  currentJob.isFeatured
+                    ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                    : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100'
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{currentJob.isFeatured ? 'Remover Destaque VIP' : 'Ativar Destaque VIP'}</span>
+              </button>
+
+              <Link
+                to="/editdev"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-800 text-slate-100 text-xs font-bold hover:bg-black transition-colors"
+              >
+                <span>Painel /editdev</span>
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* 1. ESPAÇO PUBLICITÁRIO ADSENSE SUPERIOR (Leaderboard) */}
         <div className="mb-6">
           <AdPlaceholder format="horizontal" />
@@ -397,32 +533,32 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
               </h1>
 
               {/* Linha da Empresa com Logotipo e Nome */}
-              <div className="mt-4 flex items-center gap-3.5 flex-wrap">
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-lg overflow-hidden shrink-0 shadow-2xs">
-                  {currentJob.companyLogoUrl ? (
+              <div className="mt-4 flex items-center gap-4 flex-wrap">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-xl sm:text-2xl overflow-hidden shrink-0 shadow-xs p-1">
+                  {isCleanLogo && currentJob.companyLogoUrl ? (
                     <img 
                       src={currentJob.companyLogoUrl} 
                       alt={`Logo ${currentJob.companyName}`} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain rounded-xl"
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     />
                   ) : (
-                    <Building2 className="w-6 h-6 text-slate-400" />
+                    <Building2 className="w-8 h-8 sm:w-10 sm:h-10 text-slate-400" />
                   )}
                 </div>
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200">
+                    <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-slate-100">
                       {currentJob.companyName}
                     </span>
                     {isVerifiedCompany && (
                       <span title="Empresa Verificada pelo Natal Vagas" className="text-blue-500 inline-flex items-center">
-                        <CheckCircle2 className="w-4 h-4 fill-blue-500 text-white" />
+                        <CheckCircle2 className="w-5 h-5 fill-blue-500 text-white" />
                       </span>
                     )}
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
                     <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                     <span>{currentJob.neighborhood ? `${currentJob.neighborhood}, ${currentJob.city}/RN` : `${currentJob.city}/RN`}</span>
                   </p>
@@ -523,6 +659,35 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
                 {currentJob.description}
               </div>
             </div>
+
+            {/* Seção: Panfleto & Anúncio Original da Vaga */}
+            {flyerSrc && (
+              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5 text-brand-600 dark:text-brand-400">
+                    <ImageIcon className="w-5 h-5" />
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
+                      Panfleto & Anúncio Oficial da Vaga
+                    </h2>
+                  </div>
+                  <span className="text-xs bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300 font-bold px-3 py-1 rounded-full border border-brand-200 dark:border-brand-800">
+                    Material Original
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  Abaixo está o anúncio e panfleto original compartilhado pela empresa nos canais de recrutamento:
+                </p>
+                <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950/5 dark:bg-slate-950 flex items-center justify-center p-2 sm:p-4">
+                  <img
+                    src={flyerSrc}
+                    alt={`Panfleto oficial da vaga ${currentJob.title}`}
+                    className="max-h-[650px] w-auto max-w-full object-contain rounded-xl shadow-md cursor-pointer hover:opacity-95 transition-opacity"
+                    onClick={() => window.open(flyerSrc, '_blank')}
+                    title="Clique para ampliar o panfleto original"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* 3. ESPAÇO PUBLICITÁRIO IN-CONTENT (MEIO DO CONTEÚDO) */}
             <AdPlaceholder format="horizontal" />
@@ -768,16 +933,16 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
 
               {/* Perfil da Empresa */}
               <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-xl overflow-hidden shrink-0 shadow-2xs">
-                  {currentJob.companyLogoUrl ? (
+                <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-xl overflow-hidden shrink-0 shadow-xs p-1">
+                  {isCleanLogo && currentJob.companyLogoUrl ? (
                     <img 
                       src={currentJob.companyLogoUrl} 
                       alt={`Logo ${currentJob.companyName}`} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain rounded-xl"
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     />
                   ) : (
-                    <Building2 className="w-7 h-7 text-slate-400" />
+                    <Building2 className="w-8 h-8 text-slate-400" />
                   )}
                 </div>
 
@@ -1020,6 +1185,16 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
           job={currentJob}
           isOpen={isSocialModalOpen}
           onClose={() => setIsSocialModalOpen(false)}
+        />
+      )}
+
+      {/* Modal de Edição de Vaga pelo Administrador */}
+      {isAdminEditModalOpen && currentJob && (
+        <AdminJobEditModal
+          job={currentJob}
+          isOpen={isAdminEditModalOpen}
+          onClose={() => setIsAdminEditModalOpen(false)}
+          onSave={handleAdminSave}
         />
       )}
 

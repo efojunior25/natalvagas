@@ -42,9 +42,9 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
     >
       <div>
         {/* Selos de Destaque, Empresa Verificada e Acessibilidade PcD */}
-        {(job.isFeatured || job.isCompanyVerified || (job.verifiedAt && !/confidencial/i.test(job.companyName)) || job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+        {(job.isFeatured || job.isCompanyVerified || job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            {(job.isCompanyVerified || (job.verifiedAt && !/confidencial/i.test(job.companyName))) && (
+            {Boolean(job.isCompanyVerified) && (
               <div className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-extrabold text-blue-800 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60 px-2.5 py-0.5 rounded-full shadow-2xs">
                 <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
                 <span>VERIFICADA</span>
@@ -88,7 +88,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
             <div className="min-w-0 flex-1">
               <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate">
                 <span className="truncate">{job.companyName}</span>
-                {(job.isCompanyVerified || (job.verifiedAt && !/confidencial/i.test(job.companyName))) && (
+                {Boolean(job.isCompanyVerified) && (
                   <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 fill-blue-500 text-white shrink-0" />
                 )}
               </span>

@@ -27,7 +27,7 @@ const BlogList = lazy(() => import('./pages/BlogList').then(m => ({ default: m.B
 const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 const JobDetailsPage = lazy(() => import('./pages/JobDetailsPage').then(m => ({ default: m.JobDetailsPage })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
-const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
+const EditDevPage = lazy(() => import('./pages/EditDevPage').then(m => ({ default: m.EditDevPage })));
 
 const PAGE_SIZE = 24;
 
@@ -489,12 +489,30 @@ export const App: React.FC = () => {
     fetchJobs();
   }, [fetchJobs]);
 
+  // Mescla overrides administrativos salvos localmente
+  const effectiveJobs = useMemo(() => {
+    try {
+      const stored = localStorage.getItem('natalvagas_job_overrides');
+      if (stored) {
+        const overrides: Record<string, Partial<Job>> = JSON.parse(stored);
+        return jobs.map(j => {
+          const key = j.slug || String(j.id);
+          if (overrides[key]) {
+            return { ...j, ...overrides[key] };
+          }
+          return j;
+        });
+      }
+    } catch {}
+    return jobs;
+  }, [jobs]);
+
   return (
     <>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-          <Route path="/vaga/:slug" element={<JobDetailsPage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          <Route path="/" element={<HomePage jobs={effectiveJobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          <Route path="/vaga/:slug" element={<JobDetailsPage jobs={effectiveJobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
           
           {/* Rotas de Programmatic SEO Dedicadas por Cidade e Categoria */}
           {SEO_LANDING_PAGES.map((page) => (
@@ -503,7 +521,7 @@ export const App: React.FC = () => {
               path={page.path}
               element={
                 <HomePage
-                  jobs={jobs}
+                  jobs={effectiveJobs}
                   isLoading={isLoading}
                   onJobCreated={fetchJobs}
                   seoCategorySlug={page.slug}
@@ -521,8 +539,10 @@ export const App: React.FC = () => {
           <Route path="/sobre" element={<AboutUs />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/dicas-seguranca" element={<JobSafety />} />
-          <Route path="/admin" element={<AdminCoupons />} />
-          <Route path="/admin/cupons" element={<AdminCoupons />} />
+          
+          {/* Painel Interno Restrito */}
+          <Route path="/editdev" element={<EditDevPage jobs={effectiveJobs} onJobUpdated={fetchJobs} />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
