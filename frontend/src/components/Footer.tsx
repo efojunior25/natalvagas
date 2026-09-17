@@ -1,13 +1,13 @@
 import React from 'react';
-import { ShieldCheck, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800">
+    <footer className="bg-slate-900 text-slate-300 pt-8 pb-6 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-4">
           
           {/* Coluna 1: Sobre */}
           <div>
@@ -40,8 +40,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/criar-curriculo" className="hover:text-brand-400 text-brand-300 font-semibold transition-colors flex items-center gap-1">Criar Currículo <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-1 rounded-sm">Grátis</span></Link></li>
               <li><Link to="/blog" className="hover:text-brand-400 transition-colors">Blog & Notícias de Emprego</Link></li>
               <li><Link to="/sobre" className="hover:text-brand-400 transition-colors">Sobre o Natal Vagas</Link></li>
-              <li><Link to="/dicas-seguranca" className="hover:text-brand-400 transition-colors">Dicas Anti-Golpe</Link></li>
-              <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Fale Conosco / Contato</Link></li>
+              <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Fale Conosco</Link></li>
             </ul>
           </div>
 
@@ -54,7 +53,6 @@ export const Footer: React.FC = () => {
               <li><Link to="/politica-de-privacidade" className="hover:text-brand-400 transition-colors">Política de Privacidade</Link></li>
               <li><Link to="/termos-de-uso" className="hover:text-brand-400 transition-colors">Termos de Uso</Link></li>
               <li><Link to="/dicas-seguranca" className="hover:text-brand-400 transition-colors">Segurança do Candidato</Link></li>
-              <li><Link to="/contato" className="hover:text-brand-400 transition-colors">Reportar Vaga / Suporte</Link></li>
             </ul>
           </div>
 
@@ -127,15 +125,9 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Alerta de Segurança e Direitos Autorais */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div className="flex items-center gap-2 text-emerald-400 bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-900/50">
-            <ShieldCheck className="w-4 h-4 shrink-0" />
-            <span>Atenção: O Natal Vagas é 100% gratuito. Nunca pague por cursos ou processos seletivos!</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span>© {new Date().getFullYear()} NatalVagas.com.br — Todos os direitos reservados.</span>
-          </div>
+        {/* Direitos Autorais Centralizados */}
+        <div className="pt-2 text-center text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} NatalVagas.com.br — Todos os direitos reservados.</p>
         </div>
 
       </div>

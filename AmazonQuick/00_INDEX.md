@@ -74,7 +74,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [CookieConsentBanner.tsx.md](./CookieConsentBanner.tsx.md) | `frontend/src/components/CookieConsentBanner.tsx` | 92 | `.tsx` |
 | [CourseRecommendations.tsx.md](./CourseRecommendations.tsx.md) | `frontend/src/components/CourseRecommendations.tsx` | 95 | `.tsx` |
 | [FaqSection.tsx.md](./FaqSection.tsx.md) | `frontend/src/components/FaqSection.tsx` | 107 | `.tsx` |
-| [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 144 | `.tsx` |
+| [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 136 | `.tsx` |
 | [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 108 | `.tsx` |
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 164 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
