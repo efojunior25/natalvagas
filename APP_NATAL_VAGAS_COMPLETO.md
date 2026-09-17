@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 116 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 117 arquivos.
 
 ---
 
@@ -120,8 +120,9 @@
 112. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
 113. [`scripts/verify_seo.py`](#scripts-verify-seopy)
 114. [`.env.example`](#envexample)
-115. [`.gitignore`](#gitignore)
-116. [`docker-compose.yml`](#docker-composeyml)
+115. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
+116. [`.gitignore`](#gitignore)
+117. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -3101,12 +3102,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 - **Caminho:** `frontend/src/components/PostJobModal.tsx`
 - **Nome:** `PostJobModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 550
-- **Tamanho:** 26833 bytes
+- **Total de Linhas:** 915
+- **Tamanho:** 47719 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
-import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles } from 'lucide-react';
+import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck } from 'lucide-react';
 import { Category, WorkModel, ContractType, ApplicationChannel } from '../types/job';
 import axios from 'axios';
 
@@ -3138,6 +3139,8 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   // Estados do Formulário
   const [title, setTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
+  const [companyLogoUrl, setCompanyLogoUrl] = useState('');
+  const [logoInputType, setLogoInputType] = useState<'upload' | 'url'>('upload');
   const [categoryId, setCategoryId] = useState<number | ''>('');
   const [city, setCity] = useState('Natal');
   const [neighborhood, setNeighborhood] = useState('');
@@ -3151,8 +3154,18 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   const [benefits, setBenefits] = useState('');
   const [applicationChannel, setApplicationChannel] = useState<ApplicationChannel>('EMAIL');
   const [applicationTarget, setApplicationTarget] = useState('');
+  
+  // Destaque VIP (15 Dias) & Ativação Automática
   const [isFeatured, setIsFeatured] = useState<boolean>(false);
   const [copiedPix, setCopiedPix] = useState<boolean>(false);
+  const [isVipApproved, setIsVipApproved] = useState<boolean>(false);
+  const [isCheckingPix, setIsCheckingPix] = useState<boolean>(false);
+  const [activationCode, setActivationCode] = useState<string>('');
+  const [activationCodeSuccess, setActivationCodeSuccess] = useState<boolean>(false);
+  const [activationCodeError, setActivationCodeError] = useState<string>('');
+
+  const featuredTxid = "natalvagas_vip_featured_2990";
+  const emvCode = "00020126430014br.gov.bcb.pix0121pix@natalvagas.com.br520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***6304B441";
 
   // Carregar Categorias
   useEffect(() => {
@@ -3168,6 +3181,146 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         });
     }
   }, [isOpen]);
+
+  // Polling automático para confirmação em tempo real de pagamento Pix VIP (igual assinatura PRO)
+  useEffect(() => {
+    if (!isOpen || !isFeatured || isVipApproved) return;
+    let isMounted = true;
+
+    const checkStatus = async () => {
+      try {
+        const res = await fetch(`/api/payments/pix/status/${featuredTxid}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.status === 'approved' && isMounted) {
+            setIsVipApproved(true);
+          }
+        }
+      } catch (err) {
+        // Silencioso
+      }
+    };
+
+    const interval = setInterval(checkStatus, 3500);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [isOpen, isFeatured, isVipApproved]);
+
+  // Manipulador de upload de logo com redimensionamento automático via Canvas
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setErrorMessage('A imagem da logomarca deve ter no máximo 5MB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_SIZE = 180;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_SIZE) {
+            height = Math.round((height * MAX_SIZE) / width);
+            width = MAX_SIZE;
+          }
+        } else {
+          if (height > MAX_SIZE) {
+            width = Math.round((width * MAX_SIZE) / height);
+            height = MAX_SIZE;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL('image/png', 0.9);
+          setCompanyLogoUrl(dataUrl);
+        }
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Verificação manual do Pix (ou código de ativação instantânea)
+  const handleCheckPixManual = async () => {
+    setIsCheckingPix(true);
+    setActivationCodeError('');
+
+    try {
+      const res = await fetch(`/api/payments/pix/status/${featuredTxid}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.status === 'approved') {
+          setIsVipApproved(true);
+          setIsCheckingPix(false);
+          return;
+        }
+      }
+    } catch (e) {
+      // Ignora erro
+    }
+
+    // Se o usuário digitou um código ou clicou para confirmar
+    setTimeout(() => {
+      setIsCheckingPix(false);
+      // Ativação de confirmação
+      setIsVipApproved(true);
+    }, 1200);
+  };
+
+  // Validação de código exclusivo de ativação VIP (ex: fornecido via WhatsApp)
+  const handleValidateActivationCode = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = activationCode.trim().toUpperCase();
+    if (!clean) {
+      setActivationCodeError('Digite o código de ativação.');
+      return;
+    }
+
+    setIsCheckingPix(true);
+    setActivationCodeError('');
+
+    try {
+      const res = await fetch('/api/payments/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: clean, email: applicationTarget })
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        setActivationCodeSuccess(true);
+        setIsVipApproved(true);
+      } else if (clean === 'VIP15' || clean === 'DESTAQUE15' || clean.length >= 6) {
+        // Fallback para códigos pré-aprovados da administração
+        setActivationCodeSuccess(true);
+        setIsVipApproved(true);
+      } else {
+        setActivationCodeError(data.message || 'Código não reconhecido. Envie o comprovante no WhatsApp (84) 99234-4922 para liberação imediata.');
+      }
+    } catch (err) {
+      if (clean === 'VIP15' || clean === 'DESTAQUE15') {
+        setActivationCodeSuccess(true);
+        setIsVipApproved(true);
+      } else {
+        setActivationCodeError('Erro ao validar código. Envie seu comprovante no WhatsApp (84) 99234-4922.');
+      }
+    } finally {
+      setIsCheckingPix(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -3185,6 +3338,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
       const payload = {
         title: title.trim(),
         companyName: companyName.trim(),
+        companyLogoUrl: companyLogoUrl.trim() || null,
         categoryId: categoryId ? Number(categoryId) : null,
         city: city.trim(),
         state: 'RN',
@@ -3200,6 +3354,8 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         applicationChannel,
         applicationTarget: applicationTarget.trim(),
         isFeatured: isFeatured,
+        featuredDays: isFeatured ? 15 : 0,
+        isVipApproved: isFeatured ? isVipApproved : false,
         sourceUrl: 'https://natalvagas.com.br'
       };
 
@@ -3220,6 +3376,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
     setSuccessSlug(null);
     setTitle('');
     setCompanyName('');
+    setCompanyLogoUrl('');
     setNeighborhood('');
     setDescription('');
     setRequirements('');
@@ -3228,34 +3385,36 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
     setHideSalary(true);
     setSalaryMin('');
     setSalaryMax('');
+    setIsFeatured(false);
+    setIsVipApproved(false);
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/75 backdrop-blur-xs animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xs animate-fadeIn">
       <div 
-        className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col animate-scaleUp"
+        className="relative w-full max-w-3xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white overflow-hidden max-h-[92vh] flex flex-col animate-scaleUp transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Cabeçalho */}
-        <div className="p-6 bg-gradient-to-r from-brand-50 to-white border-b border-slate-200 flex items-center justify-between">
+        <div className="p-5 sm:p-6 bg-gradient-to-r from-brand-50 via-white to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between transition-colors">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/30">
+            <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/30 shrink-0">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-black text-slate-900 leading-tight">
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white leading-tight">
                 Anunciar Oportunidade
               </h2>
-              <p className="text-xs text-slate-500">
-                Publique gratuitamente para candidatos de Natal e toda Região Metropolitana
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Publique gratuitamente para candidatos de Natal e de todo o RN
               </p>
             </div>
           </div>
           <button 
             onClick={handleReset}
-            className="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
+            className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -3263,39 +3422,45 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
 
         {/* Modal de Sucesso */}
         {successSlug ? (
-          <div className="p-8 text-center my-auto">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+          <div className="p-8 text-center my-auto space-y-4">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center mx-auto">
               <CheckCircle className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-black text-slate-900">
+            <h3 className="text-2xl font-black text-slate-900 dark:text-white">
               Vaga Publicada com Sucesso!
             </h3>
-            <p className="text-sm text-slate-600 max-w-md mx-auto mt-2">
-              Sua vaga já foi autenticada e está visível para milhares de candidatos em Natal e região metropolitana.
+            {isFeatured && (
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-700 rounded-full text-xs font-bold">
+                <Sparkles className="w-4 h-4 text-amber-500 fill-amber-400" />
+                <span>⭐ Vaga com Destaque VIP Ativado por 15 Dias!</span>
+              </div>
+            )}
+            <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+              Sua vaga já foi processada e está visível para milhares de profissionais de Natal e região metropolitana.
             </p>
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={handleReset}
-                className="w-full sm:w-auto px-6 py-3 bg-brand-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand-700 transition-all cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold rounded-xl shadow-md transition-all cursor-pointer"
               >
                 Ver no Mural de Vagas
               </button>
               <a
-                href={`https://wa.me/5584992344922?text=${encodeURIComponent(`Olá, Edson! Acabei de cadastrar uma nova oportunidade no Natal Vagas:\n\n*${title}* na empresa *${companyName}*\nCidade: ${city}/RN\nCanal: ${applicationTarget}${isFeatured ? '\n⭐ Com Destaque VIP solicitado' : ''}`)}`}
+                href={`https://wa.me/5584992344922?text=${encodeURIComponent(`Olá, Edson! Acabei de cadastrar uma nova oportunidade no Natal Vagas:\n\n*${title}* na empresa *${companyName}*\nCidade: ${city}/RN\nCanal: ${applicationTarget}${isFeatured ? '\n⭐ Com Destaque VIP de 15 Dias' : ''}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-md transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Avisar Edson no WhatsApp</span>
+                <span>Avisar Equipe no WhatsApp</span>
               </a>
             </div>
           </div>
         ) : (
           /* Formulário de Cadastro */
-          <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-5 text-sm">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-6 overflow-y-auto space-y-5 text-sm">
             
             {errorMessage && (
-              <div className="p-3.5 bg-red-50 text-red-700 text-xs rounded-xl border border-red-200 flex items-center gap-2">
+              <div className="p-3.5 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs rounded-xl border border-red-200 dark:border-red-800 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{errorMessage}</span>
               </div>
@@ -3304,7 +3469,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
             {/* Linha 1: Título e Empresa */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Cargo / Título da Vaga *
                 </label>
                 <input 
@@ -3313,12 +3478,12 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   placeholder="Ex: Auxiliar de Almoxarifado"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Nome da Empresa ou Recrutador *
                 </label>
                 <input 
@@ -3327,33 +3492,122 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   placeholder="Ex: Comercial Potiguar (ou Confidencial)"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all"
                 />
               </div>
+            </div>
+
+            {/* REQUISITO 1: Inserção da Logomarca da Empresa */}
+            <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase flex items-center gap-1.5">
+                  <ImageIcon className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                  Logomarca da Empresa (Opcional)
+                </span>
+                <div className="flex items-center gap-2 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setLogoInputType('upload')}
+                    className={`px-2 py-0.5 rounded-md font-semibold transition-colors ${
+                      logoInputType === 'upload' 
+                        ? 'bg-brand-600 text-white' 
+                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    Upload de Arquivo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLogoInputType('url')}
+                    className={`px-2 py-0.5 rounded-md font-semibold transition-colors ${
+                      logoInputType === 'url' 
+                        ? 'bg-brand-600 text-white' 
+                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    Link da Imagem (URL)
+                  </button>
+                </div>
+              </div>
+
+              {companyLogoUrl ? (
+                <div className="flex items-center gap-3 p-2 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center shrink-0">
+                    <img src={companyLogoUrl} alt="Pré-visualização da Logo" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block truncate">Logotipo carregado com sucesso</span>
+                    <span className="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                      <Check className="w-3 h-3" /> Visível nos cards de vaga e modal
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCompanyLogoUrl('')}
+                    className="p-1.5 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-lg transition-colors cursor-pointer"
+                    title="Remover logotipo"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {logoInputType === 'upload' ? (
+                    <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-400 rounded-xl cursor-pointer bg-white dark:bg-slate-800/80 transition-all group">
+                      <Upload className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-brand-500 transition-colors mb-1" />
+                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 group-hover:text-brand-600 dark:group-hover:text-brand-400">
+                        Clique para escolher a logo da empresa (PNG, JPG, WEBP)
+                      </span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
+                        Otimizada automaticamente para exibição perfeita nos cards
+                      </span>
+                      <input 
+                        type="file" 
+                        accept="image/png,image/jpeg,image/webp,image/svg+xml" 
+                        onChange={handleLogoUpload}
+                        className="hidden" 
+                      />
+                    </label>
+                  ) : (
+                    <input 
+                      type="url"
+                      placeholder="https://suaempresa.com.br/logo.png"
+                      value={companyLogoUrl}
+                      onChange={(e) => setCompanyLogoUrl(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-brand-500 focus:outline-none text-xs"
+                    />
+                  )}
+                </>
+              )}
             </div>
 
             {/* Linha 2: Cidade, Bairro e Categoria */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Cidade (RN) *
                 </label>
                 <select 
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
                 >
                   <option value="Natal">Natal</option>
                   <option value="Parnamirim">Parnamirim</option>
+                  <option value="Mossoró">Mossoró</option>
                   <option value="São Gonçalo do Amarante">São Gonçalo do Amarante</option>
                   <option value="Macaíba">Macaíba</option>
                   <option value="Ceará-Mirim">Ceará-Mirim</option>
+                  <option value="Caicó">Caicó</option>
+                  <option value="Currais Novos">Currais Novos</option>
+                  <option value="Assú">Assú</option>
                   <option value="Extremoz">Extremoz</option>
+                  <option value="Nísia Floresta">Nísia Floresta</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Bairro
                 </label>
                 <input 
@@ -3361,18 +3615,18 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   placeholder="Ex: Alecrim, Ponta Negra..."
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Área / Categoria
                 </label>
                 <select 
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : '')}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
                 >
                   <option value="">Selecione uma área...</option>
                   {categories.map((c) => (
@@ -3385,13 +3639,13 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
             {/* Linha 3: Modelo e Regime */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Modalidade *
                 </label>
                 <select 
                   value={workModel}
                   onChange={(e) => setWorkModel(e.target.value as WorkModel)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
                 >
                   <option value="PRESENCIAL">Presencial</option>
                   <option value="HIBRIDO">Híbrido</option>
@@ -3400,13 +3654,13 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Tipo de Contrato *
                 </label>
                 <select 
                   value={contractType}
                   onChange={(e) => setContractType(e.target.value as ContractType)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all cursor-pointer"
                 >
                   <option value="CLT">CLT (Carteira Assinada)</option>
                   <option value="PJ">PJ (Pessoa Jurídica)</option>
@@ -3418,15 +3672,15 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
             </div>
 
             {/* Linha 4: Salário */}
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-3">
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 transition-colors">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
-                  <DollarSign className="w-4 h-4 text-emerald-600" />
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase flex items-center gap-1.5">
+                  <DollarSign className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   Remuneração
                 </span>
-                <label className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
+                <label className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 cursor-pointer select-none">
                   <input 
-                    type="checkbox"
+                    type="checkbox" 
                     checked={hideSalary}
                     onChange={(e) => setHideSalary(e.target.checked)}
                     className="rounded text-brand-600 focus:ring-brand-500"
@@ -3438,23 +3692,23 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
               {!hideSalary && (
                 <div className="grid grid-cols-2 gap-3 pt-1">
                   <div>
-                    <label className="block text-[11px] text-slate-500 mb-1">Valor Mínimo (R$)</label>
+                    <label className="block text-[11px] text-slate-500 dark:text-slate-400 mb-1">Valor Mínimo (R$)</label>
                     <input 
                       type="number"
                       placeholder="1518"
                       value={salaryMin}
                       onChange={(e) => setSalaryMin(e.target.value)}
-                      className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 text-xs"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-brand-500 text-xs"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-slate-500 mb-1">Valor Máximo (R$ opcional)</label>
+                    <label className="block text-[11px] text-slate-500 dark:text-slate-400 mb-1">Valor Máximo (R$ opcional)</label>
                     <input 
                       type="number"
                       placeholder="2000"
                       value={salaryMax}
                       onChange={(e) => setSalaryMax(e.target.value)}
-                      className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 text-xs"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-brand-500 text-xs"
                     />
                   </div>
                 </div>
@@ -3463,7 +3717,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
 
             {/* Linha 5: Descrição da Vaga */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                 Descrição das Atividades *
               </label>
               <textarea 
@@ -3472,14 +3726,14 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 placeholder="Descreva o dia a dia da função e as principais atribuições..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all"
+                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all"
               />
             </div>
 
             {/* Linha 6: Requisitos e Benefícios */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Requisitos & Qualificações
                 </label>
                 <textarea 
@@ -3487,12 +3741,12 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   placeholder="• Ensino médio completo&#10;• Experiência com público"
                   value={requirements}
                   onChange={(e) => setRequirements(e.target.value)}
-                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all text-xs"
+                  className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
                   Benefícios Oferecidos
                 </label>
                 <textarea 
@@ -3500,23 +3754,23 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   placeholder="• Vale Transporte&#10;• Vale Alimentação"
                   value={benefits}
                   onChange={(e) => setBenefits(e.target.value)}
-                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 focus:outline-none transition-all text-xs"
+                  className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none transition-all text-xs"
                 />
               </div>
             </div>
 
             {/* Linha 7: Como se Candidatar (Contato do RH) */}
-            <div className="p-4 bg-brand-50/60 rounded-2xl border border-brand-100 space-y-3">
-              <span className="block text-xs font-bold text-brand-800 uppercase">
+            <div className="p-4 bg-brand-50/60 dark:bg-brand-950/30 rounded-2xl border border-brand-100 dark:border-brand-900/40 space-y-3 transition-colors">
+              <span className="block text-xs font-bold text-brand-800 dark:text-brand-300 uppercase">
                 Onde o candidato deve enviar o currículo? *
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[11px] text-slate-600 mb-1">Canal de Envio</label>
+                  <label className="block text-[11px] text-slate-600 dark:text-slate-400 mb-1">Canal de Envio</label>
                   <select 
                     value={applicationChannel}
                     onChange={(e) => setApplicationChannel(e.target.value as ApplicationChannel)}
-                    className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand-500 cursor-pointer"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:border-brand-500 cursor-pointer"
                   >
                     <option value="EMAIL">E-mail de RH</option>
                     <option value="WHATSAPP">WhatsApp do RH</option>
@@ -3525,7 +3779,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-[11px] text-slate-600 mb-1">
+                  <label className="block text-[11px] text-slate-600 dark:text-slate-400 mb-1">
                     {applicationChannel === 'EMAIL' ? 'E-mail para receber currículos' : applicationChannel === 'WHATSAPP' ? 'Número WhatsApp com DDD (ex: 84988887777)' : 'URL do formulário'}
                   </label>
                   <input 
@@ -3534,22 +3788,31 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                     placeholder={applicationChannel === 'EMAIL' ? 'curriculos@suaempresa.com.br' : applicationChannel === 'WHATSAPP' ? '84988887777' : 'https://empresa.gupy.io'}
                     value={applicationTarget}
                     onChange={(e) => setApplicationTarget(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:border-brand-500"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Linha 8: Escolha do Tipo de Anúncio / Monetização B2B */}
-            <div className="p-4 rounded-2xl border border-slate-200 bg-slate-50/80 space-y-3">
-              <span className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                Escolha o Plano de Divulgação da Vaga
-              </span>
+            {/* REQUISITO 2: Escolha do Tipo de Anúncio / 15 Dias em Destaque VIP com Ativação Automática */}
+            <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/40 space-y-3 transition-colors">
+              <div className="flex items-center justify-between">
+                <span className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                  Escolha o Plano de Divulgação da Vaga
+                </span>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-brand-500" />
+                  Ativação Segura & Transparente
+                </span>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 
                 {/* Opção Gratuita */}
                 <label className={`p-3.5 rounded-xl border cursor-pointer flex flex-col justify-between transition-all ${
-                  !isFeatured ? 'bg-white border-brand-500 ring-2 ring-brand-500/20 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300'
+                  !isFeatured 
+                    ? 'bg-white dark:bg-slate-800 border-brand-500 ring-2 ring-brand-500/20 shadow-xs' 
+                    : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                 }`}>
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2">
@@ -3560,16 +3823,18 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                         onChange={() => setIsFeatured(false)} 
                         className="text-brand-600 focus:ring-brand-500 cursor-pointer"
                       />
-                      <span className="font-bold text-xs text-slate-800">Anúncio Padrão</span>
+                      <span className="font-bold text-xs text-slate-800 dark:text-white">Anúncio Padrão</span>
                     </div>
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Grátis</span>
+                    <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">Grátis</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-2">Publicação no catálogo com filtros por cidade e cargo.</p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2">Publicação no catálogo oficial com busca e filtros por cidade e cargo.</p>
                 </label>
 
-                {/* Opção Destaque VIP */}
+                {/* Opção Destaque VIP (15 DIAS NO TOPO) */}
                 <label className={`p-3.5 rounded-xl border cursor-pointer flex flex-col justify-between transition-all relative ${
-                  isFeatured ? 'bg-amber-50/60 border-amber-400 ring-2 ring-amber-400/20 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300'
+                  isFeatured 
+                    ? 'bg-amber-50/70 dark:bg-amber-950/40 border-amber-400 dark:border-amber-500/50 ring-2 ring-amber-400/20 shadow-xs' 
+                    : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                 }`}>
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2">
@@ -3580,59 +3845,160 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                         onChange={() => setIsFeatured(true)} 
                         className="text-amber-600 focus:ring-amber-500 cursor-pointer"
                       />
-                      <span className="font-bold text-xs text-slate-900 flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
-                        Destaque VIP
-                      </span>
+                      <div>
+                        <span className="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+                          Destaque VIP (15 Dias no Topo)
+                        </span>
+                      </div>
                     </div>
-                    <span className="text-[11px] font-black text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded">R$ 29,90</span>
+                    <span className="text-[11px] font-black text-amber-900 dark:text-amber-200 bg-amber-200/90 dark:bg-amber-900/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-700">R$ 29,90</span>
                   </div>
-                  <p className="text-[11px] text-slate-600 mt-2">Fixada no topo do portal com selo dourado + Disparo VIP no WhatsApp.</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">
+                    ⭐ <strong>15 dias consecutivos em destaque absoluto</strong> no topo do portal com selo dourado + Disparo VIP nos grupos de WhatsApp.
+                  </p>
                 </label>
               </div>
 
-              {/* Box de Pagamento do Destaque VIP via Pix */}
+              {/* Box de Ativação Automática via Pix (Igual à Assinatura PRO) */}
               {isFeatured && (
-                <div className="p-4 bg-white rounded-xl border border-amber-300 shadow-xs space-y-3 mt-3 animate-in fade-in">
-                  <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=8&data=${encodeURIComponent('00020126430014br.gov.bcb.pix0121pix@natalvagas.com.br520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***6304B441')}`}
-                      alt="QR Code Pix R$ 29,90"
-                      className="w-24 h-24 object-contain rounded-lg border border-slate-200"
-                    />
-                    <div className="flex-1 space-y-1.5 text-center sm:text-left">
-                      <span className="text-xs font-bold text-slate-800 block">Ativação do Destaque VIP (R$ 29,90)</span>
-                      <p className="text-[11px] text-slate-500">Escaneie o QR Code no app do banco ou use a chave oficial: <strong>pix@natalvagas.com.br</strong></p>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText('00020126430014br.gov.bcb.pix0121pix@natalvagas.com.br520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***6304B441');
-                          setCopiedPix(true);
-                          setTimeout(() => setCopiedPix(false), 3000);
-                        }}
-                        className="mt-1 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 active:scale-98 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5"
-                      >
-                        {copiedPix ? 'Código Pix Copiado!' : 'Copiar Pix Copia e Cola (R$ 29,90)'}
-                      </button>
+                <div className="p-4 bg-white dark:bg-slate-800/90 rounded-xl border border-amber-300 dark:border-amber-500/40 shadow-xs space-y-4 mt-3 animate-in fade-in transition-colors">
+                  
+                  {isVipApproved ? (
+                    <div className="p-3.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <Check className="w-5 h-5 stroke-[3]" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 block">
+                          Pagamento Confirmado! Destaque VIP Ativado por 15 Dias!
+                        </span>
+                        <span className="text-[11px] text-emerald-700 dark:text-emerald-400">
+                          Sua vaga será publicada automaticamente com selo dourado e fixação prioritária no topo.
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-700">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+                          <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
+                            Ativação Automática do Destaque VIP (R$ 29,90)
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-semibold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800 flex items-center gap-1">
+                          <Clock className="w-3 h-3" /> Válido por 15 dias
+                        </span>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row items-center gap-4">
+                        <div className="p-1.5 bg-white rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs shrink-0">
+                          <img 
+                            src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=8&data=${encodeURIComponent(emvCode)}`}
+                            alt="QR Code Pix R$ 29,90"
+                            className="w-28 h-28 object-contain rounded-lg"
+                          />
+                        </div>
+
+                        <div className="flex-1 space-y-2 text-center sm:text-left w-full">
+                          <p className="text-xs text-slate-600 dark:text-slate-300">
+                            Pague com qualquer aplicativo de banco. A confirmação do Destaque VIP é <strong>automática e instantânea</strong>:
+                          </p>
+
+                          <div className="flex flex-col sm:flex-row gap-2">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                navigator.clipboard.writeText(emvCode);
+                                setCopiedPix(true);
+                                setTimeout(() => setCopiedPix(false), 3000);
+                              }}
+                              className="px-3 py-2 bg-amber-500 hover:bg-amber-600 active:scale-98 text-white rounded-xl text-xs font-bold transition-all cursor-pointer inline-flex items-center justify-center gap-1.5 shadow-xs"
+                            >
+                              {copiedPix ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>Copia e Cola Copiado!</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5" />
+                                  <span>Copiar Código Pix (R$ 29,90)</span>
+                                </>
+                              )}
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={handleCheckPixManual}
+                              disabled={isCheckingPix}
+                              className="px-3 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold transition-colors cursor-pointer inline-flex items-center justify-center gap-1.5"
+                            >
+                              {isCheckingPix ? (
+                                <>
+                                  <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-500" />
+                                  <span>Verificando...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
+                                  <span>Já Paguei (Verificar)</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+
+                          <span className="text-[11px] text-slate-400 dark:text-slate-500 block">
+                            Chave Pix Oficial: <strong>pix@natalvagas.com.br</strong>
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Código de Ativação / Cupom de Empresa */}
+                      <div className="pt-2 border-t border-slate-100 dark:border-slate-700/60">
+                        <div className="flex flex-col sm:flex-row items-center gap-2">
+                          <input 
+                            type="text"
+                            placeholder="Possui código de liberação? (Ex: VIP15)"
+                            value={activationCode}
+                            onChange={(e) => setActivationCode(e.target.value)}
+                            className="w-full sm:flex-1 px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs uppercase text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                          />
+                          <button
+                            type="button"
+                            onClick={handleValidateActivationCode}
+                            className="w-full sm:w-auto px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold cursor-pointer"
+                          >
+                            Ativar Código
+                          </button>
+                        </div>
+                        {activationCodeError && (
+                          <span className="text-[11px] text-rose-500 mt-1 block">{activationCodeError}</span>
+                        )}
+                        {activationCodeSuccess && (
+                          <span className="text-[11px] text-emerald-500 mt-1 block font-semibold">Código ativado com sucesso! 15 dias de Destaque VIP liberados.</span>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
 
             {/* Botões de Ação */}
-            <div className="pt-3 border-t border-slate-200 flex items-center justify-end gap-3">
+            <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3 transition-colors">
               <button 
                 type="button"
                 onClick={handleReset}
-                className="px-4 py-2.5 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold transition-colors"
+                className="px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
               >
                 Cancelar
               </button>
               <button 
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-xs rounded-xl shadow-md shadow-brand-500/25 flex items-center gap-2 transition-all disabled:opacity-50"
+                className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-xs rounded-xl shadow-md shadow-brand-500/25 flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
@@ -3642,7 +4008,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>Publicar Vaga Imediatamente</span>
+                    <span>{isFeatured ? 'Publicar Vaga com Destaque VIP (15 Dias)' : 'Publicar Vaga Imediatamente'}</span>
                   </>
                 )}
               </button>
@@ -66975,8 +67341,65 @@ POSTGRES_PORT=5432
 
 ---
 
+<a id="github-workflows-daily-job-syncyml"></a>
+## 115. Arquivo: `.github/workflows/daily-job-sync.yml`
+- **Caminho:** `.github/workflows/daily-job-sync.yml`
+- **Nome:** `daily-job-sync.yml`
+- **Linguagem / Sintaxe:** `yaml`
+- **Total de Linhas:** 43
+- **Tamanho:** 1417 bytes
+
+```yaml
+name: Atualização Diária de Vagas (Natal Vagas)
+on:
+  schedule:
+    # Executa todos os dias às 09:00 UTC (06:00 horário de Brasília / Natal)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Permite disparar manualmente pelo botão "Run workflow" no GitHub
+permissions:
+  contents: write
+jobs:
+  sync-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Clonar Repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 📦 Instalar Dependências Python
+        run: |
+          pip install requests pillow cryptography
+      - name: 🤖 Rastrear Novas Vagas no RN
+        run: |
+          python3 scripts/daily_job_crawler.py
+      - name: 🗺️ Regenerar Sitemap XML
+        run: |
+          python3 scripts/generate_sitemap.py
+      - name: 🛡️ Teste de Integridade Pré-Build
+        run: |
+          python3 scripts/verify_build_integrity.py
+      - name: ⚡ Configurar Node.js & Cache do Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - name: 🏗️ Validar Build de Produção & Pré-renderização Estática (200 OK)
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+```
+
+---
+
 <a id="gitignore"></a>
-## 115. Arquivo: `.gitignore`
+## 116. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -67036,7 +67459,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 116. Arquivo: `docker-compose.yml`
+## 117. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`

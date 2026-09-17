@@ -9,6 +9,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | Arquivo Markdown | Caminho Original no Projeto | Linhas | Tipo |
 | :--- | :--- | :--- | :--- |
 | [root.env.example.md](./root.env.example.md) | `.env.example` | 5 | `.example` |
+| [daily-job-sync.yml.md](./daily-job-sync.yml.md) | `.github/workflows/daily-job-sync.yml` | 43 | `.yml` |
 | [gitignore.md](./gitignore.md) | `.gitignore` | 46 | `config` |
 | [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md) | `PROJECT_CONTEXT.md` | 248 | `.md` |
 | [README.md](./README.md) | `README.md` | 1 | `.md` |
@@ -78,7 +79,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 155 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
 | [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 362 | `.tsx` |
-| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 550 | `.tsx` |
+| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 915 | `.tsx` |
 | [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 813 | `.tsx` |
 | [PwaInstallPrompt.tsx.md](./PwaInstallPrompt.tsx.md) | `frontend/src/components/PwaInstallPrompt.tsx` | 111 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
@@ -126,4 +127,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 70 | `.py` |
 
 ---
-**Total de Arquivos:** 116 arquivos convertidos com sucesso.
+**Total de Arquivos:** 117 arquivos convertidos com sucesso.
