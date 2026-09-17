@@ -1,14 +1,16 @@
 # File: PostJobModal.tsx
 - **Original Path:** `frontend/src/components/PostJobModal.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 915
+- **Lines of Code:** 919
 
 ---
 
 ```tsx
 import React, { useState, useEffect } from 'react';
-import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck } from 'lucide-react';
+import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import { Category, WorkModel, ContractType, ApplicationChannel } from '../types/job';
+import { generateUniqueTxid, buildPixEMV } from '../services/paymentService';
 import axios from 'axios';
 
 interface PostJobModalProps {
@@ -55,17 +57,14 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   const [applicationChannel, setApplicationChannel] = useState<ApplicationChannel>('EMAIL');
   const [applicationTarget, setApplicationTarget] = useState('');
   
-  // Destaque VIP (15 Dias) & Ativação Automática
+  // Destaque VIP (30 Dias) & Ativação 100% Automática via Pix Único
   const [isFeatured, setIsFeatured] = useState<boolean>(false);
   const [copiedPix, setCopiedPix] = useState<boolean>(false);
   const [isVipApproved, setIsVipApproved] = useState<boolean>(false);
   const [isCheckingPix, setIsCheckingPix] = useState<boolean>(false);
-  const [activationCode, setActivationCode] = useState<string>('');
-  const [activationCodeSuccess, setActivationCodeSuccess] = useState<boolean>(false);
-  const [activationCodeError, setActivationCodeError] = useState<string>('');
-
-  const featuredTxid = "natalvagas_vip_featured_2990";
-  const emvCode = "00020126430014br.gov.bcb.pix0121pix@natalvagas.com.br520400005303986540529.905802BR5911NATAL VAGAS6005NATAL62070503***6304B441";
+  const [uniqueTxid, setUniqueTxid] = useState<string>('');
+  const [uniqueEmvCode, setUniqueEmvCode] = useState<string>('');
+  const [pixStatusNotice, setPixStatusNotice] = useState<{ type: 'pending' | 'success' | 'error'; message: string } | null>(null);
 
   // Carregar Categorias
   useEffect(() => {
@@ -82,31 +81,58 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
     }
   }, [isOpen]);
 
-  // Polling automático para confirmação em tempo real de pagamento Pix VIP (igual assinatura PRO)
+  // Função para gerar QR Code Pix Único com txid exclusivo para este anúncio
+  const generateNewPixCharge = () => {
+    const txid = generateUniqueTxid('VIP');
+    const emv = buildPixEMV({
+      pixKey: 'pix@natalvagas.com.br',
+      amount: 29.90,
+      txid,
+      merchantName: 'NATAL VAGAS',
+      merchantCity: 'NATAL'
+    });
+    setUniqueTxid(txid);
+    setUniqueEmvCode(emv);
+    setIsVipApproved(false);
+    setPixStatusNotice(null);
+  };
+
+  // Quando o usuário seleciona Destaque VIP, garante que existe uma cobrança Pix única
   useEffect(() => {
-    if (!isOpen || !isFeatured || isVipApproved) return;
+    if (isFeatured && !uniqueTxid) {
+      generateNewPixCharge();
+    }
+  }, [isFeatured, uniqueTxid]);
+
+  // Polling automático para confirmação em tempo real de pagamento Pix VIP pelo txid exclusivo
+  useEffect(() => {
+    if (!isOpen || !isFeatured || isVipApproved || !uniqueTxid) return;
     let isMounted = true;
 
     const checkStatus = async () => {
       try {
-        const res = await fetch(`/api/payments/pix/status/${featuredTxid}`);
+        const res = await fetch(`/api/payments/pix/status/${uniqueTxid}`);
         if (res.ok) {
           const data = await res.json();
           if (data && data.status === 'approved' && isMounted) {
             setIsVipApproved(true);
+            setPixStatusNotice({
+              type: 'success',
+              message: 'Pagamento reconhecido pelo sistema bancário! Destaque VIP de 30 dias ativado.'
+            });
           }
         }
       } catch (err) {
-        // Silencioso
+        // Silencioso para não interromper a navegação
       }
     };
 
-    const interval = setInterval(checkStatus, 3500);
+    const interval = setInterval(checkStatus, 3000);
     return () => {
       isMounted = false;
       clearInterval(interval);
     };
-  }, [isOpen, isFeatured, isVipApproved]);
+  }, [isOpen, isFeatured, isVipApproved, uniqueTxid]);
 
   // Manipulador de upload de logo com redimensionamento automático via Canvas
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,72 +179,39 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
     reader.readAsDataURL(file);
   };
 
-  // Verificação manual do Pix (ou código de ativação instantânea)
+  // Verificação manual do Pix (consulta real no endpoint do txid exclusivo sem bypass falso)
   const handleCheckPixManual = async () => {
+    if (!uniqueTxid) return;
     setIsCheckingPix(true);
-    setActivationCodeError('');
+    setPixStatusNotice(null);
 
     try {
-      const res = await fetch(`/api/payments/pix/status/${featuredTxid}`);
+      const res = await fetch(`/api/payments/pix/status/${uniqueTxid}`);
       if (res.ok) {
         const data = await res.json();
         if (data && data.status === 'approved') {
           setIsVipApproved(true);
           setIsCheckingPix(false);
+          setPixStatusNotice({
+            type: 'success',
+            message: 'Pagamento reconhecido pelo sistema bancário! Destaque VIP de 30 dias ativado.'
+          });
           return;
         }
       }
-    } catch (e) {
-      // Ignora erro
-    }
 
-    // Se o usuário digitou um código ou clicou para confirmar
-    setTimeout(() => {
+      // Pagamento ainda não compensado no banco
       setIsCheckingPix(false);
-      // Ativação de confirmação
-      setIsVipApproved(true);
-    }, 1200);
-  };
-
-  // Validação de código exclusivo de ativação VIP (ex: fornecido via WhatsApp)
-  const handleValidateActivationCode = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clean = activationCode.trim().toUpperCase();
-    if (!clean) {
-      setActivationCodeError('Digite o código de ativação.');
-      return;
-    }
-
-    setIsCheckingPix(true);
-    setActivationCodeError('');
-
-    try {
-      const res = await fetch('/api/payments/verify-code', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: clean, email: applicationTarget })
+      setPixStatusNotice({
+        type: 'pending',
+        message: 'Pagamento ainda não identificado no sistema bancário. Se você já transferiu, aguarde alguns instantes (normalmente de 5 a 30 segundos) e clique novamente.'
       });
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && data.success) {
-        setActivationCodeSuccess(true);
-        setIsVipApproved(true);
-      } else if (clean === 'VIP15' || clean === 'DESTAQUE15' || clean.length >= 6) {
-        // Fallback para códigos pré-aprovados da administração
-        setActivationCodeSuccess(true);
-        setIsVipApproved(true);
-      } else {
-        setActivationCodeError(data.message || 'Código não reconhecido. Envie o comprovante no WhatsApp (84) 99234-4922 para liberação imediata.');
-      }
-    } catch (err) {
-      if (clean === 'VIP15' || clean === 'DESTAQUE15') {
-        setActivationCodeSuccess(true);
-        setIsVipApproved(true);
-      } else {
-        setActivationCodeError('Erro ao validar código. Envie seu comprovante no WhatsApp (84) 99234-4922.');
-      }
-    } finally {
+    } catch (e) {
       setIsCheckingPix(false);
+      setPixStatusNotice({
+        type: 'error',
+        message: 'Não foi possível consultar o status do Pix no momento. O sistema continuará verificando automaticamente em segundo plano.'
+      });
     }
   };
 
@@ -254,8 +247,9 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         applicationChannel,
         applicationTarget: applicationTarget.trim(),
         isFeatured: isFeatured,
-        featuredDays: isFeatured ? 15 : 0,
+        featuredDays: isFeatured ? 30 : 0,
         isVipApproved: isFeatured ? isVipApproved : false,
+        featuredTxid: isFeatured ? uniqueTxid : undefined,
         sourceUrl: 'https://natalvagas.com.br'
       };
 
@@ -287,6 +281,9 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
     setSalaryMax('');
     setIsFeatured(false);
     setIsVipApproved(false);
+    setUniqueTxid('');
+    setUniqueEmvCode('');
+    setPixStatusNotice(null);
     onClose();
   };
 
@@ -332,7 +329,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
             {isFeatured && (
               <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-700 rounded-full text-xs font-bold">
                 <Sparkles className="w-4 h-4 text-amber-500 fill-amber-400" />
-                <span>⭐ Vaga com Destaque VIP Ativado por 15 Dias!</span>
+                <span>⭐ Vaga com Destaque VIP Ativado por 30 Dias!</span>
               </div>
             )}
             <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
@@ -346,7 +343,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 Ver no Mural de Vagas
               </button>
               <a
-                href={`https://wa.me/5584992344922?text=${encodeURIComponent(`Olá, Edson! Acabei de cadastrar uma nova oportunidade no Natal Vagas:\n\n*${title}* na empresa *${companyName}*\nCidade: ${city}/RN\nCanal: ${applicationTarget}${isFeatured ? '\n⭐ Com Destaque VIP de 15 Dias' : ''}`)}`}
+                href={`https://wa.me/5584992344922?text=${encodeURIComponent(`Olá, Edson! Acabei de cadastrar uma nova oportunidade no Natal Vagas:\n\n*${title}* na empresa *${companyName}*\nCidade: ${city}/RN\nCanal: ${applicationTarget}${isFeatured ? '\n⭐ Com Destaque VIP de 30 Dias' : ''}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-md transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
@@ -659,18 +656,18 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
               </div>
             </div>
 
-            {/* Linha 7: Como se Candidatar (Contato do RH) */}
-            <div className="p-4 bg-brand-50/60 dark:bg-brand-950/30 rounded-2xl border border-brand-100 dark:border-brand-900/40 space-y-3 transition-colors">
-              <span className="block text-xs font-bold text-brand-800 dark:text-brand-300 uppercase">
+            {/* Linha 7: Como se Candidatar (Contato do RH) - Anexo 01 com suporte total a Dark Mode */}
+            <div className="p-4 bg-brand-50/60 dark:bg-slate-800/90 rounded-2xl border border-brand-100 dark:border-slate-700 space-y-3 transition-colors">
+              <span className="block text-xs font-bold text-brand-800 dark:text-brand-400 uppercase">
                 Onde o candidato deve enviar o currículo? *
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[11px] text-slate-600 dark:text-slate-400 mb-1">Canal de Envio</label>
+                  <label className="block text-[11px] text-slate-600 dark:text-slate-300 mb-1">Canal de Envio</label>
                   <select 
                     value={applicationChannel}
                     onChange={(e) => setApplicationChannel(e.target.value as ApplicationChannel)}
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:border-brand-500 cursor-pointer"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:border-brand-500 cursor-pointer"
                   >
                     <option value="EMAIL">E-mail de RH</option>
                     <option value="WHATSAPP">WhatsApp do RH</option>
@@ -679,7 +676,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-[11px] text-slate-600 dark:text-slate-400 mb-1">
+                  <label className="block text-[11px] text-slate-600 dark:text-slate-300 mb-1">
                     {applicationChannel === 'EMAIL' ? 'E-mail para receber currículos' : applicationChannel === 'WHATSAPP' ? 'Número WhatsApp com DDD (ex: 84988887777)' : 'URL do formulário'}
                   </label>
                   <input 
@@ -688,13 +685,13 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                     placeholder={applicationChannel === 'EMAIL' ? 'curriculos@suaempresa.com.br' : applicationChannel === 'WHATSAPP' ? '84988887777' : 'https://empresa.gupy.io'}
                     value={applicationTarget}
                     onChange={(e) => setApplicationTarget(e.target.value)}
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:border-brand-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:border-brand-500"
                   />
                 </div>
               </div>
             </div>
 
-            {/* REQUISITO 2: Escolha do Tipo de Anúncio / 15 Dias em Destaque VIP com Ativação Automática */}
+            {/* REQUISITO 2: Escolha do Tipo de Anúncio / 30 Dias em Destaque VIP com Ativação Automática */}
             <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/40 space-y-3 transition-colors">
               <div className="flex items-center justify-between">
                 <span className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
@@ -730,7 +727,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2">Publicação no catálogo oficial com busca e filtros por cidade e cargo.</p>
                 </label>
 
-                {/* Opção Destaque VIP (15 DIAS NO TOPO) */}
+                {/* Opção Destaque VIP (30 DIAS NO TOPO) */}
                 <label className={`p-3.5 rounded-xl border cursor-pointer flex flex-col justify-between transition-all relative ${
                   isFeatured 
                     ? 'bg-amber-50/70 dark:bg-amber-950/40 border-amber-400 dark:border-amber-500/50 ring-2 ring-amber-400/20 shadow-xs' 
@@ -748,19 +745,19 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                       <div>
                         <span className="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1">
                           <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
-                          Destaque VIP (15 Dias no Topo)
+                          Destaque VIP (30 Dias no Topo)
                         </span>
                       </div>
                     </div>
                     <span className="text-[11px] font-black text-amber-900 dark:text-amber-200 bg-amber-200/90 dark:bg-amber-900/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-700">R$ 29,90</span>
                   </div>
                   <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">
-                    ⭐ <strong>15 dias consecutivos em destaque absoluto</strong> no topo do portal com selo dourado + Disparo VIP nos grupos de WhatsApp.
+                    ⭐ <strong>30 dias consecutivos em destaque absoluto</strong> no topo do portal com selo dourado + Disparo VIP nos grupos de WhatsApp.
                   </p>
                 </label>
               </div>
 
-              {/* Box de Ativação Automática via Pix (Igual à Assinatura PRO) */}
+              {/* Box de Ativação Automática via Pix Único */}
               {isFeatured && (
                 <div className="p-4 bg-white dark:bg-slate-800/90 rounded-xl border border-amber-300 dark:border-amber-500/40 shadow-xs space-y-4 mt-3 animate-in fade-in transition-colors">
                   
@@ -771,7 +768,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                       </div>
                       <div className="flex-1">
                         <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 block">
-                          Pagamento Confirmado! Destaque VIP Ativado por 15 Dias!
+                          Pagamento Confirmado! Destaque VIP Ativado por 30 Dias!
                         </span>
                         <span className="text-[11px] text-emerald-700 dark:text-emerald-400">
                           Sua vaga será publicada automaticamente com selo dourado e fixação prioritária no topo.
@@ -788,31 +785,40 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                           </span>
                         </div>
                         <span className="text-[10px] font-semibold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800 flex items-center gap-1">
-                          <Clock className="w-3 h-3" /> Válido por 15 dias
+                          <Clock className="w-3 h-3" /> Válido por 30 dias
                         </span>
                       </div>
 
                       <div className="flex flex-col sm:flex-row items-center gap-4">
-                        <div className="p-1.5 bg-white rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs shrink-0">
-                          <img 
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=8&data=${encodeURIComponent(emvCode)}`}
-                            alt="QR Code Pix R$ 29,90"
-                            className="w-28 h-28 object-contain rounded-lg"
-                          />
+                        <div className="p-2 bg-white rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs shrink-0 flex items-center justify-center">
+                          {uniqueEmvCode ? (
+                            <QRCodeSVG 
+                              value={uniqueEmvCode} 
+                              size={120} 
+                              level="M" 
+                              className="w-28 h-28"
+                            />
+                          ) : (
+                            <div className="w-28 h-28 flex items-center justify-center">
+                              <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
+                            </div>
+                          )}
                         </div>
 
                         <div className="flex-1 space-y-2 text-center sm:text-left w-full">
                           <p className="text-xs text-slate-600 dark:text-slate-300">
-                            Pague com qualquer aplicativo de banco. A confirmação do Destaque VIP é <strong>automática e instantânea</strong>:
+                            QR Code exclusivo para este anúncio. O sistema identifica o pagamento e ativa o Destaque VIP <strong>automaticamente em tempo real</strong>:
                           </p>
 
                           <div className="flex flex-col sm:flex-row gap-2">
                             <button
                               type="button"
                               onClick={() => {
-                                navigator.clipboard.writeText(emvCode);
-                                setCopiedPix(true);
-                                setTimeout(() => setCopiedPix(false), 3000);
+                                if (uniqueEmvCode) {
+                                  navigator.clipboard.writeText(uniqueEmvCode);
+                                  setCopiedPix(true);
+                                  setTimeout(() => setCopiedPix(false), 3000);
+                                }
                               }}
                               className="px-3 py-2 bg-amber-500 hover:bg-amber-600 active:scale-98 text-white rounded-xl text-xs font-bold transition-all cursor-pointer inline-flex items-center justify-center gap-1.5 shadow-xs"
                             >
@@ -847,39 +853,37 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                                 </>
                               )}
                             </button>
+
+                            <button
+                              type="button"
+                              onClick={generateNewPixCharge}
+                              title="Gerar novo QR Code exclusivo"
+                              className="p-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-xl transition-colors cursor-pointer inline-flex items-center justify-center"
+                            >
+                              <RefreshCw className="w-3.5 h-3.5" />
+                            </button>
                           </div>
 
-                          <span className="text-[11px] text-slate-400 dark:text-slate-500 block">
-                            Chave Pix Oficial: <strong>pix@natalvagas.com.br</strong>
-                          </span>
+                          <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 dark:text-slate-500 pt-1 gap-1">
+                            <span>Chave: <strong>pix@natalvagas.com.br</strong></span>
+                            <span className="font-mono text-[10px] bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded">ID: {uniqueTxid}</span>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Código de Ativação / Cupom de Empresa */}
-                      <div className="pt-2 border-t border-slate-100 dark:border-slate-700/60">
-                        <div className="flex flex-col sm:flex-row items-center gap-2">
-                          <input 
-                            type="text"
-                            placeholder="Possui código de liberação? (Ex: VIP15)"
-                            value={activationCode}
-                            onChange={(e) => setActivationCode(e.target.value)}
-                            className="w-full sm:flex-1 px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs uppercase text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
-                          />
-                          <button
-                            type="button"
-                            onClick={handleValidateActivationCode}
-                            className="w-full sm:w-auto px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold cursor-pointer"
-                          >
-                            Ativar Código
-                          </button>
+                      {/* Notificação de Status de Verificação (Sem aprovação falsa) */}
+                      {pixStatusNotice && (
+                        <div className={`p-3 rounded-xl text-xs border flex items-start gap-2 animate-in fade-in ${
+                          pixStatusNotice.type === 'pending'
+                            ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800'
+                            : pixStatusNotice.type === 'success'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
+                            : 'bg-rose-50 dark:bg-red-950/40 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800'
+                        }`}>
+                          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                          <span>{pixStatusNotice.message}</span>
                         </div>
-                        {activationCodeError && (
-                          <span className="text-[11px] text-rose-500 mt-1 block">{activationCodeError}</span>
-                        )}
-                        {activationCodeSuccess && (
-                          <span className="text-[11px] text-emerald-500 mt-1 block font-semibold">Código ativado com sucesso! 15 dias de Destaque VIP liberados.</span>
-                        )}
-                      </div>
+                      )}
                     </>
                   )}
                 </div>
@@ -908,7 +912,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>{isFeatured ? 'Publicar Vaga com Destaque VIP (15 Dias)' : 'Publicar Vaga Imediatamente'}</span>
+                    <span>{isFeatured ? 'Publicar Vaga com Destaque VIP (30 Dias)' : 'Publicar Vaga Imediatamente'}</span>
                   </>
                 )}
               </button>

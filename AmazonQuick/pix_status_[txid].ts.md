@@ -1,7 +1,7 @@
 # File: [txid].ts
 - **Original Path:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Language / Type:** `typescript`
-- **Lines of Code:** 111
+- **Lines of Code:** 112
 
 ---
 
@@ -63,7 +63,8 @@ export const onRequestGet = async ({ params, env }: { params: { txid: string }; 
     '34c4c8898b574e88aac634e77dca7406': 'annual',
     'dddc590b669b4f8fa78ac6939fa8d687': 'lifetime'
   };
-  const plan = planMap[txid] || 'monthly';
+  const isVipJob = txid.startsWith('VIP') || txid.startsWith('natalvagas_vip');
+  const plan = planMap[txid] || (isVipJob ? 'vip_job_30' : 'monthly');
 
   if (isApproved && record) {
     const expiresDays = plan === 'lifetime' ? 3650 : plan === 'annual' ? 365 : 30;

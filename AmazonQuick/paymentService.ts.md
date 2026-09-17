@@ -1,7 +1,7 @@
 # File: paymentService.ts
 - **Original Path:** `frontend/src/services/paymentService.ts`
 - **Language / Type:** `typescript`
-- **Lines of Code:** 61
+- **Lines of Code:** 122
 
 ---
 
@@ -67,5 +67,66 @@ export const checkPixStatus = async (orderId: string): Promise<'pending' | 'appr
   }
   return 'pending';
 };
+
+// BACEN Pix EMV Generator com CRC16 oficial
+export function calculatePixCRC16(payload: string): string {
+  let crc = 0xFFFF;
+  for (let i = 0; i < payload.length; i++) {
+    crc ^= (payload.charCodeAt(i) << 8);
+    for (let j = 0; j < 8; j++) {
+      if ((crc & 0x8000) !== 0) {
+        crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+      } else {
+        crc = (crc << 1) & 0xFFFF;
+      }
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4, '0');
+}
+
+export function formatEmvField(id: string, val: string): string {
+  return id + String(val.length).padStart(2, '0') + val;
+}
+
+export function generateUniqueTxid(prefix = 'VIP'): string {
+  const ts = Date.now().toString(36).toUpperCase();
+  const rnd = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `${prefix}${ts}${rnd}`.slice(0, 25);
+}
+
+export interface BuildPixParams {
+  pixKey: string;
+  amount: number;
+  txid: string;
+  merchantName?: string;
+  merchantCity?: string;
+}
+
+export function buildPixEMV(params: BuildPixParams): string {
+  const {
+    pixKey,
+    amount,
+    txid,
+    merchantName = 'NATAL VAGAS',
+    merchantCity = 'NATAL'
+  } = params;
+
+  let payload = formatEmvField('00', '01');
+  const gui = formatEmvField('00', 'br.gov.bcb.pix');
+  const key = formatEmvField('01', pixKey);
+  payload += formatEmvField('26', gui + key);
+  payload += formatEmvField('52', '0000');
+  payload += formatEmvField('53', '986');
+  payload += formatEmvField('54', amount.toFixed(2));
+  payload += formatEmvField('58', 'BR');
+  payload += formatEmvField('59', merchantName.slice(0, 25));
+  payload += formatEmvField('60', merchantCity.slice(0, 15));
+  const field05 = formatEmvField('05', txid);
+  payload += formatEmvField('62', field05);
+  payload += '6304';
+  const crc = calculatePixCRC16(payload);
+  return payload + crc;
+}
+
 
 ```

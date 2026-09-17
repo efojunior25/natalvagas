@@ -49,7 +49,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [list.ts.md](./list.ts.md) | `frontend/functions/api/coupons/list.ts` | 127 | `.ts` |
 | [verify.ts.md](./verify.ts.md) | `frontend/functions/api/coupons/verify.ts` | 177 | `.ts` |
 | [index.ts.md](./index.ts.md) | `frontend/functions/api/jobs/index.ts` | 79 | `.ts` |
-| [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 111 | `.ts` |
+| [pix_status_[txid].ts.md](./pix_status_[txid].ts.md) | `frontend/functions/api/payments/pix/status/[txid].ts` | 112 | `.ts` |
 | [webhook.ts.md](./webhook.ts.md) | `frontend/functions/api/payments/pix/webhook.ts` | 143 | `.ts` |
 | [verify-code.ts.md](./verify-code.ts.md) | `frontend/functions/api/payments/verify-code.ts` | 128 | `.ts` |
 | [index.ts.md](./index.ts.md) | `frontend/functions/api/resumes/index.ts` | 139 | `.ts` |
@@ -79,7 +79,7 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 155 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
 | [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 362 | `.tsx` |
-| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 915 | `.tsx` |
+| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 919 | `.tsx` |
 | [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 813 | `.tsx` |
 | [PwaInstallPrompt.tsx.md](./PwaInstallPrompt.tsx.md) | `frontend/src/components/PwaInstallPrompt.tsx` | 111 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
@@ -103,11 +103,11 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [PrivacyPolicy.tsx.md](./PrivacyPolicy.tsx.md) | `frontend/src/pages/PrivacyPolicy.tsx` | 119 | `.tsx` |
 | [ResumeBuilder.tsx.md](./ResumeBuilder.tsx.md) | `frontend/src/pages/ResumeBuilder.tsx` | 1281 | `.tsx` |
 | [TermsOfUse.tsx.md](./TermsOfUse.tsx.md) | `frontend/src/pages/TermsOfUse.tsx` | 98 | `.tsx` |
-| [paymentService.ts.md](./paymentService.ts.md) | `frontend/src/services/paymentService.ts` | 61 | `.ts` |
+| [paymentService.ts.md](./paymentService.ts.md) | `frontend/src/services/paymentService.ts` | 122 | `.ts` |
 | [blog.ts.md](./blog.ts.md) | `frontend/src/types/blog.ts` | 21 | `.ts` |
 | [job.ts.md](./job.ts.md) | `frontend/src/types/job.ts` | 55 | `.ts` |
 | [vite-env.d.ts.md](./vite-env.d.ts.md) | `frontend/src/vite-env.d.ts` | 1 | `.ts` |
-| [tailwind.config.js.md](./tailwind.config.js.md) | `frontend/tailwind.config.js` | 38 | `.js` |
+| [tailwind.config.js.md](./tailwind.config.js.md) | `frontend/tailwind.config.js` | 39 | `.js` |
 | [tsconfig.json.md](./tsconfig.json.md) | `frontend/tsconfig.json` | 20 | `.json` |
 | [tsconfig.node.json.md](./tsconfig.node.json.md) | `frontend/tsconfig.node.json` | 10 | `.json` |
 | [vite.config.ts.md](./vite.config.ts.md) | `frontend/vite.config.ts` | 28 | `.ts` |

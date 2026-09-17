@@ -1,7 +1,7 @@
 # File: tailwind.config.js
 - **Original Path:** `frontend/tailwind.config.js`
 - **Language / Type:** `javascript`
-- **Lines of Code:** 38
+- **Lines of Code:** 39
 
 ---
 
@@ -27,6 +27,7 @@ export default {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
+          950: '#082f49',
         },
         surface: {
           dark: '#1E293B',
