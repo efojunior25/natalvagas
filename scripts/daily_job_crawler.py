@@ -194,10 +194,10 @@ def main():
             existing_slugs.add(slug)
             existing_keys.add(t_key)
             
-            # Limite seguro diário de 15 novas oportunidades para evitar inchaço
-            if len(new_jobs) >= 15:
+            # Limite diário expandido para capturar até 100 novas oportunidades por dia
+            if len(new_jobs) >= 100:
                 break
-        if len(new_jobs) >= 15:
+        if len(new_jobs) >= 100:
             break
             
     print(f"✨ Novas vagas identificadas hoje: {len(new_jobs)}")

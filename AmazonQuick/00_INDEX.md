@@ -59,11 +59,11 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [redirects.md](./redirects.md) | `frontend/public/_redirects` | 1 | `config` |
 | [routes.json.md](./routes.json.md) | `frontend/public/_routes.json` | 5 | `.json` |
 | [ads.txt.md](./ads.txt.md) | `frontend/public/ads.txt` | 1 | `.txt` |
-| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 35454 | `.json` |
+| [jobs.json.md](./jobs.json.md) | `frontend/public/data/jobs.json` | 37454 | `.json` |
 | [manifest.json.md](./manifest.json.md) | `frontend/public/manifest.json` | 33 | `.json` |
 | [manifest.webmanifest.md](./manifest.webmanifest.md) | `frontend/public/manifest.webmanifest` | 33 | `.webmanifest` |
 | [robots.txt.md](./robots.txt.md) | `frontend/public/robots.txt` | 19 | `.txt` |
-| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 9118 | `.xml` |
+| [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 9718 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
 | [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
 | [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
