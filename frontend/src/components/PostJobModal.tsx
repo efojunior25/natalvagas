@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
+import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck, RefreshCw, Globe } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Category, WorkModel, ContractType, ApplicationChannel } from '../types/job';
 import { generateUniqueTxid, buildPixEMV } from '../services/paymentService';
@@ -34,6 +34,10 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   const [title, setTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyLogoUrl, setCompanyLogoUrl] = useState('');
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const [companyInstagram, setCompanyInstagram] = useState('');
+  const [companyLinkedin, setCompanyLinkedin] = useState('');
+  const [companyDescription, setCompanyDescription] = useState('');
   const [logoInputType, setLogoInputType] = useState<'upload' | 'url'>('upload');
   const [categoryId, setCategoryId] = useState<number | ''>('');
   const [city, setCity] = useState('Natal');
@@ -239,6 +243,11 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         applicationChannel,
         applicationTarget: applicationTarget.trim(),
         isFeatured: isFeatured,
+        isCompanyVerified: isFeatured ? isVipApproved : false,
+        companyWebsite: companyWebsite.trim() || null,
+        companyInstagram: companyInstagram.trim() || null,
+        companyLinkedin: companyLinkedin.trim() || null,
+        companyDescription: companyDescription.trim() || null,
         featuredDays: isFeatured ? 30 : 0,
         isVipApproved: isFeatured ? isVipApproved : false,
         featuredTxid: isFeatured ? uniqueTxid : undefined,
@@ -468,6 +477,68 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   )}
                 </>
               )}
+            </div>
+
+            {/* Canais e Redes Sociais da Empresa (Exibidos na Página Completa da Vaga) */}
+            <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase flex items-center gap-1.5">
+                <Globe className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                Canais e Redes da Empresa (Opcional - Exibidos na Página da Vaga)
+              </span>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    Site Oficial da Empresa
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://suaempresa.com.br"
+                    value={companyWebsite}
+                    onChange={(e) => setCompanyWebsite(e.target.value)}
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    Instagram da Empresa
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="@suaempresa ou link"
+                    value={companyInstagram}
+                    onChange={(e) => setCompanyInstagram(e.target.value)}
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    LinkedIn da Empresa
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://linkedin.com/company/..."
+                    value={companyLinkedin}
+                    onChange={(e) => setCompanyLinkedin(e.target.value)}
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  Sobre a Empresa / Histórico (Opcional)
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ex: Empresa potiguar fundada em 2015, referência no varejo no RN."
+                  value={companyDescription}
+                  onChange={(e) => setCompanyDescription(e.target.value)}
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                />
+              </div>
             </div>
 
             {/* Linha 2: Cidade, Bairro e Categoria */}
@@ -744,7 +815,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                     <span className="text-[11px] font-black text-amber-900 dark:text-amber-200 bg-amber-200/90 dark:bg-amber-900/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-700">R$ 29,90</span>
                   </div>
                   <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">
-                    ⭐ <strong>30 dias consecutivos em destaque absoluto</strong> no topo do portal com selo dourado + Disparo VIP nos grupos de WhatsApp.
+                    ⭐ <strong>30 dias consecutivos em destaque absoluto</strong> no topo com selo VIP + <strong>Selo de Empresa Verificada Oficial</strong> na página da vaga + Disparo nos grupos de WhatsApp.
                   </p>
                 </label>
               </div>

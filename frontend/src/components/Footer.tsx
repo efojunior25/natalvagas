@@ -108,49 +108,6 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Links de SEO Programático: Polos no RN e Categorias Estratégicas */}
-        <div className="py-8 border-b border-slate-800 space-y-5 text-xs text-slate-400">
-          <div>
-            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
-              Vagas por Cidade no Rio Grande do Norte:
-            </h4>
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              <Link to="/vagas-natal" className="hover:text-brand-400 transition-colors">Vagas em Natal (1.000+)</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-parnamirim" className="hover:text-brand-400 transition-colors">Vagas em Parnamirim</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-mossoro" className="hover:text-brand-400 transition-colors">Vagas em Mossoró</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-macaiba" className="hover:text-brand-400 transition-colors">Vagas em Macaíba</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-sao-goncalo" className="hover:text-brand-400 transition-colors">Vagas em São Gonçalo do Amarante</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-caico" className="hover:text-brand-400 transition-colors">Vagas em Caicó</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-currais-novos" className="hover:text-brand-400 transition-colors">Vagas em Currais Novos</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-ceara-mirim" className="hover:text-brand-400 transition-colors">Vagas em Ceará-Mirim</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-assu" className="hover:text-brand-400 transition-colors">Vagas em Assú / Açu</Link>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
-              Categorias e Modalidades:
-            </h4>
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              <Link to="/vagas-sem-experiencia" className="hover:text-emerald-400 text-emerald-300/90 font-medium transition-colors">🌱 Vagas Sem Experiência / 1º Emprego</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-estagio-rn" className="hover:text-brand-400 transition-colors">🎓 Vagas de Estágio no RN</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-jovem-aprendiz-rn" className="hover:text-brand-400 transition-colors">🌟 Jovem Aprendiz</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-home-office-rn" className="hover:text-brand-400 transition-colors">🏠 Vagas Home Office / Remoto</Link>
-            </div>
-          </div>
-        </div>
-
         {/* Alerta de Segurança e Direitos Autorais */}
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex items-center gap-2 text-emerald-400 bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-900/50">

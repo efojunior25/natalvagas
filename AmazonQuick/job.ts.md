@@ -1,7 +1,7 @@
 # File: job.ts
 - **Original Path:** `frontend/src/types/job.ts`
 - **Language / Type:** `typescript`
-- **Lines of Code:** 55
+- **Lines of Code:** 60
 
 ---
 
@@ -50,6 +50,11 @@ export interface Job {
   sourceUrl?: string;
   verifiedAt?: string;
   expiresAt?: string;
+  isCompanyVerified?: boolean;
+  companyWebsite?: string;
+  companyInstagram?: string;
+  companyLinkedin?: string;
+  companyDescription?: string;
 }
 
 export interface JobFilterParams {

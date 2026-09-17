@@ -67,19 +67,19 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [sitemap.xml.md](./sitemap.xml.md) | `frontend/public/sitemap.xml` | 9718 | `.xml` |
 | [sw.js.md](./sw.js.md) | `frontend/public/sw.js` | 87 | `.js` |
 | [schema.sql.md](./schema.sql.md) | `frontend/schema.sql` | 45 | `.sql` |
-| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 587 | `.tsx` |
+| [App.tsx.md](./App.tsx.md) | `frontend/src/App.tsx` | 539 | `.tsx` |
 | [AdPlaceholder.tsx.md](./AdPlaceholder.tsx.md) | `frontend/src/components/AdPlaceholder.tsx` | 70 | `.tsx` |
 | [AuthModal.tsx.md](./AuthModal.tsx.md) | `frontend/src/components/AuthModal.tsx` | 226 | `.tsx` |
 | [CityPills.tsx.md](./CityPills.tsx.md) | `frontend/src/components/CityPills.tsx` | 114 | `.tsx` |
 | [CookieConsentBanner.tsx.md](./CookieConsentBanner.tsx.md) | `frontend/src/components/CookieConsentBanner.tsx` | 92 | `.tsx` |
 | [CourseRecommendations.tsx.md](./CourseRecommendations.tsx.md) | `frontend/src/components/CourseRecommendations.tsx` | 95 | `.tsx` |
 | [FaqSection.tsx.md](./FaqSection.tsx.md) | `frontend/src/components/FaqSection.tsx` | 107 | `.tsx` |
-| [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 168 | `.tsx` |
+| [Footer.tsx.md](./Footer.tsx.md) | `frontend/src/components/Footer.tsx` | 125 | `.tsx` |
 | [HeroBanner.tsx.md](./HeroBanner.tsx.md) | `frontend/src/components/HeroBanner.tsx` | 108 | `.tsx` |
-| [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 155 | `.tsx` |
+| [JobCard.tsx.md](./JobCard.tsx.md) | `frontend/src/components/JobCard.tsx` | 164 | `.tsx` |
 | [JobModal.tsx.md](./JobModal.tsx.md) | `frontend/src/components/JobModal.tsx` | 320 | `.tsx` |
 | [Navbar.tsx.md](./Navbar.tsx.md) | `frontend/src/components/Navbar.tsx` | 362 | `.tsx` |
-| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 919 | `.tsx` |
+| [PostJobModal.tsx.md](./PostJobModal.tsx.md) | `frontend/src/components/PostJobModal.tsx` | 990 | `.tsx` |
 | [ProPaymentModal.tsx.md](./ProPaymentModal.tsx.md) | `frontend/src/components/ProPaymentModal.tsx` | 813 | `.tsx` |
 | [PwaInstallPrompt.tsx.md](./PwaInstallPrompt.tsx.md) | `frontend/src/components/PwaInstallPrompt.tsx` | 111 | `.tsx` |
 | [ResumeLaunchOfferModal.tsx.md](./ResumeLaunchOfferModal.tsx.md) | `frontend/src/components/ResumeLaunchOfferModal.tsx` | 156 | `.tsx` |
@@ -99,13 +99,14 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [BlogList.tsx.md](./BlogList.tsx.md) | `frontend/src/pages/BlogList.tsx` | 248 | `.tsx` |
 | [BlogPost.tsx.md](./BlogPost.tsx.md) | `frontend/src/pages/BlogPost.tsx` | 264 | `.tsx` |
 | [Contact.tsx.md](./Contact.tsx.md) | `frontend/src/pages/Contact.tsx` | 176 | `.tsx` |
+| [JobDetailsPage.tsx.md](./JobDetailsPage.tsx.md) | `frontend/src/pages/JobDetailsPage.tsx` | 1031 | `.tsx` |
 | [JobSafety.tsx.md](./JobSafety.tsx.md) | `frontend/src/pages/JobSafety.tsx` | 94 | `.tsx` |
 | [PrivacyPolicy.tsx.md](./PrivacyPolicy.tsx.md) | `frontend/src/pages/PrivacyPolicy.tsx` | 119 | `.tsx` |
 | [ResumeBuilder.tsx.md](./ResumeBuilder.tsx.md) | `frontend/src/pages/ResumeBuilder.tsx` | 1281 | `.tsx` |
 | [TermsOfUse.tsx.md](./TermsOfUse.tsx.md) | `frontend/src/pages/TermsOfUse.tsx` | 98 | `.tsx` |
 | [paymentService.ts.md](./paymentService.ts.md) | `frontend/src/services/paymentService.ts` | 122 | `.ts` |
 | [blog.ts.md](./blog.ts.md) | `frontend/src/types/blog.ts` | 21 | `.ts` |
-| [job.ts.md](./job.ts.md) | `frontend/src/types/job.ts` | 55 | `.ts` |
+| [job.ts.md](./job.ts.md) | `frontend/src/types/job.ts` | 60 | `.ts` |
 | [vite-env.d.ts.md](./vite-env.d.ts.md) | `frontend/src/vite-env.d.ts` | 1 | `.ts` |
 | [tailwind.config.js.md](./tailwind.config.js.md) | `frontend/tailwind.config.js` | 39 | `.js` |
 | [tsconfig.json.md](./tsconfig.json.md) | `frontend/tsconfig.json` | 20 | `.json` |
@@ -127,4 +128,4 @@ Este diretório contém todos os arquivos de código, configurações, dados e s
 | [verify_seo.py.md](./verify_seo.py.md) | `scripts/verify_seo.py` | 70 | `.py` |
 
 ---
-**Total de Arquivos:** 117 arquivos convertidos com sucesso.
+**Total de Arquivos:** 118 arquivos convertidos com sucesso.

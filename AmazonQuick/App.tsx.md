@@ -1,18 +1,17 @@
 # File: App.tsx
 - **Original Path:** `frontend/src/App.tsx`
 - **Language / Type:** `tsx`
-- **Lines of Code:** 587
+- **Lines of Code:** 539
 
 ---
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
-import { Routes, Route, useNavigate, useParams, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { SeoCategoryHero } from './components/SeoCategoryHero';
 import { JobCard } from './components/JobCard';
-import { JobModal } from './components/JobModal';
 import { CityPills } from './components/CityPills';
 import { FaqSection } from './components/FaqSection';
 import { AdPlaceholder } from './components/AdPlaceholder';
@@ -34,6 +33,7 @@ const JobSafety = lazy(() => import('./pages/JobSafety').then(m => ({ default: m
 const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder').then(m => ({ default: m.ResumeBuilder })));
 const BlogList = lazy(() => import('./pages/BlogList').then(m => ({ default: m.BlogList })));
 const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
+const JobDetailsPage = lazy(() => import('./pages/JobDetailsPage').then(m => ({ default: m.JobDetailsPage })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
 
@@ -47,9 +47,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoCategorySlug }) => {
-  const { slug } = useParams<{ slug?: string }>();
   const navigate = useNavigate();
-  const [activeJob, setActiveJob] = useState<Job | null>(null);
   const [isPostJobOpen, setIsPostJobOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
@@ -79,27 +77,16 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       else setSelectedWorkModel('TODOS');
 
       setVisibleCount(PAGE_SIZE);
-    } else if (!slug) {
+    } else {
       setSelectedCity('');
       setOnlyNoExperience(false);
       setOnlyPcd(false);
       setSelectedWorkModel('TODOS');
       setVisibleCount(PAGE_SIZE);
     }
-  }, [seoConfig, slug]);
+  }, [seoConfig]);
 
-  // Mapa de indexação O(1) por slug e id para performance instantânea
-  const jobsLookupMap = useMemo(() => {
-    const map = new Map<string, Job>();
-    for (let i = 0; i < jobs.length; i++) {
-      const j = jobs[i];
-      if (j.slug) map.set(j.slug, j);
-      if (j.id) map.set(String(j.id), j);
-    }
-    return map;
-  }, [jobs]);
-
-  // Trata abertura direta por URL (/vaga/:slug) e metadados dinâmicos de SEO
+  // Metadados dinâmicos de SEO da página principal
   useEffect(() => {
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
@@ -113,22 +100,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
     const ogDesc = document.querySelector('meta[property="og:description"]');
     const ogUrl = document.querySelector('meta[property="og:url"]');
 
-    if (slug) {
-      const found = jobsLookupMap.get(slug);
-      if (found) {
-        setActiveJob(found);
-        const pageTitle = `${found.title} — ${found.companyName} | Natal Vagas`;
-        const description = `Vaga de ${found.title} na empresa ${found.companyName} em ${found.city}/RN. Requisitos, benefícios e link oficial para candidatura no Natal Vagas.`;
-        
-        document.title = pageTitle;
-        if (metaDesc) metaDesc.setAttribute('content', description);
-        if (ogTitle) ogTitle.setAttribute('content', pageTitle);
-        if (ogDesc) ogDesc.setAttribute('content', description);
-        if (ogUrl) ogUrl.setAttribute('content', `https://natalvagas.com.br/vaga/${found.slug}`);
-        canonical.setAttribute('href', `https://natalvagas.com.br/vaga/${found.slug}`);
-      }
-    } else if (seoConfig) {
-      setActiveJob(null);
+    if (seoConfig) {
       document.title = seoConfig.metaTitle;
       if (metaDesc) metaDesc.setAttribute('content', seoConfig.metaDescription);
       if (ogTitle) ogTitle.setAttribute('content', seoConfig.metaTitle);
@@ -136,7 +108,6 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       if (ogUrl) ogUrl.setAttribute('content', `https://natalvagas.com.br${seoConfig.path}`);
       canonical.setAttribute('href', `https://natalvagas.com.br${seoConfig.path}`);
     } else {
-      setActiveJob(null);
       const defaultTitle = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 1.400 Oportunidades';
       const defaultDesc = 'Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.';
       
@@ -147,7 +118,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       if (ogUrl) ogUrl.setAttribute('content', 'https://natalvagas.com.br/');
       canonical.setAttribute('href', 'https://natalvagas.com.br/');
     }
-  }, [slug, jobsLookupMap, seoConfig]);
+  }, [seoConfig]);
 
   const handleSearch = (query: string, city: string) => {
     setSearchQuery(query);
@@ -157,17 +128,6 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
   const handleApply = (job: Job) => {
     navigate(`/vaga/${job.slug}`);
-  };
-
-  const handleCloseModal = () => {
-    setActiveJob(null);
-    if (slug) {
-      if (seoConfig) {
-        navigate(seoConfig.path);
-      } else {
-        navigate('/');
-      }
-    }
   };
 
   const filteredJobs = useMemo(() => {
@@ -469,14 +429,6 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       </main>
 
-      {/* Modal de Detalhes da Vaga */}
-      {activeJob && (
-        <JobModal
-          job={activeJob}
-          onClose={handleCloseModal}
-        />
-      )}
-
       {/* Modal de Anúncio de Vaga por Empresas (Lazy Loaded) */}
       <Suspense fallback={null}>
         {isPostJobOpen && (
@@ -550,7 +502,7 @@ export const App: React.FC = () => {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-          <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          <Route path="/vaga/:slug" element={<JobDetailsPage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
           
           {/* Rotas de Programmatic SEO Dedicadas por Cidade e Categoria */}
           {SEO_LANDING_PAGES.map((page) => (

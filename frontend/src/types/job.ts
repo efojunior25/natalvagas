@@ -42,6 +42,11 @@ export interface Job {
   sourceUrl?: string;
   verifiedAt?: string;
   expiresAt?: string;
+  isCompanyVerified?: boolean;
+  companyWebsite?: string;
+  companyInstagram?: string;
+  companyLinkedin?: string;
+  companyDescription?: string;
 }
 
 export interface JobFilterParams {

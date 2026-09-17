@@ -1,6 +1,6 @@
 # 🚀 Natal Vagas — Código Fonte e Documentação Completa da Aplicação (All-in-One)
 > **Arquivo Único Consolidado de Código:** Contém todos os códigos-fonte, arquitetura, regras de negócio, dados, páginas, componentes, backend serverless, scripts de automação e configurações do portal [natalvagas.com.br](https://natalvagas.com.br).
-> **Total de Arquivos Compilados com Código Integral:** 117 arquivos.
+> **Total de Arquivos Compilados com Código Integral:** 118 arquivos.
 
 ---
 
@@ -36,93 +36,94 @@
 28. [`frontend/src/pages/BlogList.tsx`](#frontend-src-pages-bloglisttsx)
 29. [`frontend/src/pages/BlogPost.tsx`](#frontend-src-pages-blogposttsx)
 30. [`frontend/src/pages/Contact.tsx`](#frontend-src-pages-contacttsx)
-31. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
-32. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
-33. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
-34. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
-35. [`frontend/functions/api/auth/_utils.ts`](#frontend-functions-api-auth--utilsts)
-36. [`frontend/functions/api/auth/login.ts`](#frontend-functions-api-auth-logints)
-37. [`frontend/functions/api/auth/me.ts`](#frontend-functions-api-auth-mets)
-38. [`frontend/functions/api/auth/register.ts`](#frontend-functions-api-auth-registerts)
-39. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
-40. [`frontend/functions/api/categories.ts`](#frontend-functions-api-categoriests)
-41. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
-42. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
-43. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
-44. [`frontend/functions/api/jobs/index.ts`](#frontend-functions-api-jobs-indexts)
-45. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
-46. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
-47. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
-48. [`frontend/functions/api/resumes/index.ts`](#frontend-functions-api-resumes-indexts)
-49. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
-50. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
-51. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
-52. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
-53. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
-54. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
-55. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
-56. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
-57. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
-58. [`frontend/public/_redirects`](#frontend-public--redirects)
-59. [`frontend/public/_routes.json`](#frontend-public--routesjson)
-60. [`frontend/public/ads.txt`](#frontend-public-adstxt)
-61. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
-62. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
-63. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
-64. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
-65. [`frontend/public/sw.js`](#frontend-public-swjs)
-66. [`frontend/.env.example`](#frontend-envexample)
-67. [`frontend/index.html`](#frontend-indexhtml)
-68. [`frontend/package-lock.json`](#frontend-package-lockjson)
-69. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
-70. [`frontend/schema.sql`](#frontend-schemasql)
-71. [`frontend/src/index.css`](#frontend-src-indexcss)
-72. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
-73. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
-74. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
-75. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
-76. [`backend/Dockerfile`](#backend-dockerfile)
-77. [`backend/pom.xml`](#backend-pomxml)
-78. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
-79. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
-80. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
-81. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
-82. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
-83. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
-84. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
-85. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
-86. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
-87. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
-88. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
-89. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
-90. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
-91. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
-92. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
-93. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
-94. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
-95. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
-96. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
-97. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
-98. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
-99. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
-100. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
-101. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
-102. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
-103. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
-104. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
-105. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
-106. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
-107. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
-108. [`scripts/notify_google_indexing.py`](#scripts-notify-google-indexingpy)
-109. [`scripts/pre_render_static_routes.py`](#scripts-pre-render-static-routespy)
-110. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
-111. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
-112. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
-113. [`scripts/verify_seo.py`](#scripts-verify-seopy)
-114. [`.env.example`](#envexample)
-115. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
-116. [`.gitignore`](#gitignore)
-117. [`docker-compose.yml`](#docker-composeyml)
+31. [`frontend/src/pages/JobDetailsPage.tsx`](#frontend-src-pages-jobdetailspagetsx)
+32. [`frontend/src/pages/JobSafety.tsx`](#frontend-src-pages-jobsafetytsx)
+33. [`frontend/src/pages/PrivacyPolicy.tsx`](#frontend-src-pages-privacypolicytsx)
+34. [`frontend/src/pages/ResumeBuilder.tsx`](#frontend-src-pages-resumebuildertsx)
+35. [`frontend/src/pages/TermsOfUse.tsx`](#frontend-src-pages-termsofusetsx)
+36. [`frontend/functions/api/auth/_utils.ts`](#frontend-functions-api-auth--utilsts)
+37. [`frontend/functions/api/auth/login.ts`](#frontend-functions-api-auth-logints)
+38. [`frontend/functions/api/auth/me.ts`](#frontend-functions-api-auth-mets)
+39. [`frontend/functions/api/auth/register.ts`](#frontend-functions-api-auth-registerts)
+40. [`frontend/functions/api/auth/sign-pro.ts`](#frontend-functions-api-auth-sign-prots)
+41. [`frontend/functions/api/categories.ts`](#frontend-functions-api-categoriests)
+42. [`frontend/functions/api/coupons/create.ts`](#frontend-functions-api-coupons-createts)
+43. [`frontend/functions/api/coupons/list.ts`](#frontend-functions-api-coupons-listts)
+44. [`frontend/functions/api/coupons/verify.ts`](#frontend-functions-api-coupons-verifyts)
+45. [`frontend/functions/api/jobs/index.ts`](#frontend-functions-api-jobs-indexts)
+46. [`frontend/functions/api/payments/pix/status/[txid].ts`](#frontend-functions-api-payments-pix-status-txidts)
+47. [`frontend/functions/api/payments/pix/webhook.ts`](#frontend-functions-api-payments-pix-webhookts)
+48. [`frontend/functions/api/payments/verify-code.ts`](#frontend-functions-api-payments-verify-codets)
+49. [`frontend/functions/api/resumes/index.ts`](#frontend-functions-api-resumes-indexts)
+50. [`frontend/src/context/AuthContext.tsx`](#frontend-src-context-authcontexttsx)
+51. [`frontend/src/context/ThemeContext.tsx`](#frontend-src-context-themecontexttsx)
+52. [`frontend/src/services/paymentService.ts`](#frontend-src-services-paymentservicets)
+53. [`frontend/src/types/blog.ts`](#frontend-src-types-blogts)
+54. [`frontend/src/types/job.ts`](#frontend-src-types-jobts)
+55. [`frontend/src/data/blogPosts.ts`](#frontend-src-data-blogpoststs)
+56. [`frontend/src/data/initialJobs.ts`](#frontend-src-data-initialjobsts)
+57. [`frontend/src/data/seoLandingPages.ts`](#frontend-src-data-seolandingpagests)
+58. [`frontend/public/data/jobs.json`](#frontend-public-data-jobsjson)
+59. [`frontend/public/_redirects`](#frontend-public--redirects)
+60. [`frontend/public/_routes.json`](#frontend-public--routesjson)
+61. [`frontend/public/ads.txt`](#frontend-public-adstxt)
+62. [`frontend/public/manifest.json`](#frontend-public-manifestjson)
+63. [`frontend/public/manifest.webmanifest`](#frontend-public-manifestwebmanifest)
+64. [`frontend/public/robots.txt`](#frontend-public-robotstxt)
+65. [`frontend/public/sitemap.xml`](#frontend-public-sitemapxml)
+66. [`frontend/public/sw.js`](#frontend-public-swjs)
+67. [`frontend/.env.example`](#frontend-envexample)
+68. [`frontend/index.html`](#frontend-indexhtml)
+69. [`frontend/package-lock.json`](#frontend-package-lockjson)
+70. [`frontend/postcss.config.js`](#frontend-postcssconfigjs)
+71. [`frontend/schema.sql`](#frontend-schemasql)
+72. [`frontend/src/index.css`](#frontend-src-indexcss)
+73. [`frontend/src/vite-env.d.ts`](#frontend-src-vite-envdts)
+74. [`frontend/tailwind.config.js`](#frontend-tailwindconfigjs)
+75. [`frontend/tsconfig.json`](#frontend-tsconfigjson)
+76. [`frontend/tsconfig.node.json`](#frontend-tsconfignodejson)
+77. [`backend/Dockerfile`](#backend-dockerfile)
+78. [`backend/pom.xml`](#backend-pomxml)
+79. [`backend/src/main/java/com/natalvagas/NatalVagasApplication.java`](#backend-src-main-java-com-natalvagas-natalvagasapplicationjava)
+80. [`backend/src/main/java/com/natalvagas/api/CategoryController.java`](#backend-src-main-java-com-natalvagas-api-categorycontrollerjava)
+81. [`backend/src/main/java/com/natalvagas/api/JobController.java`](#backend-src-main-java-com-natalvagas-api-jobcontrollerjava)
+82. [`backend/src/main/java/com/natalvagas/api/SitemapController.java`](#backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava)
+83. [`backend/src/main/java/com/natalvagas/config/SecurityConfig.java`](#backend-src-main-java-com-natalvagas-config-securityconfigjava)
+84. [`backend/src/main/java/com/natalvagas/config/WebConfig.java`](#backend-src-main-java-com-natalvagas-config-webconfigjava)
+85. [`backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`](#backend-src-main-java-com-natalvagas-domain-applicationchanneljava)
+86. [`backend/src/main/java/com/natalvagas/domain/Category.java`](#backend-src-main-java-com-natalvagas-domain-categoryjava)
+87. [`backend/src/main/java/com/natalvagas/domain/ContractType.java`](#backend-src-main-java-com-natalvagas-domain-contracttypejava)
+88. [`backend/src/main/java/com/natalvagas/domain/Job.java`](#backend-src-main-java-com-natalvagas-domain-jobjava)
+89. [`backend/src/main/java/com/natalvagas/domain/JobStatus.java`](#backend-src-main-java-com-natalvagas-domain-jobstatusjava)
+90. [`backend/src/main/java/com/natalvagas/domain/User.java`](#backend-src-main-java-com-natalvagas-domain-userjava)
+91. [`backend/src/main/java/com/natalvagas/domain/WorkModel.java`](#backend-src-main-java-com-natalvagas-domain-workmodeljava)
+92. [`backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`](#backend-src-main-java-com-natalvagas-dto-categorydtojava)
+93. [`backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobcreatedtojava)
+94. [`backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`](#backend-src-main-java-com-natalvagas-dto-jobresponsedtojava)
+95. [`backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`](#backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava)
+96. [`backend/src/main/java/com/natalvagas/repository/JobRepository.java`](#backend-src-main-java-com-natalvagas-repository-jobrepositoryjava)
+97. [`backend/src/main/java/com/natalvagas/service/CategoryService.java`](#backend-src-main-java-com-natalvagas-service-categoryservicejava)
+98. [`backend/src/main/java/com/natalvagas/service/JobService.java`](#backend-src-main-java-com-natalvagas-service-jobservicejava)
+99. [`backend/src/main/resources/application.yml`](#backend-src-main-resources-applicationyml)
+100. [`backend/src/main/resources/db/migration/V1__init_schema.sql`](#backend-src-main-resources-db-migration-v1--init-schemasql)
+101. [`scripts/add_whatsapp_jobs.py`](#scripts-add-whatsapp-jobspy)
+102. [`scripts/build_single_context_md.py`](#scripts-build-single-context-mdpy)
+103. [`scripts/convert_to_amazon_quick.py`](#scripts-convert-to-amazon-quickpy)
+104. [`scripts/daily-job-sync.yml.example`](#scripts-daily-job-syncymlexample)
+105. [`scripts/daily_job_crawler.py`](#scripts-daily-job-crawlerpy)
+106. [`scripts/fetch_500_rn_jobs.py`](#scripts-fetch-500-rn-jobspy)
+107. [`scripts/generate_sitemap.py`](#scripts-generate-sitemappy)
+108. [`scripts/ingest_jobs.py`](#scripts-ingest-jobspy)
+109. [`scripts/notify_google_indexing.py`](#scripts-notify-google-indexingpy)
+110. [`scripts/pre_render_static_routes.py`](#scripts-pre-render-static-routespy)
+111. [`scripts/rn_job_scraper.py`](#scripts-rn-job-scraperpy)
+112. [`scripts/test_efi_status.py`](#scripts-test-efi-statuspy)
+113. [`scripts/verify_build_integrity.py`](#scripts-verify-build-integritypy)
+114. [`scripts/verify_seo.py`](#scripts-verify-seopy)
+115. [`.env.example`](#envexample)
+116. [`.github/workflows/daily-job-sync.yml`](#github-workflows-daily-job-syncyml)
+117. [`.gitignore`](#gitignore)
+118. [`docker-compose.yml`](#docker-composeyml)
 
 ---
 
@@ -530,17 +531,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - **Caminho:** `frontend/src/App.tsx`
 - **Nome:** `App.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 587
-- **Tamanho:** 23775 bytes
+- **Total de Linhas:** 539
+- **Tamanho:** 22092 bytes
 
 ```tsx
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
-import { Routes, Route, useNavigate, useParams, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { SeoCategoryHero } from './components/SeoCategoryHero';
 import { JobCard } from './components/JobCard';
-import { JobModal } from './components/JobModal';
 import { CityPills } from './components/CityPills';
 import { FaqSection } from './components/FaqSection';
 import { AdPlaceholder } from './components/AdPlaceholder';
@@ -562,6 +562,7 @@ const JobSafety = lazy(() => import('./pages/JobSafety').then(m => ({ default: m
 const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder').then(m => ({ default: m.ResumeBuilder })));
 const BlogList = lazy(() => import('./pages/BlogList').then(m => ({ default: m.BlogList })));
 const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
+const JobDetailsPage = lazy(() => import('./pages/JobDetailsPage').then(m => ({ default: m.JobDetailsPage })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
 
@@ -575,9 +576,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoCategorySlug }) => {
-  const { slug } = useParams<{ slug?: string }>();
   const navigate = useNavigate();
-  const [activeJob, setActiveJob] = useState<Job | null>(null);
   const [isPostJobOpen, setIsPostJobOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
@@ -607,27 +606,16 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       else setSelectedWorkModel('TODOS');
 
       setVisibleCount(PAGE_SIZE);
-    } else if (!slug) {
+    } else {
       setSelectedCity('');
       setOnlyNoExperience(false);
       setOnlyPcd(false);
       setSelectedWorkModel('TODOS');
       setVisibleCount(PAGE_SIZE);
     }
-  }, [seoConfig, slug]);
+  }, [seoConfig]);
 
-  // Mapa de indexação O(1) por slug e id para performance instantânea
-  const jobsLookupMap = useMemo(() => {
-    const map = new Map<string, Job>();
-    for (let i = 0; i < jobs.length; i++) {
-      const j = jobs[i];
-      if (j.slug) map.set(j.slug, j);
-      if (j.id) map.set(String(j.id), j);
-    }
-    return map;
-  }, [jobs]);
-
-  // Trata abertura direta por URL (/vaga/:slug) e metadados dinâmicos de SEO
+  // Metadados dinâmicos de SEO da página principal
   useEffect(() => {
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
@@ -641,22 +629,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
     const ogDesc = document.querySelector('meta[property="og:description"]');
     const ogUrl = document.querySelector('meta[property="og:url"]');
 
-    if (slug) {
-      const found = jobsLookupMap.get(slug);
-      if (found) {
-        setActiveJob(found);
-        const pageTitle = `${found.title} — ${found.companyName} | Natal Vagas`;
-        const description = `Vaga de ${found.title} na empresa ${found.companyName} em ${found.city}/RN. Requisitos, benefícios e link oficial para candidatura no Natal Vagas.`;
-        
-        document.title = pageTitle;
-        if (metaDesc) metaDesc.setAttribute('content', description);
-        if (ogTitle) ogTitle.setAttribute('content', pageTitle);
-        if (ogDesc) ogDesc.setAttribute('content', description);
-        if (ogUrl) ogUrl.setAttribute('content', `https://natalvagas.com.br/vaga/${found.slug}`);
-        canonical.setAttribute('href', `https://natalvagas.com.br/vaga/${found.slug}`);
-      }
-    } else if (seoConfig) {
-      setActiveJob(null);
+    if (seoConfig) {
       document.title = seoConfig.metaTitle;
       if (metaDesc) metaDesc.setAttribute('content', seoConfig.metaDescription);
       if (ogTitle) ogTitle.setAttribute('content', seoConfig.metaTitle);
@@ -664,7 +637,6 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       if (ogUrl) ogUrl.setAttribute('content', `https://natalvagas.com.br${seoConfig.path}`);
       canonical.setAttribute('href', `https://natalvagas.com.br${seoConfig.path}`);
     } else {
-      setActiveJob(null);
       const defaultTitle = 'Natal Vagas — Vagas de Emprego em Natal e no RN | Mais de 1.400 Oportunidades';
       const defaultDesc = 'Encontre mais de 1.400 vagas de emprego reais e verificadas em Natal, Mossoró, Parnamirim e todo o RN. Conectamos candidatos a empresas de forma 100% gratuita.';
       
@@ -675,7 +647,7 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
       if (ogUrl) ogUrl.setAttribute('content', 'https://natalvagas.com.br/');
       canonical.setAttribute('href', 'https://natalvagas.com.br/');
     }
-  }, [slug, jobsLookupMap, seoConfig]);
+  }, [seoConfig]);
 
   const handleSearch = (query: string, city: string) => {
     setSearchQuery(query);
@@ -685,17 +657,6 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
   const handleApply = (job: Job) => {
     navigate(`/vaga/${job.slug}`);
-  };
-
-  const handleCloseModal = () => {
-    setActiveJob(null);
-    if (slug) {
-      if (seoConfig) {
-        navigate(seoConfig.path);
-      } else {
-        navigate('/');
-      }
-    }
   };
 
   const filteredJobs = useMemo(() => {
@@ -997,14 +958,6 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       </main>
 
-      {/* Modal de Detalhes da Vaga */}
-      {activeJob && (
-        <JobModal
-          job={activeJob}
-          onClose={handleCloseModal}
-        />
-      )}
-
       {/* Modal de Anúncio de Vaga por Empresas (Lazy Loaded) */}
       <Suspense fallback={null}>
         {isPostJobOpen && (
@@ -1078,7 +1031,7 @@ export const App: React.FC = () => {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
-          <Route path="/vaga/:slug" element={<HomePage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
+          <Route path="/vaga/:slug" element={<JobDetailsPage jobs={jobs} isLoading={isLoading} onJobCreated={fetchJobs} />} />
           
           {/* Rotas de Programmatic SEO Dedicadas por Cidade e Categoria */}
           {SEO_LANDING_PAGES.map((page) => (
@@ -1919,8 +1872,8 @@ export const FaqSection: React.FC = () => {
 - **Caminho:** `frontend/src/components/Footer.tsx`
 - **Nome:** `Footer.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 168
-- **Tamanho:** 9927 bytes
+- **Total de Linhas:** 125
+- **Tamanho:** 6903 bytes
 
 ```tsx
 import React from 'react';
@@ -2031,49 +1984,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-        </div>
-
-        {/* Links de SEO Programático: Polos no RN e Categorias Estratégicas */}
-        <div className="py-8 border-b border-slate-800 space-y-5 text-xs text-slate-400">
-          <div>
-            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
-              Vagas por Cidade no Rio Grande do Norte:
-            </h4>
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              <Link to="/vagas-natal" className="hover:text-brand-400 transition-colors">Vagas em Natal (1.000+)</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-parnamirim" className="hover:text-brand-400 transition-colors">Vagas em Parnamirim</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-mossoro" className="hover:text-brand-400 transition-colors">Vagas em Mossoró</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-macaiba" className="hover:text-brand-400 transition-colors">Vagas em Macaíba</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-sao-goncalo" className="hover:text-brand-400 transition-colors">Vagas em São Gonçalo do Amarante</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-caico" className="hover:text-brand-400 transition-colors">Vagas em Caicó</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-currais-novos" className="hover:text-brand-400 transition-colors">Vagas em Currais Novos</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-ceara-mirim" className="hover:text-brand-400 transition-colors">Vagas em Ceará-Mirim</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-assu" className="hover:text-brand-400 transition-colors">Vagas em Assú / Açu</Link>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-slate-200 font-bold uppercase tracking-wider mb-2.5">
-              Categorias e Modalidades:
-            </h4>
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              <Link to="/vagas-sem-experiencia" className="hover:text-emerald-400 text-emerald-300/90 font-medium transition-colors">🌱 Vagas Sem Experiência / 1º Emprego</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-estagio-rn" className="hover:text-brand-400 transition-colors">🎓 Vagas de Estágio no RN</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-jovem-aprendiz-rn" className="hover:text-brand-400 transition-colors">🌟 Jovem Aprendiz</Link>
-              <span className="text-slate-700">•</span>
-              <Link to="/vagas-home-office-rn" className="hover:text-brand-400 transition-colors">🏠 Vagas Home Office / Remoto</Link>
-            </div>
-          </div>
         </div>
 
         {/* Alerta de Segurança e Direitos Autorais */}
@@ -2223,12 +2133,12 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onSearch, cities }) => {
 - **Caminho:** `frontend/src/components/JobCard.tsx`
 - **Nome:** `JobCard.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 155
-- **Tamanho:** 8640 bytes
+- **Total de Linhas:** 164
+- **Tamanho:** 9606 bytes
 
 ```tsx
 import React from 'react';
-import { MapPin, Building2, Clock, DollarSign, ArrowUpRight, Share2, Sparkles } from 'lucide-react';
+import { MapPin, Building2, Clock, DollarSign, ArrowUpRight, Share2, Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { Job } from '../types/job';
 
 interface JobCardProps {
@@ -2270,9 +2180,15 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
       }`}
     >
       <div>
-        {/* Selos de Destaque e Acessibilidade PcD */}
-        {(job.isFeatured || job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
+        {/* Selos de Destaque, Empresa Verificada e Acessibilidade PcD */}
+        {(job.isFeatured || job.isCompanyVerified || (job.verifiedAt && !/confidencial/i.test(job.companyName)) || job.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${job.title} ${job.description} ${job.requirements || ''}`)) && (
           <div className="mb-3 flex flex-wrap items-center gap-2">
+            {(job.isCompanyVerified || (job.verifiedAt && !/confidencial/i.test(job.companyName))) && (
+              <div className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-extrabold text-blue-800 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60 px-2.5 py-0.5 rounded-full shadow-2xs">
+                <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                <span>VERIFICADA</span>
+              </div>
+            )}
             {job.isFeatured && (
               <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold text-amber-800 bg-amber-100 border border-amber-300/80 px-2.5 py-0.5 rounded-full shadow-2xs">
                 <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 fill-amber-400 animate-pulse shrink-0" />
@@ -2309,8 +2225,11 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 block truncate">
-                {job.companyName}
+              <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate">
+                <span className="truncate">{job.companyName}</span>
+                {(job.isCompanyVerified || (job.verifiedAt && !/confidencial/i.test(job.companyName))) && (
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 fill-blue-500 text-white shrink-0" />
+                )}
               </span>
               <h3 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors leading-snug break-words">
                 {job.title}
@@ -3102,12 +3021,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
 - **Caminho:** `frontend/src/components/PostJobModal.tsx`
 - **Nome:** `PostJobModal.tsx`
 - **Linguagem / Sintaxe:** `tsx`
-- **Total de Linhas:** 919
-- **Tamanho:** 48265 bytes
+- **Total de Linhas:** 990
+- **Tamanho:** 52437 bytes
 
 ```tsx
 import React, { useState, useEffect } from 'react';
-import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
+import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Upload, Image as ImageIcon, Trash2, Check, Copy, Clock, ShieldCheck, RefreshCw, Globe } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Category, WorkModel, ContractType, ApplicationChannel } from '../types/job';
 import { generateUniqueTxid, buildPixEMV } from '../services/paymentService';
@@ -3142,6 +3061,10 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   const [title, setTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyLogoUrl, setCompanyLogoUrl] = useState('');
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const [companyInstagram, setCompanyInstagram] = useState('');
+  const [companyLinkedin, setCompanyLinkedin] = useState('');
+  const [companyDescription, setCompanyDescription] = useState('');
   const [logoInputType, setLogoInputType] = useState<'upload' | 'url'>('upload');
   const [categoryId, setCategoryId] = useState<number | ''>('');
   const [city, setCity] = useState('Natal');
@@ -3347,6 +3270,11 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         applicationChannel,
         applicationTarget: applicationTarget.trim(),
         isFeatured: isFeatured,
+        isCompanyVerified: isFeatured ? isVipApproved : false,
+        companyWebsite: companyWebsite.trim() || null,
+        companyInstagram: companyInstagram.trim() || null,
+        companyLinkedin: companyLinkedin.trim() || null,
+        companyDescription: companyDescription.trim() || null,
         featuredDays: isFeatured ? 30 : 0,
         isVipApproved: isFeatured ? isVipApproved : false,
         featuredTxid: isFeatured ? uniqueTxid : undefined,
@@ -3576,6 +3504,68 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                   )}
                 </>
               )}
+            </div>
+
+            {/* Canais e Redes Sociais da Empresa (Exibidos na Página Completa da Vaga) */}
+            <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase flex items-center gap-1.5">
+                <Globe className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                Canais e Redes da Empresa (Opcional - Exibidos na Página da Vaga)
+              </span>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    Site Oficial da Empresa
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://suaempresa.com.br"
+                    value={companyWebsite}
+                    onChange={(e) => setCompanyWebsite(e.target.value)}
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    Instagram da Empresa
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="@suaempresa ou link"
+                    value={companyInstagram}
+                    onChange={(e) => setCompanyInstagram(e.target.value)}
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    LinkedIn da Empresa
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://linkedin.com/company/..."
+                    value={companyLinkedin}
+                    onChange={(e) => setCompanyLinkedin(e.target.value)}
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  Sobre a Empresa / Histórico (Opcional)
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ex: Empresa potiguar fundada em 2015, referência no varejo no RN."
+                  value={companyDescription}
+                  onChange={(e) => setCompanyDescription(e.target.value)}
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 text-xs focus:border-brand-500 focus:outline-none"
+                />
+              </div>
             </div>
 
             {/* Linha 2: Cidade, Bairro e Categoria */}
@@ -3852,7 +3842,7 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                     <span className="text-[11px] font-black text-amber-900 dark:text-amber-200 bg-amber-200/90 dark:bg-amber-900/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-700">R$ 29,90</span>
                   </div>
                   <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">
-                    ⭐ <strong>30 dias consecutivos em destaque absoluto</strong> no topo do portal com selo dourado + Disparo VIP nos grupos de WhatsApp.
+                    ⭐ <strong>30 dias consecutivos em destaque absoluto</strong> no topo com selo VIP + <strong>Selo de Empresa Verificada Oficial</strong> na página da vaga + Disparo nos grupos de WhatsApp.
                   </p>
                 </label>
               </div>
@@ -7054,8 +7044,1053 @@ export const Contact: React.FC = () => {
 
 ---
 
+<a id="frontend-src-pages-jobdetailspagetsx"></a>
+## 31. Arquivo: `frontend/src/pages/JobDetailsPage.tsx`
+- **Caminho:** `frontend/src/pages/JobDetailsPage.tsx`
+- **Nome:** `JobDetailsPage.tsx`
+- **Linguagem / Sintaxe:** `tsx`
+- **Total de Linhas:** 1031
+- **Tamanho:** 54456 bytes
+
+```tsx
+import React, { useEffect, useState, useMemo, lazy, Suspense } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { 
+  Building2, MapPin, Clock, DollarSign, Share2, CheckCircle2, 
+  ExternalLink, Mail, ArrowLeft, ShieldCheck, Sparkles, AlertTriangle, 
+  Copy, Check, Send, Globe, Instagram, Linkedin,
+  FileText, ChevronRight, Briefcase
+} from 'lucide-react';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { AdPlaceholder } from '../components/AdPlaceholder';
+import { Job } from '../types/job';
+import { SocialPostGeneratorModal } from '../components/SocialPostGeneratorModal';
+
+const PostJobModal = lazy(() => import('../components/PostJobModal').then(m => ({ default: m.PostJobModal })));
+
+interface JobDetailsPageProps {
+  jobs: Job[];
+  isLoading: boolean;
+  onJobCreated: () => void;
+}
+
+export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading, onJobCreated }) => {
+  const { slug } = useParams<{ slug: string }>();
+
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedCoverLetter, setCopiedCoverLetter] = useState(false);
+  const [isPostJobOpen, setIsPostJobOpen] = useState(false);
+  const [isSocialModalOpen, setIsSocialModalOpen] = useState(false);
+  const [localJob, setLocalJob] = useState<Job | null>(null);
+  const [isFetchingDirect, setIsFetchingDirect] = useState(false);
+
+  // 1. Busca da vaga no array da aplicação (ou em cache)
+  const currentJob = useMemo(() => {
+    if (!slug) return null;
+    const foundInProps = jobs.find(j => j.slug === slug || String(j.id) === slug);
+    if (foundInProps) return foundInProps;
+    return localJob;
+  }, [jobs, slug, localJob]);
+
+  // Se o usuário entrou diretamente pela URL e os jobs da prop ainda estão vazios, faz fetch rápido do catálogo
+  useEffect(() => {
+    if (!currentJob && slug && !isLoading) {
+      let isMounted = true;
+      setIsFetchingDirect(true);
+      fetch('/data/jobs.json')
+        .then(res => res.ok ? res.json() : [])
+        .then((allJobs: Job[]) => {
+          if (!isMounted) return;
+          const found = allJobs.find(j => j.slug === slug || String(j.id) === slug);
+          if (found) {
+            setLocalJob(found);
+          }
+        })
+        .catch(err => {
+          console.warn('Erro ao carregar vaga diretamente:', err);
+        })
+        .finally(() => {
+          if (isMounted) setIsFetchingDirect(false);
+        });
+
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [slug, currentJob, isLoading]);
+
+  // Rola para o topo ao trocar de vaga
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCopiedLink(false);
+    setCopiedEmail(false);
+    setCopiedCoverLetter(false);
+  }, [slug]);
+
+  // 2. Metadados Dinâmicos de SEO & OpenGraph para Redes Sociais / WhatsApp
+  useEffect(() => {
+    if (!currentJob) return;
+
+    const pageTitle = `${currentJob.title} — ${currentJob.companyName} (${currentJob.city}/RN) | Natal Vagas`;
+    const description = `Vaga de ${currentJob.title} na empresa ${currentJob.companyName} em ${currentJob.city}/RN. Confira os requisitos, benefícios e envie seu currículo gratuitamente no Natal Vagas.`;
+    const jobUrl = `https://natalvagas.com.br/vaga/${currentJob.slug}`;
+
+    document.title = pageTitle;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', description);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', jobUrl);
+
+    // OpenGraph
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', pageTitle);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', description);
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', jobUrl);
+  }, [currentJob]);
+
+  // Determina se a empresa ou vaga tem o Selo de Empresa Verificada
+  const isVerifiedCompany = useMemo(() => {
+    if (!currentJob) return false;
+    return Boolean(
+      currentJob.isCompanyVerified || 
+      currentJob.isFeatured || 
+      (currentJob.verifiedAt && !/confidencial/i.test(currentJob.companyName))
+    );
+  }, [currentJob]);
+
+  // Vagas Relacionadas (mesma cidade ou setor, excluindo a atual)
+  const relatedJobs = useMemo(() => {
+    if (!currentJob || jobs.length === 0) return [];
+    return jobs
+      .filter(j => j.id !== currentJob.id && (j.city === currentJob.city || (Boolean(currentJob.category?.id) && j.category?.id === currentJob.category?.id)))
+      .slice(0, 4);
+  }, [currentJob, jobs]);
+
+  // Outras vagas da mesma empresa
+  const otherJobsFromCompany = useMemo(() => {
+    if (!currentJob || jobs.length === 0 || /confidencial/i.test(currentJob.companyName)) return [];
+    return jobs
+      .filter(j => j.id !== currentJob.id && j.companyName.toLowerCase() === currentJob.companyName.toLowerCase())
+      .slice(0, 3);
+  }, [currentJob, jobs]);
+
+  // Funções de Compartilhamento
+  const handleShare = async () => {
+    if (!currentJob) return;
+    const shareTitle = `${currentJob.title} — ${currentJob.companyName} (${currentJob.city}/RN)`;
+    const shareText = `🔥 Oportunidade: Vaga de *${currentJob.title}* na empresa *${currentJob.companyName}* em ${currentJob.city}/RN!\n\nVeja todos os detalhes e envie seu currículo no Natal Vagas:`;
+    const shareUrl = `https://natalvagas.com.br/vaga/${currentJob.slug}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: `${shareText}\n${shareUrl}`,
+          url: shareUrl,
+        });
+        return;
+      } catch (e) {
+        // Fallback
+      }
+    }
+
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 3000);
+    }
+  };
+
+  const handleCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 3000);
+  };
+
+  const handleCopyCoverLetter = (job: Job) => {
+    const letter = `Prezado(a) Recrutador(a) da empresa ${job.companyName},\n\nVenho por meio deste candidatar-me à vaga de ${job.title}, divulgada no portal Natal Vagas.\n\nPossuo total interesse na oportunidade e disponibilidade para atuar em ${job.city}/RN. Em anexo, envio meu currículo atualizado para análise.\n\nFico à disposição para uma entrevista.\n\nAtenciosamente,\n[Seu Nome Completo]\n[Seu Telefone / WhatsApp]`;
+    navigator.clipboard.writeText(letter);
+    setCopiedCoverLetter(true);
+    setTimeout(() => setCopiedCoverLetter(false), 3500);
+  };
+
+  // Links de e-mail formatados
+  const emailSubject = currentJob ? `Candidatura: ${currentJob.title} (Via Natal Vagas)` : '';
+  const emailBody = currentJob 
+    ? `Olá! Tenho interesse na vaga de ${currentJob.title}, divulgada no Natal Vagas.\n\nSegue meu currículo anexo para avaliação.\n\nNome:\nTelefone:` 
+    : '';
+  const gmailUrl = currentJob ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(currentJob.applicationTarget)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}` : '';
+  const outlookUrl = currentJob ? `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(currentJob.applicationTarget)}&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}` : '';
+
+  // Schema.org JobPosting para Google Jobs
+  const jobPostingSchema = currentJob ? {
+    "@context": "https://schema.org/",
+    "@type": "JobPosting",
+    "title": currentJob.title,
+    "description": currentJob.description,
+    "datePosted": currentJob.publishedAt || currentJob.createdAt,
+    "validThrough": currentJob.expiresAt || new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(),
+    "employmentType": currentJob.contractType === 'ESTAGIO' 
+      ? 'INTERN' 
+      : currentJob.contractType === 'TEMPORARIO' 
+      ? 'TEMPORARY' 
+      : currentJob.contractType === 'PJ' 
+      ? 'CONTRACTOR' 
+      : 'FULL_TIME',
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": currentJob.companyName,
+      "logo": currentJob.companyLogoUrl || "https://natalvagas.com.br/assets/logo-natalvagas.jpg",
+      ...(currentJob.companyWebsite ? { "sameAs": currentJob.companyWebsite } : {})
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": currentJob.neighborhood || "Natal",
+        "addressLocality": currentJob.city,
+        "addressRegion": "RN",
+        "addressCountry": "BR"
+      }
+    },
+    "directApply": true,
+    ...(currentJob.salaryMin ? {
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "BRL",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": currentJob.salaryMin,
+          ...(currentJob.salaryMax ? { "maxValue": currentJob.salaryMax } : {}),
+          "unitText": "MONTH"
+        }
+      }
+    } : {})
+  } : null;
+
+  // Tela de Carregamento
+  if (isLoading || isFetchingDirect) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-between">
+        <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
+        <main className="max-w-5xl mx-auto px-4 py-16 text-center">
+          <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-brand-600 border-t-transparent mb-4"></div>
+          <p className="text-slate-600 dark:text-slate-400 font-medium">Carregando detalhes da vaga no Natal Vagas...</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Tela de Vaga Não Encontrada ou Expirada
+  if (!currentJob) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-between">
+        <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
+        <main className="max-w-4xl mx-auto px-4 py-16 text-center">
+          <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-xs">
+            <AlertTriangle className="w-8 h-8" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100">
+            Vaga Não Encontrada ou Expirada
+          </h1>
+          <p className="mt-3 text-slate-600 dark:text-slate-400 max-w-lg mx-auto text-sm sm:text-base">
+            Esta vaga pode ter sido preenchida pela empresa recentemente ou o link acessado está incorreto. Não se preocupe, temos centenas de outras vagas abertas no RN!
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all active:scale-95"
+            >
+              <Briefcase className="w-4 h-4" />
+              Ver Todas as Vagas Abertas
+            </Link>
+            <Link
+              to="/criar-curriculo"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-xs"
+            >
+              <FileText className="w-4 h-4 text-brand-600" />
+              Criar Currículo Grátis
+            </Link>
+          </div>
+          <div className="mt-12">
+            <AdPlaceholder format="horizontal" />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-between text-slate-900 dark:text-slate-100 transition-colors">
+      
+      {/* Script com Schema JSON-LD para Google Jobs */}
+      {jobPostingSchema && (
+        <script 
+          type="application/ld+json" 
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
+        />
+      )}
+
+      {/* Cabeçalho da Aplicação */}
+      <Navbar onOpenPostJob={() => setIsPostJobOpen(true)} />
+
+      {/* Conteúdo Principal da Vaga */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full">
+        
+        {/* Navegação Breadcrumb & Voltar */}
+        <nav aria-label="Navegação estrutural" className="mb-4 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-2 overflow-x-auto py-1">
+            <Link to="/" className="hover:text-brand-600 dark:hover:text-brand-400 flex items-center gap-1 font-medium transition-colors shrink-0">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Início
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-700 shrink-0" />
+            <Link to={`/?cidade=${encodeURIComponent(currentJob.city)}`} className="hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-colors shrink-0">
+              Vagas em {currentJob.city}/RN
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-700 shrink-0" />
+            <span className="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-[200px] sm:max-w-xs">
+              {currentJob.title}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold shadow-2xs transition-all cursor-pointer"
+              title="Copiar link oficial da vaga"
+            >
+              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
+              <span>{copiedLink ? 'Copiado!' : 'Copiar Link'}</span>
+            </button>
+            <button
+              onClick={handleShare}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 text-xs font-bold shadow-2xs transition-all cursor-pointer active:scale-95"
+              title="Compartilhar no WhatsApp"
+            >
+              <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Compartilhar</span>
+            </button>
+          </div>
+        </nav>
+
+        {/* 1. ESPAÇO PUBLICITÁRIO ADSENSE SUPERIOR (Leaderboard) */}
+        <div className="mb-6">
+          <AdPlaceholder format="horizontal" />
+        </div>
+
+        {/* Grid Principal: 2 Colunas */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* COLUNA PRINCIPAL DA VAGA (8 Colunas) */}
+          <div className="lg:col-span-8 space-y-6">
+            
+            {/* Card Principal: Cabeçalho & Visão Geral */}
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm relative overflow-hidden">
+              
+              {/* Faixa decorativa no topo */}
+              <div className={`absolute top-0 left-0 right-0 h-1.5 ${
+                currentJob.isFeatured 
+                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-300' 
+                  : 'bg-gradient-to-r from-brand-500 to-indigo-600'
+              }`} />
+
+              {/* Badges de Selos (Destaque VIP, Empresa Verificada, PcD, Sem Experiência) */}
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                {isVerifiedCompany && (
+                  <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-blue-900 dark:text-blue-200 bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/60 px-3 py-1 rounded-full shadow-2xs">
+                    <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 fill-blue-100 dark:fill-blue-900/30" />
+                    <span>EMPRESA VERIFICADA</span>
+                  </div>
+                )}
+
+                {currentJob.isFeatured && (
+                  <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-900 dark:text-amber-200 bg-amber-50 dark:bg-amber-950/70 border border-amber-300 dark:border-amber-700/60 px-3 py-1 rounded-full shadow-2xs">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400 animate-pulse" />
+                    <span>VAGA EM DESTAQUE VIP</span>
+                  </div>
+                )}
+
+                {(currentJob.isPcd || /pcd|pessoa com deficiência|deficiência/i.test(`${currentJob.title} ${currentJob.description} ${currentJob.requirements || ''}`)) && (
+                  <div className="inline-flex items-center gap-1 text-xs font-bold text-indigo-900 dark:text-indigo-200 bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/60 px-3 py-1 rounded-full shadow-2xs">
+                    <span>♿ Vaga Inclusiva PcD</span>
+                  </div>
+                )}
+
+                {(currentJob.contractType === 'ESTAGIO' || 
+                  currentJob.contractType === 'JOVEM_APRENDIZ' || 
+                  /sem experiência|primeiro emprego|não exige experiência/i.test(`${currentJob.title} ${currentJob.requirements || ''} ${currentJob.description}`)) && (
+                  <div className="inline-flex items-center gap-1 text-xs font-bold text-emerald-900 dark:text-emerald-200 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/60 px-3 py-1 rounded-full shadow-2xs">
+                    <span>🌱 Sem Experiência / 1º Emprego</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Título Principal (H1) */}
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white leading-tight tracking-tight">
+                {currentJob.title}
+              </h1>
+
+              {/* Linha da Empresa com Logotipo e Nome */}
+              <div className="mt-4 flex items-center gap-3.5 flex-wrap">
+                <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-lg overflow-hidden shrink-0 shadow-2xs">
+                  {currentJob.companyLogoUrl ? (
+                    <img 
+                      src={currentJob.companyLogoUrl} 
+                      alt={`Logo ${currentJob.companyName}`} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  ) : (
+                    <Building2 className="w-6 h-6 text-slate-400" />
+                  )}
+                </div>
+
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200">
+                      {currentJob.companyName}
+                    </span>
+                    {isVerifiedCompany && (
+                      <span title="Empresa Verificada pelo Natal Vagas" className="text-blue-500 inline-flex items-center">
+                        <CheckCircle2 className="w-4 h-4 fill-blue-500 text-white" />
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <span>{currentJob.neighborhood ? `${currentJob.neighborhood}, ${currentJob.city}/RN` : `${currentJob.city}/RN`}</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Grade de Pílulas com Detalhes Chave */}
+              <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
+                
+                {/* Modalidade */}
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-brand-100 dark:bg-brand-950/70 text-brand-600 dark:text-brand-400 flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[10px] uppercase font-bold text-slate-400">Modalidade</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200 truncate block">
+                      {currentJob.workModel === 'NAO_INFORMADO' ? 'A Definir' : currentJob.workModel}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Regime de Contratação */}
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-indigo-100 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                    <Briefcase className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[10px] uppercase font-bold text-slate-400">Contrato</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200 truncate block">
+                      {currentJob.contractType === 'NAO_INFORMADO' ? 'CLT / Efetivo' : currentJob.contractType}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Remuneração */}
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center gap-3 col-span-2 sm:col-span-1">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <DollarSign className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[10px] uppercase font-bold text-slate-400">Salário</span>
+                    <span className="font-bold text-emerald-700 dark:text-emerald-300 truncate block">
+                      {!currentJob.hideSalary && currentJob.salaryMin 
+                        ? `R$ ${currentJob.salaryMin.toLocaleString('pt-BR')}${currentJob.salaryMax ? ` a R$ ${currentJob.salaryMax.toLocaleString('pt-BR')}` : ''}`
+                        : 'A Combinar'
+                      }
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* 2. BANNER OFICIAL NATAL VAGAS (COMUNIDADE & ALERTA DE VAGAS) */}
+            <div className="rounded-3xl p-6 sm:p-7 bg-gradient-to-br from-emerald-600 via-teal-600 to-brand-700 text-white shadow-md relative overflow-hidden">
+              <div className="absolute right-0 bottom-0 translate-x-8 translate-y-8 opacity-10 pointer-events-none">
+                <Send className="w-64 h-64 text-white" />
+              </div>
+
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="space-y-2 text-center md:text-left">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold backdrop-blur-xs">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                    <span>CANAL OFICIAL NATAL VAGAS</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black leading-tight">
+                    Receba vagas fresquinhas no seu WhatsApp!
+                  </h3>
+                  <p className="text-emerald-50 text-xs sm:text-sm max-w-xl">
+                    Entre na nossa comunidade oficial gratuita com mais de 35.000 profissionais no RN e seja avisado assim que novas oportunidades surgirem.
+                  </p>
+                </div>
+
+                <a
+                  href="https://chat.whatsapp.com/natalvagas" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-800 font-extrabold text-sm shadow-lg hover:shadow-xl transition-all flex items-center gap-2.5 shrink-0 active:scale-95"
+                >
+                  <Send className="w-4 h-4 text-emerald-600" />
+                  <span>Entrar no Grupo VIP Grátis</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Seção: Descrição da Vaga */}
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+              <div className="flex items-center gap-2.5 text-brand-600 dark:text-brand-400">
+                <FileText className="w-5 h-5" />
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
+                  Descrição da Vaga
+                </h2>
+              </div>
+              
+              <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line break-words space-y-3">
+                {currentJob.description}
+              </div>
+            </div>
+
+            {/* 3. ESPAÇO PUBLICITÁRIO IN-CONTENT (MEIO DO CONTEÚDO) */}
+            <AdPlaceholder format="horizontal" />
+
+            {/* Seção: Requisitos e Qualificações (se houver) */}
+            {currentJob.requirements && (
+              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+                <div className="flex items-center gap-2.5 text-emerald-600 dark:text-emerald-400">
+                  <CheckCircle2 className="w-5 h-5" />
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
+                    Requisitos e Qualificações
+                  </h2>
+                </div>
+                
+                <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line space-y-2">
+                  {currentJob.requirements.split('\n').map((req, idx) => {
+                    const clean = req.trim();
+                    if (!clean) return null;
+                    return (
+                      <div key={idx} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-1" />
+                        <span>{clean.replace(/^[•\-\*]\s*/, '')}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Seção: Benefícios Oferecidos (se houver) */}
+            {currentJob.benefits && (
+              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+                <div className="flex items-center gap-2.5 text-amber-500 dark:text-amber-400">
+                  <Sparkles className="w-5 h-5" />
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
+                    Benefícios Oferecidos
+                  </h2>
+                </div>
+                
+                <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line space-y-2">
+                  {currentJob.benefits.split('\n').map((ben, idx) => {
+                    const clean = ben.trim();
+                    if (!clean) return null;
+                    return (
+                      <div key={idx} className="flex items-start gap-2.5">
+                        <span className="text-amber-500 font-bold shrink-0 mt-0.5">✦</span>
+                        <span>{clean.replace(/^[•\-\*]\s*/, '')}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* 4. ESPAÇO PUBLICITÁRIO PRÉ-CANDIDATURA (ALTA VISIBILIDADE) */}
+            <AdPlaceholder format="horizontal" />
+
+            {/* BOX DE CANDIDATURA OFICIAL */}
+            <div id="candidatura" className="bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 rounded-3xl p-6 sm:p-8 border-2 border-brand-500/40 dark:border-brand-500/30 shadow-lg space-y-6">
+              
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 block mb-1">
+                    Processo Seletivo Oficial
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
+                    Como se candidatar a esta vaga
+                  </h3>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>100% Gratuito</span>
+                </div>
+              </div>
+
+              {/* CASO 1: CANDIDATURA POR E-MAIL */}
+              {currentJob.applicationChannel === 'EMAIL' && (
+                <div className="space-y-4">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    A empresa solicita o envio do seu currículo por e-mail com o assunto informado abaixo:
+                  </p>
+
+                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-950/70 text-brand-600 dark:text-brand-400 flex items-center justify-center shrink-0">
+                        <Mail className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="block text-[11px] font-bold text-slate-400 uppercase">E-mail para envio</span>
+                        <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate block">
+                          {currentJob.applicationTarget}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handleCopyEmail(currentJob.applicationTarget)}
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 text-brand-700 dark:text-brand-300 text-xs font-bold border border-brand-200 dark:border-brand-800/60 transition-colors cursor-pointer shrink-0"
+                    >
+                      {copiedEmail ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                      <span>{copiedEmail ? 'E-mail Copiado!' : 'Copiar E-mail'}</span>
+                    </button>
+                  </div>
+
+                  {/* Botões diretos para envio de e-mail */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <a
+                      href={gmailUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-3.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-95"
+                    >
+                      <Mail className="w-4 h-4" />
+                      <span>Abrir no Gmail</span>
+                    </a>
+
+                    <a
+                      href={outlookUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-95"
+                    >
+                      <Mail className="w-4 h-4" />
+                      <span>Abrir no Outlook / Hotmail</span>
+                    </a>
+                  </div>
+
+                  {/* Modelo Pronto de Mensagem */}
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={() => handleCopyCoverLetter(currentJob)}
+                      className="w-full py-3 px-4 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 hover:bg-slate-100/70 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                    >
+                      {copiedCoverLetter ? <Check className="w-4 h-4 text-emerald-600" /> : <FileText className="w-4 h-4 text-brand-600" />}
+                      <span>{copiedCoverLetter ? 'Modelo de Apresentação Copiado!' : 'Copiar Modelo de Mensagem Pronto para Colar no E-mail'}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* CASO 2: CANDIDATURA POR WHATSAPP */}
+              {currentJob.applicationChannel === 'WHATSAPP' && (
+                <div className="space-y-4">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    A empresa recebe currículos diretamente pelo WhatsApp. Clique no botão abaixo para iniciar a conversa já com a mensagem pronta:
+                  </p>
+
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=${encodeURIComponent(currentJob.applicationTarget)}&text=${encodeURIComponent(`Olá! Vi a vaga de *${currentJob.title}* no site Natal Vagas e gostaria de enviar meu currículo para avaliação.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-3 active:scale-95"
+                  >
+                    <Send className="w-5 h-5" />
+                    <span>Conversar e Enviar Currículo no WhatsApp</span>
+                  </a>
+                </div>
+              )}
+
+              {/* CASO 3: CANDIDATURA POR LINK / SITE OFICIAL */}
+              {currentJob.applicationChannel === 'LINK' && (
+                <div className="space-y-4">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Esta oportunidade é gerenciada pelo portal oficial de carreiras da empresa ou parceiro oficial. Clique abaixo para acessar a página oficial de inscrição:
+                  </p>
+
+                  <a
+                    href={currentJob.applicationTarget}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-3 active:scale-95"
+                  >
+                    <span>Acessar Página Oficial de Candidatura</span>
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
+
+                  <p className="text-[11px] text-slate-400 text-center">
+                    Você será redirecionado em segurança para o site oficial da vaga.
+                  </p>
+                </div>
+              )}
+
+              {/* Dica de Segurança & Alerta Anti-Golpe */}
+              <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 flex items-start gap-3 text-xs text-amber-800 dark:text-amber-200">
+                <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-extrabold block mb-0.5">Dica de Segurança do Natal Vagas:</span>
+                  <p className="leading-relaxed">
+                    Nunca pague por processos seletivos, testes de aptidão, exames médicos admissionais ou cursos obrigatórios para conseguir uma vaga. O Natal Vagas preza por vagas 100% autênticas e gratuitas.
+                  </p>
+                  <Link to="/dicas-seguranca" className="inline-flex items-center gap-1 font-bold text-amber-900 dark:text-amber-100 underline mt-1.5 hover:text-brand-600">
+                    <span>Ler todas as nossas dicas de segurança</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Seção: Gerador de Currículo */}
+            <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="space-y-1.5 text-center sm:text-left">
+                <span className="text-xs font-bold text-brand-400 uppercase tracking-wider">
+                  Aumente suas chances de contratação
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold">
+                  Precisa de um currículo profissional em PDF?
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 max-w-md">
+                  Crie seu currículo formatado no padrão aceito pelas empresas de Natal e RN em menos de 5 minutos, direto pelo celular.
+                </p>
+              </div>
+
+              <Link
+                to="/criar-curriculo"
+                className="px-6 py-3 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-sm shadow-md transition-all shrink-0 active:scale-95 flex items-center gap-2"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Criar Currículo Grátis</span>
+              </Link>
+            </div>
+
+          </div>
+
+          {/* COLUNA LATERAL (SIDEBAR DIREITA - 4 Colunas) */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* PAINEL DA EMPRESA CONTRATANTE */}
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
+              
+              <div className="flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Sobre a Contratante
+                </span>
+                {isVerifiedCompany && (
+                  <span className="text-[11px] font-extrabold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-800/60 flex items-center gap-1">
+                    <ShieldCheck className="w-3 h-3 text-blue-600" />
+                    Verificada
+                  </span>
+                )}
+              </div>
+
+              {/* Perfil da Empresa */}
+              <div className="flex items-center gap-3.5">
+                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-xl overflow-hidden shrink-0 shadow-2xs">
+                  {currentJob.companyLogoUrl ? (
+                    <img 
+                      src={currentJob.companyLogoUrl} 
+                      alt={`Logo ${currentJob.companyName}`} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  ) : (
+                    <Building2 className="w-7 h-7 text-slate-400" />
+                  )}
+                </div>
+
+                <div className="min-w-0">
+                  <h4 className="text-base font-bold text-slate-900 dark:text-slate-100 truncate">
+                    {currentJob.companyName}
+                  </h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
+                    <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                    <span>{currentJob.city}/RN</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Selo de Garantia da Empresa Verificada */}
+              {isVerifiedCompany ? (
+                <div className="p-3 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 border border-blue-200 dark:border-blue-800/60 text-xs text-blue-900 dark:text-blue-200 space-y-1">
+                  <div className="flex items-center gap-1.5 font-extrabold text-blue-700 dark:text-blue-300">
+                    <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span>Empresa Homologada</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                    Esta empresa teve seus dados e canal oficial de seleção auditados pela equipe do Natal Vagas.
+                  </p>
+                </div>
+              ) : (
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                  <span className="font-bold text-slate-700 dark:text-slate-300 block">
+                    Vaga da Comunidade
+                  </span>
+                  <p className="text-[11px] leading-relaxed">
+                    Oportunidade coletada e verificada nos canais públicos de emprego do Rio Grande do Norte.
+                  </p>
+                </div>
+              )}
+
+              {/* Informações da Empresa: Site & Redes Sociais */}
+              <div className="space-y-2 pt-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+                  Canais Oficiais da Empresa
+                </span>
+
+                <div className="flex flex-col gap-2">
+                  {/* Site Oficial */}
+                  {currentJob.companyWebsite ? (
+                    <a
+                      href={currentJob.companyWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors"
+                    >
+                      <span className="flex items-center gap-2 truncate">
+                        <Globe className="w-4 h-4 text-brand-600 shrink-0" />
+                        <span className="truncate">Site Oficial</span>
+                      </span>
+                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    </a>
+                  ) : (
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/50 dark:bg-slate-800/30 border border-dashed border-slate-200 dark:border-slate-800 text-xs text-slate-400">
+                      <span className="flex items-center gap-2">
+                        <Globe className="w-4 h-4 text-slate-300" />
+                        <span>Site não informado</span>
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Instagram */}
+                  {currentJob.companyInstagram ? (
+                    <a
+                      href={currentJob.companyInstagram.startsWith('http') ? currentJob.companyInstagram : `https://instagram.com/${currentJob.companyInstagram.replace('@', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors"
+                    >
+                      <span className="flex items-center gap-2 truncate">
+                        <Instagram className="w-4 h-4 text-pink-600 shrink-0" />
+                        <span className="truncate">Instagram Oficial</span>
+                      </span>
+                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    </a>
+                  ) : null}
+
+                  {/* LinkedIn */}
+                  {currentJob.companyLinkedin ? (
+                    <a
+                      href={currentJob.companyLinkedin}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors"
+                    >
+                      <span className="flex items-center gap-2 truncate">
+                        <Linkedin className="w-4 h-4 text-sky-600 shrink-0" />
+                        <span className="truncate">LinkedIn da Empresa</span>
+                      </span>
+                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+
+              {/* Apresentação sobre a Empresa (se houver) */}
+              {currentJob.companyDescription && (
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
+                  <span className="font-bold text-slate-800 dark:text-slate-200 block mb-1">
+                    Histórico & Atuação:
+                  </span>
+                  <p className="leading-relaxed">
+                    {currentJob.companyDescription}
+                  </p>
+                </div>
+              )}
+
+              {/* Outras Vagas da Mesma Empresa */}
+              {otherJobsFromCompany.length > 0 && (
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+                    Mais Vagas nesta Empresa ({otherJobsFromCompany.length})
+                  </span>
+                  <div className="space-y-2">
+                    {otherJobsFromCompany.map(oj => (
+                      <Link
+                        key={oj.id}
+                        to={`/vaga/${oj.slug}`}
+                        className="block p-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 dark:bg-slate-800/40 dark:hover:bg-slate-800 border border-slate-100 dark:border-slate-800 text-xs transition-colors group"
+                      >
+                        <span className="font-bold text-slate-800 dark:text-slate-200 group-hover:text-brand-600 dark:group-hover:text-brand-400 block truncate">
+                          {oj.title}
+                        </span>
+                        <span className="text-[11px] text-slate-400 block mt-0.5">
+                          {oj.city}/RN • {oj.contractType}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+            {/* 5. ESPAÇO PUBLICITÁRIO SIDEBAR STICKY (RETÂNGULO MÉDIO 300x250) */}
+            <div className="sticky top-24 space-y-6">
+              <AdPlaceholder format="rectangle" />
+
+              {/* Card para Empresas: Anuncie sua Vaga */}
+              <div className="bg-gradient-to-br from-brand-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800/80 rounded-3xl p-6 border border-brand-200/80 dark:border-slate-700 text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-brand-600 text-white flex items-center justify-center mx-auto shadow-xs">
+                  <Building2 className="w-6 h-6" />
+                </div>
+                <h4 className="text-base font-bold text-slate-900 dark:text-slate-100">
+                  É Recrutador no RN?
+                </h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Anuncie sua vaga no maior portal de empregos do Rio Grande do Norte e alcance candidatos qualificados.
+                </p>
+                <button
+                  onClick={() => setIsPostJobOpen(true)}
+                  className="w-full py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
+                >
+                  Publicar Vaga Grátis ou VIP
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* 6. ESPAÇO PUBLICITÁRIO ANTES DAS VAGAS RELACIONADAS */}
+        <div className="mt-12 mb-6">
+          <AdPlaceholder format="horizontal" />
+        </div>
+
+        {/* SEÇÃO DE VAGAS RELACIONADAS (RECOMENDADAS) */}
+        {relatedJobs.length > 0 && (
+          <section className="mt-8 mb-12">
+            <div className="flex items-center justify-between gap-4 mb-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 block mb-1">
+                  Continue Navegando
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
+                  Outras Vagas em Destaque no RN
+                </h3>
+              </div>
+              <Link
+                to="/"
+                className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-brand-600 hover:text-brand-700 dark:text-brand-400 transition-colors shrink-0"
+              >
+                <span>Ver todas</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {relatedJobs.map((rj) => (
+                <Link
+                  key={rj.id}
+                  to={`/vaga/${rj.slug}`}
+                  className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-500 hover:shadow-md transition-all flex flex-col justify-between group"
+                >
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-semibold text-slate-400 block truncate">
+                      {rj.companyName}
+                    </span>
+                    <h4 className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-brand-600 dark:group-hover:text-brand-400 text-sm leading-snug line-clamp-2 transition-colors">
+                      {rj.title}
+                    </h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                      <span>{rj.city}/RN</span>
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-bold">
+                    <span>Ver oportunidade</span>
+                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+      </main>
+
+      {/* Modal de Publicação de Vaga por Empresas (Lazy Loaded) */}
+      <Suspense fallback={null}>
+        {isPostJobOpen && (
+          <PostJobModal 
+            isOpen={isPostJobOpen} 
+            onClose={() => setIsPostJobOpen(false)}
+            onJobCreated={onJobCreated}
+          />
+        )}
+      </Suspense>
+
+      {/* Modal Gerador de Post para Instagram / Redes Sociais */}
+      {isSocialModalOpen && currentJob && (
+        <SocialPostGeneratorModal
+          job={currentJob}
+          isOpen={isSocialModalOpen}
+          onClose={() => setIsSocialModalOpen(false)}
+        />
+      )}
+
+      {/* Rodapé Oficial da Aplicação */}
+      <Footer />
+
+    </div>
+  );
+};
+
+```
+
+---
+
 <a id="frontend-src-pages-jobsafetytsx"></a>
-## 31. Arquivo: `frontend/src/pages/JobSafety.tsx`
+## 32. Arquivo: `frontend/src/pages/JobSafety.tsx`
 - **Caminho:** `frontend/src/pages/JobSafety.tsx`
 - **Nome:** `JobSafety.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7163,7 +8198,7 @@ export const JobSafety: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-privacypolicytsx"></a>
-## 32. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
+## 33. Arquivo: `frontend/src/pages/PrivacyPolicy.tsx`
 - **Caminho:** `frontend/src/pages/PrivacyPolicy.tsx`
 - **Nome:** `PrivacyPolicy.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -7296,7 +8331,7 @@ export const PrivacyPolicy: React.FC = () => {
 ---
 
 <a id="frontend-src-pages-resumebuildertsx"></a>
-## 33. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
+## 34. Arquivo: `frontend/src/pages/ResumeBuilder.tsx`
 - **Caminho:** `frontend/src/pages/ResumeBuilder.tsx`
 - **Nome:** `ResumeBuilder.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -8591,7 +9626,7 @@ export default ResumeBuilder;
 ---
 
 <a id="frontend-src-pages-termsofusetsx"></a>
-## 34. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
+## 35. Arquivo: `frontend/src/pages/TermsOfUse.tsx`
 - **Caminho:** `frontend/src/pages/TermsOfUse.tsx`
 - **Nome:** `TermsOfUse.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -8703,7 +9738,7 @@ export const TermsOfUse: React.FC = () => {
 ---
 
 <a id="frontend-functions-api-auth--utilsts"></a>
-## 35. Arquivo: `frontend/functions/api/auth/_utils.ts`
+## 36. Arquivo: `frontend/functions/api/auth/_utils.ts`
 - **Caminho:** `frontend/functions/api/auth/_utils.ts`
 - **Nome:** `_utils.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8833,7 +9868,7 @@ export async function verifySessionToken(token: string, secret: string): Promise
 ---
 
 <a id="frontend-functions-api-auth-logints"></a>
-## 36. Arquivo: `frontend/functions/api/auth/login.ts`
+## 37. Arquivo: `frontend/functions/api/auth/login.ts`
 - **Caminho:** `frontend/functions/api/auth/login.ts`
 - **Nome:** `login.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -8966,7 +10001,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-auth-mets"></a>
-## 37. Arquivo: `frontend/functions/api/auth/me.ts`
+## 38. Arquivo: `frontend/functions/api/auth/me.ts`
 - **Caminho:** `frontend/functions/api/auth/me.ts`
 - **Nome:** `me.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9074,7 +10109,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-auth-registerts"></a>
-## 38. Arquivo: `frontend/functions/api/auth/register.ts`
+## 39. Arquivo: `frontend/functions/api/auth/register.ts`
 - **Caminho:** `frontend/functions/api/auth/register.ts`
 - **Nome:** `register.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9203,7 +10238,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-auth-sign-prots"></a>
-## 39. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
+## 40. Arquivo: `frontend/functions/api/auth/sign-pro.ts`
 - **Caminho:** `frontend/functions/api/auth/sign-pro.ts`
 - **Nome:** `sign-pro.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9304,7 +10339,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
 ---
 
 <a id="frontend-functions-api-categoriests"></a>
-## 40. Arquivo: `frontend/functions/api/categories.ts`
+## 41. Arquivo: `frontend/functions/api/categories.ts`
 - **Caminho:** `frontend/functions/api/categories.ts`
 - **Nome:** `categories.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9339,7 +10374,7 @@ export const onRequestGet: PagesFunction = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-createts"></a>
-## 41. Arquivo: `frontend/functions/api/coupons/create.ts`
+## 42. Arquivo: `frontend/functions/api/coupons/create.ts`
 - **Caminho:** `frontend/functions/api/coupons/create.ts`
 - **Nome:** `create.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9515,7 +10550,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-listts"></a>
-## 42. Arquivo: `frontend/functions/api/coupons/list.ts`
+## 43. Arquivo: `frontend/functions/api/coupons/list.ts`
 - **Caminho:** `frontend/functions/api/coupons/list.ts`
 - **Nome:** `list.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9656,7 +10691,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-coupons-verifyts"></a>
-## 43. Arquivo: `frontend/functions/api/coupons/verify.ts`
+## 44. Arquivo: `frontend/functions/api/coupons/verify.ts`
 - **Caminho:** `frontend/functions/api/coupons/verify.ts`
 - **Nome:** `verify.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9847,7 +10882,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-jobs-indexts"></a>
-## 44. Arquivo: `frontend/functions/api/jobs/index.ts`
+## 45. Arquivo: `frontend/functions/api/jobs/index.ts`
 - **Caminho:** `frontend/functions/api/jobs/index.ts`
 - **Nome:** `index.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -9940,7 +10975,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 ---
 
 <a id="frontend-functions-api-payments-pix-status-txidts"></a>
-## 45. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
+## 46. Arquivo: `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Caminho:** `frontend/functions/api/payments/pix/status/[txid].ts`
 - **Nome:** `[txid].ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10066,7 +11101,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-pix-webhookts"></a>
-## 46. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
+## 47. Arquivo: `frontend/functions/api/payments/pix/webhook.ts`
 - **Caminho:** `frontend/functions/api/payments/pix/webhook.ts`
 - **Nome:** `webhook.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10223,7 +11258,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-payments-verify-codets"></a>
-## 47. Arquivo: `frontend/functions/api/payments/verify-code.ts`
+## 48. Arquivo: `frontend/functions/api/payments/verify-code.ts`
 - **Caminho:** `frontend/functions/api/payments/verify-code.ts`
 - **Nome:** `verify-code.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10365,7 +11400,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-functions-api-resumes-indexts"></a>
-## 48. Arquivo: `frontend/functions/api/resumes/index.ts`
+## 49. Arquivo: `frontend/functions/api/resumes/index.ts`
 - **Caminho:** `frontend/functions/api/resumes/index.ts`
 - **Nome:** `index.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -10518,7 +11553,7 @@ export const onRequestOptions = async () => {
 ---
 
 <a id="frontend-src-context-authcontexttsx"></a>
-## 49. Arquivo: `frontend/src/context/AuthContext.tsx`
+## 50. Arquivo: `frontend/src/context/AuthContext.tsx`
 - **Caminho:** `frontend/src/context/AuthContext.tsx`
 - **Nome:** `AuthContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -10853,7 +11888,7 @@ export const useAuth = (): AuthContextType => {
 ---
 
 <a id="frontend-src-context-themecontexttsx"></a>
-## 50. Arquivo: `frontend/src/context/ThemeContext.tsx`
+## 51. Arquivo: `frontend/src/context/ThemeContext.tsx`
 - **Caminho:** `frontend/src/context/ThemeContext.tsx`
 - **Nome:** `ThemeContext.tsx`
 - **Linguagem / Sintaxe:** `tsx`
@@ -10940,7 +11975,7 @@ export const useTheme = (): ThemeContextType => {
 ---
 
 <a id="frontend-src-services-paymentservicets"></a>
-## 51. Arquivo: `frontend/src/services/paymentService.ts`
+## 52. Arquivo: `frontend/src/services/paymentService.ts`
 - **Caminho:** `frontend/src/services/paymentService.ts`
 - **Nome:** `paymentService.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11076,7 +12111,7 @@ export function buildPixEMV(params: BuildPixParams): string {
 ---
 
 <a id="frontend-src-types-blogts"></a>
-## 52. Arquivo: `frontend/src/types/blog.ts`
+## 53. Arquivo: `frontend/src/types/blog.ts`
 - **Caminho:** `frontend/src/types/blog.ts`
 - **Nome:** `blog.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11111,12 +12146,12 @@ export interface BlogPost {
 ---
 
 <a id="frontend-src-types-jobts"></a>
-## 53. Arquivo: `frontend/src/types/job.ts`
+## 54. Arquivo: `frontend/src/types/job.ts`
 - **Caminho:** `frontend/src/types/job.ts`
 - **Nome:** `job.ts`
 - **Linguagem / Sintaxe:** `typescript`
-- **Total de Linhas:** 55
-- **Tamanho:** 1335 bytes
+- **Total de Linhas:** 60
+- **Tamanho:** 1481 bytes
 
 ```typescript
 export interface Category {
@@ -11163,6 +12198,11 @@ export interface Job {
   sourceUrl?: string;
   verifiedAt?: string;
   expiresAt?: string;
+  isCompanyVerified?: boolean;
+  companyWebsite?: string;
+  companyInstagram?: string;
+  companyLinkedin?: string;
+  companyDescription?: string;
 }
 
 export interface JobFilterParams {
@@ -11180,7 +12220,7 @@ export interface JobFilterParams {
 ---
 
 <a id="frontend-src-data-blogpoststs"></a>
-## 54. Arquivo: `frontend/src/data/blogPosts.ts`
+## 55. Arquivo: `frontend/src/data/blogPosts.ts`
 - **Caminho:** `frontend/src/data/blogPosts.ts`
 - **Nome:** `blogPosts.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11759,7 +12799,7 @@ export const BLOG_POSTS: BlogPost[] = [
 ---
 
 <a id="frontend-src-data-initialjobsts"></a>
-## 55. Arquivo: `frontend/src/data/initialJobs.ts`
+## 56. Arquivo: `frontend/src/data/initialJobs.ts`
 - **Caminho:** `frontend/src/data/initialJobs.ts`
 - **Nome:** `initialJobs.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11793,7 +12833,7 @@ export const INITIAL_REAL_JOBS: Job[] = [];
 ---
 
 <a id="frontend-src-data-seolandingpagests"></a>
-## 56. Arquivo: `frontend/src/data/seoLandingPages.ts`
+## 57. Arquivo: `frontend/src/data/seoLandingPages.ts`
 - **Caminho:** `frontend/src/data/seoLandingPages.ts`
 - **Nome:** `seoLandingPages.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -11970,7 +13010,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-data-jobsjson"></a>
-## 57. Arquivo: `frontend/public/data/jobs.json`
+## 58. Arquivo: `frontend/public/data/jobs.json`
 - **Caminho:** `frontend/public/data/jobs.json`
 - **Nome:** `jobs.json`
 - **Linguagem / Sintaxe:** `json`
@@ -49437,7 +50477,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public--redirects"></a>
-## 58. Arquivo: `frontend/public/_redirects`
+## 59. Arquivo: `frontend/public/_redirects`
 - **Caminho:** `frontend/public/_redirects`
 - **Nome:** `_redirects`
 - **Linguagem / Sintaxe:** `text`
@@ -49452,7 +50492,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public--routesjson"></a>
-## 59. Arquivo: `frontend/public/_routes.json`
+## 60. Arquivo: `frontend/public/_routes.json`
 - **Caminho:** `frontend/public/_routes.json`
 - **Nome:** `_routes.json`
 - **Linguagem / Sintaxe:** `json`
@@ -49471,7 +50511,7 @@ export const SEO_LANDING_MAP = new Map<string, SeoLandingConfig>(
 ---
 
 <a id="frontend-public-adstxt"></a>
-## 60. Arquivo: `frontend/public/ads.txt`
+## 61. Arquivo: `frontend/public/ads.txt`
 - **Caminho:** `frontend/public/ads.txt`
 - **Nome:** `ads.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -49486,7 +50526,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestjson"></a>
-## 61. Arquivo: `frontend/public/manifest.json`
+## 62. Arquivo: `frontend/public/manifest.json`
 - **Caminho:** `frontend/public/manifest.json`
 - **Nome:** `manifest.json`
 - **Linguagem / Sintaxe:** `json`
@@ -49533,7 +50573,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-manifestwebmanifest"></a>
-## 62. Arquivo: `frontend/public/manifest.webmanifest`
+## 63. Arquivo: `frontend/public/manifest.webmanifest`
 - **Caminho:** `frontend/public/manifest.webmanifest`
 - **Nome:** `manifest.webmanifest`
 - **Linguagem / Sintaxe:** `text`
@@ -49580,7 +50620,7 @@ google.com, pub-7415792754049263, DIRECT, f08c47fec0942fa0
 ---
 
 <a id="frontend-public-robotstxt"></a>
-## 63. Arquivo: `frontend/public/robots.txt`
+## 64. Arquivo: `frontend/public/robots.txt`
 - **Caminho:** `frontend/public/robots.txt`
 - **Nome:** `robots.txt`
 - **Linguagem / Sintaxe:** `text`
@@ -49613,7 +50653,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-sitemapxml"></a>
-## 64. Arquivo: `frontend/public/sitemap.xml`
+## 65. Arquivo: `frontend/public/sitemap.xml`
 - **Caminho:** `frontend/public/sitemap.xml`
 - **Nome:** `sitemap.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -59345,7 +60385,7 @@ Sitemap: https://natalvagas.com.br/sitemap.xml
 ---
 
 <a id="frontend-public-swjs"></a>
-## 65. Arquivo: `frontend/public/sw.js`
+## 66. Arquivo: `frontend/public/sw.js`
 - **Caminho:** `frontend/public/sw.js`
 - **Nome:** `sw.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -59446,7 +60486,7 @@ self.addEventListener('fetch', (event) => {
 ---
 
 <a id="frontend-envexample"></a>
-## 66. Arquivo: `frontend/.env.example`
+## 67. Arquivo: `frontend/.env.example`
 - **Caminho:** `frontend/.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -59468,7 +60508,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-indexhtml"></a>
-## 67. Arquivo: `frontend/index.html`
+## 68. Arquivo: `frontend/index.html`
 - **Caminho:** `frontend/index.html`
 - **Nome:** `index.html`
 - **Linguagem / Sintaxe:** `html`
@@ -59580,7 +60620,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-package-lockjson"></a>
-## 68. Arquivo: `frontend/package-lock.json`
+## 69. Arquivo: `frontend/package-lock.json`
 - **Caminho:** `frontend/package-lock.json`
 - **Nome:** `package-lock.json`
 - **Linguagem / Sintaxe:** `json`
@@ -62663,7 +63703,7 @@ VITE_SITE_URL=https://natalvagas.com.br
 ---
 
 <a id="frontend-postcssconfigjs"></a>
-## 69. Arquivo: `frontend/postcss.config.js`
+## 70. Arquivo: `frontend/postcss.config.js`
 - **Caminho:** `frontend/postcss.config.js`
 - **Nome:** `postcss.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -62683,7 +63723,7 @@ export default {
 ---
 
 <a id="frontend-schemasql"></a>
-## 70. Arquivo: `frontend/schema.sql`
+## 71. Arquivo: `frontend/schema.sql`
 - **Caminho:** `frontend/schema.sql`
 - **Nome:** `schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -62742,7 +63782,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-src-indexcss"></a>
-## 71. Arquivo: `frontend/src/index.css`
+## 72. Arquivo: `frontend/src/index.css`
 - **Caminho:** `frontend/src/index.css`
 - **Nome:** `index.css`
 - **Linguagem / Sintaxe:** `css`
@@ -62818,7 +63858,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-src-vite-envdts"></a>
-## 72. Arquivo: `frontend/src/vite-env.d.ts`
+## 73. Arquivo: `frontend/src/vite-env.d.ts`
 - **Caminho:** `frontend/src/vite-env.d.ts`
 - **Nome:** `vite-env.d.ts`
 - **Linguagem / Sintaxe:** `typescript`
@@ -62833,7 +63873,7 @@ CREATE INDEX IF NOT EXISTS idx_coupons_used ON coupons(used);
 ---
 
 <a id="frontend-tailwindconfigjs"></a>
-## 73. Arquivo: `frontend/tailwind.config.js`
+## 74. Arquivo: `frontend/tailwind.config.js`
 - **Caminho:** `frontend/tailwind.config.js`
 - **Nome:** `tailwind.config.js`
 - **Linguagem / Sintaxe:** `javascript`
@@ -62886,7 +63926,7 @@ export default {
 ---
 
 <a id="frontend-tsconfigjson"></a>
-## 74. Arquivo: `frontend/tsconfig.json`
+## 75. Arquivo: `frontend/tsconfig.json`
 - **Caminho:** `frontend/tsconfig.json`
 - **Nome:** `tsconfig.json`
 - **Linguagem / Sintaxe:** `json`
@@ -62920,7 +63960,7 @@ export default {
 ---
 
 <a id="frontend-tsconfignodejson"></a>
-## 75. Arquivo: `frontend/tsconfig.node.json`
+## 76. Arquivo: `frontend/tsconfig.node.json`
 - **Caminho:** `frontend/tsconfig.node.json`
 - **Nome:** `tsconfig.node.json`
 - **Linguagem / Sintaxe:** `json`
@@ -62944,7 +63984,7 @@ export default {
 ---
 
 <a id="backend-dockerfile"></a>
-## 76. Arquivo: `backend/Dockerfile`
+## 77. Arquivo: `backend/Dockerfile`
 - **Caminho:** `backend/Dockerfile`
 - **Nome:** `Dockerfile`
 - **Linguagem / Sintaxe:** `dockerfile`
@@ -62976,7 +64016,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-pomxml"></a>
-## 77. Arquivo: `backend/pom.xml`
+## 78. Arquivo: `backend/pom.xml`
 - **Caminho:** `backend/pom.xml`
 - **Nome:** `pom.xml`
 - **Linguagem / Sintaxe:** `xml`
@@ -63094,7 +64134,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 ---
 
 <a id="backend-src-main-java-com-natalvagas-natalvagasapplicationjava"></a>
-## 78. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
+## 79. Arquivo: `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/NatalVagasApplication.java`
 - **Nome:** `NatalVagasApplication.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63120,7 +64160,7 @@ public class NatalVagasApplication {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-categorycontrollerjava"></a>
-## 79. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
+## 80. Arquivo: `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/CategoryController.java`
 - **Nome:** `CategoryController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63162,7 +64202,7 @@ public class CategoryController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-jobcontrollerjava"></a>
-## 80. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
+## 81. Arquivo: `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/JobController.java`
 - **Nome:** `JobController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63235,7 +64275,7 @@ public class JobController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-api-sitemapcontrollerjava"></a>
-## 81. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
+## 82. Arquivo: `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/api/SitemapController.java`
 - **Nome:** `SitemapController.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63301,7 +64341,7 @@ public class SitemapController {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-securityconfigjava"></a>
-## 82. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
+## 83. Arquivo: `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/SecurityConfig.java`
 - **Nome:** `SecurityConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63398,7 +64438,7 @@ public class SecurityConfig {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-config-webconfigjava"></a>
-## 83. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
+## 84. Arquivo: `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/config/WebConfig.java`
 - **Nome:** `WebConfig.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63436,7 +64476,7 @@ public class WebConfig implements WebMvcConfigurer {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-applicationchanneljava"></a>
-## 84. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
+## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ApplicationChannel.java`
 - **Nome:** `ApplicationChannel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63457,7 +64497,7 @@ public enum ApplicationChannel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-categoryjava"></a>
-## 85. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
+## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Category.java`
 - **Nome:** `Category.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63513,7 +64553,7 @@ public class Category {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-contracttypejava"></a>
-## 86. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
+## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/ContractType.java`
 - **Nome:** `ContractType.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63536,7 +64576,7 @@ public enum ContractType {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobjava"></a>
-## 87. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
+## 88. Arquivo: `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/Job.java`
 - **Nome:** `Job.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63676,7 +64716,7 @@ public class Job {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-jobstatusjava"></a>
-## 88. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
+## 89. Arquivo: `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/JobStatus.java`
 - **Nome:** `JobStatus.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63698,7 +64738,7 @@ public enum JobStatus {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-userjava"></a>
-## 89. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
+## 90. Arquivo: `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/User.java`
 - **Nome:** `User.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63754,7 +64794,7 @@ public class User {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-domain-workmodeljava"></a>
-## 90. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
+## 91. Arquivo: `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/domain/WorkModel.java`
 - **Nome:** `WorkModel.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63775,7 +64815,7 @@ public enum WorkModel {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-categorydtojava"></a>
-## 91. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
+## 92. Arquivo: `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/CategoryDTO.java`
 - **Nome:** `CategoryDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63798,7 +64838,7 @@ public record CategoryDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobcreatedtojava"></a>
-## 92. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
+## 93. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobCreateDTO.java`
 - **Nome:** `JobCreateDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63867,7 +64907,7 @@ public record JobCreateDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-dto-jobresponsedtojava"></a>
-## 93. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
+## 94. Arquivo: `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/dto/JobResponseDTO.java`
 - **Nome:** `JobResponseDTO.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63918,7 +64958,7 @@ public record JobResponseDTO(
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-categoryrepositoryjava"></a>
-## 94. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
+## 95. Arquivo: `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/CategoryRepository.java`
 - **Nome:** `CategoryRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63944,7 +64984,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-repository-jobrepositoryjava"></a>
-## 95. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
+## 96. Arquivo: `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/repository/JobRepository.java`
 - **Nome:** `JobRepository.java`
 - **Linguagem / Sintaxe:** `java`
@@ -63981,7 +65021,7 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-categoryservicejava"></a>
-## 96. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
+## 97. Arquivo: `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/CategoryService.java`
 - **Nome:** `CategoryService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -64030,7 +65070,7 @@ public class CategoryService {
 ---
 
 <a id="backend-src-main-java-com-natalvagas-service-jobservicejava"></a>
-## 97. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
+## 98. Arquivo: `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Caminho:** `backend/src/main/java/com/natalvagas/service/JobService.java`
 - **Nome:** `JobService.java`
 - **Linguagem / Sintaxe:** `java`
@@ -64221,7 +65261,7 @@ public class JobService {
 ---
 
 <a id="backend-src-main-resources-applicationyml"></a>
-## 98. Arquivo: `backend/src/main/resources/application.yml`
+## 99. Arquivo: `backend/src/main/resources/application.yml`
 - **Caminho:** `backend/src/main/resources/application.yml`
 - **Nome:** `application.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -64279,7 +65319,7 @@ natalvagas:
 ---
 
 <a id="backend-src-main-resources-db-migration-v1--init-schemasql"></a>
-## 99. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
+## 100. Arquivo: `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Caminho:** `backend/src/main/resources/db/migration/V1__init_schema.sql`
 - **Nome:** `V1__init_schema.sql`
 - **Linguagem / Sintaxe:** `sql`
@@ -64364,7 +65404,7 @@ ON CONFLICT (name) DO NOTHING;
 ---
 
 <a id="scripts-add-whatsapp-jobspy"></a>
-## 100. Arquivo: `scripts/add_whatsapp_jobs.py`
+## 101. Arquivo: `scripts/add_whatsapp_jobs.py`
 - **Caminho:** `scripts/add_whatsapp_jobs.py`
 - **Nome:** `add_whatsapp_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -65325,7 +66365,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-build-single-context-mdpy"></a>
-## 101. Arquivo: `scripts/build_single_context_md.py`
+## 102. Arquivo: `scripts/build_single_context_md.py`
 - **Caminho:** `scripts/build_single_context_md.py`
 - **Nome:** `build_single_context_md.py`
 - **Linguagem / Sintaxe:** `python`
@@ -65482,7 +66522,7 @@ print(f"Tamanho total: {size_mb:.2f} MB | {len(full_md_text.splitlines())} linha
 ---
 
 <a id="scripts-convert-to-amazon-quickpy"></a>
-## 102. Arquivo: `scripts/convert_to_amazon_quick.py`
+## 103. Arquivo: `scripts/convert_to_amazon_quick.py`
 - **Caminho:** `scripts/convert_to_amazon_quick.py`
 - **Nome:** `convert_to_amazon_quick.py`
 - **Linguagem / Sintaxe:** `python`
@@ -65614,7 +66654,7 @@ print(f"Successfully converted {converted_count} files into {target_dir} plus 00
 ---
 
 <a id="scripts-daily-job-syncymlexample"></a>
-## 103. Arquivo: `scripts/daily-job-sync.yml.example`
+## 104. Arquivo: `scripts/daily-job-sync.yml.example`
 - **Caminho:** `scripts/daily-job-sync.yml.example`
 - **Nome:** `daily-job-sync.yml.example`
 - **Linguagem / Sintaxe:** `text`
@@ -65707,7 +66747,7 @@ jobs:
 ---
 
 <a id="scripts-daily-job-crawlerpy"></a>
-## 104. Arquivo: `scripts/daily_job_crawler.py`
+## 105. Arquivo: `scripts/daily_job_crawler.py`
 - **Caminho:** `scripts/daily_job_crawler.py`
 - **Nome:** `daily_job_crawler.py`
 - **Linguagem / Sintaxe:** `python`
@@ -65938,7 +66978,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-fetch-500-rn-jobspy"></a>
-## 105. Arquivo: `scripts/fetch_500_rn_jobs.py`
+## 106. Arquivo: `scripts/fetch_500_rn_jobs.py`
 - **Caminho:** `scripts/fetch_500_rn_jobs.py`
 - **Nome:** `fetch_500_rn_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -66239,7 +67279,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-generate-sitemappy"></a>
-## 106. Arquivo: `scripts/generate_sitemap.py`
+## 107. Arquivo: `scripts/generate_sitemap.py`
 - **Caminho:** `scripts/generate_sitemap.py`
 - **Nome:** `generate_sitemap.py`
 - **Linguagem / Sintaxe:** `python`
@@ -66417,7 +67457,7 @@ print(f"Generated sitemap with {len(xml_lines)} lines at {sitemap_path}")
 ---
 
 <a id="scripts-ingest-jobspy"></a>
-## 107. Arquivo: `scripts/ingest_jobs.py`
+## 108. Arquivo: `scripts/ingest_jobs.py`
 - **Caminho:** `scripts/ingest_jobs.py`
 - **Nome:** `ingest_jobs.py`
 - **Linguagem / Sintaxe:** `python`
@@ -66640,7 +67680,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-notify-google-indexingpy"></a>
-## 108. Arquivo: `scripts/notify_google_indexing.py`
+## 109. Arquivo: `scripts/notify_google_indexing.py`
 - **Caminho:** `scripts/notify_google_indexing.py`
 - **Nome:** `notify_google_indexing.py`
 - **Linguagem / Sintaxe:** `python`
@@ -66806,7 +67846,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-pre-render-static-routespy"></a>
-## 109. Arquivo: `scripts/pre_render_static_routes.py`
+## 110. Arquivo: `scripts/pre_render_static_routes.py`
 - **Caminho:** `scripts/pre_render_static_routes.py`
 - **Nome:** `pre_render_static_routes.py`
 - **Linguagem / Sintaxe:** `python`
@@ -66934,7 +67974,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-rn-job-scraperpy"></a>
-## 110. Arquivo: `scripts/rn_job_scraper.py`
+## 111. Arquivo: `scripts/rn_job_scraper.py`
 - **Caminho:** `scripts/rn_job_scraper.py`
 - **Nome:** `rn_job_scraper.py`
 - **Linguagem / Sintaxe:** `python`
@@ -67133,7 +68173,7 @@ if __name__ == "__main__":
 ---
 
 <a id="scripts-test-efi-statuspy"></a>
-## 111. Arquivo: `scripts/test_efi_status.py`
+## 112. Arquivo: `scripts/test_efi_status.py`
 - **Caminho:** `scripts/test_efi_status.py`
 - **Nome:** `test_efi_status.py`
 - **Linguagem / Sintaxe:** `python`
@@ -67213,7 +68253,7 @@ print("\n🎉 Sistema Efí Bank 100% operacional para o Natal Vagas!")
 ---
 
 <a id="scripts-verify-build-integritypy"></a>
-## 112. Arquivo: `scripts/verify_build_integrity.py`
+## 113. Arquivo: `scripts/verify_build_integrity.py`
 - **Caminho:** `scripts/verify_build_integrity.py`
 - **Nome:** `verify_build_integrity.py`
 - **Linguagem / Sintaxe:** `python`
@@ -67306,7 +68346,7 @@ sys.exit(0)
 ---
 
 <a id="scripts-verify-seopy"></a>
-## 113. Arquivo: `scripts/verify_seo.py`
+## 114. Arquivo: `scripts/verify_seo.py`
 - **Caminho:** `scripts/verify_seo.py`
 - **Nome:** `verify_seo.py`
 - **Linguagem / Sintaxe:** `python`
@@ -67390,7 +68430,7 @@ print("\nTODOS OS TESTES DE SEO E ADSENSE PASSARAM COM SUCESSO!")
 ---
 
 <a id="envexample"></a>
-## 114. Arquivo: `.env.example`
+## 115. Arquivo: `.env.example`
 - **Caminho:** `.env.example`
 - **Nome:** `.env.example`
 - **Linguagem / Sintaxe:** `bash`
@@ -67409,7 +68449,7 @@ POSTGRES_PORT=5432
 ---
 
 <a id="github-workflows-daily-job-syncyml"></a>
-## 115. Arquivo: `.github/workflows/daily-job-sync.yml`
+## 116. Arquivo: `.github/workflows/daily-job-sync.yml`
 - **Caminho:** `.github/workflows/daily-job-sync.yml`
 - **Nome:** `daily-job-sync.yml`
 - **Linguagem / Sintaxe:** `yaml`
@@ -67466,7 +68506,7 @@ jobs:
 ---
 
 <a id="gitignore"></a>
-## 116. Arquivo: `.gitignore`
+## 117. Arquivo: `.gitignore`
 - **Caminho:** `.gitignore`
 - **Nome:** `.gitignore`
 - **Linguagem / Sintaxe:** `gitignore`
@@ -67526,7 +68566,7 @@ imagens vagas/
 ---
 
 <a id="docker-composeyml"></a>
-## 117. Arquivo: `docker-compose.yml`
+## 118. Arquivo: `docker-compose.yml`
 - **Caminho:** `docker-compose.yml`
 - **Nome:** `docker-compose.yml`
 - **Linguagem / Sintaxe:** `yaml`
