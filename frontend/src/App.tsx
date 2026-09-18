@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { SeoCategoryHero } from './components/SeoCategoryHero';
@@ -484,6 +484,19 @@ export const App: React.FC = () => {
       setIsLoading(false);
     }
   }, []);
+
+  const location = useLocation();
+
+  // Envia page_view para o Google Analytics a cada transição de rota no SPA
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('config', 'G-7L3CD25WSC', {
+        page_path: location.pathname + location.search,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }
+  }, [location]);
 
   useEffect(() => {
     fetchJobs();

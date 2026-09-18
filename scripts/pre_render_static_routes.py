@@ -10,6 +10,14 @@ instead of falling back to 404.html, solving all Google Search Console indexatio
 import os
 import re
 import json
+import sys
+
+# Ensure UTF-8 output encoding on Windows consoles
+if sys.stdout.encoding != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 frontend_dir = os.path.join(repo_root, "frontend")
@@ -17,7 +25,7 @@ dist_dir = os.path.join(frontend_dir, "dist")
 index_html_path = os.path.join(dist_dir, "index.html")
 
 def main():
-    print("🚀 Iniciando pré-renderização estática de rotas para SEO...")
+    print("[SEO] Iniciando pré-renderização estática de rotas para SEO...")
     
     if not os.path.exists(index_html_path):
         print(f"❌ {index_html_path} não encontrado! Rode o build do frontend primeiro.")
