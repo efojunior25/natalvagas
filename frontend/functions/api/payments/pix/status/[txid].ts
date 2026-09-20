@@ -1,11 +1,11 @@
+import { getAuthSecret, getCorsHeaders } from "../../auth/_utils";
+
 interface Env {
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
   };
   AUTH_SECRET?: string;
 }
-
-const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
 
 async function signHMAC(secret: string, data: string): Promise<string> {
   const enc = new TextEncoder();
@@ -21,13 +21,14 @@ async function signHMAC(secret: string, data: string): Promise<string> {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-export const onRequestGet = async ({ params, env }: { params: { txid: string }; env?: Env }) => {
+export const onRequestGet = async ({ request, params, env }: { request: Request; params: { txid: string }; env?: Env }) => {
+  const corsHeaders = getCorsHeaders(request);
   const { txid } = params;
 
   if (!txid) {
     return new Response(JSON.stringify({ status: 'error', message: 'txid obrigatório' }), {
       status: 400,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json', ...corsHeaders }
     });
   }
 
@@ -68,7 +69,7 @@ export const onRequestGet = async ({ params, env }: { params: { txid: string }; 
       expiresAt: Date.now() + expiresDays * 24 * 60 * 60 * 1000
     };
     const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(tokenPayload))));
-    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const secret = getAuthSecret(env);
     const signature = await signHMAC(secret, b64);
     const token = `${b64}.${signature}`;
 
@@ -82,7 +83,7 @@ export const onRequestGet = async ({ params, env }: { params: { txid: string }; 
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        ...corsHeaders
       }
     });
   }
@@ -95,18 +96,14 @@ export const onRequestGet = async ({ params, env }: { params: { txid: string }; 
     status: 200,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      ...corsHeaders
     }
   });
 };
 
-export const onRequestOptions = async () => {
+export const onRequestOptions = async ({ request }: { request?: Request }) => {
   return new Response(null, {
     status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    }
+    headers: getCorsHeaders(request)
   });
 };

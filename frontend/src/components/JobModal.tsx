@@ -99,7 +99,7 @@ export const JobModal: React.FC<JobModalProps> = ({ job, onClose }) => {
       {/* Script com Schema JSON-LD para Google Jobs */}
       <script 
         type="application/ld+json" 
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema).replace(/</g, '\\u003c') }}
       />
 
       <div 

@@ -1,3 +1,5 @@
+import { getCorsHeaders } from "../auth/_utils";
+
 interface D1Database {
   prepare: (query: string) => {
     bind: (...args: any[]) => {
@@ -20,6 +22,7 @@ interface Env {
 const FORBIDDEN_LEGACY_CODES = ["PCD50", "INCLUSAO50", "LAUDO50", "DESCONTO50"];
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  const corsHeaders = getCorsHeaders(request);
   try {
     const body: any = await request.json().catch(() => ({}));
     const rawCode = (body.code || "").trim().toUpperCase();
@@ -31,7 +34,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         message: "Por favor, digite o código do cupom." 
       }), {
         status: 400,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     }
 
@@ -42,7 +45,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         message: "O código genérico PCD50 foi desativado. Para garantir o benefício, envie seu laudo médico no WhatsApp para receber um cupom individual de uso único." 
       }), {
         status: 403,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     }
 
@@ -57,7 +60,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
             message: `Este cupom já foi utilizado${usedDateStr ? ` em ${usedDateStr}` : ""} e só é válido uma única vez.` 
           }), {
             status: 409,
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+            headers: { "Content-Type": "application/json", ...corsHeaders }
           });
         }
 
@@ -74,7 +77,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
           message: "Cupom PcD validado com sucesso! 50% de desconto aplicado."
         }), {
           status: 200,
-          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          headers: { "Content-Type": "application/json", ...corsHeaders }
         });
       }
     }
@@ -89,7 +92,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
           message: "Cupom não encontrado ou inválido. Envie seu laudo médico no WhatsApp para receber seu código de 50% de desconto." 
         }), {
           status: 404,
-          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          headers: { "Content-Type": "application/json", ...corsHeaders }
         });
       }
 
@@ -104,7 +107,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
             message: `Este cupom já foi utilizado${usedDateStr ? ` em ${usedDateStr}` : ""} e só é válido uma única vez.` 
           }), {
             status: 409,
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+            headers: { "Content-Type": "application/json", ...corsHeaders }
           });
         }
 
@@ -124,33 +127,19 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
           message: "Cupom PcD validado com sucesso! 50% de desconto aplicado."
         }), {
           status: 200,
-          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          headers: { "Content-Type": "application/json", ...corsHeaders }
         });
       } catch (parseErr) {
         console.error("Erro ao parsear dados do cupom no KV:", parseErr);
       }
     }
 
-    // 3. Fallback de contingência caso o KV ainda não tenha sido vinculado no Cloudflare Pages
-    // Verifica formato válido gerado (ex: PCD-XXXX)
-    if (/^PCD-[A-Z0-9]{4,8}$/.test(rawCode)) {
-      return new Response(JSON.stringify({
-        success: true,
-        code: rawCode,
-        discountPercent: 50,
-        message: "Cupom PcD validado! 50% de desconto aplicado."
-      }), {
-        status: 200,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
-      });
-    }
-
     return new Response(JSON.stringify({ 
       success: false, 
-      message: "Cupom inválido. Envie seu laudo médico no WhatsApp para receber o código de 50% de desconto." 
+      message: "Cupom não encontrado ou inválido. Verifique o código digitado ou solicite suporte." 
     }), {
-      status: 400,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      status: 404,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
     });
 
   } catch (err: any) {
@@ -160,18 +149,14 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       error: err?.message 
     }), {
       status: 500,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      headers: { "Content-Type": "application/json", ...corsHeaders }
     });
   }
 };
 
-export const onRequestOptions = async () => {
+export const onRequestOptions = async ({ request }: { request?: Request }) => {
   return new Response(null, {
     status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization"
-    }
+    headers: getCorsHeaders(request)
   });
 };

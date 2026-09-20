@@ -16,6 +16,24 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       });
     }
 
+    const rawTarget = String(body.applicationTarget || '').trim();
+    const lowerTarget = rawTarget.toLowerCase();
+    const isSafeTarget = lowerTarget.startsWith('http://') || lowerTarget.startsWith('https://')
+      || lowerTarget.startsWith('mailto:') || lowerTarget.startsWith('tel:')
+      || lowerTarget.startsWith('wa.me/') || lowerTarget.startsWith('api.whatsapp.com/')
+      || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawTarget)
+      || /^\+?[0-9\s()\-./]{8,25}$/.test(rawTarget);
+
+    if (!isSafeTarget || lowerTarget.startsWith('javascript:') || lowerTarget.startsWith('data:')) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: 'Canal de candidatura inválido. Insira um link HTTPS, e-mail ou WhatsApp válido.'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     const cleanTitle = String(body.title).trim();
     const cleanCompany = String(body.companyName).trim();
     const baseSlug = `${cleanTitle}-${cleanCompany}`

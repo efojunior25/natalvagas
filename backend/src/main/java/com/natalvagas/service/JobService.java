@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,12 +107,13 @@ public class JobService {
                 .requirements(dto.requirements())
                 .benefits(dto.benefits())
                 .applicationChannel(dto.applicationChannel())
-                .applicationTarget(dto.applicationTarget().trim())
-                .status(JobStatus.APPROVED)
+                .applicationTarget(sanitizeApplicationTarget(dto.applicationTarget()))
+                .status(JobStatus.PENDING)
                 .isFeatured(false)
                 .sourceUrl(dto.sourceUrl())
-                .publishedAt(OffsetDateTime.now())
+                .publishedAt(null)
                 .build();
+
 
         Job saved = jobRepository.save(job);
         return toDTO(saved);
@@ -122,8 +124,17 @@ public class JobService {
         Job job = jobRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Vaga não encontrada com ID: " + id));
 
+        String approver = "admin";
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getName() != null && !auth.getName().isBlank()) {
+            approver = auth.getName();
+        }
+
+        OffsetDateTime now = OffsetDateTime.now();
         job.setStatus(JobStatus.APPROVED);
-        job.setPublishedAt(OffsetDateTime.now());
+        job.setPublishedAt(now);
+        job.setApprovedAt(now);
+        job.setApprovedBy(approver);
         return toDTO(jobRepository.save(job));
     }
 
@@ -168,6 +179,26 @@ public class JobService {
         );
     }
 
+    public static String sanitizeApplicationTarget(String target) {
+        if (target == null || target.trim().isEmpty()) {
+            throw new IllegalArgumentException("Canal de candidatura obrigatório.");
+        }
+        String clean = target.trim();
+        String lower = clean.toLowerCase(Locale.ENGLISH);
+        if (lower.startsWith("http://") || lower.startsWith("https://")
+                || lower.startsWith("mailto:") || lower.startsWith("tel:")
+                || lower.startsWith("wa.me/") || lower.startsWith("api.whatsapp.com/")) {
+            return clean;
+        }
+        if (clean.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+            return "mailto:" + clean;
+        }
+        if (clean.matches("^\\+?[0-9\\s()\\-\\.\\/]{8,25}$")) {
+            return clean;
+        }
+        throw new IllegalArgumentException("Canal de candidatura inválido. Insira um link HTTPS, e-mail ou WhatsApp seguro.");
+    }
+
     public static String toSlug(String input) {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
@@ -175,3 +206,4 @@ public class JobService {
         return slug.toLowerCase(Locale.ENGLISH).replaceAll("-+", "-").replaceAll("^-|-$", "");
     }
 }
+

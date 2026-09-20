@@ -1,0 +1,8 @@
+Contact: mailto:contato@natalvagas.com.br
+Contact: https://wa.me/5584992344922
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: pt-BR, en
+Canonical: https://natalvagas.com.br/.well-known/security.txt
+Policy: https://natalvagas.com.br/privacidade
+Hiring: https://natalvagas.com.br/sobre
+Acknowledgments: https://natalvagas.com.br/

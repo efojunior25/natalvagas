@@ -71,7 +71,7 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
     });
   }, [jobs, overrides]);
 
-  const isAuth = Boolean(user?.isAdmin) || (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(STORAGE_SESSION_AUTH) === 'true');
+  const isAuth = Boolean(user?.isAdmin);
 
   const handleLogout = () => {
     logout();

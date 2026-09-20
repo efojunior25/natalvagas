@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { generateTotpSecret, generateOtpAuthUri, verifyTotpCode } from '../services/totpService';
 
 export interface UserProfile {
   id: string;
@@ -37,27 +36,11 @@ export const USER_STORAGE_KEY = 'natalvagas_auth_user';
 export const TOKEN_STORAGE_KEY = 'natalvagas_auth_token';
 export const PRO_TOKEN_KEY = 'natalvagas_pro_token';
 
-export const isDeveloperEmail = (email?: string | null): boolean => {
-  if (!email) return false;
-  const clean = email.trim().toLowerCase();
-  return (
-    clean.endsWith('@natalvagas.com.br') ||
-    clean === 'efojunior25@gmail.com' ||
-    clean === 'natalvagas.edson@gmail.com' ||
-    clean === 'edson' ||
-    clean === 'admin'
-  );
+export const isDeveloperEmail = (_email?: string | null): boolean => {
+  return false;
 };
 
-export const MASTER_PASSWORDS = [
-  'edson2026',
-  'admin2026',
-  'potiguar2026',
-  'natalvagas2026',
-  'edson',
-  'natalvagas',
-  'natalvagas-pro-auth-secret-potiguar-2026'
-];
+export const MASTER_PASSWORDS: string[] = [];
 
 export interface ProTokenPayload {
   status: string;
@@ -134,16 +117,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }
 
         const stored = localStorage.getItem(USER_STORAGE_KEY);
-        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
         if (stored) {
           const parsed = JSON.parse(stored);
-          parsed.isPro = isProUnlocked || Boolean(parsed.isPro);
-          if (isDeveloperEmail(parsed.email)) {
-            // SÓ ativa o Modo Administrador se o MFA foi validado nesta sessão via sessionStorage
-            const isMfaActiveInSession = sessionStorage.getItem('natalvagas_admin_mfa_auth') === 'true';
-            parsed.isAdmin = isMfaActiveInSession;
-            parsed.role = isMfaActiveInSession ? 'ADMIN' : 'USER';
-          }
+          parsed.isAdmin = parsed.role === 'ADMIN';
           setUser(parsed);
         }
       } catch (e) {
@@ -214,7 +190,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     sessionStorage.removeItem('natalvagas_admin_email');
   };
 
-  const loginWithEmail = async (email: string, pass: string, mfaCode?: string, setupSecret?: string): Promise<{ 
+  const loginWithEmail = async (email: string, pass: string): Promise<{ 
     success: boolean; 
     requiresMfa?: boolean; 
     requiresMfaSetup?: boolean;
@@ -226,109 +202,20 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const cleanEmail = email.trim().toLowerCase();
     const cleanPass = pass.trim();
 
-    // Se for e-mail de Desenvolvedor da Página
-    if (isDeveloperEmail(cleanEmail)) {
-      const isPasswordValid = MASTER_PASSWORDS.includes(cleanPass.toLowerCase());
-      if (!isPasswordValid) {
-        setIsLoading(false);
-        return { success: false, message: 'Senha de administrador inválida.' };
-      }
-
-      const secretStorageKey = `natalvagas_mfa_secret_${cleanEmail}`;
-      const storedSecret = localStorage.getItem(secretStorageKey);
-
-      // CASO 1: PRIMEIRO ACESSO - O MFA DEVE SER CONFIGURADO COM APLICATIVO AUTENTICADOR!
-      if (!storedSecret) {
-        const secretToUse = setupSecret || generateTotpSecret();
-        const uri = generateOtpAuthUri(cleanEmail, secretToUse);
-
-        // Se o usuário ainda não enviou o código de 6 dígitos gerado pelo aplicativo
-        if (!mfaCode) {
-          setIsLoading(false);
-          return { 
-            success: false, 
-            requiresMfaSetup: true,
-            mfaSecret: secretToUse,
-            otpauthUri: uri,
-            message: 'Primeiro acesso: configure seu aplicativo autenticador (Google Authenticator ou Authy).' 
-          };
-        }
-
-        // Validação estrita do código TOTP com o secret novo gerado
-        const isSetupValid = await verifyTotpCode(mfaCode, secretToUse);
-        if (!isSetupValid) {
-          setIsLoading(false);
-          return { 
-            success: false, 
-            requiresMfaSetup: true,
-            mfaSecret: secretToUse,
-            otpauthUri: uri,
-            message: 'Código de confirmação incorreto. Abra o aplicativo autenticador e digite o código atual de 6 dígitos.' 
-          };
-        }
-
-        // Pareamento confirmado com sucesso: salva a chave no dispositivo
-        localStorage.setItem(secretStorageKey, secretToUse);
-        localStorage.setItem('natalvagas_admin_mfa_enabled', 'true');
-      } 
-      // CASO 2: LOGINS SUBSEQUENTES - MFA JÁ CONFIGURADO
-      else {
-        // Se ainda não forneceu o código MFA de 6 dígitos
-        if (!mfaCode) {
-          setIsLoading(false);
-          return { 
-            success: false, 
-            requiresMfa: true, 
-            message: 'Digite o código de 6 dígitos gerado no seu aplicativo autenticador (Google Authenticator / Authy).' 
-          };
-        }
-
-        // Validação estrita do código TOTP com a chave salva
-        const isCodeValid = await verifyTotpCode(mfaCode, storedSecret);
-        if (!isCodeValid) {
-          setIsLoading(false);
-          return { 
-            success: false, 
-            requiresMfa: true, 
-            message: 'Código MFA incorreto ou expirado. Verifique o código atual no seu aplicativo e tente novamente.' 
-          };
-        }
-      }
-
-      // SÓ LIBERA O MODO ADMINISTRADOR APÓS MFA VALIDADO
-      const name = cleanEmail.split('@')[0].replace(/[._]/g, ' ');
-      const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
-      const adminUser: UserProfile = {
-        id: `dev_${Date.now()}`,
-        name: `${formattedName} (Dev/Admin)`,
-        email: cleanEmail,
-        isPro: true,
-        isAdmin: true,
-        role: 'ADMIN',
-        createdAt: new Date().toISOString()
-      };
-
-      setUser(adminUser);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(adminUser));
-      sessionStorage.setItem('natalvagas_admin_mfa_auth', 'true');
-      sessionStorage.setItem('natalvagas_admin_email', cleanEmail);
-      setIsLoading(false);
-      return { success: true, message: 'Autenticação em 2 etapas confirmada com sucesso! Modo Administrador ativado.' };
-    }
-
-    // Fluxo padrão para usuários comuns
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass })
+        body: JSON.stringify({ email: cleanEmail, password: cleanPass })
       });
 
       const data = await res.json().catch(() => ({}));
 
-      if (res.ok && data.success) {
-        const isProUnlocked = data.user.isPro || verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-        const loggedUser: UserProfile = { ...data.user, isPro: isProUnlocked };
+      if (res.ok && data.success && data.user) {
+        const loggedUser: UserProfile = { 
+          ...data.user,
+          isAdmin: data.user.role === 'ADMIN' || Boolean(data.user.isAdmin)
+        };
         setUser(loggedUser);
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(loggedUser));
         if (data.token) {
@@ -339,7 +226,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
       return { success: false, message: data.message || 'E-mail ou senha incorretos.' };
     } catch (err) {
-      return { success: false, message: 'Erro ao autenticar. Verifique seus dados.' };
+      return { success: false, message: 'Erro de conexão ao autenticar. Tente novamente.' };
     } finally {
       setIsLoading(false);
     }
@@ -348,47 +235,29 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const registerWithEmail = async (name: string, email: string, pass: string): Promise<{ success: boolean; message?: string }> => {
     setIsLoading(true);
     const cleanEmail = email.trim().toLowerCase();
-
-    if (isDeveloperEmail(cleanEmail)) {
-      setIsLoading(false);
-      return { 
-        success: false, 
-        message: 'Contas de administrador/desenvolvedor não podem ser criadas via cadastro público. Acesse pela tela de login.' 
-      };
-    }
+    const cleanName = name.trim();
 
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password: pass })
+        body: JSON.stringify({ name: cleanName, email: cleanEmail, password: pass.trim() })
       });
 
       const data = await res.json().catch(() => ({}));
 
-      if (res.ok && data.success) {
-        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-        const newUser: UserProfile = { ...data.user, isPro: isProUnlocked };
+      if (res.ok && data.success && data.user) {
+        const newUser: UserProfile = { 
+          ...data.user,
+          isAdmin: false,
+          role: 'USER'
+        };
         setUser(newUser);
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
         if (data.token) {
           localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
         }
         return { success: true, message: data.message };
-      }
-
-      if (!res.ok && res.status !== 400 && res.status !== 409) {
-        const isProUnlocked = verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-        const fallbackUser: UserProfile = {
-          id: `user_${Date.now()}`,
-          name,
-          email,
-          isPro: isProUnlocked,
-          createdAt: new Date().toISOString()
-        };
-        setUser(fallbackUser);
-        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(fallbackUser));
-        return { success: true };
       }
 
       return { success: false, message: data.message || 'Erro ao criar conta. Tente outro e-mail.' };

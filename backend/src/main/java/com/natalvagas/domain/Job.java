@@ -96,6 +96,12 @@ public class Job {
     @Column(name = "published_at")
     private OffsetDateTime publishedAt;
 
+    @Column(name = "approved_by", length = 120)
+    private String approvedBy;
+
+    @Column(name = "approved_at")
+    private OffsetDateTime approvedAt;
+
     @Column(name = "expires_at")
     private OffsetDateTime expiresAt;
 

@@ -1,3 +1,5 @@
+import { getAuthSecret, getCorsHeaders } from "../auth/_utils";
+
 interface Env {
   PAYMENTS_KV?: {
     get: (key: string) => Promise<string | null>;
@@ -7,16 +9,8 @@ interface Env {
   AUTHORIZED_CODES_JSON?: string;
 }
 
-const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
-
-// Códigos padrão de contingência (podem ser sobrepostos via env.AUTHORIZED_CODES_JSON)
-const DEFAULT_AUTHORIZED_CODES: Record<string, { plan: 'monthly' | 'annual' | 'lifetime'; maxUses?: number }> = {
-  'POTIGUAR2026': { plan: 'lifetime' },
-  'VITALICIO2026': { plan: 'lifetime' },
-  'PRO2026': { plan: 'annual' },
-  'NATALVAGAS2026': { plan: 'monthly' },
-  'VIP-NATAL': { plan: 'annual' }
-};
+// Códigos autorizados devem ser definidos exclusivamente via env.AUTHORIZED_CODES_JSON
+const DEFAULT_AUTHORIZED_CODES: Record<string, { plan: 'monthly' | 'annual' | 'lifetime'; maxUses?: number }> = {};
 
 async function signHMAC(secret: string, data: string): Promise<string> {
   const enc = new TextEncoder();
@@ -33,6 +27,7 @@ async function signHMAC(secret: string, data: string): Promise<string> {
 }
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  const corsHeaders = getCorsHeaders(request);
   try {
     const body: any = await request.json().catch(() => ({}));
     const rawCode = (body.code || '').trim().toUpperCase();
@@ -44,7 +39,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         message: 'Por favor, informe o código de ativação.' 
       }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
       });
     }
 
@@ -69,7 +64,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         message: 'Código inválido ou expirado. Verifique a digitação ou contate o suporte no WhatsApp.' 
       }), {
         status: 404,
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
       });
     }
 
@@ -87,7 +82,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
     };
 
     const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(tokenPayload))));
-    const secret = (env && env.AUTH_SECRET) ? env.AUTH_SECRET : DEFAULT_SECRET;
+    const secret = getAuthSecret(env);
     const signature = await signHMAC(secret, b64);
     const token = `${b64}.${signature}`;
 
@@ -106,23 +101,19 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       message: 'Código verificado com sucesso!'
     }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      headers: { 'Content-Type': 'application/json', ...corsHeaders }
     });
   } catch (err: any) {
     return new Response(JSON.stringify({ success: false, message: 'Erro ao validar código.' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      headers: { 'Content-Type': 'application/json', ...corsHeaders }
     });
   }
 };
 
-export const onRequestOptions = async () => {
+export const onRequestOptions = async ({ request }: { request?: Request }) => {
   return new Response(null, {
     status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    }
+    headers: getCorsHeaders(request)
   });
 };

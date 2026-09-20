@@ -10,13 +10,33 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
     salt TEXT NOT NULL,
+    role TEXT DEFAULT 'USER',
     is_pro INTEGER DEFAULT 0,
     pro_plan TEXT DEFAULT NULL,
+    failed_attempts INTEGER DEFAULT 0,
+    locked_until TEXT DEFAULT NULL,
+    last_login_ip TEXT DEFAULT NULL,
+    last_login_at TEXT DEFAULT NULL,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+-- 2. TABELA DE LOGS DE AUDITORIA DE SEGURANÇA (CTRL-16, CTRL-64, CTRL-65)
+CREATE TABLE IF NOT EXISTS security_audit_logs (
+    id TEXT PRIMARY KEY,
+    user_id TEXT,
+    action TEXT NOT NULL,
+    ip_address TEXT,
+    user_agent TEXT,
+    details TEXT,
+    created_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_user_action ON security_audit_logs(user_id, action);
+CREATE INDEX IF NOT EXISTS idx_audit_created ON security_audit_logs(created_at);
+
 
 -- 2. TABELA DE CURRÍCULOS SALVOS NA NUVEM
 CREATE TABLE IF NOT EXISTS resumes (

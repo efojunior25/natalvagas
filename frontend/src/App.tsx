@@ -28,6 +28,7 @@ const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.B
 const JobDetailsPage = lazy(() => import('./pages/JobDetailsPage').then(m => ({ default: m.JobDetailsPage })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 const EditDevPage = lazy(() => import('./pages/EditDevPage').then(m => ({ default: m.EditDevPage })));
+const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
 
 const PAGE_SIZE = 24;
 
@@ -555,6 +556,8 @@ export const App: React.FC = () => {
           
           {/* Painel Interno Restrito */}
           <Route path="/editdev" element={<EditDevPage jobs={effectiveJobs} onJobUpdated={fetchJobs} />} />
+          <Route path="/admin/cupons" element={<AdminCoupons />} />
+          <Route path="/admin/coupons" element={<Navigate to="/admin/cupons" replace />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

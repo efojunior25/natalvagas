@@ -1,3 +1,5 @@
+import { getCorsHeaders } from "../../auth/_utils";
+
 // Cloudflare Pages Function - Efí Pix Webhook Receiver
 // Endpoint: https://natalvagas.com.br/api/payments/pix/webhook
 
@@ -9,17 +11,16 @@ interface Env {
   WEBHOOK_SECRET?: string;
 }
 
-const DEFAULT_WEBHOOK_SECRET = "natalvagas-efi-webhook-secret-potiguar-2026";
-
 // Armazenamento em memória (persiste durante o ciclo de vida do worker)
 const MEMORY_APPROVED_TXIDS = new Map<string, any>();
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  const corsHeaders = getCorsHeaders(request);
   try {
     const url = new URL(request.url);
     const tokenQuery = url.searchParams.get('token');
     const headerSecret = request.headers.get('x-webhook-secret') || request.headers.get('x-webhook-token');
-    const expectedSecret = (env && env.WEBHOOK_SECRET) ? env.WEBHOOK_SECRET : DEFAULT_WEBHOOK_SECRET;
+    const expectedSecret = env?.WEBHOOK_SECRET?.trim();
 
     let payload: any = {};
     const text = await request.text();
@@ -42,18 +43,26 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          ...corsHeaders
         }
       });
     }
 
     // Para notificações reais de pagamento com payload.pix, a validação do secret é OBRIGATÓRIA
+    if (!expectedSecret) {
+      console.error('[EFI_PIX_WEBHOOK] Erro: WEBHOOK_SECRET não configurada no ambiente.');
+      return new Response(JSON.stringify({ error: 'Configuração de segurança do servidor ausente.' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
+      });
+    }
+
     const isAuthorized = tokenQuery === expectedSecret || headerSecret === expectedSecret;
     if (!isAuthorized) {
       console.warn('[EFI_PIX_WEBHOOK] Tentativa de chamada não autorizada:', { tokenQuery, headerSecret: !!headerSecret });
       return new Response(JSON.stringify({ error: 'Acesso não autorizado ao webhook' }), {
         status: 401,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
       });
     }
 
@@ -69,7 +78,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          ...corsHeaders
         }
       });
     }
@@ -109,7 +118,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        ...corsHeaders
       }
     });
   } catch (err: any) {
@@ -131,13 +140,9 @@ export const onRequestGet = async () => {
   });
 };
 
-export const onRequestOptions = async () => {
+export const onRequestOptions = async ({ request }: { request?: Request }) => {
   return new Response(null, {
     status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    }
+    headers: getCorsHeaders(request)
   });
 };

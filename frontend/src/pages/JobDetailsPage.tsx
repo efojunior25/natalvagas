@@ -12,7 +12,7 @@ import { AdPlaceholder } from '../components/AdPlaceholder';
 import { Job } from '../types/job';
 import { SocialPostGeneratorModal } from '../components/SocialPostGeneratorModal';
 import { AdminJobEditModal } from '../components/AdminJobEditModal';
-import { useAuth, isDeveloperEmail } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const PostJobModal = lazy(() => import('../components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 
@@ -109,18 +109,8 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
     if (ogUrl) ogUrl.setAttribute('content', jobUrl);
   }, [currentJob]);
 
-  const [isAdminSession, setIsAdminSession] = useState(false);
   const [isAdminEditModalOpen, setIsAdminEditModalOpen] = useState(false);
-
-  useEffect(() => {
-    try {
-      setIsAdminSession(sessionStorage.getItem('natalvagas_admin_mfa_auth') === 'true');
-    } catch {
-      setIsAdminSession(false);
-    }
-  }, []);
-
-  const isAdminLoggedIn = Boolean(isAdminSession || user?.isAdmin || isDeveloperEmail(user?.email));
+  const isAdminLoggedIn = Boolean(user?.isAdmin);
 
   // Determina se a empresa tem o Selo de Empresa Verificada (estrito para quem o administrador homologou)
   const isVerifiedCompany = useMemo(() => {
@@ -364,7 +354,7 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
       {jobPostingSchema && (
         <script 
           type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema).replace(/</g, '\\u003c') }}
         />
       )}
 

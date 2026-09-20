@@ -1,3 +1,5 @@
+import { getCorsHeaders } from "../auth/_utils";
+
 interface D1Database {
   prepare: (query: string) => {
     bind: (...args: any[]) => {
@@ -18,25 +20,17 @@ interface Env {
   ADMIN_PIN?: string;
 }
 
-const DEFAULT_SECRET = "natalvagas-pro-auth-secret-potiguar-2026";
-const VALID_PINS = [
-  "potiguar2026",
-  "edson2026",
-  "natalvagas2026",
-  DEFAULT_SECRET
-];
-
 function checkAdminAuth(authHeader: string | null, bodyKey?: string, env?: Env): boolean {
   const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
   const keyToCheck = bodyKey || token;
   if (!keyToCheck) return false;
 
-  const validEnvSecret = env?.AUTH_SECRET || DEFAULT_SECRET;
+  const validEnvSecret = env?.AUTH_SECRET;
   const validEnvPin = env?.ADMIN_PIN;
 
-  if (keyToCheck === validEnvSecret) return true;
   if (validEnvPin && keyToCheck === validEnvPin) return true;
-  return VALID_PINS.includes(keyToCheck.toLowerCase());
+  if (validEnvSecret && keyToCheck === validEnvSecret) return true;
+  return false;
 }
 
 function generateRandomCode(): string {
@@ -52,6 +46,7 @@ function generateRandomCode(): string {
 }
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
+  const corsHeaders = getCorsHeaders(request);
   try {
     const authHeader = request.headers.get("Authorization");
     const body: any = await request.json().catch(() => ({}));
@@ -63,7 +58,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
         message: "Acesso administrativo não autorizado. Verifique sua chave ou PIN." 
       }), {
         status: 401,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     }
 
@@ -135,7 +130,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       message: `Cupom ${code} criado com sucesso!`
     }), {
       status: 201,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      headers: { "Content-Type": "application/json", ...corsHeaders }
     });
 
   } catch (err: any) {
@@ -145,18 +140,14 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       error: err?.message 
     }), {
       status: 500,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      headers: { "Content-Type": "application/json", ...corsHeaders }
     });
   }
 };
 
-export const onRequestOptions = async () => {
+export const onRequestOptions = async ({ request }: { request?: Request }) => {
   return new Response(null, {
     status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization"
-    }
+    headers: getCorsHeaders(request)
   });
 };

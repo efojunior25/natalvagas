@@ -28,7 +28,7 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Value("${natalvagas.security.admin-api-key:natalvagas_master_admin_secret_key_2026}")
+    @Value("${natalvagas.security.admin-api-key:}")
     private String adminApiKey;
 
     @Bean
@@ -40,7 +40,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Endpoints Públicos de Leitura
                 .requestMatchers(HttpMethod.GET, "/jobs/**", "/categories/**", "/sitemap.xml").permitAll()
-                .requestMatchers("/docs/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+                // Documentação OpenAPI / Swagger restrita a Administradores em produção
+                .requestMatchers("/docs/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").hasRole("ADMIN")
                 // Aprovação e exclusão Administrativa de Vagas protegidas
                 .requestMatchers(HttpMethod.PATCH, "/jobs/*/approve").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/jobs/**").hasRole("ADMIN")
@@ -67,7 +68,9 @@ public class SecurityConfig {
                     }
                 }
 
-                if (apiKey != null && apiKey.equals(adminApiKey)) {
+                if (apiKey != null && !apiKey.trim().isEmpty()
+                        && adminApiKey != null && !adminApiKey.trim().isEmpty()
+                        && apiKey.equals(adminApiKey.trim())) {
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                             "admin",
                             null,
