@@ -1,4 +1,4 @@
-import { getAuthSecret, getCorsHeaders } from "../../auth/_utils";
+import { getAuthSecret, getCorsHeaders } from "../../../auth/_utils";
 
 interface Env {
   PAYMENTS_KV?: {
