@@ -1,207 +1,22 @@
-import { 
-  verifyPassword, 
-  createSessionToken, 
-  getCorsHeaders, 
-  checkRateLimit, 
-  createAuthCookie, 
-  logSecurityEvent, 
-  getAuthSecret 
-} from "./_utils";
-
-interface D1Database {
-  prepare: (query: string) => {
-    bind: (...args: any[]) => {
-      first: <T = any>() => Promise<T | null>;
-      run: () => Promise<{ success: boolean; meta?: any }>;
-    };
-  };
-}
-
-interface Env {
-  DB?: D1Database;
-  PAYMENTS_KV?: any;
-  AUTH_SECRET?: string;
-}
-
+import { createSessionToken, hashPassword, json, requireSecret, sessionCookie, verifyPassword, verifyTotp } from "./_utils";
+interface D1Database { prepare: (query: string) => { bind: (...args: any[]) => { first: <T = any>() => Promise<T | null>; run: () => Promise<any> } } }
+interface Env { DB?: D1Database; AUTH_SECRET?: string }
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
-  const corsHeaders = getCorsHeaders(request);
-  const clientIp = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for") || "client";
-  const userAgent = request.headers.get("user-agent") || "";
-
-  // Rate limiting anti-força bruta por IP: máx 5 tentativas por minuto (CTRL-03)
-  const rl = await checkRateLimit(clientIp, "login", 5, 60, env?.PAYMENTS_KV);
-  if (!rl.allowed) {
-    return new Response(JSON.stringify({
-      success: false,
-      message: "Muitas tentativas de login consecutivas. Por segurança, aguarde 1 minuto para tentar novamente."
-    }), {
-      status: 429,
-      headers: {
-        "Content-Type": "application/json",
-        "Retry-After": "60",
-        ...corsHeaders
-      }
-    });
-  }
-
   try {
-    const body: any = await request.json().catch(() => ({}));
-    const email = (body.email || "").trim().toLowerCase();
-    const password = (body.password || "").trim();
-
-    if (!email || !password) {
-      return new Response(JSON.stringify({ success: false, message: "Informe seu e-mail e senha." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    let secret: string;
-    try {
-      secret = getAuthSecret(env);
-    } catch {
-      return new Response(JSON.stringify({
-        success: false,
-        message: "Configuração de segurança do servidor ausente (AUTH_SECRET)."
-      }), {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    if (env && env.DB) {
-      // 1. Busca o usuário pelo e-mail com dados de bloqueio
-      const userRecord: any = await env.DB.prepare(`
-        SELECT id, name, email, password_hash, salt, role, is_pro, pro_plan, failed_attempts, locked_until, created_at
-        FROM users WHERE email = ?
-      `).bind(email).first();
-
-      if (!userRecord) {
-        await logSecurityEvent(env.DB, null, "LOGIN_FAILED_UNKNOWN_EMAIL", clientIp, userAgent, { email });
-        return new Response(JSON.stringify({ success: false, message: "E-mail ou senha incorretos." }), {
-          status: 401,
-          headers: { "Content-Type": "application/json", ...corsHeaders }
-        });
-      }
-
-      // 2. Verifica se a conta está temporariamente bloqueada por excesso de tentativas (CTRL-12)
-      if (userRecord.locked_until) {
-        const lockExpiration = new Date(userRecord.locked_until).getTime();
-        if (lockExpiration > Date.now()) {
-          const minutesLeft = Math.max(1, Math.ceil((lockExpiration - Date.now()) / 60000));
-          await logSecurityEvent(env.DB, userRecord.id, "LOGIN_BLOCKED_LOCKOUT", clientIp, userAgent, { email, minutesLeft });
-          return new Response(JSON.stringify({
-            success: false,
-            message: `Conta temporariamente bloqueada após repetidas tentativas inválidas. Tente novamente em ${minutesLeft} minuto(s).`
-          }), {
-            status: 423, // 423 Locked
-            headers: { "Content-Type": "application/json", ...corsHeaders }
-          });
-        }
-      }
-
-      // 3. Valida a senha com tempo constante
-      const isValid = await verifyPassword(password, userRecord.salt, userRecord.password_hash);
-      if (!isValid) {
-        const currentAttempts = (userRecord.failed_attempts || 0) + 1;
-        if (currentAttempts >= 5) {
-          // Bloqueia a conta por 15 minutos (900.000 ms)
-          const lockTime = new Date(Date.now() + 15 * 60 * 1000).toISOString();
-          await env.DB.prepare(`
-            UPDATE users SET failed_attempts = ?, locked_until = ? WHERE id = ?
-          `).bind(currentAttempts, lockTime, userRecord.id).run();
-
-          await logSecurityEvent(env.DB, userRecord.id, "ACCOUNT_LOCKED_5_ATTEMPTS", clientIp, userAgent, { email });
-
-          return new Response(JSON.stringify({
-            success: false,
-            message: "Conta bloqueada por 15 minutos após 5 tentativas de senha consecutivas incorretas."
-          }), {
-            status: 423,
-            headers: { "Content-Type": "application/json", ...corsHeaders }
-          });
-        } else {
-          await env.DB.prepare(`
-            UPDATE users SET failed_attempts = ? WHERE id = ?
-          `).bind(currentAttempts, userRecord.id).run();
-
-          await logSecurityEvent(env.DB, userRecord.id, "LOGIN_PASSWORD_MISMATCH", clientIp, userAgent, {
-            email,
-            attempt: currentAttempts,
-            remainingBeforeLock: 5 - currentAttempts
-          });
-
-          return new Response(JSON.stringify({ success: false, message: "E-mail ou senha incorretos." }), {
-            status: 401,
-            headers: { "Content-Type": "application/json", ...corsHeaders }
-          });
-        }
-      }
-
-      // 4. Sucesso na autenticação: zera tentativas, limpa bloqueio e atualiza dados de acesso (CTRL-14)
-      const now = new Date().toISOString();
-      await env.DB.prepare(`
-        UPDATE users SET failed_attempts = 0, locked_until = NULL, last_login_ip = ?, last_login_at = ? WHERE id = ?
-      `).bind(clientIp, now, userRecord.id).run();
-
-      const role = userRecord.role || "USER";
-      const isAdmin = role === "ADMIN";
-
-      const userProfile = {
-        id: userRecord.id,
-        name: userRecord.name,
-        email: userRecord.email,
-        role,
-        isAdmin,
-        isPro: Boolean(userRecord.is_pro),
-        proPlan: userRecord.pro_plan,
-        createdAt: userRecord.created_at
-      };
-
-      const token = await createSessionToken(userProfile, secret);
-      const authCookie = createAuthCookie(token, isAdmin ? 8 * 3600 : 30 * 24 * 3600);
-
-      await logSecurityEvent(env.DB, userRecord.id, "LOGIN_SUCCESS", clientIp, userAgent, { email, role });
-
-      return new Response(JSON.stringify({
-        success: true,
-        user: userProfile,
-        token,
-        message: "Login realizado com sucesso!"
-      }), {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": authCookie,
-          ...corsHeaders
-        }
-      });
-    }
-
-    return new Response(JSON.stringify({
-      success: false,
-      message: "Serviço de autenticação temporariamente indisponível. Conexão com banco de dados não estabelecida."
-    }), {
-      status: 503,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
-    });
-
-
-  } catch (err: any) {
-    return new Response(JSON.stringify({ 
-      success: false, 
-      message: "Erro ao autenticar no servidor.", 
-      error: err?.message 
-    }), {
-      status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
-    });
+    if (!env?.DB) return json({ success: false, message: "Serviço de autenticação temporariamente indisponível." }, 503);
+    const secret = requireSecret(env.AUTH_SECRET); const body: any = await request.json().catch(() => ({})); const email = String(body.email || "").trim().toLowerCase().slice(0, 150); const password = String(body.password || ""); const mfaCode = String(body.mfaCode || "").trim(); const generic = { success: false, message: "E-mail ou senha incorretos." };
+    if (!email || !password) return json(generic, 401);
+    const user: any = await env.DB.prepare("SELECT id, name, email, password_hash, salt, role, company_id, status, is_pro, email_verified, failed_login_count, locked_until, mfa_totp_secret, auth_version, created_at FROM users WHERE email = ?").bind(email).first();
+    if (!user) { await hashPassword(password, "00000000000000000000000000000000"); return json(generic, 401); }
+    if (user.status !== "ACTIVE" || (user.locked_until && Date.parse(user.locked_until) > Date.now())) return json(generic, 401);
+    if (!await verifyPassword(password, user.salt, user.password_hash)) { const failures = Number(user.failed_login_count || 0) + 1; const locked = failures >= 5 ? new Date(Date.now() + Math.min(30, 2 ** (failures - 5)) * 60_000).toISOString() : null; await env.DB.prepare("UPDATE users SET failed_login_count = ?, locked_until = ?, updated_at = ? WHERE id = ?").bind(failures, locked, new Date().toISOString(), user.id).run(); return json(generic, 401); }
+    if (user.role === "EDITDEV") { if (!user.mfa_totp_secret) return json({ success: false, message: "Conta EDITDEV sem MFA provisionado." }, 403); if (!mfaCode) return json({ success: false, requiresMfa: true, message: "Informe o código do autenticador." }, 428); if (!await verifyTotp(mfaCode, user.mfa_totp_secret)) return json({ success: false, requiresMfa: true, message: "Credenciais inválidas." }, 401); }
+    await env.DB.prepare("UPDATE users SET failed_login_count = 0, locked_until = NULL, last_login_at = ?, updated_at = ? WHERE id = ?").bind(new Date().toISOString(), new Date().toISOString(), user.id).run();
+    let companyVerified = false; if (user.company_id) { const company: any = await env.DB.prepare("SELECT verification_status FROM companies WHERE id = ?").bind(user.company_id).first(); companyVerified = company?.verification_status === "VERIFIED"; }
+    const profile = { id: user.id, name: user.name, email: user.email, role: user.role, companyId: user.company_id, isPro: Boolean(user.is_pro), emailVerified: Boolean(user.email_verified), companyVerified, createdAt: user.created_at }; const token = await createSessionToken({ ...profile, authVersion: Number(user.auth_version || 0) }, secret);
+    return json({ success: true, user: profile, message: "Login realizado com sucesso." }, 200, { "Set-Cookie": sessionCookie(token) });
+  } catch (error: any) {
+    console.error("auth_login_failed", error instanceof Error ? `${error.name}: ${error.message}` : "unknown_error");
+    return json({ success: false, message: "Serviço de autenticação temporariamente indisponível." }, error?.message === "AUTH_CONFIG_MISSING" ? 503 : 500);
   }
-};
-
-export const onRequestOptions = async ({ request }: { request?: Request }) => {
-  return new Response(null, {
-    status: 204,
-    headers: getCorsHeaders(request)
-  });
 };

@@ -1,4 +1,4 @@
-import { verifySessionToken, getCorsHeaders, getAuthSecret } from "../auth/_utils";
+import { verifySessionToken, readSessionToken, requireSecret } from "../auth/_utils";
 
 interface D1Database {
   prepare: (query: string) => {
@@ -15,26 +15,16 @@ interface Env {
 }
 
 export const onRequestGet = async ({ request, env }: { request: Request; env?: Env }) => {
-  const corsHeaders = getCorsHeaders(request);
   try {
-    const authHeader = request.headers.get("Authorization");
-    const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
-
-    let secret: string;
-    try {
-      secret = getAuthSecret(env);
-    } catch {
-      return new Response(JSON.stringify({ success: false, message: "Configuração de segurança do servidor ausente." }), {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
+    if (!env?.DB) return new Response(JSON.stringify({ success: false, message: "Serviço indisponível." }), { status: 503, headers: { "Content-Type": "application/json" } });
+    const token = readSessionToken(request);
+    const secret = requireSecret(env?.AUTH_SECRET);
 
     const session = await verifySessionToken(token, secret);
     if (!session) {
       return new Response(JSON.stringify({ success: false, message: "Sessão não autorizada." }), {
         status: 401,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
       });
     }
 
@@ -55,7 +45,7 @@ export const onRequestGet = async ({ request, env }: { request: Request; env?: E
             resume: parsed
           }), {
             status: 200,
-            headers: { "Content-Type": "application/json", ...corsHeaders }
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
           });
         } catch (e) {
           console.error("Falha ao parsear resume_data:", e);
@@ -65,38 +55,28 @@ export const onRequestGet = async ({ request, env }: { request: Request; env?: E
 
     return new Response(JSON.stringify({ success: false, message: "Nenhum currículo em nuvem encontrado." }), {
       status: 404,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
     });
 
   } catch (err: any) {
     return new Response(JSON.stringify({ success: false, message: "Erro ao buscar currículo.", error: err?.message }), {
       status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
     });
   }
 };
 
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
-  const corsHeaders = getCorsHeaders(request);
   try {
-    const authHeader = request.headers.get("Authorization");
-    const token = (authHeader || "").replace(/^Bearer\s+/i, "").trim();
-
-    let secret: string;
-    try {
-      secret = getAuthSecret(env);
-    } catch {
-      return new Response(JSON.stringify({ success: false, message: "Configuração de segurança do servidor ausente." }), {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
+    if (!env?.DB) return new Response(JSON.stringify({ success: false, message: "Serviço indisponível." }), { status: 503, headers: { "Content-Type": "application/json" } });
+    const token = readSessionToken(request);
+    const secret = requireSecret(env?.AUTH_SECRET);
 
     const session = await verifySessionToken(token, secret);
     if (!session) {
       return new Response(JSON.stringify({ success: false, message: "Faça login para salvar seu currículo na nuvem." }), {
         status: 401,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
       });
     }
 
@@ -107,12 +87,13 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
     if (!resumeData || typeof resumeData !== "object") {
       return new Response(JSON.stringify({ success: false, message: "Dados do currículo inválidos." }), {
         status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
       });
     }
 
     const now = new Date().toISOString();
     const jsonStr = JSON.stringify(resumeData);
+    if (jsonStr.length > 250_000) return new Response(JSON.stringify({ success: false, message: "Currículo excede o limite permitido." }), { status: 413, headers: { "Content-Type": "application/json" } });
 
     if (env && env.DB) {
       const existing: any = await env.DB.prepare(`SELECT id FROM resumes WHERE user_id = ?`).bind(session.sub).first();
@@ -136,20 +117,24 @@ export const onRequestPost = async ({ request, env }: { request: Request; env?: 
       updatedAt: now
     }), {
       status: 200,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
     });
 
   } catch (err: any) {
     return new Response(JSON.stringify({ success: false, message: "Erro ao salvar currículo.", error: err?.message }), {
       status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
     });
   }
 };
 
-export const onRequestOptions = async ({ request }: { request?: Request }) => {
+export const onRequestOptions = async () => {
   return new Response(null, {
     status: 204,
-    headers: getCorsHeaders(request)
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
   });
 };

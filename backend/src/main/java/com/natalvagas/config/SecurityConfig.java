@@ -28,8 +28,8 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Value("${natalvagas.security.admin-api-key:}")
-    private String adminApiKey;
+    @Value("${natalvagas.security.editdev-api-key}")
+    private String editdevApiKey;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,41 +40,32 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Endpoints Públicos de Leitura
                 .requestMatchers(HttpMethod.GET, "/jobs/**", "/categories/**", "/sitemap.xml").permitAll()
-                // Documentação OpenAPI / Swagger restrita a Administradores em produção
-                .requestMatchers("/docs/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").hasRole("ADMIN")
+                .requestMatchers("/docs/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").hasRole("EDITDEV")
                 // Aprovação e exclusão Administrativa de Vagas protegidas
-                .requestMatchers(HttpMethod.PATCH, "/jobs/*/approve").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/jobs/**").hasRole("ADMIN")
-                // Criação de vagas pública (com moderação para status PENDING)
-                .requestMatchers(HttpMethod.POST, "/jobs").permitAll()
+                .requestMatchers(HttpMethod.PATCH, "/jobs/*/approve").hasRole("EDITDEV")
+                .requestMatchers(HttpMethod.DELETE, "/jobs/**").hasRole("EDITDEV")
+                // A API Spring não mantém sessões de empresa; publicação ocorre pela função edge autenticada.
+                .requestMatchers(HttpMethod.POST, "/jobs").hasRole("EDITDEV")
                 .anyRequest().authenticated()
             )
-            .addFilterBefore(apiKeyAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(editdevKeyAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
-    public OncePerRequestFilter apiKeyAuthenticationFilter() {
+    public OncePerRequestFilter editdevKeyAuthenticationFilter() {
         return new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
                     throws ServletException, IOException {
-                String apiKey = request.getHeader("X-Admin-Api-Key");
-                if (apiKey == null) {
-                    String authHeader = request.getHeader("Authorization");
-                    if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                        apiKey = authHeader.substring(7);
-                    }
-                }
+                String apiKey = request.getHeader("X-Editdev-Key");
 
-                if (apiKey != null && !apiKey.trim().isEmpty()
-                        && adminApiKey != null && !adminApiKey.trim().isEmpty()
-                        && apiKey.equals(adminApiKey.trim())) {
+                if (apiKey != null && apiKey.equals(editdevApiKey)) {
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                            "admin",
+                            "editdev",
                             null,
-                            List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_RECRUITER"))
+                            List.of(new SimpleGrantedAuthority("ROLE_EDITDEV"))
                     );
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }

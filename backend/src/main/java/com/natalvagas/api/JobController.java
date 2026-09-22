@@ -51,7 +51,7 @@ public class JobController {
     }
 
     @PatchMapping("/{id}/approve")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('EDITDEV')")
     @Operation(summary = "Aprovar vaga pendente (Curadoria/Admin)")
     public ResponseEntity<JobResponseDTO> approveJob(@PathVariable Long id) {
         return ResponseEntity.ok(jobService.approveJob(id));

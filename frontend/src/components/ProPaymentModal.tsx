@@ -9,6 +9,7 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { AuthModal } from "./AuthModal";
 import { QRCodeSVG } from "qrcode.react";
+import { buildPixEMV } from "../services/paymentService";
 
 interface ProPaymentModalProps {
   isOpen: boolean;
@@ -121,6 +122,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   // Status de automação do Pix
   const [autoApproved, setAutoApproved] = useState<boolean>(false);
+  const [paymentOrder, setPaymentOrder] = useState<{ txid: string; amount: number; pixKey: string; expiresAt: string } | null>(null);
+  const [paymentError, setPaymentError] = useState<string>("");
 
   // Controle de liberação protegida por código via API segura
   const [activationCode, setActivationCode] = useState<string>("");
@@ -165,20 +168,32 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   const currentPlanData = PLANS[selectedPlan];
   const pixEmailKey = "pix@natalvagas.com.br";
+  const currentPixPayload = paymentOrder ? buildPixEMV({ pixKey: paymentOrder.pixKey, amount: paymentOrder.amount, txid: paymentOrder.txid }) : "";
+
+  useEffect(() => {
+    if (!isOpen || !isAuthenticated) return;
+    let active = true;
+    setPaymentOrder(null); setPaymentError(""); setAutoApproved(false);
+    fetch('/api/payments/orders', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: selectedPlan }) })
+      .then(async res => ({ ok: res.ok, data: await res.json().catch(() => ({})) }))
+      .then(({ ok, data }) => { if (!active) return; if (ok && data.order) setPaymentOrder(data.order); else setPaymentError(data.message || 'Não foi possível criar o pedido.'); })
+      .catch(() => { if (active) setPaymentError('Serviço de pagamentos indisponível.'); });
+    return () => { active = false; };
+  }, [isOpen, isAuthenticated, selectedPlan]);
 
   // POLLING AUTOMÁTICO EM TEMPO REAL DO STATUS DO PIX
   useEffect(() => {
-    if (!isOpen || paymentMethod !== "pix" || autoApproved) return;
+    if (!isOpen || paymentMethod !== "pix" || autoApproved || !paymentOrder) return;
     let isMounted = true;
 
     const checkStatus = async () => {
       try {
-        const res = await fetch(`/api/payments/pix/status/${currentPlanData.txid}`);
+        const res = await fetch(`/api/payments/pix/status/${paymentOrder.txid}`, { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           if (data && data.status === "approved" && isMounted) {
             setAutoApproved(true);
-            unlockProStatus(data.token, data.plan || selectedPlan);
+            unlockProStatus();
             setTimeout(() => {
               if (isMounted) {
                 onSuccess();
@@ -199,7 +214,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
       isMounted = false;
       clearInterval(interval);
     };
-  }, [isOpen, paymentMethod, currentPlanData.txid, selectedPlan, autoApproved, unlockProStatus, onSuccess, onClose]);
+  }, [isOpen, paymentMethod, paymentOrder, selectedPlan, autoApproved, unlockProStatus, onSuccess, onClose]);
 
   if (!isOpen || typeof document === "undefined") return null;
 
@@ -210,7 +225,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
   };
 
   const handleCopyPayload = () => {
-    navigator.clipboard.writeText(currentPlanData.emvCode);
+    if (!currentPixPayload) return;
+    navigator.clipboard.writeText(currentPixPayload);
     setCopiedType("payload");
     setTimeout(() => setCopiedType(null), 3000);
   };
@@ -246,7 +262,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
       if (res.ok && data.success) {
         setCodeSuccess(true);
         setTimeout(() => {
-          unlockProStatus(data.token, data.plan || selectedPlan);
+          unlockProStatus();
           onSuccess();
           onClose();
         }, 1200);
@@ -260,9 +276,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     }
   };
 
-  const effectivePrice = isPcdDiscountApplied 
-    ? (currentPlanData.amount * 0.5).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : currentPlanData.currentPrice;
+  const effectivePrice = (paymentOrder?.amount ?? currentPlanData.amount).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const handleApplyPcdCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -607,7 +621,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2 flex flex-col items-center">
                     <div className="p-2 bg-white rounded-xl">
                       <QRCodeSVG 
-                        value={currentPlanData.emvCode}
+                        value={currentPixPayload || 'PEDIDO-NAO-DISPONIVEL'}
                         size={128}
                         level="M"
                         includeMargin={false}
@@ -624,7 +638,9 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
                   {/* Status do Pix em Tempo Real */}
                   <div className="w-full mb-2.5 p-2 rounded-xl bg-slate-100/90 border border-slate-200 text-center">
-                    {autoApproved ? (
+                    {paymentError ? (
+                      <div className="text-rose-700 text-xs font-bold">{paymentError}</div>
+                    ) : autoApproved ? (
                       <div className="flex items-center justify-center gap-2 text-emerald-700 font-extrabold text-xs">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 animate-bounce" />
                         <span>Pagamento Confirmado! Desbloqueando Acesso Pro...</span>

@@ -21,6 +21,10 @@ backend/target/
 
 # Logs
 *.log
+
+# Local audit and production backup artifacts (may contain sensitive data)
+audit_tmp/
+.wrangler/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

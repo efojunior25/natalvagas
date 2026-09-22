@@ -110,7 +110,7 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
   }, [currentJob]);
 
   const [isAdminEditModalOpen, setIsAdminEditModalOpen] = useState(false);
-  const isAdminLoggedIn = Boolean(user?.isAdmin);
+  const isAdminLoggedIn = user?.role === 'EDITDEV';
 
   // Determina se a empresa tem o Selo de Empresa Verificada (estrito para quem o administrador homologou)
   const isVerifiedCompany = useMemo(() => {
@@ -354,7 +354,7 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
       {jobPostingSchema && (
         <script 
           type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema).replace(/</g, '\\u003c') }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
         />
       )}
 
