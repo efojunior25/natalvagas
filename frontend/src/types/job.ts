@@ -47,6 +47,8 @@ export interface Job {
   companyInstagram?: string;
   companyLinkedin?: string;
   companyDescription?: string;
+  sourceType?: 'VERIFIED_COMPANY' | 'REGISTERED_COMPANY' | 'ROBOT';
+  sourcePriority?: number;
 }
 
 export interface JobFilterParams {

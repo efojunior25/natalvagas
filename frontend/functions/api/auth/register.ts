@@ -1,168 +1,25 @@
-import { 
-  hashPassword, 
-  createSessionToken, 
-  getCorsHeaders, 
-  getAuthSecret, 
-  createAuthCookie, 
-  logSecurityEvent 
-} from "./_utils";
-
-interface D1Database {
-  prepare: (query: string) => {
-    bind: (...args: any[]) => {
-      first: <T = any>() => Promise<T | null>;
-      run: () => Promise<{ success: boolean; meta?: any }>;
-      all: <T = any>() => Promise<{ results: T[] }>;
-    };
-  };
-}
-
-interface Env {
-  DB?: D1Database;
-  AUTH_SECRET?: string;
-}
-
-const WEAK_PASSWORDS = [
-  "12345678", "123456789", "1234567890", "password", "qwertyui", 
-  "senha123", "admin123", "natal123", "11111111", "00000000",
-  "abcdefgh", "mudar123", "brasil123"
-];
-
+import { AccountRole, createSessionToken, hashOpaqueToken, hashPassword, json, randomToken, requireSecret, sessionCookie, validCnpj, validPassword } from "./_utils";
+interface D1Database { prepare: (query: string) => { bind: (...args: any[]) => { first: <T = any>() => Promise<T | null>; run: () => Promise<any> } } }
+interface Env { DB?: D1Database; AUTH_SECRET?: string; SITE_URL?: string; EMAIL_QUEUE?: { send: (message: unknown) => Promise<void> } }
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
-  const corsHeaders = getCorsHeaders(request);
-  const clientIp = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for") || "client";
-  const userAgent = request.headers.get("user-agent") || "";
-
   try {
-    const body: any = await request.json().catch(() => ({}));
-    const name = (body.name || "").trim();
-    const email = (body.email || "").trim().toLowerCase();
-    const password = (body.password || "").trim();
-
-    if (!name || name.length < 2) {
-      return new Response(JSON.stringify({ success: false, message: "Informe seu nome completo." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return new Response(JSON.stringify({ success: false, message: "Informe um e-mail válido." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    if (!password || password.length < 8) {
-      return new Response(JSON.stringify({ success: false, message: "A senha deve ter no mínimo 8 caracteres." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    if (WEAK_PASSWORDS.includes(password.toLowerCase()) || /^(.)\1+$/.test(password)) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        message: "Senha muito previsível. Por segurança, escolha uma senha mais forte combinando letras e números." 
-      }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    if (!env || !env.DB) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        message: "Serviço de cadastro indisponível. Base de dados não conectada." 
-      }), {
-        status: 503,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    let secret: string;
-    try {
-      secret = getAuthSecret(env);
-    } catch {
-      return new Response(JSON.stringify({
-        success: false,
-        message: "Configuração de segurança do servidor ausente (AUTH_SECRET)."
-      }), {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    const userId = `usr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
-    const now = new Date().toISOString();
-
-    // 1. Verifica se o e-mail já existe
-    const existing = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
-    if (existing) {
-      await logSecurityEvent(env.DB, null, "REGISTER_FAILED_EMAIL_EXISTS", clientIp, userAgent, { email });
-      return new Response(JSON.stringify({ 
-        success: false, 
-        message: "Não foi possível concluir o cadastro com este e-mail. Se já possui cadastro, faça login." 
-      }), {
-        status: 409,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    // 2. Criptografa a senha com salt exclusivo
-    const { hash, salt } = await hashPassword(password);
-
-    // 3. Salva no banco de dados D1 com papel padrão USER e campos de controle de tentativas
-    await env.DB.prepare(`
-      INSERT INTO users (id, name, email, password_hash, salt, role, is_pro, pro_plan, failed_attempts, locked_until, last_login_ip, last_login_at, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, 'USER', 0, NULL, 0, NULL, ?, ?, ?, ?)
-    `).bind(userId, name, email, hash, salt, clientIp, now, now, now).run();
-
-    const userProfile = {
-      id: userId,
-      name,
-      email,
-      role: "USER",
-      isAdmin: false,
-      isPro: false,
-      createdAt: now
-    };
-
-    const token = await createSessionToken(userProfile, secret);
-    const authCookie = createAuthCookie(token, 30 * 24 * 3600);
-
-    await logSecurityEvent(env.DB, userId, "USER_REGISTERED", clientIp, userAgent, { email });
-
-    return new Response(JSON.stringify({
-      success: true,
-      user: userProfile,
-      token,
-      message: "Conta criada com sucesso!"
-    }), {
-      status: 201,
-      headers: {
-        "Content-Type": "application/json",
-        "Set-Cookie": authCookie,
-        ...corsHeaders
-      }
-    });
-
-
-  } catch (err: any) {
-    return new Response(JSON.stringify({ 
-      success: false, 
-      message: "Erro ao criar conta no servidor.", 
-      error: err?.message 
-    }), {
-      status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders }
-    });
+    if (!env?.DB) return json({ success: false, message: "Serviço de cadastro temporariamente indisponível." }, 503);
+    const secret = requireSecret(env.AUTH_SECRET); const body: any = await request.json().catch(() => ({}));
+    const name = String(body.name || "").trim().slice(0, 120); const email = String(body.email || "").trim().toLowerCase().slice(0, 150); const password = String(body.password || "");
+    const accountType: AccountRole = body.accountType === "COMPANY" ? "COMPANY" : "USER"; const companyName = String(body.companyName || "").trim().slice(0, 160); const cnpj = String(body.cnpj || "").replace(/\D/g, "");
+    if (body.accountType === "EDITDEV") return json({ success: false, message: "Tipo de conta não permitido no cadastro público." }, 403);
+    if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ success: false, message: "Dados de cadastro inválidos." }, 400);
+    if (!validPassword(password)) return json({ success: false, message: "Use ao menos 12 caracteres, com maiúscula, minúscula, número e símbolo." }, 400);
+    if (accountType === "COMPANY" && (companyName.length < 2 || !validCnpj(cnpj))) return json({ success: false, message: "Informe razão social e CNPJ válidos." }, 400);
+    if (await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first()) return json({ success: false, message: "Não foi possível concluir o cadastro com os dados informados." }, 409);
+    const now = new Date().toISOString(); const userId = `usr_${crypto.randomUUID()}`; const companyId = accountType === "COMPANY" ? `cmp_${crypto.randomUUID()}` : null; const { hash, salt } = await hashPassword(password);
+    if (companyId) await env.DB.prepare("INSERT INTO companies (id, legal_name, display_name, cnpj, verification_status, created_at, updated_at) VALUES (?, ?, ?, ?, 'PENDING', ?, ?)").bind(companyId, companyName, companyName, cnpj, now, now).run();
+    await env.DB.prepare("INSERT INTO users (id, name, email, password_hash, salt, role, company_id, status, is_pro, email_verified, failed_login_count, auth_version, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, 'ACTIVE', 0, 0, 0, 0, ?, ?)").bind(userId, name, email, hash, salt, accountType, companyId, now, now).run();
+    if (env.EMAIL_QUEUE) { const rawToken = randomToken(); const tokenHash = await hashOpaqueToken(rawToken); const expiresAt = new Date(Date.now() + 24 * 60 * 60_000).toISOString(); await env.DB.prepare("INSERT INTO account_tokens (id, user_id, token_hash, purpose, expires_at, created_at) VALUES (?, ?, ?, 'VERIFY_EMAIL', ?, ?)").bind(`tok_${crypto.randomUUID()}`, userId, tokenHash, expiresAt, now).run(); await env.EMAIL_QUEUE.send({ type: "VERIFY_EMAIL", to: email, name, url: `${env.SITE_URL || "https://natalvagas.com.br"}/verificar-email?token=${rawToken}` }); }
+    const profile = { id: userId, name, email, role: accountType, companyId, isPro: false, companyVerified: false, emailVerified: false, createdAt: now }; const token = await createSessionToken(profile, secret);
+    return json({ success: true, user: profile, message: "Conta criada. Verifique seu e-mail antes de usar recursos sensíveis." }, 201, { "Set-Cookie": sessionCookie(token) });
+  } catch (error: any) {
+    console.error("auth_register_failed", error instanceof Error ? `${error.name}: ${error.message}` : "unknown_error");
+    return json({ success: false, message: "Não foi possível concluir o cadastro." }, error?.message === "AUTH_CONFIG_MISSING" ? 503 : 500);
   }
-};
-
-export const onRequestOptions = async ({ request }: { request?: Request }) => {
-  return new Response(null, {
-    status: 204,
-    headers: getCorsHeaders(request)
-  });
 };

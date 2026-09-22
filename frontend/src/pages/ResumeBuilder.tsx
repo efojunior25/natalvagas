@@ -12,7 +12,7 @@ import { ResumeLaunchOfferModal } from '../components/ResumeLaunchOfferModal';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { PostJobModal } from '../components/PostJobModal';
-import { useAuth, PRO_TOKEN_KEY, TOKEN_STORAGE_KEY, verifyProToken } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 interface Experience {
   id: string;
@@ -108,9 +108,7 @@ export const ResumeBuilder: React.FC = () => {
 
   const [activeTemplate, setActiveTemplate] = useState<TemplateType>('ats');
   const { user } = useAuth();
-  const [isPro, setIsPro] = useState<boolean>(() => {
-    return verifyProToken(localStorage.getItem(PRO_TOKEN_KEY));
-  });
+  const [isPro, setIsPro] = useState<boolean>(false);
   const effectiveIsPro = isPro || !!user?.isPro;
 
   useEffect(() => {
@@ -131,12 +129,7 @@ export const ResumeBuilder: React.FC = () => {
   // Carrega currículo da nuvem quando o usuário estiver autenticado
   useEffect(() => {
     if (!user) return;
-    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-    if (!token) return;
-
-    fetch('/api/resumes', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+    fetch('/api/resumes', { credentials: 'include' })
       .then(res => res.ok ? res.json() : null)
       .then(result => {
         if (result?.success && result?.resume?.data) {
@@ -160,17 +153,14 @@ export const ResumeBuilder: React.FC = () => {
       return;
     }
 
-    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-    if (!token) return;
-
     setCloudSyncStatus('saving');
     const timer = setTimeout(async () => {
       try {
         const res = await fetch('/api/resumes', {
           method: 'POST',
+          credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             title: data.fullName ? `Currículo - ${data.fullName}` : 'Meu Currículo',

@@ -16,8 +16,6 @@ interface EditDevPageProps {
   onJobUpdated?: () => void;
 }
 
-const STORAGE_SESSION_AUTH = 'natalvagas_admin_mfa_auth';
-const STORAGE_ADMIN_EMAIL = 'natalvagas_admin_email';
 export const STORAGE_JOB_OVERRIDES = 'natalvagas_job_overrides';
 
 export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) => {
@@ -71,14 +69,10 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
     });
   }, [jobs, overrides]);
 
-  const isAuth = Boolean(user?.isAdmin);
+  const isAuth = user?.role === 'EDITDEV';
 
   const handleLogout = () => {
     logout();
-    try {
-      sessionStorage.removeItem(STORAGE_SESSION_AUTH);
-      sessionStorage.removeItem(STORAGE_ADMIN_EMAIL);
-    } catch {}
   };
 
   // Toggle rápido de Selo de Empresa Verificada
@@ -181,7 +175,7 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
     return Array.from(set).sort();
   }, [consolidatedJobs]);
 
-  // TELA 1: LOGIN ADMINISTRATIVO COM MFA
+  // TELA 1: LOGIN EDITDEV COM MFA
   if (!isAuth) {
     return (
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 text-white">
@@ -194,10 +188,10 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
 
           <div className="space-y-2">
             <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-              Painel Restrito Dev / Admin
+              Painel Restrito EDITDEV
             </h1>
             <p className="text-xs text-slate-400 leading-relaxed max-w-xs mx-auto">
-              Acesso exclusivo aos administradores oficiais do Natal Vagas com autenticação em duas etapas (MFA).
+              Acesso exclusivo à conta operacional EDITDEV com autenticação em duas etapas (MFA).
             </p>
           </div>
 
@@ -220,14 +214,14 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
         <AuthModal
           isOpen={showAuthModal}
           onClose={() => setShowAuthModal(false)}
-          title="Login de Administrador"
+          title="Login EDITDEV"
           subtitle="Informe suas credenciais corporativas @natalvagas.com.br."
         />
       </div>
     );
   }
 
-  // TELA 2: PAINEL ADMINISTRATIVO DE EDIÇÃO DE VAGAS
+  // TELA 2: PAINEL EDITDEV DE EDIÇÃO DE VAGAS
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
       
@@ -241,11 +235,11 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
             <h2 className="text-sm sm:text-base font-black flex items-center gap-2">
               <span>Painel de Controle de Vagas</span>
               <span className="text-[10px] uppercase font-bold bg-brand-500/20 text-brand-300 border border-brand-500/30 px-2 py-0.5 rounded-full">
-                Admin MFA
+                EDITDEV MFA
               </span>
             </h2>
             <p className="text-[11px] text-slate-400 truncate max-w-xs">
-              Sessão: <strong className="text-slate-300">{user?.email || 'admin@natalvagas.com.br'}</strong>
+              Sessão: <strong className="text-slate-300">{user?.email || 'editdev@natalvagas.com.br'}</strong>
             </p>
           </div>
         </div>
@@ -521,7 +515,7 @@ export const EditDevPage: React.FC<EditDevPageProps> = ({ jobs, onJobUpdated }) 
 
       {/* Rodapé Interno */}
       <footer className="p-4 border-t border-slate-800 text-center text-xs text-slate-500">
-        Natal Vagas • Ambiente Interno Administrativo
+        Natal Vagas • Ambiente Interno EDITDEV
       </footer>
 
     </div>

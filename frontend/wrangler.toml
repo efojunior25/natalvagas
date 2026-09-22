@@ -1,0 +1,8 @@
+name = "natalvagas"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-10"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "natalvagas-db"
+database_id = "16506fb3-dae6-44ee-a105-1097db1865dd"

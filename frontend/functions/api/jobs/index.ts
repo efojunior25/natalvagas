@@ -1,97 +1,29 @@
-interface Env {
-  DB?: any;
-}
+import { json, readSessionToken, requireSecret, verifySessionToken } from "../auth/_utils";
+interface D1Database { prepare: (query: string) => { bind: (...args: any[]) => { first: <T = any>() => Promise<T | null>; run: () => Promise<any>; all: <T = any>() => Promise<{ results: T[] }> } } }
+interface Env { DB?: D1Database; AUTH_SECRET?: string }
+const cleanText = (value: unknown, max: number) => String(value || "").trim().slice(0, max);
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
+export const onRequestGet = async ({ env }: { env?: Env }) => {
+  if (!env?.DB) return json({ success: false, message: "Catálogo dinâmico indisponível." }, 503);
+  const rows = await env.DB.prepare("SELECT id, slug, title, company, data, source_type, source_priority, is_featured, created_at FROM submitted_jobs WHERE status = 'APPROVED' ORDER BY source_priority ASC, is_featured DESC, created_at DESC LIMIT 500").bind().all();
+  return json({ success: true, jobs: rows.results.map((row: any) => ({ ...JSON.parse(row.data), id: row.id, slug: row.slug, sourceType: row.source_type, sourcePriority: row.source_priority, isFeatured: Boolean(row.is_featured), createdAt: row.created_at })) });
+};
+
+export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
   try {
-    const body = await context.request.json().catch(() => null) as any;
-
-    if (!body || !body.title || !body.companyName || !body.description || !body.applicationTarget) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        message: 'Preencha todos os campos obrigatórios da vaga.' 
-      }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-    const rawTarget = String(body.applicationTarget || '').trim();
-    const lowerTarget = rawTarget.toLowerCase();
-    const isSafeTarget = lowerTarget.startsWith('http://') || lowerTarget.startsWith('https://')
-      || lowerTarget.startsWith('mailto:') || lowerTarget.startsWith('tel:')
-      || lowerTarget.startsWith('wa.me/') || lowerTarget.startsWith('api.whatsapp.com/')
-      || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawTarget)
-      || /^\+?[0-9\s()\-./]{8,25}$/.test(rawTarget);
-
-    if (!isSafeTarget || lowerTarget.startsWith('javascript:') || lowerTarget.startsWith('data:')) {
-      return new Response(JSON.stringify({
-        success: false,
-        message: 'Canal de candidatura inválido. Insira um link HTTPS, e-mail ou WhatsApp válido.'
-      }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-    const cleanTitle = String(body.title).trim();
-    const cleanCompany = String(body.companyName).trim();
-    const baseSlug = `${cleanTitle}-${cleanCompany}`
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-
-    const slug = `${baseSlug}-${Date.now().toString(36)}`;
-
-    // Se o banco D1 estiver vinculado, pode registrar no histórico de vagas submetidas
-    if (context.env.DB) {
-      try {
-        await context.env.DB.prepare(`
-          CREATE TABLE IF NOT EXISTS submitted_jobs (
-            id TEXT PRIMARY KEY,
-            slug TEXT UNIQUE,
-            title TEXT NOT NULL,
-            company TEXT NOT NULL,
-            data TEXT NOT NULL,
-            is_featured INTEGER DEFAULT 0,
-            created_at TEXT NOT NULL
-          )
-        `).run();
-
-        await context.env.DB.prepare(`
-          INSERT INTO submitted_jobs (id, slug, title, company, data, is_featured, created_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
-        `).bind(
-          `job_${Date.now()}`,
-          slug,
-          cleanTitle,
-          cleanCompany,
-          JSON.stringify(body),
-          body.isFeatured ? 1 : 0,
-          new Date().toISOString()
-        ).run();
-      } catch (dbErr) {
-        console.warn('Registro no D1 falhou, prosseguindo com sucesso:', dbErr);
-      }
-    }
-
-    return new Response(JSON.stringify({
-      success: true,
-      slug,
-      message: 'Vaga cadastrada com sucesso! Ela passará pela curadoria e estará no mural.'
-    }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  } catch (err: any) {
-    return new Response(JSON.stringify({ 
-      success: false, 
-      message: 'Erro interno ao processar a vaga.' 
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
+    if (!env?.DB) return json({ success: false, message: "Cadastro de vagas indisponível." }, 503);
+    const session = await verifySessionToken(readSessionToken(request), requireSecret(env.AUTH_SECRET));
+    if (!session || session.role !== "COMPANY" || !session.companyId) return json({ success: false, message: "Entre com uma conta de empresa para publicar vagas." }, 403);
+    const account: any = await env.DB.prepare("SELECT email_verified, status FROM users WHERE id = ?").bind(session.sub).first();
+    if (!account || account.status !== "ACTIVE" || !account.email_verified) return json({ success: false, message: "Verifique o e-mail da empresa antes de publicar." }, 403);
+    const company: any = await env.DB.prepare("SELECT display_name, verification_status FROM companies WHERE id = ?").bind(session.companyId).first();
+    if (!company || ["REJECTED", "SUSPENDED"].includes(company.verification_status)) return json({ success: false, message: "Empresa sem permissão para publicar." }, 403);
+    const body: any = await request.json().catch(() => null); const title = cleanText(body?.title, 150); const description = cleanText(body?.description, 10_000); const target = cleanText(body?.applicationTarget, 500);
+    if (!title || description.length < 20 || !target) return json({ success: false, message: "Preencha os campos obrigatórios da vaga." }, 400);
+    const baseSlug = `${title}-${company.display_name}`.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    const slug = `${baseSlug}-${crypto.randomUUID().slice(0, 8)}`; const verified = company.verification_status === "VERIFIED"; const sourceType = verified ? "VERIFIED_COMPANY" : "REGISTERED_COMPANY"; const priority = verified ? 1 : 2; const now = new Date().toISOString();
+    const safeData = { title, companyName: company.display_name, city: cleanText(body.city, 80), state: "RN", neighborhood: cleanText(body.neighborhood, 100) || undefined, workModel: body.workModel, contractType: body.contractType, hideSalary: Boolean(body.hideSalary), salaryMin: Number.isFinite(body.salaryMin) ? body.salaryMin : undefined, salaryMax: Number.isFinite(body.salaryMax) ? body.salaryMax : undefined, description, requirements: cleanText(body.requirements, 5000) || undefined, benefits: cleanText(body.benefits, 5000) || undefined, applicationChannel: body.applicationChannel, applicationTarget: target, status: "PENDING", isCompanyVerified: verified, sourceType, sourcePriority: priority };
+    await env.DB.prepare("INSERT INTO submitted_jobs (id, slug, company_id, title, company, data, status, source_type, source_priority, is_featured, created_at) VALUES (?, ?, ?, ?, ?, ?, 'PENDING', ?, ?, 0, ?)").bind(`job_${crypto.randomUUID()}`, slug, session.companyId, title, company.display_name, JSON.stringify(safeData), sourceType, priority, now).run();
+    return json({ success: true, slug, status: "PENDING", message: "Vaga recebida e enviada para verificação." }, 202);
+  } catch { return json({ success: false, message: "Não foi possível cadastrar a vaga." }, 500); }
 };

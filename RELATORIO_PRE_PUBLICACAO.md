@@ -1,173 +1,203 @@
-# Relatório de Auditoria de Prontidão para Publicação (Pre-Launch QA & AppSec)
-**Projeto:** Natal Vagas  
-**Data da Auditoria:** 20 de Setembro de 2026  
-**Auditor:** Especialista Sênior em QA & Segurança de Aplicações (AppSec)  
-**Status do Repositório:** Análise estática do código-fonte (Frontend React, Cloudflare Functions, Backend Spring Boot) e reprodução de cenários em ambiente de sandbox.
+# Relatório de Auditoria Pré-Publicação — Natal Vagas
 
----
+**Data:** 22/09/2026  
+**Revisão auditada:** `b0fab21ad226406506a8ce42385991951127c4ac` (`feat/google-analytics-gtag`)  
+**Modo:** somente auditoria; nenhuma alteração no código do produto  
+**Ambiente:** local, dados sintéticos e sem chamadas à produção  
 
-## 1. Resumo Executivo & Veredito
+## 1. Resumo executivo e veredito
 
-### Veredito: 🔴 **NÃO PRONTO PARA PRODUÇÃO**
+## Veredito: **NÃO PRONTO**
 
-O portal **Natal Vagas** possui um catálogo de vagas estruturado, interface visual moderna e estratégias agressivas de SEO e PWA. No entanto, a aplicação apresenta **vulnerabilidades críticas de segurança da informação**, **falhas de arquitetura estruturais** e **ausência total de módulos essenciais declarados no escopo de negócio** (painéis de usuário, empresa e moderação real).
+O sistema não deve ser publicado no estado auditado. Foram confirmados controles de autenticação, pagamento e administração que falham de forma aberta quando bindings/variáveis de ambiente não existem. O impacto inclui login sem credencial válida, criação/forja de sessões, concessão gratuita de plano PRO vitalício, falsificação de confirmação Pix, criação administrativa de cupons com PIN público e publicação imediata de vagas anônimas sem moderação.
 
-Se publicado no estado atual, o portal estará exposto a:
-1. **Comprometimento imediato de privilégios de Administrador:** A autenticação administrativa é realizada no código do frontend (cliente), validando senhas fracas hardcoded e permitindo bypass trivial via console do navegador (`sessionStorage`).
-2. **Fraude generalizada no modelo de monetização:** Qualquer usuário pode forjar tokens de acesso PRO vitalício em segundos ou solicitar tokens assinados pelo servidor sem pagar um único centavo. Os pagamentos Pix utilizam identificadores estáticos compartilhados que liberam planos para terceiros.
-3. **Execução Remota de Código no Navegador (Stored XSS):** Qualquer usuário anônimo pode cadastrar uma vaga com scripts maliciosos em campos de texto, os quais são injetados sem sanitização em tags `<script type="application/ld+json">`, executando JavaScript no navegador de candidatos e administradores.
-4. **Vazamento de credenciais e certificados bancários:** Certificados de produção da Efí Bank (`.p12`, `.pem`) e segredos de API estão presentes no ambiente local do repositório.
-5. **Aprovação automática de vagas anônimas no Spring Boot:** Vagas cadastradas publicamente são gravadas com status `APPROVED` direto, abrindo portas para campanhas de golpes, links maliciosos e vagas fraudulentas sem moderação prévia.
-6. **Perfis de Empresa e Candidato inexistentes:** Os fluxos de painel da empresa (CNPJ, gestão de candidatos) e do candidato (perfil, candidaturas, favoritos, exclusão de conta/LGPD) não estão implementados.
+Também não estão implementados fluxos essenciais solicitados: verificação de e-mail, recuperação/redefinição/troca de senha, refresh/rotação/revogação de sessão, exclusão de conta, painel de empresa, candidaturas/favoritos/alertas, RBAC real para Usuário/Empresa/Admin e auditoria administrativa.
 
----
+Pontos positivos confirmados: build de produção concluído; Flyway ativo com `ddl-auto: validate`; queries observadas usam parâmetros; busca pública limita página a 50; currículo em nuvem usa o `sub` da sessão nas queries; sitemap/robots/JSON-LD passaram nos validadores locais; nenhum `.p12`, `.pem`, `.key`, `.pfx` ou `.jks` foi encontrado rastreado no Git.
 
-## 2. Bloqueadores de Publicação (Must-Fix) — Ordenados por Severidade
+### Classificação das evidências
 
-Os itens abaixo impedem a publicação do site e devem ser corrigidos antes de qualquer exposição ao público:
+- **CONFIRMADO (testei e reproduzi):** execução local do handler/build/teste com request sintético, ou ausência comprovada por inventário completo de rotas/arquivos.
+- **SUSPEITA (só li o código):** risco derivado da implementação, sem infraestrutura Cloudflare/PostgreSQL/Efí real disponível localmente.
 
-1. **[CRÍTICO] Bypass de Autenticação Administrativa e Senhas Mestras no Frontend (`AuthContext.tsx`):**  
-   Remover toda autenticação administrativa do lado cliente, eliminar o array de senhas `MASTER_PASSWORDS` e migrar a autenticação para um endpoint backend seguro com hash Argon2/BCrypt e MFA gerenciado no servidor.
-2. **[CRÍTICO] Forjamento Trivial de Tokens PRO (`AuthContext.tsx` & `verify-code.ts` & `sign-pro.ts`):**  
-   Corrigir a função `verifyProToken` para validar a assinatura criptográfica com chave secreta HMAC exclusivamente no backend. Corrigir o endpoint `/api/auth/sign-pro` para exigir confirmação obrigatória de pagamento antes da emissão do token.
-3. **[CRÍTICO] Stored XSS via Injeção em JSON-LD (`JobModal.tsx` e `JobDetailsPage.tsx`):**  
-   Sanitizar todos os campos de texto no cadastro de vagas e escapar caracteres HTML perigosos (`<` para `\u003c`) antes de injetar objetos em tags `<script dangerouslySetInnerHTML>`.
-4. **[CRÍTICO] Certificados Efí Bank e Segredos Reais no Diretório do Projeto:**  
-   Mover `producao-951802-Natal Vagas.p12`, `certs/key.pem` e chaves do `.env` para cofres de segredos (Cloudflare Secrets / HashiCorp Vault), removê-los do sistema de arquivos local e rotacionar as credenciais no Efí Bank imediatamente.
-5. **[CRÍTICO] Vagas Criadas Diretamente como `APPROVED` no Spring Boot (`JobService.java`):**  
-   Alterar o status inicial de criação de vagas públicas para `PENDING`, exigindo aprovação manual de moderador antes de torná-las visíveis no catálogo.
-6. **[ALTO] Txids Estáticos Compartilhados no Pagamento Pix (`ProPaymentModal.tsx` & `status/[txid].ts`):**  
-   Implementar cobranças dinâmicas Pix com `txid` único por transação/pedido. Txids reutilizados causam aprovação indevida para múltiplos usuários simultâneos.
-7. **[ALTO] Desconexão Arquitetural entre Spring Boot e Cloudflare Functions:**  
-   Definir uma fonte canônica de verdade para o backend (ou migrar os endpoints de auth/pagamento para o Spring Boot ou consolidar toda a persistência no Cloudflare D1). No modo de desenvolvimento local, o Vite encaminha requisições `/api` para a porta 8085 do Spring Boot, onde endpoints de autenticação e pagamentos não existem (resultando em fallback mock no navegador).
-8. **[ALTO] Ausência de Recuperação de Senha, Verificação de E-mail e Exclusão de Conta (LGPD):**  
-   Implementar envio de e-mails transacionais para confirmação de conta, recuperação de senha com tokens de uso único e rota para exclusão e portabilidade de dados pessoais.
+## 2. Bloqueadores de publicação (must-fix)
 
----
+1. **CRÍTICO — autenticação fail-open:** `/api/auth/login` aceita qualquer e-mail/senha quando D1 não está vinculado (`frontend/functions/api/auth/login.ts:77-96`). Reproduzido localmente: request sintético retornou HTTP 200, usuário e token.
+2. **CRÍTICO — segredos reais/padrão versionados:** segredo HMAC, segredo de webhook, chave de admin, senhas/PINs mestres e códigos PRO estão no código/histórico. Exemplos mascarados: `nata...`, `edso...`, `poti...`. Rotacionar todos e remover do histórico.
+3. **CRÍTICO — plano PRO sem pagamento:** `/api/auth/sign-pro` aceita apenas `email` e `plan`, trata como `manual_grant` e emite token aprovado (`frontend/functions/api/auth/sign-pro.ts:24-78`). Reproduzido com plano vitalício e sem txid.
+4. **CRÍTICO — falsificação de Pix:** segredo padrão público autentica webhook e qualquer `payload.pix` vira aprovado sem validação criptográfica/mTLS/consulta à Efí, valor ou vínculo com pedido (`frontend/functions/api/payments/pix/webhook.ts:12,17-23,50-99`). Reproduzido localmente com Pix fictício de R$ 0,01.
+5. **CRÍTICO — administração no cliente:** senhas mestras e decisão de admin/MFA ficam no bundle e em `localStorage`/`sessionStorage` (`frontend/src/context/AuthContext.tsx:40-60,209-315`; `frontend/src/pages/EditDevPage.tsx:74`). Qualquer usuário pode definir `natalvagas_admin_mfa_auth=true`; não há autorização backend correspondente para as edições locais.
+6. **ALTO — publicação anônima e imediatamente aprovada:** `POST /jobs` é público (`backend/src/main/java/com/natalvagas/config/SecurityConfig.java:47-49`) e o service força `APPROVED` (`backend/src/main/java/com/natalvagas/service/JobService.java:82-117`, especialmente linha 110), contrariando a mensagem de curadoria.
+7. **ALTO — códigos/cupons inseguros:** códigos PRO fixos públicos dão acesso; qualquer `PCD-XXXX` é aceito na ausência de KV; PINs administrativos públicos criam/listam cupons (`frontend/functions/api/payments/verify-code.ts:12-18,64-109`; `frontend/functions/api/coupons/verify.ts:134-145`; `frontend/functions/api/coupons/create.ts:20-39,54-68`). Todos foram reproduzidos localmente.
+8. **ALTO — sessão fraca e não revogável:** token HMAC próprio de 30 dias usa segredo público, não valida emissor/audiência, não possui refresh/rotação/jti e logout só apaga armazenamento local (`frontend/functions/api/auth/_utils.ts:74-115`; `frontend/src/context/AuthContext.tsx:402-410`). Token forjado foi aceito por `/api/auth/me`.
+9. **ALTO — fluxos fundamentais ausentes:** não existem endpoints/componentes para verificação de e-mail, recuperação/redefinição/troca de senha, exclusão de conta e revogação de sessões. Inventário: somente `login`, `register`, `me` e `sign-pro` em `frontend/functions/api/auth/`.
+10. **ALTO — dependências vulneráveis:** `npm audit --json` confirmou 1 vulnerabilidade alta e 3 moderadas, incluindo Vite path traversal/Windows alternate paths (`GHSA-fx2h-pf6j-xcff`) e React Router open redirect (`GHSA-wrjc-x8rr-h8h6`).
 
-## 3. Tabela de Achados de Auditoria
+## 3. Tabela de achados
 
-| ID | Área | Severidade | Confirmado / Suspeita | Descrição | Evidência | Impacto | Como Reproduzir | Correção Sugerida | Esforço |
-|---|---|---|---|---|---|---|---|---|---|
-| **SEC-01** | Auth / Login | **Crítico** | **CONFIRMADO** | Senhas mestras hardcoded e autenticação Admin 100% no cliente | `frontend/src/context/AuthContext.tsx:52-60` e `:143-145` | Qualquer visitante assume papel de Admin e acessa telas restritas | Abrir DevTools no navegador, executar `sessionStorage.setItem('natalvagas_admin_mfa_auth', 'true')` e acessar `/editdev` | Transferir autenticação para o backend, excluir senhas no código e usar cookies HTTP-only seguros | M |
-| **SEC-02** | Monetização | **Crítico** | **CONFIRMADO** | `verifyProToken` aceita qualquer assinatura hex de 64 caracteres | `frontend/src/context/AuthContext.tsx:80-105` | Desbloqueio gratuito e permanente do Plano PRO para qualquer usuário | Gerar payload base64 com status "approved" e concatenar `.` seguido de 64 zeros; `verifyProToken` retorna `true` | Validar a assinatura HMAC-SHA256 no servidor com chave secreta não exposta ao cliente | P |
-| **SEC-03** | Monetização | **Crítico** | **CONFIRMADO** | Endpoint `/api/auth/sign-pro` assina token PRO vitalício sem checar pagamento | `frontend/functions/api/auth/sign-pro.ts:27-45` | Obtenção de token PRO válido assinado pelo servidor de graça | Fazer `POST /api/auth/sign-pro` com payload `{"email": "teste@exemplo.com", "plan": "lifetime"}` (sem `txid`) | Exigir `txid` válido, confirmado no banco de pagamentos antes de gerar qualquer token | P |
-| **SEC-04** | Injeção / XSS | **Crítico** | **CONFIRMADO** | Stored XSS via quebra de tag em Schema JSON-LD | `frontend/src/components/JobModal.tsx:102` e `JobDetailsPage.tsx:367` | Execução de script arbitrário no navegador de visitantes e roubo de tokens de sessão | Cadastrar vaga com título `Analista</script><script>alert(1)</script>` e abrir o modal da vaga | Escapar `<` como `\u003c` ao serializar JSON-LD em tags `<script>` | P |
-| **SEC-05** | Credenciais | **Crítico** | **CONFIRMADO** | Certificado bancário `.p12`, chave privada RSA e segredos expostos no disco | Raiz `./producao-951802-Natal Vagas.p12`, `certs/key.pem`, `.env:2-6` | Comprometimento total da conta jurídica Efí Bank e falsificação de transações Pix | Inspecionar a pasta raiz do repositório local | Revogar e reemitir certificado no Efí Bank, mover arquivos para cofre seguro fora do repo | M |
-| **SEC-06** | Backend / Moderação | **Crítico** | **CONFIRMADO** | Vagas criadas via API Spring Boot ficam ativas (`APPROVED`) imediatamente sem moderação | `backend/src/main/java/com/natalvagas/service/JobService.java:110` | Disseminação instantânea de fraudes e golpes de falso emprego no catálogo | Fazer `POST /jobs` com payload válido; o retorno indica `status: "APPROVED"` | Definir `status(JobStatus.PENDING)` em `JobService.java:110` e criar fila de aprovação | P |
-| **SEC-07** | Auth / Login | **Alto** | **CONFIRMADO** | Fallback de contingência no login aceita qualquer senha se banco D1 estiver ausente | `frontend/functions/api/auth/login.ts:77-96` | Qualquer usuário loga com qualquer senha se D1 não responder | Enviar `POST /api/auth/login` sem D1 configurado; retorna HTTP 200 com token válido | Retornar HTTP 503 (Serviço Indisponível) caso a conexão com a base de dados falhe | P |
-| **SEC-08** | Auth / Login | **Alto** | **CONFIRMADO** | Cadastro finge sucesso criando mock local caso a API falhe | `frontend/src/context/AuthContext.tsx:380-392` | Usuário acredita ter conta criada, mas dados não foram persistidos no servidor | Bloquear ou derrubar o backend e tentar se cadastrar; modal fecha com falso sucesso | Tratar erros de rede exibindo alerta ao usuário em vez de criar usuário fake em `localStorage` | P |
-| **SEC-09** | Pagamentos | **Alto** | **CONFIRMADO** | Planos Pix possuem `txid` estático e compartilhado entre todos os compradores | `frontend/src/components/ProPaymentModal.tsx:45,67,91` | Um único pagamento pode validar o status de múltiplos usuários concorrentes | Abrir modal em duas abas anônimas; ambas consultam o mesmo `txid` estático | Gerar cobrança Pix dinâmica com `txid` aleatório exclusivo por pedido na Efí | G |
-| **SEC-10** | Pagamentos | **Alto** | **CONFIRMADO** | Códigos autorizados fixos concedem PRO vitalício ilimitado (`verify-code.ts`) | `frontend/functions/api/payments/verify-code.ts:13-19` | Perda total de controle de cupons e acesso PRO não autorizado | Enviar código `POTIGUAR2026` no endpoint `/api/payments/verify-code`; aprova vitalício sem limite | Remover códigos fixos em código, armazenar cupons em tabela com contador e expiração | M |
-| **SEC-11** | Painel Admin | **Alto** | **CONFIRMADO** | Modificações em `/editdev` gravam apenas no `localStorage` do navegador do admin | `frontend/src/pages/EditDevPage.tsx:97,129` | Alterações de vagas feitas pelo admin não são vistas por nenhum outro usuário | Alterar uma vaga em `/editdev` e abrir o site em outro navegador; a alteração não existe | Implementar endpoint backend (`PATCH /api/jobs/{id}`) para persistir edições no banco | M |
-| **SEC-12** | Painel Admin | **Médio** | **CONFIRMADO** | Tela de gerenciamento de cupons (`AdminCoupons.tsx`) não possui rota e está órfã | `frontend/src/pages/AdminCoupons.tsx` e `frontend/src/App.tsx:513-547` | Administrador não tem como acessar a interface de gestão de cupons PcD | Buscar a rota `/admin/coupons` em `App.tsx`; não há correspondência | Adicionar rota protegida para `AdminCoupons` em `App.tsx` | P |
-| **SEC-13** | Sessão | **Médio** | **CONFIRMADO** | Tokens JWT de 30 dias salvos em `localStorage` sem revogação no logout | `frontend/src/context/AuthContext.tsx:402-410` e `_utils.ts:84` | Sessões sequestradas continuam ativas no servidor por 30 dias após logout | Fazer logout, copiar o token anterior e enviar no cabeçalho `Authorization`; a API ainda aceita | Usar cookies `HttpOnly; Secure; SameSite=Lax` com mecanismo de lista negra ou refresh tokens | M |
-| **SEC-14** | Auth / Segurança | **Médio** | **CONFIRMADO** | Inexistência de política de rate limit e proteção contra força bruta | `functions/api/auth/login.ts` e `backend/SecurityConfig.java` | Ataques automatizados de força bruta contra senhas e cupons de ativação | Disparar requisições em loop contra `/api/auth/login`; não há bloqueio ou atraso | Implementar rate limiting por IP/conta via Cloudflare WAF ou biblioteca Bucket4j/Redis | M |
-| **SEC-15** | Auth / Enumeração | **Baixo** | **CONFIRMADO** | Enumeração de usuários através da resposta do cadastro | `frontend/functions/api/auth/register.ts:55-61` | Invasores podem mapear quais e-mails possuem conta no portal | Tentar registrar um e-mail já existente; a API responde HTTP 409 explícito | Manter mensagens e respostas neutras ou implementar fluxo unificado | P |
-| **SEC-16** | CORS | **Médio** | **CONFIRMADO** | Wildcard permissivo (`Access-Control-Allow-Origin: *`) em todas as rotas da Edge API | `frontend/functions/api/**/*.ts` | Qualquer domínio externo pode disparar requisições AJAX contra a API | Inspecionar cabeçalhos de resposta em requisições OPTIONS | Restringir CORS explicitamente para `https://natalvagas.com.br` | P |
-| **SEC-17** | Pagamento Cartão | **Médio** | **CONFIRMADO** | Opção Cartão de Crédito é um formulário sem gateway que encaminha para o WhatsApp | `frontend/src/components/ProPaymentModal.tsx:728-738` | Frustração do usuário que espera aprovação instantânea e abandono de carrinho | Clicar na aba Cartão de Crédito no modal de pagamento | Integrar gateway real de cartão (Mercado Pago / Efí) ou deixar claro que o atendimento é manual | M |
-| **SEC-18** | Arquitetura | **Alto** | **CONFIRMADO** | Ambiente de desenvolvimento (Vite) aponta para Spring Boot, mas Auth/Pix estão no Cloudflare | `frontend/vite.config.ts:11-16` vs `frontend/functions/` | Quebra de paridade dev-prod: desenvolvedores testam com mocks sem saber se o backend real funciona | Rodar `npm run dev`; qualquer chamada a `/api/auth/*` retorna 404/403 do Spring Boot | Unificar a stack da API ou configurar o Wrangler Pages dev localmente | G |
-| **SEC-19** | LGPD / Auth | **Alto** | **CONFIRMADO** | Inexistência de recuperação de senha, verificação de e-mail e exclusão de conta | Toda a base de código | Violação de requisitos de conformidade com LGPD e perda irreversível de acesso por usuários | Procurar funcionalidade "Esqueci minha senha" ou "Excluir conta"; inexistem | Criar rotas e serviços para envio de e-mails de redefinição e exclusão lógica/física | G |
-| **SEC-20** | Qualidade / Testes | **Médio** | **CONFIRMADO** | Ausência completa de testes automatizados unitários ou de integração | Pastas `backend/src/test/` (inexistente) e `frontend/` (sem testes) | Regressões silenciosas em atualizações de código | Executar `mvn test` no backend; exibe "No sources to compile" | Adicionar suítes de teste com JUnit 5 / Mockito no backend e Vitest / Testing Library no front | G |
+| ID | Área | Severidade | Estado | Descrição | Evidência | Impacto | Como reproduzir | Correção sugerida | Esforço |
+|---|---|---:|---|---|---|---|---|---|:---:|
+| AUTH-01 | Login | Crítico | **CONFIRMADO** | Login aceita credenciais arbitrárias se `env.DB` estiver ausente. | `frontend/functions/api/auth/login.ts:32-75,77-96`; `audit_tmp/audit_handlers.ts:20-28`; resposta local HTTP 200 `success:true`. | Tomada de conta lógica/falsa autenticação durante erro de configuração. | Executar o runner local; caso `arbitraryLogin`. | Falhar fechado (503) se DB/secret não existirem; validar bindings no startup/deploy. | P |
+| AUTH-02 | Cadastro | Alto | **CONFIRMADO** | Cadastro sem DB devolve sucesso e token, mas não persiste usuário. | `frontend/functions/api/auth/register.ts:46-72,74-92`; runner `registrationWithoutDb` retornou 201. | Contas fantasmas e sessão não lastreada. | Runner local, caso `registrationWithoutDb`. | Exigir DB e transação bem-sucedida antes de emitir sessão. | P |
+| AUTH-03 | Segredos | Crítico | **CONFIRMADO** | Segredo HMAC padrão versionado; localizado também no histórico. Valor mascarado: `nata...`. | `frontend/functions/api/auth/_utils.ts:1`; `frontend/functions/api/auth/sign-pro.ts:8`; `git log -G` localizou commits `2c86ad2`, `6ae0307`, `8481e8f`. | Qualquer pessoa com repositório/bundle pode assinar sessões/benefícios. | Criar token com segredo do código e chamar `/api/auth/me`; runner `acceptedForgedSession` retornou 200. | Rotação imediata; remover defaults; secret obrigatório; reescrever histórico; invalidar tokens atuais. | M |
+| AUTH-04 | Sessão | Alto | **CONFIRMADO** | Token próprio dura 30 dias, não possui `iss`, `aud`, `jti`, refresh/rotação/revogação; comparação de assinatura não é constant-time. | `frontend/functions/api/auth/_utils.ts:77-115`; logout em `AuthContext.tsx:402-410`. | Replay prolongado; logout não invalida token roubado. | Token permanece criptograficamente válido após logout local. | Cookies `HttpOnly; Secure; SameSite`, access curto, refresh rotativo e revogação server-side; validar claims. | G |
+| AUTH-05 | Armazenamento | Alto | **SUSPEITA** | Sessão e perfil ficam em `localStorage`; token PRO também. | `frontend/src/context/AuthContext.tsx:36-38,115-127,333-336,435-438`. | XSS rouba tokens; usuário altera perfil/cache. | Inspeção do código. | Migrar sessão para cookie HttpOnly e não confiar no perfil local. | M |
+| AUTH-06 | Google | Crítico | **SUSPEITA** | Credential Google é apenas decodificada no cliente, sem verificar assinatura, `aud`, `iss`, exp ou nonce; string vira token local. | `frontend/src/context/AuthContext.tsx:159-200`. | Identidade Google e e-mail administrativo falsificáveis. | Inspeção do código; fluxo não possui endpoint backend de validação. | Verificar Google ID token no backend com biblioteca oficial e client ID esperado. | M |
+| AUTH-07 | Senhas | Médio | **CONFIRMADO** | Política aceita 6 caracteres e aplica `trim`; PBKDF2-SHA256 usa 100 mil iterações. Não há BCrypt/Argon2. | `register.ts:23,39-43`; `_utils.ts:12-40`. | Senhas fracas; espaços significativos são removidos. | Cadastro sintético com `123456` retornou 201. | Argon2id (ou BCrypt forte), mínimo 12+, bloqueio de comuns e medidor no cliente. | M |
+| AUTH-08 | Enumeração | Médio | **SUSPEITA** | Cadastro retorna 409 e mensagem explícita para e-mail existente; login só calcula PBKDF2 quando usuário existe, criando diferença de tempo. | `register.ts:52-61`; `login.ts:33-53`. | Enumeração de contas por mensagem/status/timing. | Requer D1 local para medir tempos. | Resposta genérica e hash dummy no caminho inexistente. | P |
+| AUTH-09 | Força bruta | Alto | **CONFIRMADO** | Não há rate limit, backoff, lockout nem CAPTCHA nos handlers de login/cadastro/recuperação. | Arquivos completos `login.ts:17-119` e `register.ts:18-115`; busca global sem implementação. | Credential stuffing/brute force e abuso de cadastro. | Inventário de código/rotas. Nenhum teste de carga foi feito. | Rate limit por IP+conta, backoff, observabilidade e CAPTCHA adaptativo. | M |
+| AUTH-10 | Fluxos | Alto | **CONFIRMADO** | Verificação de e-mail, esqueci/redefinir/trocar senha, refresh e excluir conta não existem. | Inventário de `frontend/functions/api/auth/`: apenas `_utils`, `login`, `me`, `register`, `sign-pro`; busca global encontrou apenas logout local. | Conta sem prova de posse, sem recuperação segura e sem direito de exclusão. | Listar arquivos/rotas e buscar termos dos fluxos. | Implementar ponta a ponta com tokens aleatórios, uso único, hash, TTL e invalidação de sessões. | G |
+| AUTH-11 | Logs/erros | Médio | **SUSPEITA** | Erros internos (`err.message`) são enviados ao cliente; payload Pix completo é logado. | `register.ts:94-102`; `login.ts:98-106`; `webhook.ts:53,60,115-119`. | Vazamento de detalhes/PII/dados transacionais em resposta e logs. | Inspeção; backend gerenciado não disponível para observar logs. | Erros genéricos, IDs de correlação, logging estruturado com redaction. | P |
+| AUTH-12 | MFA/Admin | Crítico | **CONFIRMADO** | Senhas mestras no bundle e TOTP gerado/verificado/armazenado no browser. Valores mascarados: `edso...`, `admi...`, `poti...`, `nata...`. | `AuthContext.tsx:40-60,229-315`; `totpService.ts:34-49,106-127`. | MFA não prova identidade no servidor; pode ser reinicializado/alterado localmente. | Definir storage local/sessão ou usar senha exposta do bundle. | Admin real no backend; WebAuthn/TOTP server-side; recovery codes; retirar todas as credenciais do cliente e rotacionar. | G |
+| AUTHZ-01 | RBAC/Admin | Crítico | **CONFIRMADO** | `/editdev` confia em `sessionStorage` para autorização. | `App.tsx:556-557`; `EditDevPage.tsx:74`; `JobDetailsPage.tsx:115-123`. | Escalonamento vertical pelo console do navegador. | Definir `sessionStorage.natalvagas_admin_mfa_auth='true'` e abrir `/editdev`. | Backend deny-by-default e autorização por ação; UI apenas reflete claims. | M |
+| AUTHZ-02 | Cupons admin | Crítico | **CONFIRMADO** | PINs/segredo fixos concedem administração; PIN também vai na URL e `localStorage`. Valor testado mascarado: `edso...`. | `coupons/create.ts:20-39`; `coupons/list.ts:20-38`; `AdminCoupons.tsx:15-24,70-83`. | Criação/listagem de cupons; segredo vaza em histórico, logs e referer. | Runner `hardcodedAdminPin` retornou HTTP 201. | Sessão admin forte; nunca segredo em query/localStorage; RBAC e auditoria. | M |
+| AUTHZ-03 | Jobs | Alto | **CONFIRMADO** | `POST /jobs` é anônimo e service salva como `APPROVED`. | `SecurityConfig.java:40-49`; `JobService.java:81-117`; `JobController.java:46-51`. | Spam, fraude e publicação sem moderação. | Request válido anônimo alcança o método; regra e status estão explícitos. DB local indisponível impediu POST completo. | Autenticar empresa, ownership, `PENDING`, moderação e rate limit. | M |
+| AUTHZ-04 | Empresa/IDOR | Alto | **CONFIRMADO** | Não há entidade empresa/owner nem endpoints de painel/candidatos; logo não existe isolamento Empresa A/B. | Schema Spring `V1__init_schema.sql:21-59`; D1 `frontend/schema.sql:6-43`; inventário de controllers/functions. | Requisitos de isolamento horizontal não implementados. | Inventário completo de modelos e rotas. | Modelar tenant/company/ownership e testes negativos por endpoint. | G |
+| PAY-01 | PRO | Crítico | **CONFIRMADO** | `sign-pro` emite plano escolhido com `email` apenas, sem login/pagamento. | `sign-pro.ts:24-29,36-73`; `AuthContext.tsx:415-438`. | Qualquer visitante obtém PRO/vitalício grátis. | Runner `unsignedPurchase`: HTTP 200, `status:approved`, `plan:lifetime`. | Remover endpoint público; emitir entitlement apenas em transação idempotente após confirmação do provedor. | M |
+| PAY-02 | Ativação | Crítico | **CONFIRMADO** | Códigos permanentes públicos concedem plano; `maxUses` não é aplicado. Valor testado mascarado: `POTI...`. | `verify-code.ts:12-18,51-109`. | Receita perdida e acesso vitalício irrestrito. | Runner `publicActivationCode` retornou token lifetime. | Remover/rotacionar códigos, armazenar hashes, expiração, uso atômico e vínculo à conta. | M |
+| PAY-03 | Cupom | Alto | **CONFIRMADO** | Sem KV/DB, qualquer padrão `PCD-XXXX` recebe 50%. | `coupons/verify.ts:134-145`. | Fraude de desconto. | Runner `arbitraryCoupon` com `PCD-AAAA` retornou 200. | Falhar fechado; cupom persistido, aleatório, hash, uso atômico e bound à conta. | P |
+| PAY-04 | Pix webhook | Crítico | **CONFIRMADO** | Segredo público (`nata...`) autentica payload arbitrário; não valida assinatura/mTLS, valor, pedido, duplicata ou status Efí. | `webhook.ts:12,17-23,50-107`; runner `forgedWebhook` retornou processedCount 1. | Pagamentos forjados e ativação indevida. | Runner com Pix sintético de R$ 0,01 e segredo do código. | Integração oficial Efí com mTLS/assinatura, allowlist, consulta server-to-server, amount/order match e idempotência. Rotacionar segredo. | G |
+| PAY-05 | Planos | Alto | **SUSPEITA** | Plano é inferido por txids fixos ou prefixo; registro Pix não contém/verifica preço/plano/usuário. | `pix/status/[txid].ts:34-80`; `webhook.ts:77-99`. | Confusão de plano e atribuição de pagamento à pessoa errada. | Requer KV local integrado para fluxo completo. | Criar order server-side com amount/plan/user/status; transição atômica. | G |
+| PAY-06 | Cupom concorrente | Alto | **SUSPEITA** | Read-then-update não é atômico no D1/KV. | `coupons/verify.ts:49-78,82-128`. | Duas requisições simultâneas podem consumir o mesmo cupom. | Não testado para evitar carga e por falta de bindings. | `UPDATE ... WHERE used=0` e verificar affected rows; Durable Object/transação. | M |
+| INPUT-01 | Vagas/moderação | Alto | **CONFIRMADO** | Backend Spring força status `APPROVED`; função D1 aceita `isFeatured` do body e persiste JSON inteiro. | `JobService.java:110`; `functions/api/jobs/index.ts:30-56`; payload cliente em `PostJobModal.tsx:227-257`. | Mass assignment/fraude de destaque e conteúdo não moderado. | Enviar `isFeatured:true` no body da função D1; código persiste `1`. | DTO allowlist server-side, ignorar campos privilegiados, status PENDING e validação de pagamento. | M |
+| INPUT-02 | Validação | Médio | **SUSPEITA** | Campos de texto extensos e `applicationTarget` não têm formato/limite; URLs de logo/source não são validadas. | `JobCreateDTO.java:21-54`; função D1 `jobs/index.ts:7-56`. | Conteúdo abusivo, payload excessivo e links maliciosos. | Inspeção. | Limites de body/campos, validadores por canal, allowlist de esquemas/domínios quando aplicável. | M |
+| INPUT-03 | SQLi | Baixo | **CONFIRMADO** | Nas queries auditadas, entradas são vinculadas com `?`/Criteria API; não foi encontrada concatenação SQL controlada pelo usuário. | `login.ts:34-37`; `register.ts:53,68-71`; `resumes/index.ts:31-36,97-109`; `JobService.java:41-68`. | Controle adequado no escopo lido. | Revisão estática das queries. | Manter bind/ORM e adicionar testes de regressão. | P |
+| INPUT-04 | XSS/JSON-LD | Médio | **SUSPEITA** | JSON-LD usa `dangerouslySetInnerHTML` com dados de vagas. `JSON.stringify` não escapa necessariamente sequência `</script>`. | `frontend/src/App.tsx:186-219,254-258`; dados de vaga vêm de submissões. | Fechamento de `<script>` e XSS persistente se conteúdo chegar sem sanitização. | Não injetado em runtime por falta de backend integrado. | Serializador JSON-LD seguro escapando `<`, `>`, `&`, U+2028/U+2029; CSP. | M |
+| INFRA-01 | Spring Security | Médio | **CONFIRMADO** | Swagger/OpenAPI é público; chave admin tem default no código; CSRF desabilitado. | `SecurityConfig.java:31-49`; `application.yml:32-44`. | Exposição de superfície e autenticação comprometida pelo default. CSRF passa a ser crítico se cookies forem adotados sem reconfiguração. | Revisão da filter chain. | Profile de produção sem Swagger/devtools; segredo obrigatório; manter deny-by-default; CSRF conforme modelo. | P |
+| INFRA-02 | CORS | Médio | **CONFIRMADO** | Funções retornam `Access-Control-Allow-Origin: *`; Spring aceita headers `*` com credenciais e inclui localhost por default. | Ex.: `login.ts:23-27,110-117`; `WebConfig.java:11-22`; `application.yml:43-44`. | APIs token-based podem ser chamadas por qualquer origem; configuração divergente e localhost em produção. | Inspecionar resposta dos handlers locais e config. | Allowlist por ambiente, `Vary: Origin`, remover localhost em produção; nunca wildcard com credenciais. | P |
+| INFRA-03 | Headers/HTTPS | Médio | **CONFIRMADO** | Não existe `frontend/public/_headers` nem configuração equivalente para HSTS, CSP, nosniff, frame-ancestors e Referrer-Policy. | Inventário de `frontend/public`; somente `_routes.json` e `_redirects`. | Clickjacking e menor mitigação de XSS/MIME/referrer. | `rg --files frontend/public` não encontrou `_headers`. | Adicionar headers na hospedagem; forçar HTTPS/HSTS após validar domínio. | P |
+| INFRA-04 | Erros Spring | Médio | **SUSPEITA** | `IllegalArgumentException` é lançada sem handler global; profile/flags de stack trace não são definidos. | `JobService.java:72-78,121-127`; `application.yml` completo. | Possíveis 500 e detalhes inconsistentes. | Subida completa bloqueada por ausência de PostgreSQL/Docker. | `@ControllerAdvice`, respostas RFC 9457 genéricas, desabilitar trace/message em produção. | P |
+| INFRA-05 | Dependências | Alto | **CONFIRMADO** | `npm audit`: 1 alta, 3 moderadas em Vite/esbuild/React Router. | `frontend/package-lock.json`; saída local do `npm audit --json`. | Dev server pode expor arquivos/NTLM; router possui open redirect e issue SSR. | `cd frontend && npm audit --json`. | Atualizar para versões corrigidas, revisar breaking changes e reexecutar audit/build. | M |
+| INFRA-06 | Banco/migrations | Baixo | **CONFIRMADO** | Spring usa Flyway e `ddl-auto: validate`, adequado. | `application.yml:11-25`; `backend/.../db/migration/V1__init_schema.sql`. | Reduz drift destrutivo. | `mvn test` compilou resources/classes. | Manter; acrescentar teste de migration em banco efêmero. | P |
+| INFRA-07 | Backup | Médio | **SUSPEITA** | Não há política/script verificável de backup e restore para PostgreSQL, D1 ou KV. Export do admin cobre apenas JSON de vagas local. | Busca global por backup; `EditDevPage.tsx:134-143`. | Perda de dados e recuperação não testada. | Inventário do repositório. | Backups automáticos, retenção, criptografia e teste periódico de restore. | M |
+| PRIV-01 | LGPD | Alto | **CONFIRMADO** | Política declara que não armazena currículos, mas API/schema armazenam currículo em D1; não há exclusão de conta/dados. | `PrivacyPolicy.tsx:85-102`; `frontend/schema.sql:21-32`; `resumes/index.ts:69-120`. | Informação pública incorreta e descumprimento de transparência/direitos. | Comparar texto publicado com implementação. | Corrigir política, base legal/retenção/operadores e implementar exportação/exclusão auditável. | M |
+| TEST-01 | Testes | Alto | **CONFIRMADO** | Maven compilou com sucesso, porém informou `No tests to run`; frontend não possui suíte unitária/e2e. | Saída `mvn test`; `backend/src/test` ausente; `package.json:7-12`. | Regressões críticas não detectadas. | Executar `mvn test` e inventariar scripts npm. | Testes de auth/RBAC/IDOR/pagamento; Playwright com ambiente efêmero e dados sintéticos. | G |
+| BUILD-01 | Build | Baixo | **CONFIRMADO** | Build frontend passou e pré-renderizou 1.699 páginas; smoke e SEO passaram. | `npm run build`; `npm run test:smoke` com `PYTHONIOENCODING=utf-8`; `scripts/verify_seo.py`. | Sinal positivo de empacotamento, não de segurança. | Comandos citados. | Manter em CI. | P |
 
----
+## 4. Matriz de cobertura
 
-## 4. Matriz de Cobertura de Funcionalidades por Perfil
+### 4.1 Login e conta
 
-Legenda:  
-- ✅ **OK**: Funcionalidade completa e segura.  
-- ⚠️ **Parcial**: Funciona superficialmente, mas possui falhas de segurança, dados voláteis ou lógica incompleta.  
-- ❌ **Quebrado**: Implementado, mas falha ou gera erro durante o uso.  
-- ⛔ **Não Implementado**: Declarado no escopo ou documentação, mas ausente no código.  
-- ❓ **Não Verificado**: Não foi possível testar (motivo detalhado na seção 6).
-
----
-
-### A. Fluxos de Login e Autenticação
-
-| Fluxo / Requisito | Status | Detalhes / Evidência |
+| Fluxo/tela | Status | Evidência/observação |
 |---|---|---|
-| Cadastro de Usuário (Email/Senha) | ⚠️ **Parcial** | Salva no Cloudflare D1 se configurado. Se falhar, cria mock em `localStorage` (`AuthContext.tsx:380`). |
-| Validação de Força de Senha | ❌ **Quebrado** | Exige apenas 6 caracteres (`register.ts:39`), sem exigência de complexidade (maiúsculas, números, caracteres especiais). |
-| Verificação de E-mail (Confirmação) | ⛔ **Não Implementado** | Não há envio de e-mail com token ou link de ativação; conta fica ativa imediatamente. |
-| Login com E-mail e Senha | ⚠️ **Parcial** | Funciona no D1. Porém, há fallback que aceita qualquer senha se o banco não estiver ativo (`login.ts:77`). |
-| Login Social com Google | ⚠️ **Parcial** | Decodifica token JWT do Google no frontend (`AuthContext.tsx:168`), mas não valida assinatura no backend. |
-| Proteção contra Força Bruta / Rate Limit | ⛔ **Não Implementado** | Sem CAPTCHA, sem limite de tentativas por IP ou bloqueio temporário de conta. |
-| "Esqueci a Senha" / Redefinição | ⛔ **Não Implementado** | Botão e fluxos inexistentes em `AuthModal.tsx` e na API. |
-| Troca de Senha Logado | ⛔ **Não Implementado** | Inexistente na interface e no backend. |
-| Logout e Revogação de Sessão | ⚠️ **Parcial** | Apenas apaga dados do `localStorage`; o token continua válido no servidor por 30 dias. |
-| Armazenamento Seguro de Tokens | ❌ **Quebrado** | Armazena tokens JWT em `localStorage` em vez de cookies `HttpOnly; Secure; SameSite`. |
-| Proteção contra XSS para Sessão | ❌ **Quebrado** | Vulnerável a roubo de token devido ao Stored XSS presente no JSON-LD das vagas. |
+| Cadastro | **Quebrado** | Sem verificação de e-mail; fail-open sem DB (`register.ts:46-92`). |
+| Verificação de e-mail | **Não implementado** | Nenhuma rota/token/estado no schema. |
+| Login e-mail/senha | **Quebrado** | Qualquer senha funciona sem DB (`login.ts:77-96`), confirmado. |
+| Login Google | **Quebrado** | JWT apenas decodificado no cliente (`AuthContext.tsx:159-200`). |
+| Logout | **Parcial** | Apaga localStorage/sessionStorage, mas não revoga token (`AuthContext.tsx:402-410`). |
+| Sessão/access token | **Quebrado** | Segredo público, 30 dias, sem revogação/claims completos. |
+| Refresh/rotação | **Não implementado** | Nenhum endpoint ou armazenamento de refresh. |
+| Esqueci a senha | **Não implementado** | Sem rota/UI. |
+| Redefinição de senha | **Não implementado** | Sem token/TTL/hash/uso único. |
+| Troca de senha | **Não implementado** | Sem endpoint/UI. |
+| Exclusão de conta | **Não implementado** | Sem endpoint/UI. |
+| Rate limit/CAPTCHA | **Não implementado** | Ausente em login, cadastro e pagamentos. |
+| MFA admin | **Quebrado** | Inteiramente client-side e com credenciais públicas. |
 
----
+### 4.2 Painel do usuário
 
-### B. Perfil do Candidato (Usuário)
-
-| Fluxo / Tela | Status | Detalhes / Evidência |
+| Fluxo/tela | Status | Evidência/observação |
 |---|---|---|
-| Tela de Perfil e Edição de Dados | ⛔ **Não Implementado** | Candidato não possui página `/perfil` ou `/minha-conta`. |
-| Gerador de Currículo ATS Gratuito | ✅ **OK** | Funcional, estilizado e gera impressão PDF A4 perfeita via CSS `@media print`. |
-| Salvamento de Currículo na Nuvem | ⚠️ **Parcial** | Endpoints `/api/resumes` existem, mas no frontend o gerador prioriza estado local e impressão direta. |
-| Histórico de Candidaturas | ⛔ **Não Implementado** | As candidaturas são externas (WhatsApp, e-mail, link da empresa); a plataforma não registra histórico. |
-| Vagas Favoritas / Alertas de Emprego | ⛔ **Não Implementado** | Não há mecanismo de favoritar vagas ou receber alertas personalizados. |
-| Upload de Currículo em Arquivo (PDF/DOCX) | ⛔ **Não Implementado** | Plataforma não recebe anexos de currículo de candidatos. |
-| Exclusão de Conta e Dados (LGPD) | ⛔ **Não Implementado** | Não há mecanismo para o usuário solicitar a eliminação de seus dados. |
+| Perfil/edição de dados | **Não implementado** | Não há rota/página/API de perfil. |
+| Criador de currículo | **Parcial** | UI existe; nuvem usa sessão, mas não limita body e política contradiz armazenamento (`ResumeBuilder.tsx`; `resumes/index.ts`). |
+| Upload de currículo | **Não implementado** | Não há upload/download de arquivo; apenas JSON do currículo. |
+| Candidaturas | **Não implementado** | Candidatura é link/e-mail/WhatsApp externo; sem histórico. |
+| Favoritos | **Não implementado** | Nenhum modelo/rota. |
+| Alertas | **Parcial** | Há links de comunidade, não preferências/alertas por usuário. |
+| Exclusão/LGPD | **Não implementado** | Sem exclusão/export de dados. |
+| Loading/erro/vazio | **Parcial** | Home/currículo têm estados, mas sem teste e2e completo. |
+| Mobile | **Parcial** | Classes responsivas presentes; não verificado visualmente em dispositivos. |
 
----
+### 4.3 Painel da empresa
 
-### C. Perfil da Empresa (Recrutador)
-
-| Fluxo / Tela | Status | Detalhes / Evidência |
+| Fluxo/tela | Status | Evidência/observação |
 |---|---|---|
-| Cadastro de Empresa / Validação de CNPJ | ⛔ **Não Implementado** | Não há entidade, autenticação ou formulário para perfil empresarial. |
-| Painel da Empresa (Dashboard) | ⛔ **Não Implementado** | Não há tela para a empresa gerenciar suas vagas publicadas. |
-| Publicação de Vaga Gratuita | ⚠️ **Parcial** | Modal público aberto (`PostJobModal.tsx`). No Spring Boot aprova automaticamente sem moderação. |
-| Publicação de Vaga VIP com Destaque | ⚠️ **Parcial** | Gera QR Code Pix com chave estática, mas não há conferência bancária automatizada vinculada a pedido real. |
-| Visualização de Candidatos Recebidos | ⛔ **Não Implementado** | Candidatos enviam currículos diretamente pelos canais externos da empresa. |
-| Pausar / Editar / Excluir Vaga pela Empresa | ⛔ **Não Implementado** | Uma vez enviada, a empresa não tem como alterar ou encerrar a vaga no portal. |
+| Cadastro de empresa/CNPJ | **Não implementado** | Sem entidade empresa/CNPJ/ownership. |
+| Criar vaga | **Quebrado** | Anônimo e aprovado automaticamente. |
+| Editar/pausar/excluir próprias vagas | **Não implementado** | Não há endpoints de ownership; delete Spring é admin e nem há método no controller. |
+| Ver candidatos próprios | **Não implementado** | Não há candidatos/candidaturas no backend. |
+| Planos e Pix | **Quebrado** | Bypasses críticos confirmados. |
+| Webhook idempotente/validado | **Quebrado** | Sem autenticação robusta, amount/order match ou idempotência. |
+| Pagamento expirado/duplicado | **Não implementado** | KV guarda aprovação por 1 ano; sem máquina de estados. |
+| Limites/moderação | **Quebrado** | Criação sem rate limit; Spring grava `APPROVED`. |
 
----
+### 4.4 Painel admin
 
-### D. Perfil de Administrador
-
-| Fluxo / Tela | Status | Detalhes / Evidência |
+| Fluxo/tela | Status | Evidência/observação |
 |---|---|---|
-| Painel de Moderação de Vagas (`/editdev`) | ⚠️ **Parcial** | Interface visual funciona, mas grava edições apenas no `localStorage` do computador do admin. |
-| Autenticação Segura de Admin (2FA) | ❌ **Quebrado** | TOTP validado inteiramente no navegador; bypass simples via console do navegador. |
-| Gestão de Usuários (Banir/Suspender) | ⛔ **Não Implementado** | Não há listagem de usuários ou controles de bloqueio administrativo. |
-| Gestão de Cupons PcD (`AdminCoupons.tsx`) | ❌ **Quebrado** | O componente existe e conversa com o Cloudflare D1/KV, mas não está roteado em `App.tsx`. |
-| Trilha de Auditoria de Ações Administrativas | ⛔ **Não Implementado** | Não há log persistente de quem alterou ou aprovou vagas. |
-| Métricas e Analytics da Plataforma | ⛔ **Não Implementado** | Não há painel analítico de acessos, candidaturas ou conversões. |
+| Login admin/2FA | **Quebrado** | Senhas e TOTP no cliente. |
+| Moderação de vagas | **Parcial** | UI local e approve Spring; publicação já nasce aprovada. |
+| Moderação de empresas/usuários | **Não implementado** | Sem modelos/endpoints. |
+| Banir/suspender | **Não implementado** | Sem estado/endpoint. |
+| Gestão de perfis/RBAC | **Não implementado** | D1 nem possui role; Spring usa chave única de admin. |
+| Métricas | **Parcial** | Contadores locais, sem telemetria/auditoria confiável. |
+| Trilha de auditoria | **Não implementado** | Nenhuma tabela/evento de auditoria. |
+| Proteção contra acesso indevido | **Quebrado** | Guard client-side via sessionStorage. |
+| Gestão de cupons | **Quebrado** | PIN fixo público; segredo em URL/localStorage. |
 
----
+### 4.5 Matriz RBAC perfil × endpoint/tela
 
-## 5. Recomendações para Depois do Lançamento (Pós-Go-Live)
+Legenda: **OK** = comportamento coerente; **Quebrado** = acesso indevido confirmado/dedutível diretamente; **N/I** = não implementado; **N/V** = não verificado em runtime integrado.
 
-Após sanar os bloqueadores críticos listados na Seção 2, recomenda-se planejar as seguintes melhorias:
+| Endpoint/tela | Anônimo | Usuário | Empresa | Admin | Evidência |
+|---|---:|---:|---:|---:|---|
+| `GET /api/jobs/**` | OK | OK | OK | OK | Público em `SecurityConfig.java:41-43`. |
+| `POST /api/jobs` | **Quebrado: permitido** | **Quebrado: sem ownership** | **Quebrado: sem perfil empresa** | Permitido | `SecurityConfig.java:47-49`; `JobService.java:110`. |
+| `PATCH /api/jobs/{id}/approve` | Bloqueado | Bloqueado | Bloqueado | N/V | `SecurityConfig.java:45`; chave default compromete admin. |
+| `DELETE /api/jobs/**` | Bloqueado | Bloqueado | Bloqueado | **Quebrado/N/I** | Regra existe (`SecurityConfig.java:46`), mas controller não implementa delete. |
+| `POST /api/auth/register` | Público | Público | Público | Público | Sem perfis/roles no D1. |
+| `POST /api/auth/login` | **Quebrado** | **Quebrado** | **Quebrado** | Não é auth admin real | Fail-open sem DB. |
+| `GET /api/auth/me` | Bloqueado sem token | OK com token | N/I | N/I | Token forjável com secret público. |
+| `GET/POST /api/resumes` | Bloqueado sem token | Parcial/owner por `sub` | N/I | Sem override | `resumes/index.ts:17-128`. |
+| `POST /api/auth/sign-pro` | **Quebrado: permitido** | **Quebrado** | **Quebrado** | **Quebrado** | Email basta; confirmado. |
+| `POST /api/payments/verify-code` | **Quebrado: permitido** | **Quebrado** | **Quebrado** | **Quebrado** | Código fixo público. |
+| `POST /api/coupons/verify` | Público | Público | Público | Público | Fallback aceita qualquer `PCD-XXXX`. |
+| `POST /api/coupons/create` | **Quebrado com PIN público** | **Quebrado** | **Quebrado** | Permitido | Confirmado com PIN mascarado `edso...`. |
+| `GET /api/coupons/list` | **Quebrado com PIN público** | **Quebrado** | **Quebrado** | Permitido | `coupons/list.ts:20-50`. |
+| `POST /api/payments/pix/webhook` | **Quebrado com secret público** | Idem | Idem | Idem | Webhook falso confirmado. |
+| Tela `/editdev` | **Quebrado via sessionStorage** | **Quebrado** | **Quebrado** | Permitido | `EditDevPage.tsx:74`. |
+| Painel empresa | N/I | N/I | N/I | N/I | Nenhuma rota/modelo. |
+| Painel usuário | N/I | N/I | N/I | N/I | Apenas modal auth e currículo. |
 
-1. **Arquitetura de Backend Unificada:**  
-   Decidir entre manter uma API monolítica conteinerizada (Spring Boot + PostgreSQL no Fly.io / AWS ECS) ou arquitetura 100% Serverless (Cloudflare Pages + D1 + Workers). A coexistência parcial atual causa divergências entre o ambiente local e a produção.
-2. **Gateway de Pagamento Robusto:**  
-   Substituir a geração manual de EMV Pix pela API oficial v2 da Efí com criação dinâmica de cobrança imediata (`POST /v2/cob`), associando um `txid` exclusivo a um pedido pendente no banco de dados e aguardando confirmação via webhook assinado por mTLS.
-3. **Módulo Completo de Recrutador / Empresa:**  
-   Implementar cadastro empresarial com consulta automatizada na Receita Federal (validação de CNPJ) e dashboard dedicado onde a empresa visualiza métricas de visualizações e cliques no link de candidatura.
-4. **Trilha de Auditoria e LGPD:**  
-   Adicionar registro estruturado de logs de segurança (quem logou, data/hora, IP, ações administrativas executadas) e disponibilizar um botão de autoatendimento para o candidato solicitar exclusão completa de seus dados pessoais.
-5. **Cobertura de Testes Automatizados (CI/CD):**  
-   Adicionar ao fluxo do GitHub Actions:
-   - Testes unitários de serviços e controllers no backend (`mvn verify`).
-   - Testes de componentes e fluxos no frontend com Vitest e Playwright.
-   - Verificação contínua de vulnerabilidades em dependências (`npm audit` e OWASP Dependency-Check).
+## 5. Recomendações para depois do lançamento
 
----
+Somente após os bloqueadores:
 
-## 6. O Que Não Foi Possível Verificar e Por Quê
+1. WebAuthn/passkeys para administradores, além de TOTP server-side.
+2. Alertas de login, sessão/dispositivos e revogação individual.
+3. WAF/bot management e limites de custo por rota.
+4. SAST, secret scanning, dependency audit e DAST em CI; impedir deploy se bindings obrigatórios faltarem.
+5. Telemetria de segurança: sucesso/falha de login, reset, alteração de papel, moderação, pagamento e download de dados, sem senha/token/PII desnecessária.
+6. Testes de autorização gerados da matriz RBAC e testes de tenant/IDOR.
+7. Backups com restore exercitado e RPO/RTO documentados.
+8. Revisão de acessibilidade e testes móveis reais.
+9. Política de retenção, DPA com provedores e canal LGPD com SLA.
 
-1. **Chamadas reais à API de Produção da Efí Bank (`scripts/test_efi_status.py`):**  
-   *Motivo:* A regra número 2 da auditoria veda estritamente testes contra endpoints de produção ou movimentações financeiras reais com certificados do cliente.
-2. **Execução em runtime de produção do Cloudflare D1 e Cloudflare KV:**  
-   *Motivo:* Os serviços Cloudflare D1 e KV operam gerenciados na nuvem da Cloudflare. Sem as credenciais de vínculo do Wrangler (`wrangler d1` / `wrangler pages dev`), as funções foram analisadas estaticamente no código-fonte e emuladas localmente.
-3. **Execução de testes do Spring Boot (`mvn test`):**  
-   *Motivo:* O diretório `backend/src/test/` não existe no repositório (não há nenhum arquivo de teste automatizado implementado pela equipe até o momento).
-4. **Auditoria de pacotes via `npm audit` conectado à internet:**  
-   *Motivo:* O ambiente de sandbox local opera sem acesso irrestrito à internet, bloqueando consultas ao endpoint externo da NPM registry.
+## 6. Não verificado e por quê
+
+- **Produção, domínio e headers reais:** deliberadamente não acessados, conforme regra de não testar produção.
+- **Cloudflare D1/KV/Pages bindings:** não havia ambiente local/credenciais de teste. Foram testados os caminhos sem bindings, pois são parte explícita do código e revelaram fail-open.
+- **PostgreSQL/API Spring ponta a ponta:** Docker não está instalado e não havia PostgreSQL efêmero configurado. O código compilou; endpoints dependentes de DB não foram chamados.
+- **Efí real, certificado e mTLS:** não usados para evitar produção/dados reais; não há sandbox Efí configurado no repositório.
+- **Timing de enumeração:** não medido sem D1 local; apenas mensagem/status e bifurcação de hash foram revisados.
+- **Corrida de cupom/idempotência:** não disparada para respeitar a proibição de DoS e pela falta de KV/D1 local.
+- **Upload/download de currículo:** recurso de arquivo não existe; somente JSON do builder foi identificado.
+- **Responsividade visual/Playwright:** build estático foi validado, mas não há Playwright instalado nem suíte e2e; não foi adicionada dependência ao produto. Estados mobile permanecem não verificados visualmente.
+- **OWASP Dependency-Check Java:** plugin não está configurado; Maven compilou e informou `No tests to run`. Uma análise de CVEs Java completa requer ferramenta/banco NVD apropriado.
+- **Histórico Git completo de segredos:** foram verificadas extensões sensíveis e commits que introduziram marcadores conhecidos. Não foi executado scanner de entropia dedicado; portanto podem existir outros segredos não reconhecidos.
+- **Backups/restore externos:** podem existir fora do repositório; nenhum artefato verificável foi fornecido.
+
+## 7. Evidências de execução local
+
+| Comando/cenário | Resultado |
+|---|---|
+| `git pull --ff-only` | Já atualizado no branch `feat/google-analytics-gtag`. |
+| `mvn test` | `BUILD SUCCESS`, mas `No tests to run`. |
+| `npm ci` | 165 pacotes instalados; 4 vulnerabilidades (1 alta, 3 moderadas). |
+| `npm audit --json` | Confirmou advisories em Vite/esbuild/React Router. |
+| `npm run build` | Sucesso; 1.699 páginas estáticas pré-renderizadas. |
+| `npm run test:smoke` com `PYTHONIOENCODING=utf-8` | 1.663 vagas, sitemap e ausência de certificados rastreados validados. |
+| `python ../scripts/verify_seo.py` | Sitemap (1.618 URLs), robots, ads.txt, canonical, Open Graph, JSON-LD e páginas legais passaram. |
+| `audit_tmp/audit_handlers.ts` | Reproduziu 8 cenários locais: login arbitrário, cadastro sem DB, sessão forjada, PRO sem pagamento, código PRO público, cupom arbitrário, PIN admin fixo e webhook Pix forjado. |
+
+> Nota sobre segredos: este relatório mostra somente os quatro primeiros caracteres (`nata...`, `edso...`, `poti...`, `admi...`). Todos os valores reais encontrados devem ser tratados como comprometidos, rotacionados e removidos do histórico antes de qualquer publicação.

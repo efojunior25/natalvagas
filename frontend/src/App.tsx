@@ -28,7 +28,8 @@ const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.B
 const JobDetailsPage = lazy(() => import('./pages/JobDetailsPage').then(m => ({ default: m.JobDetailsPage })));
 const PostJobModal = lazy(() => import('./components/PostJobModal').then(m => ({ default: m.PostJobModal })));
 const EditDevPage = lazy(() => import('./pages/EditDevPage').then(m => ({ default: m.EditDevPage })));
-const AdminCoupons = lazy(() => import('./pages/AdminCoupons').then(m => ({ default: m.AdminCoupons })));
+const VerifyEmail = lazy(() => import('./pages/VerifyEmail').then(m => ({ default: m.VerifyEmail })));
+const PasswordAccess = lazy(() => import('./pages/PasswordAccess').then(m => ({ default: m.PasswordAccess })));
 
 const PAGE_SIZE = 24;
 
@@ -161,11 +162,16 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
 
       return matchesQuery && matchesCity && matchesModel && matchesNoExperience && matchesPcd;
     }).sort((a, b) => {
-      // 1. Vagas em destaque VIP sempre no topo
+      // 1. Origem confiável: empresa verificada, empresa cadastrada e, por último, robô.
+      const priority = (job: Job) => job.isCompanyVerified ? 1 : job.sourceType === 'REGISTERED_COMPANY' ? 2 : (job.sourcePriority || 3);
+      const sourceDifference = priority(a) - priority(b);
+      if (sourceDifference !== 0) return sourceDifference;
+
+      // 2. Vagas em destaque VIP dentro da mesma faixa de confiança
       if (a.isFeatured && !b.isFeatured) return -1;
       if (!a.isFeatured && b.isFeatured) return 1;
 
-      // 2. Empresas com nome identificado têm prioridade; vagas confidenciais vão para o final
+      // 3. Empresas com nome identificado têm prioridade; vagas confidenciais vão para o final
       const aConf = /confidencial/i.test(a.companyName);
       const bConf = /confidencial/i.test(b.companyName);
       if (!aConf && bConf) return -1;
@@ -553,11 +559,12 @@ export const App: React.FC = () => {
           <Route path="/sobre" element={<AboutUs />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/dicas-seguranca" element={<JobSafety />} />
+          <Route path="/verificar-email" element={<VerifyEmail />} />
+          <Route path="/recuperar-senha" element={<PasswordAccess />} />
+          <Route path="/redefinir-senha" element={<PasswordAccess />} />
           
           {/* Painel Interno Restrito */}
           <Route path="/editdev" element={<EditDevPage jobs={effectiveJobs} onJobUpdated={fetchJobs} />} />
-          <Route path="/admin/cupons" element={<AdminCoupons />} />
-          <Route path="/admin/coupons" element={<Navigate to="/admin/cupons" replace />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
