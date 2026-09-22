@@ -6,6 +6,11 @@
 - `WEBHOOK_SECRET`: segredo independente, com pelo menos 32 caracteres.
 - `EDITDEV_API_KEY`: chave exclusiva da API Spring. Não reutilize os segredos anteriores.
 - `CORS_ALLOWED_ORIGINS`: apenas os domínios HTTPS publicados.
+- `CLOUDFLARE_EMAIL_TOKEN`: token restrito ao Email Sending para verificação e recuperação de senha.
+- `CLOUDFLARE_ACCOUNT_ID`: identificador da conta Cloudflare.
+- Binding de serviço `EFI_PIX`: Worker privado com certificado mTLS e credenciais Efí.
+
+O roteiro operacional atualizado está em `CONFIGURACAO_PENDENTE_EMAIL_EFI.md`.
 
 O sistema falha fechado quando banco ou segredo não estão disponíveis. Não há valores padrão de produção.
 

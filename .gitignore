@@ -25,6 +25,7 @@ backend/target/
 # Local audit and production backup artifacts (may contain sensitive data)
 audit_tmp/
 .wrangler/
+workers/efi-pix/wrangler.toml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

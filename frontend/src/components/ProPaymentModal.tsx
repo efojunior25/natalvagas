@@ -9,7 +9,6 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { AuthModal } from "./AuthModal";
 import { QRCodeSVG } from "qrcode.react";
-import { buildPixEMV } from "../services/paymentService";
 
 interface ProPaymentModalProps {
   isOpen: boolean;
@@ -29,8 +28,6 @@ const PLANS: Record<PlanType, {
   amount: number;
   badge: string;
   badgeColor: string;
-  emvCode: string;
-  txid: string;
   features: string[];
   installments: { count: number; value: string; label: string }[];
 }> = {
@@ -43,8 +40,6 @@ const PLANS: Record<PlanType, {
     amount: 9.90,
     badge: "75% OFF",
     badgeColor: "bg-emerald-100 text-emerald-800",
-    txid: "cbc09e55682a4802ae728295c0d6fa97",
-    emvCode: "00020101021226830014BR.GOV.BCB.PIX2561qrcodespix.sejaefi.com.br/v2/160b259449f34a75a8e3db86f382a64b5204000053039865802BR5905EFISA6008SAOPAULO62070503***6304FA7C",
     features: [
       "Acesso total durante 30 dias",
       "Currículos ilimitados gerados por IA",
@@ -65,8 +60,6 @@ const PLANS: Record<PlanType, {
     amount: 39.90,
     badge: "MAIS ESCOLHIDO",
     badgeColor: "bg-brand-100 text-brand-800",
-    txid: "34c4c8898b574e88aac634e77dca7406",
-    emvCode: "00020101021226830014BR.GOV.BCB.PIX2561qrcodespix.sejaefi.com.br/v2/18b78429795c4f539db2b39dc69c16a15204000053039865802BR5905EFISA6008SAOPAULO62070503***63046754",
     features: [
       "Acesso total durante 1 ano (12 meses)",
       "Currículos ilimitados para várias áreas",
@@ -89,8 +82,6 @@ const PLANS: Record<PlanType, {
     amount: 99.90,
     badge: "👑 VITALÍCIO",
     badgeColor: "bg-amber-100 text-amber-900",
-    txid: "dddc590b669b4f8fa78ac6939fa8d687",
-    emvCode: "00020101021226830014BR.GOV.BCB.PIX2561qrcodespix.sejaefi.com.br/v2/49bab83f90fe4aacadb9d889f126ea085204000053039865802BR5905EFISA6008SAOPAULO62070503***63049EA6",
     features: [
       "Acesso para sempre (nunca mais pague)",
       "Todos os novos modelos e recursos de IA",
@@ -122,7 +113,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   // Status de automação do Pix
   const [autoApproved, setAutoApproved] = useState<boolean>(false);
-  const [paymentOrder, setPaymentOrder] = useState<{ txid: string; amount: number; pixKey: string; expiresAt: string } | null>(null);
+  const [paymentOrder, setPaymentOrder] = useState<{ txid: string; amount: number; pixCode: string; expiresAt: string } | null>(null);
   const [paymentError, setPaymentError] = useState<string>("");
 
   // Controle de liberação protegida por código via API segura
@@ -168,7 +159,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   const currentPlanData = PLANS[selectedPlan];
   const pixEmailKey = "pix@natalvagas.com.br";
-  const currentPixPayload = paymentOrder ? buildPixEMV({ pixKey: paymentOrder.pixKey, amount: paymentOrder.amount, txid: paymentOrder.txid }) : "";
+  const currentPixPayload = paymentOrder?.pixCode || "";
 
   useEffect(() => {
     if (!isOpen || !isAuthenticated) return;
@@ -473,7 +464,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
             </div>
 
             {/* Card de Desconto Social PcD (50% OFF) */}
-            <div className="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/90 rounded-2xl">
+            {false && <div className="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/90 rounded-2xl">
               <div className="flex items-start gap-2.5">
                 <span className="text-xl shrink-0 mt-0.5">♿</span>
                 <div className="text-left flex-1 min-w-0">
@@ -563,7 +554,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   )}
                 </div>
               </div>
-            </div>
+            </div>}
 
             {/* Benefícios */}
             <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 space-y-1">
@@ -620,13 +611,13 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                 <div className="bg-slate-50 rounded-2xl border border-slate-200 p-4 flex flex-col items-center text-center">
                   <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2 flex flex-col items-center">
                     <div className="p-2 bg-white rounded-xl">
-                      <QRCodeSVG 
-                        value={currentPixPayload || 'PEDIDO-NAO-DISPONIVEL'}
+                      {currentPixPayload && <QRCodeSVG
+                        value={currentPixPayload}
                         size={128}
                         level="M"
                         includeMargin={false}
                         aria-label={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"}
-                      />
+                      />}
                     </div>
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
                       Valor a Pagar: <strong className="text-emerald-600 text-xs">R$ {effectivePrice}</strong>
@@ -661,6 +652,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     <button
                       type="button"
                       onClick={handleCopyPayload}
+                      disabled={!currentPixPayload}
                       className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
                         copiedType === "payload"
                           ? "bg-emerald-600 text-white border-emerald-600"
@@ -681,7 +673,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     </button>
                   )}
 
-                  <button
+                  {false && <button
                     type="button"
                     onClick={handleCopyEmail}
                     className={`w-full ${isPcdDiscountApplied ? 'py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold' : 'mt-2 py-1.5 px-3 bg-white border-slate-200 hover:bg-slate-100 text-slate-600 font-semibold'} rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer border`}
@@ -690,10 +682,10 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     <span>
                       {copiedType === "email" ? "Chave E-mail Copiada!" : "Copiar Chave Pix E-mail: " + pixEmailKey}
                     </span>
-                  </button>
+                  </button>}
                 </div>
 
-                <a
+                {false && <a
                   href={"https://wa.me/5584992344922?text=" + whatsappMessage}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -701,7 +693,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>Enviar Comprovante no WhatsApp (84) 99234-4922</span>
-                </a>
+                </a>}
               </div>
             )}
 
