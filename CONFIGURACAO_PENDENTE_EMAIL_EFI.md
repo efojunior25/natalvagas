@@ -2,6 +2,19 @@
 
 O código do Pages está preparado. Execute as etapas abaixo na conta Cloudflare que contém o projeto `natalvagas`. Não envie senhas, tokens ou certificados pelo chat e não grave esses valores no Git.
 
+## Checklist da sua parte
+
+1. **GitHub:** mescle o [PR #13](https://github.com/efojunior25/natalvagas/pull/13) para que o próximo deploy automático não reverta a preparação já publicada.
+2. **Recebimento:** crie no Cloudflare Email Routing a regra `dev@natalvagas.com.br` → seu Gmail e confirme que recebe mensagens.
+3. **Envio:** ative `natalvagas.com.br` no Cloudflare Email Sending, confirme os registros DNS e o plano Workers Paid para enviar a candidatos externos. Crie um token com permissão `Email Sending: Edit` e salve-o como Secret `CLOUDFLARE_EMAIL_TOKEN` no Pages `natalvagas`, ambiente Production.
+4. **Efí:** deixe disponíveis o certificado `.p12` de produção, Client ID, Client Secret e chave Pix da aplicação. Informe-me apenas o caminho local do certificado; insira as credenciais como Secrets no Cloudflare quando o Worker estiver publicado. Não envie valores pelo chat.
+5. **EDITDEV:** escolha uma senha exclusiva e cadastre um segredo TOTP no seu aplicativo autenticador para `dev@natalvagas.com.br`. A senha e o segredo devem ser inseridos localmente; não envie os valores pelo chat.
+6. **Preços:** confirme antes de habilitar cobranças se os planos previstos estão corretos: usuário R$ 9,90/mês, R$ 39,90/ano, R$ 99,90 vitalício; empresa R$ 29,90/mês, R$ 149,90/ano, R$ 399,90 vitalício.
+
+## O que eu farei depois da sua configuração
+
+Publicarei o Worker Efí, adicionarei o binding `EFI_PIX` ao Pages, registrarei e testarei o webhook, testarei envio e recuperação de e-mail, criarei a conta `EDITDEV` no D1 sem cadastro público e validarei os fluxos com dados sintéticos. O roteiro abaixo documenta os comandos para conferência; você não precisa executar a implantação do Worker nem o script de webhook sozinho.
+
 ## 1. Receber em `dev@natalvagas.com.br`
 
 Cloudflare Dashboard → **Compute → Email Service → Email Routing → Routing Rules** → crie `dev@natalvagas.com.br` com destino no seu Gmail já verificado. Confirme no Gmail que a mensagem chega. Esse endereço servirá como identidade da conta EDITDEV; o encaminhamento não cria a conta dentro do site.
