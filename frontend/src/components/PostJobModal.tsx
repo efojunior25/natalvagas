@@ -802,20 +802,21 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
                         type="radio" 
                         name="plan" 
                         checked={isFeatured} 
-                        onChange={() => setIsFeatured(true)} 
+                        onChange={() => setIsFeatured(false)}
+                        disabled
                         className="text-amber-600 focus:ring-amber-500 cursor-pointer"
                       />
                       <div>
                         <span className="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1">
                           <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
-                          Destaque VIP (30 Dias no Topo)
+                          Destaque VIP (disponível em breve)
                         </span>
                       </div>
                     </div>
                     <span className="text-[11px] font-black text-amber-900 dark:text-amber-200 bg-amber-200/90 dark:bg-amber-900/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-700">R$ 29,90</span>
                   </div>
                   <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">
-                    ⭐ <strong>30 dias consecutivos em destaque absoluto</strong> no topo com selo VIP + <strong>Selo de Empresa Verificada Oficial</strong> na página da vaga + Disparo nos grupos de WhatsApp.
+                    A contratação do destaque será liberada após a integração bancária.
                   </p>
                 </label>
               </div>

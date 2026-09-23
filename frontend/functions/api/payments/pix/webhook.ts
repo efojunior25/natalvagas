@@ -1,18 +1,24 @@
 import { json } from "../../auth/_utils";
 interface D1Database { prepare: (query: string) => { bind: (...args: any[]) => { first: <T = any>() => Promise<T | null>; run: () => Promise<any> } } }
-interface Env { DB?: D1Database; WEBHOOK_SECRET?: string }
+interface Env { DB?: D1Database; WEBHOOK_SECRET?: string; EFI_PIX?: { fetch: (request: Request) => Promise<Response> } }
 function constantTimeEqual(a: string, b: string): boolean { if (a.length !== b.length) return false; let result = 0; for (let i = 0; i < a.length; i++) result |= a.charCodeAt(i) ^ b.charCodeAt(i); return result === 0; }
 export const onRequestPost = async ({ request, env }: { request: Request; env?: Env }) => {
   try {
-    if (!env?.DB || !env.WEBHOOK_SECRET || env.WEBHOOK_SECRET.length < 32) return json({ status: "unavailable" }, 503);
-    const supplied = request.headers.get("x-webhook-secret") || ""; if (!constantTimeEqual(supplied, env.WEBHOOK_SECRET)) return json({ error: "unauthorized" }, 401);
-    const payload: any = await request.json().catch(() => null); if (!payload || !Array.isArray(payload.pix)) return json({ error: "invalid_payload" }, 400);
+    if (!env?.DB || !env.EFI_PIX || !env.WEBHOOK_SECRET || env.WEBHOOK_SECRET.length < 32) return json({ status: "unavailable" }, 503);
+    const supplied = new URL(request.url).searchParams.get("hmac") || "";
+    if (!constantTimeEqual(supplied, env.WEBHOOK_SECRET)) return json({ error: "unauthorized" }, 401);
+    const payload: any = await request.json().catch(() => null);
+    if (payload && !Array.isArray(payload.pix) && payload.teste) return json({ status: "ok", processedCount: 0 });
+    if (!payload || !Array.isArray(payload.pix)) return json({ error: "invalid_payload" }, 400);
     let processed = 0;
     for (const item of payload.pix.slice(0, 20)) {
       const txid = String(item?.txid || ""); const endToEndId = String(item?.endToEndId || ""); const paidCents = Math.round(Number(String(item?.valor || "0").replace(",", ".")) * 100);
       if (!txid || !endToEndId || !Number.isSafeInteger(paidCents) || paidCents <= 0) continue;
       const order: any = await env.DB.prepare("SELECT id, user_id, plan, amount_cents, status, expires_at FROM payment_orders WHERE txid = ?").bind(txid).first();
       if (!order || order.status !== "PENDING" || order.amount_cents !== paidCents || Date.parse(order.expires_at) < Date.now()) continue;
+      const provider = await env.EFI_PIX.fetch(new Request("https://natalvagas-efi-pix.internal/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "verify", txid, endToEndId }) })).catch(() => null);
+      const verified: any = provider?.ok ? await provider.json().catch(() => null) : null;
+      if (!verified?.confirmed || verified.amountCents !== paidCents) continue;
       const paidAt = item.horario ? new Date(item.horario).toISOString() : new Date().toISOString();
       const result: any = await env.DB.prepare("UPDATE payment_orders SET status = 'PAID', provider_end_to_end_id = ?, paid_at = ? WHERE id = ? AND status = 'PENDING'").bind(endToEndId, paidAt, order.id).run();
       if (result?.meta?.changes === 0) continue;
