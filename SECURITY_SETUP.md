@@ -6,7 +6,7 @@
 - `WEBHOOK_SECRET`: segredo independente, com pelo menos 32 caracteres.
 - `EDITDEV_API_KEY`: chave exclusiva da API Spring. Não reutilize os segredos anteriores.
 - `CORS_ALLOWED_ORIGINS`: apenas os domínios HTTPS publicados.
-- `CLOUDFLARE_EMAIL_TOKEN`: token restrito ao Email Sending para verificação e recuperação de senha.
+- `RESEND_API_KEY`: chave com permissão apenas de envio, restrita ao domínio `natalvagas.com.br`, para verificação e recuperação de senha.
 - `CLOUDFLARE_ACCOUNT_ID`: identificador da conta Cloudflare.
 - Binding de serviço `EFI_PIX`: Worker privado com certificado mTLS e credenciais Efí.
 

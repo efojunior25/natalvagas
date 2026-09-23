@@ -1,15 +1,50 @@
-# Ativação de e-mail, Pix Efí e conta EDITDEV
+# Ativação de e-mail via Resend, Pix Efí e conta EDITDEV
 
 O código do Pages está preparado. Execute as etapas abaixo na conta Cloudflare que contém o projeto `natalvagas`. Não envie senhas, tokens ou certificados pelo chat e não grave esses valores no Git.
 
-## Checklist da sua parte
+## Faça você: roteiro em ordem
 
-1. **GitHub:** mescle o [PR #13](https://github.com/efojunior25/natalvagas/pull/13) para que o próximo deploy automático não reverta a preparação já publicada.
-2. **Recebimento:** crie no Cloudflare Email Routing a regra `dev@natalvagas.com.br` → seu Gmail e confirme que recebe mensagens.
-3. **Envio:** ative `natalvagas.com.br` no Cloudflare Email Sending, confirme os registros DNS e o plano Workers Paid para enviar a candidatos externos. Crie um token com permissão `Email Sending: Edit` e salve-o como Secret `CLOUDFLARE_EMAIL_TOKEN` no Pages `natalvagas`, ambiente Production.
-4. **Efí:** deixe disponíveis o certificado `.p12` de produção, Client ID, Client Secret e chave Pix da aplicação. Informe-me apenas o caminho local do certificado; insira as credenciais como Secrets no Cloudflare quando o Worker estiver publicado. Não envie valores pelo chat.
-5. **EDITDEV:** escolha uma senha exclusiva e cadastre um segredo TOTP no seu aplicativo autenticador para `dev@natalvagas.com.br`. A senha e o segredo devem ser inseridos localmente; não envie os valores pelo chat.
-6. **Preços:** confirme antes de habilitar cobranças se os planos previstos estão corretos: usuário R$ 9,90/mês, R$ 39,90/ano, R$ 99,90 vitalício; empresa R$ 29,90/mês, R$ 149,90/ano, R$ 399,90 vitalício.
+Não cole senhas, tokens, Client Secret, chave Pix ou certificado no chat ou no Git. Pare se algum menu não aparecer; diga-me em qual tela parou. Não faça uma cobrança real como teste.
+
+### 1. Garantir que o código continue publicado
+
+No GitHub, abra e mescle o [PR #13](https://github.com/efojunior25/natalvagas/pull/13). O código de preparação já foi publicado diretamente, mas o merge impede que um deploy automático futuro o reverta.
+
+### 2. Receber mensagens em `dev@natalvagas.com.br`
+
+1. Abra [Cloudflare Dashboard](https://dash.cloudflare.com/) na conta do domínio.
+2. Vá a **Compute → Email Service → Email Routing → Destination Addresses**. Se seu Gmail ainda não estiver na lista como **Verified**, adicione-o e clique no link de confirmação que a Cloudflare enviará a ele.
+3. No domínio `natalvagas.com.br`, abra **Email Routing → Routing Rules → Create routing rule**. Em endereço personalizado, informe `dev` (o endereço completo será `dev@natalvagas.com.br`); em ação escolha **Send to an email** e selecione seu Gmail verificado. Salve/ative.
+4. Envie uma mensagem de **outra conta de e-mail** para `dev@natalvagas.com.br` e confira se chega ao Gmail, inclusive em Spam. Encaminhar e-mail não cria uma caixa postal separada nem configura o envio.
+
+### 3. Enviar mensagens do site sem Workers Paid
+
+O domínio `natalvagas.com.br` já aparece como **Verified** no Resend após a configuração automática com Cloudflare (captura enviada em 23/09/2026). Não é necessário ativar Cloudflare Email Sending nem Workers Paid para este fluxo.
+
+1. No [Resend](https://resend.com/), abra **API Keys → Create API Key**. Dê um nome como `natalvagas-production`; escolha **Sending access** e restrinja ao domínio `natalvagas.com.br`.
+2. Copie a chave uma vez e vá à [Cloudflare](https://dash.cloudflare.com/) → **Workers & Pages → natalvagas → Settings → Variables and Secrets**. Selecione **Production** e adicione `RESEND_API_KEY` como **Secret/Encrypted**. Não envie a chave pelo chat.
+3. Avise-me que o Secret foi salvo. Eu farei o redeploy e testarei com endereço de teste controlado, sem dados reais de usuários. Até lá, o cadastro permanece fechado com erro 503.
+
+O plano gratuito informado pelo Resend é de até 3.000 mensagens/mês e 100/dia; ao chegar ao limite, novos cadastros podem falhar de modo seguro até a cota voltar ou ser ampliada. Confira a cota vigente no painel antes de abrir o site ao público.
+
+### 4. Preparar Efí Pix, sem ativar cobranças
+
+1. Entre na sua conta Efí. Em **API → Aplicações**, abra a aplicação Pix existente ou use **Criar aplicação**. Habilite API Pix em **Produção** e confirme os escopos `cob.write`, `cob.read`, `payloadlocation.read` e `webhook.write`. Localize o **Client ID** e **Client Secret de Produção** (não os de Homologação).
+2. Em **API → Meus Certificados → Produção → Novo Certificado**, gere e baixe o `.p12` de produção. Guarde-o em uma pasta privada fora do repositório e faça backup seguro; a Efí não permite baixar de novo o mesmo certificado.
+3. Confira qual chave Pix da sua conta Efí será usada para recebimento. Guarde chave, Client ID e Client Secret em gerenciador de senhas. **Não** os insira ainda no Pages: eles serão Secrets do Worker privado que eu publicarei.
+4. Quando estiver pronto, informe-me **somente o caminho absoluto local do `.p12`** (por exemplo, `C:\\Users\\seu-usuario\\Documents\\Privado\\efi-prod.p12`), sem anexar o arquivo nem copiar seu conteúdo. Combinaremos a inserção local das credenciais no Worker.
+
+### 5. Preparar a conta EDITDEV
+
+1. Instale um aplicativo autenticador compatível com TOTP no seu celular, se ainda não tiver.
+2. Escolha uma senha única e longa para `dev@natalvagas.com.br`, guarde-a no gerenciador de senhas e **não** a envie pelo chat.
+3. Ainda **não** tente cadastrar TOTP sozinho: o aplicativo autenticador precisa primeiro de um QR/segredo gerado para a conta. Eu orientarei essa etapa junto com a criação controlada da conta EDITDEV; você escaneará o QR localmente e me informará apenas se o código de 6 dígitos funciona, sem enviar o segredo.
+
+### 6. Confirmar preços
+
+Responda apenas **“preços confirmados”** se estiverem certos, ou liste as correções: usuário R$ 9,90/mês, R$ 39,90/ano, R$ 99,90 vitalício; empresa R$ 29,90/mês, R$ 149,90/ano, R$ 399,90 vitalício. Essa confirmação não ativa cobranças; pagamentos continuarão bloqueados até integração e testes.
+
+Ao terminar, diga-me quais das etapas 1–6 concluiu. Pode enviar prints dos status, mas oculte credenciais, tokens e QR de autenticação.
 
 ## O que eu farei depois da sua configuração
 
@@ -21,11 +56,7 @@ Cloudflare Dashboard → **Compute → Email Service → Email Routing → Routi
 
 ## 2. Enviar como `noreply@natalvagas.com.br`
 
-Cloudflare Dashboard → **Compute → Email Service → Email Sending** → **Onboard Domain** → `natalvagas.com.br`. Aguarde o status verificado dos registros DNS de envio. O encaminhamento existente para seu Gmail continua separado.
-
-O envio para candidatos externos requer **Workers Paid**. Crie um API token restrito à conta com permissão **Email Sending: Edit**. Em **Workers & Pages → natalvagas → Settings → Variables and Secrets → Production**, adicione como Secret `CLOUDFLARE_EMAIL_TOKEN`. O identificador `CLOUDFLARE_ACCOUNT_ID` já foi configurado. A aplicação enviará verificação e recuperação de senha diretamente pela API da Cloudflare. Enquanto o token não existir, o cadastro responderá 503 e não criará contas sem verificação.
-
-Depois de salvar o token, faça um redeploy do projeto Pages para garantir que o binding seja carregado. Teste cadastro usando um endereço seu, confirme o link e teste recuperação de senha. Não use uma conta de cliente nesse primeiro teste.
+O site usa a API do Resend para enviar verificação de e-mail e recuperação de senha. O domínio já foi verificado; falta apenas o Secret `RESEND_API_KEY` no Pages Production e um novo deploy. O encaminhamento para Gmail pela Cloudflare é independente. Sem a chave, o cadastro responde 503 e não cria contas sem verificação. Os testes iniciais devem usar apenas endereços controlados, nunca contas de clientes.
 
 ## 3. Efí Pix
 
