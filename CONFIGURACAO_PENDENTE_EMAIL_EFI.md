@@ -1,4 +1,4 @@
-# Ativação de e-mail, Pix Efí e conta EDITDEV
+# Ativação de e-mail via Resend, Pix Efí e conta EDITDEV
 
 O código do Pages está preparado. Execute as etapas abaixo na conta Cloudflare que contém o projeto `natalvagas`. Não envie senhas, tokens ou certificados pelo chat e não grave esses valores no Git.
 
@@ -17,13 +17,15 @@ No GitHub, abra e mescle o [PR #13](https://github.com/efojunior25/natalvagas/pu
 3. No domínio `natalvagas.com.br`, abra **Email Routing → Routing Rules → Create routing rule**. Em endereço personalizado, informe `dev` (o endereço completo será `dev@natalvagas.com.br`); em ação escolha **Send to an email** e selecione seu Gmail verificado. Salve/ative.
 4. Envie uma mensagem de **outra conta de e-mail** para `dev@natalvagas.com.br` e confira se chega ao Gmail, inclusive em Spam. Encaminhar e-mail não cria uma caixa postal separada nem configura o envio.
 
-### 3. Enviar mensagens do site
+### 3. Enviar mensagens do site sem Workers Paid
 
-1. Na Cloudflare, vá a **Compute → Email Service → Email Sending → Onboard Domain** e escolha `natalvagas.com.br`.
-2. Aceite os registros DNS propostos e aguarde o domínio aparecer como verificado/ativo. Não apague os registros existentes de Email Routing. Se houver conflito DNS, pare e me mostre apenas os nomes/tipos dos registros, sem tokens.
-3. Em **Workers & Pages → Plans/Billing**, confira se a conta usa **Workers Paid**. Se estiver Free, a mudança envolve cobrança recorrente; confirme preço e condições mostrados pela Cloudflare antes de ativar. O plano do domínio (Free/Pro) é separado do Workers Paid.
-4. Em **My Profile → API Tokens → Create Token → Custom token**, dê um nome como `natalvagas-email-sending`; adicione a permissão **Account → Email Sending → Edit** e restrinja o recurso à conta do projeto `natalvagas`. Crie e copie o token: a Cloudflare o mostra uma vez.
-5. Em **Workers & Pages → natalvagas → Settings → Variables and Secrets**, escolha **Production**, adicione `CLOUDFLARE_EMAIL_TOKEN`, cole o token como **Secret/Encrypted** (não variável visível) e salve. Se houver botão de redeploy, use-o; caso contrário, me avise para eu publicar novamente. Não envie o token pelo chat.
+O domínio `natalvagas.com.br` já aparece como **Verified** no Resend após a configuração automática com Cloudflare (captura enviada em 23/09/2026). Não é necessário ativar Cloudflare Email Sending nem Workers Paid para este fluxo.
+
+1. No [Resend](https://resend.com/), abra **API Keys → Create API Key**. Dê um nome como `natalvagas-production`; escolha **Sending access** e restrinja ao domínio `natalvagas.com.br`.
+2. Copie a chave uma vez e vá à [Cloudflare](https://dash.cloudflare.com/) → **Workers & Pages → natalvagas → Settings → Variables and Secrets**. Selecione **Production** e adicione `RESEND_API_KEY` como **Secret/Encrypted**. Não envie a chave pelo chat.
+3. Avise-me que o Secret foi salvo. Eu farei o redeploy e testarei com endereço de teste controlado, sem dados reais de usuários. Até lá, o cadastro permanece fechado com erro 503.
+
+O plano gratuito informado pelo Resend é de até 3.000 mensagens/mês e 100/dia; ao chegar ao limite, novos cadastros podem falhar de modo seguro até a cota voltar ou ser ampliada. Confira a cota vigente no painel antes de abrir o site ao público.
 
 ### 4. Preparar Efí Pix, sem ativar cobranças
 
@@ -54,11 +56,7 @@ Cloudflare Dashboard → **Compute → Email Service → Email Routing → Routi
 
 ## 2. Enviar como `noreply@natalvagas.com.br`
 
-Cloudflare Dashboard → **Compute → Email Service → Email Sending** → **Onboard Domain** → `natalvagas.com.br`. Aguarde o status verificado dos registros DNS de envio. O encaminhamento existente para seu Gmail continua separado.
-
-O envio para candidatos externos requer **Workers Paid**. Crie um API token restrito à conta com permissão **Email Sending: Edit**. Em **Workers & Pages → natalvagas → Settings → Variables and Secrets → Production**, adicione como Secret `CLOUDFLARE_EMAIL_TOKEN`. O identificador `CLOUDFLARE_ACCOUNT_ID` já foi configurado. A aplicação enviará verificação e recuperação de senha diretamente pela API da Cloudflare. Enquanto o token não existir, o cadastro responderá 503 e não criará contas sem verificação.
-
-Depois de salvar o token, faça um redeploy do projeto Pages para garantir que o binding seja carregado. Teste cadastro usando um endereço seu, confirme o link e teste recuperação de senha. Não use uma conta de cliente nesse primeiro teste.
+O site usa a API do Resend para enviar verificação de e-mail e recuperação de senha. O domínio já foi verificado; falta apenas o Secret `RESEND_API_KEY` no Pages Production e um novo deploy. O encaminhamento para Gmail pela Cloudflare é independente. Sem a chave, o cadastro responde 503 e não cria contas sem verificação. Os testes iniciais devem usar apenas endereços controlados, nunca contas de clientes.
 
 ## 3. Efí Pix
 
