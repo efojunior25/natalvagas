@@ -31,7 +31,12 @@ function accountEmailContent(type: "VERIFY_EMAIL" | "RESET_PASSWORD", url: strin
 <span style="display:none!important;visibility:hidden;opacity:0;height:0;width:0;overflow:hidden;">${description}</span>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#f1f5f9;"><tr><td align="center" style="padding:32px 16px;">
   <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:560px;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;">
-    <tr><td style="background:#0284c7;padding:24px 32px;color:#ffffff;font-size:21px;font-weight:700;letter-spacing:-0.5px;">Natal <span style="color:#bae6fd;">Vagas</span></td></tr>
+    <tr><td style="border-top:6px solid #0284c7;border-bottom:1px solid #e2e8f0;padding:18px 20px;background:#ffffff;">
+      <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+        <td width="60" valign="middle" style="padding-right:12px;"><img src="https://natalvagas.com.br/assets/icone-lupa-natalvagas.png" width="54" alt="" style="display:block;width:54px;max-width:100%;height:auto;border:0;"></td>
+        <td valign="middle"><img src="https://natalvagas.com.br/assets/logo-natalvagas-email.png" width="190" alt="Natal Vagas — sua oportunidade está aqui" style="display:block;width:190px;max-width:100%;height:auto;border:0;"></td>
+      </tr></table>
+    </td></tr>
     <tr><td style="padding:36px 32px 32px;">
       <p style="margin:0 0 12px;color:#0284c7;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;">${verify ? "Confirmação de conta" : "Segurança da conta"}</p>
       <h1 style="margin:0 0 18px;color:#0f172a;font-size:28px;line-height:1.25;">${title}</h1>
