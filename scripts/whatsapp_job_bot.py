@@ -92,7 +92,7 @@ def format_whatsapp_message(job, is_channel=False):
         salary_str = "Salário a combinar"
         
     slug = job.get('slug', '')
-    job_url = f"https://natalvagas.com.br/vaga/{slug}" if slug else "https://natalvagas.com.br"
+    job_url = f"https://natalvagas.com.br/vaga/{slug}/" if slug else "https://natalvagas.com.br/"
     
     msg = (
         f"🚨 *VAGA: {title.upper()}*\n\n"
