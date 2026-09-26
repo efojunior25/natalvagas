@@ -61,7 +61,7 @@ def save_posted_history(history):
     except Exception as e:
         print(f"⚠️ Erro ao salvar histórico de postagens: {e}")
 
-def format_whatsapp_message(job):
+def format_whatsapp_message(job, is_channel=False):
     title = job.get('title', 'Vaga de Emprego').strip()
     company = job.get('companyName', 'Empresa Confidencial').strip()
     city = job.get('city', 'Natal').strip()
@@ -87,7 +87,7 @@ def format_whatsapp_message(job):
     slug = job.get('slug', '')
     job_url = f"https://natalvagas.com.br/vaga/{slug}" if slug else "https://natalvagas.com.br"
     
-    # Resumo dos requisitos (primeiras 2 linhas limpas)
+    # Resumo dos requisitos (primeiras 3 linhas limpas)
     reqs_raw = job.get('requirements', '')
     req_bullets = []
     if reqs_raw:
@@ -96,6 +96,23 @@ def format_whatsapp_message(job):
             req_bullets.append(f"• {l}")
     
     req_text = "\n".join(req_bullets) if req_bullets else "• Detalhes e perfil no link oficial"
+
+    if is_channel:
+        footer = (
+            f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"🔗 *Confira mais vagas e envie seu currículo:*\n"
+            f"👉 https://natalvagas.com.br\n\n"
+            f"📄 *Crie seu currículo grátis em PDF:*\n"
+            f"👉 https://natalvagas.com.br/criar-curriculo"
+        )
+    else:
+        footer = (
+            f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"📢 *Receba vagas diárias no Canal Oficial:*\n"
+            f"👉 {WA_COMMUNITY_LINK}\n\n"
+            f"🔗 Mais vagas no mural oficial:\n"
+            f"👉 https://natalvagas.com.br"
+        )
 
     msg = (
         f"🚨 *NOVA OPORTUNIDADE EM {city.upper()} / RN*\n"
@@ -108,12 +125,9 @@ def format_whatsapp_message(job):
         f"📌 *Principais Requisitos:*\n"
         f"{req_text}\n\n"
         f"📲 *COMO SE CANDIDATAR (100% GRATUITO):*\n"
-        f"Acesse o link oficial no Natal Vagas para enviar seu currículo diretamente para a empresa:\n"
+        f"Acesse o link oficial no Natal Vagas para enviar seu currículo diretamente para a empresa:\n\n"
         f"👉 {job_url}\n\n"
-        f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📢 *Receba vagas diárias no Canal Oficial:*\n"
-        f"👉 {WA_COMMUNITY_LINK}\n"
-        f"🔗 Mais vagas no mural oficial: https://natalvagas.com.br"
+        f"{footer}"
     )
     return msg
 
@@ -151,6 +165,7 @@ def send_whatsapp_message(group_id, message):
 
 def main():
     parser = argparse.ArgumentParser(description="Robô de Divulgação de Vagas no WhatsApp")
+    parser.add_argument('--channel', action='store_true', help="Formata a mensagem especificamente para publicação em Canal")
     parser.add_argument('--preview', action='store_true', help="Apenas imprime a mensagem formatada para conferência")
     parser.add_argument('--dry-run', action='store_true', help="Executa todo o fluxo sem realizar disparos reais")
     parser.add_argument('--limit', type=int, default=5, help="Quantidade máxima de vagas a processar (padrão: 5)")
@@ -187,7 +202,7 @@ def main():
 
     for i, job in enumerate(selected, 1):
         job_id = str(job.get('id') or job.get('slug'))
-        msg = format_whatsapp_message(job)
+        msg = format_whatsapp_message(job, is_channel=args.channel)
         
         print("\n" + "="*50)
         print(f"📢 [{i}/{len(selected)}] Vaga: {job.get('title')} ({job.get('companyName')})")
