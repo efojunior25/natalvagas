@@ -3,6 +3,8 @@ import { X, Building2, DollarSign, Send, CheckCircle, AlertCircle, Loader2, Spar
 import { QRCodeSVG } from 'qrcode.react';
 import { Category, WorkModel, ContractType, ApplicationChannel } from '../types/job';
 import { generateUniqueTxid, buildPixEMV } from '../services/paymentService';
+import { useAuth } from '../context/AuthContext';
+import { AuthModal } from './AuthModal';
 import axios from 'axios';
 
 interface PostJobModalProps {
@@ -25,6 +27,8 @@ const DEFAULT_CATEGORIES: Category[] = [
 ];
 
 export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJobCreated }) => {
+  const { user, isAuthenticated } = useAuth();
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [categories, setCategories] = useState<Category[]>(DEFAULT_CATEGORIES);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successSlug, setSuccessSlug] = useState<string | null>(null);
@@ -33,6 +37,12 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
   // Estados do Formulário
   const [title, setTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
+
+  useEffect(() => {
+    if (user?.name && !companyName) {
+      setCompanyName(user.name);
+    }
+  }, [user]);
   const [companyLogoUrl, setCompanyLogoUrl] = useState('');
   const [companyWebsite, setCompanyWebsite] = useState('');
   const [companyInstagram, setCompanyInstagram] = useState('');
@@ -353,10 +363,67 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
               </a>
             </div>
           </div>
+        ) : !isAuthenticated ? (
+          /* Portal da Empresa - Login/Cadastro Obrigatório */
+          <div className="p-6 sm:p-10 text-center flex flex-col items-center justify-center my-auto space-y-5">
+            <div className="w-16 h-16 bg-brand-50 dark:bg-brand-950/50 rounded-2xl flex items-center justify-center text-brand-600 dark:text-brand-400 shadow-md border border-brand-200 dark:border-brand-800">
+              <Building2 className="w-8 h-8" />
+            </div>
+
+            <div className="space-y-2 max-w-md mx-auto">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-800 dark:text-brand-300 text-xs font-black uppercase tracking-wider">
+                Área Exclusiva de Recrutamento
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-tight">
+                Identifique sua Empresa para Anunciar
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                Para manter a credibilidade do mural e garantir a segurança dos candidatos de Natal e região, é necessário acessar ou cadastrar sua empresa.
+              </p>
+            </div>
+
+            <div className="w-full max-w-sm space-y-2.5">
+              <button
+                type="button"
+                onClick={() => setIsAuthOpen(true)}
+                className="w-full py-3.5 px-4 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Building2 className="w-4 h-4" />
+                <span>Entrar ou Cadastrar Empresa Gratuitamente</span>
+              </button>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                Cadastro em 10 segundos • 100% gratuito para publicação de vagas
+              </p>
+            </div>
+
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-2xl text-left text-xs max-w-md w-full space-y-2">
+              <div className="flex items-center gap-2 font-bold text-slate-800 dark:text-slate-200">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span>Vantagens para sua Empresa:</span>
+              </div>
+              <ul className="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                <li>Divulgação nos canais oficiais e redes do Natal Vagas</li>
+                <li>Recebimento direto de currículos no e-mail ou WhatsApp da empresa</li>
+                <li>Painel para gerenciar, editar ou pausar suas vagas</li>
+                <li>Selo de empresa verificada para atrair os melhores talentos</li>
+              </ul>
+            </div>
+          </div>
         ) : (
           /* Formulário de Cadastro */
           <form onSubmit={handleSubmit} className="p-5 sm:p-6 overflow-y-auto space-y-5 text-sm">
             
+            {/* Informações da Empresa Conectada */}
+            <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center justify-between text-xs text-emerald-900 dark:text-emerald-300">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Publicando como: <strong>{user?.name}</strong> ({user?.email})</span>
+              </div>
+              <span className="text-[10px] font-bold uppercase bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 rounded-md text-emerald-800 dark:text-emerald-300">
+                Empresa Autenticada
+              </span>
+            </div>
+
             {errorMessage && (
               <div className="p-3.5 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs rounded-xl border border-red-200 dark:border-red-800 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
@@ -986,6 +1053,13 @@ export const PostJobModal: React.FC<PostJobModalProps> = ({ isOpen, onClose, onJ
         )}
 
       </div>
+
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        title="Área da Empresa"
+        subtitle="Acesse ou crie a conta da sua empresa gratuitamente para anunciar vagas."
+      />
     </div>
   );
 };

@@ -390,21 +390,24 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
           </div>
 
           {/* Vínculo da Conta (shrink-0) */}
-          <div className="bg-slate-50 border-b border-slate-200 px-4 sm:px-5 py-2 flex items-center justify-between text-xs shrink-0">
+          <div className="bg-amber-50/90 border-b border-amber-200 px-4 sm:px-5 py-2.5 flex items-center justify-between text-xs shrink-0">
             {isAuthenticated ? (
               <div className="flex items-center gap-2 text-slate-700 font-medium truncate">
                 <UserCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="truncate">Vinculado a: <strong>{user?.name}</strong> ({user?.email})</span>
+                <span className="truncate">Assinatura será vinculada a: <strong>{user?.name}</strong> ({user?.email})</span>
               </div>
             ) : (
-              <div className="flex items-center justify-between w-full">
-                <span className="text-slate-500 text-[11px]">Deseja salvar seu currículo online?</span>
+              <div className="flex items-center justify-between w-full gap-2">
+                <div className="flex items-center gap-1.5 text-amber-900 text-xs">
+                  <Lock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <span>Para manter seus <strong>30 dias Pro</strong> ativos em qualquer celular ou PC:</span>
+                </div>
                 <button
                   type="button"
                   onClick={() => setIsAuthOpen(true)}
-                  className="text-brand-600 font-bold hover:underline cursor-pointer flex items-center gap-1 text-xs"
+                  className="px-3 py-1 bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold rounded-lg transition-all text-xs shrink-0 shadow-xs cursor-pointer"
                 >
-                  Entrar com Google
+                  Login / Cadastrar
                 </button>
               </div>
             )}
@@ -851,8 +854,8 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
-        title="Conectar com o Google"
-        subtitle="Vincule sua conta para manter seus currículos salvos para sempre."
+        title="Vincular Plano Pro à sua Conta"
+        subtitle="Entre ou cadastre-se grátis para vincular seu Acesso Pro de 30 dias e salvar seus currículos na nuvem."
       />
     </>,
     document.body

@@ -211,6 +211,10 @@ export const ResumeBuilder: React.FC = () => {
   const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
 
   const handlePrint = () => {
+    if (!user) {
+      setIsAuthOpen(true);
+      return;
+    }
     if (activeTemplate !== 'ats' && !effectiveIsPro) {
       setIsPaymentModalOpen(true);
       return;
@@ -1246,8 +1250,16 @@ Agradeço pela oportunidade e fico à disposição para entrevista!`;
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
-        title="Salvar Currículo na Nuvem"
-        subtitle="Conecte-se em 1 clique para manter seus dados salvos em qualquer dispositivo."
+        title="Salvar e Baixar Currículo Grátis"
+        subtitle="Crie sua conta gratuita em 10 segundos para salvar seu currículo na nuvem e fazer download gratuito em PDF ilimitado."
+        onSuccess={() => {
+          setIsAuthOpen(false);
+          setTimeout(() => {
+            if (activeTemplate === 'ats' || effectiveIsPro) {
+              window.print();
+            }
+          }, 800);
+        }}
       />
 
       {/* Rodapé Institucional (Oculto na impressão) */}
