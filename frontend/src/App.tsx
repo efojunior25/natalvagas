@@ -15,6 +15,7 @@ import { WhatsAppCommunityBanner } from './components/WhatsAppCommunityBanner';
 import { CourseRecommendations } from './components/CourseRecommendations';
 import { SEO_LANDING_PAGES, SEO_LANDING_MAP } from './data/seoLandingPages';
 import { PwaInstallPrompt } from './components/PwaInstallPrompt';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 // Lazy loading para páginas institucionais e modais (reduz bundle inicial)
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
@@ -581,6 +582,9 @@ export const App: React.FC = () => {
 
       {/* Banner PWA de Instalação no Celular */}
       <PwaInstallPrompt />
+
+      {/* Botão Flutuante Oficial do WhatsApp */}
+      <FloatingWhatsApp />
     </>
   );
 };
