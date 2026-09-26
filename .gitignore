@@ -48,8 +48,8 @@ pgdata/
 *.pem
 certs/
 
-# Imagens de triagem temporárias
-imagens vagas/
-*.bak
-__pycache__/
+# WhatsApp Bot Session & node_modules
+scripts/whatsapp-poster/node_modules/
+scripts/.wpp_session/
+.wpp_session/
 
