@@ -31,7 +31,8 @@ WA_API_URL = os.environ.get('WHATSAPP_API_URL', '').rstrip('/')
 WA_API_KEY = os.environ.get('WHATSAPP_API_KEY', '')
 WA_INSTANCE = os.environ.get('WHATSAPP_INSTANCE', 'natalvagas')
 WA_GROUPS_RAW = os.environ.get('WHATSAPP_GROUP_IDS', '')
-WA_COMMUNITY_LINK = os.environ.get('WHATSAPP_COMMUNITY_LINK', 'https://chat.whatsapp.com/natalvagas')
+WA_COMMUNITY_LINK = os.environ.get('WHATSAPP_COMMUNITY_LINK', 'https://whatsapp.com/channel/0029Vb8fAyN4o7qURPaBIN2B')
+WA_CHANNEL_ID = os.environ.get('WHATSAPP_CHANNEL_ID', '0029Vb8fAyN4o7qURPaBIN2B')
 
 def load_jobs():
     if not os.path.exists(JOBS_FILE):
@@ -110,9 +111,9 @@ def format_whatsapp_message(job):
         f"Acesse o link oficial no Natal Vagas para enviar seu currículo diretamente para a empresa:\n"
         f"👉 {job_url}\n\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"👥 *Compartilhe nos grupos de emprego e ajude quem precisa!*\n"
-        f"🔗 Mais vagas no mural oficial: https://natalvagas.com.br\n"
-        f"💬 Grupo Oficial no WhatsApp: {WA_COMMUNITY_LINK}"
+        f"📢 *Receba vagas diárias no Canal Oficial:*\n"
+        f"👉 {WA_COMMUNITY_LINK}\n"
+        f"🔗 Mais vagas no mural oficial: https://natalvagas.com.br"
     )
     return msg
 

@@ -65,8 +65,8 @@ export const WhatsAppCommunityBanner: React.FC<WhatsAppCommunityBannerProps> = (
                 </span>
               </div>
               <div>
-                <span className="text-xs font-bold text-white block group-hover:text-emerald-300 transition-colors">Grupo WhatsApp</span>
-                <span className="text-[10px] text-emerald-200/80">Entrar no Grupo VIP</span>
+                <span className="text-xs font-bold text-white block group-hover:text-emerald-300 transition-colors">Canal WhatsApp</span>
+                <span className="text-[10px] text-emerald-200/80">Seguir Canal Oficial</span>
               </div>
             </a>
 
@@ -120,7 +120,7 @@ export const WhatsAppCommunityBanner: React.FC<WhatsAppCommunityBannerProps> = (
 
           </div>
 
-          {/* Botão de Entrada no Grupo VIP */}
+          {/* Botão de Entrada no Canal */}
           <a
             href={activeGroupUrl}
             target="_blank"
@@ -128,7 +128,7 @@ export const WhatsAppCommunityBanner: React.FC<WhatsAppCommunityBannerProps> = (
             className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-emerald-600/30 transition-all group cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 fill-white" />
-            <span>Entrar no Grupo VIP de Vagas no WhatsApp</span>
+            <span>Seguir Canal de Vagas no WhatsApp</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>

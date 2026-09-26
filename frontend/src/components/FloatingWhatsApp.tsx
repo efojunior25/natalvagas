@@ -120,10 +120,10 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
                 </div>
                 <div className="text-left">
                   <span className="font-bold text-emerald-900 dark:text-emerald-200 block">
-                    Entrar no Grupo de Vagas
+                    Seguir Canal Oficial no WhatsApp
                   </span>
                   <span className="text-[10px] text-emerald-700 dark:text-emerald-400">
-                    Receba vagas diárias no WhatsApp
+                    Histórico completo e alertas diários
                   </span>
                 </div>
               </div>

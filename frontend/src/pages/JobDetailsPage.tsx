@@ -616,13 +616,13 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
                 </div>
 
                 <a
-                  href="https://chat.whatsapp.com/natalvagas" 
+                  href={import.meta.env.VITE_WHATSAPP_GROUP_URL || "https://whatsapp.com/channel/0029Vb8fAyN4o7qURPaBIN2B"} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-800 font-extrabold text-sm shadow-lg hover:shadow-xl transition-all flex items-center gap-2.5 shrink-0 active:scale-95"
                 >
                   <Send className="w-4 h-4 text-emerald-600" />
-                  <span>Entrar no Grupo VIP Grátis</span>
+                  <span>Seguir Canal de Vagas Grátis</span>
                 </a>
               </div>
             </div>
