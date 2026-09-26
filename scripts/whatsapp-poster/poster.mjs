@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Robô Autônomo de Divulgação de Vagas no WhatsApp (Canal & Grupos)
+ * Robô Autônomo de Divulgação de Vagas no WhatsApp (Canal Oficial)
  * Natal Vagas — Execução Local Headless 100% Gratuita via Puppeteer-Core
  * 
  * Uso:
@@ -21,7 +21,6 @@ const REPO_ROOT = path.resolve(__dirname, '../..');
 const JOBS_FILE = path.join(REPO_ROOT, 'frontend', 'public', 'data', 'jobs.json');
 const HISTORY_FILE = path.join(REPO_ROOT, 'scripts', '.posted_whatsapp_jobs.json');
 const SESSION_DIR = path.join(REPO_ROOT, 'scripts', '.wpp_session');
-const CHANNEL_URL = 'https://web.whatsapp.com/channel/0029Vb8fAyN4o7qURPaBIN2B';
 
 // Detecta executável do Google Chrome no Linux
 function getChromePath() {
@@ -142,10 +141,8 @@ Uso:
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
       '--no-first-run',
-      '--no-zygote',
-      '--disable-gpu'
+      '--no-zygote'
     ]
   });
 
@@ -156,13 +153,12 @@ Uso:
     console.log('\n📱 Abrindo WhatsApp Web para autenticação...');
     console.log('👉 Por favor, abra o WhatsApp no celular:');
     console.log('   Configurações > Aparelhos Conectados > Conectar um aparelho');
-    console.log('👉 E aponte a câmera para o QR Code na janela do Chrome que acabou de abrir!\n');
+    console.log('👉 E aponte a câmera para o QR Code na janela do Chrome!\n');
     
     await page.goto('https://web.whatsapp.com/', { waitUntil: 'domcontentloaded', timeout: 60000 });
     
-    // Aguarda o usuário logar (detecção do chat list ou painel)
     try {
-      await page.waitForSelector('div[contenteditable="true"], div[data-testid="chat-list"]', { timeout: 120000 });
+      await page.waitForSelector('div[contenteditable="true"], div[data-testid="chat-list"], button[aria-label*="Canais"]', { timeout: 120000 });
       console.log('✅ Login identificado com sucesso! Sessão salva localmente.');
       console.log('🎉 Agora você já pode rodar com `--post` sem precisar abrir janela visível.');
     } catch {
@@ -191,15 +187,54 @@ Uso:
     const toPost = candidates.slice(0, limit);
     console.log(`🎯 Postando ${toPost.length} vaga(s) no canal oficial...`);
 
-    console.log(`🌐 Navegando para o Canal Natal Vagas...`);
-    await page.goto(CHANNEL_URL, { waitUntil: 'networkidle2', timeout: 60000 });
+    console.log(`🌐 Acessando WhatsApp Web...`);
+    await page.goto('https://web.whatsapp.com/', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await new Promise(r => setTimeout(r, 4000));
 
-    // Aguarda carregar a caixa de texto do canal
-    const inputSelector = 'footer div[contenteditable="true"]';
+    // 1. Fecha modais/popups que possam bloquear a tela (ex: "Novidades do WhatsApp Web")
+    await page.evaluate(() => {
+      const btns = Array.from(document.querySelectorAll('button, div[role="button"]'));
+      const modalBtn = btns.find(b => b.innerText?.trim() === 'Continuar' || b.getAttribute('aria-label') === 'Fechar');
+      if (modalBtn) modalBtn.click();
+    });
+    await new Promise(r => setTimeout(r, 1000));
+
+    // 2. Abre a aba "Canais" no menu lateral
+    console.log(`📑 Acessando a aba Canais...`);
+    await page.evaluate(() => {
+      const btns = Array.from(document.querySelectorAll('button'));
+      const canaisBtn = btns.find(b => b.innerText?.includes('Canais') || b.getAttribute('aria-label')?.includes('Canais'));
+      if (canaisBtn) canaisBtn.click();
+    });
+    await new Promise(r => setTimeout(r, 2000));
+
+    // 3. Localiza e clica no canal "Natal Vagas" usando coordenadas reais de mouse
+    console.log(`🔍 Localizando o Canal Natal Vagas...`);
+    const rect = await page.evaluate(() => {
+      const els = Array.from(document.querySelectorAll('*'));
+      const natalEl = els.find(el => el.innerText?.trim().startsWith('Natal Vagas') && el.children.length === 0) ||
+                      els.find(el => el.innerText?.includes('Natal Vagas') && el.offsetHeight > 30 && el.offsetWidth > 80);
+      if (!natalEl) return null;
+      const r = natalEl.getBoundingClientRect();
+      return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+    });
+
+    if (!rect) {
+      console.error('❌ Canal Natal Vagas não encontrado na lista. Verifique se você é administrador do canal nesta conta.');
+      await browser.close();
+      process.exit(1);
+    }
+
+    console.log(`👉 Abrindo o Canal Natal Vagas...`);
+    await page.mouse.click(rect.x, rect.y);
+    await new Promise(r => setTimeout(r, 3000));
+
+    // 4. Aguarda a caixa de texto de envio do canal
+    const inputSelector = 'div[contenteditable="true"]';
     try {
-      await page.waitForSelector(inputSelector, { timeout: 30000 });
+      await page.waitForSelector(inputSelector, { timeout: 20000 });
     } catch {
-      console.error('❌ Não foi possível encontrar a caixa de envio do canal. Verifique se o login está ativo rodando com `--login`.');
+      console.error('❌ Não foi possível encontrar o campo de digitação do canal.');
       await browser.close();
       process.exit(1);
     }
@@ -211,10 +246,9 @@ Uso:
 
       console.log(`\n📢 [${i + 1}/${toPost.length}] Publicando: ${job.title} (${job.companyName})...`);
 
-      // 1. Focar e digitar o texto da vaga
-      await page.focus(inputSelector);
+      // 1. Focar e digitar o texto da vaga no campo
       await page.evaluate((text, selector) => {
-        const el = document.querySelector(selector);
+        const el = document.querySelector('footer div[contenteditable="true"]') || document.querySelector(selector);
         if (el) {
           el.focus();
           document.execCommand('selectAll', false, null);
@@ -223,11 +257,11 @@ Uso:
         }
       }, msg, inputSelector);
 
-      // 2. Aguarda 5 segundos para o WhatsApp carregar a imagem de prévia (OpenGraph)
+      // 2. Aguarda 5.5 segundos para o WhatsApp carregar a imagem de prévia (OpenGraph)
       console.log('   ⏳ Aguardando WhatsApp gerar o card com imagem...');
       await new Promise(r => setTimeout(r, 5500));
 
-      // 3. Localiza e clica no botão Enviar
+      // 3. Clica no botão Enviar
       const sent = await page.evaluate(() => {
         const sendBtn = document.querySelector('button[aria-label="Enviar"]') ||
                         document.querySelector('footer button[data-tab="11"]') ||
@@ -240,21 +274,21 @@ Uso:
       });
 
       if (sent) {
-        console.log(`   ✅ Vaga publicada com sucesso no canal!`);
+        console.log(`   ✅ Vaga publicada com sucesso no canal com o card de imagem!`);
         history.add(jobId);
         saveHistory(history);
       } else {
         console.error(`   ❌ Falha ao clicar no botão Enviar.`);
       }
 
-      // Intervalo de segurança anti-bloqueio entre postagens
       if (i < toPost.length - 1) {
         console.log('   ⏸️ Aguardando intervalo de segurança (8s)...');
         await new Promise(r => setTimeout(r, 8000));
       }
     }
 
-    console.log('\n🎉 Processo de postagem concluído!');
+    console.log('\n🎉 Todas as postagens foram concluídas com sucesso!');
+    await new Promise(r => setTimeout(r, 2000));
     await browser.close();
   }
 }
