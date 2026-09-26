@@ -14,8 +14,8 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
   const [hasNewNotification, setHasNewNotification] = useState(true);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // Número oficial de WhatsApp Business (padrão: 5584992344922)
-  const activeNumber = phoneNumber || (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined) || '5584992344922';
+  // Número oficial de WhatsApp Business (padrão: 5584921869397)
+  const activeNumber = phoneNumber || (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined) || '5584921869397';
   const cleanNumber = activeNumber.replace(/\D/g, '');
 
   // Link do grupo de vagas do WhatsApp

@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
             <div className="mt-4 flex items-center gap-2.5">
               {/* WhatsApp */}
               <a 
-                href="https://wa.me/5584992344922" 
+                href="https://wa.me/5584921869397" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 title="WhatsApp Oficial"

@@ -35,15 +35,21 @@ export const createPixOrder = async (
     // Continua para o gerador direto do Banco Central / Mercado Pago
   }
 
-  // Código EMV oficial com a chave telefone (84) 99234-4922 e R$ 9,90 fixo
-  const emvCode = '00020126360014br.gov.bcb.pix0114+558499234492252040000530398654049.905802BR5911NATAL VAGAS6005NATAL62070503***6304A77F';
+  // Código EMV oficial com a chave oficial do Natal Vagas e R$ 9,90
+  const emvCode = buildPixEMV({
+    pixKey: 'pix@natalvagas.com.br',
+    amount: 9.90,
+    txid: generateUniqueTxid('PRO'),
+    merchantName: 'NATAL VAGAS',
+    merchantCity: 'NATAL'
+  });
 
   return {
     id: `pix_${Date.now()}`,
     status: 'pending',
     amount: 9.90,
     qrCodeCopyPaste: emvCode,
-    phoneKey: '(84) 99234-4922',
+    phoneKey: '(84) 92186-9397',
     expiresAt: new Date(Date.now() + 15 * 60 * 1000).toISOString()
   };
 };

@@ -277,7 +277,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
           onClose();
         }, 1200);
       } else {
-        setCodeError(data.message || "Código não reconhecido. Envie seu comprovante no WhatsApp (84) 99234-4922 para receber um código exclusivo.");
+        setCodeError(data.message || "Código não reconhecido. Envie seu comprovante no WhatsApp (84) 92186-9397 para receber um código exclusivo.");
       }
     } catch (err) {
       setCodeError("Erro de conexão ao validar o código. Tente novamente ou fale com o suporte.");
@@ -517,7 +517,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                   ) : (
                     <div className="mt-2 flex flex-wrap items-center gap-2">
                       <a
-                        href={"https://wa.me/5584992344922?text=" + whatsappLaudoMessage}
+                        href={"https://wa.me/5584921869397?text=" + whatsappLaudoMessage}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white rounded-lg text-xs font-bold transition-all shadow-2xs cursor-pointer"
@@ -727,7 +727,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     </button>
 
                     <a
-                      href={"https://wa.me/5584992344922?text=" + whatsappMessage}
+                      href={"https://wa.me/5584921869397?text=" + whatsappMessage}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="py-2 px-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl font-bold text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
@@ -777,7 +777,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                 </div>
 
                 <a
-                  href={"https://wa.me/5584992344922?text=" + whatsappCardMessage}
+                  href={"https://wa.me/5584921869397?text=" + whatsappCardMessage}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"

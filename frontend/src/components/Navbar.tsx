@@ -370,7 +370,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
             {/* Rodapé da Gaveta */}
             <div className="pt-6 border-t border-slate-100 text-center space-y-2">
               <p className="text-[11px] text-slate-400">
-                Suporte WhatsApp: <strong className="text-slate-600">(84) 99234-4922</strong>
+                Suporte WhatsApp: <strong className="text-slate-600">(84) 92186-9397</strong>
               </p>
               <p className="text-[10px] text-slate-400">
                 © {new Date().getFullYear()} NatalVagas.com.br
