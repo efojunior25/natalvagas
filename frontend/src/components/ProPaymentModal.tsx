@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { 
   X, Sparkles, Check, Copy, ShieldCheck, 
@@ -9,6 +9,7 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { AuthModal } from "./AuthModal";
 import { QRCodeSVG } from "qrcode.react";
+import { buildPixEMV, generateUniqueTxid } from "../services/paymentService";
 
 interface ProPaymentModalProps {
   isOpen: boolean;
@@ -159,7 +160,25 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
   const currentPlanData = PLANS[selectedPlan];
   const pixEmailKey = "pix@natalvagas.com.br";
-  const currentPixPayload = paymentOrder?.pixCode || "";
+
+  const numericAmount = useMemo(() => {
+    if (paymentOrder?.amount) return paymentOrder.amount;
+    const base = currentPlanData.amount;
+    return isPcdDiscountApplied ? Number((base * 0.5).toFixed(2)) : base;
+  }, [paymentOrder, currentPlanData.amount, isPcdDiscountApplied]);
+
+  const fallbackTxid = useMemo(() => generateUniqueTxid("PRO"), [selectedPlan, isPcdDiscountApplied]);
+  const fallbackPixPayload = useMemo(() => {
+    return buildPixEMV({
+      pixKey: pixEmailKey,
+      amount: numericAmount,
+      txid: fallbackTxid,
+      merchantName: "NATAL VAGAS",
+      merchantCity: "NATAL"
+    });
+  }, [pixEmailKey, numericAmount, fallbackTxid]);
+
+  const currentPixPayload = paymentOrder?.pixCode || fallbackPixPayload;
 
   useEffect(() => {
     if (!isOpen || !isAuthenticated) return;
@@ -267,7 +286,7 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
     }
   };
 
-  const effectivePrice = (paymentOrder?.amount ?? currentPlanData.amount).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const effectivePrice = numericAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const handleApplyPcdCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -611,13 +630,13 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                 <div className="bg-slate-50 rounded-2xl border border-slate-200 p-4 flex flex-col items-center text-center">
                   <div className="p-2.5 bg-white rounded-2xl shadow-xs border border-slate-200 mb-2 flex flex-col items-center">
                     <div className="p-2 bg-white rounded-xl">
-                      {currentPixPayload && <QRCodeSVG
+                      <QRCodeSVG
                         value={currentPixPayload}
-                        size={128}
+                        size={140}
                         level="M"
                         includeMargin={false}
-                        aria-label={"QR Code Pix " + currentPlanData.currentPrice + " Natal Vagas"}
-                      />}
+                        aria-label={"QR Code Pix " + effectivePrice + " Natal Vagas"}
+                      />
                     </div>
                     <span className="block text-[11px] font-bold text-slate-700 mt-1">
                       Valor a Pagar: <strong className="text-emerald-600 text-xs">R$ {effectivePrice}</strong>
@@ -629,17 +648,22 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
 
                   {/* Status do Pix em Tempo Real */}
                   <div className="w-full mb-2.5 p-2 rounded-xl bg-slate-100/90 border border-slate-200 text-center">
-                    {paymentError ? (
-                      <div className="text-rose-700 text-xs font-bold">{paymentError}</div>
-                    ) : autoApproved ? (
+                    {autoApproved ? (
                       <div className="flex items-center justify-center gap-2 text-emerald-700 font-extrabold text-xs">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 animate-bounce" />
                         <span>Pagamento Confirmado! Desbloqueando Acesso Pro...</span>
                       </div>
-                    ) : (
+                    ) : paymentOrder ? (
                       <div className="flex items-center justify-center gap-2 text-slate-600 text-[11px]">
                         <Loader2 className="w-3.5 h-3.5 text-brand-600 animate-spin" />
                         <span>Aguardando confirmação Pix em tempo real...</span>
+                      </div>
+                    ) : paymentError ? (
+                      <div className="text-rose-700 text-xs font-bold">{paymentError}</div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-1.5 text-slate-700 text-xs font-semibold">
+                        <Zap className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+                        <span>Escaneie o QR Code ou use o Pix Copia e Cola</span>
                       </div>
                     )}
                   </div>
@@ -648,52 +672,68 @@ export const ProPaymentModal: React.FC<ProPaymentModalProps> = ({
                     <div className="w-full mb-2 p-2 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 text-left">
                       💡 Com o <strong>Desconto PcD de 50%</strong>, transfira exatamente <strong>R$ {effectivePrice}</strong> para a <strong>Chave Pix E-mail</strong> abaixo e envie o comprovante no botão verde para ativação imediata:
                     </div>
-                  ) : (
+                  ) : null}
+
+                  <button
+                    type="button"
+                    onClick={handleCopyPayload}
+                    className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
+                      copiedType === "payload"
+                        ? "bg-emerald-600 text-white border-emerald-600"
+                        : "bg-brand-600 hover:bg-brand-700 text-white border-brand-600"
+                    }`}
+                  >
+                    {copiedType === "payload" ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        <span>Código Pix Copiado com Sucesso!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        <span>Copiar Código Pix Copia e Cola (R$ {effectivePrice})</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Botão de Liberação Imediata se já pagou */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAutoApproved(true);
+                      unlockProStatus();
+                      setTimeout(() => {
+                        onSuccess();
+                        onClose();
+                      }, 1200);
+                    }}
+                    className="w-full mt-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                    <span>Já fiz o Pix (Liberar Acesso Pro Agora)</span>
+                  </button>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 w-full">
                     <button
                       type="button"
-                      onClick={handleCopyPayload}
-                      disabled={!currentPixPayload}
-                      className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border ${
-                        copiedType === "payload"
-                          ? "bg-emerald-600 text-white border-emerald-600"
-                          : "bg-brand-600 hover:bg-brand-700 text-white border-brand-600"
-                      }`}
+                      onClick={handleCopyEmail}
+                      className="py-2 px-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-[11px] font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     >
-                      {copiedType === "payload" ? (
-                        <>
-                          <Check className="w-4 h-4" />
-                          <span>Código Pix Copiado com Sucesso!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4" />
-                          <span>Copiar Código Pix Copia e Cola (R$ {effectivePrice})</span>
-                        </>
-                      )}
+                      <Mail className="w-3.5 h-3.5 text-slate-500" />
+                      <span>{copiedType === "email" ? "Chave Copiada!" : `Chave: ${pixEmailKey}`}</span>
                     </button>
-                  )}
 
-                  {false && <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    className={`w-full ${isPcdDiscountApplied ? 'py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold' : 'mt-2 py-1.5 px-3 bg-white border-slate-200 hover:bg-slate-100 text-slate-600 font-semibold'} rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer border`}
-                  >
-                    <Mail className={`w-3.5 h-3.5 ${isPcdDiscountApplied ? 'text-white' : 'text-slate-400'}`} />
-                    <span>
-                      {copiedType === "email" ? "Chave E-mail Copiada!" : "Copiar Chave Pix E-mail: " + pixEmailKey}
-                    </span>
-                  </button>}
+                    <a
+                      href={"https://wa.me/5584992344922?text=" + whatsappMessage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl font-bold text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+                      <span>Comprovante WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
-
-                {false && <a
-                  href={"https://wa.me/5584992344922?text=" + whatsappMessage}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <MessageCircle className="w-4 h-4 fill-white" />
-                  <span>Enviar Comprovante no WhatsApp (84) 99234-4922</span>
-                </a>}
               </div>
             )}
 

@@ -16,7 +16,6 @@ interface AdPlaceholderProps {
 export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({ 
   slotId,
   clientId,
-  format = 'horizontal', 
   className = '' 
 }) => {
   const adRef = useRef<HTMLModElement | null>(null);
@@ -25,7 +24,7 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
 
   // ID oficial do cliente Google AdSense e Slot
   const activeClientId = clientId || (import.meta.env.VITE_ADSENSE_CLIENT_ID as string | undefined) || 'ca-pub-7415792754049263';
-  const activeSlotId = slotId || (import.meta.env.VITE_ADSENSE_SLOT_ID as string | undefined);
+  const activeSlotId = slotId || (import.meta.env.VITE_ADSENSE_SLOT_ID as string | undefined) || '6681954183';
 
   // 1. Se não houver slotId configurado (ex: aguardando liberação de blocos pelo Google), NÃO renderiza nada no DOM
   if (!activeSlotId) {
@@ -75,13 +74,15 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
 
   return (
     <div 
-      className={`flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ${
+      className={`w-full flex flex-col items-center justify-center transition-all duration-300 ${
         adStatus === 'filled' ? 'my-6 opacity-100' : 'h-0 m-0 p-0 opacity-0 overflow-hidden'
       } ${className}`}
     >
-      <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1">
-        Publicidade
-      </span>
+      {adStatus === 'filled' && (
+        <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1">
+          Publicidade
+        </span>
+      )}
 
       <ins
         ref={adRef}
@@ -89,7 +90,7 @@ export const AdPlaceholder: React.FC<AdPlaceholderProps> = ({
         style={{ display: 'block', textAlign: 'center' }}
         data-ad-client={activeClientId}
         data-ad-slot={activeSlotId}
-        data-ad-format={format === 'in-feed' ? 'fluid' : 'auto'}
+        data-ad-format="auto"
         data-full-width-responsive="true"
       />
     </div>
