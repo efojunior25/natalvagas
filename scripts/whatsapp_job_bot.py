@@ -61,6 +61,11 @@ def save_posted_history(history):
     except Exception as e:
         print(f"⚠️ Erro ao salvar histórico de postagens: {e}")
 
+def format_real(val):
+    if not val:
+        return ""
+    return f"R$ {val:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
 def format_whatsapp_message(job, is_channel=False):
     title = job.get('title', 'Vaga de Emprego').strip()
     company = job.get('companyName', 'Empresa Confidencial').strip()
@@ -69,66 +74,38 @@ def format_whatsapp_message(job, is_channel=False):
     local_str = f"{city} - RN" + (f" ({neighborhood})" if neighborhood else "")
     
     contract = job.get('contractType', 'CLT')
-    work_model = job.get('workModel', 'PRESENCIAL')
     
     # Salário
     if not job.get('hideSalary') and (job.get('salaryMin') or job.get('salaryMax')):
         s_min = job.get('salaryMin')
         s_max = job.get('salaryMax')
         if s_min and s_max:
-            salary_str = f"R$ {s_min:,.2f} a R$ {s_max:,.2f}".replace('.', ',')
+            if s_min == s_max:
+                salary_str = format_real(s_min)
+            else:
+                salary_str = f"{format_real(s_min)} a {format_real(s_max)}"
         elif s_min:
-            salary_str = f"A partir de R$ {s_min:,.2f}".replace('.', ',')
+            salary_str = f"A partir de {format_real(s_min)}"
         else:
-            salary_str = f"Até R$ {s_max:,.2f}".replace('.', ',')
+            salary_str = f"Até {format_real(s_max)}"
     else:
-        salary_str = "A combinar / Compatível com o mercado"
+        salary_str = "Salário a combinar"
         
     slug = job.get('slug', '')
     job_url = f"https://natalvagas.com.br/vaga/{slug}" if slug else "https://natalvagas.com.br"
     
-    # Resumo dos requisitos (primeiras 3 linhas limpas)
-    reqs_raw = job.get('requirements', '')
-    req_bullets = []
-    if reqs_raw:
-        lines = [line.strip().lstrip('•-* ') for line in reqs_raw.split('\n') if line.strip()]
-        for l in lines[:3]:
-            req_bullets.append(f"• {l}")
-    
-    req_text = "\n".join(req_bullets) if req_bullets else "• Detalhes e perfil no link oficial"
-
-    if is_channel:
-        footer = (
-            f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"🔗 *Confira mais vagas e envie seu currículo:*\n"
-            f"👉 https://natalvagas.com.br\n\n"
-            f"📄 *Crie seu currículo grátis em PDF:*\n"
-            f"👉 https://natalvagas.com.br/criar-curriculo"
-        )
-    else:
-        footer = (
-            f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"📢 *Receba vagas diárias no Canal Oficial:*\n"
-            f"👉 {WA_COMMUNITY_LINK}\n\n"
-            f"🔗 Mais vagas no mural oficial:\n"
-            f"👉 https://natalvagas.com.br"
-        )
-
     msg = (
-        f"🚨 *NOVA OPORTUNIDADE EM {city.upper()} / RN*\n"
-        f"━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"💼 *Cargo:* {title}\n"
+        f"🚨 *VAGA: {title.upper()}*\n\n"
         f"🏢 *Empresa:* {company}\n"
-        f"📍 *Local:* {local_str}\n"
-        f"📄 *Contrato:* {contract} ({work_model.capitalize()})\n"
+        f"📍 *Local:* {local_str} ({contract})\n"
         f"💰 *Remuneração:* {salary_str}\n\n"
-        f"📌 *Principais Requisitos:*\n"
-        f"{req_text}\n\n"
-        f"📲 *COMO SE CANDIDATAR (100% GRATUITO):*\n"
-        f"Acesse o link oficial no Natal Vagas para enviar seu currículo diretamente para a empresa:\n\n"
-        f"👉 {job_url}\n\n"
-        f"{footer}"
+        f"👇 *Ver requisitos e enviar currículo:*\n"
+        f"👉 {job_url}"
     )
+
+    if not is_channel and WA_COMMUNITY_LINK:
+        msg += f"\n\n📢 *Canal no WhatsApp:* {WA_COMMUNITY_LINK}"
+
     return msg
 
 def send_whatsapp_message(group_id, message):
