@@ -52,9 +52,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
           {/* Logotipo Oficial Limpo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img 
-              src="/assets/logo-natalvagas.jpg" 
+              src="/assets/icone-lupa-natalvagas.png" 
               alt="Natal Vagas Logotipo" 
-              className="h-10 sm:h-12 w-auto object-contain rounded-md shadow-2xs transition-transform group-hover:scale-105"
+              className="h-10 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105"
             />
             <span className="text-xl sm:text-2xl font-black tracking-tight leading-none">
               <span className="text-brand-600">Natal</span>
@@ -210,9 +210,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPostJob }) => {
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-2.5">
                   <img 
-                    src="/assets/logo-natalvagas.jpg" 
+                    src="/assets/icone-lupa-natalvagas.png" 
                     alt="Natal Vagas" 
-                    className="h-9 w-auto rounded object-contain"
+                    className="h-9 w-auto object-contain"
                   />
                   <div>
                     <span className="text-lg font-black text-slate-900 dark:text-white block leading-none">

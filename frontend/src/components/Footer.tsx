@@ -13,9 +13,9 @@ export const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-3">
               <img 
-                src="/assets/logo-natalvagas.jpg" 
+                src="/assets/icone-lupa-natalvagas.png" 
                 alt="Natal Vagas" 
-                className="h-10 w-auto rounded object-contain bg-slate-100 dark:bg-white p-0.5 border border-slate-200 dark:border-transparent" 
+                className="h-10 w-auto object-contain" 
               />
               <span className="text-xl font-black text-slate-900 dark:text-white">
                 <span className="text-brand-600 dark:text-brand-400">Natal</span>Vagas
