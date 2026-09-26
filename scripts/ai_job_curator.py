@@ -135,10 +135,8 @@ def curate_job_with_gemini(raw_text: str, max_retries: int = 3) -> dict:
         raise ValueError("Chave GEMINI_API_KEY não encontrada no .env!")
 
     models_to_try = [
-        "gemini-3.5-flash-lite",
-        "gemini-3.1-flash-lite",
-        "gemini-flash-lite-latest",
-        "gemini-3.6-flash"
+        "gemini-flash-latest",
+        "gemini-flash-lite-latest"
     ]
     
     payload = {
@@ -190,7 +188,54 @@ def curate_job_with_gemini(raw_text: str, max_retries: int = 3) -> dict:
                 else:
                     break
 
-    return {"is_valid_job": False, "error": "Falha na comunicação com a API"}
+    return fallback_heuristic_job(raw_text)
+
+def fallback_heuristic_job(raw_text: str) -> dict:
+    email_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', raw_text)
+    phone_match = re.search(r'\(?84\)?\s*9?\d{4}[-\s]?\d{4}', raw_text)
+    target = ""
+    channel = "LINK"
+    if email_match:
+        target = email_match.group(0)
+        channel = "EMAIL"
+    elif phone_match:
+        target = "55" + re.sub(r'\D', '', phone_match.group(0))
+        channel = "WHATSAPP"
+    
+    title = "Oportunidade de Emprego"
+    company = "Empresa Confidencial / Parceira"
+    city = "Natal"
+    
+    for line in raw_text.split('\n'):
+        if line.startswith("Título:"):
+            title = line.replace("Título:", "").strip()
+        elif line.startswith("Fonte:"):
+            company = line.replace("Fonte:", "").strip()
+        elif line.startswith("Link Oficial:") and not target:
+            target = line.replace("Link Oficial:", "").strip()
+            channel = "LINK"
+            
+    cidades = ["Parnamirim", "Mossoró", "Macaíba", "São Gonçalo do Amarante", "Caicó", "Currais Novos", "Ceará-Mirim", "Natal"]
+    for c in cidades:
+        if c.lower() in raw_text.lower():
+            city = c
+            break
+
+    return {
+        "is_valid_job": True,
+        "title": title,
+        "companyName": company,
+        "city": city,
+        "workModel": "PRESENCIAL",
+        "contractType": "CLT",
+        "applicationChannel": channel,
+        "applicationTarget": target,
+        "companyLogoUrl": resolve_company_logo(company),
+        "requirements": "Consulte os requisitos e prazos diretamente no canal oficial da vaga.",
+        "benefits": "Informados no processo seletivo.",
+        "onlyNoExperience": False,
+        "isPcd": False
+    }
 
 def normalize_curated_job(data: dict, raw_text: str = "") -> dict:
     if not data.get("is_valid_job"):
