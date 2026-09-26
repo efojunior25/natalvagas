@@ -1,14 +1,16 @@
 import React from 'react';
-import { MapPin, Building2, Clock, DollarSign, ArrowUpRight, Share2, Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Clock, DollarSign, ArrowUpRight, Share2, Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { Job } from '../types/job';
 
 interface JobCardProps {
   job: Job;
-  onApply: (job: Job) => void;
+  onApply?: (job: Job) => void;
 }
 
 export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
   const handleShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     const shareTitle = `${job.title} — ${job.companyName} (${job.city}/RN)`;
     const shareText = `🔥 Vaga de *${job.title}* na empresa *${job.companyName}* em ${job.city}/RN!\n\nConfira os requisitos e candidate-se de graça no Natal Vagas:`;
@@ -31,9 +33,28 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
     window.open(whatsappUrl, '_blank');
   };
 
+  const isConfidential = /confidencial/i.test(job.companyName);
+  const isUnwantedImage = Boolean(
+    job.companyLogoUrl && (
+      job.companyLogoUrl.includes('/assets/vagas/') ||
+      job.companyLogoUrl.includes('WhatsApp Image') ||
+      job.companyLogoUrl.includes('logo-natalvagas')
+    )
+  );
+
+  const defaultAvatarBg = isConfidential ? '334155' : '059669';
+  const cleanLogoUrl = (!isUnwantedImage && job.companyLogoUrl)
+    ? job.companyLogoUrl
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(job.companyName)}&background=${defaultAvatarBg}&color=fff&size=128&bold=true`;
+
   return (
-    <article 
-      onClick={() => onApply(job)}
+    <Link 
+      to={`/vaga/${job.slug}`}
+      onClick={(e) => {
+        if (onApply && !e.defaultPrevented && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
+          onApply(job);
+        }
+      }}
       className={`group relative rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between border ${
         job.isFeatured
           ? 'border-amber-300 dark:border-amber-500/40 ring-2 ring-amber-400/20 bg-gradient-to-b from-amber-50/30 via-white to-white dark:from-amber-950/20 dark:via-slate-900 dark:to-slate-900 hover:border-amber-400'
@@ -68,22 +89,19 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
         <div className="flex items-start justify-between gap-2.5 sm:gap-3">
           <div className="flex items-start gap-3 min-w-0 flex-1">
             <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-base sm:text-lg uppercase shrink-0 overflow-hidden group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors mt-0.5">
-              {job.companyLogoUrl ? (
-                <img 
-                  src={job.companyLogoUrl} 
-                  alt={`Logotipo da empresa ${job.companyName}`} 
-                  width={48}
-                  height={48}
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                  className="w-full h-full object-cover" 
-                />
-              ) : (
-                <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
-              )}
+              <img 
+                src={cleanLogoUrl} 
+                alt={`Logotipo da empresa ${job.companyName}`} 
+                width={48}
+                height={48}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(job.companyName)}&background=${defaultAvatarBg}&color=fff&size=128&bold=true`;
+                }}
+                className="w-full h-full object-cover" 
+              />
             </div>
             <div className="min-w-0 flex-1">
               <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate">
@@ -159,6 +177,6 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply }) => {
           <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </span>
       </div>
-    </article>
+    </Link>
   );
 };

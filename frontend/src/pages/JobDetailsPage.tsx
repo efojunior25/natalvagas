@@ -4,7 +4,7 @@ import {
   Building2, MapPin, Clock, DollarSign, Share2, CheckCircle2, 
   ExternalLink, Mail, ArrowLeft, ShieldCheck, Sparkles, AlertTriangle, 
   Copy, Check, Send, Globe, Instagram, Linkedin,
-  FileText, ChevronRight, Briefcase, Edit3, Image as ImageIcon
+  FileText, ChevronRight, Briefcase, Edit3
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -118,23 +118,15 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
     return Boolean(currentJob.isCompanyVerified);
   }, [currentJob]);
 
-  // Detecta se a vaga possui panfleto/flyer oficial (ex: vindo do WhatsApp)
-  const flyerSrc = useMemo(() => {
-    if (!currentJob) return null;
-    if (currentJob.sourceUrl && currentJob.sourceUrl.includes('/assets/vagas/')) {
-      return currentJob.sourceUrl;
-    }
-    if (currentJob.companyLogoUrl && (currentJob.companyLogoUrl.includes('/assets/vagas/') || currentJob.companyLogoUrl.includes('WhatsApp Image'))) {
-      return currentJob.companyLogoUrl;
-    }
-    return null;
-  }, [currentJob]);
-
-  // Se a imagem for um flyer retangular/panfleto, não a tratamos como logo quadrada
+  // Se a imagem for um flyer retangular/panfleto ou o logo genérico do portal, usa avatar corporativo
   const isCleanLogo = useMemo(() => {
     if (!currentJob?.companyLogoUrl) return false;
-    return !currentJob.companyLogoUrl.includes('/assets/vagas/') && !currentJob.companyLogoUrl.includes('WhatsApp Image');
+    return !currentJob.companyLogoUrl.includes('/assets/vagas/') && 
+           !currentJob.companyLogoUrl.includes('WhatsApp Image') &&
+           !currentJob.companyLogoUrl.includes('logo-natalvagas');
   }, [currentJob]);
+
+  const defaultAvatarBg = (currentJob && /confidencial/i.test(currentJob.companyName)) ? '334155' : '059669';
 
   const handleToggleVerified = () => {
     if (!currentJob) return;
@@ -525,16 +517,15 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
               {/* Linha da Empresa com Logotipo e Nome */}
               <div className="mt-4 flex items-center gap-4 flex-wrap">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-xl sm:text-2xl overflow-hidden shrink-0 shadow-xs p-1">
-                  {isCleanLogo && currentJob.companyLogoUrl ? (
-                    <img 
-                      src={currentJob.companyLogoUrl} 
-                      alt={`Logo ${currentJob.companyName}`} 
-                      className="w-full h-full object-contain rounded-xl"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
-                  ) : (
-                    <Building2 className="w-8 h-8 sm:w-10 sm:h-10 text-slate-400" />
-                  )}
+                  <img 
+                    src={(isCleanLogo && currentJob.companyLogoUrl) ? currentJob.companyLogoUrl : `https://ui-avatars.com/api/?name=${encodeURIComponent(currentJob.companyName)}&background=${defaultAvatarBg}&color=fff&size=128&bold=true`} 
+                    alt={`Logo ${currentJob.companyName}`} 
+                    className="w-full h-full object-contain rounded-xl"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentJob.companyName)}&background=${defaultAvatarBg}&color=fff&size=128&bold=true`;
+                    }}
+                  />
                 </div>
 
                 <div className="min-w-0">
@@ -650,31 +641,69 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
               </div>
             </div>
 
-            {/* Seção: Panfleto & Anúncio Original da Vaga */}
-            {flyerSrc && (
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+            {/* Seção: Canais Oficiais & Redes da Empresa */}
+            {(currentJob.companyWebsite || currentJob.companyInstagram) && (
+              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 text-brand-600 dark:text-brand-400">
-                    <ImageIcon className="w-5 h-5" />
+                    <Globe className="w-5 h-5" />
                     <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
-                      Panfleto & Anúncio Oficial da Vaga
+                      Canais Oficiais da Contratante
                     </h2>
                   </div>
-                  <span className="text-xs bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300 font-bold px-3 py-1 rounded-full border border-brand-200 dark:border-brand-800">
-                    Material Original
+                  <span className="text-xs bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                    Fonte Verificada
                   </span>
                 </div>
+                
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  Abaixo está o anúncio e panfleto original compartilhado pela empresa nos canais de recrutamento:
+                  Conheça a empresa, confira a cultura corporativa e acompanhe novas oportunidades pelos canais oficiais:
                 </p>
-                <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950/5 dark:bg-slate-950 flex items-center justify-center p-2 sm:p-4">
-                  <img
-                    src={flyerSrc}
-                    alt={`Panfleto oficial da vaga ${currentJob.title}`}
-                    className="max-h-[650px] w-auto max-w-full object-contain rounded-xl shadow-md cursor-pointer hover:opacity-95 transition-opacity"
-                    onClick={() => window.open(flyerSrc, '_blank')}
-                    title="Clique para ampliar o panfleto original"
-                  />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {currentJob.companyInstagram && (
+                    <a
+                      href={currentJob.companyInstagram.startsWith('http') ? currentJob.companyInstagram : `https://instagram.com/${currentJob.companyInstagram.replace('@', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-pink-500/5 hover:from-pink-500/20 hover:to-purple-500/15 border border-pink-200 dark:border-pink-900/50 flex items-center justify-between gap-3 text-slate-800 dark:text-slate-200 transition-all group shadow-2xs active:scale-98"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                          <Instagram className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <span className="block text-[10px] uppercase font-bold text-pink-600 dark:text-pink-400">Instagram Oficial</span>
+                          <span className="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate block">
+                            {currentJob.companyInstagram.startsWith('@') ? currentJob.companyInstagram : `@${currentJob.companyInstagram.replace(/https?:\/\/(www\.)?instagram\.com\/?/, '').replace(/\/$/, '')}`}
+                          </span>
+                        </div>
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-pink-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    </a>
+                  )}
+
+                  {currentJob.companyWebsite && (
+                    <a
+                      href={currentJob.companyWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="p-3.5 rounded-2xl bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-800/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3 text-slate-800 dark:text-slate-200 transition-all group shadow-2xs active:scale-98"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-950/70 text-brand-600 dark:text-brand-400 flex items-center justify-center shrink-0 shadow-xs">
+                          <Globe className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <span className="block text-[10px] uppercase font-bold text-slate-400">Site Oficial</span>
+                          <span className="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate block">
+                            {currentJob.companyWebsite.replace(/https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                          </span>
+                        </div>
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    </a>
+                  )}
                 </div>
               </div>
             )}
@@ -751,6 +780,35 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
                   <Check className="w-3.5 h-3.5" />
                   <span>100% Gratuito</span>
                 </div>
+              </div>
+
+              {/* CTA Estratégico de Conversão: Gerador de Currículo ATS */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 dark:from-emerald-950/40 dark:via-slate-900 dark:to-emerald-950/40 border-2 border-emerald-300 dark:border-emerald-700/60 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-start gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-0.5 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 rounded-full">
+                        Dica de RH • Aumente em até 3x suas chances
+                      </span>
+                    </div>
+                    <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100">
+                      Seu currículo está aprovado nos robôs de triagem (ATS)?
+                    </h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
+                      Antes de enviar para a empresa, garanta um currículo formatado no padrão executivo aceito pelos recrutadores no RN. PDF pronto em 2 minutos por apenas R$ 9,90 no Pix.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  to="/criar-curriculo"
+                  className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-sm hover:shadow transition-all shrink-0 active:scale-95 flex items-center gap-2 self-stretch sm:self-auto justify-center"
+                >
+                  <Sparkles className="w-4 h-4 text-amber-300" />
+                  <span>Otimizar Meu Currículo</span>
+                </Link>
               </div>
 
               {/* CASO 1: CANDIDATURA POR E-MAIL */}
@@ -924,16 +982,15 @@ export const JobDetailsPage: React.FC<JobDetailsPageProps> = ({ jobs, isLoading,
               {/* Perfil da Empresa */}
               <div className="flex items-center gap-3.5">
                 <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold text-xl overflow-hidden shrink-0 shadow-xs p-1">
-                  {isCleanLogo && currentJob.companyLogoUrl ? (
-                    <img 
-                      src={currentJob.companyLogoUrl} 
-                      alt={`Logo ${currentJob.companyName}`} 
-                      className="w-full h-full object-contain rounded-xl"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
-                  ) : (
-                    <Building2 className="w-8 h-8 text-slate-400" />
-                  )}
+                  <img 
+                    src={(isCleanLogo && currentJob.companyLogoUrl) ? currentJob.companyLogoUrl : `https://ui-avatars.com/api/?name=${encodeURIComponent(currentJob.companyName)}&background=${defaultAvatarBg}&color=fff&size=128&bold=true`} 
+                    alt={`Logo ${currentJob.companyName}`} 
+                    className="w-full h-full object-contain rounded-xl"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentJob.companyName)}&background=${defaultAvatarBg}&color=fff&size=128&bold=true`;
+                    }}
+                  />
                 </div>
 
                 <div className="min-w-0">

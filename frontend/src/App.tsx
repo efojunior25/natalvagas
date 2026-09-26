@@ -368,12 +368,18 @@ const HomePage: React.FC<HomePageProps> = ({ jobs, isLoading, onJobCreated, seoC
           <>
             {/* Grid Responsivo de Vagas */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {visibleJobs.map((job) => (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  onApply={handleApply}
-                />
+              {visibleJobs.map((job, idx) => (
+                <React.Fragment key={job.id}>
+                  <JobCard
+                    job={job}
+                    onApply={handleApply}
+                  />
+                  {(idx + 1) % 9 === 0 && (
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3">
+                      <AdPlaceholder format="horizontal" />
+                    </div>
+                  )}
+                </React.Fragment>
               ))}
             </div>
 

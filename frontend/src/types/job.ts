@@ -17,6 +17,7 @@ export interface Job {
   slug: string;
   companyName: string;
   companyLogoUrl?: string;
+  flyerUrl?: string;
   category?: Category;
   city: string;
   state: string;

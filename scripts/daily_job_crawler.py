@@ -14,6 +14,12 @@ import sys
 import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
+import time
+
+try:
+    from ai_job_curator import curate_job_with_gemini
+except ImportError:
+    from scripts.ai_job_curator import curate_job_with_gemini
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 jobs_json_file = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
@@ -139,8 +145,31 @@ def main():
             company_source = source_match.group(1).strip() if source_match else "Portal Parceiro RN"
             clean_title = re.sub(r'\s*-\s*[A-Za-z0-9À-ÿ\s.]+$', '', raw_title).strip()
             
-            # Filtro de relevância para vagas e seleções no RN
+            # Bloqueia veículos de imprensa e sites de notícias jornalísticas
+            blocked_news_sources = {
+                'g1', 'tribunadonorte.com.br', 'agorarn', 'agora rn', 'portal 98 fm natal',
+                'portal 96fm', 'blog do gustavo negreiros', 'blog gran cursos online',
+                'gran cursos online', 'estratégia concursos', 'estrategia concursos',
+                'qconcursos folha dirigida', 'qconcursos', 'folha dirigida', 'direção concursos',
+                'portal diário do rn', 'diário do rn', 'pciconcursos.com.br', 'jcconcursos.com.br',
+                'natal em foco', 'natalemfoco.com.br', 'bnews rn', 'bnews', 'opoti.com.br',
+                'novonoticias.com'
+            }
+            if company_source.lower() in blocked_news_sources:
+                continue
+
+            # Bloqueia títulos com manchetes jornalísticas
             title_lower = clean_title.lower()
+            news_patterns = [
+                'mantém geração', 'cria empregos', 'queda em', 'tudo sobre as vagas',
+                'previstas para', 'puxam crescimento', 'quando dados viram', 'deve abrir',
+                'são convocados para posse', 'convoca', 'publica retificação', 'locais de prova',
+                'saldo de empregos', 'gera postos', 'feira de empregabilidade'
+            ]
+            if any(np in title_lower for np in news_patterns):
+                continue
+                
+            # Filtro de relevância para vagas e seleções no RN
             relevant_keywords = ['vaga', 'emprego', 'contrata', 'concurso', 'estágio', 'estagio', 'aprendiz', 'oportunidade', 'seleção', 'seletivo', 'edital', 'inscriç']
             if not any(kw in title_lower for kw in relevant_keywords):
                 continue
@@ -153,40 +182,70 @@ def main():
             contract_type = parse_contract_type(clean_title, desc)
             work_model = parse_work_model(desc)
             
+            # Curadoria e Auditoria com Gemini AI (Free Tier)
+            raw_input = f"Título: {clean_title}\nFonte: {company_source}\nDetalhes: {desc}\nLink Oficial: {link}"
+            try:
+                ai_data = curate_job_with_gemini(raw_input)
+                # Respeita o limite do plano gratuito do Google AI Studio
+                time.sleep(4)
+            except Exception as e:
+                print(f"⚠️ Aviso ao consultar Gemini: {e}")
+                ai_data = {"is_valid_job": True}
+
+            if not ai_data.get("is_valid_job", True):
+                print(f"🗑️ Descartada pela IA (não é vaga real ou é notícia): {clean_title}")
+                continue
+
+            # Atualiza com as informações normalizadas pela IA
+            title_final = ai_data.get("title") or clean_title
+            company_final = ai_data.get("companyName") or company_source
+            city_final = ai_data.get("city") or city
+            neighborhood_final = ai_data.get("neighborhood")
+            contract_final = ai_data.get("contractType") or contract_type
+            model_final = ai_data.get("workModel") or work_model
+            reqs_final = ai_data.get("requirements") or "Verifique os requisitos, prazos e documentos necessários no canal oficial da oportunidade."
+            bens_final = ai_data.get("benefits") or "Benefícios informados no processo seletivo oficial."
+            only_no_exp = ai_data.get("onlyNoExperience", False)
+            is_pcd_flag = ai_data.get("isPcd", False)
+
             # Trata data de publicação
             try:
-                # Exemplo: Wed, 16 Sep 2026 14:00:00 GMT
                 dt = datetime.strptime(pub_date_str[:16], "%a, %d %b %Y")
                 published_iso = dt.strftime("%Y-%m-%d")
             except Exception:
                 published_iso = datetime.now().strftime("%Y-%m-%d")
                 
             current_max_id += 1
-            slug = f"{slugify(clean_title)}-{slugify(company_source)}-{slugify(city)}-{current_max_id}"
+            slug = f"{slugify(title_final)}-{slugify(company_final)}-{slugify(city_final)}-{current_max_id}"
             
             if slug in existing_slugs:
                 continue
                 
-            description_text = f"{desc}\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por {company_source}. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição."
+            description_text = f"{desc}\n\nOportunidade oficial apurada e divulgada no Rio Grande do Norte por {company_final}. Acesse o canal oficial para conferir edital, requisitos e detalhes de inscrição."
             
             job_obj = {
                 "id": current_max_id,
-                "title": clean_title,
+                "title": title_final,
                 "slug": slug,
-                "companyName": company_source,
-                "city": city,
+                "companyName": company_final,
+                "companyLogoUrl": ai_data.get("companyLogoUrl"),
+                "companyWebsite": ai_data.get("companyWebsite"),
+                "companyInstagram": ai_data.get("companyInstagram"),
+                "city": city_final,
+                "neighborhood": neighborhood_final,
                 "state": "RN",
-                "workModel": work_model,
-                "contractType": contract_type,
+                "workModel": model_final,
+                "contractType": contract_final,
                 "description": description_text,
-                "requirements": "Verifique os requisitos, prazos e documentos necessários no edital ou link oficial da oportunidade.",
-                "benefits": "Benefícios informados no edital / processo seletivo oficial.",
+                "requirements": reqs_final,
+                "benefits": bens_final,
                 "salaryCurrency": "BRL",
                 "hideSalary": True,
                 "applicationChannel": "LINK",
                 "applicationTarget": link,
-                "isFeatured": ("concurso" in title_lower or "edital" in title_lower or "2 mil" in title_lower),
-                "isPcd": ("pcd" in title_lower or "deficiência" in title_lower),
+                "isFeatured": ("concurso" in title_lower or "edital" in title_lower),
+                "isPcd": is_pcd_flag,
+                "onlyNoExperience": only_no_exp,
                 "publishedAt": published_iso
             }
             

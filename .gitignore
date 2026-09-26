@@ -48,4 +48,6 @@ certs/
 
 # Imagens de triagem temporárias
 imagens vagas/
+*.bak
+__pycache__/
 
