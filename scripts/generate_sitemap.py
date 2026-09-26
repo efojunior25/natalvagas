@@ -1,6 +1,7 @@
 import re
 import json
 import os
+from datetime import datetime
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 jobs_json_path = os.path.join(repo_root, "frontend", "public", "data", "jobs.json")
@@ -21,7 +22,7 @@ else:
         print(f"Loaded {len(records)} jobs from initialJobs.ts")
 
 base_url = "https://natalvagas.com.br"
-today = "2026-09-12"
+today = datetime.now().strftime("%Y-%m-%d")
 
 xml_lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
